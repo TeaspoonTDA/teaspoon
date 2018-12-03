@@ -1,16 +1,20 @@
-## @package teaspoon.ML.tents
-# Machine learning featurization method
-#
-# If you make use of this code, please cite the following paper:<br/>
-# J.A. Perea, E. Munch, and F. Khasawneh.  "Approximating Continuous Functions On Persistence Diagrams." Preprint, 2017.
-#
-# An example workflow to ensure that classification is working:
-# \code{.py}
-# import teaspoon.MakeData.PointCloud as gPC
-# import teaspoon.ML.tents as tents
-# df = gPC.testSetClassification()
-# tents.getPercentScore(df,dgm_col = 'Dgm')
+'''
+Machine learning featurization method
 
+If you make use of this code, please cite the following paper:<br/>
+J.A. Perea, E. Munch, and F. Khasawneh.  "Approximating Continuous Functions On Persistence Diagrams." Preprint, 2017.
+
+An example workflow to ensure that classification is working:
+\code{.py}
+import teaspoon.MakeData.PointCloud as gPC
+import teaspoon.ML.tents as tents
+df = gPC.testSetClassification()
+tents.getPercentScore(df,dgm_col = 'Dgm')
+'''
+
+'''
+.. module:: tents
+'''
 
 
 
@@ -35,45 +39,51 @@ import itertools
 
 
 
+"""
+.. class:: ParameterBucket
+"""
 
-## 	A class for storing all of the chosen parameters for a data frame and computation of ML.
-#
 class ParameterBucket(object):
+	'''
+	A class for storing all of the chosen parameters for a data frame and computation of ML.
+	'''
 	def __init__(self, description = '',
-					d=10,
-					delta = 1,
-					epsilon = 0,
-					maxPower = 1,
-					clfClass = RidgeClassifierCV,
-					seed = None,
-					test_size = .33,
-                 	feature_function=None,
-                 	boundingBoxMatrix = None):
-		"""!@brief Creates a new ParameterBucket object.
+			d=10,
+			delta = 1,
+			epsilon = 0,
+			maxPower = 1,
+			clfClass = RidgeClassifierCV,
+			seed = None,
+			test_size = .33,
+						  feature_function=None,
+						  boundingBoxMatrix = None):
 
-	    This object is being used to keep track of all the parameters needed
-	    for the tents ML featurization.
+		"""
+		Creates a new ParameterBucket object.
+		This object is being used to keep track of all the parameters needed
+		for the tents ML featurization.
 
-	    Parameters that are included in the ParameterBucket initially:
+		Parameters that are included in the ParameterBucket initially:
 
-	    @param description A description, has no effect on code. This can be set on initialization.
-	    @param d, delta, epsilon
-	    	The bounding box for the persistence diagram in the (birth, lifetime) coordinates is [0,d * delta] x [epsilon, d* delta + epsilon].  In the usual coordinates, this creates a parallelogram.
-	    @param maxPower
-	    	The maximum degree used for the monomial combinations of the tent functions.  Testing suggests we usually want this to be 1.  Increasing causes large increase in number of features.
-	    @param clfClass
-	    	The choice of tool used for classification or regression, passed as the function.  This code has been tested using `sklearn` functions `RidgeClassiferCV` for classification and `RidgeCV` for regression.
-	    @param seed
-	    	The seed for the pseudo-random number generator.  Pass None if you don't want it fixed; otherwise, pass an integer.
-	    @param test_size
-	    	A number in \f$[0,1]\f$.  Gives the percentage of data points to be reserved for the testing set if this is being used for a train/test split experiment.  Otherwise, ignored.
-        @param feature_function
-	    	The basis function you want to use for interpolation. Default is tent()
-	    @param boundingBoxMatrix
-	    	Not yet implemented.  See self.findBoundingBox()
+			:Parameter description:
+				A description, has no effect on code. This can be set on initialization.
+			:Parameter d, delta, epsilon:
+				The bounding box for the persistence diagram in the (birth, lifetime) coordinates is [0,d * delta] x [epsilon, d* delta + epsilon].  In the usual coordinates, this creates a parallelogram.
+			:Parameter maxPower:
+				The maximum degree used for the monomial combinations of the tent functions.  Testing suggests we usually want this to be 1.  Increasing causes large increase in number of features.
+			:Parameter clfClass:
+				The choice of tool used for classification or regression, passed as the function.  This code has been tested using `sklearn` functions `RidgeClassiferCV` for classification and `RidgeCV` for regression.
+			:Parameter seed:
+				The seed for the pseudo-random number generator.  Pass None if you don't want it fixed; otherwise, pass an integer.
+			:Parameter test_size:
+				A number in [0,1]. Gives the percentage of data points to be reserved for the testing set if this is being used for a train/test split experiment. Otherwise, ignored.
+			:Parameter feature_function:
+				The basis function you want to use for interpolation. Default is tent()
+			:Parameter boundingBoxMatrix:
+				Not yet implemented. See self.findBoundingBox()
 
+		"""
 
-	    """
 		self.description = description
 		self.d = d
 		self.delta = delta
@@ -99,8 +109,8 @@ class ParameterBucket(object):
 
 
 	def __str__(self):
-		"""!
-		@brief Nicely prints all currently set values in the ParameterBucket.
+		"""
+		Nicely prints all currently set values in the ParameterBucket.
 		"""
 		attrs = vars(self)
 		output = ''
@@ -113,10 +123,11 @@ class ParameterBucket(object):
 		return output
 
 	def encloseDgms(self, DgmSeries):
-		'''!
-		@brief Tests to see if the parameters enclose the persistence diagrams in the DgmSeries
+		'''
+		Tests to see if the parameters enclose the persistence diagrams in the DgmSeries
 
-		@returns boolean
+		:returns:
+			boolean
 		'''
 
 		# Height of parallelogram; equivalently maximum lifetime enclosed
@@ -147,10 +158,14 @@ class ParameterBucket(object):
 
 	def chooseDeltaEpsWithPadding(self, DgmsSeries, pad = 0):
 		'''
+		Parameters:
 
-		DgmsSeries is pd.series
-		d is number of grid elements in either direction
-		pad is the additional padding outside of the points in the diagrams
+		:Parameter DgmsSeries:
+			pd.series
+		:Parameter d:
+			number of grid elements in either direction
+		:Parameter pad:
+			the additional padding outside of the points in the diagrams
 
 		Sets the needed delta and epsilon
 
@@ -178,9 +193,12 @@ class ParameterBucket(object):
 
 	def findBoundingBox(self,DgmsSeries,pad = 0):
 		'''
-		DgmsSeries is of type pd.series
-		pad is the additional padding outside of the points in the diagrams
+		Parameters:
 
+		:Parameter DgmsSeries:
+			of type pd.series
+		:Parameter pad:
+			the additional padding outside of the points in the diagrams
 
 		Sets a bounding box in the birth-lifetime plane
 		to use for creating support of function collection.
@@ -211,22 +229,34 @@ class ParameterBucket(object):
 # -------------------------------------------- #
 
 
-## Applies the tent function to a diagram.
-# @param Dgm
-# 	A persistence diagram, given as a $K \times 2$ numpy array
-# @param params
-# 	An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.
-# @param type
-#	This code accepts diagrams either
-#	* in (birth, death) coordinates, in which case `type = 'BirthDeath'`, or
-#	* in (birth, lifetime) = (birth, death-birth) coordinates, in which case `type = 'BirthLifetime'`
-# @return \f$\sum_{x,y \in \text{Dgm}}g_{i,j}(x,y)\f$ where
-# \f[g_{i,j}(x,y) =
-# \bigg| 1- \max\left\{ \left|\frac{x}{\delta} - i\right|, \left|\frac{y-x}{\delta} - j\right|\right\} \bigg|_+\f]
-# where
-# \f$| * |_+\f$ is positive part; equivalently, min of \f$*\f$ and 0.
-# @note This code does not take care of the maxPower polynomial stuff.  The build_G() function does it after all the rows have been calculated.
+
 def tent(Dgm, params, type = 'BirthDeath'):
+	'''
+	Applies the tent function to a diagram.
+
+	Parameters:
+
+	:Parameter Dgm:
+		A persistence diagram, given as a $K \times 2$ numpy array
+	:Parameter params:
+		A tents.ParameterBucket object. Really, we need d, delta, and epsilon from that.
+
+	This code accepts diagrams either
+		1. in (birth, death) coordinates, in which case `type = 'BirthDeath'`, or
+		2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case `type = 'BirthLifetime'`
+
+	:returns:
+
+	:math:`\sum_{x,y \in \text{Dgm}}g_{i,j}(x,y)` where
+
+	.. math::
+
+		g_{i,j}(x,y) = \\bigg| 1- \\max\\left\\{ \\left|\\frac{x}{\\delta} - i\\right|, \\left|\\frac{y-x}{\\delta} - j\\right|\\right\\} \\bigg|_+
+
+	where :math:`| * |_+` is positive part; equivalently, min of :math:`*` and 0.
+
+	'''
+
 	d = params.d
 	delta = params.delta
 	epsilon = params.epsilon
@@ -269,42 +299,49 @@ def tent(Dgm, params, type = 'BirthDeath'):
 	# if params.maxPower >1:
 
 
-	# 	BigOuts = [out]
-	# 	# Make 2 using np.triu_indices
-	# 	indices = np.array(np.triu_indices(len(out)))
-	# 	C = out[indices.T]
-	# 	C = np.prod(C,1)
-	# 	BigOuts.append(C)
-	# 	# Make 3 or above using itertools
-	# 	# NOTE: This is incredibly slow and should be improved.
-	# 	for i in range(3,params.maxPower + 1):
-	# 		C = [a for a in itertools.combinations_with_replacement(out,i)]
-	# 		C = np.array(C)
-	# 		C = np.prod(C,1)
-	# 		BigOuts.append(C)
-	# 	# turn all of them into one long vector
-	# 	out = np.concatenate(BigOuts)
+	#	 BigOuts = [out]
+	#	 # Make 2 using np.triu_indices
+	#	 indices = np.array(np.triu_indices(len(out)))
+	#	 C = out[indices.T]
+	#	 C = np.prod(C,1)
+	#	 BigOuts.append(C)
+	#	 # Make 3 or above using itertools
+	#	 # NOTE: This is incredibly slow and should be improved.
+	#	 for i in range(3,params.maxPower + 1):
+	#	 C = [a for a in itertools.combinations_with_replacement(out,i)]
+	#	 C = np.array(C)
+	#	 C = np.prod(C,1)
+	#	 BigOuts.append(C)
+	#	 # turn all of them into one long vector
+	#	 out = np.concatenate(BigOuts)
 
 
 	return out
 
 
-
-## Applies the tent function to all diagrams in the series and outputs the feature matrix
-# \f$G_{a,b}\f$ is the \f$b^{th}\f$ tent function (after flattening the order) evaluated on the \f$a^{th}\f$ diagram in the series.
-# @param DgmSeries : pd.Series
-#	The structure holding the persistence diagrams.
-# @param params : tents.ParameterBucket
-# 	A parameter bucket used for calculations.
 def build_G(DgmSeries, params):
-    applyTents = lambda x: params.feature_function(x,params = params)
-    G = np.array(list(DgmSeries.apply(applyTents )))
-    
-    # Include powers if necessary
-    if params.maxPower>1:
-        poly = PolynomialFeatures(params.maxPower)
-        G = poly.fit_transform(G)
-    return G
+	'''
+	Applies the tent function to all diagrams in the series and outputs the feature matrix
+
+	:math:`G_{a,b}` is the :math:`b^{th}` tent function (after flattening the order) evaluated on the :math:`a^{th}`` diagram in the series.
+
+	Parameters:
+
+	:Parameter DgmSeries: pd.Series
+		The structure holding the persistence diagrams.
+	:Parameter params: tents.ParameterBucket
+		 A parameter bucket used for calculations.
+
+	'''
+
+	applyTents = lambda x: params.feature_function(x,params = params)
+	G = np.array(list(DgmSeries.apply(applyTents )))
+
+	 # Include powers if necessary
+	if params.maxPower>1:
+		poly = PolynomialFeatures(params.maxPower)
+		G = poly.fit_transform(G)
+	return G
 
 #----------------------------------------------------#
 #----------------------------------------------------#
@@ -312,154 +349,158 @@ def build_G(DgmSeries, params):
 #----------------------------------------------------#
 #----------------------------------------------------#
 
-## Main function to run ML with tents on persistence diagrams.
-# Takes data frame DgmsDF and specified persistence diagram column labels,
-# computes the G matrix using build_G.
-# Does classification using labels from labels_col in the data frame.
-# Returns instance of estimator
-#
-# 	@param DgmsDF
-# 		A pandas data frame containing, at least, a column of
-# 		diagrams and a column of labels
-# 	@param labels_col
-# 		A string.  The label for the column in DgmsDF containing
-# 		the training labels.
-# 	@param dgm_col
-# 		The label(s) for the column containing the diagrams given as a string or list of strings.
-# 	@param params
-# 		A class of type ParameterBucket
-# 		Should store:
-# 			- **d**:
-# 				An integer, the number of elements for griding up
-# 				the x and y axis of the diagram.  Will result in
-# 				d*(d+1) tent functions
-# 			- **delta**, **epsilon**:
-# 				Controls location and width of mesh elements for x and y axis of the
-# 				diagram.
-# 			- **clfClass**:
-# 				The class which will be used for classification.  Currently tested
-#				using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.
-# @return
-# 	The classifier object. Coefficients can be found from clf.coef_
+
 def TentML(DgmsDF,
+		labels_col = 'trainingLabel',
+		dgm_col = 'Dgm1',
+		params = None,
+		normalize = False,
+		verbose = True
+		):
+	'''
+	Main function to run ML with tents on persistence diagrams.
+	Takes data frame DgmsDF and specified persistence diagram column labels,
+	computes the G matrix using build_G.
+	Does classification using labels from labels_col in the data frame.
+	Returns instance of estimator
+
+	Parameters:
+
+	:Parameter DgmsDF:
+		A pandas data frame containing, at least, a column of diagrams and a column of labels
+	:Parameter abels_col:
+		A string. The label for the column in DgmsDF containing the training labels.
+	:Parameter dgm_col:
+		The label(s) for the column containing the diagrams given as a string or list of strings.
+	:Parameter params:
+		A class of type ParameterBucket.
+		Should store:
+			**d**:
+				An integer, the number of elements for griding up the x and y axis of the diagram.  Will result in d*(d+1) tent functions
+			**delta**, **epsilon**:
+				Controls location and width of mesh elements for x and y axis of the diagram.
+			**clfClass**:
+				The class which will be used for classification.  Currently tested using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.
+
+	:returns:
+
+	The classifier object. Coefficients can be found from clf.coef.
+
+	'''
+	 #Choosing epsilon
+	if params == None:
+		print('You need to pass in a ParameterBucket. Exiting....')
+		return
+	if params.d == None or params.delta == None or params.epsilon == None or params.maxPower == None:
+		print('You need to finish filling the parameter bucket. ')
+		print(params)
+		# print('params.d = ', params.d)
+		# print('params.delta = ', params.delta)
+		# print('params.epsilon = ', params.epsilon)
+		# print('params.maxPower = ', params.maxPower)
+		print('Exiting....')
+		return
+
+	clf = params.clfClass()
+
+	if verbose:
+		print('Training estimator.')
+
+#	 startTime = time.time()
+
+	 #check to see if only one column label was passed. If so, turn it into a list.
+	if type(dgm_col) == str:
+		dgm_col = [dgm_col]
+
+	if verbose:
+		print('Making G...')
+
+	listOfG = []
+	for dgmColLabel in dgm_col:
+		G = build_G(DgmsDF[dgmColLabel],params)
+		listOfG.append(G)
+
+	G = np.concatenate(listOfG,axis = 1)
+
+	numFeatures = np.shape(G)[1]
+
+	# Normalize G
+	if normalize:
+		G = scale(G)
+
+
+	if verbose:
+		 print('Number of features used is', numFeatures,'...')
+
+	clf.fit(G,list(DgmsDF[labels_col]))
+
+	if verbose:
+		print('Checking score on training set...')
+
+	score = clf.score(G,list(DgmsDF[labels_col]))
+
+	if verbose:
+		print('Score on training set: ' + str(score) + '.\n')
+
+	clf.delta = params.delta
+	clf.epsilon = params.epsilon
+	clf.trainingScore = score
+	clf.d = params.d
+
+	return clf
+
+
+
+
+
+def getPercentScore(DgmsDF,
 			labels_col = 'trainingLabel',
 			dgm_col = 'Dgm1',
-			params = None,
+			params = ParameterBucket(),
 			normalize = False,
 			verbose = True
 			):
-    #Choosing epsilon
-    if params == None:
-        print('You need to pass in a ParameterBucket. Exiting....')
-        return
-    if params.d == None or params.delta == None or params.epsilon == None or params.maxPower == None:
-        print('You need to finish filling the parameter bucket. ')
-        print(params)
-        # print('params.d = ', params.d)
-        # print('params.delta = ', params.delta)
-        # print('params.epsilon = ', params.epsilon)
-        # print('params.maxPower = ', params.maxPower)
-        print('Exiting....')
-        return
-    
-    clf = params.clfClass()
-    
-    if verbose:
-        print('Training estimator.')
-        
-#    startTime = time.time()
-    
-    #check to see if only one column label was passed. If so, turn it into a list.
-    if type(dgm_col) == str:
-        dgm_col = [dgm_col]
-        
-    if verbose:
-        print('Making G...')
-        
-    listOfG = []
-    for dgmColLabel in dgm_col:
-        G = build_G(DgmsDF[dgmColLabel],params)
-        listOfG.append(G)
-    
-    G = np.concatenate(listOfG,axis = 1)
 
-    numFeatures = np.shape(G)[1]
-     
-    # Normalize G
-    if normalize:
-        G = scale(G)
+	'''
+	Main testing function for classification or regression methods.
+	Does train/test split, creates classifier, and returns score on test.
 
+	Parameters:
 
-    if verbose:
-        print('Number of features used is', numFeatures,'...')
-        
-    clf.fit(G,list(DgmsDF[labels_col]))
-    
-    if verbose:
-        print('Checking score on training set...')
-        
-    score = clf.score(G,list(DgmsDF[labels_col]))
-    
-    if verbose:
-        print('Score on training set: ' + str(score) + '.\n')
-        
-    clf.delta = params.delta
-    clf.epsilon = params.epsilon
-    clf.trainingScore = score
-    clf.d = params.d
-    
-    return clf
+	:Parameter DgmsDF:
+		A pandas data frame containing, at least, a column of diagrams and a column of labels
+	:Parameter labels_col:
+		A string. The label for the column in DgmsDF containing the training labels.
+	:Parameter dgm_col:
+		A string or list of strings giving the label for the column containing the diagrams.
+	:Parameter params:
+		A class of type ParameterBucket
+		Should store:
+			**d**:
+			 	An integer, the number of elements for griding up the x and y axis of the diagram.  Will result in d*(d+1) tent functions
+			**delta**, **epsilon**:
+				Controls location and width of mesh elements for x and y axis of the diagram.
+			**clfClass**:
+				The class which will be used for classification.  Currently tested using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.
+			**seed**:
+				None if we don't want to mess with the seed for the train_test_split function. Else, pass integer.
+			**test_split**:
+				The percentage of the data to be reserved for the test part of the train/test split.
 
+	:returns:
 
+	Returned as a dictionary of entries:
+		- **score**
+			The percent correct when predicting on the test set.
+		- **DgmsDF**
+			The original data frame passed back with a column labeled
+			'Prediction' added with the predictions gotten for the
+			test set. Data points in the training set will have an
+			entry of NaN
+		- **clf**
+			The classifier object.
 
-
-## Main testing function for classification or regression methods.
-# Does train/test split, creates classifier, and returns score on test.
-#
-# 	@param DgmsDF
-# 		A pandas data frame containing, at least, a column of
-# 		diagrams and a column of labels
-# 	@param labels_col
-# 		A string.  The label for the column in DgmsDF containing the training labels.
-# 	@param dgm_col
-# 		A string or list of strings giving the label for the column containing the diagrams.
-# 	@param params
-# 		A class of type ParameterBucket
-# 		Should store:
-# 			- **d**:
-# 				An integer, the number of elements for griding up
-# 				the x and y axis of the diagram.  Will result in
-# 				d*(d+1) tent functions
-# 			- **delta**, **epsilon**:
-# 				Controls location and width of mesh elements for x and y axis of the
-# 				diagram.
-# 			- **clfClass**:
-# 				The class which will be used for classification.  Currently tested
-#				using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.
-#			- **seed**:
-#				None if we don't want to mess with the seed for the train_test_split function. Else, pass integer.
-#			- **test_split**:
-#				The percentage of the data to be reserved for the test part of the train/test split.
-#
-# 	@return
-#		Returned as a dictionary of entries:
-# 		- **score**
-# 			The percent correct when predicting on the test set.
-# 		- **DgmsDF**
-# 			The original data frame passed back with a column labeled
-# 			'Prediction' added with the predictions gotten for the
-# 			test set. Data points in the training set will have an
-# 			entry of NaN
-# 		- **clf**
-# 			The classifier object.
-#
-def getPercentScore(DgmsDF,
-					labels_col = 'trainingLabel',
-					dgm_col = 'Dgm1',
-					params = ParameterBucket(),
-					normalize = False,
-					verbose = True
-					):
+	'''
 
 	print('---')
 	print('Beginning experiment.')
@@ -472,20 +513,20 @@ def getPercentScore(DgmsDF,
 
 	# Run actual train/test experiment using sklearn
 	D_train, D_test, L_train,L_test = train_test_split(DgmsDF,
-													DgmsDF[labels_col],
-													test_size=params.test_size,
-													random_state = params.seed
-													)
+							DgmsDF[labels_col],
+							test_size=params.test_size,
+							random_state = params.seed
+							)
 
 	#--------Training------------#
 	if verbose:
 		print('Using ' + str(len(L_train)) + '/' + str(len(DgmsDF)) + ' to train...')
 	clf = TentML(D_train,
-					labels_col = labels_col,
-					dgm_col = dgm_col,
-					params = params,
-					normalize = normalize,
-					verbose = verbose)
+			labels_col = labels_col,
+			dgm_col = dgm_col,
+			params = params,
+			normalize = normalize,
+			verbose = verbose)
 
 	#--------Testing-------------#
 	if verbose:

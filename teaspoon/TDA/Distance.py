@@ -1,9 +1,9 @@
 """
-Created on Jun 9, 2016
-
 Has code for computing pairwise distance for diagrams.
 
-@author: liz
+Created on Jun 9, 2016
+
+:author: liz
 """
 
 import numpy as np
@@ -13,7 +13,9 @@ import subprocess
 # import TSAwithTDA.SlidingWindows as SW
 from .Persistence import  prepareFolders
 
-
+"""
+.. module: Distance
+"""
 
 #-----------------------------------------------------------------------
 
@@ -21,71 +23,65 @@ from .Persistence import  prepareFolders
 
 ## Computes the distance using the geom_bottleneck and geom_matching code
 # from [Hera](https://bitbucket.org/grey_narn/hera).
-#
-# @todo This documentation needs cleaning and updating.
-#
-# Need to build the C++ code, then add bottleneck_dist folder and wasserstein_dist to path
-# On Liz's machine, this involves adding the following lines to the ~/.bashrc
-#     export PATH="/home/liz/Dropbox/Math/Code/hera/geom_matching/wasserstein/build:$PATH"
-#     export PATH="/home/liz/Dropbox/Math/Code/hera/geom_bottleneck/build/example:$PATH"
-#
-#
-# Default values for wasserstein_dist from Hera: 
-#
-#
-#
-# internal_p must be in \f$[1.0, \infty]\f$ (to explicitly set internal_p to \f$\infty\f$, supply inf).By default wasserstein degree is 1.0, relative error is 0.01, internal norm is l_infinity.
-#
-# hera input format:
-# \code{.sh}
-# bottleneck_dist file1 file2  [relative_error]
-# wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm] 
-# \endcode
-#
-#
-# Parameters
-# ----------
-# @param D1 
-# @param D2
-#     Persistence diagrams given as Lx2 numpy arrays.
-# @param wassDeg
-#     Options are:
-#     - 'Bottleneck' or anything containing 'bot'
-#         Runs the bottleneck_dist command
-#     - np.inf 
-#         Also returns bottleneck distance with the bottleneck_dist command
-#     - an integer q 
-#         Computes the q-th Wasserstein distance
-# @param relError
-#     - An input to both bottleneck_dist and wasserstein_dist.
-#
-#       - For wasserstein_dist from hera documentation:
-#         If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).
-#         Otherwise the output is an approximation of the exact distance. Precisely:
-#         if d_exact is the true distance and d_approx is the output, then 
-#
-#             \frac{| d_{exact} - d_{approx} |}{ d_{exact} } < \mathrm{relativeError}.
-#
-#       - For bottleneck_dist from hera documentation:
-#         If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same). Otherwise the output is an approximation of the exact distance. Precisely: if d_exact is the true distance and d_approx is the output, then 
-#         \f[
-#             \frac{| d_{exact} - d_{approx} |}{ d_{exact} } < \mathrm{relativeError}.
-#         \f]
-#     - Default value in Hera is 0.01 for Wasserstein distance and 0 (exact computation) for bottleneck distance. 
-#     - Values passed to hera must be positive. @todo: Does this mean strictly positive? What is the behavior when passing 0?
-# @param internal_p
-#     This is only controllable for Wasserstein distance computation.  Matched points are measured by \f$L_p\f$ distance.
-#     Default is internal_p = infinity.
-#     @todo: Check that bottleneck_dist uses infinity even though it doesn't explicitly say so in the documentation.
-#
-#
-#
-# @return A float for the distance between the diagrams
-#
+'''
+.. todo::
+
+    This documentation needs cleaning and updating.
+
+    Need to build the C++ code, then add bottleneck_dist folder and wasserstein_dist to path
+
+    On Liz's machine, this involves adding the following lines to the ~/.bashrc
+        export PATH="/home/liz/Dropbox/Math/Code/hera/geom_matching/wasserstein/build:$PATH"
+        export PATH="/home/liz/Dropbox/Math/Code/hera/geom_bottleneck/build/example:$PATH"
+
+'''
 
 def dgmDist_Hera(D1,D2, wassDeg = 'Bottleneck', relError = None, internal_p = None):
+    """
+    Default values for wasserstein_dist from Hera:
+
+        internal_p must be in :math:`[1.0, \infty]` (to explicitly set internal_p to :math:`\infty`, supply inf).By default wasserstein degree is 1.0, relative error is 0.01, internal norm is l_infinity.
+
+    hera input format:
+        \code{.sh}
+        bottleneck_dist file1 file2  [relative_error]
+        wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]
+        \endcode
+
+    Parameters:
+
+    :Parameter D1:
+    :Parameter D2:
+        Persistence diagrams given as Lx2 numpy arrays.
+    :Parameter wassDeg:
+        Options are:
+            - 'Bottleneck' or anything containing 'bot'. Runs the bottleneck_dist command
+            - np.inf: Also returns bottleneck distance with the bottleneck_dist command
+            - an integer q: Computes the q-th Wasserstein distance
+    :Parameter relError:
+        - An input to both bottleneck_dist and wasserstein_dist.
+        - For wasserstein_dist from hera documentation:
+            If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).
+            Otherwise the output is an approximation of the exact distance. Precisely:
+            if d_exact is the true distance and d_approx is the output, then
+                :math:`\\frac{| d_{exact} - d_{approx} |}{ d_{exact} } < \\mathrm{relativeError}`.
+        - For bottleneck_dist from hera documentation:
+            If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same). Otherwise the output is an approximation of the exact distance. Precisely: if d_exact is the true distance and d_approx is the output, then
+                :math:`\\frac{| d_{exact} - d_{approx} |}{ d_{exact} } < \\mathrm{relativeError}.`
+        - Default value in Hera is 0.01 for Wasserstein distance and 0 (exact computation) for bottleneck distance.
+        - Values passed to hera must be positive.
+        .. todo:: Does this mean strictly positive? What is the behavior when passing 0?
+    :Parameter internal_p:
+        This is only controllable for Wasserstein distance computation.  Matched points are measured by :math:`L_p` distance.
+        Default is internal_p = infinity.
+
+    .. todo:: Check that bottleneck_dist uses infinity even though it doesn't explicitly say so in the documentation.
+
+    :returns: A float for the distance between the diagrams
+
+    """
     # Make and check folder system.
-    # Warning: Empties the directory every time! Don't put anything in the 
+    # Warning: Empties the directory every time! Don't put anything in the
     #          created .teaspoonData folder that you don't want to lose.
     prepareFolders()
 
@@ -115,7 +111,7 @@ def dgmDist_Hera(D1,D2, wassDeg = 'Bottleneck', relError = None, internal_p = No
                 print('Exiting...')
                 return
             else:
-                cmd += ' ' + str(relError) 
+                cmd += ' ' + str(relError)
 
         # We're ignoring internal_p if we're doing bottleneck distance.
         if internal_p:
@@ -139,7 +135,7 @@ def dgmDist_Hera(D1,D2, wassDeg = 'Bottleneck', relError = None, internal_p = No
             if internal_p:
                 cmd += ' ' + str(internal_p)
             else:
-                cmd += ' ' + 'inf' # default value 
+                cmd += ' ' + 'inf' # default value
 
 
 

@@ -1,25 +1,30 @@
-'''
+"""
+
 Code for drawing various things.
 
-'''
+"""
 
-
+"""
+.. module: Draw
+"""
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 
-## \brief Draws simple persistence diagram plot
-#
-# @param D
-#	a persistence diagram, given as a Kx2 numpy array
-# @param boundary
-# @param epsilon
-#	The diagram is drawn on [0,boundary]x[0,boundary].  
-#	If boundary not given, then it is determined to be the 
-#	max death time from the input diagram plus epsilon.  
-#
 def drawDgm(D,boundary=None,epsilon = .5, color=None):
+    """
+    Draws simple persistence diagram plot
+
+    :Parameter D:
+        a persistence diagram, given as a Kx2 numpy array
+    :Parameter boundary:
+    :Parameter epsilon:
+        The diagram is drawn on [0,boundary]x[0,boundary].
+        If boundary not given, then it is determined to be the
+        max death time from the input diagram plus epsilon.
+
+    """
     # Separate out the infinite classes if they exist
     includesInfPts = np.inf in D
     if includesInfPts:
@@ -51,11 +56,13 @@ def drawDgm(D,boundary=None,epsilon = .5, color=None):
     plt.xlabel('Birth')
 
 
-## \brief Draws simple point cloud plot
-#
-# @param P
-#	a point cloud, given as a KxD numpy array
-#	Even if D>2, only the first two coordinates are plotted.
-#
 def drawPtCloud(P):
+    """
+    Draws simple point cloud plot
+
+    :Parameter P:
+        a point cloud, given as a KxD numpy array.
+        Even if D>2, only the first two coordinates are plotted.
+
+    """
     plt.scatter(P[:,0],P[:,1])

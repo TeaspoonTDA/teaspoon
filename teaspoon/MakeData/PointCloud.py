@@ -1,7 +1,9 @@
-## @package teaspoon.MakeData.PointCloud
-# Generates data sets related to persistence diagrams and point clouds.
-#
-#All point clouds are returned as a numpy array, larger collection data is returned as a pandas DataFrame.
+'''
+Generates data sets related to persistence diagrams and point clouds.
+
+All point clouds are returned as a numpy array, larger collection data is returned as a pandas DataFrame.
+
+'''
 
 import random
 import os
@@ -11,7 +13,9 @@ import pandas as pd
 from teaspoon.TDA import Persistence as pP
 from scipy.spatial.distance import euclidean
 
-
+"""
+.. module::PointCloud
+"""
 
 #-------------Circles and Annuli---------------------------------------#
 def Circle(N = 100, r=1, gamma=None, seed = None):
@@ -24,22 +28,19 @@ def Circle(N = 100, r=1, gamma=None, seed = None):
     distribution is not bounded, so your favorite stability theorem doesn't
     immediately apply.
 
-    Parameters
-    ----------
-    N -
+    Parameters:
+
+    :Parameter N:
         Number of points to generate
-    r -
+    :Parameter r:
         Radius of the circle
-    gamma -
-        Standard deviation of the normally distributed noise. 
-    seed -
+    :Parameter gamma:
+        Standard deviation of the normally distributed noise.
+    :Parameter seed:
         Fixes the seed.  Good if we want to replicate results.
 
-
-    Returns
-    -------
-    P -
-        A Nx2 numpy array with the points drawn as the rows.
+    :returns:
+        P- A Nx2 numpy array with the points drawn as the rows.
 
     """
     np.random.seed(seed)
@@ -65,20 +66,18 @@ def Sphere(N = 100, r = 1, noise = 0, seed = None):
     If noise is set to a positive number, the points
     can be at distance r +/- noise from the origin.
 
-    Parameters
-    ----------
-    N -
+    Parameters:
+
+    :Parameter N:
         Number of points to generate
-    r -
+    :Parameter r:
         Radius of the sphere
-    seed -
+    :Parameter seed:
         Fixes the seed.  Good if we want to replicate results.
 
 
-    Returns
-    -------
-    P -
-        A Nx3 numpy array with the points drawn as the rows.
+    :returns:
+        P- A Nx3 numpy array with the points drawn as the rows.
 
     """
     np.random.seed(seed)
@@ -100,20 +99,19 @@ def Annulus(N=200,r=1,R=2, seed = None):
     Returns point cloud sampled from uniform distribution on
     annulus in R^2 of inner radius r and outer radius R
 
-    Parameters
-    ----------
-    N -
+    Parameters:
+
+    :Parameter N:
         Number of points to generate
-    r -
+    :Parameter r:
         Inner radius of the annulus
-    R -
+    :Parameter R:
         Outer radius of the annulus
-    seed -
+    :Parameter seed:
         Fixes the seed.  Good if we want to replicate results.
 
 
-    Returns
-    -------
+    :returns:
     P -
         A Nx2 numpy array with the points drawn as the rows.
 
@@ -155,20 +153,19 @@ def Torus(N = 100, r = 1,R = 2,  seed = None):
     For theta, draw theta uniformly from [0,2pi) and
     eta from [1-r/R,1+r/R].  If eta< 1 + (r/R) cos(theta), return theta.
 
-    Parameters
-    ----------
-    N -
+    Parameters:
+
+    :Parameter N:
         Number of points to generate
-    r -
+    :Parameter r:
         Inner radius of the torus
-    R -
+    :Parameter R:
         Outer radius of the torus
-    seed -
+    :Parameter seed:
         Fixes the seed.  Good if we want to replicate results.
 
 
-    Returns
-    -------
+    :returns:
     P -
         A Nx3 numpy array with the points drawn as the rows.
 
@@ -219,20 +216,18 @@ def Cube(N = 100, diam = 1, dim = 2, seed = None):
     Generate N points in R^dim from the box
     [0,diam]x[0,diam]x...x[0,diam]
 
-    Parameters
-    ----------
-    N -
+    Parameters:
+
+    :Parameter N:
         Number of points to generate
-    diam -
+    :Parameter diam:
         Points are pulled from the box
         [0,diam]x[0,diam]x...x[0,diam]
-    dim -
+    :Parameter dim:
         Points are embedded in R^dim
 
-    Returns
-    -------
-    P -
-        A Nxdim numpy array with the points drawn as the rows.
+    :returns:
+    P - A Nxdim numpy array with the points drawn as the rows.
 
     """
     np.random.seed(seed)
@@ -255,25 +250,24 @@ def Clusters(N = 100,
     the ith cluster in R^d.
     Points are drawn from a normal distribution with std dev = sd
 
-    Parameters
-    ----------
-    N -
+    Parameters:
+
+    :Parameter N:
         Number of points to be generated
-    centers -
+    :Parameter centers:
         k x d numpy array, where centers[i,:] is the center of
         the ith cluster in R^d.
-
-    sd -
+    :Parameter sd:
         standard deviation of clusters.
-        TODO: Make this enterable as a vector so each cluster can have
-        a different sd?
-    seed -
+        
+        .. todo:: Make this enterable as a vector so each cluster can have a different sd?
+
+    :Parameter seed:
         Fixes the seed.  Good if we want to replicate results.
 
-    Returns
-    -------
-    P -
-        A Nxd numpy array with the points drawn as the rows.
+    :returns:
+
+    P - A Nxd numpy array with the points drawn as the rows.
 
     """
 
@@ -322,19 +316,24 @@ def Clusters(N = 100,
 #----------------------------------------------------------------------#
 #------------Normally distributed points in (birth,death) plane--------#
 #----------------------------------------------------------------------#
-
-## Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.
-# Pulls `N` points from a normal distribution with mean `mu` and standard deviation `sd`, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.
-#
-# @param N
-#   Original number of points drawn for the persistence diagram.
-# @param mu, sd
-#   Mean and standard deviation of the normal distribution used to generate the points.
-# @param seed
-#   Used to fix the seed if passed an integer; otherwise should be `None`.
-# @return
-#   A persistence diagram given as a numpy array of size `Kx2`.
 def normalDiagram(N=20, mu=(2,4), sd=1, seed = None):
+    """
+    Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.
+    Pulls `N` points from a normal distribution with mean `mu` and standard deviation `sd`, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.
+
+    Parameters:
+
+    :Parameter N:
+        Original number of points drawn for the persistence diagram.
+    :Parameter mu, sd:
+        Mean and standard deviation of the normal distribution used to generate the points.
+    :Parameter seed:
+        Used to fix the seed if passed an integer; otherwise should be `None`.
+
+    :returns:
+        A persistence diagram given as a numpy array of size `Kx2`.
+
+    """
 
 
     np.random.seed(seed)
@@ -358,23 +357,6 @@ def normalDiagram(N=20, mu=(2,4), sd=1, seed = None):
 
 
 
-
-## Generate a collection of diagrams using the normalDiagram() function for classification tests.
-# @param N
-#   The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.
-# @param numDgms
-#   The number of diagrams for the collection.  Can either be an integer, in which case `numDgms` is the number of diagrams of *each type* that are generated, thus returning a data set with `2*numDgms` diagrams.  Alternatively, `numDgms` can be passed as a length two list `(n,m)` where `n` diagrams of the first type and `m` diagrams of the second type are drawn, for a total of `n+m` diagrams.
-# @param muRed, muBlue
-#   The means used for the normal distribution in normalDiagram() for the two different types.
-# @param sd
-#   The standard deviation for the normal distribution used for normalDiagram().
-# @param permute
-#   If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.
-# @param seed
-#   Used to fix the seed if passed an integer; otherwise should be `None`.
-#
-# @return
-#   A pandas dataframe with columns ```['Dgm', 'mean', 'sd', 'trainingLabel']```. In this case, the entry in `trainingLabel` is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.
 def testSetClassification(N = 20,
                     numDgms = (10,10),
                     muRed = (1,3),
@@ -382,8 +364,27 @@ def testSetClassification(N = 20,
                     sd = 1,
                     permute = True,
                     seed = None):
+    '''
+    Generate a collection of diagrams using the normalDiagram() function for classification tests.
 
+    Parameters:
 
+    :Parameter N:
+        The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.
+    :Parameter numDgms:
+        The number of diagrams for the collection.  Can either be an integer, in which case `numDgms` is the number of diagrams of *each type* that are generated, thus returning a data set with `2*numDgms` diagrams.  Alternatively, `numDgms` can be passed as a length two list `(n,m)` where `n` diagrams of the first type and `m` diagrams of the second type are drawn, for a total of `n+m` diagrams.
+    :Parameter muRed, muBlue:
+        The means used for the normal distribution in normalDiagram() for the two different types.
+    :Parameter sd:
+        The standard deviation for the normal distribution used for normalDiagram().
+    :Parameter permute:
+        If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.
+    :Parameter seed:
+        Used to fix the seed if passed an integer; otherwise should be `None`.
+
+    :returns:
+        A pandas dataframe with columns ```['Dgm', 'mean', 'sd', 'trainingLabel']```. In this case, the entry in `trainingLabel` is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.
+    '''
 
     if type(numDgms) == int:
         numDgms = (numDgms,numDgms)
@@ -391,7 +392,6 @@ def testSetClassification(N = 20,
     columns = ['Dgm', 'mean', 'sd', 'trainingLabel']
     index = range(sum(numDgms))
     DgmsDF = pd.DataFrame(columns = columns, index = index)
-
 
     counter = 0
 
@@ -423,22 +423,6 @@ def testSetClassification(N = 20,
 #---------------LINEAR---------------------------------------
 #-----------------------------------------------
 
-## Generate a collection of diagrams with means distributed along a line using the normalDiagram() function for regression tests.
-# @param N
-#   The number of initial points pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.
-# @param numDgms
-#   The number of diagrams for the collection given as an integer.
-# @param muStart, muEnd
-#   The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by `muStart` and `muEnd`.
-# @param sd
-#   The standard deviation for the normal distribution used for normalDiagram().
-# @param permute
-#   If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.
-# @param seed
-#   Used to fix the seed if passed an integer; otherwise should be `None`.
-#
-# @return
-#   A pandas dataframe with columns ```['Dgm', 'mean', 'sd', 'trainingLabel']```.  In this case, `trainingLabel` is the distance from the mean used for that persistence diagram to `muStart`.
 def testSetRegressionLine(N = 20,
                     numDgms = 40,
                     muStart = (1,3),
@@ -446,6 +430,29 @@ def testSetRegressionLine(N = 20,
                     sd = 1,
                     permute = True,
                     seed = None):
+    '''
+    Generate a collection of diagrams with means distributed along a line using the normalDiagram() function for regression tests.
+
+    Parameters:
+
+    :Parameter N:
+        The number of initial points pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.
+    :Parameter numDgms:
+        The number of diagrams for the collection given as an integer.
+    :Parameter muStart, muEnd:
+        The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by `muStart` and `muEnd`.
+    :Parameter sd:
+        The standard deviation for the normal distribution used for normalDiagram().
+    :Parameter permute:
+        If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.
+    :Parameter seed:
+        Used to fix the seed if passed an integer; otherwise should be `None`.
+
+    :returns:
+        A pandas dataframe with columns ```['Dgm', 'mean', 'sd', 'trainingLabel']```.  In this case, `trainingLabel` is the distance from the mean used for that persistence diagram to `muStart`.
+
+    '''
+
     columns = ['Dgm', 'mean', 'sd', 'trainingLabel']
     index = range(numDgms)
     DgmsDF = pd.DataFrame(columns = columns, index = index)
@@ -475,28 +482,35 @@ def testSetRegressionLine(N = 20,
 #---------------2D-ball around center-----------------------
 #-----------------------------------------------
 
-## Generate a collection of diagrams with means distributed normally using the normalDiagram() function; used for regression tests.
-# @param N
-#   The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.
-# @param numDgms
-#   The number of diagrams for the collection given as an integer.
-# @param muCenter
-#   The means used for the normal distribution in normalDiagram() are drawn from the normal distribution with mean `muCenter`.
-# @param sd
-#   The standard deviation for the normal distribution used for normalDiagram(), as well as for the standard deviation passed to normalDiagram().
-# @param permute
-#   If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.
-# @param seed
-#   Used to fix the seed if passed an integer; otherwise should be `None`.
-#
-# @return
-#   A pandas dataframe with columns ```['Dgm', 'mean', 'sd', 'trainingLabel']```.  In this case, `trainingLabel` is the distance from the mean used for that persistence diagram to `muCenter`.
 def testSetRegressionBall(N = 20,
                     numDgms = 40,
                     muCenter = (1,3),
                     sd = 1,
                     permute = True,
                     seed = None):
+
+    '''
+    Generate a collection of diagrams with means distributed normally using the normalDiagram() function; used for regression tests.
+
+    Parameters:
+
+    :Parameter N:
+        The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.
+    :Parameter numDgms:
+        The number of diagrams for the collection given as an integer.
+    :Parameter muCenter:
+        The means used for the normal distribution in normalDiagram() are drawn from the normal distribution with mean `muCenter`.
+    :Parameter sd:
+        The standard deviation for the normal distribution used for normalDiagram(), as well as for the standard deviation passed to normalDiagram().
+    :Parameter permute:
+        If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.
+    :Parameter seed:
+        Used to fix the seed if passed an integer; otherwise should be `None`.
+
+    :returns:
+        A pandas dataframe with columns ```['Dgm', 'mean', 'sd', 'trainingLabel']```.  In this case, `trainingLabel` is the distance from the mean used for that persistence diagram to `muCenter`.
+
+    '''
 
     columns = ['Dgm', 'mean', 'sd', 'trainingLabel']
     index = range(numDgms)
@@ -525,36 +539,38 @@ def testSetRegressionBall(N = 20,
 
 #------------------------------------------------------------#
 
-
-## Generates a collection of diagrams from different underlying topological spaces.  This set is useful for testing classification tasks.
-#
-# The types of underlying spaces with their entry in the `trainingLabel` column is as follows. Each function uses the default values (except for the number of points) unless otherwise noted.
-# - **Torus**: A torus embedded in \f$\mathbb{R}^3\f$ using the function Torus().
-# - **Annulus**: An annulus generated with default inputs of Annulus().
-# - **Cube**: Points drawn uniformly from the cube \f$[0,1]^3 \subset \mathbb{R}^3\f$ using the function Cube().
-# - **3Cluster**: Points are drawn using Clusters() with centers `[0,0], [0,1.5], [1.5,0]` with `sd = 0.05`.
-# - **3Clusters of 3Clusters**: Points are drawn with 9 different centers, which can be loosely grouped into three groups of three; again uses Clusters() with `sd = 0.05`. The centers are `[0,0], [0,1.5], [1.5,0]`; this set rotated 45 degrees and shifted up by 4; and the first set shifted right 3 and up 4.
-# - **Sphere**: Points drawn from a sphere using Sphere() with `noise = .05`.
-#
-#
-# @param numDgms
-#   The number of diagrams generated of each type. The resulting dataset will have `6*numDgms` diagrams.
-# @param numPts
-#   The number of points in each point cloud.
-# @param permute
-#   If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.
-# @param seed
-#   Used to fix the seed if passed an integer; otherwise should be `None`.
-#
-# @return
-#   A pandas DataFrame with columns ```['Dgm0', 'Dgm1', 'trainingLabel']```.  The `trainingLabel` row has entries with labels given as the boldface above.
-#
 def testSetManifolds(numDgms = 50,
                         numPts = 300,
                         permute = True,
                         seed = None
                         ):
 
+    '''
+    Generates a collection of diagrams from different underlying topological spaces.  This set is useful for testing classification tasks.
+
+    The types of underlying spaces with their entry in the `trainingLabel` column is as follows. Each function uses the default values (except for the number of points) unless otherwise noted.
+        - **Torus**: A torus embedded in :math:`\mathbb{R}^3` using the function Torus().
+        - **Annulus**: An annulus generated with default inputs of Annulus().
+        - **Cube**: Points drawn uniformly from the cube :math:`[0,1]^3 \subset \mathbb{R}^3` using the function Cube().
+        - **3Cluster**: Points are drawn using Clusters() with centers `[0,0], [0,1.5], [1.5,0]` with `sd = 0.05`.
+        - **3Clusters of 3Clusters**: Points are drawn with 9 different centers, which can be loosely grouped into three groups of three; again uses Clusters() with `sd = 0.05`. The centers are `[0,0], [0,1.5], [1.5,0]`; this set rotated 45 degrees and shifted up by 4; and the first set shifted right 3 and up 4.
+        - **Sphere**: Points drawn from a sphere using Sphere() with `noise = .05`.
+
+    Parameters:
+
+    :Parameter numDgms:
+        The number of diagrams generated of each type. The resulting dataset will have `6*numDgms` diagrams.
+    :Parameter numPts:
+        The number of points in each point cloud.
+    :Parameter permute:
+        If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.
+    :Parameter seed:
+        Used to fix the seed if passed an integer; otherwise should be `None`.
+
+    :returns:
+        A pandas DataFrame with columns ```['Dgm0', 'Dgm1', 'trainingLabel']```.  The `trainingLabel` row has entries with labels given as the boldface above.
+
+    '''
 
 
     columns = ['Dgm0', 'Dgm1', 'trainingLabel']

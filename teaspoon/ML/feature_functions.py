@@ -1,9 +1,9 @@
-## @package teaspoon.ML.feature_functions
-# Machine learning featurization method
-# 
-# If you make use of this code, please cite the following paper:<br/>
-# J.A. Perea, E. Munch, and F. Khasawneh.  "Approximating Continuous Functions On Persistence Diagrams." Preprint, 2017.
-#
+'''
+Machine learning featurization method
+
+If you make use of this code, please cite the following paper:<br/>
+J.A. Perea, E. Munch, and F. Khasawneh.  "Approximating Continuous Functions On Persistence Diagrams." Preprint, 2017.
+'''
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,23 +15,38 @@ import matplotlib.pyplot as plt
 # -------------------------------------------- #
 # -------------------------------------------- #
 
+"""
+.. module::feature_functions
+"""
 
-## Applies the tent function to a diagram.
-# @param Dgm
-# 	A persistence diagram, given as a $K \times 2$ numpy array
-# @param params
-# 	An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.
-# @param type
-#	This code accepts diagrams either 
-#	* in (birth, death) coordinates, in which case `type = 'BirthDeath'`, or 
-#	* in (birth, lifetime) = (birth, death-birth) coordinates, in which case `type = 'BirthLifetime'`
-# @return \f$\sum_{x,y \in \text{Dgm}}g_{i,j}(x,y)\f$ where
-# \f[g_{i,j}(x,y) = 
-# \bigg| 1- \max\left\{ \left|\frac{x}{\delta} - i\right|, \left|\frac{y-x}{\delta} - j\right|\right\} \bigg|_+\f]
-# where
-# \f$| * |_+\f$ is positive part; equivalently, min of \f$*\f$ and 0.
-# @note This code does not take care of the maxPower polynomial stuff.  The build_G() function does it after all the rows have been calculated.
 def tent(Dgm, params, dgm_type='BirthDeath'):
+    '''
+    Applies the tent function to a diagram.
+
+    Parameters:
+
+    :Parameter Dgm:
+     	A persistence diagram, given as a :math:`K \times 2` numpy array
+    :Parameter params:
+     	An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.
+    :Parameter type:
+    	This code accepts diagrams either
+            1. in (birth, death) coordinates, in which case `type = 'BirthDeath'`, or
+            2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case `type = 'BirthLifetime'`
+
+    :returns:
+
+    :math:`\sum_{x,y \in \text{Dgm}}g_{i,j}(x,y)` where
+
+    .. math::
+
+        \\bigg| 1- \\max\\left\\{ \\left|\\frac{x}{\\delta} - i\\right|, \\left|\\frac{y-x}{\\delta} - j\\right|\\right\\} \\bigg|_+]
+
+    where :math:`| * |_+` is positive part; equivalently, min of * and 0.
+
+.. note:: This code does not take care of the maxPower polynomial stuff.  The build_G() function does it after all the rows have been calculated.
+
+    '''
     d = params.d
 
     delta = params.delta
@@ -94,28 +109,34 @@ def tent(Dgm, params, dgm_type='BirthDeath'):
 
     return out
 
-
-# coverts subscripts to indices
 def sub2ind(array_shape, rows, cols):
+    '''
+    Converts subscripts to indices
+    '''
     ind = rows * array_shape[1] + cols
     ind[ind < 0] = -1
     ind[ind >= array_shape[0] * array_shape[1]] = -1
     return ind
 
 
-# convert indices to subscripts
 def ind2sub(array_shape, ind):
+    '''
+    Converts indices to subscripts
+    '''
     ind[ind < 0] = -1
     ind[ind >= array_shape[0] * array_shape[1]] = -1
     rows = (ind.astype('int') / array_shape[1])
     cols = ind % array_shape[1]
     return rows, cols
 
-
-# find the quadrature/interpolation weights for common orthognal functions
-# define the function blocks
-# Chebyshev-Gauss points of the first kind
 def quad_cheb1(npts=10):
+    '''
+    Find the quadrature/interpolation weights for common orthognal functions
+
+    Define the function blocks
+
+    Chebyshev-Gauss points of the first kind
+    '''
     # get the Chebyshev nodes of the first kind
     x = np.cos(np.pi * np.arange(0, npts + 1) / npts)
 
@@ -124,11 +145,12 @@ def quad_cheb1(npts=10):
 
     return x, w
 
-
-# Computes the Legendre-Gauss-Lobatto nodes, and their quadrate weights.
-# The LGL nodes are the zeros of (1-x**2)*P'_N(x), wher P_N is the nth Legendre
-# polynomial
 def quad_legendre(npts=10):
+    '''
+    Computes the Legendre-Gauss-Lobatto nodes, and their quadrate weights.
+
+    The LGL nodes are the zeros of (1-x**2)*P'_N(x), wher P_N is the nth Legendre polynomial
+    '''
     # Truncation + 1
     nptsPlusOne = npts + 1
     eps = np.spacing(1)  # find epsilon, the machine precision
@@ -162,23 +184,26 @@ def quad_legendre(npts=10):
 
     return x, w
 
+'''
+Map the inputs to the function block.
+You can invoke the desired function block using:
+quad_pts_and_weights['name_of_function'](npts)
+'''
+quad_pts_and_weights = {'cheb1': quad_cheb1,'legendre': quad_legendre}
 
-# map the inputs to the function blocks
-# you can invoke the desired function block using:
-# quad_pts_and_weights['name_of_function'](npts)
-quad_pts_and_weights = {'cheb1': quad_cheb1,
-                        'legendre': quad_legendre
-                        }
 
-
-# find the barycentric interplation weights
 def bary_weights(x):
-    # Calculate Barycentric weights for the base points x.
-    #
-    # Note: this algorithm may be numerically unstable for high degree
-    # polynomials (e.g. 15+). If using linear or Chebyshev spacing of base
-    # points then explicit formulae should then be used. See Berrut and
-    # Trefethen, SIAM Review, 2004.
+    '''
+    Find the barycentric interplation weights
+
+    Calculate Barycentric weights for the base points x.
+
+    .. note:: this algorithm may be numerically unstable for high degree
+
+    Polynomials (e.g. 15+). If using linear or Chebyshev spacing of base
+    points then explicit formulae should then be used. See Berrut and
+    Trefethen, SIAM Review, 2004.
+    '''
 
     # find the length of x
     n = x.size
@@ -196,14 +221,23 @@ def bary_weights(x):
 
 
 def bary_diff_matrix(xnew, xbase, w=None):
-    # Calculate both the derivative and plain Lagrange interpolation matrix
-    # using Barycentric formulae from Berrut and Trefethen, SIAM Review, 2004.
-    # xnew     Interpolation points
+    '''
+    Calculate both the derivative and plain Lagrange interpolation matrix
+    using Barycentric formulae from Berrut and Trefethen, SIAM Review, 2004.
 
-    # xbase    Base points for interpolation
-    # w        Weights calculated for base points (optional)
+    Parameters:
+
+    :Parameter xnew:
+        Interpolation points
+    :Parameter xbase:
+        Base points for interpolation
+    :Parameter w:
+        Weights calculated for base points (optional)
+
+    '''
 
     # if w is not set, set it
+
     if w is None:
         w = bary_weights(xbase)
 
@@ -252,18 +286,28 @@ def bary_diff_matrix(xnew, xbase, w=None):
     return M
 
 
-## Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.
-# @param Dgm
-# 	A persistence diagram, given as a $K \times 2$ numpy array
-# @param params
-# 	An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.
-# @param type
-#	This code accepts diagrams either
-#	* in (birth, death) coordinates, in which case `type = 'BirthDeath'`, or
-#	* in (birth, lifetime) = (birth, death-birth) coordinates, in which case `dgm_type = 'BirthLifetime'`
-# @return interp_weight, which is a matrix with each entry representiting the weight of an interpolation
-#	function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.
 def interp_polynomial(Dgm, params, dgm_type='BirthDeath'):
+    '''
+    Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.
+
+    Parameters:
+
+    :Parameter Dgm:
+     	A persistence diagram, given as a :math:`K \times 2` numpy array
+    :Parameter params:
+     	An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.
+    :Parameter type:
+    	This code accepts diagrams either
+    	1. in (birth, death) coordinates, in which case `type = 'BirthDeath'`, or
+    	2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case `dgm_type = 'BirthLifetime'`
+
+    :returns:
+
+    interp_weight-
+        a matrix with each entry representiting the weight of an interpolation
+    	function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.
+
+    '''
     #	jacobi_func = params.jacobi_func
     # check if we asked for a squre mesh or not
     if isinstance(params.d, int):
