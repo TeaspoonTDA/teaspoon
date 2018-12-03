@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Packages &#8212; teaspoon 2018 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -17,21 +17,30 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Classes" href="classes.html" />
-    <link rel="prev" title="Todo List" href="TODOLIST.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="prev" title="Todo List" href="TODOLIST.html" /> 
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="classes.html" title="Classes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="TODOLIST.html" title="Todo List"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">teaspoon 2018 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
   <div class="section" id="packages">
@@ -536,12 +545,13 @@ function on the base mesh. This matrix assumes that on a 2D mesh the functions a
 <span class="target" id="module-teaspoon.ML.tents"></span><p>Machine learning featurization method</p>
 <p>If you make use of this code, please cite the following paper:&lt;br/&gt;
 J.A. Perea, E. Munch, and F. Khasawneh.  “Approximating Continuous Functions On Persistence Diagrams.” Preprint, 2017.</p>
-<p>An example workflow to ensure that classification is working:
-code{.py}
-import teaspoon.MakeData.PointCloud as gPC
-import teaspoon.ML.tents as tents
-df = gPC.testSetClassification()
-tents.getPercentScore(df,dgm_col = ‘Dgm’)</p>
+<p>An example workflow to ensure that classification is working:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="k">as</span> <span class="nn">gPC</span>
+<span class="kn">import</span> <span class="nn">teaspoon.ML.tents</span> <span class="k">as</span> <span class="nn">tents</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">gPC</span><span class="o">.</span><span class="n">testSetClassification</span><span class="p">()</span>
+<span class="n">tents</span><span class="o">.</span><span class="n">getPercentScore</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">dgm_col</span> <span class="o">=</span> <span class="s1">&#39;Dgm&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="function">
 <dt id="teaspoon.ML.tents.tent">
 <code class="descclassname">teaspoon.ML.tents.</code><code class="descname">tent</code><span class="sig-paren">(</span><em>Dgm</em>, <em>params</em>, <em>type='BirthDeath'</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.tents.tent" title="Permalink to this definition">¶</a></dt>
@@ -551,7 +561,7 @@ tents.getPercentScore(df,dgm_col = ‘Dgm’)</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameter Dgm:</th><td class="field-body">A persistence diagram, given as a $K    imes 2$ numpy array</td>
+<tr class="field-odd field"><th class="field-name">Parameter Dgm:</th><td class="field-body">A persistence diagram, given as a <span class="math notranslate nohighlight">\(K      imes 2\)</span> numpy array</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">Parameter params:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body">A tents.ParameterBucket object. Really, we need d, delta, and epsilon from that.</td>
@@ -746,13 +756,13 @@ entry of NaN</dd>
 <dd><p>Default values for wasserstein_dist from Hera:</p>
 <blockquote>
 <div>internal_p must be in <span class="math notranslate nohighlight">\([1.0, \infty]\)</span> (to explicitly set internal_p to <span class="math notranslate nohighlight">\(\infty\)</span>, supply inf).By default wasserstein degree is 1.0, relative error is 0.01, internal norm is l_infinity.</div></blockquote>
-<dl class="docutils">
-<dt>hera input format:</dt>
-<dd>code{.sh}
-bottleneck_dist file1 file2  [relative_error]
-wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]
-endcode</dd>
-</dl>
+<p>hera input format:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bottleneck_dist</span> <span class="n">file1</span> <span class="n">file2</span>  <span class="p">[</span><span class="n">relative_error</span><span class="p">]</span>
+<span class="n">wasserstein_dist</span> <span class="n">file1</span> <span class="n">file2</span>  <span class="p">[</span><span class="n">wasserstein</span> <span class="n">degree</span><span class="p">]</span> <span class="p">[</span><span class="n">relative</span> <span class="n">error</span><span class="p">]</span> <span class="p">[</span><span class="n">internal</span> <span class="n">norm</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>Parameters:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -872,15 +882,14 @@ Even if D&gt;2, only the first two coordinates are plotted.</td>
 
 <span class="target" id="module-teaspoon.TDA.Persistence"></span><p>Wrapper for using various fast persistence software inside of python.</p>
 <p>All diagrams are stored as a 2xN numpy matrix.
-When a code returns multiple dimensions, these are returned as a dictionary
-code{.py}
-{</p>
-<blockquote>
-<div>0: DgmDimension0,
-1: DgmDimension1,
-…</div></blockquote>
-<p>}
-endcode</p>
+When a code returns multiple dimensions, these are returned as a dictionary</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="n">DgmDimension0</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="n">DgmDimension1</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <p>Infinite classes are given an entry of np.inf.
 During computation, all data files are saved in a hidden folder “.teaspoonData”.
 This folder is created if it doesn’t already exist.
@@ -1260,39 +1269,23 @@ Gets maximum persistence for a pandas.Series with diagrams as entries</p>
 
 
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">teaspoon</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="relatedpages.html">Related Pages</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Packages</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="TODOLIST.html" title="previous chapter">Todo List</a></li>
-      <li>Next: <a href="classes.html" title="next chapter">Classes</a></li>
-  </ul></li>
-</ul>
-</div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="TODOLIST.html"
+                        title="previous chapter">Todo List</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="classes.html"
+                        title="next chapter">Classes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/teaspoon/packages.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -1309,20 +1302,27 @@ Gets maximum persistence for a pandas.Series with diagrams as entries</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Elizabeth Munch.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.8</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
-      
-      |
-      <a href="../_sources/teaspoon/packages.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="classes.html" title="Classes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="TODOLIST.html" title="Todo List"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">teaspoon 2018 documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Elizabeth Munch.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.8.
+    </div>
   </body>
 </html>

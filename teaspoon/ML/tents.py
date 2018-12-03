@@ -5,11 +5,14 @@ If you make use of this code, please cite the following paper:<br/>
 J.A. Perea, E. Munch, and F. Khasawneh.  "Approximating Continuous Functions On Persistence Diagrams." Preprint, 2017.
 
 An example workflow to ensure that classification is working:
-\code{.py}
-import teaspoon.MakeData.PointCloud as gPC
-import teaspoon.ML.tents as tents
-df = gPC.testSetClassification()
-tents.getPercentScore(df,dgm_col = 'Dgm')
+
+::
+
+	import teaspoon.MakeData.PointCloud as gPC
+	import teaspoon.ML.tents as tents
+	df = gPC.testSetClassification()
+	tents.getPercentScore(df,dgm_col = 'Dgm')
+
 '''
 
 '''
@@ -237,7 +240,7 @@ def tent(Dgm, params, type = 'BirthDeath'):
 	Parameters:
 
 	:Parameter Dgm:
-		A persistence diagram, given as a $K \times 2$ numpy array
+		A persistence diagram, given as a :math:`K \times 2` numpy array
 	:Parameter params:
 		A tents.ParameterBucket object. Really, we need d, delta, and epsilon from that.
 

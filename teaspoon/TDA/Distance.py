@@ -43,10 +43,12 @@ def dgmDist_Hera(D1,D2, wassDeg = 'Bottleneck', relError = None, internal_p = No
         internal_p must be in :math:`[1.0, \infty]` (to explicitly set internal_p to :math:`\infty`, supply inf).By default wasserstein degree is 1.0, relative error is 0.01, internal norm is l_infinity.
 
     hera input format:
-        \code{.sh}
-        bottleneck_dist file1 file2  [relative_error]
-        wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]
-        \endcode
+
+        ::
+
+            bottleneck_dist file1 file2  [relative_error]
+            wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]
+
 
     Parameters:
 

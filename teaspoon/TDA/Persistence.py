@@ -4,13 +4,15 @@ Wrapper for using various fast persistence software inside of python.
 
 All diagrams are stored as a 2xN numpy matrix.
 When a code returns multiple dimensions, these are returned as a dictionary
-\code{.py}
-{
-    0: DgmDimension0,
-    1: DgmDimension1,
-    ...
-}
-\endcode
+
+::
+
+    {
+        0: DgmDimension0,
+        1: DgmDimension1,
+        ...
+    }
+
 
 Infinite classes are given an entry of np.inf.
 During computation, all data files are saved in a hidden folder ".teaspoonData".
