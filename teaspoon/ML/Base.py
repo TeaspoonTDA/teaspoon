@@ -1,8 +1,44 @@
-## @package teaspoon.ML.Base
-# Basic code used for doing ML on persistence diagrams
-# by featurization.  Includes... @todo More description
-#
+"""
+This is the main code for running ML code in teaspoon.
 
+Here, we start with an instance of the `ParameterBucket` class. The intention of this
+object is to keep all determined parameters in one easy to use object. A new
+`ParameterBucket` subclass can be defined to inform any featurization method of interest.
+For instance, a simple example of using tent functions as defined in *Approximating
+Continuous Functions on Persistence Diagrams Using Template Functions* (Perea, Munch,
+Khasawneh 2018) is shown below.
+
+import teaspoon.ML.Base as Base
+import teaspoon.MakeData.PointCloud as gPC
+import teaspoon.ML.feature_functions as fF
+from sklearn.linear_model import RidgeClassifierCV
+
+params = Base.TentParameters(clf_model = RidgeClassifierCV,
+                             feature_function = fF.tent,
+                              test_size = .33,
+                              seed = 48824,
+                              d = 10,
+                              delta = 1,
+                              epsilon = 0
+                             )
+
+DgmsDF = gPC.testSetClassification(N = 20,
+                                  numDgms = 50,
+                                  muRed = (1,3),
+                                  muBlue = (2,5),
+                                  sd = 1,
+                                   seed = 48824
+                                  )
+
+out = Base.getPercentScore(DgmsDF,dgm_col = 'Dgm', labels_col = 'trainingLabel', params = params )
+
+
+
+"""
+
+"""
+.. module: Base
+"""
 
 from teaspoon.Misc import printPrettyTime
 from teaspoon.ML import feature_functions as fF
