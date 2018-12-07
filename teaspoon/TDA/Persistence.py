@@ -1,22 +1,29 @@
 ## @package teaspoon.TDA.Persistence
-# Wrapper for using various fast persistence software inside of python.
-#
-# All diagrams are stored as a 2xN numpy matrix.
-# When a code returns multiple dimensions, these are returned as a dictionary
-# \code{.py}
-# {
-#     0: DgmDimension0,
-#     1: DgmDimension1,
-#     ...
-# }
-# \endcode
-# Infinite classes are given an entry of np.inf.
-#
-# During computation, all data files are saved in a hidden folder ".teaspoonData".
-# This folder is created if it doesn't already exist.
-# Files are repeatedly emptied out of it, so do not save anything in it that you might want later!
-#
+"""
+Wrapper for using various fast persistence software inside of python.
 
+All diagrams are stored as a 2xN numpy matrix.
+When a code returns multiple dimensions, these are returned as a dictionary
+
+::
+
+    {
+        0: DgmDimension0,
+        1: DgmDimension1,
+        ...
+    }
+
+
+Infinite classes are given an entry of np.inf.
+During computation, all data files are saved in a hidden folder ".teaspoonData".
+This folder is created if it doesn't already exist.
+Files are repeatedly emptied out of it, so do not save anything in it that you might want later!
+
+"""
+
+"""
+.. module: Persistence
+"""
 
 import numpy as np
 import os
@@ -35,9 +42,12 @@ import re
 #-----------------------------------------------------#
 
 def prepareFolders():
-## Checks that necessary folder structure system exists.
-# Empties out all previously saved files to avoid confusion.
+    """
+    Checks that necessary folder structure system exists.
+    Empties out all previously saved files to avoid confusion.
+    """
     #---- Make folders for saving files
+
     folders = ['.teaspoonData',
 			   '.teaspoonData'+ os.path.sep + 'input',
 			   '.teaspoonData'+os.path.sep + 'output']
@@ -47,9 +57,10 @@ def prepareFolders():
 
 
 def readPerseusOutput(outputFileName):
-## Reads in the diagrams in the format that Perseus uses.
-# Returns a dictionary with integer keys representing the dimension of each diagram.
-
+    """
+    Reads in the diagrams in the format that Perseus uses.
+    Returns a dictionary with integer keys representing the dimension of each diagram.
+    """
     outputFiles = glob.glob(outputFileName + '*')
 
     # Delete the file with the betti numbers
@@ -79,6 +90,9 @@ def readPerseusOutput(outputFileName):
 
 
 def readRipserString(s):
+    """
+    Read string from Ripser
+    """
 
     birth_death_str = re.findall(r"(\d*[.]?\d*)", s)
 
@@ -94,6 +108,9 @@ def readRipserString(s):
 
 
 def readRipserOutput(out, drop_inf_class=True):
+    """
+    Read output from Ripser
+    """
     # split into persistence diagrams
     Dgms = {}
 
@@ -151,26 +168,31 @@ def readRipserOutput(out, drop_inf_class=True):
 
 #------------Ripser-----------------------------------#
 
-
-
-## Computes persistence up to dimension maxDim using Uli Bauer's Ripser.
-#
-#
-# @remark Ripser needs to be installed on machine in advance
-# https://github.com/Ripser/ripser
-#
-# @param P
-#     A point cloud as an NxD numpy array.
-#     N is the number of points, D is the dimension of
-#     Euclidean space.
-# @param  maxDim
-#     An integer representing the maximum dimension
-#     for computing persistent homology
-#
-# @return
-#     A dictionary Dgms where Dgms[k] is a lx2 matrix
-#     giving points in the k-dimensional pers diagram
 def VR_Ripser(P, maxDim = 1):
+    """
+    Computes persistence up to dimension maxDim using Uli Bauer's Ripser.
+
+    .. note::
+        Ripser needs to be installed on machine in advance https://github.com/Ripser/ripser
+
+
+
+
+    :Parameter P:
+        A point cloud as an NxD numpy array.
+        N is the number of points, D is the dimension of
+        Euclidean space.
+    :Parameter maxDim:
+        An integer representing the maximum dimension
+        for computing persistent homology
+
+    :returns:
+
+        A dictionary Dgms where Dgms[k] is a lx2 matrix
+        giving points in the k-dimensional pers diagram
+
+    """
+
 
     # Compute pairwise distance matrix, then use the other
     # Ripser input style to do the work.
@@ -200,6 +222,31 @@ def writePointCloudFileForPerseus(P,filename,
     # numSteps
     #     Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until stepSize*numSteps.
 
+=======
+    """
+    Writes the point cloud to a file in the perseus format.
+
+    .. note::
+
+        Vidit has options for radius scaling factor.
+
+    .. todo::
+
+        Figure out if this should be 1 or 2
+
+    Parameters:
+
+    :Parameter P:
+        An NxD array.  Represents $N$ points in $R^D$.
+    :Parameter filename:
+        location for saving the file
+    :Parameter stepSize:
+    :Parameter numSteps:
+        Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.
+        So, persistence will be calculated from parameter 0 until stepSize*numSteps.
+
+    """
+>>>>>>> 60ee126e7e119190ea7597bf5391e9a230529b4f
 
     dimension = np.shape(P)[1]
     radiusScalingFactor = 1
@@ -245,6 +292,41 @@ def writePointCloudFileForPerseus(P,filename,
 def VR_Perseus(P,dim = 1,
             maxRadius = 3, numSteps = 100, stepSize = None,
             suppressOutput = True):
+    """
+    Does brips version of perseus.
+    Computes VR persitsence on points in Euclidean space.
+
+    .. note::
+
+        Requires choice of maxRadius, numSteps, and/or stepSize.
+        Bad choices will give junk results.
+
+    .. todo::
+
+        This appears to spit out radius rather than diameter
+        persistence computations.  Need to figure this out and
+        make the choice uniform across outputs.
+
+
+    :Parameter P:
+        An NxD array.  Represents N points in R^D.
+    :Parameter maxRadius:
+    :Parameter stepSize:
+    :Parameter numSteps:
+        Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until
+        maxRadius = stepSize*numSteps.
+        Only 2 of the three entries should be passed.
+        If numSteps and stepSize are passed (regardless of whether maxRadius is passed), they will be used for the computation.  Otherwise, the two non-none valued entries will be used to calculate the third.
+    :Parameter suppressOutput:
+        If true, gets rid of printed output from perseus.
+
+    :returns:
+
+        A dictionary with integer keys 0,1,...,N
+
+        The key gives the dimension of the persistence diagram.
+
+    """
 
     #---- Clean up and/or create local folder system
     prepareFolders()
@@ -344,6 +426,23 @@ def VR_Perseus(P,dim = 1,
 #     A dictionary Dgms where Dgms[k] is a lx2 matrix
 #     giving points in the k-dimensional pers diagram
 def distMat_Ripser(distMat, maxDim = 1):
+    """
+    Computes persistence up to maxDim using Uli Bauer's `Ripser <https://github.com/Ripser/ripser>`_.
+
+    .. note:: Ripser needs to be installed on machine in advance. This code doesn't check for it's existence.
+
+    :Parameter distMat:
+        A distance matrix given as a NxN numpy array
+    :Parameter maxDim:
+        An integer representing the maximum dimension
+        for computing persistent homology
+
+    :returns:
+
+        A dictionary Dgms where Dgms[k] is a lx2 matrix
+        giving points in the k-dimensional pers diagram
+
+    """
 	# Check/setup the folder structure
 	# Note: empties the folders in preparation
     prepareFolders()
@@ -392,6 +491,9 @@ def distMat_Ripser(distMat, maxDim = 1):
 
 ## @todo
 def distMat_Perseus():
+    """
+    Not yet implemented
+    """
     print('Sorry, not yet implemented.  Try distMat_Ripser instead!')
 
 #-----------------------------------------------------#
@@ -409,7 +511,15 @@ def writeMatrixFileForPerseus(M,filesavename):
     # Info on format can be found at:
     # http://people.maths.ox.ac.uk/nanda/perseus/index.html
 
-    # TODO: Set this up to work with higher-dimensional cubical complexes
+    """
+    Given 2D matrix M, write into file format read by Perseus.
+    Info on format can be found at:
+    http://people.maths.ox.ac.uk/nanda/perseus/index.html
+
+
+.. todo:: Set this up to work with higher-dimensional cubical complexes
+
+    """
 
     Top = np.array([[2],[np.shape(M)[0]], [np.shape(M)[1]]])
 
@@ -419,32 +529,38 @@ def writeMatrixFileForPerseus(M,filesavename):
 
     np.savetxt(filesavename, M, fmt = '%i')
 
-
-
-## \brief Computes persistence for a matrix of function values
-# using Vidit Nanda's [perseus](http://people.maths.ox.ac.uk/nanda/perseus/index.html).
-#
-# @remark
-# - perseus must be in the bash path
-# - matrix must be 2-dimensional
-#
-# @todo Update this to accept higher dimensional cubical complexes
-#
-# @param M
-#     a 2D numpy array
-# @param numDigits
-#     Perseus only accepts positive integer valued matrices.  To
-#     compensate, we apply the transformation
-#             x -> x* (10**numDigits) + M.min()
-#     then calculate persistence on the resulting matrix.
-#     The persistence diagram birth/death times are then converted
-#     back via the inverse transform.
-# @param suppressOutput
-#     If true, gets rid of printed output from perseus.
-#
-# @return A dictionary with integer keys 0,1,...,N
-# The key gives the dimension of the persistence diagram.
 def Cubical_Perseus(M, numDigits = 2, suppressOutput = True):
+    """
+    Computes persistence for a matrix of function values
+    using Vidit Nanda's `perseus <http://people.maths.ox.ac.uk/nanda/perseus/index.html>`_.
+
+    .. note::
+
+
+
+
+        - perseus must be in the bash path
+        - matrix must be 2-dimensional
+
+    .. todo:: Update this to accept higher dimensional cubical complexes
+
+    :Parameter M:
+        a 2D numpy array
+    :Parameter numDigits:
+        Perseus only accepts positive integer valued matrices.  To
+        compensate, we apply the transformation
+            x -> x* (10**numDigits) + M.min()
+        then calculate persistence on the resulting matrix.
+        The persistence diagram birth/death times are then converted
+        back via the inverse transform.
+    :Parameter suppressOutput:
+        If true, gets rid of printed output from perseus.
+
+    :returns: A dictionary with integer keys 0,1,...,N
+        The key gives the dimension of the persistence diagram.
+
+    """
+
     #---- Clean up and/or create local folder system
     prepareFolders()
 
@@ -519,29 +635,32 @@ def Cubical_Perseus(M, numDigits = 2, suppressOutput = True):
 #----------------------------------------------
 #----------------------------------------------
 
-
-
-## \brief Gets minimum persistence for a given diagram
-#
-# @param Dgm
-#     a 2D numpy array
-#
-# @return float
 def minPers(Dgm):
+    """
+    Gets minimum persistence for a given diagram
+
+    :Parameter Dgm:
+        a 2D numpy array
+
+    :returns: float
+
+    """
     try:
         lifetimes = Dgm[:,1] - Dgm[:,0]
         return min(lifetimes)
     except:
         return 0
 
-
-## \brief Gets maximum persistence for a given diagram
-#
-# @param Dgm
-#     a 2D numpy array
-#
-# @return float
 def maxPers(Dgm):
+    """
+    Gets maximum persistence for a given diagram
+
+    :Parameter Dgm:
+        a 2D numpy array
+
+    :returns: float
+
+    """
     try:
         lifetimes = Dgm[:,1] - Dgm[:,0]
         m = max(lifetimes)
@@ -554,13 +673,16 @@ def maxPers(Dgm):
     except:
         return 0
 
-## \brief Gets maximum birth  for a given diagram
-#
-# @param Dgm
-#     a 2D numpy array
-#
-# @return float
 def maxBirth(Dgm):
+    """
+    Gets maximum birth for a given diagram
+
+    :Parameter Dgm:
+        a 2D numpy array
+
+    :returns: float
+
+    """
     try:
         m = max(Dgm[:,0])
         if m == np.inf:
@@ -573,13 +695,16 @@ def maxBirth(Dgm):
     except:
         return 0
 
-## \brief Gets minimum birth  for a given diagram
-#
-# @param Dgm
-#     a 2D numpy array
-#
-# @return float
 def minBirth(Dgm):
+    """
+    Gets minimum birth  for a given diagram
+
+    :Parameter Dgm:
+        a 2D numpy array
+
+    :returns: float
+
+    """
     try:
         m = min(Dgm[:,0])
         return m
@@ -594,58 +719,68 @@ def minBirth(Dgm):
 # @return float
 def minPersistenceSeries(DgmsSeries):
     '''
-    Takes data frame DgmsDF
+    Takes data frame DgmsDF.
     Finds minimum persistence over all diagrams in
-    column with label dgm_col
+    column with label dgm_col.
+    Gets minimum persistence for a pandas.Series with diagrams as entries
+
+    :Parameter DgmSeries:
+        a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.
+
+    :returns: float
+
     '''
     return min ( DgmsSeries.apply(minPers))
 
-## \brief Gets maximum persistence for a pandas.Series with diagrams as entries
-#
-# @param DgmSeries
-#     a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.
-#
-# @return float
 def maxPersistenceSeries(DgmsSeries):
     '''
-    Takes data frame DgmsDF
+    Takes data frame DgmsDF.
     Finds maximum persistence over all diagrams in
-    column with label dgm_col
+    column with label dgm_col.
+    Gets maximum persistence for a pandas.Series with diagrams as entries
+
+    :Parameter DgmsSeries:
+        a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.
+
+    :returns: float
+
     '''
     return max ( DgmsSeries.apply(maxPers))
 
-
-## \brief Gets minimum persistence for a pandas.Series with diagrams as entries
-#
-# @param DgmSeries
-#     a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.
-#
-# @return float
 def minBirthSeries(DgmsSeries):
     '''
-    Takes data frame DgmsDF
+    Takes data frame DgmsDF.
     Finds minimum persistence over all diagrams in
-    column with label dgm_col
+    column with label dgm_col.
+    Gets minimum persistence for a pandas.Series with diagrams as entries
+
+    :Parameter DgmSeries:
+        a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.
+
+    :returns: float
+
     '''
     return min ( DgmsSeries.apply(minBirth))
 
-## \brief Gets maximum persistence for a pandas.Series with diagrams as entries
-#
-# @param DgmSeries
-#     a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.
-#
-# @return float
 def maxBirthSeries(DgmsSeries):
     '''
-    Takes data frame DgmsDF
+    Takes data frame DgmsDF.
     Finds maximum persistence over all diagrams in
-    column with label dgm_col
+    column with label dgm_col.
+    Gets maximum persistence for a pandas.Series with diagrams as entries
+
+    :Parameter DgmSeries:
+        a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.
+
+    :returns: float
+
     '''
     return max ( DgmsSeries.apply(maxBirth))
 
 
 def removeInfiniteClasses(Dgm):
-    '''!@brief Simply deletes classes that have infinite lifetimes.
+    '''
+    Simply deletes classes that have infinite lifetimes.
 
     '''
     keepRows = np.isfinite(Dgm[:,1])

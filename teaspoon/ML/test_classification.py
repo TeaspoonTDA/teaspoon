@@ -10,16 +10,16 @@ Created on Tue Apr 24 10:43:11 2018
 import numpy as np
 #import teaspoon.MakeData.PointCloud as gpc
 from teaspoon.MakeData import PointCloud as gpc
-from Base import ParameterBucket, getPercentScore
+from tents import ParameterBucket, getPercentScore
 import feature_functions as fF
 from scipy import stats
 import matplotlib.pyplot as plt
 from sklearn.linear_model import RidgeCV, RidgeClassifierCV
 
 # to reload a module
-# from imp import reload
-# reload(fF)
-# reload(gpc)
+from imp import reload
+reload(fF)
+reload(gpc)
 
 #----------------------------------
 # define a parameters bucket
@@ -45,10 +45,8 @@ params = ParameterBucket()
 
 #--- Test manifold classification
 df = gpc.testSetManifolds(numDgms = 50, numPts = 100) # numpTs=200
-
-print(df.head())
 # dgmColLabel = ['Dgm0', 'Dgm1']
-dgmColLabel = ['Dgm0','Dgm1']
+dgmColLabel = ['Dgm1']
 params.clfClass = RidgeClassifierCV
 
 #print('\n', params, '\n')
@@ -59,16 +57,13 @@ params.clfClass = RidgeClassifierCV
 #----------------------------------
 # Find bounding box
 #----------------------------------
-params.setBoundingBox(df[dgmColLabel], pad = .05)
+params.findBoundingBox(df[dgmColLabel], pad = .05)
 params.jacobi_poly = 'cheb1'  # choose the interpolating polynomial
-
-print(params)
-
 
 #----------------------------------
 # define the number of base points
 #----------------------------------
-params.d = 5
+params.d = 10
 
 
 #----------------------------------
@@ -77,7 +72,6 @@ params.d = 5
 params.feature_function = fF.interp_polynomial
 #params.feature_function = fF.tent
 
-print(params)
 #----------------------------------
 # Run the experiment
 #----------------------------------
