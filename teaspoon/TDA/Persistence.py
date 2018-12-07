@@ -222,7 +222,6 @@ def writePointCloudFileForPerseus(P,filename,
     # numSteps
     #     Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until stepSize*numSteps.
 
-=======
     """
     Writes the point cloud to a file in the perseus format.
 
@@ -246,7 +245,6 @@ def writePointCloudFileForPerseus(P,filename,
         So, persistence will be calculated from parameter 0 until stepSize*numSteps.
 
     """
->>>>>>> 60ee126e7e119190ea7597bf5391e9a230529b4f
 
     dimension = np.shape(P)[1]
     radiusScalingFactor = 1
