@@ -13,7 +13,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
       name='teaspoon',
-      version='0.4.02',
+      version='0.4.08',
       description='Python wrappers for various applied topology related code.',
       long_description=long_description,
 
@@ -29,36 +29,37 @@ setup(
 
       # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        # How mature is this project? Common values are
-        #   3 - Alpha
-        #   4 - Beta
-        #   5 - Production/Stable
-        'Development Status :: 3 - Alpha',
+              # How mature is this project? Common values are
+              #   3 - Alpha
+              #   4 - Beta
+              #   5 - Production/Stable
+              'Development Status :: 3 - Alpha',
 
-        # This project is intended for mathematicians and researchers
-        'Intended Audience :: Science/Research',
-        'Topic :: Scientific/Engineering :: Mathematics',
+              # This project is intended for mathematicians and researchers
+              'Intended Audience :: Science/Research',
+              'Topic :: Scientific/Engineering :: Mathematics',
 
-        # License info
-        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+              # License info
+              'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+
+              # Supported versions of python
+              # Can include multiple, however currently only tested on Liz's system, Python 3.5.2
+              # 'Programming Language :: Python :: 3',
+              # 'Programming Language :: Python :: 3.3',
+              # 'Programming Language :: Python :: 3.4',
+              'Programming Language :: Python :: 3.5',
+              'Programming Language :: Python :: 3.5.2',
+              ],
 
 
-        # Supported versions of python
-        # Can include multiple, however currently only tested on Liz's system, Python 3.5.2
-        # 'Programming Language :: Python :: 3',
-        # 'Programming Language :: Python :: 3.3',
-        # 'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.5.2',
-
-      ],
 
       keywords='persistent homology, TDA, topological data analysis',
 
       packages=find_packages(exclude=['contrib', 'docs', 'tests']),
 
 
-      install_requires=[
+    install_requires=[
+          'ripser',
           'numpy',
           'matplotlib',
           # 'os',

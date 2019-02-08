@@ -1,0 +1,1328 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Packages &#8212; teaspoon 2018 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Classes" href="classes.html" />
+    <link rel="prev" title="Todo List" href="TODOLIST.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="classes.html" title="Classes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="TODOLIST.html" title="Todo List"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">teaspoon 2018 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="TODOLIST.html"
+                        title="previous chapter">Todo List</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="classes.html"
+                        title="next chapter">Classes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/teaspoon/packages.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="packages">
+<h1>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#module-teaspoon.MakeData.PointCloud" title="teaspoon.MakeData.PointCloud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">teaspoon.MakeData.PointCloud</span></code></a></td>
+<td>Generates data sets related to persistence diagrams and point clouds.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#module-teaspoon.ML.feature_functions" title="teaspoon.ML.feature_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">teaspoon.ML.feature_functions</span></code></a></td>
+<td>Machine learning featurization method</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#module-teaspoon.ML.tents" title="teaspoon.ML.tents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">teaspoon.ML.tents</span></code></a></td>
+<td>Machine learning featurization method</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#module-teaspoon.TDA.Distance" title="teaspoon.TDA.Distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">teaspoon.TDA.Distance</span></code></a></td>
+<td>Has code for computing pairwise distance for diagrams.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#module-teaspoon.TDA.Draw" title="teaspoon.TDA.Draw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">teaspoon.TDA.Draw</span></code></a></td>
+<td>Code for drawing various things.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#module-teaspoon.TDA.Persistence" title="teaspoon.TDA.Persistence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">teaspoon.TDA.Persistence</span></code></a></td>
+<td>Wrapper for using various fast persistence software inside of python.</td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="module-teaspoon.MakeData.PointCloud"></span><p>Generates data sets related to persistence diagrams and point clouds.</p>
+<p>All point clouds are returned as a numpy array, larger collection data is returned as a pandas DataFrame.</p>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Circle">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">Circle</code><span class="sig-paren">(</span><em>N=100</em>, <em>r=1</em>, <em>gamma=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate N points in R^2 from the circle centered
+at the origin with radius r.</p>
+<p>If <cite>gamma</cite> is not <cite>None</cite>, then we add noise
+using a normal distribution.  Note that this means the resulting
+distribution is not bounded, so your favorite stability theorem doesn’t
+immediately apply.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body">Number of points to generate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter r:</th><td class="field-body">Radius of the circle</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter gamma:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Standard deviation of the normally distributed noise.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter seed:</th><td class="field-body">Fixes the seed.  Good if we want to replicate results.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">P- A Nx2 numpy array with the points drawn as the rows.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Sphere">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">Sphere</code><span class="sig-paren">(</span><em>N=100</em>, <em>r=1</em>, <em>noise=0</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate N points in R^3 from the sphere centered
+at the origin with radius r.
+If noise is set to a positive number, the points
+can be at distance r +/- noise from the origin.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body">Number of points to generate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter r:</th><td class="field-body">Radius of the sphere</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameter seed:</th><td class="field-body">Fixes the seed.  Good if we want to replicate results.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">P- A Nx3 numpy array with the points drawn as the rows.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Annulus">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">Annulus</code><span class="sig-paren">(</span><em>N=200</em>, <em>r=1</em>, <em>R=2</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Annulus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns point cloud sampled from uniform distribution on
+annulus in R^2 of inner radius r and outer radius R</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body">Number of points to generate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter r:</th><td class="field-body">Inner radius of the annulus</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameter R:</th><td class="field-body">Outer radius of the annulus</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter seed:</th><td class="field-body">Fixes the seed.  Good if we want to replicate results.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>P -</dt>
+<dd>A Nx2 numpy array with the points drawn as the rows.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Torus">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">Torus</code><span class="sig-paren">(</span><em>N=100</em>, <em>r=1</em>, <em>R=2</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Torus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sampling method taken from Sampling from a Manifold by Diaconis,
+Holmes and Shahshahani, arXiv:1206.6913</p>
+<p>Generates torus with points
+x = ( R + r*cos(theta) ) * cos(psi),
+y = ( R + r*cos(theta) ) * sin(psi),
+z = r * sin(theta)</p>
+<p>Need to draw theta with distribution</p>
+<p>g(theta) = (1+ r*cos(theta)/R ) / (2pi) on 0 &lt;= theta &lt; 2pi</p>
+<p>and psi with uniform density on [0,2pi).</p>
+<p>For theta, draw theta uniformly from [0,2pi) and
+eta from [1-r/R,1+r/R].  If eta&lt; 1 + (r/R) cos(theta), return theta.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body">Number of points to generate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter r:</th><td class="field-body">Inner radius of the torus</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameter R:</th><td class="field-body">Outer radius of the torus</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter seed:</th><td class="field-body">Fixes the seed.  Good if we want to replicate results.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>P -</dt>
+<dd>A Nx3 numpy array with the points drawn as the rows.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Cube">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">Cube</code><span class="sig-paren">(</span><em>N=100</em>, <em>diam=1</em>, <em>dim=2</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate N points in R^dim from the box
+[0,diam]x[0,diam]x…x[0,diam]</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body">Number of points to generate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter diam:</th><td class="field-body">Points are pulled from the box
+[0,diam]x[0,diam]x…x[0,diam]</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameter dim:</th><td class="field-body">Points are embedded in R^dim</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>P - A Nxdim numpy array with the points drawn as the rows.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Clusters">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">Clusters</code><span class="sig-paren">(</span><em>N=100, centers=array([[0, 0],        [3, 3]]), sd=1, seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Clusters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate k clusters of points, N points in total (evenly divided?)
+centers is a k x d numpy array, where centers[i,:] is the center of
+the ith cluster in R^d.
+Points are drawn from a normal distribution with std dev = sd</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body"><p class="first">Number of points to be generated</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter centers:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">k x d numpy array, where centers[i,:] is the center of
+the ith cluster in R^d.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameter sd:</th><td class="field-body"><p class="first">standard deviation of clusters.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Make this enterable as a vector so each cluster can have a different sd?</p>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter seed:</th><td class="field-body"><p class="first">Fixes the seed.  Good if we want to replicate results.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>P - A Nxd numpy array with the points drawn as the rows.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.normalDiagram">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">normalDiagram</code><span class="sig-paren">(</span><em>N=20</em>, <em>mu=(2</em>, <em>4)</em>, <em>sd=1</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.normalDiagram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.
+Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite> and standard deviation <cite>sd</cite>, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body">Original number of points drawn for the persistence diagram.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter mu, sd:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Mean and standard deviation of the normal distribution used to generate the points.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameter seed:</th><td class="field-body">Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A persistence diagram given as a numpy array of size <cite>Kx2</cite>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.testSetClassification">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">testSetClassification</code><span class="sig-paren">(</span><em>N=20</em>, <em>numDgms=(10</em>, <em>10)</em>, <em>muRed=(1</em>, <em>3)</em>, <em>muBlue=(2</em>, <em>5)</em>, <em>sd=1</em>, <em>permute=True</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetClassification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a collection of diagrams using the normalDiagram() function for classification tests.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body">The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter numDgms:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">The number of diagrams for the collection.  Can either be an integer, in which case <cite>numDgms</cite> is the number of diagrams of <em>each type</em> that are generated, thus returning a data set with <cite>2*numDgms</cite> diagrams.  Alternatively, <cite>numDgms</cite> can be passed as a length two list <cite>(n,m)</cite> where <cite>n</cite> diagrams of the first type and <cite>m</cite> diagrams of the second type are drawn, for a total of <cite>n+m</cite> diagrams.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter muRed, muBlue:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The means used for the normal distribution in normalDiagram() for the two different types.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter sd:</th><td class="field-body">The standard deviation for the normal distribution used for normalDiagram().</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter permute:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter seed:</th><td class="field-body">Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>. In this case, the entry in <cite>trainingLabel</cite> is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.testSetRegressionLine">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">testSetRegressionLine</code><span class="sig-paren">(</span><em>N=20</em>, <em>numDgms=40</em>, <em>muStart=(1</em>, <em>3)</em>, <em>muEnd=(2</em>, <em>5)</em>, <em>sd=1</em>, <em>permute=True</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetRegressionLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a collection of diagrams with means distributed along a line using the normalDiagram() function for regression tests.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body">The number of initial points pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter numDgms:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">The number of diagrams for the collection given as an integer.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter muStart, muEnd:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by <cite>muStart</cite> and <cite>muEnd</cite>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter sd:</th><td class="field-body">The standard deviation for the normal distribution used for normalDiagram().</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter permute:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter seed:</th><td class="field-body">Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muStart</cite>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.testSetRegressionBall">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">testSetRegressionBall</code><span class="sig-paren">(</span><em>N=20</em>, <em>numDgms=40</em>, <em>muCenter=(1</em>, <em>3)</em>, <em>sd=1</em>, <em>permute=True</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetRegressionBall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a collection of diagrams with means distributed normally using the normalDiagram() function; used for regression tests.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter N:</th><td class="field-body">The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter numDgms:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">The number of diagrams for the collection given as an integer.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter muCenter:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The means used for the normal distribution in normalDiagram() are drawn from the normal distribution with mean <cite>muCenter</cite>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter sd:</th><td class="field-body">The standard deviation for the normal distribution used for normalDiagram(), as well as for the standard deviation passed to normalDiagram().</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter permute:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter seed:</th><td class="field-body">Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muCenter</cite>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.testSetManifolds">
+<code class="descclassname">teaspoon.MakeData.PointCloud.</code><code class="descname">testSetManifolds</code><span class="sig-paren">(</span><em>numDgms=50</em>, <em>numPts=300</em>, <em>permute=True</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetManifolds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a collection of diagrams from different underlying topological spaces.  This set is useful for testing classification tasks.</p>
+<dl class="docutils">
+<dt>The types of underlying spaces with their entry in the <cite>trainingLabel</cite> column is as follows. Each function uses the default values (except for the number of points) unless otherwise noted.</dt>
+<dd><ul class="first last simple">
+<li><strong>Torus</strong>: A torus embedded in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> using the function Torus().</li>
+<li><strong>Annulus</strong>: An annulus generated with default inputs of Annulus().</li>
+<li><strong>Cube</strong>: Points drawn uniformly from the cube <span class="math notranslate nohighlight">\([0,1]^3 \subset \mathbb{R}^3\)</span> using the function Cube().</li>
+<li><strong>3Cluster</strong>: Points are drawn using Clusters() with centers <cite>[0,0], [0,1.5], [1.5,0]</cite> with <cite>sd = 0.05</cite>.</li>
+<li><strong>3Clusters of 3Clusters</strong>: Points are drawn with 9 different centers, which can be loosely grouped into three groups of three; again uses Clusters() with <cite>sd = 0.05</cite>. The centers are <cite>[0,0], [0,1.5], [1.5,0]</cite>; this set rotated 45 degrees and shifted up by 4; and the first set shifted right 3 and up 4.</li>
+<li><strong>Sphere</strong>: Points drawn from a sphere using Sphere() with <cite>noise = .05</cite>.</li>
+</ul>
+</dd>
+</dl>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter numDgms:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The number of diagrams generated of each type. The resulting dataset will have <cite>6*numDgms</cite> diagrams.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter numPts:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">The number of points in each point cloud.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter permute:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter seed:</th><td class="field-body">Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A pandas DataFrame with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm0',</span> <span class="pre">'Dgm1',</span> <span class="pre">'trainingLabel']`</span></code>.  The <cite>trainingLabel</cite> row has entries with labels given as the boldface above.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-teaspoon.ML.feature_functions"></span><p>Machine learning featurization method</p>
+<p>If you make use of this code, please cite the following paper:&lt;br/&gt;
+J.A. Perea, E. Munch, and F. Khasawneh.  “Approximating Continuous Functions On Persistence Diagrams.” Preprint, 2017.</p>
+<dl class="function">
+<dt id="teaspoon.ML.feature_functions.tent">
+<code class="descclassname">teaspoon.ML.feature_functions.</code><code class="descname">tent</code><span class="sig-paren">(</span><em>Dgm</em>, <em>params</em>, <em>dgm_type='BirthDeath'</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.feature_functions.tent" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Applies the tent function to a diagram.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter Dgm:</th><td class="field-body"><p class="first">A persistence diagram, given as a <span class="math notranslate nohighlight">\(K      imes 2\)</span> numpy array</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter params:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameter type:</th><td class="field-body"><dl class="first docutils">
+<dt>This code accepts diagrams either</dt>
+<dd><ol class="first last arabic simple">
+<li>in (birth, death) coordinates, in which case <cite>type = ‘BirthDeath’</cite>, or</li>
+<li>in (birth, lifetime) = (birth, death-birth) coordinates, in which case <cite>type = ‘BirthLifetime’</cite></li>
+</ol>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math notranslate nohighlight">\(\sum_{x,y \in        ext{Dgm}}g_{i,j}(x,y)\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\bigg| 1- \max\left\{ \left|\frac{x}{\delta} - i\right|, \left|\frac{y-x}{\delta} - j\right|\right\} \bigg|_+]\]</div>
+<p>where <span class="math notranslate nohighlight">\(| * |_+\)</span> is positive part; equivalently, min of * and 0.</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This code does not take care of the maxPower polynomial stuff.  The build_G() function does it after all the rows have been calculated.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.feature_functions.sub2ind">
+<code class="descclassname">teaspoon.ML.feature_functions.</code><code class="descname">sub2ind</code><span class="sig-paren">(</span><em>array_shape</em>, <em>rows</em>, <em>cols</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.feature_functions.sub2ind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts subscripts to indices</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.feature_functions.ind2sub">
+<code class="descclassname">teaspoon.ML.feature_functions.</code><code class="descname">ind2sub</code><span class="sig-paren">(</span><em>array_shape</em>, <em>ind</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.feature_functions.ind2sub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts indices to subscripts</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.feature_functions.quad_cheb1">
+<code class="descclassname">teaspoon.ML.feature_functions.</code><code class="descname">quad_cheb1</code><span class="sig-paren">(</span><em>npts=10</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.feature_functions.quad_cheb1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the quadrature/interpolation weights for common orthognal functions</p>
+<p>Define the function blocks</p>
+<p>Chebyshev-Gauss points of the first kind</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.feature_functions.quad_legendre">
+<code class="descclassname">teaspoon.ML.feature_functions.</code><code class="descname">quad_legendre</code><span class="sig-paren">(</span><em>npts=10</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.feature_functions.quad_legendre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Legendre-Gauss-Lobatto nodes, and their quadrate weights.</p>
+<p>The LGL nodes are the zeros of (1-x**2)*P’_N(x), wher P_N is the nth Legendre polynomial</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.feature_functions.bary_weights">
+<code class="descclassname">teaspoon.ML.feature_functions.</code><code class="descname">bary_weights</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.feature_functions.bary_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the barycentric interplation weights</p>
+<p>Calculate Barycentric weights for the base points x.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">this algorithm may be numerically unstable for high degree</p>
+</div>
+<p>Polynomials (e.g. 15+). If using linear or Chebyshev spacing of base
+points then explicit formulae should then be used. See Berrut and
+Trefethen, SIAM Review, 2004.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.feature_functions.bary_diff_matrix">
+<code class="descclassname">teaspoon.ML.feature_functions.</code><code class="descname">bary_diff_matrix</code><span class="sig-paren">(</span><em>xnew</em>, <em>xbase</em>, <em>w=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.feature_functions.bary_diff_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate both the derivative and plain Lagrange interpolation matrix
+using Barycentric formulae from Berrut and Trefethen, SIAM Review, 2004.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter xnew:</th><td class="field-body">Interpolation points</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter xbase:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Base points for interpolation</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameter w:</th><td class="field-body">Weights calculated for base points (optional)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.feature_functions.interp_polynomial">
+<code class="descclassname">teaspoon.ML.feature_functions.</code><code class="descname">interp_polynomial</code><span class="sig-paren">(</span><em>Dgm</em>, <em>params</em>, <em>dgm_type='BirthDeath'</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.feature_functions.interp_polynomial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter Dgm:</th><td class="field-body">A persistence diagram, given as a <span class="math notranslate nohighlight">\(K      imes 2\)</span> numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter params:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameter type:</th><td class="field-body">This code accepts diagrams either
+1. in (birth, death) coordinates, in which case <cite>type = ‘BirthDeath’</cite>, or
+2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case <cite>dgm_type = ‘BirthLifetime’</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>interp_weight-</dt>
+<dd>a matrix with each entry representiting the weight of an interpolation
+function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-teaspoon.ML.tents"></span><p>Machine learning featurization method</p>
+<p>If you make use of this code, please cite the following paper:&lt;br/&gt;
+J.A. Perea, E. Munch, and F. Khasawneh.  “Approximating Continuous Functions On Persistence Diagrams.” Preprint, 2017.</p>
+<p>An example workflow to ensure that classification is working:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="k">as</span> <span class="nn">gPC</span>
+<span class="kn">import</span> <span class="nn">teaspoon.ML.tents</span> <span class="k">as</span> <span class="nn">tents</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">gPC</span><span class="o">.</span><span class="n">testSetClassification</span><span class="p">()</span>
+<span class="n">tents</span><span class="o">.</span><span class="n">getPercentScore</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">dgm_col</span> <span class="o">=</span> <span class="s1">&#39;Dgm&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="teaspoon.ML.tents.tent">
+<code class="descclassname">teaspoon.ML.tents.</code><code class="descname">tent</code><span class="sig-paren">(</span><em>Dgm</em>, <em>params</em>, <em>type='BirthDeath'</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.tents.tent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the tent function to a diagram.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter Dgm:</th><td class="field-body">A persistence diagram, given as a <span class="math notranslate nohighlight">\(K      imes 2\)</span> numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter params:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">A tents.ParameterBucket object. Really, we need d, delta, and epsilon from that.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>This code accepts diagrams either</dt>
+<dd><ol class="first last arabic simple">
+<li>in (birth, death) coordinates, in which case <cite>type = ‘BirthDeath’</cite>, or</li>
+<li>in (birth, lifetime) = (birth, death-birth) coordinates, in which case <cite>type = ‘BirthLifetime’</cite></li>
+</ol>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math notranslate nohighlight">\(\sum_{x,y \in    ext{Dgm}}g_{i,j}(x,y)\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[g_{i,j}(x,y) = \bigg| 1- \max\left\{ \left|\frac{x}{\delta} - i\right|, \left|\frac{y-x}{\delta} - j\right|\right\} \bigg|_+\]</div>
+<p>where <span class="math notranslate nohighlight">\(| * |_+\)</span> is positive part; equivalently, min of <span class="math notranslate nohighlight">\(*\)</span> and 0.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.tents.build_G">
+<code class="descclassname">teaspoon.ML.tents.</code><code class="descname">build_G</code><span class="sig-paren">(</span><em>DgmSeries</em>, <em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.tents.build_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the tent function to all diagrams in the series and outputs the feature matrix</p>
+<p><span class="math notranslate nohighlight">\(G_{a,b}\)</span> is the <span class="math notranslate nohighlight">\(b^{th}\)</span> tent function (after flattening the order) evaluated on the <span class="math notranslate nohighlight">\(a^{th}`\)</span> diagram in the series.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter DgmSeries:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">pd.Series
+The structure holding the persistence diagrams.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter params:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">tents.ParameterBucket
+A parameter bucket used for calculations.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.tents.TentML">
+<code class="descclassname">teaspoon.ML.tents.</code><code class="descname">TentML</code><span class="sig-paren">(</span><em>DgmsDF</em>, <em>labels_col='trainingLabel'</em>, <em>dgm_col='Dgm1'</em>, <em>params=None</em>, <em>normalize=False</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.tents.TentML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function to run ML with tents on persistence diagrams.
+Takes data frame DgmsDF and specified persistence diagram column labels,
+computes the G matrix using build_G.
+Does classification using labels from labels_col in the data frame.
+Returns instance of estimator</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter DgmsDF:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">A pandas data frame containing, at least, a column of diagrams and a column of labels</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter abels_col:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">A string. The label for the column in DgmsDF containing the training labels.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter dgm_col:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">The label(s) for the column containing the diagrams given as a string or list of strings.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter params:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">A class of type ParameterBucket.
+Should store:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt><strong>d</strong>:</dt>
+<dd><p class="first last">An integer, the number of elements for griding up the x and y axis of the diagram.  Will result in d*(d+1) tent functions</p>
+</dd>
+<dt><strong>delta</strong>, <strong>epsilon</strong>:</dt>
+<dd><p class="first last">Controls location and width of mesh elements for x and y axis of the diagram.</p>
+</dd>
+<dt><strong>clfClass</strong>:</dt>
+<dd><p class="first last">The class which will be used for classification.  Currently tested using <cite>sklearn.RidgeClassifierCV</cite> and <cite>sklearn.RidgeCV</cite>.</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The classifier object. Coefficients can be found from clf.coef.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.ML.tents.getPercentScore">
+<code class="descclassname">teaspoon.ML.tents.</code><code class="descname">getPercentScore</code><span class="sig-paren">(</span><em>DgmsDF</em>, <em>labels_col='trainingLabel'</em>, <em>dgm_col='Dgm1'</em>, <em>params=&lt;teaspoon.ML.tents.ParameterBucket object&gt;</em>, <em>normalize=False</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.ML.tents.getPercentScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main testing function for classification or regression methods.
+Does train/test split, creates classifier, and returns score on test.</p>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter DgmsDF:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">A pandas data frame containing, at least, a column of diagrams and a column of labels</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter labels_col:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">A string. The label for the column in DgmsDF containing the training labels.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter dgm_col:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">A string or list of strings giving the label for the column containing the diagrams.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter params:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">A class of type ParameterBucket
+Should store:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt><strong>d</strong>:</dt>
+<dd><p class="first last">An integer, the number of elements for griding up the x and y axis of the diagram.  Will result in d*(d+1) tent functions</p>
+</dd>
+<dt><strong>delta</strong>, <strong>epsilon</strong>:</dt>
+<dd><p class="first last">Controls location and width of mesh elements for x and y axis of the diagram.</p>
+</dd>
+<dt><strong>clfClass</strong>:</dt>
+<dd><p class="first last">The class which will be used for classification.  Currently tested using <cite>sklearn.RidgeClassifierCV</cite> and <cite>sklearn.RidgeCV</cite>.</p>
+</dd>
+<dt><strong>seed</strong>:</dt>
+<dd><p class="first last">None if we don’t want to mess with the seed for the train_test_split function. Else, pass integer.</p>
+</dd>
+<dt><strong>test_split</strong>:</dt>
+<dd><p class="first last">The percentage of the data to be reserved for the test part of the train/test split.</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Returned as a dictionary of entries:</dt>
+<dd><ul class="first last simple">
+<li><dl class="first docutils">
+<dt><strong>score</strong></dt>
+<dd>The percent correct when predicting on the test set.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>DgmsDF</strong></dt>
+<dd>The original data frame passed back with a column labeled
+‘Prediction’ added with the predictions gotten for the
+test set. Data points in the training set will have an
+entry of NaN</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>clf</strong></dt>
+<dd>The classifier object.</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-teaspoon.TDA.Distance"></span><p>Has code for computing pairwise distance for diagrams.</p>
+<p>Created on Jun 9, 2016</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">author:</th><td class="field-body">liz</td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="teaspoon.TDA.Distance.dgmDist_Hera">
+<code class="descclassname">teaspoon.TDA.Distance.</code><code class="descname">dgmDist_Hera</code><span class="sig-paren">(</span><em>D1</em>, <em>D2</em>, <em>wassDeg='Bottleneck'</em>, <em>relError=None</em>, <em>internal_p=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Distance.dgmDist_Hera" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for wasserstein_dist from Hera:</p>
+<blockquote>
+<div>internal_p must be in <span class="math notranslate nohighlight">\([1.0, \infty]\)</span> (to explicitly set internal_p to <span class="math notranslate nohighlight">\(\infty\)</span>, supply inf).By default wasserstein degree is 1.0, relative error is 0.01, internal norm is l_infinity.</div></blockquote>
+<p>hera input format:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bottleneck_dist</span> <span class="n">file1</span> <span class="n">file2</span>  <span class="p">[</span><span class="n">relative_error</span><span class="p">]</span>
+<span class="n">wasserstein_dist</span> <span class="n">file1</span> <span class="n">file2</span>  <span class="p">[</span><span class="n">wasserstein</span> <span class="n">degree</span><span class="p">]</span> <span class="p">[</span><span class="n">relative</span> <span class="n">error</span><span class="p">]</span> <span class="p">[</span><span class="n">internal</span> <span class="n">norm</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter D1:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameter D2:</th><td class="field-body"><p class="first">Persistence diagrams given as Lx2 numpy arrays.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter wassDeg:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><dl class="first docutils">
+<dt>Options are:</dt>
+<dd><ul class="first last simple">
+<li>‘Bottleneck’ or anything containing ‘bot’. Runs the bottleneck_dist command</li>
+<li>np.inf: Also returns bottleneck distance with the bottleneck_dist command</li>
+<li>an integer q: Computes the q-th Wasserstein distance</li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter relError:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first">
+<li><p class="first">An input to both bottleneck_dist and wasserstein_dist.</p>
+</li>
+<li><dl class="first docutils">
+<dt>For wasserstein_dist from hera documentation:</dt>
+<dd><p class="first">If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).
+Otherwise the output is an approximation of the exact distance. Precisely:
+if d_exact is the true distance and d_approx is the output, then</p>
+<blockquote class="last">
+<div><p><span class="math notranslate nohighlight">\(\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \mathrm{relativeError}\)</span>.</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>For bottleneck_dist from hera documentation:</dt>
+<dd><dl class="first last docutils">
+<dt>If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same). Otherwise the output is an approximation of the exact distance. Precisely: if d_exact is the true distance and d_approx is the output, then</dt>
+<dd><p class="first last"><span class="math notranslate nohighlight">\(\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \mathrm{relativeError}.\)</span></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><p class="first">Default value in Hera is 0.01 for Wasserstein distance and 0 (exact computation) for bottleneck distance.</p>
+</li>
+<li><p class="first">Values passed to hera must be positive.</p>
+</li>
+</ul>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Does this mean strictly positive? What is the behavior when passing 0?</p>
+</div>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter internal_p:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first last">This is only controllable for Wasserstein distance computation.  Matched points are measured by <span class="math notranslate nohighlight">\(L_p\)</span> distance.
+Default is internal_p = infinity.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-todo admonition" id="index-2">
+<p class="first admonition-title">Todo</p>
+<p class="last">Check that bottleneck_dist uses infinity even though it doesn’t explicitly say so in the documentation.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A float for the distance between the diagrams</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-teaspoon.TDA.Draw"></span><p>Code for drawing various things.</p>
+<dl class="function">
+<dt id="teaspoon.TDA.Draw.drawDgm">
+<code class="descclassname">teaspoon.TDA.Draw.</code><code class="descname">drawDgm</code><span class="sig-paren">(</span><em>D</em>, <em>boundary=None</em>, <em>epsilon=0.5</em>, <em>color=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Draw.drawDgm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws simple persistence diagram plot</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter D:</th><td class="field-body">a persistence diagram, given as a Kx2 numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter boundary:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter epsilon:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The diagram is drawn on [0,boundary]x[0,boundary].
+If boundary not given, then it is determined to be the
+max death time from the input diagram plus epsilon.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Draw.drawPtCloud">
+<code class="descclassname">teaspoon.TDA.Draw.</code><code class="descname">drawPtCloud</code><span class="sig-paren">(</span><em>P</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Draw.drawPtCloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws simple point cloud plot</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter P:</th><td class="field-body">a point cloud, given as a KxD numpy array.
+Even if D&gt;2, only the first two coordinates are plotted.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-teaspoon.TDA.Persistence"></span><p>Wrapper for using various fast persistence software inside of python.</p>
+<p>All diagrams are stored as a 2xN numpy matrix.
+When a code returns multiple dimensions, these are returned as a dictionary</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="n">DgmDimension0</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="n">DgmDimension1</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Infinite classes are given an entry of np.inf.
+During computation, all data files are saved in a hidden folder “.teaspoonData”.
+This folder is created if it doesn’t already exist.
+Files are repeatedly emptied out of it, so do not save anything in it that you might want later!</p>
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.prepareFolders">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">prepareFolders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.prepareFolders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that necessary folder structure system exists.
+Empties out all previously saved files to avoid confusion.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.readPerseusOutput">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">readPerseusOutput</code><span class="sig-paren">(</span><em>outputFileName</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.readPerseusOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in the diagrams in the format that Perseus uses.
+Returns a dictionary with integer keys representing the dimension of each diagram.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.readRipserString">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">readRipserString</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.readRipserString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read string from Ripser</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.readRipserOutput">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">readRipserOutput</code><span class="sig-paren">(</span><em>out</em>, <em>drop_inf_class=True</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.readRipserOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read output from Ripser</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.VR_Ripser">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">VR_Ripser</code><span class="sig-paren">(</span><em>P</em>, <em>maxDim=1</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.VR_Ripser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes persistence up to dimension maxDim using Uli Bauer’s Ripser.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ripser needs to be installed on machine in advance <a class="reference external" href="https://github.com/Ripser/ripser">https://github.com/Ripser/ripser</a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter P:</th><td class="field-body">A point cloud as an NxD numpy array.
+N is the number of points, D is the dimension of
+Euclidean space.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter maxDim:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">An integer representing the maximum dimension
+for computing persistent homology</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A dictionary Dgms where Dgms[k] is a lx2 matrix
+giving points in the k-dimensional pers diagram</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.writePointCloudFileForPerseus">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">writePointCloudFileForPerseus</code><span class="sig-paren">(</span><em>P</em>, <em>filename</em>, <em>stepSize=0.1</em>, <em>numSteps=500</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.writePointCloudFileForPerseus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the point cloud to a file in the perseus format.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Vidit has options for radius scaling factor.</p>
+</div>
+<div class="admonition-todo admonition" id="index-3">
+<p class="first admonition-title">Todo</p>
+<p class="last">Figure out if this should be 1 or 2</p>
+</div>
+<p>Parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter P:</th><td class="field-body">An NxD array.  Represents $N$ points in $R^D$.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter filename:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">location for saving the file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter stepSize:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter numSteps:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.
+So, persistence will be calculated from parameter 0 until stepSize*numSteps.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.VR_Perseus">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">VR_Perseus</code><span class="sig-paren">(</span><em>P</em>, <em>dim=1</em>, <em>maxRadius=3</em>, <em>numSteps=100</em>, <em>stepSize=None</em>, <em>suppressOutput=True</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.VR_Perseus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does brips version of perseus.
+Computes VR persitsence on points in Euclidean space.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires choice of maxRadius, numSteps, and/or stepSize.
+Bad choices will give junk results.</p>
+</div>
+<div class="admonition-todo admonition" id="index-4">
+<p class="first admonition-title">Todo</p>
+<p class="last">This appears to spit out radius rather than diameter
+persistence computations.  Need to figure this out and
+make the choice uniform across outputs.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter P:</th><td class="field-body">An NxD array.  Represents N points in R^D.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter maxRadius:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter stepSize:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter numSteps:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until
+maxRadius = stepSize*numSteps.
+Only 2 of the three entries should be passed.
+If numSteps and stepSize are passed (regardless of whether maxRadius is passed), they will be used for the computation.  Otherwise, the two non-none valued entries will be used to calculate the third.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter suppressOutput:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">If true, gets rid of printed output from perseus.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dictionary with integer keys 0,1,…,N<p>The key gives the dimension of the persistence diagram.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.distMat_Ripser">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">distMat_Ripser</code><span class="sig-paren">(</span><em>distMat</em>, <em>maxDim=1</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.distMat_Ripser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes persistence up to maxDim using Uli Bauer’s <a class="reference external" href="https://github.com/Ripser/ripser">Ripser</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ripser needs to be installed on machine in advance. This code doesn’t check for it’s existence.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter distMat:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">A distance matrix given as a NxN numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter maxDim:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">An integer representing the maximum dimension
+for computing persistent homology</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A dictionary Dgms where Dgms[k] is a lx2 matrix
+giving points in the k-dimensional pers diagram</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.distMat_Perseus">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">distMat_Perseus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.distMat_Perseus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not yet implemented</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.writeMatrixFileForPerseus">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">writeMatrixFileForPerseus</code><span class="sig-paren">(</span><em>M</em>, <em>filesavename</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.writeMatrixFileForPerseus" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>Given 2D matrix M, write into file format read by Perseus.
+Info on format can be found at:
+<a class="reference external" href="http://people.maths.ox.ac.uk/nanda/perseus/index.html">http://people.maths.ox.ac.uk/nanda/perseus/index.html</a></div></blockquote>
+<div class="admonition-todo admonition" id="index-5">
+<p class="first admonition-title">Todo</p>
+<p class="last">Set this up to work with higher-dimensional cubical complexes</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.Cubical_Perseus">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">Cubical_Perseus</code><span class="sig-paren">(</span><em>M</em>, <em>numDigits=2</em>, <em>suppressOutput=True</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.Cubical_Perseus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes persistence for a matrix of function values
+using Vidit Nanda’s <a class="reference external" href="http://people.maths.ox.ac.uk/nanda/perseus/index.html">perseus</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>perseus must be in the bash path</li>
+<li>matrix must be 2-dimensional</li>
+</ul>
+</div>
+<div class="admonition-todo admonition" id="index-6">
+<p class="first admonition-title">Todo</p>
+<p class="last">Update this to accept higher dimensional cubical complexes</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter M:</th><td class="field-body"><p class="first">a 2D numpy array</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parameter numDigits:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">Perseus only accepts positive integer valued matrices.  To
+compensate, we apply the transformation</p>
+<blockquote>
+<div><p>x -&gt; x* (10**numDigits) + M.min()</p>
+</div></blockquote>
+<p>then calculate persistence on the resulting matrix.
+The persistence diagram birth/death times are then converted
+back via the inverse transform.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter suppressOutput:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">If true, gets rid of printed output from perseus.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with integer keys 0,1,…,N
+The key gives the dimension of the persistence diagram.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.minPers">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">minPers</code><span class="sig-paren">(</span><em>Dgm</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.minPers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets minimum persistence for a given diagram</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter Dgm:</th><td class="field-body">a 2D numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.maxPers">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">maxPers</code><span class="sig-paren">(</span><em>Dgm</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets maximum persistence for a given diagram</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter Dgm:</th><td class="field-body">a 2D numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.maxBirth">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">maxBirth</code><span class="sig-paren">(</span><em>Dgm</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets maximum birth for a given diagram</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter Dgm:</th><td class="field-body">a 2D numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.minBirth">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">minBirth</code><span class="sig-paren">(</span><em>Dgm</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets minimum birth  for a given diagram</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter Dgm:</th><td class="field-body">a 2D numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.minPersistenceSeries">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">minPersistenceSeries</code><span class="sig-paren">(</span><em>DgmsSeries</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.minPersistenceSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes data frame DgmsDF.
+Finds minimum persistence over all diagrams in
+column with label dgm_col.
+Gets minimum persistence for a pandas.Series with diagrams as entries</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter DgmSeries:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.maxPersistenceSeries">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">maxPersistenceSeries</code><span class="sig-paren">(</span><em>DgmsSeries</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPersistenceSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes data frame DgmsDF.
+Finds maximum persistence over all diagrams in
+column with label dgm_col.
+Gets maximum persistence for a pandas.Series with diagrams as entries</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter DgmsSeries:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.minBirthSeries">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">minBirthSeries</code><span class="sig-paren">(</span><em>DgmsSeries</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirthSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes data frame DgmsDF.
+Finds minimum persistence over all diagrams in
+column with label dgm_col.
+Gets minimum persistence for a pandas.Series with diagrams as entries</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter DgmSeries:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.maxBirthSeries">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">maxBirthSeries</code><span class="sig-paren">(</span><em>DgmsSeries</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirthSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes data frame DgmsDF.
+Finds maximum persistence over all diagrams in
+column with label dgm_col.
+Gets maximum persistence for a pandas.Series with diagrams as entries</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Parameter DgmSeries:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaspoon.TDA.Persistence.removeInfiniteClasses">
+<code class="descclassname">teaspoon.TDA.Persistence.</code><code class="descname">removeInfiniteClasses</code><span class="sig-paren">(</span><em>Dgm</em><span class="sig-paren">)</span><a class="headerlink" href="#teaspoon.TDA.Persistence.removeInfiniteClasses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simply deletes classes that have infinite lifetimes.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="classes.html" title="Classes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="TODOLIST.html" title="Todo List"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">teaspoon 2018 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Elizabeth Munch.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.8.
+    </div>
+  </body>
+</html>
