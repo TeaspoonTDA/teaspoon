@@ -18,7 +18,7 @@ Locations
 ==============
 
 
-- **Code**: [http://gitlab.msu.edu/TSAwithTDA/teaspoon](https://gitlab.msu.edu/TSAwithTDA/teaspoon).
+- **Code**: [https://github.com/lizliz/teaspoon](https://github.com/lizliz/teaspoon).
 
 - **Documentation**: [http://elizabethmunch.com/code/teaspoon/index.html](http://elizabethmunch.com/code/teaspoon/index.html)
 
@@ -28,7 +28,7 @@ Requirements
 
 Please note that this code is still pre-alpha, so many things are not fully up and running yet.
 
-Bugs reports and feature reqests can be posted on the [gitlab issues](https://gitlab.msu.edu/TSAwithTDA/teaspoon/issues) page.
+Bugs reports and feature reqests can be posted on the [github issues](https://github.com/lizliz/teaspoon/issues) page.
 
 In order to use all wrappers in teaspoon.TDA, the following need to be installed so they can be run command line.
 
@@ -44,7 +44,7 @@ Installation
 
 ### <span style="color:red">Warning</span>:
 This code is still pre-alpha.  In particular, using the pip install seems to be finicky at best.  
-If you are having installation issues, please make a note of what you've done, including copying error message outputs, as a comment into the [installation issue on gitlab](https://gitlab.msu.edu/TSAwithTDA/teaspoon/issues/1) so we can start figuring out what is up with this system.
+If you are having installation issues, please make a note of what you've done, including copying error message outputs, as a comment into the [installation issue on github](https://github.com/lizliz/teaspoon/issues) so we can start figuring out what is up with this system.
 
 
 
@@ -53,7 +53,7 @@ If you are having installation issues, please make a note of what you've done, i
 So far, the most success has been had with pip installation.  Run the following commands to clone and install teaspoon. In particular, the `pip install .` command needs to be run in the folder with the `setup.py` file.
 
 ```{bash}
-git clone https://gitlab.msu.edu/TSAwithTDA/teaspoon
+git clone https://github.com/lizliz/teaspoon.git
 cd teaspoon
 pip install .
 ```
@@ -78,13 +78,12 @@ Documentation
 
 Documentation is done using [doxygen](http://www.doxygen.org).
 The most recent version of the [teaspoon documentation is hosted here](http://elizabethmunch.com/code/teaspoon/index.html).  
-Further info on documentation can be found in the [contributing](https://gitlab.msu.edu/TSAwithTDA/teaspoon/blob/master/CONTRIBUTING.md) page.
+Further info on documentation can be found in the [contributing](https://github.com/lizliz/teaspoon/blob/master/CONTRIBUTING.md) page.
 
 
 Contributing
-=============
-
-See the [contributing](https://gitlab.msu.edu/TSAwithTDA/teaspoon/blob/master/CONTRIBUTING.md) page for more information on workflows.
+=================
+See the [contributing](http://github.com/lizliz/teaspoon/blob/master/CONTRIBUTING.md) page for more information on workflows.
 
 Contact
 =============
