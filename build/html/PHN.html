@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Persistent Homology of Networks (PHN) &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Dynamic Systems Library (DynSysLib)" href="DynSysLib.html" />
+    <link rel="prev" title="1. Getting Started" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> teaspoon
+          
+
+          
+            
+            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Persistent Homology of Networks Module (PHN)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">2.1. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DynSysLib.html">3. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_selection.html">4. Parameter Selection Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="information.html">5. Information Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ML.html">6. Machine Learning</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>Persistent Homology of Networks (PHN)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/PHN.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="persistent-homology-of-networks-phn">
+<h1><span class="section-number">2. </span>Persistent Homology of Networks (PHN)<a class="headerlink" href="#persistent-homology-of-networks-phn" title="Permalink to this headline">¶</a></h1>
+<p>This page provides a summary of the python functions used in in “<a class="reference external" href="https://arxiv.org/abs/1904.07403">Persistent Homology of Complex Networks for Dynamic State Detection</a>” for generating and analyzing complex networks as the Persistent Homology of Networks (PHN). Additionally, a basic example is provided showing the functionality of the method for a simple time series. Below, a simple overview of the method is provided.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/process.png"><img alt="_images/process.png" src="_images/process.png" style="width: 687.2px; height: 188.8px;" /></a>
+</div>
+<p>Outline of method: a time series (a) is embedded (b) using state space reconstruction from Takens’ embedding or segmenting the vectors into a set of permutations. From these two representations, an undirected, unweighted network (c) is formed by either applying a kth nearest neighbors algorithm or by setting each permutation state as a node. The distance matrix (d) is calculated using the shortest path between all nodes. The
+persistence diagram (e) is generated by applying persistent homology to the distance matrix. Finally, one of several point summaries (f) are used to extract information from the persistence diagram.</p>
+<span class="target" id="module-teaspoon.PHN.PHN"></span><dl class="py function">
+<dt id="teaspoon.PHN.PHN.PH_network">
+<code class="sig-prename descclassname">teaspoon.PHN.PHN.</code><code class="sig-name descname">PH_network</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts</span></em>, <em class="sig-param"><span class="n">tau</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'unweighted'</span></em>, <em class="sig-param"><span class="n">distance</span><span class="o">=</span><span class="default_value">'shortest_path'</span></em>, <em class="sig-param"><span class="n">network</span><span class="o">=</span><span class="default_value">'ordinal_partition'</span></em>, <em class="sig-param"><span class="n">plotting</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">4</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/PHN/PHN.html#PH_network"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.PHN.PHN.PH_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function provides a library of dynamical system models to simulate with the time series as the output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ts</strong> (<em>array</em>) – 1-D time series.</p></li>
+<li><p><strong>tau</strong> (<em>int</em>) – permutation or embedding delay.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – permutation or embedding dimension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>method</strong> (<em>Optional[string]</em>) – either ‘unweighted’, ‘simple’, ‘inverse’, or ‘difference’. Default is ‘unweighted’.</p></li>
+<li><p><strong>distance</strong> (<em>Optional[string]</em>) – either ‘shortest_path’, ‘longest_path’ (if using ‘simple’ distance), or ‘resistance’. Default is ‘shortest_path’.</p></li>
+<li><p><strong>network</strong> (<em>Optional[string]</em>) – either ‘ordinal_partition’ or ‘knn’ for an ordinal partition network or k nearest neighbors network, respectively. Default is ‘ordinal_partition’.</p></li>
+<li><p><strong>k</strong> (<em>Optional[array]</em>) – number of nearest neighbors. Default is k=4.</p></li>
+<li><p><strong>plotting</strong> (<em>Optional[boolean]</em>) – either True or False. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>PS (permutation sequence if an ordinal partition network is used), A (adjanency matrix), D (distance matrix), diagram (persistence diagram statistics), (maximum persistence ratio, persistent entropy normalized, homology class ratio)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[1-D array, 2-D array, 2-D array, list, 1-D array]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="section" id="examples">
+<h2><span class="section-number">2.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The following is an example implementing the method for an ordinal partition network for a simple time series:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#import needed packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1">#generate a simple time series</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span>
+<span class="n">PS</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">diagram</span><span class="p">,</span> <span class="n">statistics</span> <span class="o">=</span> <span class="n">PH_network</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">network</span> <span class="o">=</span> <span class="s1">&#39;ordinal_partition&#39;</span><span class="p">,</span>
+                                           <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;unweighted&#39;</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="s1">&#39;shortest_path&#39;</span><span class="p">,</span>
+                                           <span class="n">plotting</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># PS = permutation sequence, A = adjacency matrix, D = distance matrix,</span>
+<span class="c1"># diagram = persistence diagram, and</span>
+<span class="c1"># statistics =  [maximum persistence ratio, persistent entropy normalized, homology class ratio]</span>
+</pre></div>
+</div>
+<p>Where the output for this example is</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/networks_example_OP.png"><img alt="_images/networks_example_OP.png" src="_images/networks_example_OP.png" style="width: 549.5px; height: 373.09999999999997px;" /></a>
+</div>
+<p>The following is an example implementing the method for a k-NN network for a simple time series:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#import needed packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1">#generate a simple time series</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span>
+<span class="n">PS</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">diagram</span><span class="p">,</span> <span class="n">statistics</span> <span class="o">=</span> <span class="n">PH_network</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">network</span> <span class="o">=</span> <span class="s1">&#39;knn&#39;</span><span class="p">,</span>
+                                           <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;unweighted&#39;</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="s1">&#39;shortest_path&#39;</span><span class="p">,</span>
+                                           <span class="n">plotting</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># PS = permutation sequence, A = adjacency matrix, D = distance matrix,</span>
+<span class="c1"># diagram = persistence diagram, and</span>
+<span class="c1"># statistics =  [maximum persistence ratio, persistent entropy normalized, homology class ratio]</span>
+</pre></div>
+</div>
+<p>Where the output for this example is</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/networks_example_kNN.png"><img alt="_images/networks_example_kNN.png" src="_images/networks_example_kNN.png" style="width: 555.0999999999999px; height: 373.09999999999997px;" /></a>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="DynSysLib.html" class="btn btn-neutral float-right" title="3. Dynamic Systems Library (DynSysLib)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral float-left" title="1. Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Munch
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

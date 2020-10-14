@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6.1. Featurization &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6.2. Classification" href="CL.html" />
+    <link rel="prev" title="6. Persistence Diagram Featurization" href="ML.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> teaspoon
+          
+
+          
+            
+            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PHN.html">2. Persistent Homology of Networks Module (PHN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DynSysLib.html">3. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_selection.html">4. Parameter Selection Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="information.html">5. Information Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ML.html">6. Machine Learning</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.1. Featurization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#persistence-landscapes">6.1.1. Persistence Landscapes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#persistence-images">6.1.2. Persistence Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#carlsson-coordinates">6.1.3. Carlsson Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#path-signatures">6.1.4. Path Signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kernel-method">6.1.5. Kernel Method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CL.html">6.2. Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html#references">6.3. References</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="ML.html"><span class="section-number">6. </span>Persistence Diagram Featurization</a> &raquo;</li>
+        
+      <li><span class="section-number">6.1. </span>Featurization</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/F_PD.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="featurization">
+<span id="id1"></span><h1><span class="section-number">6.1. </span>Featurization<a class="headerlink" href="#featurization" title="Permalink to this headline">¶</a></h1>
+<p>This documentation includes five different persistence diagram featurization methods.
+These are persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.</p>
+<div class="section" id="persistence-landscapes">
+<span id="id2"></span><h2><span class="section-number">6.1.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="landscape-class">
+<h3><span class="section-number">6.1.1.1. </span>Landscape class<a class="headerlink" href="#landscape-class" title="Permalink to this headline">¶</a></h3>
+<p><strong>Example:</strong> In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">PLandscape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">14</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mf">8.1</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mf">8.5</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">)]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PLC</span> <span class="o">=</span> <span class="n">PLandscape</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">PL_number</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">AllPL</span><span class="p">)</span>
+<span class="go">   Landscape Number                                             Points</span>
+<span class="go">0               1.0  [[1.0, 0.0], [3.0, 2.0], [3.5, 1.5], [8.0, 6.0...</span>
+<span class="go">1               2.0  [[1.0, 0.0], [2.5, 1.5], [3.0, 1.0], [3.5, 1.5...</span>
+<span class="go">2               3.0  [[2.0, 0.0], [3.0, 1.0], [4.0, 0.0], [4.5, 0.5...</span>
+<span class="go">3               4.0               [[3.0, 0.0], [3.5, 0.5], [4.0, 0.0]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">DesPL</span><span class="p">)</span>
+<span class="go">Warning: Desired landscape numbers were not specified.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">PLC</span><span class="o">.</span><span class="n">PLandscape_plot</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">AllPL</span><span class="p">[</span><span class="s1">&#39;Points&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Output of the plotting functions is:</p>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="_images/All_Landscapes.png"><img alt="_images/All_Landscapes.png" src="_images/All_Landscapes.png" style="width: 627.3px; height: 371.09999999999997px;" /></a>
+<p class="caption"><span class="caption-text">All landscape functions for the given persistence diagram</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>If user specify the desired landscapes, output will be:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PLC</span>  <span class="o">=</span> <span class="n">PLandscape</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span> <span class="o">.</span><span class="n">PL_number</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span> <span class="o">.</span><span class="n">AllPL</span><span class="p">)</span>
+<span class="go">        Landscape Number                                             Points</span>
+<span class="go">0               1.0  [[1.0, 0.0], [3.0, 2.0], [3.5, 1.5], [8.0, 6.0...</span>
+<span class="go">1               2.0  [[1.0, 0.0], [2.5, 1.5], [3.0, 1.0], [3.5, 1.5...</span>
+<span class="go">2               3.0  [[2.0, 0.0], [3.0, 1.0], [4.0, 0.0], [4.5, 0.5...</span>
+<span class="go">3               4.0               [[3.0, 0.0], [3.5, 0.5], [4.0, 0.0]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span> <span class="o">.</span><span class="n">DesPL</span><span class="p">)</span>
+<span class="go">[array([[ 1.  ,  0.  ],</span>
+<span class="go">        [ 2.5 ,  1.5 ],</span>
+<span class="go">        [ 3.  ,  1.  ],</span>
+<span class="go">        [ 3.5 ,  1.5 ],</span>
+<span class="go">        [ 4.5 ,  0.5 ],</span>
+<span class="go">        [ 6.05,  2.05],</span>
+<span class="go">        [ 7.55,  0.55],</span>
+<span class="go">        [ 7.75,  0.75],</span>
+<span class="go">        [ 8.5 ,  0.  ],</span>
+<span class="go">        [ 9.  ,  0.  ],</span>
+<span class="go">        [10.5 ,  1.5 ],</span>
+<span class="go">        [12.  ,  0.  ]])</span>
+<span class="go">array([[2.  , 0.  ],</span>
+<span class="go">        [3.  , 1.  ],</span>
+<span class="go">        [4.  , 0.  ],</span>
+<span class="go">        [4.5 , 0.5 ],</span>
+<span class="go">        [5.  , 0.  ],</span>
+<span class="go">        [6.  , 0.  ],</span>
+<span class="go">        [6.5 , 0.5 ],</span>
+<span class="go">        [7.  , 0.  ],</span>
+<span class="go">        [7.55, 0.55],</span>
+<span class="go">        [8.1 , 0.  ]])]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PLC</span><span class="o">.</span><span class="n">PLandscape_plot</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="s1">&#39;Points&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Output of the plotting functions is:</p>
+<div class="figure align-center" id="id7">
+<a class="reference internal image-reference" href="_images/Des_Landscapes.png"><img alt="_images/Des_Landscapes.png" src="_images/Des_Landscapes.png" style="width: 639.3px; height: 371.09999999999997px;" /></a>
+<p class="caption"><span class="caption-text">Chosen landscape functions for the given persistence diagram</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="parameter-bucket-for-landscapes">
+<span id="pb-landscape"></span><h3><span class="section-number">6.1.1.2. </span>Parameter bucket for landscapes<a class="headerlink" href="#parameter-bucket-for-landscapes" title="Permalink to this headline">¶</a></h3>
+<p><strong>Example:</strong> If user does not provide classification labels, parameter bucket will return a warning as shown below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">LandscapesParameterBucket</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">LandscapesParameterBucket</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">LinearSVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span><span class="mf">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">Labels</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">PL_Number</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<span class="go">Variables in parameter bucket</span>
+<span class="go">-----------------------------</span>
+<span class="go">clf_model : &lt;class &#39;sklearn.svm._classes.LinearSVC&#39;&gt;</span>
+<span class="go">feature_function : &lt;function F_Landscape at 0x000001F6AB9F6558&gt;</span>
+<span class="go">PL_Number : [2]</span>
+<span class="go">Labels : None</span>
+<span class="go">test_size : 0.5</span>
+<span class="go">-----------------------------</span>
+<span class="go">Warning: Classification labels are missing.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="feature-matrix-generation">
+<h3><span class="section-number">6.1.1.3. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center" id="id8">
+<span id="f-matrix"></span><a class="reference internal image-reference" href="_images/Mesh_Generation_Example.png"><img alt="_images/Mesh_Generation_Example.png" src="_images/Mesh_Generation_Example.png" style="width: 958.0px; height: 525.4px;" /></a>
+<p class="caption"><span class="caption-text">Feature matrix generation steps explained with an simple example.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p><code class="xref std std-numref docutils literal notranslate"><span class="pre">F_Matrix</span></code> explains the steps for generation feature matrix using persistence landscapes. There are three persistence landscape sets for three different persistence diagram.
+We choose one landscape function among them. In the example above, second landscape function is selected and plotted for each landscape set.
+The plot in the third column includes all selected landscape functions.
+In other words, we plot all selected landscapes in same figure.
+The next step is to find the mesh points using node points of landscapes.
+Node points are projected on x-axis.
+The red dots in the plot represent these projections.
+Then, we sort these points (red dots) and remove the duplicates if there is any.
+Resulting array will be our mesh and it is used to obtain features.
+The mesh points is shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">Mesh</span></code> with red dots.
+There may not be corresponding y value for each mesh points in selected landscape functions so we use linear interpolation to find these values.
+Then, these y values become the feature for each landscape functions, and they can be used in classification.</p>
+<div class="figure align-center" id="id9">
+<span id="mesh"></span><a class="reference internal image-reference" href="_images/Mesh_Points.png"><img alt="_images/Mesh_Points.png" src="_images/Mesh_Points.png" style="width: 631.5px; height: 247.79999999999998px;" /></a>
+<p class="caption"><span class="caption-text">Mesh obtained using second landscape function for the example provided in <code class="xref std std-numref docutils literal notranslate"><span class="pre">F_Matrix</span></code>.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="persistence-images">
+<span id="id3"></span><h2><span class="section-number">6.1.2. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline">¶</a></h2>
+<p><strong>Example:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">F_Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">=</span><span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">14</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mf">8.1</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mf">8.5</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">)]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">3.6</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mf">2.6</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mf">3.7</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mf">7.3</span><span class="p">),(</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">),(</span><span class="mi">12</span><span class="p">,</span><span class="mi">17</span><span class="p">)]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TF_Learning</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D_Img</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_PI</span> <span class="o">=</span> <span class="n">F_Image</span><span class="p">(</span><span class="n">PD</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="n">plot</span><span class="p">,</span><span class="n">TF_Learning</span><span class="p">,</span><span class="n">D_Img</span><span class="p">)</span>
+<span class="go"># if user wants to plot images</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_PI</span> <span class="o">=</span> <span class="n">F_Image</span><span class="p">(</span><span class="n">PD</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="n">plot</span><span class="p">,</span><span class="n">TF_Learning</span><span class="p">,</span><span class="n">D_Img</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The algorithm will return two images as shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">PI_Example</span></code>.</p>
+<div class="figure align-center" id="pi-example">
+<a class="reference internal image-reference" href="_images/PI_Example.png"><img alt="_images/PI_Example.png" src="_images/PI_Example.png" style="width: 498.8px; height: 241.8px;" /></a>
+</div>
+</div>
+<div class="section" id="carlsson-coordinates">
+<span id="id4"></span><h2><span class="section-number">6.1.3. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Permalink to this headline">¶</a></h2>
+<p><strong>Example:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">F_CCoordinates</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">=</span><span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">14</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mf">8.1</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mf">8.5</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">)]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">3.6</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mf">2.6</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mf">3.7</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mf">7.3</span><span class="p">),(</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">),(</span><span class="mi">12</span><span class="p">,</span><span class="mi">17</span><span class="p">)]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FN</span><span class="o">=</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FeatureMatrix</span><span class="p">,</span><span class="n">TotalNumComb</span><span class="p">,</span><span class="n">CombList</span> <span class="o">=</span> <span class="n">F_CCoordinates</span><span class="p">(</span><span class="n">PD</span><span class="p">,</span><span class="n">FN</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">TotalNumComb</span><span class="p">)</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">CombList</span><span class="p">)</span>
+<span class="go">[[1. 0. 0. 0. 0.]</span>
+<span class="go"> [2. 0. 0. 0. 0.]</span>
+<span class="go"> [3. 0. 0. 0. 0.]</span>
+<span class="go"> [1. 2. 0. 0. 0.]</span>
+<span class="go"> [1. 3. 0. 0. 0.]</span>
+<span class="go"> [2. 3. 0. 0. 0.]</span>
+<span class="go"> [1. 2. 3. 0. 0.]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="path-signatures">
+<span id="id5"></span><h2><span class="section-number">6.1.4. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Permalink to this headline">¶</a></h2>
+<p><strong>Example:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">PLandscape</span><span class="p">,</span><span class="n">F_PSignature</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">=</span><span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">14</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mf">8.1</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mf">8.5</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">)]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">3.6</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mf">2.6</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mf">3.7</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mf">7.3</span><span class="p">),(</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">),(</span><span class="mi">12</span><span class="p">,</span><span class="mi">17</span><span class="p">)]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PerLand</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">Land</span><span class="o">=</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">PerLand</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">Land</span><span class="o">.</span><span class="n">AllPL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L_number</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_PS</span> <span class="o">=</span> <span class="n">F_PSignature</span><span class="p">(</span><span class="n">PerLand</span><span class="p">,</span><span class="n">L_number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="kernel-method">
+<h2><span class="section-number">6.1.5. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Permalink to this headline">¶</a></h2>
+<p><strong>Example:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">KernelMethod</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">=</span><span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">14</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mf">8.1</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mf">8.5</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">)]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PD</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">3.6</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mf">2.6</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mf">3.7</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mf">7.3</span><span class="p">),(</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">),(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">),(</span><span class="mi">12</span><span class="p">,</span><span class="mi">17</span><span class="p">)]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perDgm1</span> <span class="o">=</span> <span class="n">PD</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perDgm2</span> <span class="o">=</span> <span class="n">PD</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sigma</span><span class="o">=</span><span class="mf">0.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">KernelMethod</span><span class="p">(</span><span class="n">perDgm1</span><span class="p">,</span> <span class="n">perDgm2</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+<span class="go">0.9160645485529173</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CL.html" class="btn btn-neutral float-right" title="6.2. Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ML.html" class="btn btn-neutral float-left" title="6. Persistence Diagram Featurization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Munch
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

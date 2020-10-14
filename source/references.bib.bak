@@ -1,0 +1,96 @@
+% Encoding: UTF-8
+
+@article{Adams2017,
+  title={Persistence images: A stable vector representation of persistent homology},
+  author={Adams, Henry and Emerson, Tegan and Kirby, Michael and Neville, Rachel and Peterson, Chris and Shipman, Patrick and Chepushtanova, Sofya and Hanson, Eric and Motta, Francis and Ziegelmeier, Lori},
+  journal={The Journal of Machine Learning Research},
+  volume={18},
+  number={1},
+  pages={218--252},
+  year={2017},
+  publisher={JMLR. org}
+}
+
+@Article{Adcock2016,
+  author    = {Aaron Adcock and Erik Carlsson and Gunnar Carlsson},
+  journal   = {Homology, Homotopy and Applications},
+  title     = {The ring of algebraic functions on persistence bar codes},
+  year      = {2016},
+  number    = {1},
+  pages     = {381--402},
+  volume    = {18},
+  doi       = {10.4310/hha.2016.v18.n1.a21},
+  publisher = {International Press of Boston},
+}
+
+@article{Chevyrev2016,
+  title={A primer on the signature method in machine learning},
+  author={Chevyrev, Ilya and Kormilitzin, Andrey},
+  journal={arXiv preprint arXiv:1603.03788},
+  year={2016}
+}
+
+@Article{Chevyrev2020,
+  author    = {Ilya Chevyrev and Vidit Nanda and Harald Oberhauser},
+  journal   = {{IEEE} Transactions on Pattern Analysis and Machine Intelligence},
+  title     = {Persistence Paths and Signature Features in Topological Data Analysis},
+  year      = {2020},
+  month     = {jan},
+  number    = {1},
+  pages     = {192--202},
+  volume    = {42},
+  doi       = {10.1109/tpami.2018.2885516},
+  publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
+}
+
+@InProceedings{Reininghaus2015,
+  author    = {Jan Reininghaus and Stefan Huber and Ulrich Bauer and Roland Kwitt},
+  booktitle = {2015 {IEEE} Conference on Computer Vision and Pattern Recognition ({CVPR})},
+  title     = {A stable multi-scale kernel for topological machine learning},
+  year      = {2015},
+  month     = {jun},
+  publisher = {{IEEE}},
+  doi       = {10.1109/cvpr.2015.7299106},
+}
+
+@Article{Yesilli2019,
+  author  = {Yesilli, Melih C. and Khasawneh, Firas A. and Otto, Andreas},
+  journal = {arXiv preprint arXiv:1905.08671},
+  title   = {Topological feature vectors for chatter detection in turning processes},
+  year    = {2019},
+}
+
+@Article{Bubenik2017,
+  author    = {Peter Bubenik and Pawe{\l} D{\l}otko},
+  journal   = {Journal of Symbolic Computation},
+  title     = {A persistence landscapes toolbox for topological statistics},
+  year      = {2017},
+  month     = {jan},
+  pages     = {91--114},
+  volume    = {78},
+  doi       = {10.1016/j.jsc.2016.03.009},
+  publisher = {Elsevier {BV}},
+}
+
+@Article{Khasawneh2018,
+  author    = {Khasawneh, Firas A. and Munch, Elizabeth and Perea, Jose A.},
+  journal   = {{IFAC}-{PapersOnLine}},
+  title     = {Chatter {C}lassification in {T}urning using {M}achine {L}earning and {T}opological {D}ata {A}nalysis},
+  year      = {2018},
+  number    = {14},
+  pages     = {195--200},
+  volume    = {51},
+  doi       = {10.1016/j.ifacol.2018.07.222},
+  publisher = {Elsevier {BV}},
+}
+
+@Misc{Khasawneh2019,
+  author    = {Khasawneh, Firas A. and Otto, Andreas and Yesilli, Melih C.},
+  title     = {Turning Dataset for Chatter Diagnosis Using Machine Learning},
+  year      = {2019},
+  doi       = {10.17632/HVM4WH3JZX.1},
+  keywords  = {Machine Learning, Turning, Machining, Time Series},
+  publisher = {Mendeley http://dx.doi.org/10.17632/hvm4wh3jzx.1},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
