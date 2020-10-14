@@ -12,6 +12,9 @@ The code is an compilation of work done by [Elizabeth Munch](http://www.elizabet
 - [Firas Khasawneh](http://www.firaskhasawneh.com)
 - Jesse Berwald
 - Brian Bollen
+- Audun Myers
+- Melih Yesilli
+- Sarah Tymochko
 
 
 Locations
