@@ -37,4 +37,4 @@ Table of Contents
    Dynamic Systems Library (DynSysLib) Module <DynSysLib.rst>
    Parameter Selection Module <parameter_selection.rst>
    Information Module <information.rst>
-   Machine Learning <ML.rst>
+   Machine Learning (ML) Module <ML.rst>
