@@ -1,0 +1,1354 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>teaspoon.ML.feature_functions &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> teaspoon
+          
+
+          
+            
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PHN.html">2. Persistent Homology of Networks Module (PHN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../DynSysLib.html">3. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parameter_selection.html">4. Parameter Selection Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../information.html">5. Information Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ML.html">6. Machine Learning (ML) Module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>teaspoon.ML.feature_functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for teaspoon.ML.feature_functions</h1><div class="highlight"><pre>
+<span></span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Machine learning featurization method</span>
+
+<span class="sd">If you make use of this code, please cite the following paper:&lt;br/&gt;</span>
+<span class="sd">J.A. Perea, E. Munch, and F. Khasawneh.  &quot;Approximating Continuous Functions On Persistence Diagrams.&quot; Preprint, 2017.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">PersistenceImages.persistence_images</span> <span class="k">as</span> <span class="nn">pimg</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span> <span class="k">as</span> <span class="n">lnorm</span>
+<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="n">t</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Piecewise</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">diff</span><span class="p">,</span><span class="n">integrate</span>
+<span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+
+<span class="c1"># -------------------------------------------- #</span>
+<span class="c1"># -------------------------------------------- #</span>
+<span class="c1"># ----------Featurization--------------------- #</span>
+<span class="c1"># -------------------------------------------- #</span>
+<span class="c1"># -------------------------------------------- #</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module::feature_functions</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">tent</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Applies the tent function to a diagram.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    :Parameter Dgm:</span>
+<span class="sd">     	A persistence diagram, given as a :math:`K \times 2` numpy array</span>
+<span class="sd">    :Parameter params:</span>
+<span class="sd">     	An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</span>
+<span class="sd">    :Parameter type:</span>
+<span class="sd">    	This code accepts diagrams either</span>
+<span class="sd">            1. in (birth, death) coordinates, in which case `type = &#39;BirthDeath&#39;`, or</span>
+<span class="sd">            2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case `type = &#39;BirthLifetime&#39;`</span>
+
+<span class="sd">    :returns:</span>
+
+<span class="sd">    :math:`\sum_{x,y \in \text{Dgm}}g_{i,j}(x,y)` where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\bigg| 1- \\max\\left\\{ \\left|\\frac{x}{\\delta} - i\\right|, \\left|\\frac{y-x}{\\delta} - j\\right|\\right\\} \\bigg|_+]</span>
+
+<span class="sd">    where :math:`| * |_+` is positive part; equivalently, min of * and 0.</span>
+
+<span class="sd">.. note:: This code does not take care of the maxPower polynomial stuff.  The build_G() function does it after all the rows have been calculated.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">d</span>
+
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">delta</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">epsilon</span>
+    <span class="c1"># print(Dgm[:3])</span>
+    <span class="c1"># Move to birth,lifetime plane</span>
+    <span class="k">if</span> <span class="n">dgm_type</span> <span class="o">==</span> <span class="s1">&#39;BirthDeath&#39;</span><span class="p">:</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">dgm_type</span> <span class="o">==</span> <span class="s1">&#39;BirthLifetime&#39;</span><span class="p">:</span>
+
+        <span class="n">A</span> <span class="o">=</span> <span class="n">Dgm</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your choices for type are &quot;BirthDeath&quot; or &quot;BirthLifetime&quot;.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exiting...&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">I</span><span class="p">,</span> <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">Iflat</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">I</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+    <span class="n">Jflat</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">J</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span> <span class="o">+</span> <span class="n">epsilon</span>
+
+    <span class="n">Irepeated</span> <span class="o">=</span> <span class="n">Iflat</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">Dgm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">Jrepeated</span> <span class="o">=</span> <span class="n">Jflat</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">Dgm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">DgmRepeated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Iflat</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">BigIJ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">Irepeated</span><span class="p">,</span> <span class="n">Jrepeated</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="n">B</span> <span class="o">=</span> <span class="n">DgmRepeated</span> <span class="o">-</span> <span class="n">BigIJ</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">B</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">Iflat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Dgm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="o">/</span> <span class="n">delta</span>
+
+    <span class="c1"># TO BE REMOVED.... THIS HAS BEEN MOVED TO build_G()</span>
+    <span class="c1"># if params.maxPower &gt;1:</span>
+
+    <span class="c1"># 	BigOuts = [out]</span>
+    <span class="c1"># 	# Make 2 using np.triu_indices</span>
+    <span class="c1"># 	indices = np.array(np.triu_indices(len(out)))</span>
+    <span class="c1"># 	C = out[indices.T]</span>
+    <span class="c1"># 	C = np.prod(C,1)</span>
+    <span class="c1"># 	BigOuts.append(C)</span>
+    <span class="c1"># 	# Make 3 or above using itertools</span>
+    <span class="c1"># 	# NOTE: This is incredibly slow and should be improved.</span>
+    <span class="c1"># 	for i in range(3,params.maxPower + 1):</span>
+    <span class="c1"># 		C = [a for a in itertools.combinations_with_replacement(out,i)]</span>
+    <span class="c1"># 		C = np.array(C)</span>
+    <span class="c1"># 		C = np.prod(C,1)</span>
+    <span class="c1"># 		BigOuts.append(C)</span>
+    <span class="c1"># 	# turn all of them into one long vector</span>
+    <span class="c1"># 	out = np.concatenate(BigOuts)</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span> <span class="nf">sub2ind</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Converts subscripts to indices</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">rows</span> <span class="o">*</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">cols</span>
+    <span class="n">ind</span><span class="p">[</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">ind</span><span class="p">[</span><span class="n">ind</span> <span class="o">&gt;=</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">ind</span>
+
+
+<span class="c1"># convert indices to subscripts</span>
+<span class="k">def</span> <span class="nf">ind2sub</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Converts indices to subscripts</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">ind</span><span class="p">[</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">ind</span><span class="p">[</span><span class="n">ind</span> <span class="o">&gt;=</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">(</span><span class="n">ind</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">ind</span> <span class="o">%</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span>
+
+
+<span class="c1"># find the quadrature/interpolation weights for common orthognal functions</span>
+<span class="c1"># define the function blocks</span>
+<span class="c1"># Chebyshev-Gauss points of the first kind</span>
+<span class="k">def</span> <span class="nf">quad_cheb1</span><span class="p">(</span><span class="n">npts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Find the quadrature/interpolation weights for common orthognal functions</span>
+
+<span class="sd">    Define the function blocks</span>
+
+<span class="sd">    Chebyshev-Gauss points of the first kind</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># get the Chebyshev nodes of the first kind</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">npts</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">npts</span><span class="p">)</span>
+
+    <span class="c1"># get the corresponding quadrature weights</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">npts</span><span class="p">,</span> <span class="n">npts</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span>
+
+
+<span class="c1"># Computes the Legendre-Gauss-Lobatto nodes, and their quadrate weights.</span>
+<span class="c1"># The LGL nodes are the zeros of (1-x**2)*P&#39;_N(x), wher P_N is the nth Legendre</span>
+<span class="c1"># polynomial</span>
+<span class="k">def</span> <span class="nf">quad_legendre</span><span class="p">(</span><span class="n">npts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Computes the Legendre-Gauss-Lobatto nodes, and their quadrate weights.</span>
+
+<span class="sd">    The LGL nodes are the zeros of (1-x**2)*P&#39;_N(x), wher P_N is the nth Legendre polynomial</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Truncation + 1</span>
+    <span class="n">nptsPlusOne</span> <span class="o">=</span> <span class="n">npts</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">spacing</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># find epsilon, the machine precision</span>
+
+    <span class="c1"># Use the Chebyshev-Gauss-Lobatto nodes as the first guess</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">npts</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">npts</span><span class="p">)</span>
+
+    <span class="c1"># Get the Legendre Vandermonde Matrix</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nptsPlusOne</span><span class="p">,</span> <span class="n">nptsPlusOne</span><span class="p">))</span>
+
+    <span class="c1"># Compute P_(N) using the recursion relation</span>
+    <span class="c1"># Compute its first and second derivatives and</span>
+    <span class="c1"># update x using the Newton-Raphson method.</span>
+
+    <span class="n">xold</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xold</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="n">xold</span> <span class="o">=</span> <span class="n">x</span>
+
+        <span class="n">P</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">P</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">npts</span><span class="p">):</span>
+            <span class="n">P</span><span class="p">[:,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">P</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="n">P</span><span class="p">[:,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">xold</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">P</span><span class="p">[:,</span> <span class="n">npts</span><span class="p">]</span> <span class="o">-</span> <span class="n">P</span><span class="p">[:,</span> <span class="n">npts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> \
+            <span class="o">/</span> <span class="p">(</span><span class="n">nptsPlusOne</span> <span class="o">*</span> <span class="n">P</span><span class="p">[:,</span> <span class="n">npts</span><span class="p">])</span>
+
+    <span class="c1"># get the corresponding quadrature weights</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">npts</span> <span class="o">*</span> <span class="n">nptsPlusOne</span> <span class="o">*</span> <span class="n">P</span><span class="p">[:,</span> <span class="n">npts</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Map the inputs to the function block.</span>
+<span class="sd">You can invoke the desired function block using:</span>
+<span class="sd">quad_pts_and_weights[&#39;name_of_function&#39;](npts)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">quad_pts_and_weights</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cheb1&#39;</span><span class="p">:</span> <span class="n">quad_cheb1</span><span class="p">,</span><span class="s1">&#39;legendre&#39;</span><span class="p">:</span> <span class="n">quad_legendre</span><span class="p">}</span>
+
+<span class="c1"># map the inputs to the function blocks</span>
+<span class="c1"># you can invoke the desired function block using:</span>
+<span class="c1"># quad_pts_and_weights[&#39;name_of_function&#39;](npts)</span>
+<span class="n">quad_pts_and_weights</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cheb1&#39;</span><span class="p">:</span> <span class="n">quad_cheb1</span><span class="p">,</span>
+                        <span class="s1">&#39;legendre&#39;</span><span class="p">:</span> <span class="n">quad_legendre</span>
+                        <span class="p">}</span>
+
+
+<span class="c1"># find the barycentric interplation weights</span>
+<span class="k">def</span> <span class="nf">bary_weights</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Find the barycentric interplation weights</span>
+
+<span class="sd">    Calculate Barycentric weights for the base points x.</span>
+
+<span class="sd">    .. note:: this algorithm may be numerically unstable for high degree</span>
+
+<span class="sd">    Polynomials (e.g. 15+). If using linear or Chebyshev spacing of base</span>
+<span class="sd">    points then explicit formulae should then be used. See Berrut and</span>
+<span class="sd">    Trefethen, SIAM Review, 2004.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># find the length of x</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="c1"># Rescale for numerical stability</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">spacing</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># find epsilon, the machine precision</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="n">eps</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># find the weights</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">w</span>
+
+
+<span class="k">def</span> <span class="nf">bary_diff_matrix</span><span class="p">(</span><span class="n">xnew</span><span class="p">,</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculate both the derivative and plain Lagrange interpolation matrix</span>
+<span class="sd">    using Barycentric formulae from Berrut and Trefethen, SIAM Review, 2004.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    :Parameter xnew:</span>
+<span class="sd">        Interpolation points</span>
+<span class="sd">    :Parameter xbase:</span>
+<span class="sd">        Base points for interpolation</span>
+<span class="sd">    :Parameter w:</span>
+<span class="sd">        Weights calculated for base points (optional)</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># if w is not set, set it</span>
+
+    <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">bary_weights</span><span class="p">(</span><span class="n">xbase</span><span class="p">)</span>
+
+    <span class="c1"># get the length of the base points</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">xbase</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="c1"># get the length of the requested points</span>
+    <span class="n">nn</span> <span class="o">=</span> <span class="n">xnew</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="c1"># replicate the weights vector into a matrix</span>
+    <span class="n">wex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Barycentric Lagrange interpolation (from Berrut and Trefethen, SIAM Review, 2004)</span>
+    <span class="n">xdiff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">xnew</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">xbase</span><span class="p">,</span> <span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="n">wex</span> <span class="o">/</span> <span class="n">xdiff</span>
+
+    <span class="n">divisor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">divisor</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">divisor</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">M</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="n">M</span> <span class="o">/</span> <span class="n">divisor</span>
+
+    <span class="c1">#	M[np.isnan(M)] = 0</span>
+
+    <span class="n">M</span><span class="p">[</span><span class="n">xdiff</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1">#	# Construct the derivative (Section 9.3 of Berrut and Trefethen)</span>
+    <span class="c1">#	xdiff2 = xdiff ** 2</span>
+    <span class="c1">#</span>
+    <span class="c1">#	frac1 = wex / xdiff</span>
+    <span class="c1">#	frac1[np.isinf(frac1)] = float(&quot;inf&quot;)</span>
+    <span class="c1">#</span>
+    <span class="c1">#	frac2 = wex / xdiff2</span>
+    <span class="c1">#</span>
+    <span class="c1">#	DM = (M * np.tile(np.sum(frac2, axis=1)[np.newaxis].T, (1, n)) - frac2) / np.tile(np.sum(frac1, axis=1)[np.newaxis].T, (1, n))</span>
+    <span class="c1">#	row, col = np.where(xdiff == 0)</span>
+    <span class="c1">#</span>
+    <span class="c1">#</span>
+    <span class="c1">#	if np.all(row == 0):  # or, row.size == 0:</span>
+    <span class="c1">#		DM[row, ] = (wex[row, ] / np.tile(w[col].T, (1, n))) / xdiff[row, ]</span>
+    <span class="c1">#		idx = sub2ind(DM.shape, row, col)</span>
+    <span class="c1">#		DM[idx] = 0</span>
+    <span class="c1">#		DM[idx] = -np.sum(DM[row, ], axis=1)</span>
+    <span class="k">return</span> <span class="n">M</span>
+
+
+<span class="k">def</span> <span class="nf">interp_polynomial</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    :Parameter Dgm:</span>
+<span class="sd">     	A persistence diagram, given as a :math:`K \times 2` numpy array</span>
+<span class="sd">    :Parameter params:</span>
+<span class="sd">     	An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</span>
+<span class="sd">    :Parameter type:</span>
+<span class="sd">    	This code accepts diagrams either</span>
+<span class="sd">    	1. in (birth, death) coordinates, in which case `type = &#39;BirthDeath&#39;`, or</span>
+<span class="sd">    	2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case `dgm_type = &#39;BirthLifetime&#39;`</span>
+
+<span class="sd">    :returns:</span>
+
+<span class="sd">    interp_weight-</span>
+<span class="sd">        a matrix with each entry representiting the weight of an interpolation</span>
+<span class="sd">    	function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1">#	jacobi_func = params.jacobi_func</span>
+
+    <span class="c1"># check if we asked for a squre mesh or not</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">nx</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">d</span>
+        <span class="n">ny</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">d</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">d</span>
+
+    <span class="c1"># check if the Dgm is empty. If it is, pass back zeros</span>
+    <span class="k">if</span> <span class="n">Dgm</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>  <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ny</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Move to birth,lifetime plane</span>
+    <span class="k">if</span> <span class="n">dgm_type</span> <span class="o">==</span> <span class="s1">&#39;BirthDeath&#39;</span><span class="p">:</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dgm_type</span> <span class="o">==</span> <span class="s1">&#39;BirthLifetime&#39;</span><span class="p">:</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">Dgm</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your choices for type are &quot;BirthDeath&quot; or &quot;BirthLifetime&quot;.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exiting...&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># first, get the entries in Dgm that are within each partition</span>
+    <span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">partitions</span><span class="p">:</span>
+        <span class="n">query_Dgm_pts</span> <span class="o">=</span> <span class="n">getSubset</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">partition</span><span class="p">)</span>
+
+        <span class="c1"># get the number of query points</span>
+        <span class="n">num_query_pts</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">query_Dgm_pts</span><span class="p">)</span>
+
+        <span class="c1"># check if the intersection of the Dgm and the partition is empty.</span>
+        <span class="c1"># If it is, pass back zeros</span>
+        <span class="k">if</span> <span class="n">num_query_pts</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ny</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># get the query points. xq are the brith times, yq are the death times.</span>
+        <span class="n">xq</span><span class="p">,</span> <span class="n">yq</span> <span class="o">=</span> <span class="n">query_Dgm_pts</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">query_Dgm_pts</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># xq, yq = np.sort(query_Dgm_pts[:, 0]), np.sort(query_Dgm_pts[:, 1])</span>
+
+        <span class="c1"># 1) Get the base nodes:</span>
+        <span class="c1"># get the 1D base nodes in x and y</span>
+
+        <span class="n">xmesh</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">quad_pts_and_weights</span><span class="p">[</span><span class="n">params</span><span class="o">.</span><span class="n">jacobi_poly</span><span class="p">](</span><span class="n">nx</span><span class="p">)</span>
+        <span class="n">ymesh</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">quad_pts_and_weights</span><span class="p">[</span><span class="n">params</span><span class="o">.</span><span class="n">jacobi_poly</span><span class="p">](</span><span class="n">ny</span><span class="p">)</span>
+        <span class="n">xmesh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">xmesh</span><span class="p">)</span>
+        <span class="n">ymesh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">ymesh</span><span class="p">)</span>
+
+        <span class="c1"># shift the base mesh points to the interval of interpolation [ax, bx], and</span>
+        <span class="c1"># [ay, by]</span>
+        <span class="n">ax</span><span class="p">,</span> <span class="n">bx</span><span class="p">,</span> <span class="n">ay</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="n">partition</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]</span>
+        <span class="c1"># ax = 5</span>
+        <span class="c1"># bx = 6</span>
+        <span class="n">xmesh</span> <span class="o">=</span> <span class="p">(</span><span class="n">bx</span> <span class="o">-</span> <span class="n">ax</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xmesh</span> <span class="o">+</span> <span class="p">(</span><span class="n">bx</span> <span class="o">+</span> <span class="n">ax</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="c1"># ay = 5</span>
+        <span class="c1"># by = 6</span>
+        <span class="n">ymesh</span> <span class="o">=</span> <span class="p">(</span><span class="n">by</span> <span class="o">-</span> <span class="n">ay</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ymesh</span> <span class="o">+</span> <span class="p">(</span><span class="n">by</span> <span class="o">+</span> <span class="n">ay</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="c1"># define a mesh on the base points</span>
+        <span class="n">x_base</span><span class="p">,</span> <span class="n">y_base</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xmesh</span><span class="p">,</span> <span class="n">ymesh</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+
+        <span class="c1"># get the x and y interpolation matrices</span>
+        <span class="c1"># get the 1D interpolation matrix for x</span>
+        <span class="n">x_interp_mat</span> <span class="o">=</span> <span class="n">bary_diff_matrix</span><span class="p">(</span><span class="n">xnew</span><span class="o">=</span><span class="n">xq</span><span class="p">,</span> <span class="n">xbase</span><span class="o">=</span><span class="n">xmesh</span><span class="p">)</span>
+        <span class="n">x_interp_mat</span> <span class="o">=</span> <span class="n">x_interp_mat</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># transpose the x-interplation matrix</span>
+
+        <span class="c1"># get the 1D interpolation matrix for y</span>
+        <span class="n">y_interp_mat</span> <span class="o">=</span> <span class="n">bary_diff_matrix</span><span class="p">(</span><span class="n">xnew</span><span class="o">=</span><span class="n">yq</span><span class="p">,</span> <span class="n">xbase</span><span class="o">=</span><span class="n">ymesh</span><span class="p">)</span>
+
+        <span class="c1"># replicate each column in the x-interpolation matrix n times</span>
+        <span class="n">Gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">x_interp_mat</span><span class="p">,</span> <span class="n">ny</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># unravel, then replicate each row in the y-interpolation matrix m times</span>
+        <span class="n">y_interp_mat</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_interp_mat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">Phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">y_interp_mat</span><span class="p">,</span> <span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># element-wise multiply Gamma and Phi</span>
+        <span class="n">Psi</span> <span class="o">=</span> <span class="n">Gamma</span> <span class="o">*</span> <span class="n">Phi</span>
+
+        <span class="c1"># split column-wise, then concatenate row-wise</span>
+        <span class="c1">#    if Psi.size &gt; 0:  # check that Psi is not empty</span>
+        <span class="n">Psi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">Psi</span><span class="p">,</span> <span class="n">num_query_pts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># now reshape Psi so that each row corresponds to the weights of one query pt</span>
+        <span class="n">Psi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Psi</span><span class="p">,</span> <span class="p">(</span><span class="n">num_query_pts</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># get the weights for each interpolation function/base-point</span>
+        <span class="n">interp_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Psi</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1">#    print(&#39;I ran the feature function!&#39;)</span>
+        <span class="c1">#    plt.figure(10)</span>
+        <span class="c1">#    plt.plot(np.abs(interp_weights),&#39;x&#39;)</span>
+        <span class="c1">#    plt.show()</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">interp_weights</span><span class="p">)</span>
+
+
+<span class="c1"># this function returns the points from querSet that are within the baseRecatangle</span>
+<span class="k">def</span> <span class="nf">getSubset</span><span class="p">(</span><span class="n">querySet</span><span class="p">,</span> <span class="n">baseRectangle</span><span class="p">):</span>
+    <span class="c1"># get the rectangel corners</span>
+    <span class="n">xmin</span> <span class="o">=</span> <span class="n">baseRectangle</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">xmax</span> <span class="o">=</span> <span class="n">baseRectangle</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+    <span class="n">ymin</span> <span class="o">=</span> <span class="n">baseRectangle</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+    <span class="n">ymax</span> <span class="o">=</span> <span class="n">baseRectangle</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+
+    <span class="c1"># subset</span>
+    <span class="k">return</span> <span class="n">querySet</span><span class="p">[(</span><span class="n">querySet</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">&amp;</span>
+                    <span class="p">(</span><span class="n">querySet</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">xmax</span><span class="p">)</span> <span class="o">&amp;</span>
+                    <span class="p">(</span><span class="n">querySet</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">&amp;</span>
+                    <span class="p">(</span><span class="n">querySet</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ymax</span><span class="p">),</span> <span class="p">:]</span>
+
+
+<span class="k">def</span> <span class="nf">PLandscapes</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function computes persistence landscapes for given persistence diagrams.</span>
+<span class="sd">    Function has two inputs which are persistence diagrams and chosen landscapes function.</span>
+<span class="sd">    Algorithm computes all persistence landscapes for the persistence diagram.</span>
+<span class="sd">    The output is an dictionary that includes all landscape functions, total number of landscapes and desired landscapes (if user specify L_number). </span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+     <span class="c1"># :param ndarray (A): </span>
+     <span class="c1">#     Persistence diagram points--(Nx2) matrix.</span>
+     
+     <span class="c1"># :param list (L_number): </span>
+     <span class="c1">#     Landscape numbers user wants to compute</span>
+    
+     <span class="c1"># :Returns:</span>
+
+     <span class="c1">#     :output:</span>
+     <span class="c1">#         (dict) Dictionary that includes the outputs</span>
+    
+     <span class="c1">#         * all: (DataFrame) Includes all landscape functions of the persistece diagram</span>
+     <span class="c1">#         * LN : (int) Total number of landscapes for persistence diagram A</span>
+     <span class="c1">#         * DesPL: (ndarray) Includes only selected landscapes functions given in L_number</span>
+
+    <span class="c1"># sort persistence diagrams with respect to increasing order of birth time</span>
+    <span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="c1"># sort persistence diagrams that has same birth time with respect to descending order of death time</span>
+    <span class="c1"># group persistence diagrams with respect to same birth times</span>
+    <span class="n">compressed_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">return_index</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">compressed_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">compressed_data</span><span class="p">)</span>                                 <span class="c1">#convert list object to array</span>
+
+    <span class="c1"># sorting each birth time arrays with respect to descending order of death time</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">compressed_data</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">compressed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">compressed_data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">N</span><span class="p">]</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">compressed_data</span><span class="p">)</span>
+
+    <span class="c1"># create p as zero matrix</span>
+    <span class="n">p</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">infnt</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="c1">#define infinity value</span>
+
+    <span class="n">l_n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">pl</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="n">Land</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">A1</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">A1</span><span class="o">!=</span><span class="p">[]:</span>
+        <span class="c1"># initialize L</span>
+        <span class="n">L</span><span class="o">=</span><span class="p">[]</span>
+        <span class="c1"># the first term (b,d) form A</span>
+        <span class="n">b</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">d</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># let next point to be p</span>
+        <span class="n">length</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">length</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">infnt</span>
+            <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+        <span class="c1"># add (-inf,0),(b,0),((b+d)/2,(d-b)/2) to L</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="n">infnt</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">d</span><span class="p">),</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">d</span><span class="o">-</span><span class="n">b</span><span class="p">)])</span>
+        <span class="c1"># pop the first term (b,d) form A</span>
+        <span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">A</span><span class="p">,(</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">L</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="p">[</span><span class="n">infnt</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="c1"># convert death_time into list to find dmax</span>
+            <span class="n">death_t</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">death_t</span><span class="o">==</span><span class="p">[]:</span>
+                <span class="n">dmax</span><span class="o">=</span><span class="n">d</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">death_t</span><span class="p">)</span>
+            <span class="c1"># if maximum death time of the remaning terms in A is bigger or equal to d, add those two terms into the L</span>
+            <span class="k">if</span> <span class="n">d</span><span class="o">&gt;=</span><span class="n">dmax</span><span class="p">:</span>
+                <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">infnt</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>                                    <span class="c1"># if maximum death time of the remaning terms in A is not bigger or equal to d</span>
+                <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">death_t</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="n">d</span><span class="p">:</span>                     <span class="c1"># find the first item that is bigger than d</span>
+                        <span class="n">d_p</span><span class="o">=</span><span class="n">item</span>                     <span class="c1"># define new d_prime</span>
+                        <span class="n">b_p</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">index</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>               <span class="c1"># define new b_prime</span>
+                        <span class="k">break</span>
+                <span class="k">if</span> <span class="n">d_p</span><span class="o">!=</span><span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]:</span>                     <span class="c1"># assign next elment as p if d_p is not last element of matrix A</span>
+                    <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>              <span class="c1"># let next point to be p</span>
+                    <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">infnt</span>
+                    <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+                <span class="c1"># delete (b_p,d_p) form A</span>
+                <span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">A</span><span class="p">,(</span><span class="n">index</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">b_p</span><span class="o">&gt;</span><span class="n">d</span><span class="p">:</span>
+                    <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>                  <span class="c1"># add (d,0) to L</span>
+                <span class="k">if</span> <span class="n">b_p</span><span class="o">&gt;=</span><span class="n">d</span><span class="p">:</span>
+                    <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">b_p</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>                <span class="c1"># add (b_p,0) to L</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">b_p</span><span class="o">+</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,(</span><span class="n">d</span><span class="o">-</span><span class="n">b_p</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="c1"># push (b_p,d) in A in order of p</span>
+                    <span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">b_p</span><span class="p">,</span><span class="n">d</span><span class="p">)),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="c1"># sort persistence diagrams with respect to increasing order of birth time</span>
+                    <span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                    <span class="c1"># sort persistence diagrams that has same birth time with respect to descending order of death time</span>
+                    <span class="c1"># group persistence diagrams with respect to same birth times</span>
+                    <span class="n">compressed_data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">return_index</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">compressed_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">compressed_data</span><span class="p">)</span> <span class="c1">#convert list object to array</span>
+                    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">compressed_data</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">compressed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">compressed_data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">N</span><span class="p">]</span>
+                    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">compressed_data</span><span class="p">)</span>
+                    <span class="c1">#find index of point p - use min command if multiple of rows of A matrix has same value</span>
+                    <span class="n">index_p</span><span class="o">=</span><span class="nb">min</span><span class="p">(((</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">b_p</span><span class="p">)))[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="c1"># assign next elment as p if b_p is not last element of matrix A</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">!=</span><span class="n">index_p</span><span class="p">:</span>
+                        <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">index_p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">index_p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">infnt</span>
+                        <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+                <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">b_p</span><span class="o">+</span><span class="n">d_p</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,(</span><span class="n">d_p</span><span class="o">-</span><span class="n">b_p</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">b</span><span class="o">=</span><span class="n">b_p</span>                              <span class="c1"># b_prime becomes b</span>
+                <span class="n">d</span><span class="o">=</span><span class="n">d_p</span>                              <span class="c1"># d_prime becomes d</span>
+        <span class="n">l_n</span><span class="o">=</span><span class="n">l_n</span><span class="o">+</span><span class="mi">1</span>                                  <span class="c1"># counter for persistence landscape</span>
+        <span class="n">tag</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">),</span><span class="mi">1</span><span class="p">),</span><span class="n">l_n</span><span class="p">)</span>                <span class="c1"># add tag information to calculated landscape so that np.groupby can be used</span>
+        <span class="n">Land</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">tag</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">Land</span><span class="o">=</span><span class="n">Land</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>                            <span class="c1"># exclude the infinity terms inside the landscape</span>
+        <span class="n">pl</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">pl</span><span class="p">,</span><span class="n">Land</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        <span class="c1"># add tagging information to list of landscapes point</span>
+        <span class="n">A1</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>                            <span class="c1"># create list of last version of A to be able to check while condition above</span>
+
+    <span class="n">pl</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>                                  <span class="c1"># delete first zero row from pl</span>
+    <span class="n">pl</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span>                                        <span class="c1"># convert landscape matrix into dataframe</span>
+    <span class="n">pl</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s2">&quot;Landscape&quot;</span><span class="p">})</span>       <span class="c1"># rename columns</span>
+    <span class="c1"># make group of points with respect to their landscape number</span>
+    <span class="n">comp_pl</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Landscape&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">y</span><span class="p">])))</span>
+    <span class="n">comp_pl</span> <span class="o">=</span> <span class="n">comp_pl</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">comp_pl</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Landscape Number&#39;</span><span class="p">,</span> <span class="s1">&#39;Points&#39;</span><span class="p">]</span>
+    <span class="n">PL</span><span class="o">=</span><span class="n">comp_pl</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">Landscape_number</span><span class="o">=</span><span class="n">l_n</span>
+    
+    <span class="n">output</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">output</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">comp_pl</span>
+    <span class="n">output</span><span class="p">[</span><span class="s1">&#39;LN&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">Landscape_number</span>
+    <span class="c1"># in the case of user wants specific landscape data points</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">L_number</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">L_number</span><span class="p">)</span><span class="o">&lt;</span><span class="n">Landscape_number</span><span class="p">):</span>
+        <span class="n">L_number</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">number</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">L_number</span><span class="p">]</span>
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;DesPL&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">PL</span><span class="p">[</span><span class="n">L_number</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">output</span>
+
+
+
+<div class="viewcode-block" id="PLandscape"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.PLandscape">[docs]</a><span class="k">class</span> <span class="nc">PLandscape</span><span class="p">():</span>
+
+<div class="viewcode-block" id="PLandscape.__init__"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.PLandscape.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">PD</span><span class="p">,</span><span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>              <span class="c1"># if user wants to see the plot and the points of the specific landscapes, L_number variable should be given as input.</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        This class uses landscapes algorithm (:meth:`PD_Featurization.PLandscapes`) to compute persistence landscapes and plot them based on user preference.</span>
+<span class="sd">        The algorithm computes the persistence landscapes is written based on Ref. :cite:`1 &lt;Bubenik2017&gt;`.</span>
+
+<span class="sd">        :param ndarray (PD):</span>
+<span class="sd">            Persistence diagram points--(Nx2) matrix.</span>
+<span class="sd">            </span>
+<span class="sd">        :param list (L_Number):</span>
+<span class="sd">            Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.</span>
+<span class="sd">            </span>
+<span class="sd">        :Returns:</span>
+
+<span class="sd">            :PL_number:</span>
+<span class="sd">                (int) Total number of landscapes for given persistence diagram </span>
+<span class="sd">        </span>
+<span class="sd">            :DesPL:</span>
+<span class="sd">                (ndarray) Includes only selected landscapes functions given in L_number</span>
+<span class="sd">            </span>
+<span class="sd">            :AllPL: </span>
+<span class="sd">                (ndarray) Includes all landscape functions of the persistece diagram    </span>
+<span class="sd">            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># L_number is a Nx1 matrix that includes the desired numbers of landscapes</span>
+        <span class="n">out</span><span class="o">=</span><span class="n">PLandscapes</span><span class="p">(</span><span class="n">PD</span><span class="p">,</span><span class="n">L_number</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">PL_number</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;LN&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">L_number</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># if user gives landscape number which does not exist:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">L_number</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">L_number</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;LN&#39;</span><span class="p">]:</span>
+                    <span class="nb">print</span> <span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s1">&#39;Warning:&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Landscape number </span><span class="si">{}</span><span class="s1"> does not exist. Number of Landscapes are </span><span class="si">{}</span><span class="s1">. Please enter desired landscape values less than or equal to </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">L_number</span><span class="p">,</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;LN&#39;</span><span class="p">],</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;LN&#39;</span><span class="p">]))</span>
+                <span class="k">break</span>
+        <span class="c1"># Warning: If user enters a specific landscape number which does not exist for current persistence diagrams,</span>
+        <span class="c1"># class returns a warning message to user.</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">L_number</span><span class="p">)</span><span class="o">&lt;</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;LN&#39;</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">DesPL</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;DesPL&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">DesPL</span> <span class="o">=</span> <span class="s1">&#39;Warning: Desired landscape numbers were not specified.&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">AllPL</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="PLandscape.PLandscape_plot"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.PLandscape.PLandscape_plot">[docs]</a>    <span class="k">def</span> <span class="nf">PLandscape_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">PL</span><span class="p">,</span><span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        This function plots selected persistence landscapes or it plots all of them if user does not provide desired landscape functions.</span>
+
+<span class="sd">        :param ndarray (PD):</span>
+<span class="sd">            Persistence diagram points--(Nx2) matrix.</span>
+<span class="sd">            </span>
+<span class="sd">        :param list (L_Number):</span>
+<span class="sd">            Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.</span>
+<span class="sd">            </span>
+<span class="sd">        :Returns:</span>
+
+<span class="sd">            :PL_plot:</span>
+<span class="sd">                (fig) The figure that includes chosen or all landsape functions  </span>
+<span class="sd">                     </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+        <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
+        <span class="n">k</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">PL</span><span class="p">)</span>                                   <span class="c1"># number of landscapes</span>
+        <span class="k">if</span> <span class="n">L_number</span><span class="o">==</span><span class="p">[]:</span>                            <span class="c1"># if user does not enter any landscape function, all landscpaes will be plotted</span>
+            <span class="n">L_number</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ioff</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">L_number</span><span class="p">)):</span>            <span class="c1"># plotting the landscapes</span>
+            <span class="n">index1</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">L_number</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">PL</span><span class="p">[</span><span class="n">index1</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">PL</span><span class="p">[</span><span class="n">index1</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Landscape </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">index1</span> <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+        <span class="n">PL_plot</span><span class="o">=</span><span class="n">fig</span>
+        <span class="k">return</span> <span class="n">PL_plot</span></div></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="F_Landscape"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.F_Landscape">[docs]</a><span class="k">def</span> <span class="nf">F_Landscape</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">max_l_number</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    This function computes the features for selected persistence landscape numbers.</span>
+<span class="sd">    There are three inputs to the function. </span>
+<span class="sd">    These are all landscape functions for each persistence diagram, parameter bucket object and the maximum level of landscape function.</span>
+<span class="sd">    If user does not specify the third input, algorithm will automatically compute it.</span>
+<span class="sd">    The second parameter includes the parameters needed to compute features and perform classification.</span>
+<span class="sd">    Please see :meth:`PD_ParameterBucket.LandscapesParameterBucket` for more details about parameters.</span>
+<span class="sd">    </span>
+<span class="sd">    :param ndarray (PL):</span>
+<span class="sd">        Object array that includes all landscape functions for each persistence diagram</span>
+<span class="sd">        </span>
+<span class="sd">    :param object (params):</span>
+<span class="sd">        Parameterbucket object. We need landscape numbers defined by user to generate feature matrix.</span>
+<span class="sd">        </span>
+<span class="sd">    :Returns:</span>
+
+<span class="sd">        :feature:</span>
+<span class="sd">            (Array) NxM matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and M is the numbers of features which is equal to length of sorted mesh of landscapes functions.</span>
+<span class="sd">        </span>
+<span class="sd">        :Sorted_mesh: </span>
+<span class="sd">            (list) It includes the sorted mesh for each landscape function chosen by user.</span>
+<span class="sd">                     </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">PL</span>
+    <span class="n">N</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    
+    <span class="c1"># landscape number will be used to generate feature matrix</span>
+    <span class="n">PLN</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">PL_Number</span>
+    <span class="k">if</span> <span class="n">PLN</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">PLN</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    
+    <span class="c1"># find mesh for given landscape number</span>
+    <span class="n">l_number</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">if</span> <span class="n">max_l_number</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>                            <span class="c1"># find maximum number of landscapes in whole sets</span>
+        <span class="p">[</span><span class="n">l_number</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">max_l_number</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">l_number</span><span class="p">)</span>                    <span class="c1"># maximum landscape number for given persistence diagram set</span>
+    
+
+    <span class="n">Sorted_mesh</span><span class="o">=</span><span class="p">[]</span>                                    <span class="c1"># this list includes x points of specific landscapes for whole landscapes in increasing order and duplicates are removed</span>
+    <span class="n">interp_y</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">PLN</span><span class="p">)):</span>
+        <span class="n">X</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">k</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>                  <span class="c1"># landscapes set</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">&gt;=</span><span class="n">PLN</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">m</span><span class="o">=</span><span class="n">k</span><span class="p">[</span><span class="n">PLN</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>                           <span class="c1"># combine whole x values of same landscapes into one vector</span>
+        <span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="c1"># sorting x values in increasing order</span>
+        <span class="n">K</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">Sorted_X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">K</span><span class="p">))</span>
+        <span class="n">Sorted_X_unique</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Sorted_X</span><span class="p">)</span>           <span class="c1"># removing duplicates</span>
+        <span class="n">Sorted_mesh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Sorted_X_unique</span><span class="p">)</span>
+
+        <span class="n">desPL</span><span class="o">=</span><span class="n">PLN</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">xvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Sorted_mesh</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>              <span class="c1"># taking mesh for nth landscapes</span>
+        <span class="n">y_interp</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">),</span><span class="n">N</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>                          <span class="c1"># the loop which iterates for whole cases</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&gt;=</span><span class="n">PLN</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>                     <span class="c1"># check if the landscape function exist for the current set of landscapes </span>
+                <span class="n">L</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>              <span class="c1"># landscapes set</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">L</span><span class="p">[</span><span class="n">desPL</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">0</span><span class="p">]</span>                     <span class="c1"># x values of nth landscape</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">L</span><span class="p">[</span><span class="n">desPL</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">1</span><span class="p">]</span>                     <span class="c1"># y values of nth landscape</span>
+                <span class="n">y_interp</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>    <span class="c1"># piecewise linear interpolation</span>
+        <span class="n">interp_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_interp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">),</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">])</span>
+
+    <span class="n">feature</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">PLN</span><span class="p">)):</span>
+        <span class="n">Piecewise_Linear</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">interp_y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">ftr</span><span class="o">=</span><span class="n">Piecewise_Linear</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="n">feature</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">feature</span><span class="p">,</span><span class="n">ftr</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]</span>
+    
+    <span class="k">return</span> <span class="n">feature</span><span class="p">,</span> <span class="n">Sorted_mesh</span></div>
+
+<div class="viewcode-block" id="F_Image"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.F_Image">[docs]</a><span class="k">def</span> <span class="nf">F_Image</span><span class="p">(</span><span class="n">PD1</span><span class="p">,</span><span class="n">PS</span><span class="p">,</span><span class="n">var</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">TF_Learning</span><span class="p">,</span> <span class="n">D_Img</span><span class="o">=</span><span class="p">[],</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    This function returns user feature matrix generated using persistence images.</span>
+<span class="sd">    We use `PersistenceImages &lt;https://gitlab.com/csu-tda/PersistenceImages&gt;`_ package to compute persistence images.</span>
+<span class="sd">    User can also specify a list that includes the persistence diagram number to plot images of them.</span>
+<span class="sd">    Algorithms returns plot only if plotting option is True and transfer learning is false.</span>
+<span class="sd">    </span>
+<span class="sd">    :param ndarray (PD):</span>
+<span class="sd">        Object array that includes all persistence diagrams</span>
+<span class="sd">        </span>
+<span class="sd">    :param float (PS):</span>
+<span class="sd">        Pixel size. </span>
+<span class="sd">        </span>
+<span class="sd">    :param float (var):</span>
+<span class="sd">        Variance of the Gaussian distribution. </span>
+<span class="sd">    </span>
+<span class="sd">    :param list (D_Img):</span>
+<span class="sd">        The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams. </span>
+<span class="sd">    </span>
+<span class="sd">    :param (TF_Learning): If it is true, then algorithm will need the second persistence diagram set and it will compute feature matrices for training set and test set.</span>
+<span class="sd">    </span>
+<span class="sd">    :Returns:</span>
+
+<span class="sd">        :output:</span>
+<span class="sd">            (dict) A dictionary that includes the feature matrix. In the case of transfer learning, output will have training and test feature matrices separately.</span>
+<span class="sd">            </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">TF_Learning</span><span class="p">:</span> <span class="c1"># transfer learning option</span>
+    
+        <span class="n">PD2</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="c1">#number of diagrams in training set</span>
+        <span class="n">N1</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">PD1</span><span class="p">)</span>
+        <span class="c1">#number of diagrams in test set </span>
+        <span class="n">N2</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">PD2</span><span class="p">)</span> 
+
+        <span class="n">persistence_range_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">birth_range_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
+
+        <span class="n">persistence_range_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">birth_range_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        
+        <span class="c1">#find the max persistence and birth times for test set persistence diagrams</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N1</span><span class="p">):</span>
+            <span class="n">per_diag</span> <span class="o">=</span> <span class="n">PD1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">birth_range_train</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">persistence_range_train</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+
+        
+        <span class="c1">#find the max persistence and birth times for test set persistence diagrams</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N2</span><span class="p">):</span>
+            <span class="n">per_diag</span> <span class="o">=</span> <span class="n">PD2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">birth_range_test</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">persistence_range_test</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="c1"># determine the maximum bound for images of test set diagrams</span>
+        <span class="n">max_per_lim_test</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">persistence_range_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">max_bth_lim_test</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">birth_range_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span>
+        
+        <span class="c1"># determine the maximum bound for images of training set diagrams</span>
+        <span class="n">max_per_lim_train</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">persistence_range_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">max_bth_lim_train</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">birth_range_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span>
+        
+        <span class="c1"># determine the bounds of the images based on bounds of training set and test set diagrams</span>
+        <span class="c1"># adjust the image parameters and compute images</span>
+        <span class="n">pers_imager</span> <span class="o">=</span> <span class="n">pimg</span><span class="o">.</span><span class="n">PersistenceImager</span><span class="p">()</span>
+        <span class="n">pers_imager</span><span class="o">.</span><span class="n">pixel_size</span> <span class="o">=</span> <span class="n">PS</span>
+        <span class="n">pers_imager</span><span class="o">.</span><span class="n">birth_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">max_bth_lim_test</span><span class="p">,</span><span class="n">max_bth_lim_train</span><span class="p">))</span>
+        <span class="n">pers_imager</span><span class="o">.</span><span class="n">pers_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">max_per_lim_test</span><span class="p">,</span><span class="n">max_per_lim_train</span><span class="p">))</span>
+        <span class="n">pers_imager</span><span class="o">.</span><span class="n">kernel_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="n">var</span><span class="p">}</span>
+        
+        <span class="c1">#compute persistence images of training set</span>
+        <span class="n">pers_img_train</span> <span class="o">=</span> <span class="p">[</span><span class="n">pers_imager</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">PD1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">skew</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>  
+        
+        <span class="c1">#compute persistence images of test set</span>
+        <span class="n">pers_img_test</span> <span class="o">=</span> <span class="p">[</span><span class="n">pers_imager</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">PD2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">skew</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N2</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span> 
+        
+        <span class="c1">#generate feature matrices---------------------------------------------</span>
+        
+        <span class="c1">#training set</span>
+        <span class="n">feature_PI_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">pers_img_train</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">pers_img_train</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">,:])))</span>
+        <span class="c1">#test set</span>
+        <span class="n">feature_PI_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N2</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">pers_img_test</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">pers_img_test</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">,:])))</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N1</span><span class="p">):</span>
+            <span class="n">feature_PI_train</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">pers_img_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>         
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N2</span><span class="p">):</span>
+            <span class="n">feature_PI_test</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">pers_img_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>         
+        
+        <span class="n">output</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;F_train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_PI_train</span>
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;F_test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_PI_test</span>
+        
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">output</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># number of persistence diagrams</span>
+        <span class="n">N1</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">PD1</span><span class="p">)</span>
+        
+        <span class="n">persistence_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">birth_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        
+        <span class="c1"># find a bounds of the image</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N1</span><span class="p">):</span>
+            <span class="n">per_diag</span> <span class="o">=</span> <span class="n">PD1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">birth_range</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">persistence_range</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> 
+        
+        
+        <span class="c1"># adjust the image parameters and compute images</span>
+        <span class="n">pers_imager</span> <span class="o">=</span> <span class="n">pimg</span><span class="o">.</span><span class="n">PersistenceImager</span><span class="p">()</span>
+        <span class="n">pers_imager</span><span class="o">.</span><span class="n">pixel_size</span> <span class="o">=</span> <span class="n">PS</span>
+        <span class="n">pers_imager</span><span class="o">.</span><span class="n">birth_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">birth_range</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pers_imager</span><span class="o">.</span><span class="n">pers_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">persistence_range</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pers_imager</span><span class="o">.</span><span class="n">kernel_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="n">var</span><span class="p">}</span>
+        <span class="n">pers_img</span> <span class="o">=</span> <span class="p">[</span><span class="n">pers_imager</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">PD1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">skew</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+                
+
+        <span class="c1"># generate feature matrix</span>
+        <span class="n">feature_PI</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">pers_img</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">pers_img</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">,:])))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N1</span><span class="p">):</span>
+            <span class="n">feature_PI</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">pers_img</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> 
+     
+    
+        <span class="c1"># plot all images or images of certain persistence diagrams</span>
+        <span class="k">if</span> <span class="n">plot</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="n">D_Img</span><span class="o">==</span><span class="p">[]:</span>
+                <span class="n">D_Img</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D_Img</span><span class="p">)):</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+                <span class="n">pers_imager</span><span class="o">.</span><span class="n">plot_image</span><span class="p">(</span><span class="n">PD1</span><span class="p">[</span><span class="n">D_Img</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">skew</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">())</span>
+            <span class="n">output</span><span class="p">[</span><span class="s1">&#39;figures&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fig</span>
+        
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;F_Matrix&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_PI</span>
+    <span class="k">return</span> <span class="n">output</span></div>
+
+
+<div class="viewcode-block" id="F_CCoordinates"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.F_CCoordinates">[docs]</a><span class="k">def</span> <span class="nf">F_CCoordinates</span><span class="p">(</span><span class="n">PD</span><span class="p">,</span><span class="n">FN</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. :eq:`1st_coord` - :eq:`5th_coord`.</span>
+<span class="sd">    The first four functions are taken from Ref. :cite:`2 &lt;Adcock2016&gt;` and the last one is obtained from Ref. :cite:`3 &lt;Khasawneh2018&gt;`.</span>
+<span class="sd">    There are two inputs to the function. These are persistence diagrams and number of coordinates that user wants to use in feature matrix.</span>
+<span class="sd">    Algorithm will return feature matrix object array that includes feature matrices for different combinations, and total number of combinations will be :math:`\sum_{i=1}^{FN} {FN \choose i}`. </span>
+<span class="sd">    </span>
+<span class="sd">    .. math:: f_{1}(PD) = \sum b_{i}(d_{i}-b_{i})</span>
+<span class="sd">       :label: 1st_coord</span>
+<span class="sd">    </span>
+<span class="sd">    .. math:: f_{2}(PD) = \sum (d_{max}-d_{i})(d_{i}-b_{i})</span>
+<span class="sd">       :label: 2nd_coord</span>
+<span class="sd">    </span>
+<span class="sd">    .. math:: f_{3}(PD) = \sum b_{i}^{2}(d_{i}-b_{i})^{4}</span>
+<span class="sd">       :label: 3rd_coord</span>
+<span class="sd">    </span>
+<span class="sd">    .. math:: f_{4}(PD) = \sum (d_{max}-d_{i})^{2}(d_{i}-b_{i})^{4}</span>
+<span class="sd">       :label: 4th_coord</span>
+
+<span class="sd">    .. math:: f_{5}(PD) = \sum max(d_{i}-b_{i})</span>
+<span class="sd">       :label: 5th_coord</span>
+<span class="sd">       </span>
+<span class="sd">    :param ndarray (PD):</span>
+<span class="sd">        Object array that includes all persistence diagrams</span>
+<span class="sd">    </span>
+<span class="sd">    :param float (FN):</span>
+<span class="sd">        Number of features</span>
+<span class="sd">        </span>
+<span class="sd">    :Returns:</span>
+<span class="sd">        </span>
+<span class="sd">        :FeatureMatrix:</span>
+<span class="sd">                (Array) NxFN matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and FN is the number of feature chosen.</span>
+<span class="sd">        </span>
+<span class="sd">        :TotalNumComb: </span>
+<span class="sd">                (int) Number of combinations.</span>
+<span class="sd">        </span>
+<span class="sd">        :CombList: </span>
+<span class="sd">                (list) List of combinations.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PD</span><span class="p">)</span> 
+    
+    <span class="c1"># Create combinations for features with respect to user choice</span>
+    <span class="n">Combinations</span> <span class="o">=</span> <span class="p">[]</span>            <span class="c1"># define a list that includes all combinations</span>
+    <span class="n">TotalNumComb</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">FN</span><span class="p">):</span>  
+        <span class="n">poss_comb</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">FN</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">Combinations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">poss_comb</span><span class="p">)</span>
+        <span class="n">TotalNumComb</span> <span class="o">=</span> <span class="n">TotalNumComb</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">poss_comb</span><span class="p">)</span> 
+    
+    <span class="c1"># Generating feature matrix that includes whole features inside of it.</span>
+    <span class="c1"># Then this matrix will be used to create feature matrix for different combinations of features.</span>
+       
+    <span class="n">feature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">PerDgm</span> <span class="o">=</span> <span class="n">PD</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">birth_time</span> <span class="o">=</span> <span class="n">PerDgm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">death_time</span> <span class="o">=</span> <span class="n">PerDgm</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">life_time</span> <span class="o">=</span> <span class="n">death_time</span><span class="o">-</span><span class="n">birth_time</span>
+        <span class="n">max_death_time</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">death_time</span><span class="p">)</span>
+        <span class="n">maxdtminusdt</span> <span class="o">=</span> <span class="n">max_death_time</span><span class="o">-</span><span class="n">death_time</span><span class="p">[:]</span>
+        <span class="n">btsquare</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">birth_time</span><span class="p">)</span>
+        <span class="c1">#features</span>
+        <span class="n">feature</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">birth_time</span><span class="p">,</span><span class="n">life_time</span><span class="p">))</span>
+        <span class="n">feature</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">maxdtminusdt</span><span class="p">,</span><span class="n">life_time</span><span class="p">))</span>
+        <span class="n">feature</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">btsquare</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">life_time</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+        <span class="n">feature</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">maxdtminusdt</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">life_time</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+        <span class="n">feature</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">life_time</span><span class="p">)</span>
+        
+    <span class="c1"># faeture matrix will be modified depending on how many features user wants</span>
+    <span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">FN</span><span class="p">]</span>
+    
+    <span class="c1"># Create a matrix that includes feature matrix for different combinations</span>
+    <span class="n">FeatureMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">TotalNumComb</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span> 
+    
+    <span class="c1"># Create a matrix that includes whole possible combinations for given number of feature</span>
+    <span class="n">CombList</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">TotalNumComb</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    
+    <span class="n">increment</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">FN</span><span class="p">):</span>
+        <span class="n">listofCombinations</span> <span class="o">=</span> <span class="n">Combinations</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>              <span class="c1"># combinations with n number inside total number of features </span>
+        <span class="n">numberincombination</span> <span class="o">=</span> <span class="nb">len</span> <span class="p">(</span><span class="n">listofCombinations</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># number of elements inside of the combination</span>
+        <span class="n">numberofcombination</span> <span class="o">=</span> <span class="nb">len</span> <span class="p">(</span><span class="n">listofCombinations</span><span class="p">)</span>    <span class="c1"># number of combinations</span>
+           
+        <span class="c1"># create feature matrices for all combinations</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">numberofcombination</span><span class="p">):</span>
+            <span class="n">featmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">numberincombination</span><span class="p">))</span>   <span class="c1"># create an array will take columns from feature matrix with FN=5 with respect to combination</span>
+            <span class="n">combfeat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">listofCombinations</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>    <span class="c1"># combinations</span>
+            <span class="n">CombList</span><span class="p">[</span><span class="n">increment</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">combfeat</span><span class="p">)]</span><span class="o">=</span><span class="n">combfeat</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">numberincombination</span><span class="p">):</span>    
+                <span class="n">featmat</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[:,</span><span class="n">combfeat</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   
+            <span class="n">FeatureMatrix</span><span class="p">[</span><span class="n">increment</span><span class="p">]</span> <span class="o">=</span> <span class="n">featmat</span>            <span class="c1"># storing feature matrix for each combination in a object type array</span>
+            <span class="n">increment</span> <span class="o">=</span> <span class="n">increment</span> <span class="o">+</span> <span class="mi">1</span>                     <span class="c1"># increment</span>
+        
+    <span class="k">return</span> <span class="n">FeatureMatrix</span><span class="p">,</span><span class="n">TotalNumComb</span><span class="p">,</span><span class="n">CombList</span></div>
+
+
+<div class="viewcode-block" id="F_PSignature"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.F_PSignature">[docs]</a><span class="k">def</span> <span class="nf">F_PSignature</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span><span class="n">L_Number</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    This function takes the persistence landscape set and returns the feature matrix which is computed using path signatures :cite:`4 &lt;Chevyrev2016,Chevyrev2020&gt;`.</span>
+<span class="sd">    Function takes two inputs and these are persistence landcsape set in an object array and the landscape numbers that user wants to compute their signatures.</span>
+<span class="sd">    </span>
+<span class="sd">    :param ndarray (PL):</span>
+<span class="sd">        Object array that includes all landscape functions for each persistence diagram</span>
+<span class="sd">        </span>
+<span class="sd">    :param list (L_Number):</span>
+<span class="sd">        Landscape numbers that user wants to use in feature matrix generation. If this parameter is not specified, algorithm will generate feature matrix using first landscapes.</span>
+<span class="sd">        </span>
+<span class="sd">    :Returns:</span>
+
+<span class="sd">        :feature_PS:</span>
+<span class="sd">            (Array) Nx6 matrix that includes the features for each persistence diagram, where N is the number of persistence landscape sets.</span>
+<span class="sd">        </span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PL</span><span class="p">)</span>
+    
+    <span class="c1">#generate feature matrix</span>
+    <span class="n">feature_PS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">6</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">L_Number</span><span class="p">)))</span>
+    
+    <span class="k">if</span> <span class="n">L_Number</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="n">L_Number</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># the loop that computes the signature for selected landscape functions</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">L_Number</span><span class="p">)):</span> 
+        
+        <span class="c1">#the loop that computes the signature for each case or persistence landscape set</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">Landscape</span> <span class="o">=</span> <span class="n">PL</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">L_Number</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1">#node points of the landscape functions</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">Landscape</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">Landscape</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1">#define first function of path </span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">Piecewise</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">:</span>
+                <span class="n">function_name</span> <span class="o">=</span>  <span class="s1">&#39;f_</span><span class="si">%d</span><span class="s1">_</span><span class="si">%d</span><span class="s1">_case</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">exec</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> = ((y[j+1]-y[j])/(x[j+1]-x[j]))*t+(y[j+1]*(x[j+1]-x[j])+x[j+1]*(y[j]-y[j+1]))/(x[j+1]-x[j])&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">function_name</span><span class="p">))</span>
+            
+             
+            
+            <span class="n">lower_bound</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1"># S(1)</span>
+            <span class="n">S_1</span> <span class="o">=</span> <span class="n">upper_bound</span> <span class="o">-</span> <span class="n">lower_bound</span>
+            
+            <span class="c1"># S(1,1)</span>
+            <span class="n">S_1_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">lower_bound</span><span class="o">*</span><span class="n">upper_bound</span><span class="p">)</span>
+            
+            <span class="n">S_2</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">S_1_2</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">S_2_1</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">S_2_2</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                
+                <span class="n">f_name</span> <span class="o">=</span>  <span class="s1">&#39;f_</span><span class="si">%d</span><span class="s1">_</span><span class="si">%d</span><span class="s1">_case</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;global PL_function; PL_function = Piecewise((0,t&lt;x[j]),(0,t&gt;x[j+1]),(</span><span class="si">%s</span><span class="s1"> ,True))&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">f_name</span><span class="p">))</span>
+                <span class="c1"># S(2)</span>
+                <span class="n">Signature_2</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">PL_function</span><span class="p">),(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">S_2</span> <span class="o">=</span> <span class="n">S_2</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">Signature_2</span><span class="p">)</span>
+                
+                <span class="c1"># S(1,2)</span>
+                <span class="n">Signature_1_2</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">((</span><span class="n">t</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">PL_function</span><span class="p">),(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">S_1_2</span> <span class="o">=</span> <span class="n">S_1_2</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">Signature_1_2</span><span class="p">)</span>
+                
+                <span class="c1"># S(2,1)</span>
+                <span class="n">Signature_2_1</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">((</span><span class="n">t</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">PL_function</span><span class="p">),(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">S_2_1</span> <span class="o">=</span> <span class="n">S_2_1</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">Signature_2_1</span><span class="p">)</span>
+            
+                <span class="c1"># S(2,2)</span>
+                <span class="n">Signature_2_2</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">((</span><span class="n">t</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">PL_function</span><span class="p">),</span><span class="mi">2</span><span class="p">),(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">S_2_2</span> <span class="o">=</span> <span class="n">S_2_2</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">Signature_2_2</span><span class="p">)</span>
+                
+            <span class="c1"># storing the signatures in feature matrix</span>
+            <span class="n">feature_PS</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">6</span><span class="o">*</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">S_1</span> 
+            <span class="n">feature_PS</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">6</span><span class="o">*</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">S_2</span>
+            <span class="n">feature_PS</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">6</span><span class="o">*</span><span class="n">l</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">S_1_1</span> 
+            <span class="n">feature_PS</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">6</span><span class="o">*</span><span class="n">l</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">S_1_2</span>
+            <span class="n">feature_PS</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">6</span><span class="o">*</span><span class="n">l</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">S_2_1</span>
+            <span class="n">feature_PS</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">6</span><span class="o">*</span><span class="n">l</span><span class="o">+</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">S_2_2</span>
+    <span class="k">return</span> <span class="n">feature_PS</span></div>
+
+
+<div class="viewcode-block" id="KernelMethod"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.KernelMethod">[docs]</a><span class="k">def</span> <span class="nf">KernelMethod</span><span class="p">(</span><span class="n">perDgm1</span><span class="p">,</span> <span class="n">perDgm2</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    This function computes the kernel for given two persistence diagram based on the formula provided in Ref. :cite:`5 &lt;Reininghaus2015&gt;`.</span>
+<span class="sd">    There are three inputs and these are two persistence diagrams and the kernel scale sigma.</span>
+
+<span class="sd">    :param ndarray (perDgm1):</span>
+<span class="sd">        Object array that includes first persistence diagram set</span>
+<span class="sd">        </span>
+<span class="sd">    :param ndarray (perDgm2):</span>
+<span class="sd">        Object array that includes second persistence diagram set</span>
+<span class="sd">    </span>
+<span class="sd">    :param float (sigma):</span>
+<span class="sd">        Kernel scale</span>
+<span class="sd">        </span>
+<span class="sd">    :Returns:</span>
+
+<span class="sd">        :Kernel:</span>
+<span class="sd">            (float) The kernel value for given two persistence diagrams.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">L1</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">perDgm1</span><span class="p">)</span>
+    <span class="n">L2</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">perDgm2</span><span class="p">)</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L2</span><span class="p">,</span><span class="n">L1</span><span class="p">))</span>
+    
+    <span class="n">Kernel</span><span class="o">=</span><span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L1</span><span class="p">):</span>
+        <span class="n">p</span><span class="o">=</span><span class="n">perDgm1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">p</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L2</span><span class="p">):</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">perDgm2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">q</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">q_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">q_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">q_bar</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">dist1</span> <span class="o">=</span> <span class="n">lnorm</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">q</span><span class="p">)</span>
+            <span class="n">dist2</span> <span class="o">=</span> <span class="n">lnorm</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">q_bar</span><span class="p">)</span>
+            <span class="n">kernel</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">dist1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">dist2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span>
+            <span class="n">Kernel</span> <span class="o">=</span> <span class="n">Kernel</span><span class="o">+</span><span class="n">kernel</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">Kernel</span> <span class="o">=</span> <span class="n">Kernel</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span>   
+    
+    <span class="k">return</span> <span class="n">Kernel</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Munch
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

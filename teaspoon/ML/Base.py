@@ -40,10 +40,15 @@ out = Base.getPercentScore(DgmsDF,dgm_col = 'Dgm', labels_col = 'trainingLabel',
 .. module: Base
 """
 
-from teaspoon.Misc import printPrettyTime
-from teaspoon.ML import feature_functions as fF
-from teaspoon.TDA import Persistence as pP
-from teaspoon.TSP.adaptivePart import Partitions
+# from teaspoon.Misc import printPrettyTime
+import feature_functions as fF
+
+import os
+import sys
+sys.path.insert(0, os.path.dirname(__file__)+'\..')
+import TDA
+from TDA import Persistence as pP
+from TSP.adaptivePart import Partitions
 
 import time
 import numpy as np

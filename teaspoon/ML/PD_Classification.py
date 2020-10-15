@@ -12,12 +12,12 @@ from sklearn.model_selection import train_test_split
 from scipy.special import comb
 from itertools import combinations
 from scipy.spatial.distance import squareform
-from teaspoon.ML import feature_functions as fF
-from teaspoon.ML import Base
-from teaspoon.ML.Base import ML_via_featurization, build_G,TentParameters, ParameterBucket
+import feature_functions as fF
+import Base
+from Base import ML_via_featurization, build_G,TentParameters, ParameterBucket
 
-#Import LIBSVM
-sys.path.insert(0,os.path.join('D:'+os.path.sep,'Research Stuff','libsvm-3.23','python',))
+#import LIBSVM
+sys.path.insert(0, os.path.dirname(__file__)+'\libsvm-3.23\python')
 from svmutil import *
 
 
