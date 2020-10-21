@@ -17,7 +17,7 @@ import teaspoon.ML.Base
 from teaspoon.ML.Base import ML_via_featurization, build_G, TentParameters, ParameterBucket
 
 # import LIBSVM
-sys.path.insert(0, os.path.dirname(__file__)+'\libsvm-3.23\python')
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),'\libsvm-3.23\python'))
 from svmutil import *
 
 
