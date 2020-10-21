@@ -41,11 +41,13 @@ out = Base.getPercentScore(DgmsDF,dgm_col = 'Dgm', labels_col = 'trainingLabel',
 """
 
 # from teaspoon.Misc import printPrettyTime
-import teaspoon.ML.feature_functions as fF
+
 
 import os
 import sys
-sys.path.insert(0, os.path.dirname(__file__)+'\..')
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+import teaspoon.ML.feature_functions as fF
 import teaspoon.TDA
 from teaspoon.TDA import Persistence as pP
 from teaspoon.TSP.adaptivePart import Partitions
