@@ -12,7 +12,6 @@ from sklearn.model_selection import train_test_split
 from scipy.special import comb
 from itertools import combinations
 from scipy.spatial.distance import squareform
-
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
 import teaspoon.ML.feature_functions as fF
 import teaspoon.ML.Base

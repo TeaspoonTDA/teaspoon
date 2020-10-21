@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>teaspoon.ML.PD_Classification &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> teaspoon
+          
+
+          
+            
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PHN.html">2. Persistent Homology of Networks Module (PHN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../DynSysLib.html">3. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parameter_selection.html">4. Parameter Selection Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../information.html">5. Information Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ML.html">6. Machine Learning (ML) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../TDA.html">7. Topological Data Analaysis (TDA) Module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>teaspoon.ML.PD_Classification</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for teaspoon.ML.PD_Classification</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: PD_Classification</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># from sklearn.svm import LinearSVC,NuSVC,SVC</span>
+<span class="c1"># from sklearn.linear_model import RidgeClassifierCV,RidgeClassifier</span>
+<span class="c1"># from sklearn.model_selection import train_test_split</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">squareform</span>
+
+<span class="c1"># sys.path.insert(0, os.path.join(os.path.dirname(__file__),&#39;..&#39;,&#39;..&#39;))</span>
+<span class="c1"># sys.path.insert(0, os.path.join(os.path.dirname(__file__),&#39;..&#39;))</span>
+<span class="c1"># sys.path.insert(0, os.path.dirname(__file__))</span>
+<span class="c1"># import teaspoon.ML.feature_functions as fF</span>
+<span class="c1"># import teaspoon.ML.Base as Base</span>
+<span class="c1"># from teaspoon.ML.Base import ML_via_featurization, build_G, TentParameters, ParameterBucket</span>
+
+<span class="c1"># # import LIBSVM</span>
+<span class="c1"># sys.path.insert(0, os.path.join(os.path.dirname(__file__),&#39;libsvm-3.23&#39;,&#39;python&#39;))</span>
+<span class="c1"># from svmutil import *</span>
+
+
+<div class="viewcode-block" id="CL_PL"><a class="viewcode-back" href="../../../CL.html#teaspoon.ML.PD_Classification.CL_PL">[docs]</a><span class="k">def</span> <span class="nf">CL_PL</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    This function perform classification using persistence landscapes. There are two inputs and these are persistence landscape set and parameter bucket object.</span>
+
+<span class="sd">    :param ndarray (PL):</span>
+<span class="sd">        Object array that includes all landscape functions for each persistence diagram</span>
+
+<span class="sd">    :param object (params):</span>
+<span class="sd">        Parameterbucket object for landscapes. Please see :ref:`PB_Landscape` for more details.</span>
+
+<span class="sd">    :Returns:</span>
+
+<span class="sd">        :results: 1x5 matrix that includes the classification results and total elapsed time. First and second columns are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth represents total elapsed time for classification.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="c1">#     start =time.time()</span>
+<span class="c1">#     # extract the parameter from parameter bucket</span>
+<span class="c1">#     clf = params.clf_model()</span>
+<span class="c1">#     test_size = params.test_size</span>
+<span class="c1">#     f_function = params.feature_function</span>
+<span class="c1">#     LN = params.PL_Number</span>
+<span class="c1">#     labels = params.Labels</span>
+<span class="c1">#     run_number = 10</span>
+
+<span class="c1">#     # generate a matrix which includes test and train set results and classification time</span>
+<span class="c1">#     results = np.zeros((1,5))</span>
+
+<span class="c1">#     #the loop that will</span>
+<span class="c1">#     accuracy=np.zeros((run_number,2))</span>
+<span class="c1">#     for k in range (0,run_number):</span>
+<span class="c1">#         #Training set and Test Set</span>
+
+<span class="c1">#         PL_train,PL_test,Label_train,Label_test= train_test_split(PL,labels, test_size=test_size)</span>
+
+<span class="c1">#         # feature_matrix for training set</span>
+<span class="c1">#         feature_train,mesh=fF.F_Landscape(PL_train,params)</span>
+
+<span class="c1">#         # feature matrix for test set</span>
+<span class="c1">#         # This matrix should be computed based on the mesh obtained from training set</span>
+
+<span class="c1">#         interp_y=[]</span>
+<span class="c1">#         N=len(PL_test)</span>
+<span class="c1">#         feature_test=np.zeros((N,1))</span>
+<span class="c1">#         for j in range(0,len(LN)):</span>
+<span class="c1">#             xvals = mesh[j]</span>
+<span class="c1">#             y_interp=np.zeros((len(xvals),N))</span>
+<span class="c1">#             for i in range(0,N):                                        # loop iterates for all test set landscapes</span>
+<span class="c1">#                 if len(PL_test[i])&gt;=LN[j]:                              # if current landscape number is exist in the current lansdcape set</span>
+<span class="c1">#                     L=PL_test[i].iloc[:, 1].values</span>
+<span class="c1">#                     x=L[LN[j]-1][:,0]                                   # x values of nth landscape for current persistence diagram</span>
+<span class="c1">#                     y=L[LN[j]-1][:,1]                                   # y values of nth landscape</span>
+<span class="c1">#                     y_interp[:,i]=np.interp(xvals,x,y)                  # piecewise linear interpolation</span>
+<span class="c1">#             interp_y.append((y_interp[0:len(xvals),0:N]).transpose())</span>
+<span class="c1">#         for j in range(0,len(LN)):</span>
+<span class="c1">#             ftr=interp_y[j]</span>
+<span class="c1">#             feature_test=np.concatenate((feature_test,ftr),axis=1)</span>
+<span class="c1">#         feature_test=feature_test[:,1:]</span>
+
+
+<span class="c1">#         #Classification</span>
+<span class="c1">#         Label_train=np.ravel(Label_train)</span>
+<span class="c1">#         Label_test=np.ravel(Label_test)</span>
+<span class="c1">#         clf.fit(feature_train,Label_train)</span>
+<span class="c1">#         accuracy[k,0]=clf.score(feature_test,Label_test)     # training set score</span>
+<span class="c1">#         accuracy[k,1]=clf.score(feature_train,Label_train)   # test set score</span>
+
+
+<span class="c1">#     results[0,0]=np.mean(accuracy[:,0]) # average of test set score</span>
+<span class="c1">#     results[0,1]=np.std(accuracy[:,0])  # deviation of test set score</span>
+<span class="c1">#     results[0,2]=np.mean(accuracy[:,1]) # average of training set score</span>
+<span class="c1">#     results[0,3]=np.std(accuracy[:,1])  # deviation of training set score</span>
+
+<span class="c1">#     end = time.time()</span>
+<span class="c1">#     results[0,4]=end-start               # time duration for classification</span>
+
+<span class="c1">#     print (&#39;Landscapes used in feature matrix generation: {}&#39;.format(LN))</span>
+<span class="c1">#     print (&#39;Test set score: {}&#39;.format(results[0,0]))</span>
+<span class="c1">#     print (&#39;Test set deviation: {}&#39;.format(results[0,1]))</span>
+<span class="c1">#     print (&#39;Training set score: {}&#39;.format(results[0,2]))</span>
+<span class="c1">#     print (&#39;Training set deviation: {}&#39;.format(results[0,3]))</span>
+<span class="c1">#     print (&#39;Total elapsed time: {}&#39;.format(results[0,4]))</span>
+
+<span class="c1">#     return results</span>
+
+<span class="c1"># def CL_PI(F_PImage1,params,*args):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+
+<span class="c1">#     This function takes parameter object and feature matrix/matrices which is/are generated using persistence images and returns classification results in a matrix.</span>
+<span class="c1">#     Function is capable of performing transfer learning if user specifies it in parameter bucket object and provides two feature matrices.</span>
+
+<span class="c1">#     :param ndarray (F_PImage):</span>
+<span class="c1">#         Feature matrix generated with persistence images. If user choose to perform transfer learning, algorithm will assume this parameter as the feature matrix of training set.</span>
+
+<span class="c1">#     :param object (params):</span>
+<span class="c1">#         Parameterbucket object for classification. Please see :ref:`CL_PB` for more details.</span>
+
+<span class="c1">#     :param (\*args): Optional paramters. For transfer learning, algorithm needs second feature matrix for test set.</span>
+
+<span class="c1">#     :Returns:</span>
+
+<span class="c1">#         :results: 1x5 matrix that includes the classification results and total elapsed time. First and second columns are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth represents total elapsed time for classification.</span>
+
+
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     start = time.time()</span>
+<span class="c1">#     run_number = 10</span>
+
+<span class="c1">#     clf = params.clf_model()</span>
+<span class="c1">#     test_size = params.test_size</span>
+
+<span class="c1">#     if params.TF_Learning:</span>
+<span class="c1">#         #transfer learning</span>
+<span class="c1">#         labels_train = params.training_labels   #labels for training data set</span>
+<span class="c1">#         labels_test = params.test_labels        #labels for test data set</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         labels = params.Labels</span>
+
+
+<span class="c1">#     results = np.zeros((1,5))</span>
+<span class="c1">#     accuracy=np.zeros((run_number,2))</span>
+<span class="c1">#     for k in range (0,run_number):</span>
+
+<span class="c1">#         # if user choose to perform transfer learning, second persistence diagram set should be provided</span>
+<span class="c1">#         if params.TF_Learning:</span>
+<span class="c1">#             #check if user provided the second persistence diagram</span>
+<span class="c1">#             F_PImage2 = args[0]</span>
+
+<span class="c1">#             #Training set and Test Set</span>
+<span class="c1">#             F_Training_Train,F_Training_Test,Label_Training_Train,Label_Training_Test= train_test_split(F_PImage1,labels_train, test_size=0.33)</span>
+<span class="c1">#             F_Test_Train,F_Test_Test,Label_Test_Train,Label_Test_Test= train_test_split(F_PImage2,labels_test, test_size=0.70)</span>
+
+<span class="c1">#             F_PI_train =  F_Training_Train</span>
+<span class="c1">#             F_PI_test =  F_Test_Test</span>
+
+<span class="c1">#             Label_train=np.ravel(Label_Training_Train)</span>
+<span class="c1">#             Label_test=np.ravel(Label_Test_Test)</span>
+
+<span class="c1">#         else:</span>
+
+<span class="c1">#             F_PI_train,F_PI_test,Label_train,Label_test= train_test_split(F_PImage1,labels, test_size=test_size)</span>
+
+<span class="c1">#             Label_train=np.ravel(Label_train)</span>
+<span class="c1">#             Label_test=np.ravel(Label_test)</span>
+
+
+<span class="c1">#         #Classification</span>
+
+<span class="c1">#         clf.fit(F_PI_train,Label_train)</span>
+<span class="c1">#         accuracy[k,0]=clf.score(F_PI_test,Label_test)     # training set score</span>
+<span class="c1">#         accuracy[k,1]=clf.score(F_PI_train,Label_train)   # test set score</span>
+
+<span class="c1">#     results[0,0]=np.mean(accuracy[:,0]) # average of test set score</span>
+<span class="c1">#     results[0,1]=np.std(accuracy[:,0])  # deviation of test set score</span>
+<span class="c1">#     results[0,2]=np.mean(accuracy[:,1]) # average of training set score</span>
+<span class="c1">#     results[0,3]=np.std(accuracy[:,1])  # deviation of training set score</span>
+
+<span class="c1">#     end = time.time()</span>
+<span class="c1">#     results[0,4]=end-start               # time duration for classification</span>
+
+<span class="c1">#     print (&#39;Test set score: {}&#39;.format(results[0,0]))</span>
+<span class="c1">#     print (&#39;Test set deviation: {}&#39;.format(results[0,1]))</span>
+<span class="c1">#     print (&#39;Training set score: {}&#39;.format(results[0,2]))</span>
+<span class="c1">#     print (&#39;Training set deviation: {}&#39;.format(results[0,3]))</span>
+<span class="c1">#     print (&#39;Total elapsed time: {}&#39;.format(results[0,4]))</span>
+
+<span class="c1">#     return results</span>
+
+
+
+<span class="c1"># def CL_CC(PD1,params,*args):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+
+<span class="c1">#     This function takes persistence diagrams and parameter bucket object and returns classification results in a matrix.</span>
+<span class="c1">#     Function is capable of performing transfer learning if user specifies it in parameter bucket object and provides two persistence diagrams object array.</span>
+
+<span class="c1">#     :param ndarray (PD1):</span>
+<span class="c1">#         Object array that includes the persistence diagrams. If user wants to perform transfer learning, PD1 will be assumed as training set persistence diagrams, while PD2 is set for test set diagrams.</span>
+
+<span class="c1">#     :param object (params):</span>
+<span class="c1">#         Parameterbucket object for classification. Please see :ref:`CL_PB` for more details.</span>
+
+<span class="c1">#     :param ndarray (\*args):</span>
+<span class="c1">#         If user choose the transfer learning option, test set persistence diagrams should be given to algorithm as an input.</span>
+
+<span class="c1">#     :Returns:</span>
+
+<span class="c1">#         :results: Kx4 matrix that includes the classification results. First and second column are for test set score and deviation, while third and fourth column are for training set score and deviation.</span>
+
+<span class="c1">#     &quot;&quot;&quot;</span>
+
+<span class="c1">#     start = time.time()</span>
+<span class="c1">#     run_number=10</span>
+
+<span class="c1">#     clf = params.clf_model()</span>
+<span class="c1">#     test_size = params.test_size</span>
+<span class="c1">#     FN = params.FN                              #feature number</span>
+
+<span class="c1">#     if params.TF_Learning:</span>
+<span class="c1">#         #transfer learning</span>
+<span class="c1">#         labels_train = params.training_labels   #labels for training data set</span>
+<span class="c1">#         labels_test = params.test_labels        #labels for test data set</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         labels = params.Labels</span>
+
+
+<span class="c1">#     Combinations = []                       #define a list that includes whole combinations for feature number.</span>
+
+<span class="c1">#     NComb = sum([comb(FN,i, exact=True) for i in np.arange(1,FN+1,1)])</span>
+
+<span class="c1">#     scores=np.zeros((NComb,2,10))</span>
+<span class="c1">#     results = np.zeros((NComb,4))</span>
+
+<span class="c1">#     for i in range (0,run_number):</span>
+<span class="c1">#         # if user choose to perform transfer learning, second persistence diagram set should be provided</span>
+<span class="c1">#         if params.TF_Learning:</span>
+<span class="c1">#             PD2 =args[0]</span>
+<span class="c1">#             #Training set and Test Set</span>
+<span class="c1">#             PD_Training_Train,PD_Training_Test,Label_Training_Train,Label_Training_Test= train_test_split(PD1,labels_train, test_size=0.33)</span>
+<span class="c1">#             PD_Test_Train,PD_Test_Test,Label_Test_Train,Label_Test_Test= train_test_split(PD2,labels_test, test_size=0.70)</span>
+
+<span class="c1">#             #feature matrix for training set</span>
+<span class="c1">#             feature_train,NumberofComb_train,ListofComb_train=fF.F_CCoordinates(PD_Training_Train,FN)</span>
+
+<span class="c1">#             #feature matrix for test set</span>
+<span class="c1">#             feature_test,NumberofComb_test,ListofComb_train=fF.F_CCoordinates(PD_Test_Test,FN)</span>
+
+<span class="c1">#             Label_train=np.ravel(Label_Training_Train)</span>
+<span class="c1">#             Label_test=np.ravel(Label_Test_Test)</span>
+<span class="c1">#         else :</span>
+<span class="c1">#             #Training set and Test Set</span>
+<span class="c1">#             PD_train,PD_test,Label_train,Label_test= train_test_split(PD1,labels, test_size=test_size)</span>
+
+<span class="c1">#             #feature matrix for training set</span>
+<span class="c1">#             feature_train,NumberofComb_train,ListofComb_test=fF.F_CCoordinates(PD_train,FN)</span>
+
+<span class="c1">#             #feature matrix for test set</span>
+<span class="c1">#             feature_test,NumberofComb_test,ListofComb_train=fF.F_CCoordinates(PD_test,FN)</span>
+
+<span class="c1">#             Label_train=np.ravel(Label_train)</span>
+<span class="c1">#             Label_test=np.ravel(Label_test)</span>
+
+<span class="c1">#         for m in range (0,NComb):</span>
+<span class="c1">#             clf.fit(feature_train[m],Label_train)</span>
+<span class="c1">#             scores[m,0,i]=clf.score(feature_test[m],Label_test)</span>
+<span class="c1">#             scores[m,1,i]=clf.score(feature_train[m],Label_train)</span>
+
+<span class="c1">#     for j in range(NComb):</span>
+<span class="c1">#         results[j,0] = np.mean(scores[j,0,:])</span>
+<span class="c1">#         results[j,1] = np.std(scores[j,0,:])</span>
+<span class="c1">#         results[j,2] = np.mean(scores[j,1,:])</span>
+<span class="c1">#         results[j,3] = np.std(scores[j,1,:])</span>
+
+<span class="c1">#     test_max = max(results[:,0])</span>
+<span class="c1">#     ind = np.where(results[:,0]==test_max)[0][0]</span>
+
+<span class="c1">#     end = time.time()</span>
+<span class="c1">#     duration = end-start</span>
+
+<span class="c1">#     print (&#39;Number of combinations: {}&#39;.format(NumberofComb_train))</span>
+<span class="c1">#     print (&#39;Highest accuracy among all combinations:&#39;)</span>
+<span class="c1">#     print (&#39;Test set score: {}&#39;.format(results[ind,0]))</span>
+<span class="c1">#     print (&#39;Test set deviation: {}&#39;.format(results[ind,1]))</span>
+<span class="c1">#     print (&#39;Training set score: {}&#39;.format(results[ind,2]))</span>
+<span class="c1">#     print (&#39;Training set deviation: {}&#39;.format(results[ind,3]))</span>
+<span class="c1">#     print (&#39;Total elapsed time: {}&#39;.format(duration))</span>
+
+
+<span class="c1">#     return results</span>
+
+<span class="c1"># def CL_PS(F_PSignature,params,*args):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+
+<span class="c1">#     This function takes parameter object and feature matrix which is generated using signatures of paths and returns classification results in a matrix.</span>
+<span class="c1">#     Function is capable of performing transfer learning if user specifies it in parameter bucket object and provides two feature matrices.</span>
+
+<span class="c1">#     :param ndarray (F_PSignature):</span>
+<span class="c1">#         Feature matrix generated with path signatures. If user performs transfer learning, this parameter will be assumed as training set feature matrix.</span>
+
+<span class="c1">#     :param object (params):</span>
+<span class="c1">#         Parameterbucket object for classification. Please see :ref:`CL_PB` for more details.</span>
+
+<span class="c1">#     :param (\*args): Optional parameters. If TF_Learning in parameter bucket is true, algorithms will need test set feature matrix.</span>
+
+<span class="c1">#     :Returns:</span>
+
+<span class="c1">#         :results: 1x5 matrix that includes the classification results and total elapsed time. First and second column are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth includes total elapsed time for classification.</span>
+
+
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     start = time.time()</span>
+<span class="c1">#     run_number = 10</span>
+
+<span class="c1">#     #classification parameters</span>
+<span class="c1">#     clf = params.clf_model()</span>
+<span class="c1">#     test_size = params.test_size</span>
+
+<span class="c1">#     if params.TF_Learning:</span>
+<span class="c1">#         #transfer learning</span>
+<span class="c1">#         labels_train = params.training_labels   #labels for training data set</span>
+<span class="c1">#         labels_test = params.test_labels        #labels for test data set</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         labels = params.Labels</span>
+
+<span class="c1">#     results = np.zeros((1,5))</span>
+<span class="c1">#     accuracy=np.zeros((run_number,2))</span>
+
+<span class="c1">#     for k in range (0,run_number):</span>
+<span class="c1">#         # if user choose to perform transfer learning, second persistence diagram set should be provided</span>
+<span class="c1">#         if params.TF_Learning:</span>
+<span class="c1">#             F_PSignature_test =args[0]</span>
+<span class="c1">#             #Training set and Test Set</span>
+<span class="c1">#             F_Training_Train,F_Training_Test,Label_Training_Train,Label_Training_Test= train_test_split(F_PSignature,labels_train, test_size=0.33)</span>
+<span class="c1">#             F_Test_Train,F_Test_Test,Label_Test_Train,Label_Test_Test= train_test_split(F_PSignature_test,labels_test, test_size=0.70)</span>
+
+<span class="c1">#             Label_train=np.ravel(Label_Training_Train)</span>
+<span class="c1">#             Label_test=np.ravel(Label_Test_Test)</span>
+
+<span class="c1">#             F_PS_test = F_Test_Test</span>
+<span class="c1">#             F_PS_train = F_Training_Train</span>
+
+<span class="c1">#         else:</span>
+<span class="c1">#             F_PS_train,F_PS_test,Label_train,Label_test= train_test_split(F_PSignature,labels, test_size=test_size)</span>
+
+<span class="c1">#             Label_train=np.ravel(Label_train)</span>
+<span class="c1">#             Label_test=np.ravel(Label_test)</span>
+
+<span class="c1">#         #Classification</span>
+<span class="c1">#         clf.fit(F_PS_train,Label_train)</span>
+<span class="c1">#         accuracy[k,0]=clf.score(F_PS_test,Label_test)     # training set score</span>
+<span class="c1">#         accuracy[k,1]=clf.score(F_PS_train,Label_train)   # test set score</span>
+
+<span class="c1">#     results[0,0]=np.mean(accuracy[:,0]) # average of test set score</span>
+<span class="c1">#     results[0,1]=np.std(accuracy[:,0])  # deviation of test set score</span>
+<span class="c1">#     results[0,2]=np.mean(accuracy[:,1]) # average of training set score</span>
+<span class="c1">#     results[0,3]=np.std(accuracy[:,1])  # deviation of training set score</span>
+
+<span class="c1">#     end = time.time()</span>
+<span class="c1">#     results[0,4]=end-start               # time duration for classification</span>
+
+<span class="c1">#     print (&#39;Test set score: {}&#39;.format(results[0,0]))</span>
+<span class="c1">#     print (&#39;Test set deviation: {}&#39;.format(results[0,1]))</span>
+<span class="c1">#     print (&#39;Training set score: {}&#39;.format(results[0,2]))</span>
+<span class="c1">#     print (&#39;Training set deviation: {}&#39;.format(results[0,3]))</span>
+<span class="c1">#     print (&#39;Total elapsed time: {}&#39;.format(results[0,4]))</span>
+
+<span class="c1">#     return results</span>
+
+
+<span class="c1"># def CL_KM(PD,params):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+
+<span class="c1">#     This function takes parameter object and persistence diagrams and computes pairwise kernels for training set and kernel matrix between test set and training set separately.</span>
+<span class="c1">#     The main difference of this function from others is that it uses  `LIBSVM &lt;https://www.csie.ntu.edu.tw/~cjlin/libsvm/&gt;`_ for classification.</span>
+<span class="c1">#     Computed kernels are used in SVM algorithm to perform classification.</span>
+
+<span class="c1">#     :param ndarray (PD):</span>
+<span class="c1">#         Object array that includes the persistence diagrams</span>
+
+<span class="c1">#     :param object (params):</span>
+<span class="c1">#         Parameterbucket object for classification. Please see :ref:`CL_PB` for more details.</span>
+
+<span class="c1">#     :Returns:</span>
+
+<span class="c1">#         :results: 1x3 matrix that includes the classification results and total elapsed time. First and second column is for test set score and deviation, while third column is the elapsed time.</span>
+
+<span class="c1">#     **Note:** User needs to change the path to LIBSVM folder at line 13.</span>
+
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     sigma =params.sigma</span>
+<span class="c1">#     test_size=params.test_size</span>
+<span class="c1">#     Label = params.Labels</span>
+<span class="c1">#     start = time.time()</span>
+<span class="c1">#     run_number = 3</span>
+
+
+<span class="c1">#     # accuracy and mean squared error matrices</span>
+<span class="c1">#     accuracy_kernel_test = np.zeros((run_number))</span>
+<span class="c1">#     mse_kernel = np.zeros((run_number))</span>
+
+<span class="c1">#     for rep in range(0,run_number):</span>
+
+<span class="c1">#         #split data into test set and training set</span>
+<span class="c1">#         PD_train,PD_test,Label_train,Label_test= train_test_split(PD,Label, test_size=0.33)</span>
+
+<span class="c1">#         N1=len(PD_train)</span>
+
+<span class="c1">#         # find the combinations so that we can only compute the upper diagonal and diagonal elements of pairwise kernel matrix</span>
+<span class="c1">#         poss_comb = np.array(list(combinations(range(1,N1+1), 2)))</span>
+
+<span class="c1">#         # create training kernel matrix</span>
+<span class="c1">#         KernelTrain = np.zeros((len(poss_comb),1))</span>
+<span class="c1">#         #loop computes kernels for training set (except diagonal ones)</span>
+<span class="c1">#         for i in range (0,len(poss_comb)):</span>
+<span class="c1">#             perDgm1=PD_train[(poss_comb[i,0])-1]</span>
+<span class="c1">#             perDgm2=PD_train[(poss_comb[i,1])-1]</span>
+<span class="c1">#             KernelTrain[i,0] = fF.KernelMethod(perDgm2,perDgm1,sigma)</span>
+
+<span class="c1">#         KernelTrain=np.ravel(KernelTrain)</span>
+<span class="c1">#         KernelTrain=squareform(KernelTrain)</span>
+
+<span class="c1">#         #compute diagonal kernels separately and add them to kernel matrix</span>
+<span class="c1">#         for i in range(0,N1):</span>
+<span class="c1">#             perdgm1=PD_train[i]</span>
+<span class="c1">#             KernelTrain[i,i] = fF.KernelMethod(perdgm1,perdgm1,sigma)</span>
+
+<span class="c1">#         Row1=np.zeros((N1,1))</span>
+
+<span class="c1">#         #concatane row matrix and kernel matrix</span>
+<span class="c1">#         KernelTrain=np.concatenate((Row1, KernelTrain),axis=1)</span>
+<span class="c1">#         KernelTrain[:,:1]=np.arange(N1)[:,np.newaxis]+1</span>
+
+<span class="c1">#         #Training</span>
+<span class="c1">#         m = svm_train(Label_train, [list(row) for row in KernelTrain], &#39;-c 4 -t 4&#39;)</span>
+
+<span class="c1">#         N2=len(PD_test)</span>
+<span class="c1">#         #test set kernel matrix</span>
+<span class="c1">#         KernelTest = np.zeros((N2,N1))</span>
+<span class="c1">#         for i in range (0,N2):</span>
+<span class="c1">#             perDgm1=PD_test[i]</span>
+<span class="c1">#             for k in range (0,N1):</span>
+<span class="c1">#                 perDgm2=PD_train[k]</span>
+<span class="c1">#                 KernelTest[i,k] = fF.KernelMethod(perDgm1,perDgm2,sigma)</span>
+
+<span class="c1">#         #Testing</span>
+
+<span class="c1">#         p_label, p_acc, p_val = svm_predict(Label_test,[list(row) for row in KernelTest], m)</span>
+<span class="c1">#         accuracy_kernel_test[rep] = p_acc[0]</span>
+<span class="c1">#         mse_kernel[rep] = p_acc[1]</span>
+
+<span class="c1">#     results = np.zeros((1,3))</span>
+<span class="c1">#     results[0,0] = np.mean(accuracy_kernel_test)</span>
+<span class="c1">#     results[0,1] = np.std(accuracy_kernel_test)</span>
+
+<span class="c1">#     end = time.time()</span>
+<span class="c1">#     results[0,2] = end-start</span>
+
+<span class="c1">#     print (&#39;Test set score: {}&#39;.format(results[0,0]))</span>
+<span class="c1">#     print (&#39;Test set deviation: {}&#39;.format(results[0,1]))</span>
+<span class="c1">#     print (&#39;Total elapsed time: {}&#39;.format(results[0,2]))</span>
+
+<span class="c1">#     return results</span>
+
+
+
+
+<span class="c1"># def getPercentScore(DgmsDF, labels_col = &#39;Label&#39;, dgm_col = &#39;Dgm1&#39;, params = ParameterBucket(), normalize = False, verbose = True, **kwargs):</span>
+
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     :param str DataFrame (DgmsDF):</span>
+<span class="c1">#         Data frame that includes persistence diagrams and labels. If user choose to performs transfer learning, DgmsDF_test should be given into algorithm. In case of transfer learning, first diagram input is assumed as training set.</span>
+
+<span class="c1">#     :param str (labels_col):</span>
+<span class="c1">#         Name of the labels&#39; column in the data frame</span>
+
+<span class="c1">#     :param str (dgm_col):</span>
+<span class="c1">#         Name of the diagrams&#39; columnn in the data frame</span>
+
+<span class="c1">#     :param (params): Parameter bucket object</span>
+
+<span class="c1">#     :Returns:</span>
+
+<span class="c1">#         :output:</span>
+<span class="c1">#             (dict) Classification results for training and test set</span>
+
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     if verbose:</span>
+<span class="c1">#         print(&#39;---&#39;)</span>
+<span class="c1">#         print(&#39;Beginning experiment.&#39;)</span>
+<span class="c1">#         print(params)</span>
+
+<span class="c1"># 	#check to see if only one column label was passed. If so, turn it into a list.</span>
+<span class="c1">#     if type(dgm_col) == str:</span>
+<span class="c1">#         dgm_col = [dgm_col]</span>
+
+<span class="c1">#     if params.TF_Learning:</span>
+<span class="c1">#         DgmsDF_test = kwargs[&#39;DgmsDF_test&#39;]</span>
+<span class="c1">#         # Run actual train/test experiment using sklearn. This part using %70 of each data set to generate random splits for different iterations</span>
+<span class="c1">#         D_train_train, D_train_test, L_train_train,L_train_test = train_test_split(DgmsDF,DgmsDF[labels_col],test_size=0.30,random_state = params.seed)</span>
+<span class="c1">#         D_test_train, D_test_test, L_test_train,L_test_test = train_test_split(DgmsDF_test,DgmsDF_test[labels_col],test_size=0.70,random_state = params.seed)</span>
+
+<span class="c1">#         D_train = D_train_train</span>
+<span class="c1">#         D_test = D_test_test</span>
+<span class="c1">#         L_train = L_train_train</span>
+<span class="c1">#         L_test = L_test_test</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         D_train, D_test, L_train,L_test = train_test_split(DgmsDF,</span>
+<span class="c1">#                                                            DgmsDF[labels_col],</span>
+<span class="c1">#                                                            test_size=params.test_size,</span>
+<span class="c1">#                                                            random_state = params.seed)</span>
+
+<span class="c1"># 	# Get the portions of the test data frame with diagrams and concatenate into giant series:</span>
+<span class="c1">#     allDgms = pd.concat((D_train[label] for label in dgm_col))</span>
+
+<span class="c1">#     if params.useAdaptivePart == True:</span>
+<span class="c1">#         # Hand the series to the makeAdaptivePartition function</span>
+<span class="c1">#         params.makeAdaptivePartition(allDgms, meshingScheme = &#39;DV&#39;)</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         # TODO this should work for both interp and tents but doesn&#39;t yet</span>
+<span class="c1">#         params.makeAdaptivePartition(allDgms, meshingScheme = None)</span>
+
+<span class="c1"># 	#--------Training------------#</span>
+<span class="c1">#     if verbose:</span>
+<span class="c1">#         print(&#39;Using &#39; + str(len(L_train)) + &#39;/&#39; + str(len(DgmsDF)) + &#39; to train...&#39;)</span>
+
+<span class="c1">#     clf = ML_via_featurization(D_train,labels_col = labels_col,dgm_col = dgm_col,params = params,normalize = normalize, verbose = verbose)</span>
+<span class="c1">#     listOfG_train = []</span>
+
+<span class="c1">#     for dgmColLabel in dgm_col:</span>
+<span class="c1">#         G_train = build_G(D_train[dgmColLabel],params)</span>
+<span class="c1">#         listOfG_train.append(G_train)</span>
+
+<span class="c1">#     G_train = np.concatenate(listOfG_train,axis = 1)</span>
+
+<span class="c1"># 	# Normalize G</span>
+<span class="c1">#     if normalize:</span>
+<span class="c1">#         G_train = scale(G_train)</span>
+
+
+<span class="c1"># 	#--------Testing-------------#</span>
+<span class="c1">#     if verbose:</span>
+<span class="c1">#         print(&#39;Using &#39; + str(len(L_test)) + &#39;/&#39; + str(len(DgmsDF_test)) + &#39; to test...&#39;)</span>
+<span class="c1">#     listOfG_test = []</span>
+<span class="c1">#     for dgmColLabel in dgm_col:</span>
+<span class="c1">#         G_test = build_G(D_test[dgmColLabel],params)</span>
+<span class="c1">#         listOfG_test.append(G_test)</span>
+
+<span class="c1">#     G_test = np.concatenate(listOfG_test,axis = 1)</span>
+
+<span class="c1"># 	# Normalize G</span>
+<span class="c1">#     if normalize:</span>
+<span class="c1">#         G_test = scale(G_test)</span>
+
+
+<span class="c1"># 	# Compute predictions</span>
+<span class="c1">#     L_predict = pd.Series(clf.predict(G_test),index = L_test.index)</span>
+<span class="c1">#     L_predict_train = pd.Series(clf.predict(G_train),index = L_train.index)</span>
+
+<span class="c1"># 	# Compute scores</span>
+<span class="c1">#     score = clf.score(G_test,list(L_test))</span>
+<span class="c1">#     score_train = clf.score(G_train,list(L_train))</span>
+<span class="c1">#     if verbose:</span>
+<span class="c1">#         print(&#39;Score on testing set: &#39; + str(score) +&quot;...\n&quot;)</span>
+
+<span class="c1">#         print(&#39;Finished with train/test experiment.&#39;)</span>
+
+<span class="c1">#     output = {}</span>
+<span class="c1">#     output[&#39;score&#39;] = score</span>
+<span class="c1">#     output[&#39;score_training&#39;] =score_train</span>
+<span class="c1">#     output[&#39;DgmsDF&#39;] = L_predict</span>
+<span class="c1">#     output[&#39;clf&#39;] = clf</span>
+
+<span class="c1">#     return output</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Munch
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

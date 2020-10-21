@@ -47,8 +47,9 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 import teaspoon.ML.feature_functions as fF
-import teaspoon.TDA
+import teaspoon.TDA as TDA
 from teaspoon.TDA import Persistence as pP
 from teaspoon.TSP.adaptivePart import Partitions
 
