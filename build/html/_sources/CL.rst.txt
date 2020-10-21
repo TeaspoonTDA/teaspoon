@@ -8,14 +8,14 @@ This page includes the documentation of the classification codes and some exampl
 Persistence Landscapes
 ----------------------
 
-.. automodule::teaspoon.ML.PD_Classification
-    :members:CL_PL
+.. automodule:: teaspoon.ML.PD_Classification
+    :members: CL_PL
     :undoc-members:
     :private-members:
     :special-members:
 
 **Example:** We classify chatter in time series obtained from cutting signals in turning.
-Persistence diagrams and landscapes are computed beforehand. 
+Persistence diagrams and landscapes are computed beforehand.
 The time series data is available in :cite:`Khasawneh2019`.
 
 	>>> import pickle
@@ -46,28 +46,28 @@ The time series data is available in :cite:`Khasawneh2019`.
 	Training set score: 0.925
 	Training set deviation: 0.017750567445242397
 	Total elapsed time: 0.713921070098877
-	
-	
-.. _CL_PB:	
+
+
+.. _CL_PB:
 
 Parameter Bucket for Classification
 -----------------------------------
 
-.. currentmodule::teaspoon.ML.Base
-.. autoclass::CL_ParameterBucket
-   :special-members: __init__	
-	
-	
-	
+.. currentmodule:: teaspoon.ML.Base
+.. autoclass:: CL_ParameterBucket
+   :special-members: __init__
+
+
+
 Persistence Images
 ------------------
 
-.. currentmodule::teaspoon.ML.PD_Classification
-.. autofunction::CL_PI
+.. currentmodule:: teaspoon.ML.PD_Classification
+.. autofunction:: CL_PI
 
 
-**Example:** 
-	
+**Example:**
+
 	>>> import pandas as pd
 	>>> from teaspoon.ML.PD_Classification import CL_PI
 	>>> from teaspoon.ML.Base import CL_ParameterBucket
@@ -108,7 +108,7 @@ Persistence Images
 	>>> params.test_labels = labels2
 	>>> params.TF_Learning =True
 	>>> params.FN = 5
-	>>> print(params)	
+	>>> print(params)
 	Variables in parameter bucket
 	-----------------------------
 	clf_model : <class 'sklearn.svm._classes.SVC'>
@@ -123,15 +123,15 @@ Persistence Images
 	Training set score: 0.8299748110831235
 	Training set deviation: 0.006875236304260034
 	Total elapsed time: 9.155236959457397
-	
+
 Carlsson Coordinates
 --------------------
 
-.. currentmodule::teaspoon.ML.PD_Classification
-.. autofunction::CL_CC
+.. currentmodule:: teaspoon.ML.PD_Classification
+.. autofunction:: CL_CC
 
 
-**Example:** 
+**Example:**
 
 	>>> import pandas as pd
 	>>> from teaspoon.ML.Base import CL_ParameterBucket
@@ -165,25 +165,25 @@ Carlsson Coordinates
 	Training set deviation: 0.009302864137339745
 	Total elapsed time: 3.000014066696167
 
-	
+
 Path Signatures
 ---------------
 
-.. currentmodule::teaspoon.ML.PD_Classification
-.. autofunction::CL_PS
+.. currentmodule:: teaspoon.ML.PD_Classification
+.. autofunction:: CL_PS
 
-**Example:** 
-	
+**Example:**
+
 	>>> from teaspoon.MakeData import PointCloud as gpc
 	>>> from teaspoon.ML.Base import CL_ParameterBucket
 	>>> from teaspoon.ML.PD_Classification import CL_PS
 	>>> import teaspoon.ML.feature_functions as fF
 	>>> # generate persistence diagrams
-	>>> df1 = gpc.testSetManifolds(numDgms = 5, numPts = 30) 
+	>>> df1 = gpc.testSetManifolds(numDgms = 5, numPts = 30)
 	>>> Diagrams1 = df1['Dgm1'].values
 	>>> Labels1 = df1['trainingLabel']
-        >>> 
-	>>> df2 = gpc.testSetManifolds(numDgms = 5, numPts = 30) 
+        >>>
+	>>> df2 = gpc.testSetManifolds(numDgms = 5, numPts = 30)
 	>>> Diagrams2 = df2['Dgm1'].values
 	>>> Labels2 = df2['trainingLabel']
 	>>> # compute features using first landscapes
@@ -209,7 +209,7 @@ Path Signatures
 	Training set score: 0.6199999999999999
 	Training set deviation: 0.07141428428542848
 	Total elapsed time: 0.014008522033691406
-	>>> #transfer learning 
+	>>> #transfer learning
 	>>> params = CL_ParameterBucket()
 	>>> params.clf_model = SVC
 	>>> params.test_size =0.33
@@ -228,13 +228,13 @@ Path Signatures
 	Training set score: 0.5599999999999999
 	Training set deviation: 0.09949874371066199
 	Total elapsed time: 0.015541315078735352
-	
-	
+
+
 Kernel Method
 -------------
 
-.. currentmodule::teaspoon.ML.PD_Classification
-.. autofunction::CL_KM
+.. currentmodule:: teaspoon.ML.PD_Classification
+.. autofunction:: CL_KM
 
 **Example:** For this method, we use simple persistence diagram set since the methods is computationally expensive.
 
@@ -253,4 +253,3 @@ Kernel Method
 	Test set score: 66.66666666666667
 	Test set deviation: 47.14045207910317
 	Total elapsed time: 0.016573667526245117
-
