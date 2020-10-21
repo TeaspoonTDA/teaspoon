@@ -90,13 +90,16 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PHN.html">2. Persistent Homology of Networks Module (PHN)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Dynamic Systems Library (DynSysLib) Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#examples">3.1. Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#available-dynamical-systems">3.1. Available Dynamical Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">3.2. Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_selection.html">4. Parameter Selection Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="information.html">5. Information Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ML.html">6. Machine Learning (ML) Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TDA.html">7. Topological Data Analaysis (TDA) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TSP.html">8. Topological Signal Processing (TSP) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MakeData.html">9. Make Data (MakeData) Module</a></li>
 </ul>
 
             
@@ -196,175 +199,6 @@
 </dd></dl>
 
 <p>Of the optional other parameters either the <strong>dynamic_state parameter</strong> or the system <strong>parameters</strong> must be used.</p>
-<p>The following dynamical systems are available:</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>Maps:</dt><dd><ul>
-<li><p>logistic_map</p></li>
-<li><p>henon_map</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Dissipative Flows:</dt><dd><ul>
-<li><p>driven_pendulum</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Periodic Functions:</dt><dd><ul>
-<li><p>sine</p></li>
-<li><p>incommensurate_sine</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Noise Models:</dt><dd><ul>
-<li><p>gaussian_noise</p></li>
-<li><p>uniform_noise</p></li>
-<li><p>rayleigh_noise</p></li>
-<li><p>exponential_noise</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Human Data:</dt><dd><ul>
-<li><p>ECG</p></li>
-<li><p>EEG</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Autonomous Flows:</dt><dd><ul>
-<li><p>chua</p></li>
-<li><p>lorenz</p></li>
-<li><p>rossler</p></li>
-<li><p>coupled_lorenz_rossler</p></li>
-<li><p>coupled_rossler_rossler</p></li>
-<li><p>double_pendulum</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Delayed Flows:</dt><dd><ul>
-<li><p>mackey_glass</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Maps:</dt><dd><ul>
-<li><p>logistic_map</p></li>
-<li><p>henon_map</p></li>
-<li><p>sine_map</p></li>
-<li><p>tent_map</p></li>
-<li><p>linear_congruential_generator_map</p></li>
-<li><p>rickers_population_map</p></li>
-<li><p>gauss_map</p></li>
-<li><p>cusp_map</p></li>
-<li><p>pinchers_map</p></li>
-<li><p>sine_circle_map</p></li>
-<li><p>lozi_map</p></li>
-<li><p>delayed_logstic_map</p></li>
-<li><p>tinkerbell_map</p></li>
-<li><p>burgers_map</p></li>
-<li><p>holmes_cubic_map</p></li>
-<li><p>kaplan_yorke_map</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Autonomous Dissipative Flows:</dt><dd><ul>
-<li><p>chua</p></li>
-<li><p>lorenz</p></li>
-<li><p>rossler</p></li>
-<li><p>coupled_lorenz_rossler</p></li>
-<li><p>coupled_rossler_rossler</p></li>
-<li><p>double_pendulum</p></li>
-<li><p>diffusionless_lorenz_attractor</p></li>
-<li><p>complex_butterfly</p></li>
-<li><p>chens_system</p></li>
-<li><p>hadley_circulation</p></li>
-<li><p>ACT_attractor</p></li>
-<li><p>rabinovich_frabrikant_attractor</p></li>
-<li><p>linear_feedback_rigid_body_motion_system</p></li>
-<li><p>moore_spiegel_oscillator</p></li>
-<li><p>thomas_cyclically_symmetric_attractor</p></li>
-<li><p>halvorsens_cyclically_symmetric_attractor</p></li>
-<li><p>burke_shaw_attractor</p></li>
-<li><p>rucklidge_attractor</p></li>
-<li><p>WINDMI</p></li>
-<li><p>simplest_quadratic_chaotic_flow</p></li>
-<li><p>simplest_cubic_chaotic_flow</p></li>
-<li><p>simplest_piecewise_linear_chaotic_flow</p></li>
-<li><p>double_scroll</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Driven Dissipative Flows:</dt><dd><ul>
-<li><p>driven_pendulum</p></li>
-<li><p>driven_can_der_pol_oscillator</p></li>
-<li><p>shaw_van_der_pol_oscillator</p></li>
-<li><p>forced_brusselator</p></li>
-<li><p>ueda_oscillator</p></li>
-<li><p>duffings_two_well_oscillator</p></li>
-<li><p>duffing_van_der_pol_oscillator</p></li>
-<li><p>rayleigh_duffing_oscillator</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Conservative Flows:</dt><dd><p>1 : simplest_driven_chaotic_flow
-2 : nose_hoover_oscillator
-3 : labyrinth_chaos
-4 : henon_heiles_system</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Periodic Functions:</dt><dd><ul>
-<li><p>sine</p></li>
-<li><p>incommensurate_sine</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Noise Models:</dt><dd><ul>
-<li><p>gaussian_noise</p></li>
-<li><p>uniform_noise</p></li>
-<li><p>rayleigh_noise</p></li>
-<li><p>exponential_noise</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Human Data:</dt><dd><ul>
-<li><p>ECG</p></li>
-<li><p>EEG</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Delayed Flows:</dt><dd><ul>
-<li><p>mackey_glass</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
 <p>This function requires the following packages:</p>
 <ul class="simple">
 <li><p>numpy</p></li>
@@ -372,8 +206,245 @@
 <li><p>matplotlib</p></li>
 <li><p>ddeint (delayed differential equations only)</p></li>
 </ul>
+<div class="section" id="available-dynamical-systems">
+<h2><span class="section-number">3.1. </span>Available Dynamical Systems<a class="headerlink" href="#available-dynamical-systems" title="Permalink to this headline">¶</a></h2>
+<p>The following table provides a list of all the available dynamical systems as called by the <strong>system</strong> keyword:</p>
+<table class="colwidths-given docutils align-default" id="id1">
+<caption><span class="caption-text">Available Dynmical Systems</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Maps</p></th>
+<th class="head"><p>Autonomous Dissipative Flows</p></th>
+<th class="head"><p>Driven Dissipative Flows</p></th>
+<th class="head"><p>Conservative Flows</p></th>
+<th class="head"><p>Periodic Functions</p></th>
+<th class="head"><p>Noise Models</p></th>
+<th class="head"><p>Human Data</p></th>
+<th class="head"><p>Delayed Flows</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>logistic_map</p></td>
+<td><p>chua</p></td>
+<td><p>driven_pendulum</p></td>
+<td><p>driven_can_der_pol_oscillator</p></td>
+<td><p>sine</p></td>
+<td><p>gaussian_noise</p></td>
+<td><p>ECG</p></td>
+<td><p>mackey_glass</p></td>
+</tr>
+<tr class="row-odd"><td><p>henon_map</p></td>
+<td><p>lorenz</p></td>
+<td><p>shaw_van_der_pol_oscillator</p></td>
+<td><p>simplest_driven_chaotic_flow</p></td>
+<td><p>incommensurate_sine</p></td>
+<td><p>uniform_noise</p></td>
+<td><p>EEG</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>logistic_map</p></td>
+<td><p>rossler</p></td>
+<td><p>forced_brusselator</p></td>
+<td><p>nose_hoover_oscillator</p></td>
+<td><p>rayleigh_noise</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sine_map</p></td>
+<td><p>coupled_lorenz_rossler</p></td>
+<td><p>ueda_oscillator</p></td>
+<td><p>labyrinth_chaos</p></td>
+<td><p>exponential_noise</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>tent_map</p></td>
+<td><p>coupled_rossler_rossler</p></td>
+<td><p>duffings_two_well_oscillator</p></td>
+<td><p>henon_heiles_system</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>linear_congruential_generator_map</p></td>
+<td><p>double_pendulum</p></td>
+<td><p>duffing_van_der_pol_oscillator</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>rickers_population_map</p></td>
+<td><p>diffusionless_lorenz_attractor</p></td>
+<td><p>rayleigh_duffing_oscillator</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>gauss_map</p></td>
+<td><p>complex_butterfly</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>cusp_map</p></td>
+<td><p>chens_system</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>pinchers_map</p></td>
+<td><p>hadley_circulation</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sine_circle_map</p></td>
+<td><p>ACT_attractor</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lozi_map</p></td>
+<td><p>rabinovich_frabrikant_attractor</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>delayed_logstic_map</p></td>
+<td><p>linear_feedback_rigid_body_motion_system</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>tinkerbell_map</p></td>
+<td><p>moore_spiegel_oscillator</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>burgers_map</p></td>
+<td><p>thomas_cyclically_symmetric_attractor</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>holmes_cubic_map</p></td>
+<td><p>halvorsens_cyclically_symmetric_attractor</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>kaplan_yorke_map</p></td>
+<td><p>burke_shaw_attractor</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>rucklidge_attractor</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>WINDMI</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>simplest_quadratic_chaotic_flow</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>simplest_cubic_chaotic_flow</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>simplest_piecewise_linear_chaotic_flow</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>double_scroll</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="examples">
-<h2><span class="section-number">3.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>The following is an example implementing the minimum amount of needed:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>

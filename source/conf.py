@@ -3,7 +3,9 @@ import sys
 import sphinx_rtd_theme
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..', 'teaspoon', 'ML'))
-
+sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
 # -- Project information -----------------------------------------------------
 
 project = 'teaspoon'
@@ -31,6 +33,8 @@ extensions = ['sphinx.ext.autodoc',
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 exclude_patterns = []
+
+#autodoc_mock_imports = ["feature_functions", "Base"]
 
 
 # -- Options for HTML output -------------------------------------------------

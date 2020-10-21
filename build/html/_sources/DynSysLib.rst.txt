@@ -22,127 +22,220 @@ Figure: x-solution to simulated rossler system for a periodic response.
 
 Of the optional other parameters either the **dynamic_state parameter** or the system **parameters** must be used.
 
-The following dynamical systems are available:
-
-* Maps:
-	* logistic_map
-	* henon_map
-* Dissipative Flows:
-	* driven_pendulum
-* Periodic Functions:
-	* sine
-	* incommensurate_sine
-* Noise Models:
-	* gaussian_noise
-	* uniform_noise
-	* rayleigh_noise
-	* exponential_noise
-* Human Data:
- 	* ECG
-	* EEG
-* Autonomous Flows:
-	* chua
-	* lorenz
-	* rossler
-	* coupled_lorenz_rossler
-	* coupled_rossler_rossler
-	* double_pendulum
-* Delayed Flows:
-	* mackey_glass
-
-
-* Maps:
-    	* logistic_map
-    	* henon_map
-    	* sine_map
-    	* tent_map
-    	* linear_congruential_generator_map
-    	* rickers_population_map
-    	* gauss_map
-    	* cusp_map
-    	* pinchers_map
-    	* sine_circle_map
-    	* lozi_map
-    	* delayed_logstic_map
-    	* tinkerbell_map
-    	* burgers_map
-    	* holmes_cubic_map
-    	* kaplan_yorke_map
-    
-    
-* Autonomous Dissipative Flows:
-    * chua
-    * lorenz
-    * rossler
-    * coupled_lorenz_rossler
-    * coupled_rossler_rossler
-    * double_pendulum
-    * diffusionless_lorenz_attractor
-    * complex_butterfly
-    * chens_system
-    * hadley_circulation
-    * ACT_attractor
-    * rabinovich_frabrikant_attractor
-    * linear_feedback_rigid_body_motion_system
-    * moore_spiegel_oscillator
-    * thomas_cyclically_symmetric_attractor
-    * halvorsens_cyclically_symmetric_attractor
-    * burke_shaw_attractor
-    * rucklidge_attractor
-    * WINDMI
-    * simplest_quadratic_chaotic_flow
-    * simplest_cubic_chaotic_flow
-    * simplest_piecewise_linear_chaotic_flow
-    * double_scroll
-
-
-* Driven Dissipative Flows:
-    * driven_pendulum
-    * driven_can_der_pol_oscillator
-    * shaw_van_der_pol_oscillator
-    * forced_brusselator
-    * ueda_oscillator
-    * duffings_two_well_oscillator
-    * duffing_van_der_pol_oscillator
-    * rayleigh_duffing_oscillator
-    
-
-* Conservative Flows:
-    1 : simplest_driven_chaotic_flow
-    2 : nose_hoover_oscillator
-    3 : labyrinth_chaos
-    4 : henon_heiles_system
-    
-
-* Periodic Functions:
-    * sine
-    * incommensurate_sine
-    
-
-* Noise Models:
-    * gaussian_noise
-    * uniform_noise
-    * rayleigh_noise
-    * exponential_noise
-    
-
-
-* Human Data:
-    * ECG
-    * EEG
-
-
-* Delayed Flows:
-    * mackey_glass
-
-
-
 This function requires the following packages:
 
 * numpy
 * scipy
 * matplotlib
 * ddeint (delayed differential equations only)
+
+
+
+Available Dynamical Systems
+####################################
+
+The following table provides a list of all the available dynamical systems as called by the **system** keyword:
+
+.. list-table:: Available Dynmical Systems
+   :widths: 10 10 10 10 10 10 10 10
+   :header-rows: 1
+
+   * - Maps
+     - Autonomous Dissipative Flows
+     - Driven Dissipative Flows
+     - Conservative Flows
+     - Periodic Functions
+     - Noise Models
+     - Human Data
+     - Delayed Flows
+
+   * - logistic_map
+     - chua
+     - driven_pendulum
+     - driven_can_der_pol_oscillator
+     - sine
+     - gaussian_noise
+     - ECG
+     - mackey_glass
+   * - henon_map
+     - lorenz
+     - shaw_van_der_pol_oscillator
+     - simplest_driven_chaotic_flow 
+     - incommensurate_sine
+     - uniform_noise
+     - EEG
+     - 
+   * - logistic_map
+     - rossler
+     - forced_brusselator
+     - nose_hoover_oscillator 
+     - rayleigh_noise
+     - 
+     - 
+     - 
+   * - sine_map
+     - coupled_lorenz_rossler
+     - ueda_oscillator
+     - labyrinth_chaos 
+     - exponential_noise
+     - 
+     - 
+     - 
+   * - tent_map
+     - coupled_rossler_rossler
+     - duffings_two_well_oscillator
+     - henon_heiles_system
+     - 
+     - 
+     - 
+     - 
+   * - linear_congruential_generator_map
+     - double_pendulum
+     - duffing_van_der_pol_oscillator
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - rickers_population_map
+     - diffusionless_lorenz_attractor
+     - rayleigh_duffing_oscillator
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - gauss_map
+     - complex_butterfly
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - cusp_map
+     - chens_system
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - pinchers_map
+     - hadley_circulation
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - sine_circle_map
+     - ACT_attractor
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - lozi_map
+     - rabinovich_frabrikant_attractor
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - delayed_logstic_map
+     - linear_feedback_rigid_body_motion_system
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - tinkerbell_map
+     - moore_spiegel_oscillator
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - burgers_map
+     - thomas_cyclically_symmetric_attractor
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - holmes_cubic_map
+     - halvorsens_cyclically_symmetric_attractor
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - kaplan_yorke_map
+     - burke_shaw_attractor
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 
+     - rucklidge_attractor
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 
+     - WINDMI
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 
+     - simplest_quadratic_chaotic_flow
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 
+     - simplest_cubic_chaotic_flow
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 
+     - simplest_piecewise_linear_chaotic_flow
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 
+     - double_scroll
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+
+
+
 
 
 Examples

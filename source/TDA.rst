@@ -1,4 +1,4 @@
-Topological Signal Processing (TSP) Module Documentation
+Topological Data Analysis (TDA) Module Documentation
 =========================================================
 
 Distances

@@ -5,20 +5,12 @@ All point clouds are returned as a numpy array, larger collection data is return
 
 '''
 
-import random
-import os
 import numpy as np
 import pandas as pd
-#import teaspoon.TDA.Persistence as pP
-from teaspoon.TDA import Persistence as pP
 from scipy.spatial.distance import euclidean
 from ripser import ripser
 
 
-
-"""
-.. module::PointCloud
-"""
 
 
 #-------------Circles and Annuli---------------------------------------#
@@ -593,7 +585,6 @@ def testSetManifolds(numDgms = 50,
     for i in range(numDgms):
         if fixSeed:
             seed += 1
-#        dgmOut = pP.VR_Ripser(Torus(N=numPts,seed = seed))  # using built-in wrapper
         dgmOut = ripser(Torus(N=numPts,seed = seed))['dgms']  # using ripser package
         DgmsDF.loc[counter] = [dgmOut[0],dgmOut[1], 'Torus']
         counter +=1

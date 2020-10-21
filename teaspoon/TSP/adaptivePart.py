@@ -18,6 +18,8 @@ class Partitions:
     data converted to ordinal and stored locally if not already
     TODO: Finish documentation
     '''
+    
+    
     def __init__(self, data = None,
                  meshingScheme = None,
                  numParts=3,

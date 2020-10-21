@@ -93,6 +93,8 @@
 <li class="toctree-l1"><a class="reference internal" href="information.html">5. Information Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ML.html">6. Machine Learning (ML) Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TDA.html">7. Topological Data Analaysis (TDA) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TSP.html">8. Topological Signal Processing (TSP) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MakeData.html">9. Make Data (MakeData) Module</a></li>
 </ul>
 
             
@@ -162,6 +164,22 @@
 <h1>Welcome to teaspoon’s documentation page!<a class="headerlink" href="#welcome-to-teaspoon-s-documentation-page" title="Permalink to this headline">¶</a></h1>
 <p>This page provides a summary of the functionality of teaspoon as well as documentation for the various topologicval signal processing modules:</p>
 <p>This package provides wrappers for using various persistent homology and other Topological Data Analysis software packages through python.</p>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PHN.html">2. Persistent Homology of Networks Module (PHN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DynSysLib.html">3. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_selection.html">4. Parameter Selection Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="information.html">5. Information Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ML.html">6. Machine Learning (ML) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TDA.html">7. Topological Data Analaysis (TDA) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TSP.html">8. Topological Signal Processing (TSP) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MakeData.html">9. Make Data (MakeData) Module</a></li>
+</ul>
+</div>
+</div>
 <div class="section" id="collaborators">
 <h2>Collaborators<a class="headerlink" href="#collaborators" title="Permalink to this headline">¶</a></h2>
 <p>The code is an compilation of work done by <a class="reference external" href="http://www.elizabethmunch.com">Elizabeth Munch</a> along with her students and collaborators.  People who have contributed to teaspoon include:</p>
@@ -174,52 +192,43 @@
 <li><p>Sarah Tymochko</p></li>
 </ul>
 </div>
+<div class="section" id="current-issues-and-to-do-items">
+<h2>Current Issues and To-do Items<a class="headerlink" href="#current-issues-and-to-do-items" title="Permalink to this headline">¶</a></h2>
+<p>This is a list of to do items:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Finish updating documentation</p></li>
+<li><p>Get autodoc with sphinx to work</p></li>
+<li><p>Make pip install-able</p></li>
+<li><p>Remove any redundant function (e.g. Takens’ Embedding)</p></li>
+</ul>
+</div></blockquote>
+<p>This is a list of the current issues for Sphinx:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Failing to autodoc the modules in PD_Classification</p></li>
+<li><p>Failing to autodoc the LandscapesParameterDucket class from Base.py</p></li>
+<li><p>PointCloud.py is failing to autodoc from the MakeData module</p></li>
+<li><p>There is no sphinx docstring documentation in the adaptivePart.py code.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>Contributions are more than welcome! There are lots of opportunities for potential projects, so please get in touch if you would like to help out. Everything from code to notebooks to examples and documentation are all equally valuable so please don’t feel you can’t contribute. To contribute please fork the project make your changes and submit a pull request. We will do our best to work through any issues with you and get your code merged into the main branch.</p>
+<p>If contributing to the documentation, the following python packages needs to be pip installed as shown:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>pip install PersistenceImages</p></li>
+<li><p>pip install TermColor</p></li>
+<li><p>pip install sphinxcontrib-bibtex</p></li>
+</ul>
+</div></blockquote>
+<p>Also, please make sure your sphinx installation is up-to-date and that you are running <strong>make html</strong> from the teaspoon directory.</p>
+</div>
 <div class="section" id="contact-information">
 <h2>Contact Information<a class="headerlink" href="#contact-information" title="Permalink to this headline">¶</a></h2>
 <p>Liz Munch: <a class="reference external" href="mailto:muncheli&#37;&#52;&#48;egr&#46;msu&#46;edu">muncheli<span>&#64;</span>egr<span>&#46;</span>msu<span>&#46;</span>edu</a></p>
-</div>
-<div class="section" id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#locations">1.1. Locations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.2. Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.3. Installation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="PHN.html">2. Persistent Homology of Networks Module (PHN)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="PHN.html#examples">2.1. Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="DynSysLib.html">3. Dynamic Systems Library (DynSysLib) Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="DynSysLib.html#examples">3.1. Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_selection.html">4. Parameter Selection Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html#mutual-information-mi-for-time-delay-tau">4.1. Mutual Information (MI) for time delay (tau).</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html#auto-correlation-for-time-delay-tau">4.2. Auto-correlation for time delay (tau).</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html#mspe-for-time-delay-tau-and-dimension-n">4.3. MsPE for time delay (tau) and dimension (n).</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html#statistical-analysis-of-the-fourier-spectrum-for-time-delay-tau">4.4. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html#permutation-auto-mutual-information-pami-for-time-delay-tau">4.5. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html#false-nearest-neighbors-fnn-for-dimension-n">4.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="information.html">5. Information Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ML.html">6. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="F_PD.html">6.1. Featurization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CL.html">6.2. Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ML.html#references">6.3. References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="TDA.html">7. Topological Data Analaysis (TDA) Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="TDA.html#module-teaspoon.TDA.Distance">7.1. Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TDA.html#module-teaspoon.TDA.Draw">7.2. Drawing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TDA.html#module-teaspoon.TDA.Persistence">7.3. Persistence</a></li>
-</ul>
-</li>
-</ul>
-</div>
 </div>
 </div>
 
