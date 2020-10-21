@@ -38,3 +38,4 @@ Table of Contents
    Parameter Selection Module <parameter_selection.rst>
    Information Module <information.rst>
    Machine Learning (ML) Module <ML.rst>
+   Topological Data Analaysis (TDA) Module <TDA.rst>

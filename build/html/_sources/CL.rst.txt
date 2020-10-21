@@ -8,8 +8,8 @@ This page includes the documentation of the classification codes and some exampl
 Persistence Landscapes
 ----------------------
 
-.. automodule:: teaspoon.ML.PD_Classification
-    :members: CL_PL
+.. automodule::teaspoon.ML.PD_Classification
+    :members:CL_PL
     :undoc-members:
     :private-members:
     :special-members:
@@ -53,8 +53,8 @@ The time series data is available in :cite:`Khasawneh2019`.
 Parameter Bucket for Classification
 -----------------------------------
 
-.. currentmodule:: teaspoon.ML.Base
-.. autoclass:: CL_ParameterBucket
+.. currentmodule::teaspoon.ML.Base
+.. autoclass::CL_ParameterBucket
    :special-members: __init__	
 	
 	
@@ -62,8 +62,8 @@ Parameter Bucket for Classification
 Persistence Images
 ------------------
 
-.. currentmodule:: teaspoon.ML.PD_Classification
-.. autofunction:: CL_PI
+.. currentmodule::teaspoon.ML.PD_Classification
+.. autofunction::CL_PI
 
 
 **Example:** 
@@ -127,8 +127,8 @@ Persistence Images
 Carlsson Coordinates
 --------------------
 
-.. currentmodule:: teaspoon.ML.PD_Classification
-.. autofunction:: CL_CC
+.. currentmodule::teaspoon.ML.PD_Classification
+.. autofunction::CL_CC
 
 
 **Example:** 
@@ -169,8 +169,8 @@ Carlsson Coordinates
 Path Signatures
 ---------------
 
-.. currentmodule:: teaspoon.ML.PD_Classification
-.. autofunction:: CL_PS
+.. currentmodule::teaspoon.ML.PD_Classification
+.. autofunction::CL_PS
 
 **Example:** 
 	
@@ -233,8 +233,8 @@ Path Signatures
 Kernel Method
 -------------
 
-.. currentmodule:: teaspoon.ML.PD_Classification
-.. autofunction:: CL_KM
+.. currentmodule::teaspoon.ML.PD_Classification
+.. autofunction::CL_KM
 
 **Example:** For this method, we use simple persistence diagram set since the methods is computationally expensive.
 
