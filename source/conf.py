@@ -5,7 +5,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..', 'teaspoon', 'ML'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
+
+# -- mocking packages -----------------------------------------------------
+
+from unittest import mock
+sys.modules['ripser'] = mock.Mock()
+
 # -- Project information -----------------------------------------------------
 
 project = 'teaspoon'
@@ -34,7 +39,6 @@ extensions = ['sphinx.ext.autodoc',
 templates_path = ['_templates']
 exclude_patterns = []
 
-#autodoc_mock_imports = ["feature_functions", "Base"]
 
 
 # -- Options for HTML output -------------------------------------------------

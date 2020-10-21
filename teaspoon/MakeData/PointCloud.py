@@ -13,6 +13,7 @@ from ripser import ripser
 
 
 
+
 #-------------Circles and Annuli---------------------------------------#
 def Circle(N = 100, r=1, gamma=None, seed = None):
     """
