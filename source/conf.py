@@ -1,7 +1,10 @@
 import os
 import sys
 import sphinx_rtd_theme
-sys.path.insert(0, os.path.dirname(__file__)+'\..')
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+
+sys.path.insert(0, '/Users/sarahtymochko/PersistenceCode/tsp_editing/teaspoon')
+
 # -- Project information -----------------------------------------------------
 
 project = 'teaspoon'

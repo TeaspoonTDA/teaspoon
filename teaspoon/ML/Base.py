@@ -41,14 +41,14 @@ out = Base.getPercentScore(DgmsDF,dgm_col = 'Dgm', labels_col = 'trainingLabel',
 """
 
 # from teaspoon.Misc import printPrettyTime
-import feature_functions as fF
+import teaspoon.ML.feature_functions as fF
 
 import os
 import sys
 sys.path.insert(0, os.path.dirname(__file__)+'\..')
-import TDA
-from TDA import Persistence as pP
-from TSP.adaptivePart import Partitions
+import teaspoon.TDA
+from teaspoon.TDA import Persistence as pP
+from teaspoon.TSP.adaptivePart import Partitions
 
 import time
 import numpy as np
@@ -557,24 +557,24 @@ class LandscapesParameterBucket(object):
                     test_size = .33,
                     **kwargs):
         """
-        
+
         :param (clf_model):
             Classification algorithm that will be used. Default is SVC.
-            
+
         :param (feature_function):
             The function that generates features using landscapes
-            
+
         :param list (PL_Number):
             Landscape numbers that user wants to use in feature matrix generation. If this parameter is not given, algorithm will generate feature matrix using first landscapes.
 
         :param list (Labels):
             Classification labels. Warning message will appear if user does not provide labels.
-        
-        :param float (test_size): 
+
+        :param float (test_size):
             The number that defines the size of test set. It should be entered between 0 and 1. Default is 0.33.
-            
+
         """
-        
+
         self.clf_model = clf_model
         self.feature_function = feature_function
         self.PL_Number = PL_Number
@@ -585,9 +585,9 @@ class LandscapesParameterBucket(object):
 
     def __str__(self):
         """
-        
+
         Nicely prints all currently set values in the ParameterBucket.
-        
+
         """
         attrs = vars(self)
         output = ''
@@ -601,8 +601,8 @@ class LandscapesParameterBucket(object):
         if np.all(self.Labels==None):
             output += colored('Warning:', 'red')+' Classification labels are missing.'
         return output
-    
-    
+
+
 class CL_ParameterBucket(object):
     def __init__(self, clf_model = SVC,
                  Labels = None,
@@ -610,33 +610,33 @@ class CL_ParameterBucket(object):
                  TF_Learning = False,
                  **kwargs):
         """
-        
+
         :param (clf_model):
             Classification algorithm that will be used. Default is SVC.
-            
+
         :param list (Labels):
             Classification labels. Warning message will appear if user does not provide labels.
-        
-        :param float (test_size): 
+
+        :param float (test_size):
             The number that defines the size of test set. It should be entered between 0 and 1. Default is 0.33.
-        
-        :param (str) TF_Learning: 
+
+        :param (str) TF_Learning:
             This option will enable performing transfer learning, if it is true.
-        
+
         :param (\*\*kwargs): Additional parameters
-        
+
         """
         self.clf_model = clf_model
         self.Labels = Labels
         self.test_size = test_size
         self.TF_Learning = TF_Learning
-        self.__dict__.update(kwargs)   
-         
+        self.__dict__.update(kwargs)
+
     def __str__(self):
         """
-        
+
         Nicely prints all currently set values in the ParameterBucket.
-        
+
         """
         attrs = vars(self)
         output = ''
