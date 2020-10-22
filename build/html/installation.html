@@ -88,12 +88,8 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#locations">1.1. Locations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#requirements">1.2. Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation">1.3. Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#installing-using-pip">1.3.1. Installing using pip:</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">1.2. Installation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="PHN.html">2. Persistent Homology of Networks Module (PHN)</a></li>
@@ -171,37 +167,23 @@
             
   <div class="section" id="getting-started">
 <h1><span class="section-number">1. </span>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="locations">
-<h2><span class="section-number">1.1. </span>Locations<a class="headerlink" href="#locations" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Code</strong>: [<a class="reference external" href="https://github.com/lizliz/teaspoon](https://github.com/lizliz/teaspoon">https://github.com/lizliz/teaspoon](https://github.com/lizliz/teaspoon</a>).</p></li>
-<li><p><strong>Documentation</strong>: [<a class="reference external" href="http://elizabethmunch.com/code/teaspoon/index.html](http://elizabethmunch.com/code/teaspoon/index.html">http://elizabethmunch.com/code/teaspoon/index.html](http://elizabethmunch.com/code/teaspoon/index.html</a>)</p></li>
-</ul>
-</div>
 <div class="section" id="requirements">
-<h2><span class="section-number">1.2. </span>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>Please note that this code is still pre-alpha, so many things are not fully up and running yet.</p>
-<p>Bugs reports and feature reqests can be posted on the [github issues](<a class="reference external" href="https://github.com/lizliz/teaspoon/issues">https://github.com/lizliz/teaspoon/issues</a>) page.</p>
+<h2><span class="section-number">1.1. </span>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>Please note that this code is an early version, so many things are not fully up and running yet.</p>
+<p>Bugs reports and feature reqests can be posted on the <a class="reference external" href="https://github.com/lizliz/teaspoon/issues">github issues page</a>.</p>
 <p>In order to use all wrappers in teaspoon.TDA, the following need to be installed so they can be run command line.</p>
 <ul class="simple">
-<li><p>[Ripser](<a class="reference external" href="https://github.com/Ripser/ripser">https://github.com/Ripser/ripser</a>). Code by Ulrich Bauer for computing persistent homology of a point cloud or distance matrix.</p></li>
-<li><p>[Perseus](<a class="reference external" href="http://people.maths.ox.ac.uk/nanda/perseus/index.html">http://people.maths.ox.ac.uk/nanda/perseus/index.html</a>). Code by Vidit Nanda for computing persistent homology of point clouds, cubical complexes, and distance matrices.</p></li>
-<li><p>[Hera](<a class="reference external" href="https://bitbucket.org/grey_narn/hera">https://bitbucket.org/grey_narn/hera</a>). Code by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov for computing bottleneck and Wasserstein distances.</p></li>
+<li><p><a class="reference external" href="https://github.com/Ripser/ripser">Ripser</a>. Code by Ulrich Bauer for computing persistent homology of a point cloud or distance matrix.</p></li>
+<li><p><a class="reference external" href="http://people.maths.ox.ac.uk/nanda/perseus/index.html">Perseus</a>. Code by Vidit Nanda for computing persistent homology of point clouds, cubical complexes, and distance matrices.</p></li>
+<li><p><a class="reference external" href="https://bitbucket.org/grey_narn/hera">Hera</a>. Code by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov for computing bottleneck and Wasserstein distances.</p></li>
 </ul>
 <p>&lt;span style=”color:red”&gt;Warning&lt;/span&gt;: the teaspoon installation will not install nor check for the install of these packages. In particular, perseus should be installed so that typing <cite>perseus</cite> in a terminal runs it, even though the default perseus installation for some operating systems ends up with an executable with a different name.</p>
 </div>
 <div class="section" id="installation">
-<h2><span class="section-number">1.3. </span>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>This code is still pre-alpha.  In particular, using the pip install seems to be finicky at best.
-If you are having installation issues, please make a note of what you’ve done, including copying error message outputs, as a comment into the [installation issue on github](<a class="reference external" href="https://github.com/lizliz/teaspoon/issues">https://github.com/lizliz/teaspoon/issues</a>) so we can start figuring out what is up with this system.</p>
-<div class="section" id="installing-using-pip">
-<h3><span class="section-number">1.3.1. </span>Installing using pip:<a class="headerlink" href="#installing-using-pip" title="Permalink to this headline">¶</a></h3>
-<p>So far, the most success has been had with pip installation.  Run the following commands to clone and install teaspoon. In particular, the <cite>pip install .</cite> command needs to be run in the folder with the <cite>setup.py</cite> file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lizliz</span><span class="o">/</span><span class="n">teaspoon</span><span class="o">.</span><span class="n">git</span>
-<span class="n">cd</span> <span class="n">teaspoon</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
+<h2><span class="section-number">1.2. </span>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>This package will soon be available through a pip install:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">teaspoon</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>

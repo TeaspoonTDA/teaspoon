@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>7. Topological Data Analysis (TDA) Module Documentation &mdash; teaspoon 0.1.0 documentation</title>
+  <title>2.6. Topological Data Analysis (TDA) Module Documentation &mdash; teaspoon 0.1.0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8. Topological Signal Processing (TSP) Module Documentation" href="TSP.html" />
-    <link rel="prev" title="6.2. Classification" href="CL.html" /> 
+    <link rel="next" title="2.7. Topological Signal Processing (TSP) Module Documentation" href="TSP.html" />
+    <link rel="prev" title="2.5.2. Classification" href="CL.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,19 +88,22 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PHN.html">2. Persistent Homology of Networks Module (PHN)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DynSysLib.html">3. Dynamic Systems Library (DynSysLib) Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_selection.html">4. Parameter Selection Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="information.html">5. Information Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ML.html">6. Machine Learning (ML) Module</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Topological Data Analaysis (TDA) Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-teaspoon.TDA.Distance">7.1. Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-teaspoon.TDA.Draw">7.2. Drawing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-teaspoon.TDA.Persistence">7.3. Persistence</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PHN.html">2.1. Persistent Homology of Networks Module (PHN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DynSysLib.html">2.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.3. Parameter Selection Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="information.html">2.4. Information Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html">2.5. Machine Learning (ML) Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.6. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-teaspoon.TDA.Distance">2.6.1. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-teaspoon.TDA.Draw">2.6.2. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-teaspoon.TDA.Persistence">2.6.3. Persistence</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="TSP.html">8. Topological Signal Processing (TSP) Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MakeData.html">9. Make Data (MakeData) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TSP.html">2.7. Topological Signal Processing (TSP) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.8. Make Data (MakeData) Module</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -147,7 +150,9 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">7. </span>Topological Data Analysis (TDA) Module Documentation</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
+        
+      <li><span class="section-number">2.6. </span>Topological Data Analysis (TDA) Module Documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,9 +172,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="topological-data-analysis-tda-module-documentation">
-<h1><span class="section-number">7. </span>Topological Data Analysis (TDA) Module Documentation<a class="headerlink" href="#topological-data-analysis-tda-module-documentation" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.6. </span>Topological Data Analysis (TDA) Module Documentation<a class="headerlink" href="#topological-data-analysis-tda-module-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-teaspoon.TDA.Distance">
-<span id="distances"></span><h2><span class="section-number">7.1. </span>Distances<a class="headerlink" href="#module-teaspoon.TDA.Distance" title="Permalink to this headline">¶</a></h2>
+<span id="distances"></span><h2><span class="section-number">2.6.1. </span>Distances<a class="headerlink" href="#module-teaspoon.TDA.Distance" title="Permalink to this headline">¶</a></h2>
 <p>Has code for computing pairwise distance for diagrams.</p>
 <p>Created on Jun 9, 2016</p>
 <dl class="field-list simple">
@@ -247,7 +252,7 @@ Default is internal_p = infinity.</p>
 
 </div>
 <div class="section" id="module-teaspoon.TDA.Draw">
-<span id="drawing"></span><h2><span class="section-number">7.2. </span>Drawing<a class="headerlink" href="#module-teaspoon.TDA.Draw" title="Permalink to this headline">¶</a></h2>
+<span id="drawing"></span><h2><span class="section-number">2.6.2. </span>Drawing<a class="headerlink" href="#module-teaspoon.TDA.Draw" title="Permalink to this headline">¶</a></h2>
 <p>Code for drawing various things.</p>
 <dl class="py function">
 <dt id="teaspoon.TDA.Draw.drawDgm">
@@ -281,7 +286,7 @@ Even if D&gt;2, only the first two coordinates are plotted.</p>
 
 </div>
 <div class="section" id="module-teaspoon.TDA.Persistence">
-<span id="persistence"></span><h2><span class="section-number">7.3. </span>Persistence<a class="headerlink" href="#module-teaspoon.TDA.Persistence" title="Permalink to this headline">¶</a></h2>
+<span id="persistence"></span><h2><span class="section-number">2.6.3. </span>Persistence<a class="headerlink" href="#module-teaspoon.TDA.Persistence" title="Permalink to this headline">¶</a></h2>
 <p>Wrapper for using various fast persistence software inside of python.</p>
 <p>All diagrams are stored as a 2xN numpy matrix.
 When a code returns multiple dimensions, these are returned as a dictionary</p>
@@ -623,10 +628,10 @@ So, persistence will be calculated from parameter 0 until stepSize*numSteps.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="TSP.html" class="btn btn-neutral float-right" title="8. Topological Signal Processing (TSP) Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="TSP.html" class="btn btn-neutral float-right" title="2.7. Topological Signal Processing (TSP) Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="CL.html" class="btn btn-neutral float-left" title="6.2. Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="CL.html" class="btn btn-neutral float-left" title="2.5.2. Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

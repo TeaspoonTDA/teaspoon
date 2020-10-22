@@ -11,6 +11,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
 from unittest import mock
 sys.modules['ripser'] = mock.Mock()
 
+
 # -- Project information -----------------------------------------------------
 
 project = 'teaspoon'

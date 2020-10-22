@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. Persistent Homology of Networks (PHN) &mdash; teaspoon 0.1.0 documentation</title>
+  <title>2.1. Persistent Homology of Networks (PHN) &mdash; teaspoon 0.1.0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Dynamic Systems Library (DynSysLib)" href="DynSysLib.html" />
-    <link rel="prev" title="1. Getting Started" href="installation.html" /> 
+    <link rel="next" title="2.2. Dynamic Systems Library (DynSysLib)" href="DynSysLib.html" />
+    <link rel="prev" title="2. Table of Contents" href="modules.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,17 +88,20 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Persistent Homology of Networks Module (PHN)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#examples">2.1. Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. Persistent Homology of Networks Module (PHN)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples">2.1.1. Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="DynSysLib.html">3. Dynamic Systems Library (DynSysLib) Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_selection.html">4. Parameter Selection Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="information.html">5. Information Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ML.html">6. Machine Learning (ML) Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TDA.html">7. Topological Data Analaysis (TDA) Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TSP.html">8. Topological Signal Processing (TSP) Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MakeData.html">9. Make Data (MakeData) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DynSysLib.html">2.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.3. Parameter Selection Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="information.html">2.4. Information Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html">2.5. Machine Learning (ML) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.6. Topological Data Analaysis (TDA) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TSP.html">2.7. Topological Signal Processing (TSP) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.8. Make Data (MakeData) Module</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -145,7 +148,9 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">2. </span>Persistent Homology of Networks (PHN)</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
+        
+      <li><span class="section-number">2.1. </span>Persistent Homology of Networks (PHN)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -165,7 +170,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="persistent-homology-of-networks-phn">
-<h1><span class="section-number">2. </span>Persistent Homology of Networks (PHN)<a class="headerlink" href="#persistent-homology-of-networks-phn" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.1. </span>Persistent Homology of Networks (PHN)<a class="headerlink" href="#persistent-homology-of-networks-phn" title="Permalink to this headline">¶</a></h1>
 <p>This page provides a summary of the python functions used in in “<a class="reference external" href="https://arxiv.org/abs/1904.07403">Persistent Homology of Complex Networks for Dynamic State Detection</a>” for generating and analyzing complex networks as the Persistent Homology of Networks (PHN). Additionally, a basic example is provided showing the functionality of the method for a simple time series. Below, a simple overview of the method is provided.</p>
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/process.png"><img alt="_images/process.png" src="_images/process.png" style="width: 687.2px; height: 188.8px;" /></a>
@@ -203,7 +208,7 @@ persistence diagram (e) is generated by applying persistent homology to the dist
 </dd></dl>
 
 <div class="section" id="examples">
-<h2><span class="section-number">2.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>The following is an example implementing the method for an ordinal partition network for a simple time series:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#import needed packages</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -251,10 +256,10 @@ persistence diagram (e) is generated by applying persistent homology to the dist
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="DynSysLib.html" class="btn btn-neutral float-right" title="3. Dynamic Systems Library (DynSysLib)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="DynSysLib.html" class="btn btn-neutral float-right" title="2.2. Dynamic Systems Library (DynSysLib)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installation.html" class="btn btn-neutral float-left" title="1. Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-left" title="2. Table of Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

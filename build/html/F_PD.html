@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6.1. Featurization &mdash; teaspoon 0.1.0 documentation</title>
+  <title>2.5.1. Featurization &mdash; teaspoon 0.1.0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6.2. Classification" href="CL.html" />
-    <link rel="prev" title="6. Persistence Diagram Featurization" href="ML.html" /> 
+    <link rel="next" title="2.5.2. Classification" href="CL.html" />
+    <link rel="prev" title="2.5. Persistence Diagram Featurization" href="ML.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,26 +88,25 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PHN.html">2. Persistent Homology of Networks Module (PHN)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DynSysLib.html">3. Dynamic Systems Library (DynSysLib) Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_selection.html">4. Parameter Selection Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="information.html">5. Information Module</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="ML.html">6. Machine Learning (ML) Module</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.1. Featurization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#persistence-landscapes">6.1.1. Persistence Landscapes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#persistence-images">6.1.2. Persistence Images</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#carlsson-coordinates">6.1.3. Carlsson Coordinates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#path-signatures">6.1.4. Path Signatures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#kernel-method">6.1.5. Kernel Method</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PHN.html">2.1. Persistent Homology of Networks Module (PHN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DynSysLib.html">2.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.3. Parameter Selection Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="information.html">2.4. Information Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ML.html">2.5. Machine Learning (ML) Module</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.5.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.5.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.5.3. References</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="CL.html">6.2. Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ML.html#references">6.3. References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.6. Topological Data Analaysis (TDA) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TSP.html">2.7. Topological Signal Processing (TSP) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.8. Make Data (MakeData) Module</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="TDA.html">7. Topological Data Analaysis (TDA) Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TSP.html">8. Topological Signal Processing (TSP) Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MakeData.html">9. Make Data (MakeData) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
 </ul>
 
             
@@ -154,9 +153,11 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="ML.html"><span class="section-number">6. </span>Persistence Diagram Featurization</a> &raquo;</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
         
-      <li><span class="section-number">6.1. </span>Featurization</li>
+          <li><a href="ML.html"><span class="section-number">2.5. </span>Persistence Diagram Featurization</a> &raquo;</li>
+        
+      <li><span class="section-number">2.5.1. </span>Featurization</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,13 +177,13 @@
            <div itemprop="articleBody">
             
   <div class="section" id="featurization">
-<span id="id1"></span><h1><span class="section-number">6.1. </span>Featurization<a class="headerlink" href="#featurization" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1><span class="section-number">2.5.1. </span>Featurization<a class="headerlink" href="#featurization" title="Permalink to this headline">¶</a></h1>
 <p>This documentation includes five different persistence diagram featurization methods.
 These are persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.</p>
 <div class="section" id="persistence-landscapes">
-<span id="id2"></span><h2><span class="section-number">6.1.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2><span class="section-number">2.5.1.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="landscape-class">
-<h3><span class="section-number">6.1.1.1. </span>Landscape class<a class="headerlink" href="#landscape-class" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.5.1.1.1. </span>Landscape class<a class="headerlink" href="#landscape-class" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="teaspoon.ML.feature_functions.PLandscape">
 <em class="property">class </em><code class="sig-prename descclassname">teaspoon.ML.feature_functions.</code><code class="sig-name descname">PLandscape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PD</span></em>, <em class="sig-param"><span class="n">L_number</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#PLandscape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.PLandscape" title="Permalink to this definition">¶</a></dt>
@@ -304,7 +305,7 @@ The algorithm computes the persistence landscapes is written based on Ref. <a cl
 </div>
 </div>
 <div class="section" id="parameter-bucket-for-landscapes">
-<span id="pb-landscape"></span><h3><span class="section-number">6.1.1.2. </span>Parameter bucket for landscapes<a class="headerlink" href="#parameter-bucket-for-landscapes" title="Permalink to this headline">¶</a></h3>
+<span id="pb-landscape"></span><h3><span class="section-number">2.5.1.1.2. </span>Parameter bucket for landscapes<a class="headerlink" href="#parameter-bucket-for-landscapes" title="Permalink to this headline">¶</a></h3>
 <p><strong>Example:</strong> If user does not provide classification labels, parameter bucket will return a warning as shown below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">LandscapesParameterBucket</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
@@ -328,7 +329,7 @@ The algorithm computes the persistence landscapes is written based on Ref. <a cl
 </div>
 </div>
 <div class="section" id="feature-matrix-generation">
-<h3><span class="section-number">6.1.1.3. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.5.1.1.3. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Permalink to this headline">¶</a></h3>
 <div class="figure align-center" id="id14">
 <span id="f-matrix"></span><a class="reference internal image-reference" href="_images/Mesh_Generation_Example.png"><img alt="_images/Mesh_Generation_Example.png" src="_images/Mesh_Generation_Example.png" style="width: 958.0px; height: 525.4px;" /></a>
 <p class="caption"><span class="caption-text">Feature matrix generation steps explained with an simple example.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
@@ -384,7 +385,7 @@ Please see <code class="xref py py-meth docutils literal notranslate"><span clas
 </div>
 </div>
 <div class="section" id="persistence-images">
-<span id="id4"></span><h2><span class="section-number">6.1.2. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2><span class="section-number">2.5.1.2. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="teaspoon.ML.feature_functions.F_Image">
 <code class="sig-prename descclassname">teaspoon.ML.feature_functions.</code><code class="sig-name descname">F_Image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PD1</span></em>, <em class="sig-param"><span class="n">PS</span></em>, <em class="sig-param"><span class="n">var</span></em>, <em class="sig-param"><span class="n">plot</span></em>, <em class="sig-param"><span class="n">TF_Learning</span></em>, <em class="sig-param"><span class="n">D_Img</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_Image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_Image" title="Permalink to this definition">¶</a></dt>
@@ -434,7 +435,7 @@ Algorithms returns plot only if plotting option is True and transfer learning is
 </div>
 </div>
 <div class="section" id="carlsson-coordinates">
-<span id="id5"></span><h2><span class="section-number">6.1.3. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2><span class="section-number">2.5.1.3. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="teaspoon.ML.feature_functions.F_CCoordinates">
 <code class="sig-prename descclassname">teaspoon.ML.feature_functions.</code><code class="sig-name descname">F_CCoordinates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PD</span></em>, <em class="sig-param"><span class="n">FN</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_CCoordinates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_CCoordinates" title="Permalink to this definition">¶</a></dt>
@@ -497,7 +498,7 @@ Algorithm will return feature matrix object array that includes feature matrices
 </div>
 </div>
 <div class="section" id="path-signatures">
-<span id="id8"></span><h2><span class="section-number">6.1.4. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Permalink to this headline">¶</a></h2>
+<span id="id8"></span><h2><span class="section-number">2.5.1.4. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="teaspoon.ML.feature_functions.F_PSignature">
 <code class="sig-prename descclassname">teaspoon.ML.feature_functions.</code><code class="sig-name descname">F_PSignature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PL</span></em>, <em class="sig-param"><span class="n">L_Number</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_PSignature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_PSignature" title="Permalink to this definition">¶</a></dt>
@@ -536,7 +537,7 @@ Function takes two inputs and these are persistence landcsape set in an object a
 </div>
 </div>
 <div class="section" id="kernel-method">
-<h2><span class="section-number">6.1.5. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.5.1.5. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="teaspoon.ML.feature_functions.KernelMethod">
 <code class="sig-prename descclassname">teaspoon.ML.feature_functions.</code><code class="sig-name descname">KernelMethod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">perDgm1</span></em>, <em class="sig-param"><span class="n">perDgm2</span></em>, <em class="sig-param"><span class="n">sigma</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#KernelMethod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.KernelMethod" title="Permalink to this definition">¶</a></dt>
@@ -585,10 +586,10 @@ There are three inputs and these are two persistence diagrams and the kernel sca
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="CL.html" class="btn btn-neutral float-right" title="6.2. Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="CL.html" class="btn btn-neutral float-right" title="2.5.2. Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ML.html" class="btn btn-neutral float-left" title="6. Persistence Diagram Featurization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ML.html" class="btn btn-neutral float-left" title="2.5. Persistence Diagram Featurization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

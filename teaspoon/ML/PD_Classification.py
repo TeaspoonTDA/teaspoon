@@ -12,17 +12,17 @@ from sklearn.model_selection import train_test_split
 from scipy.special import comb
 from itertools import combinations
 from scipy.spatial.distance import squareform
+
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
 sys.path.insert(0, os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..','teaspoon','ML'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'teaspoon','ML'))
+
 import feature_functions as fF
 import Base
-from Base import ML_via_featurization, build_G, TentParameters, ParameterBucket
 
-
-# import LIBSVM
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'libsvm-3.23','python'))
 from svmutil import *
 
@@ -472,7 +472,13 @@ def CL_KM(PD,params):
 
 
 
-def getPercentScore(DgmsDF, labels_col = 'Label', dgm_col = 'Dgm1', params = ParameterBucket(), normalize = False, verbose = True, **kwargs):
+def getPercentScore(DgmsDF, 
+                    labels_col = 'Label', 
+                    dgm_col = 'Dgm1', 
+                    params = Base.CL_ParameterBucket(), 
+                    normalize = False, 
+                    verbose = True, 
+                    **kwargs):
 
     """
     :param str DataFrame (DgmsDF):
@@ -531,11 +537,11 @@ def getPercentScore(DgmsDF, labels_col = 'Label', dgm_col = 'Dgm1', params = Par
     if verbose:
         print('Using ' + str(len(L_train)) + '/' + str(len(DgmsDF)) + ' to train...')
 
-    clf = ML_via_featurization(D_train,labels_col = labels_col,dgm_col = dgm_col,params = params,normalize = normalize, verbose = verbose)
+    clf = Base.ML_via_featurization(D_train,labels_col = labels_col,dgm_col = dgm_col,params = params,normalize = normalize, verbose = verbose)
     listOfG_train = []
 
     for dgmColLabel in dgm_col:
-        G_train = build_G(D_train[dgmColLabel],params)
+        G_train = Base.build_G(D_train[dgmColLabel],params)
         listOfG_train.append(G_train)
 
     G_train = np.concatenate(listOfG_train,axis = 1)
@@ -550,7 +556,7 @@ def getPercentScore(DgmsDF, labels_col = 'Label', dgm_col = 'Dgm1', params = Par
         print('Using ' + str(len(L_test)) + '/' + str(len(DgmsDF_test)) + ' to test...')
     listOfG_test = []
     for dgmColLabel in dgm_col:
-        G_test = build_G(D_test[dgmColLabel],params)
+        G_test = Base.build_G(D_test[dgmColLabel],params)
         listOfG_test.append(G_test)
 
     G_test = np.concatenate(listOfG_test,axis = 1)
