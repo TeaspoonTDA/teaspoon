@@ -10,7 +10,7 @@ Table of Contents
 *******************
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :numbered:
    
    Getting Started <installation.rst>
@@ -43,6 +43,7 @@ This is a list of to do items:
 	- Get autodoc with sphinx to work
 	- Make pip install-able
 	- Remove any redundant function (e.g. Takens' Embedding)
+	- Test all code and make sure it works (it should since it hasn't been changed).
 
 This is a list of the current issues for Sphinx:
 

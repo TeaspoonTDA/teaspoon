@@ -85,9 +85,52 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">3. Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#mutual-information-mi-for-time-delay-tau">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#auto-correlation-for-time-delay-tau">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#mspe-for-time-delay-tau-and-dimension-n">2.1.3. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#statistical-analysis-of-the-fourier-spectrum-for-time-delay-tau">2.1.4. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#permutation-auto-mutual-information-pami-for-time-delay-tau">2.1.5. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#false-nearest-neighbors-fnn-for-dimension-n">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">4. License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../citing.html">5. Citing</a></li>
 </ul>
@@ -168,7 +211,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="drawDgm"><a class="viewcode-back" href="../../../TDA.html#teaspoon.TDA.Draw.drawDgm">[docs]</a><span class="k">def</span> <span class="nf">drawDgm</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">boundary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">epsilon</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="drawDgm"><a class="viewcode-back" href="../../../drawing.html#teaspoon.TDA.Draw.drawDgm">[docs]</a><span class="k">def</span> <span class="nf">drawDgm</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">boundary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">epsilon</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Draws simple persistence diagram plot</span>
 
@@ -212,7 +255,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Birth&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="drawPtCloud"><a class="viewcode-back" href="../../../TDA.html#teaspoon.TDA.Draw.drawPtCloud">[docs]</a><span class="k">def</span> <span class="nf">drawPtCloud</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+<div class="viewcode-block" id="drawPtCloud"><a class="viewcode-back" href="../../../drawing.html#teaspoon.TDA.Draw.drawPtCloud">[docs]</a><span class="k">def</span> <span class="nf">drawPtCloud</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Draws simple point cloud plot</span>
 

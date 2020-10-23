@@ -1,22 +1,14 @@
 Topological Data Analysis (TDA) Module Documentation
 =========================================================
 
-Distances
-**************
+This branch of the documentation covers tool used for topological data analysis. Specifically, there are several wrappers for calculating the persistent homology as well as tools to calculate the persistent homology of networks (graphs).
+
+.. toctree::
+   :maxdepth: 1
+   
+   Persistent Homology of Networks (PHN) Module <PHN.rst>
+   Distances <distances.rst>
+   Drawing <drawing.rst>
+   Persistence <persistence.rst>
 
 
-.. automodule:: teaspoon.TDA.Distance
-   :members: dgmDist_Hera
-
-Drawing
-**************
-
-.. automodule:: teaspoon.TDA.Draw
-   :members: drawDgm, drawPtCloud
-
-
-Persistence
-**************
-
-.. automodule:: teaspoon.TDA.Persistence
-   :members: prepareFolders, readPerseusOutput, readRipserString, readRipserOutput, VR_Ripser, writePointCloudFileForPerseus, VR_Perseus, distMat_Ripser, distMat_Perseus, writeMatrixFileForPerseus, Cubical_Perseus, minPers, maxPers, maxBirth, minBirth, minPersistenceSeries, maxPersistenceSeries, minBirthSeries, maxBirthSeries, removeInfiniteClasses

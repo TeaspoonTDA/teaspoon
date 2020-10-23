@@ -6,6 +6,7 @@ False Nearest Neighbors (FNN) for dimension (n).
 """
 
 def ts_recon(ts, dim, tau):
+    import numpy as np
     xlen = len(ts)-(dim-1)*tau
     a= np.linspace(0,xlen-1,xlen)
     a= np.reshape(a,(xlen,1))

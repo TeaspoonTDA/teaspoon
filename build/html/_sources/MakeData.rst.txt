@@ -1,8 +1,8 @@
 MakeData Module Documentation
 =========================================================
 
-This module is used to generate data in specified shapes.
+.. toctree::
+   :maxdepth: 1
 
-.. automodule:: teaspoon.MakeData.PointCloud
-    :members: 
-
+   Point Cloud Data Generation (PointCloud) Module <PointCloud.rst>
+   Dynamic Systems Library (DynSysLib) Module <DynSysLib.rst>

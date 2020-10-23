@@ -15,7 +15,7 @@ Figure: x-solution to simulated rossler system for a periodic response.
 
 
 
-.. automodule:: teaspoon.DynSysLib.DynSysLib
+.. automodule:: teaspoon.MakeData.DynSysLib.DynSysLib
     :members:
     
 

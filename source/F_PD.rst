@@ -98,7 +98,9 @@ Parameter bucket for landscapes
    
 .. autoclass:: teaspoon.ML.Base.LandscapesParameterBucket
     :members:
-
+    :undoc-members:
+    :private-members:
+    :special-members: __init__
 
 **Example:** If user does not provide classification labels, parameter bucket will return a warning as shown below.
  

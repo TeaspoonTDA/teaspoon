@@ -44,6 +44,7 @@ out = Base.getPercentScore(DgmsDF,dgm_col = 'Dgm', labels_col = 'trainingLabel',
 import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..','teaspoon'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'teaspoon'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'teaspoon','ML'))
@@ -51,9 +52,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..','teaspoon','
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..','teaspoon','TSP'))
 
 import feature_functions as fF
-import TDA
 from TDA import Persistence as pP
-from adaptivePart import Partitions
+from SP.adaptivePart import Partitions
 
 import time
 import numpy as np

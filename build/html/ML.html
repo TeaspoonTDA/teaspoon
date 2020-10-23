@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2.5. Persistence Diagram Featurization &mdash; teaspoon 0.1.0 documentation</title>
+  <title>2.2. Persistence Diagram Featurization &mdash; teaspoon 0.1.0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2.5.1. Featurization" href="F_PD.html" />
-    <link rel="prev" title="2.4. Information Module" href="information.html" /> 
+    <link rel="next" title="2.2.1. Featurization" href="F_PD.html" />
+    <link rel="prev" title="2.1. Parameter selection module documentation" href="parameter_selection.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,24 +87,52 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="PHN.html">2.1. Persistent Homology of Networks Module (PHN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DynSysLib.html">2.2. Dynamic Systems Library (DynSysLib) Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.3. Parameter Selection Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="information.html">2.4. Information Module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2.5. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.5.1. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="CL.html">2.5.2. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#references">2.5.3. References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#mutual-information-mi-for-time-delay-tau">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#auto-correlation-for-time-delay-tau">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#mspe-for-time-delay-tau-and-dimension-n">2.1.3. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#statistical-analysis-of-the-fourier-spectrum-for-time-delay-tau">2.1.4. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#permutation-auto-mutual-information-pami-for-time-delay-tau">2.1.5. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#false-nearest-neighbors-fnn-for-dimension-n">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.6. Topological Data Analaysis (TDA) Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TSP.html">2.7. Topological Signal Processing (TSP) Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.8. Make Data (MakeData) Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">2.2.3. References</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">4. License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
 </ul>
@@ -155,7 +183,7 @@
         
           <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
         
-      <li><span class="section-number">2.5. </span>Persistence Diagram Featurization</li>
+      <li><span class="section-number">2.2. </span>Persistence Diagram Featurization</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -175,7 +203,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="persistence-diagram-featurization">
-<h1><span class="section-number">2.5. </span>Persistence Diagram Featurization<a class="headerlink" href="#persistence-diagram-featurization" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.2. </span>Persistence Diagram Featurization<a class="headerlink" href="#persistence-diagram-featurization" title="Permalink to this headline">¶</a></h1>
 <p>Persistence diagram can not be directly used in the machine learning algorithms.
 Therefore, there are several methods that are proposed to extract features from persistence diagrams.
 Some these methods are <a class="reference internal" href="F_PD.html#persistence-images"><span class="std std-ref">Persistence Images</span></a><a class="bibtex reference internal" href="#adams2017" id="id1">[1]</a>, <a class="reference internal" href="F_PD.html#carlsson-coordinates"><span class="std std-ref">Carlsson Coordinates</span></a><a class="bibtex reference internal" href="#adcock2016" id="id2">[2]</a><a class="bibtex reference internal" href="#khasawneh2018" id="id3">[6]</a>, <a class="reference internal" href="F_PD.html#persistence-landscapes"><span class="std std-ref">Persistence Landscapes</span></a><a class="bibtex reference internal" href="#bubenik2017" id="id4">[3]</a>, <a class="reference internal" href="F_PD.html#path-signatures"><span class="std std-ref">Path Signatures</span></a><a class="bibtex reference internal" href="#chevyrev2016" id="id5">[4]</a><a class="bibtex reference internal" href="#chevyrev2020" id="id6">[5]</a>, and kernel method <a class="bibtex reference internal" href="#reininghaus2015" id="id7">[8]</a>.
@@ -185,32 +213,32 @@ Our data set is available in Ref. <a class="bibtex reference internal" href="#kh
 One can refer to <a class="bibtex reference internal" href="#yesilli2019" id="id9">[9]</a> for more details.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="F_PD.html">2.5.1. Featurization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="F_PD.html#persistence-landscapes">2.5.1.1. Persistence Landscapes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="F_PD.html#landscape-class">2.5.1.1.1. Landscape class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="F_PD.html#parameter-bucket-for-landscapes">2.5.1.1.2. Parameter bucket for landscapes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="F_PD.html#feature-matrix-generation">2.5.1.1.3. Feature matrix generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="F_PD.html">2.2.1. Featurization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="F_PD.html#persistence-landscapes">2.2.1.1. Persistence Landscapes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html#landscape-class">2.2.1.1.1. Landscape class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html#parameter-bucket-for-landscapes">2.2.1.1.2. Parameter bucket for landscapes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html#feature-matrix-generation">2.2.1.1.3. Feature matrix generation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="F_PD.html#persistence-images">2.5.1.2. Persistence Images</a></li>
-<li class="toctree-l2"><a class="reference internal" href="F_PD.html#carlsson-coordinates">2.5.1.3. Carlsson Coordinates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="F_PD.html#path-signatures">2.5.1.4. Path Signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="F_PD.html#kernel-method">2.5.1.5. Kernel Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="F_PD.html#persistence-images">2.2.1.2. Persistence Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="F_PD.html#carlsson-coordinates">2.2.1.3. Carlsson Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="F_PD.html#path-signatures">2.2.1.4. Path Signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="F_PD.html#kernel-method">2.2.1.5. Kernel Method</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CL.html">2.5.2. Classification</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="CL.html#persistence-landscapes">2.5.2.1. Persistence Landscapes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CL.html#parameter-bucket-for-classification">2.5.2.2. Parameter Bucket for Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CL.html#persistence-images">2.5.2.3. Persistence Images</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CL.html#carlsson-coordinates">2.5.2.4. Carlsson Coordinates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CL.html#path-signatures">2.5.2.5. Path Signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CL.html#kernel-method">2.5.2.6. Kernel Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CL.html">2.2.2. Classification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CL.html#persistence-landscapes">2.2.2.1. Persistence Landscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CL.html#parameter-bucket-for-classification">2.2.2.2. Parameter Bucket for Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CL.html#persistence-images">2.2.2.3. Persistence Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CL.html#carlsson-coordinates">2.2.2.4. Carlsson Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CL.html#path-signatures">2.2.2.5. Path Signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CL.html#kernel-method">2.2.2.6. Kernel Method</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="references">
-<h2><span class="section-number">2.5.3. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2.3. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p id="bibtex-bibliography-ML-0"><dl class="citation">
 <dt class="bibtex label" id="adams2017"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Henry Adams, Tegan Emerson, Michael Kirby, Rachel Neville, Chris Peterson, Patrick Shipman, Sofya Chepushtanova, Eric Hanson, Francis Motta, and Lori Ziegelmeier. Persistence images: a stable vector representation of persistent homology. <em>The Journal of Machine Learning Research</em>, 18(1):218–252, 2017.</p>
@@ -252,10 +280,10 @@ One can refer to <a class="bibtex reference internal" href="#yesilli2019" id="id
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="F_PD.html" class="btn btn-neutral float-right" title="2.5.1. Featurization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="F_PD.html" class="btn btn-neutral float-right" title="2.2.1. Featurization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="information.html" class="btn btn-neutral float-left" title="2.4. Information Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="parameter_selection.html" class="btn btn-neutral float-left" title="2.1. Parameter selection module documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

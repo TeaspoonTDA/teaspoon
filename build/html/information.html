@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2.4. Information Module &mdash; teaspoon 0.1.0 documentation</title>
+  <title>2.4.3. Information Module &mdash; teaspoon 0.1.0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2.5. Persistence Diagram Featurization" href="ML.html" />
-    <link rel="prev" title="2.3. Parameter selection module documentation" href="parameter_selection.html" /> 
+    <link rel="next" title="2.4.4. Miscellaneous Functions" href="misc.html" />
+    <link rel="prev" title="2.4.2. Network Representation of Time Series" href="network.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,18 +87,54 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="PHN.html">2.1. Persistent Homology of Networks Module (PHN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DynSysLib.html">2.2. Dynamic Systems Library (DynSysLib) Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.3. Parameter Selection Module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2.4. Information Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ML.html">2.5. Machine Learning (ML) Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.6. Topological Data Analaysis (TDA) Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TSP.html">2.7. Topological Signal Processing (TSP) Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.8. Make Data (MakeData) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.2. Installation</a></li>
 </ul>
 </li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#mutual-information-mi-for-time-delay-tau">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#auto-correlation-for-time-delay-tau">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#mspe-for-time-delay-tau-and-dimension-n">2.1.3. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#statistical-analysis-of-the-fourier-spectrum-for-time-delay-tau">2.1.4. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#permutation-auto-mutual-information-pami-for-time-delay-tau">2.1.5. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#false-nearest-neighbors-fnn-for-dimension-n">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
 </ul>
 
             
@@ -147,7 +183,9 @@
         
           <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
         
-      <li><span class="section-number">2.4. </span>Information Module</li>
+          <li><a href="SP.html"><span class="section-number">2.4. </span>Signal Processing (SP) Module Documentation</a> &raquo;</li>
+        
+      <li><span class="section-number">2.4.3. </span>Information Module</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,11 +205,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="information-module">
-<h1><span class="section-number">2.4. </span>Information Module<a class="headerlink" href="#information-module" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.4.3. </span>Information Module<a class="headerlink" href="#information-module" title="Permalink to this headline">¶</a></h1>
 <p>This page provides a summary of the functions available in the information module.</p>
-<span class="target" id="module-teaspoon.information.entropy"></span><dl class="py function">
-<dt id="teaspoon.information.entropy.MsPE">
-<code class="sig-prename descclassname">teaspoon.information.entropy.</code><code class="sig-name descname">MsPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">delay_end</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">plotting</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">normalize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/information/entropy.html#MsPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.information.entropy.MsPE" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-teaspoon.SP.information.entropy"></span><dl class="py function">
+<dt id="teaspoon.SP.information.entropy.MsPE">
+<code class="sig-prename descclassname">teaspoon.SP.information.entropy.</code><code class="sig-name descname">MsPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">delay_end</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">plotting</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">normalize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/information/entropy.html#MsPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.information.entropy.MsPE" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>This function takes a time series and calculates Multi-scale Permutation Entropy (MsPE)</dt><dd><p>over multiple time scales</p>
 </dd>
@@ -201,8 +239,8 @@ normalize (bool): Normalizes the permutation entropy on scale from 0 to 1. defau
 </dd></dl>
 
 <dl class="py function">
-<dt id="teaspoon.information.entropy.PE">
-<code class="sig-prename descclassname">teaspoon.information.entropy.</code><code class="sig-name descname">PE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">tau</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">normalize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/information/entropy.html#PE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.information.entropy.PE" title="Permalink to this definition">¶</a></dt>
+<dt id="teaspoon.SP.information.entropy.PE">
+<code class="sig-prename descclassname">teaspoon.SP.information.entropy.</code><code class="sig-name descname">PE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">tau</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">normalize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/information/entropy.html#PE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.information.entropy.PE" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes a time series and calculates Permutation Entropy (PE).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -228,8 +266,8 @@ normalize (bool): Normalizes the permutation entropy on scale from 0 to 1. defau
 </dd></dl>
 
 <dl class="py function">
-<dt id="teaspoon.information.entropy.PersistentEntropy">
-<code class="sig-prename descclassname">teaspoon.information.entropy.</code><code class="sig-name descname">PersistentEntropy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lifetimes</span></em>, <em class="sig-param"><span class="n">normalize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/information/entropy.html#PersistentEntropy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.information.entropy.PersistentEntropy" title="Permalink to this definition">¶</a></dt>
+<dt id="teaspoon.SP.information.entropy.PersistentEntropy">
+<code class="sig-prename descclassname">teaspoon.SP.information.entropy.</code><code class="sig-name descname">PersistentEntropy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lifetimes</span></em>, <em class="sig-param"><span class="n">normalize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/information/entropy.html#PersistentEntropy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.information.entropy.PersistentEntropy" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes a time series and calculates Permutation Entropy (PE).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -260,10 +298,10 @@ normalize (bool): Normalizes the permutation entropy on scale from 0 to 1. defau
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ML.html" class="btn btn-neutral float-right" title="2.5. Persistence Diagram Featurization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="misc.html" class="btn btn-neutral float-right" title="2.4.4. Miscellaneous Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="parameter_selection.html" class="btn btn-neutral float-left" title="2.3. Parameter selection module documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="network.html" class="btn btn-neutral float-left" title="2.4.2. Network Representation of Time Series" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -70,7 +70,7 @@ def MsPE_tau(time_series, delay_end = 200, plotting = False):
     return delay_peak
 
     
-def MsPE_n(time_series, delay, m_start, m_end, plotting = False):
+def MsPE_n(time_series, delay, m_start = 3, m_end = 7, plotting = False):
     
     """This function returns a suitable embedding dimension, given a time series and embedding delay, based on the 
     dimenion normalized MsPE at the optimum delay for a range of dimensions n.

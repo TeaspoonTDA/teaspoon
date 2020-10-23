@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2.6. Topological Data Analysis (TDA) Module Documentation &mdash; teaspoon 0.1.0 documentation</title>
+  <title>2.3. Topological Data Analysis (TDA) Module Documentation &mdash; teaspoon 0.1.0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2.7. Topological Signal Processing (TSP) Module Documentation" href="TSP.html" />
-    <link rel="prev" title="2.5.2. Classification" href="CL.html" /> 
+    <link rel="next" title="2.3.1. Persistent Homology of Networks (PHN)" href="PHN.html" />
+    <link rel="prev" title="2.2.2. Classification" href="CL.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,23 +87,54 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="PHN.html">2.1. Persistent Homology of Networks Module (PHN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DynSysLib.html">2.2. Dynamic Systems Library (DynSysLib) Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.3. Parameter Selection Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="information.html">2.4. Information Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ML.html">2.5. Machine Learning (ML) Module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2.6. Topological Data Analaysis (TDA) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-teaspoon.TDA.Distance">2.6.1. Distances</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-teaspoon.TDA.Draw">2.6.2. Drawing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-teaspoon.TDA.Persistence">2.6.3. Persistence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#mutual-information-mi-for-time-delay-tau">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#auto-correlation-for-time-delay-tau">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#mspe-for-time-delay-tau-and-dimension-n">2.1.3. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#statistical-analysis-of-the-fourier-spectrum-for-time-delay-tau">2.1.4. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#permutation-auto-mutual-information-pami-for-time-delay-tau">2.1.5. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#false-nearest-neighbors-fnn-for-dimension-n">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="TSP.html">2.7. Topological Signal Processing (TSP) Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.8. Make Data (MakeData) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.2.3. References</a></li>
 </ul>
 </li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
 </ul>
 
             
@@ -152,7 +183,7 @@
         
           <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
         
-      <li><span class="section-number">2.6. </span>Topological Data Analysis (TDA) Module Documentation</li>
+      <li><span class="section-number">2.3. </span>Topological Data Analysis (TDA) Module Documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,451 +203,15 @@
            <div itemprop="articleBody">
             
   <div class="section" id="topological-data-analysis-tda-module-documentation">
-<h1><span class="section-number">2.6. </span>Topological Data Analysis (TDA) Module Documentation<a class="headerlink" href="#topological-data-analysis-tda-module-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-teaspoon.TDA.Distance">
-<span id="distances"></span><h2><span class="section-number">2.6.1. </span>Distances<a class="headerlink" href="#module-teaspoon.TDA.Distance" title="Permalink to this headline">¶</a></h2>
-<p>Has code for computing pairwise distance for diagrams.</p>
-<p>Created on Jun 9, 2016</p>
-<dl class="field-list simple">
-<dt class="field-odd">author</dt>
-<dd class="field-odd"><p>liz</p>
-</dd>
-</dl>
-<dl class="py function">
-<dt id="teaspoon.TDA.Distance.dgmDist_Hera">
-<code class="sig-prename descclassname">teaspoon.TDA.Distance.</code><code class="sig-name descname">dgmDist_Hera</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">D1</span></em>, <em class="sig-param"><span class="n">D2</span></em>, <em class="sig-param"><span class="n">wassDeg</span><span class="o">=</span><span class="default_value">'Bottleneck'</span></em>, <em class="sig-param"><span class="n">relError</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">internal_p</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Distance.html#dgmDist_Hera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Distance.dgmDist_Hera" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default values for wasserstein_dist from Hera:</p>
-<blockquote>
-<div><p>internal_p must be in <span class="math notranslate nohighlight">\([1.0, \infty]\)</span> (to explicitly set internal_p to <span class="math notranslate nohighlight">\(\infty\)</span>, supply inf).By default wasserstein degree is 1.0, relative error is 0.01, internal norm is l_infinity.</p>
-</div></blockquote>
-<p>hera input format:</p>
-<blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bottleneck_dist</span> <span class="n">file1</span> <span class="n">file2</span>  <span class="p">[</span><span class="n">relative_error</span><span class="p">]</span>
-<span class="n">wasserstein_dist</span> <span class="n">file1</span> <span class="n">file2</span>  <span class="p">[</span><span class="n">wasserstein</span> <span class="n">degree</span><span class="p">]</span> <span class="p">[</span><span class="n">relative</span> <span class="n">error</span><span class="p">]</span> <span class="p">[</span><span class="n">internal</span> <span class="n">norm</span><span class="p">]</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>Parameters:</p>
-<dl class="field-list">
-<dt class="field-odd">Parameter D1</dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Parameter D2</dt>
-<dd class="field-even"><p>Persistence diagrams given as Lx2 numpy arrays.</p>
-</dd>
-<dt class="field-odd">Parameter wassDeg</dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Options are:</dt><dd><ul class="simple">
-<li><p>‘Bottleneck’ or anything containing ‘bot’. Runs the bottleneck_dist command</p></li>
-<li><p>np.inf: Also returns bottleneck distance with the bottleneck_dist command</p></li>
-<li><p>an integer q: Computes the q-th Wasserstein distance</p></li>
+<h1><span class="section-number">2.3. </span>Topological Data Analysis (TDA) Module Documentation<a class="headerlink" href="#topological-data-analysis-tda-module-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This branch of the documentation covers tool used for topological data analysis. Specifically, there are several wrappers for calculating the persistent homology as well as tools to calculate the persistent homology of networks (graphs).</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 </ul>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Parameter relError</dt>
-<dd class="field-even"><ul>
-<li><p>An input to both bottleneck_dist and wasserstein_dist.</p></li>
-<li><dl>
-<dt>For wasserstein_dist from hera documentation:</dt><dd><p>If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).
-Otherwise the output is an approximation of the exact distance. Precisely:
-if d_exact is the true distance and d_approx is the output, then</p>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\(\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \mathrm{relativeError}\)</span>.</p>
-</div></blockquote>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>For bottleneck_dist from hera documentation:</dt><dd><dl class="simple">
-<dt>If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same). Otherwise the output is an approximation of the exact distance. Precisely: if d_exact is the true distance and d_approx is the output, then</dt><dd><p><span class="math notranslate nohighlight">\(\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \mathrm{relativeError}.\)</span></p>
-</dd>
-</dl>
-</dd>
-</dl>
-</li>
-<li><p>Default value in Hera is 0.01 for Wasserstein distance and 0 (exact computation) for bottleneck distance.</p></li>
-<li><p>Values passed to hera must be positive.</p></li>
-</ul>
-</dd>
-<dt class="field-odd">Parameter internal_p</dt>
-<dd class="field-odd"><p>This is only controllable for Wasserstein distance computation.  Matched points are measured by <span class="math notranslate nohighlight">\(L_p\)</span> distance.
-Default is internal_p = infinity.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A float for the distance between the diagrams</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="module-teaspoon.TDA.Draw">
-<span id="drawing"></span><h2><span class="section-number">2.6.2. </span>Drawing<a class="headerlink" href="#module-teaspoon.TDA.Draw" title="Permalink to this headline">¶</a></h2>
-<p>Code for drawing various things.</p>
-<dl class="py function">
-<dt id="teaspoon.TDA.Draw.drawDgm">
-<code class="sig-prename descclassname">teaspoon.TDA.Draw.</code><code class="sig-name descname">drawDgm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">D</span></em>, <em class="sig-param"><span class="n">boundary</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">epsilon</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">color</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Draw.html#drawDgm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Draw.drawDgm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draws simple persistence diagram plot</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter D</dt>
-<dd class="field-odd"><p>a persistence diagram, given as a Kx2 numpy array</p>
-</dd>
-<dt class="field-even">Parameter boundary</dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Parameter epsilon</dt>
-<dd class="field-odd"><p>The diagram is drawn on [0,boundary]x[0,boundary].
-If boundary not given, then it is determined to be the
-max death time from the input diagram plus epsilon.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Draw.drawPtCloud">
-<code class="sig-prename descclassname">teaspoon.TDA.Draw.</code><code class="sig-name descname">drawPtCloud</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">P</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Draw.html#drawPtCloud"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Draw.drawPtCloud" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draws simple point cloud plot</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter P</dt>
-<dd class="field-odd"><p>a point cloud, given as a KxD numpy array.
-Even if D&gt;2, only the first two coordinates are plotted.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="module-teaspoon.TDA.Persistence">
-<span id="persistence"></span><h2><span class="section-number">2.6.3. </span>Persistence<a class="headerlink" href="#module-teaspoon.TDA.Persistence" title="Permalink to this headline">¶</a></h2>
-<p>Wrapper for using various fast persistence software inside of python.</p>
-<p>All diagrams are stored as a 2xN numpy matrix.
-When a code returns multiple dimensions, these are returned as a dictionary</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="mi">0</span><span class="p">:</span> <span class="n">DgmDimension0</span><span class="p">,</span>
-    <span class="mi">1</span><span class="p">:</span> <span class="n">DgmDimension1</span><span class="p">,</span>
-    <span class="o">...</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Infinite classes are given an entry of np.inf.
-During computation, all data files are saved in a hidden folder “.teaspoonData”.
-This folder is created if it doesn’t already exist.
-Files are repeatedly emptied out of it, so do not save anything in it that you might want later!</p>
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.Cubical_Perseus">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">Cubical_Perseus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">numDigits</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">suppressOutput</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#Cubical_Perseus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.Cubical_Perseus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes persistence for a matrix of function values
-using Vidit Nanda’s <a class="reference external" href="http://people.maths.ox.ac.uk/nanda/perseus/index.html">perseus</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>perseus must be in the bash path</p></li>
-<li><p>matrix must be 2-dimensional</p></li>
-</ul>
-</div>
-<dl class="field-list">
-<dt class="field-odd">Parameter M</dt>
-<dd class="field-odd"><p>a 2D numpy array</p>
-</dd>
-<dt class="field-even">Parameter numDigits</dt>
-<dd class="field-even"><p>Perseus only accepts positive integer valued matrices.  To
-compensate, we apply the transformation</p>
-<blockquote>
-<div><p>x -&gt; x* (10**numDigits) + M.min()</p>
-</div></blockquote>
-<p>then calculate persistence on the resulting matrix.
-The persistence diagram birth/death times are then converted
-back via the inverse transform.</p>
-</dd>
-<dt class="field-odd">Parameter suppressOutput</dt>
-<dd class="field-odd"><p>If true, gets rid of printed output from perseus.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A dictionary with integer keys 0,1,…,N
-The key gives the dimension of the persistence diagram.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.VR_Perseus">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">VR_Perseus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">maxRadius</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">numSteps</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">stepSize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">suppressOutput</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#VR_Perseus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.VR_Perseus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Does brips version of perseus.
-Computes VR persitsence on points in Euclidean space.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires choice of maxRadius, numSteps, and/or stepSize.
-Bad choices will give junk results.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter P</dt>
-<dd class="field-odd"><p>An NxD array.  Represents N points in R^D.</p>
-</dd>
-<dt class="field-even">Parameter maxRadius</dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Parameter stepSize</dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Parameter numSteps</dt>
-<dd class="field-even"><p>Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until
-maxRadius = stepSize*numSteps.
-Only 2 of the three entries should be passed.
-If numSteps and stepSize are passed (regardless of whether maxRadius is passed), they will be used for the computation.  Otherwise, the two non-none valued entries will be used to calculate the third.</p>
-</dd>
-<dt class="field-odd">Parameter suppressOutput</dt>
-<dd class="field-odd"><p>If true, gets rid of printed output from perseus.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p>A dictionary with integer keys 0,1,…,N</p>
-<p>The key gives the dimension of the persistence diagram.</p>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.VR_Ripser">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">VR_Ripser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">maxDim</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#VR_Ripser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.VR_Ripser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes persistence up to dimension maxDim using Uli Bauer’s Ripser.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Ripser needs to be installed on machine in advance <a class="reference external" href="https://github.com/Ripser/ripser">https://github.com/Ripser/ripser</a></p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter P</dt>
-<dd class="field-odd"><p>A point cloud as an NxD numpy array.
-N is the number of points, D is the dimension of
-Euclidean space.</p>
-</dd>
-<dt class="field-even">Parameter maxDim</dt>
-<dd class="field-even"><p>An integer representing the maximum dimension
-for computing persistent homology</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A dictionary Dgms where Dgms[k] is a lx2 matrix
-giving points in the k-dimensional pers diagram</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.distMat_Perseus">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">distMat_Perseus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#distMat_Perseus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.distMat_Perseus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Not yet implemented</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.distMat_Ripser">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">distMat_Ripser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distMat</span></em>, <em class="sig-param"><span class="n">maxDim</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#distMat_Ripser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.distMat_Ripser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes persistence up to maxDim using Uli Bauer’s <a class="reference external" href="https://github.com/Ripser/ripser">Ripser</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Ripser needs to be installed on machine in advance. This code doesn’t check for it’s existence.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter distMat</dt>
-<dd class="field-odd"><p>A distance matrix given as a NxN numpy array</p>
-</dd>
-<dt class="field-even">Parameter maxDim</dt>
-<dd class="field-even"><p>An integer representing the maximum dimension
-for computing persistent homology</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A dictionary Dgms where Dgms[k] is a lx2 matrix
-giving points in the k-dimensional pers diagram</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.maxBirth">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">maxBirth</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Dgm</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxBirth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets maximum birth for a given diagram</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter Dgm</dt>
-<dd class="field-odd"><p>a 2D numpy array</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.maxBirthSeries">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">maxBirthSeries</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DgmsSeries</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxBirthSeries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirthSeries" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes data frame DgmsDF.
-Finds maximum persistence over all diagrams in
-column with label dgm_col.
-Gets maximum persistence for a pandas.Series with diagrams as entries</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter DgmSeries</dt>
-<dd class="field-odd"><p>a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.maxPers">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">maxPers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Dgm</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxPers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets maximum persistence for a given diagram</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter Dgm</dt>
-<dd class="field-odd"><p>a 2D numpy array</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.maxPersistenceSeries">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">maxPersistenceSeries</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DgmsSeries</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxPersistenceSeries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPersistenceSeries" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes data frame DgmsDF.
-Finds maximum persistence over all diagrams in
-column with label dgm_col.
-Gets maximum persistence for a pandas.Series with diagrams as entries</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter DgmsSeries</dt>
-<dd class="field-odd"><p>a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.minBirth">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">minBirth</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Dgm</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minBirth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets minimum birth  for a given diagram</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter Dgm</dt>
-<dd class="field-odd"><p>a 2D numpy array</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.minBirthSeries">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">minBirthSeries</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DgmsSeries</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minBirthSeries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirthSeries" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes data frame DgmsDF.
-Finds minimum persistence over all diagrams in
-column with label dgm_col.
-Gets minimum persistence for a pandas.Series with diagrams as entries</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter DgmSeries</dt>
-<dd class="field-odd"><p>a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.minPers">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">minPers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Dgm</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minPers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minPers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets minimum persistence for a given diagram</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter Dgm</dt>
-<dd class="field-odd"><p>a 2D numpy array</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.minPersistenceSeries">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">minPersistenceSeries</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DgmsSeries</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minPersistenceSeries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minPersistenceSeries" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes data frame DgmsDF.
-Finds minimum persistence over all diagrams in
-column with label dgm_col.
-Gets minimum persistence for a pandas.Series with diagrams as entries</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter DgmSeries</dt>
-<dd class="field-odd"><p>a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.prepareFolders">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">prepareFolders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#prepareFolders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.prepareFolders" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks that necessary folder structure system exists.
-Empties out all previously saved files to avoid confusion.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.readPerseusOutput">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">readPerseusOutput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">outputFileName</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#readPerseusOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.readPerseusOutput" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads in the diagrams in the format that Perseus uses.
-Returns a dictionary with integer keys representing the dimension of each diagram.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.readRipserOutput">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">readRipserOutput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">out</span></em>, <em class="sig-param"><span class="n">drop_inf_class</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#readRipserOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.readRipserOutput" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read output from Ripser</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.readRipserString">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">readRipserString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#readRipserString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.readRipserString" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read string from Ripser</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.removeInfiniteClasses">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">removeInfiniteClasses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Dgm</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#removeInfiniteClasses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.removeInfiniteClasses" title="Permalink to this definition">¶</a></dt>
-<dd><p>Simply deletes classes that have infinite lifetimes.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.writeMatrixFileForPerseus">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">writeMatrixFileForPerseus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">filesavename</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#writeMatrixFileForPerseus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.writeMatrixFileForPerseus" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Given 2D matrix M, write into file format read by Perseus.
-Info on format can be found at:
-<a class="reference external" href="http://people.maths.ox.ac.uk/nanda/perseus/index.html">http://people.maths.ox.ac.uk/nanda/perseus/index.html</a></p>
-</div></blockquote>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.writePointCloudFileForPerseus">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">writePointCloudFileForPerseus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">stepSize</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">numSteps</span><span class="o">=</span><span class="default_value">500</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#writePointCloudFileForPerseus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.writePointCloudFileForPerseus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes the point cloud to a file in the perseus format.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Vidit has options for radius scaling factor.</p>
-</div>
-<p>Parameters:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameter P</dt>
-<dd class="field-odd"><p>An NxD array.  Represents $N$ points in $R^D$.</p>
-</dd>
-<dt class="field-even">Parameter filename</dt>
-<dd class="field-even"><p>location for saving the file</p>
-</dd>
-<dt class="field-odd">Parameter stepSize</dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Parameter numSteps</dt>
-<dd class="field-even"><p>Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.
-So, persistence will be calculated from parameter 0 until stepSize*numSteps.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 </div>
 
@@ -628,10 +223,10 @@ So, persistence will be calculated from parameter 0 until stepSize*numSteps.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="TSP.html" class="btn btn-neutral float-right" title="2.7. Topological Signal Processing (TSP) Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="PHN.html" class="btn btn-neutral float-right" title="2.3.1. Persistent Homology of Networks (PHN)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="CL.html" class="btn btn-neutral float-left" title="2.5.2. Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="CL.html" class="btn btn-neutral float-left" title="2.2.2. Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

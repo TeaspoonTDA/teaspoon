@@ -85,9 +85,52 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">3. Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#mutual-information-mi-for-time-delay-tau">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#auto-correlation-for-time-delay-tau">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#mspe-for-time-delay-tau-and-dimension-n">2.1.3. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#statistical-analysis-of-the-fourier-spectrum-for-time-delay-tau">2.1.4. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#permutation-auto-mutual-information-pami-for-time-delay-tau">2.1.5. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#false-nearest-neighbors-fnn-for-dimension-n">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">4. License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../citing.html">5. Citing</a></li>
 </ul>
@@ -171,7 +214,7 @@
 
 
 <span class="c1">#-------------Circles and Annuli---------------------------------------#</span>
-<div class="viewcode-block" id="Circle"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.Circle">[docs]</a><span class="k">def</span> <span class="nf">Circle</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Circle"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Circle">[docs]</a><span class="k">def</span> <span class="nf">Circle</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate N points in R^2 from the circle centered</span>
 <span class="sd">    at the origin with radius r.</span>
@@ -212,7 +255,7 @@
     <span class="k">return</span> <span class="n">P</span></div>
 
 
-<div class="viewcode-block" id="Sphere"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.Sphere">[docs]</a><span class="k">def</span> <span class="nf">Sphere</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Sphere"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Sphere">[docs]</a><span class="k">def</span> <span class="nf">Sphere</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate N points in R^3 from the sphere centered</span>
 <span class="sd">    at the origin with radius r.</span>
@@ -247,7 +290,7 @@
     <span class="k">return</span> <span class="n">P</span></div>
 
 
-<div class="viewcode-block" id="Annulus"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.Annulus">[docs]</a><span class="k">def</span> <span class="nf">Annulus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Annulus"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Annulus">[docs]</a><span class="k">def</span> <span class="nf">Annulus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Returns point cloud sampled from uniform distribution on</span>
 <span class="sd">    annulus in R^2 of inner radius r and outer radius R</span>
@@ -287,7 +330,7 @@
 
 <span class="c1">#-------------Torus a la Diaconis paper--------------------------------#</span>
 
-<div class="viewcode-block" id="Torus"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.Torus">[docs]</a><span class="k">def</span> <span class="nf">Torus</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Torus"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Torus">[docs]</a><span class="k">def</span> <span class="nf">Torus</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Sampling method taken from Sampling from a Manifold by Diaconis,</span>
 <span class="sd">    Holmes and Shahshahani, arXiv:1206.6913</span>
@@ -364,7 +407,7 @@
 
 <span class="c1">#----------------------------------------------------------------------#</span>
 
-<div class="viewcode-block" id="Cube"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.Cube">[docs]</a><span class="k">def</span> <span class="nf">Cube</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">diam</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Cube"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Cube">[docs]</a><span class="k">def</span> <span class="nf">Cube</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">diam</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate N points in R^dim from the box</span>
 <span class="sd">    [0,diam]x[0,diam]x...x[0,diam]</span>
@@ -393,7 +436,7 @@
 
 <span class="c1">#----------------------------------------------------------------------#</span>
 
-<div class="viewcode-block" id="Clusters"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.Clusters">[docs]</a><span class="k">def</span> <span class="nf">Clusters</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<div class="viewcode-block" id="Clusters"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Clusters">[docs]</a><span class="k">def</span> <span class="nf">Clusters</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
             <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))),</span>
             <span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
             <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -469,7 +512,7 @@
 <span class="c1">#----------------------------------------------------------------------#</span>
 <span class="c1">#------------Normally distributed points in (birth,death) plane--------#</span>
 <span class="c1">#----------------------------------------------------------------------#</span>
-<div class="viewcode-block" id="normalDiagram"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.normalDiagram">[docs]</a><span class="k">def</span> <span class="nf">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="normalDiagram"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.normalDiagram">[docs]</a><span class="k">def</span> <span class="nf">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.</span>
 <span class="sd">    Pulls `N` points from a normal distribution with mean `mu` and standard deviation `sd`, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.</span>
@@ -510,7 +553,7 @@
 
 
 
-<div class="viewcode-block" id="testSetClassification"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.testSetClassification">[docs]</a><span class="k">def</span> <span class="nf">testSetClassification</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+<div class="viewcode-block" id="testSetClassification"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetClassification">[docs]</a><span class="k">def</span> <span class="nf">testSetClassification</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
                     <span class="n">numDgms</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span>
                     <span class="n">muRed</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
                     <span class="n">muBlue</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
@@ -576,7 +619,7 @@
 <span class="c1">#---------------LINEAR---------------------------------------</span>
 <span class="c1">#-----------------------------------------------</span>
 
-<div class="viewcode-block" id="testSetRegressionLine"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.testSetRegressionLine">[docs]</a><span class="k">def</span> <span class="nf">testSetRegressionLine</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+<div class="viewcode-block" id="testSetRegressionLine"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetRegressionLine">[docs]</a><span class="k">def</span> <span class="nf">testSetRegressionLine</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
                     <span class="n">numDgms</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
                     <span class="n">muStart</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
                     <span class="n">muEnd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
@@ -635,7 +678,7 @@
 <span class="c1">#---------------2D-ball around center-----------------------</span>
 <span class="c1">#-----------------------------------------------</span>
 
-<div class="viewcode-block" id="testSetRegressionBall"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.testSetRegressionBall">[docs]</a><span class="k">def</span> <span class="nf">testSetRegressionBall</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+<div class="viewcode-block" id="testSetRegressionBall"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetRegressionBall">[docs]</a><span class="k">def</span> <span class="nf">testSetRegressionBall</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
                     <span class="n">numDgms</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
                     <span class="n">muCenter</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
                     <span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -692,7 +735,7 @@
 
 <span class="c1">#------------------------------------------------------------#</span>
 
-<div class="viewcode-block" id="testSetManifolds"><a class="viewcode-back" href="../../../MakeData.html#teaspoon.MakeData.PointCloud.testSetManifolds">[docs]</a><span class="k">def</span> <span class="nf">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+<div class="viewcode-block" id="testSetManifolds"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetManifolds">[docs]</a><span class="k">def</span> <span class="nf">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
                         <span class="n">numPts</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
                         <span class="n">permute</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                         <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span>
