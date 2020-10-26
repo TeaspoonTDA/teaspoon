@@ -92,12 +92,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../parameter_selection.html">2.1. Parameter Selection Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#mutual-information-mi-for-time-delay-tau">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#auto-correlation-for-time-delay-tau">2.1.2. Auto-correlation for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#mspe-for-time-delay-tau-and-dimension-n">2.1.3. MsPE for time delay (tau) and dimension (n).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#statistical-analysis-of-the-fourier-spectrum-for-time-delay-tau">2.1.4. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#permutation-auto-mutual-information-pami-for-time-delay-tau">2.1.5. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../parameter_selection.html#false-nearest-neighbors-fnn-for-dimension-n">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html">2.1.6. False Nearest Neighbors</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
@@ -488,7 +488,7 @@
 <span class="c1"># In[ ]:</span>
 
 
-<div class="viewcode-block" id="MI_DV"><a class="viewcode-back" href="../../../parameter_selection.html#teaspoon.parameter_selection.MI_delay.MI_DV">[docs]</a><span class="k">def</span> <span class="nf">MI_DV</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> 
+<div class="viewcode-block" id="MI_DV"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_DV">[docs]</a><span class="k">def</span> <span class="nf">MI_DV</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> 
     <span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
 <span class="sd">    using adaptive partitioning of the plots of the time series x(t) and its delayed version x(t+tau). </span>
 <span class="sd">    This method was developed by Georges Darbellay and Igor Vajda in 1999 and was published as</span>
@@ -551,7 +551,7 @@
 <span class="c1"># algorithm described in:</span>
 <span class="c1"># &quot;Estimating Mutual Information,&quot; Alexander Kraskov, Harald Stoegbauer, Peter Grassberger, 2003.</span>
     
-<div class="viewcode-block" id="MI_kraskov"><a class="viewcode-back" href="../../../parameter_selection.html#teaspoon.parameter_selection.MI_delay.MI_kraskov">[docs]</a><span class="k">def</span> <span class="nf">MI_kraskov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="MI_kraskov"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov">[docs]</a><span class="k">def</span> <span class="nf">MI_kraskov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function estimates the mutual information between the time series x(t) and its delayed version x(t+tau) in two different ways. </span>
 <span class="sd">    This method was developed by Alexander Kraskov, Harald Stoegbauer, and Peter Grassberger in 2003 and published as </span>
 <span class="sd">    Estimating Mutual Information.</span>
@@ -631,7 +631,7 @@
 <span class="c1"># This function computes the mutual information function based on</span>
 <span class="c1"># equal sized bins for x and y arrays (seperately)</span>
 
-<div class="viewcode-block" id="MI_basic"><a class="viewcode-back" href="../../../parameter_selection.html#teaspoon.parameter_selection.MI_delay.MI_basic">[docs]</a><span class="k">def</span> <span class="nf">MI_basic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">h_method</span> <span class="o">=</span> <span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">ranking</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span> 
+<div class="viewcode-block" id="MI_basic"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_basic">[docs]</a><span class="k">def</span> <span class="nf">MI_basic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">h_method</span> <span class="o">=</span> <span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">ranking</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span> 
     <span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
 <span class="sd">    using equi-spaced partitions. The size of the partition is based on the desired bin size method commonly selected for histograms.</span>
 <span class="sd">    </span>
@@ -704,7 +704,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">I</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="MI_for_delay"><a class="viewcode-back" href="../../../parameter_selection.html#teaspoon.parameter_selection.MI_delay.MI_for_delay">[docs]</a><span class="k">def</span> <span class="nf">MI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;basic&#39;</span><span class="p">,</span> <span class="n">h_method</span> <span class="o">=</span> <span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="MI_for_delay"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay">[docs]</a><span class="k">def</span> <span class="nf">MI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;basic&#39;</span><span class="p">,</span> <span class="n">h_method</span> <span class="o">=</span> <span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function calculates the mutual information until a first minima is reached, which is estimated as a sufficient embedding dimension for permutation entropy.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>

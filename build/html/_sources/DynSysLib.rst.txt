@@ -9,7 +9,7 @@ This page provides a summary of the Python Dynamical Systems Library (DynSysLib)
    :class: with-shadow float-left
    :scale: 35
 
-Figure: x-solution to simulated rossler system for a periodic response.
+Figure: x-solution to simulated rossler system for a chaotic response.
 
 .. rst-class::  clear-both
 

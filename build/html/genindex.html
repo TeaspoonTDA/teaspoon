@@ -92,12 +92,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">2. Modules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#mutual-information-mi-for-time-delay-tau">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#auto-correlation-for-time-delay-tau">2.1.2. Auto-correlation for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#mspe-for-time-delay-tau-and-dimension-n">2.1.3. MsPE for time delay (tau) and dimension (n).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#statistical-analysis-of-the-fourier-spectrum-for-time-delay-tau">2.1.4. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#permutation-auto-mutual-information-pami-for-time-delay-tau">2.1.5. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="parameter_selection.html#false-nearest-neighbors-fnn-for-dimension-n">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html">2.1.6. False Nearest Neighbors</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
@@ -229,13 +229,13 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.delay_LMS.AbsFFT">AbsFFT() (in module teaspoon.parameter_selection.delay_LMS)</a>
+      <li><a href="FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT">AbsFFT() (in module teaspoon.parameter_selection.delay_LMS)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="PointCloud.html#teaspoon.MakeData.PointCloud.Annulus">Annulus() (in module teaspoon.MakeData.PointCloud)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau">autoCorrelation_tau() (in module teaspoon.parameter_selection.autocorrelation)</a>
+      <li><a href="AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau">autoCorrelation_tau() (in module teaspoon.parameter_selection.autocorrelation)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -289,7 +289,7 @@
 </li>
       <li><a href="F_PD.html#teaspoon.ML.feature_functions.F_PSignature">F_PSignature() (in module teaspoon.ML.feature_functions)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.FNN_n.FNN_n">FNN_n() (in module teaspoon.parameter_selection.FNN_n)</a>
+      <li><a href="FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n">FNN_n() (in module teaspoon.parameter_selection.FNN_n)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -297,12 +297,10 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="tsa.html#teaspoon.SP.tsa_tools.k_NN">k_NN() (in module teaspoon.SP.tsa_tools)</a>
+      <li><a href="F_PD.html#teaspoon.ML.feature_functions.KernelMethod">KernelMethod() (in module teaspoon.ML.feature_functions)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="F_PD.html#teaspoon.ML.feature_functions.KernelMethod">KernelMethod() (in module teaspoon.ML.feature_functions)</a>
-</li>
       <li><a href="network.html#teaspoon.SP.network.knn_graph">knn_graph() (in module teaspoon.SP.network)</a>
 </li>
   </ul></td>
@@ -311,7 +309,7 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay">LMSforDelay() (in module teaspoon.parameter_selection.delay_LMS)</a>
+      <li><a href="FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay">LMSforDelay() (in module teaspoon.parameter_selection.delay_LMS)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -325,19 +323,19 @@
 </li>
       <li><a href="persistence.html#teaspoon.TDA.Persistence.maxBirthSeries">maxBirthSeries() (in module teaspoon.TDA.Persistence)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency">MaximumFrequency() (in module teaspoon.parameter_selection.delay_LMS)</a>
+      <li><a href="FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency">MaximumFrequency() (in module teaspoon.parameter_selection.delay_LMS)</a>
 </li>
       <li><a href="persistence.html#teaspoon.TDA.Persistence.maxPers">maxPers() (in module teaspoon.TDA.Persistence)</a>
 </li>
       <li><a href="persistence.html#teaspoon.TDA.Persistence.maxPersistenceSeries">maxPersistenceSeries() (in module teaspoon.TDA.Persistence)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.MI_delay.MI_basic">MI_basic() (in module teaspoon.parameter_selection.MI_delay)</a>
+      <li><a href="MI.html#teaspoon.parameter_selection.MI_delay.MI_basic">MI_basic() (in module teaspoon.parameter_selection.MI_delay)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.MI_delay.MI_DV">MI_DV() (in module teaspoon.parameter_selection.MI_delay)</a>
+      <li><a href="MI.html#teaspoon.parameter_selection.MI_delay.MI_DV">MI_DV() (in module teaspoon.parameter_selection.MI_delay)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.MI_delay.MI_for_delay">MI_for_delay() (in module teaspoon.parameter_selection.MI_delay)</a>
+      <li><a href="MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay">MI_for_delay() (in module teaspoon.parameter_selection.MI_delay)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.MI_delay.MI_kraskov">MI_kraskov() (in module teaspoon.parameter_selection.MI_delay)</a>
+      <li><a href="MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov">MI_kraskov() (in module teaspoon.parameter_selection.MI_delay)</a>
 </li>
       <li><a href="persistence.html#teaspoon.TDA.Persistence.minBirth">minBirth() (in module teaspoon.TDA.Persistence)</a>
 </li>
@@ -357,25 +355,23 @@
 </li>
         <li><a href="F_PD.html#module-teaspoon.ML.feature_functions">teaspoon.ML.feature_functions</a>
 </li>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.autocorrelation">teaspoon.parameter_selection.autocorrelation</a>
+        <li><a href="AC.html#module-teaspoon.parameter_selection.autocorrelation">teaspoon.parameter_selection.autocorrelation</a>
 </li>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.delay_LMS">teaspoon.parameter_selection.delay_LMS</a>
+        <li><a href="FSA.html#module-teaspoon.parameter_selection.delay_LMS">teaspoon.parameter_selection.delay_LMS</a>
 </li>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.FNN_n">teaspoon.parameter_selection.FNN_n</a>
+        <li><a href="FNN.html#module-teaspoon.parameter_selection.FNN_n">teaspoon.parameter_selection.FNN_n</a>
 </li>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.MI_delay">teaspoon.parameter_selection.MI_delay</a>
+        <li><a href="MI.html#module-teaspoon.parameter_selection.MI_delay">teaspoon.parameter_selection.MI_delay</a>
 </li>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.MsPE">teaspoon.parameter_selection.MsPE</a>
+        <li><a href="MsPE.html#module-teaspoon.parameter_selection.MsPE">teaspoon.parameter_selection.MsPE</a>
 </li>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.PAMI_delay">teaspoon.parameter_selection.PAMI_delay</a>
+        <li><a href="PAMI.html#module-teaspoon.parameter_selection.PAMI_delay">teaspoon.parameter_selection.PAMI_delay</a>
 </li>
         <li><a href="information.html#module-teaspoon.SP.information.entropy">teaspoon.SP.information.entropy</a>
 </li>
         <li><a href="network.html#module-teaspoon.SP.network">teaspoon.SP.network</a>
 </li>
         <li><a href="network.html#module-teaspoon.SP.network_tools">teaspoon.SP.network_tools</a>
-</li>
-        <li><a href="tsa.html#module-teaspoon.SP.tsa_tools">teaspoon.SP.tsa_tools</a>
 </li>
         <li><a href="distances.html#module-teaspoon.TDA.Distance">teaspoon.TDA.Distance</a>
 </li>
@@ -390,11 +386,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="information.html#teaspoon.SP.information.entropy.MsPE">MsPE() (in module teaspoon.SP.information.entropy)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.MsPE.MsPE_n">MsPE_n() (in module teaspoon.parameter_selection.MsPE)</a>
+      <li><a href="MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n">MsPE_n() (in module teaspoon.parameter_selection.MsPE)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.MsPE.MsPE_tau">MsPE_tau() (in module teaspoon.parameter_selection.MsPE)</a>
+      <li><a href="MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau">MsPE_tau() (in module teaspoon.parameter_selection.MsPE)</a>
 </li>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm">mutualPerm() (in module teaspoon.parameter_selection.PAMI_delay)</a>
+      <li><a href="PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm">mutualPerm() (in module teaspoon.parameter_selection.PAMI_delay)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -418,18 +414,16 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="parameter_selection.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay">PAMI_for_delay() (in module teaspoon.parameter_selection.PAMI_delay)</a>
+      <li><a href="PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay">PAMI_for_delay() (in module teaspoon.parameter_selection.PAMI_delay)</a>
 </li>
       <li><a href="information.html#teaspoon.SP.information.entropy.PE">PE() (in module teaspoon.SP.information.entropy)</a>
 </li>
-      <li><a href="tsa.html#teaspoon.SP.tsa_tools.permutation_sequence">permutation_sequence() (in module teaspoon.SP.tsa_tools)</a>
-</li>
       <li><a href="information.html#teaspoon.SP.information.entropy.PersistentEntropy">PersistentEntropy() (in module teaspoon.SP.information.entropy)</a>
+</li>
+      <li><a href="PHN.html#teaspoon.TDA.PHN.PH_network">PH_network() (in module teaspoon.TDA.PHN)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="PHN.html#teaspoon.TDA.PHN.PH_network">PH_network() (in module teaspoon.TDA.PHN)</a>
-</li>
       <li><a href="F_PD.html#teaspoon.ML.feature_functions.PLandscape">PLandscape (class in teaspoon.ML.feature_functions)</a>
 </li>
       <li><a href="F_PD.html#teaspoon.ML.feature_functions.PLandscape.PLandscape_plot">PLandscape_plot() (teaspoon.ML.feature_functions.PLandscape method)</a>
@@ -468,8 +462,6 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="tsa.html#teaspoon.SP.tsa_tools.takens">takens() (in module teaspoon.SP.tsa_tools)</a>
-</li>
       <li>
     teaspoon.MakeData.DynSysLib.DynSysLib
 
@@ -495,44 +487,46 @@
     teaspoon.parameter_selection.autocorrelation
 
       <ul>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.autocorrelation">module</a>
+        <li><a href="AC.html#module-teaspoon.parameter_selection.autocorrelation">module</a>
 </li>
       </ul></li>
       <li>
     teaspoon.parameter_selection.delay_LMS
 
       <ul>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.delay_LMS">module</a>
+        <li><a href="FSA.html#module-teaspoon.parameter_selection.delay_LMS">module</a>
 </li>
       </ul></li>
       <li>
     teaspoon.parameter_selection.FNN_n
 
       <ul>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.FNN_n">module</a>
+        <li><a href="FNN.html#module-teaspoon.parameter_selection.FNN_n">module</a>
 </li>
       </ul></li>
       <li>
     teaspoon.parameter_selection.MI_delay
 
       <ul>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.MI_delay">module</a>
+        <li><a href="MI.html#module-teaspoon.parameter_selection.MI_delay">module</a>
 </li>
       </ul></li>
       <li>
     teaspoon.parameter_selection.MsPE
 
       <ul>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.MsPE">module</a>
+        <li><a href="MsPE.html#module-teaspoon.parameter_selection.MsPE">module</a>
 </li>
       </ul></li>
       <li>
     teaspoon.parameter_selection.PAMI_delay
 
       <ul>
-        <li><a href="parameter_selection.html#module-teaspoon.parameter_selection.PAMI_delay">module</a>
+        <li><a href="PAMI.html#module-teaspoon.parameter_selection.PAMI_delay">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     teaspoon.SP.information.entropy
 
@@ -540,8 +534,6 @@
         <li><a href="information.html#module-teaspoon.SP.information.entropy">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     teaspoon.SP.network
 
@@ -554,13 +546,6 @@
 
       <ul>
         <li><a href="network.html#module-teaspoon.SP.network_tools">module</a>
-</li>
-      </ul></li>
-      <li>
-    teaspoon.SP.tsa_tools
-
-      <ul>
-        <li><a href="tsa.html#module-teaspoon.SP.tsa_tools">module</a>
 </li>
       </ul></li>
       <li>

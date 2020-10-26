@@ -117,13 +117,32 @@ def k_NN(embedded_time_series, k=4):
     ETS = embedded_time_series
     from sklearn.neighbors import NearestNeighbors
     nbrs = NearestNeighbors(n_neighbors=k+1, algorithm='ball_tree').fit(ETS) #get nearest neighbors
-    neighbordistances, indices = nbrs.kneighbors(ETS) #get incidices of nearest neighbors
-    from scipy.spatial import distance
-    distances = distance.cdist(ETS, ETS, 'euclidean') #get euclidean distance between embedded vectors
+    distances, indices = nbrs.kneighbors(ETS) #get incidices of nearest neighbors
     return distances, indices
 
 
 
 
 # In[ ]:
+    
+if __name__ == "__main__": #Only runs if running from this file (This will show basic example)
+    import os
+    import sys
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..', '..'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+
+    
+    import numpy as np
+    t = np.linspace(0,30,200)
+    ts = np.sin(t)  #generate a simple time series
+    
+
+    from teaspoon.SP.tsa_tools import takens
+    embedded_ts = takens(ts, n = 2, tau = 10)
+    
+    import matplotlib.pyplot as plt
+    plt.plot(embedded_ts.T[0], embedded_ts.T[1], 'k.')
+    plt. show()
+    
+    
     
