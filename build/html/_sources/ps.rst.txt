@@ -1,0 +1,20 @@
+
+.. _permutation_sequence:
+
+Permutation Sequence Generation
+**********************************
+
+The function provides an array of the permutations found throughout the time series as shown in the 
+
+.. image:: figures/permutation_sequence_animation.gif
+   :class: with-shadow float-center
+   :scale: 45
+
+
+Figure: Permutation sequence animation for a simple time series and permutations of dimension three.
+
+.. rst-class::  clear-both
+
+.. automodule:: teaspoon.SP.tsa_tools
+    :members: permutation_sequence
+    :noindex:

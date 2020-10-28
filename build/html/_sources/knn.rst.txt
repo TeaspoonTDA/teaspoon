@@ -1,0 +1,10 @@
+.. _knn:
+
+
+k Nearest Neighbors
+***********************
+
+
+.. automodule:: teaspoon.SP.tsa_tools
+    :members: k_NN
+    :noindex:

@@ -1,0 +1,28 @@
+
+.. _takens:
+
+Takens' Embedding
+*******************
+
+
+The Takens' embedding algorhtm reconstructs the state space from a single time series with delay-coordinate embedding as shown in the animation below.
+
+.. image:: figures/takens_embedding_gif.gif
+   :class: with-shadow float-center
+   :scale: 35
+
+
+Figure: Takens' embedding animation for a simple time series and embedding of dimension two. This embeds the 1-D signal into n=2 dimensions with delayed coordinates.
+
+.. rst-class::  clear-both
+
+.. automodule:: teaspoon.SP.tsa_tools
+    :members: takens
+    :noindex:
+
+The two parameters needed for state space reconstruction (Takens' embedding) are the delay parameter and dimension parameter. These can be selected automatically from the parameter selection module ( :ref:`parameter_selection`).
+
+
+**Example**
+
+this is an example

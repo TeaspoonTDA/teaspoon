@@ -60,7 +60,7 @@ def permutation_sequence(ts, n = None, tau = None): #finds permutation sequency 
 # In[ ]:
     
 
-def takens(ts, n, tau):
+def takens(ts, n= None, tau= None):
     
     """This function generates an array of n-dimensional arrays from a time-delay state-space reconstruction.
     
@@ -131,17 +131,56 @@ if __name__ == "__main__": #Only runs if running from this file (This will show 
     sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..', '..'))
     sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
 
+    #------------------------------------TAKENS-----------------------------------------
     
     import numpy as np
     t = np.linspace(0,30,200)
     ts = np.sin(t)  #generate a simple time series
     
-
     from teaspoon.SP.tsa_tools import takens
     embedded_ts = takens(ts, n = 2, tau = 10)
     
     import matplotlib.pyplot as plt
     plt.plot(embedded_ts.T[0], embedded_ts.T[1], 'k.')
+    plt. show()
+    
+    
+    
+    #------------------------------------PS-----------------------------------------
+    
+    import numpy as np
+    t = np.linspace(0,30,200)
+    ts = np.sin(t)  #generate a simple time series
+    
+    from teaspoon.SP.tsa_tools import permutation_sequence
+    PS = permutation_sequence(ts, n = 3, tau = 12)
+    
+    import matplotlib.pyplot as plt
+    plt.plot(t[:len(PS)], PS, 'k')
+    plt. show()
+    
+    
+    
+    
+    #------------------------------------kNN-----------------------------------------
+    
+    import numpy as np
+    t = np.linspace(0,15,100)
+    ts = np.sin(t)  #generate a simple time series
+    
+    from teaspoon.SP.tsa_tools import takens
+    embedded_ts = takens(ts, n = 2, tau = 10)
+    
+    from teaspoon.SP.tsa_tools import k_NN
+    distances, indices = k_NN(embedded_ts, k=4)
+    
+    
+    import matplotlib.pyplot as plt
+    plt.plot(embedded_ts.T[0], embedded_ts.T[1], 'k.')
+    i = 20 #choose arbitrary index to get NN of.
+    NN = indices[i][1:] #get nearest neighbors of point with that index.
+    plt.plot(embedded_ts.T[0][NN], embedded_ts.T[1][NN], 'rs') #plot NN
+    plt.plot(embedded_ts.T[0][i], embedded_ts.T[1][i], 'bd') #plot point of interest
     plt. show()
     
     
