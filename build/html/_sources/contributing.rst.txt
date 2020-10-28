@@ -12,5 +12,6 @@ If contributing to the documentation, the following python packages need to be p
 	- pip install PersistenceImages
 	- pip install TermColor
 	- pip install sphinxcontrib-bibtex
+	- pip install sphinx-rtd-theme
 
 Also, please make sure your sphinx installation is up-to-date and that you are running **make html** from the teaspoon directory.
