@@ -1,10 +1,3 @@
-'''
-Generates data sets related to persistence diagrams and point clouds.
-
-All point clouds are returned as a numpy array, larger collection data is returned as a pandas DataFrame.
-
-'''
-
 import numpy as np
 import pandas as pd
 from scipy.spatial.distance import euclidean
@@ -256,7 +249,7 @@ def Clusters(N = 100,
         the ith cluster in R^d.
     :Parameter sd:
         standard deviation of clusters.
-        
+
         .. todo:: Make this enterable as a vector so each cluster can have a different sd?
 
     :Parameter seed:
@@ -635,8 +628,8 @@ def testSetManifolds(numDgms = 50,
     for i in range(numDgms):
         if fixSeed:
             seed += 1
-        dgmOut = ripser(Clusters(centers=centers, 
-                                        N = numPts, 
+        dgmOut = ripser(Clusters(centers=centers,
+                                        N = numPts,
                                         sd = .05,
                                         seed = seed))['dgms']
         # Dgms.append([dgmOut[0],dgmOut[1]])
