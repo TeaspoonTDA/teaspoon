@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Aug 14 09:35:30 2018
+Methods of partitioning birth-lifetime plane for persistence diagrams. This is
+used for the adaptive partitioning version of template function featurization. 
 
-@author: khasawn3
 """
+
+# Created on Tue Aug 14 09:35:30 2018
+#
+# @author: khasawn3
 
 import numpy as np
 from scipy.stats import binned_statistic_2d, chisquare, rankdata
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from copy import deepcopy
+from sklearn.cluster import KMeans, MiniBatchKMeans
 
 class Partitions:
     '''
