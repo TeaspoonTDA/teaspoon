@@ -208,7 +208,7 @@
 <span class="sd">On the 0/1 test for chaos in continuous systems by Melosik and Marszalek.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="LMSforDelay"><a class="viewcode-back" href="../../../parameter_selection.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay">[docs]</a><span class="k">def</span> <span class="nf">LMSforDelay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span><span class="c1">#1-D lms function</span>
+<div class="viewcode-block" id="LMSforDelay"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay">[docs]</a><span class="k">def</span> <span class="nf">LMSforDelay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span><span class="c1">#1-D lms function</span>
     <span class="sd">&quot;&quot;&quot;This function takes a time series (ts) and the sampling frequency (fs) and uses </span>
 <span class="sd">    the fast fourier transform and gaussian noise statistics in the fourier spectrum </span>
 <span class="sd">    (using least median of squares (LMS) in statistical analysis) to determine a suitable</span>
@@ -278,7 +278,7 @@
         
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MaximumFrequency"><a class="viewcode-back" href="../../../parameter_selection.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency">[docs]</a><span class="k">def</span> <span class="nf">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span><span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
+<div class="viewcode-block" id="MaximumFrequency"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency">[docs]</a><span class="k">def</span> <span class="nf">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span><span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
@@ -301,7 +301,7 @@
     <span class="k">return</span> <span class="n">maxfreq</span> </div>
 
 
-<div class="viewcode-block" id="AbsFFT"><a class="viewcode-back" href="../../../parameter_selection.html#teaspoon.parameter_selection.delay_LMS.AbsFFT">[docs]</a><span class="k">def</span> <span class="nf">AbsFFT</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span> 
+<div class="viewcode-block" id="AbsFFT"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT">[docs]</a><span class="k">def</span> <span class="nf">AbsFFT</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span> 
     <span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
 <span class="sd">    </span>
 <span class="sd">   Args:</span>

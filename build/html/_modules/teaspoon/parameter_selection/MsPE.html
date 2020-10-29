@@ -206,7 +206,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="MsPE_tau"><a class="viewcode-back" href="../../../parameter_selection.html#teaspoon.parameter_selection.MsPE.MsPE_tau">[docs]</a><span class="k">def</span> <span class="nf">MsPE_tau</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">delay_end</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="MsPE_tau"><a class="viewcode-back" href="../../../MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau">[docs]</a><span class="k">def</span> <span class="nf">MsPE_tau</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">delay_end</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function takes a time series and uses Multi-scale Permutation Entropy (MsPE) to find the optimum</span>
 <span class="sd">    delay based on the first maxima in the MsPE plot</span>
 <span class="sd">    </span>
@@ -269,7 +269,7 @@
     <span class="k">return</span> <span class="n">delay_peak</span></div>
 
     
-<div class="viewcode-block" id="MsPE_n"><a class="viewcode-back" href="../../../parameter_selection.html#teaspoon.parameter_selection.MsPE.MsPE_n">[docs]</a><span class="k">def</span> <span class="nf">MsPE_n</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">m_start</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">m_end</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="MsPE_n"><a class="viewcode-back" href="../../../MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n">[docs]</a><span class="k">def</span> <span class="nf">MsPE_n</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">m_start</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">m_end</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
     
     <span class="sd">&quot;&quot;&quot;This function returns a suitable embedding dimension, given a time series and embedding delay, based on the </span>
 <span class="sd">    dimenion normalized MsPE at the optimum delay for a range of dimensions n.</span>

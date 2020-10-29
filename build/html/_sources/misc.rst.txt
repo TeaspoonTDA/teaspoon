@@ -4,4 +4,5 @@ Miscellaneous Functions
 Adaptive Partitioning
 **********************
 
-Need to write sphinx docstring.
+.. automodule:: teaspoon.SP.adaptivePart
+    :members:
