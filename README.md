@@ -27,4 +27,4 @@ The software will soon be available on PyPI!
 Contacts
 =============
 * Liz Munch: [muncheli@msu.edu](mailto:muncheli@msu.edu).
-* Firas Khasawneh [khasawn3@egr.msu.edu](mailto:khasawn3@egr.msu.edu).
+* Firas Khasawneh: [khasawn3@egr.msu.edu](mailto:khasawn3@egr.msu.edu).
