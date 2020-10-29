@@ -1,10 +1,4 @@
 """
-
-Code for drawing various things.
-
-"""
-
-"""
 .. module: Draw
 """
 
@@ -16,14 +10,15 @@ def drawDgm(D,boundary=None,epsilon = .5, color=None):
     """
     Draws simple persistence diagram plot
 
-    :Parameter D:
-        a persistence diagram, given as a Kx2 numpy array
-    :Parameter boundary:
-    :Parameter epsilon:
+    :param D:
+        a persistence diagram, given as a Nx2 numpy array
+    :param boundary:
+        Boundary of persistence diagram axes
+    :param epsilon:
         The diagram is drawn on [0,boundary]x[0,boundary].
         If boundary not given, then it is determined to be the
         max death time from the input diagram plus epsilon.
-
+    :returns: Figure that includes persistence diagram
     """
     # Separate out the infinite classes if they exist
     includesInfPts = np.inf in D
@@ -60,8 +55,8 @@ def drawPtCloud(P):
     """
     Draws simple point cloud plot
 
-    :Parameter P:
-        a point cloud, given as a KxD numpy array.
+    :param P:
+        a point cloud, given as a NxD numpy array.
         Even if D>2, only the first two coordinates are plotted.
 
     """
