@@ -14,72 +14,131 @@ from copy import deepcopy
 class Partitions:
     '''
     A data structure for storing a partition coming from an adapative meshing scheme.
-    data is a numpy array of type many by 2
-    data converted to ordinal and stored locally if not already
-    TODO: Finish documentation
+
+    Parameters:
+        data (np.array):
+            A numpy array of type many by 2
+
+        convertToOrd (bool):
+            Boolean variable to decide if you want to use ordinals for
+            partitioning. Ordinals make things faster but not as nice partitions.
+
+        meshingScheme (str):
+            The type of meshing scheme you want to use. Options include:
+
+                - 'DV' method is based on (mention paper here). For more details see function return_partition_DV.
+                - 'clustering' uses a clustering algorithm to find clusters in the data, then takes the bounding box of all points assigned to each cluster. For more details see the function return_partition_clustering.
+
+        partitionParams (dict):
+            Dictionary of parameters needed for the particular meshing scheme selected.
+            For the explanation of the parameters see the function for the specific meshingScheme
+            (i.e. return_partition_DV or return_partition_clustering)
+
+                - For 'DV' the adjustable parameters are 'alpha', 'c', 'nmin', 'numParts', 'split'.
+                - For 'clustering' the adjustable parameters are 'numClusters', 'clusterAlg', 'weights', 'boxOption', 'boxWidth', 'split'.
+
+        kwargs:
+            Any leftover inputs are stored as attributes.
+
     '''
-    
-    
+
+
     def __init__(self, data = None,
+                 convertToOrd = False,
                  meshingScheme = None,
-                 numParts=3,
-                 alpha=0.05):
+                 partitionParams = {},
+                 **kwargs):
+
+        self.convertToOrd = convertToOrd
+        self.meshingScheme = meshingScheme
+        self.__dict__.update(kwargs)
 
         if data is not None:
-            # check that the data is in ordinal coordinates
-            if not self.isOrdinal(data):
-                print("Converting the data to ordinal...")
-                # perform ordinal sampling (ranking) transformation
-                xRanked = rankdata(data[:,0], method='ordinal')
-                yRanked = rankdata(data[:,1], method='ordinal')
+
+            # # if using kmeans, we dont want to convert to ordinals
+            if meshingScheme == 'DV':
+                convertToOrd = True
+
+            # check if we want to convert to ordinals
+            # may not want to for certain partitioning schemes
+            if convertToOrd:
+                # check that the data is in ordinal coordinates
+                # data converted to ordinal and stored locally if not already
+                if not self.isOrdinal(data):
+                    print("Converting the data to ordinal...")
+
+                    # perform ordinal sampling (ranking) transformation
+                    xRanked = rankdata(data[:,0], method='ordinal')
+                    yRanked = rankdata(data[:,1], method='ordinal')
+
+                    # copy original data and save
+                    xFloats = np.copy(data[:,0])
+                    xFloats.sort()
+                    yFloats = np.copy(data[:,1])
+                    yFloats.sort()
+
+                    self.xFloats = xFloats
+                    self.yFloats = yFloats
 
 
-                xFloats = np.copy(data[:,0])
-                xFloats.sort()
-                yFloats = np.copy(data[:,1])
-                yFloats.sort()
-
-                self.xFloats = xFloats
-                self.yFloats = yFloats
-
-
-                data = np.column_stack((xRanked,yRanked))
+                    data = np.column_stack((xRanked,yRanked))
 
                 # and return an empty partition bucket
 
             # If there is data, set the bounding box to be the max and min in the data
-
-
             xmin = data[:,0].min()
             xmax = data[:,0].max()
             ymin = data[:,1].min()
             ymax = data[:,1].max()
 
+            # self.borders stores x and y min and max of overall bounding box in 'nodes' and the number of points in the bounding box in 'npts'
             self.borders = {}
             self.borders['nodes'] = np.array([xmin, xmax, ymin, ymax])
             self.borders['npts'] = data.shape[0]
-            self.numParts = numParts
-            self.alpha = alpha
 
-
+            # set parameters for partitioning algorithm
+            self.setParameters(partitionParams=partitionParams)
 
             # If there is data, use the chosen meshing scheme to build the partitions.
-            if meshingScheme == 'DV' and self.isOrdinal(data):
-                # Figure out
+            if meshingScheme == 'DV':
+
                 self.partitionBucket = self.return_partition_DV(data = data,
                                         borders = self.borders,
                                         r = self.numParts,
-                                        alpha = self.alpha)
+                                        alpha = self.alpha,
+                                        c = self.c,
+                                        nmin = self.nmin)
+
+            elif meshingScheme == 'clustering':
+
+                self.partitionBucket = self.return_partition_clustering(data = data,
+                                        clusterAlg = self.clusterAlg,
+                                        num_clusters = self.numClusters,
+                                        weights= self.weights,
+                                        boxOption = self.boxOption,
+                                        boxSize = self.boxSize)
+
             else: # meshingScheme == None
             # Note that right now, this will just do the dumb thing for every other input
                 self.partitionBucket = [self.borders]
                 #  set the partitions to just be the bounding box
 
-
         else:
             self.partitionBucket = []
 
     def convertOrdToFloat(self,partitionEntry):
+        '''
+        Converts to nodes of a partition entry from ordinal back to floats.
+
+        Parameters:
+            partitionEntry (dict):
+                The partition that you want to convert.
+
+        Returns:
+            Partition entry with converted nodes. Also sets dictionary element to the converted version.
+
+        '''
+
         bdyList = partitionEntry['nodes'].copy()
         # Need to subtract one to deal with counting from
         # 0 vs counting from 1 problems
@@ -114,6 +173,11 @@ class Partitions:
             return self.partitionBucket[key]
 
     def getOrdinal(self,key):
+        '''
+        Overrides the builtin magic method in the case where you had non-ordinal data but still want the ordinal stuff back.
+        If the data wasn't ordinal, this has the exact same effect as self[key].
+
+        '''
         # overrides the builtin magic method in the case where
         # you had non-ordinal data but still want the ordinal
         # stuff back.
@@ -130,6 +194,10 @@ class Partitions:
             return iter(self.partitionBucket)
 
     def iterOrdinal(self):
+        '''
+        Functions just like iter magic method without converting each entry back to its float
+
+        '''
         # functions just like iter magic method without
         # converting each entry back to its float
         return iter(self.partitionBucket)
@@ -149,6 +217,10 @@ class Partitions:
         return output
 
     def plot(self):
+        '''
+        Plot the partitions. Can plot in ordinal or float, whichever is in the partition bucket when it's called.
+
+        '''
         # plot the partitions
         fig1, ax1 = plt.subplots()
         for binNode in self:
@@ -170,6 +242,14 @@ class Partitions:
     # ordinarl coordinates. It checks that when the two data columns are sorted
     # they are each equal to an ordered vector with the same number of rows.
     def isOrdinal(self, dd):
+        '''
+        Helper function for error checking. Used to make sure input is in ordinal coordinates.
+        It checks that when the two data columns are sorted they are each equal to an ordered vector with the same number of rows.
+
+        :param dd:
+            Data in a manyx2 numpy array
+
+        '''
         return np.all(np.equal(np.sort(dd, axis=0),
                         np.reshape(np.repeat(np.arange(start=1,stop=dd.shape[0]+1),
                                              2), (dd.shape[0], 2))))
@@ -183,6 +263,40 @@ class Partitions:
     # r: is the number of partitions
     # alpha: the significance level to test for independence
     def return_partition_DV(self, data, borders, r=2, alpha=0.05):
+        '''
+        Recursive method that partitions the data based on the DV method.
+
+        Parameters:
+            data (np.array):
+                A manyx2 numpy array that contains all the data in ordinal format.
+
+            borders (dict):
+                A dictionary that contains 'nodes' with a numpy array of Xmin, Xmax, Ymin, Ymax.
+
+            r (int):
+                The number of partitions to split in each direction
+                (i.e. r=2 means each partition is recursively split into a
+                2 by 2 grid of partitions)
+
+            alpha (float):
+                The required significance level for independence to stop partitioning
+
+            c (int):
+                Parameter for an exit criteria. Partitioning stops if min(width of
+                partition, height of partition) < max(width of bounding box, height
+                of bounding box)/c.
+
+            nmin (int):
+                Minimum average number of points in each partition to keep recursion going.
+                The default is 5 because chisquare test breaks down with less than 5 points
+                per partition, thus we recommend choosing nmin >= 5.
+
+        Returns:
+            List of dictionaries. Each dictionary corresponds to a partition and
+            contains 'nodes', a numpy array of Xmin, Xmax, Ymin, Ymax of the partition,
+            and 'npts', the number of points in the partition.
+
+        '''
         # extract the bin boundaries
         Xmin = borders['nodes'][0]
         Xmax = borders['nodes'][1]
@@ -290,6 +404,195 @@ class Partitions:
                       'npts': len(idx[0])})
 
         return partitions
+
+
+    def return_partition_clustering(self, data, clusterAlg = KMeans, num_clusters=5, weights = None, boxOption="boundPoints", boxSize=2):
+        '''
+        Partitioning method based on clustering algorithms. First cluster the data, then using the cluster centers and labels determine the partitions.
+
+        Parameters:
+            data (np.array):
+                A manyx2 numpy array that contains all the original data (not ordinals).
+
+            cluster_algorithm (function):
+                Clustering algorithm you want to use. Only options right now are
+                KMeans and MiniBatchKMeans from scikit learn.
+
+            num_clusters (int):
+                The number of clusters you want. This is the number of partitions
+                you want to divide your space into.
+
+            weights (np.array):
+                An array of the same length as data containing weights of points to use weighted clustering
+
+            boxOption (str):
+                Specifies how to choose the boxes based on cluster centers. Only option right now is
+                "boundPoints" which takes the bounding box of all data points assigned to that cluster center.
+                Additional options may be added in the future.
+
+            boxSize (int):
+                This input is not used as of now.
+
+        Returns:
+            List of dictionaries. Each dictionary corresponds to a partition and contains 'nodes',
+            a numpy array of Xmin, Xmax, Ymin, Ymax of the partition, and 'center', the center of the
+            cluster for that partition.
+
+        '''
+
+        if weights == 0:
+            sample_weights = data[:,0]
+        elif weights == 1:
+            sample_weights = data[:,1]
+        else:
+            sample_weights = None
+
+        # Fit using whatever the chosen cluster algorithm is
+        kmeans = clusterAlg(n_clusters=num_clusters).fit(data,sample_weight = sample_weights)
+
+        # Get the centers of each cluster and the labels for the data points
+        centers = kmeans.cluster_centers_
+        labels = kmeans.labels_
+
+        bins = []
+
+        # Using this optin, take the bounding box of points closest to each cluster center
+        # These will be the partitions
+        if boxOption == "boundPoints":
+
+            for l in np.unique(labels):
+                cluster = data[labels == l]
+
+                xmin = min(cluster[:,0])
+                xmax = max(cluster[:,0])
+                ymin = min(cluster[:,1])
+                ymax = max(cluster[:,1])
+
+                # issues if bounding box touches x-axis so print a warning if it does
+                # if ymin == 0:
+                #     print("Uh oh can't have points with zero lifetime!")
+
+
+                bins.insert(0,{'nodes': [xmin,xmax,ymin,ymax], 'center': centers[l]})
+
+        # # Using this option, put the equal size box centered at each cluster center
+        # # These are then the partitions and we ignore anything outside them
+        # elif boxOption == "equalSize":
+        #     print("STOP: the 'equalSize' option has not been debugged. It may be available later.")
+        #     print("If you used this option, I'm just giving you back the bounding box.")
+        #
+        #     bins.insert(0, {'nodes':[ min(data[:,0]), max(data[:,0]), min(data[:,1]), max(data[:,1]) ]})
+        #
+        #     ######################################################################
+        #     ### DON'T DELETE
+        #     ### This is a starting point but commented out because it doesn't work
+        #     ### properly. There is no error checking so boxes could cross x axis
+        #     ### which we can't have so needs more before it is usable
+        #     ######################################################################
+        #     # if isinstance(boxSize, int):
+        #     #     boxSize = list([boxSize,boxSize])
+        #     #
+        #     # for l in np.unique(labels):
+        #     #     center = centers[l]
+        #     #
+        #     #     xmin = center[0] - boxSize[0]/2
+        #     #     xmax = center[0] + boxSize[0]/2
+        #     #     ymin = center[1] - boxSize[1]/2
+        #     #     ymax = center[1] + boxSize[1]/2
+        #     #
+        #     #     bins.insert(0,{'nodes': [xmin,xmax,ymin,ymax], 'center': centers[l]})
+        #     ######################################################################
+
+        return bins
+
+    def setParameters(self, partitionParams):
+        '''
+        Helper function to set the parameters depending on the meshing scheme.
+        If any are not specified, it is set to a default value.
+
+        Parameters:
+            partitionParams:
+                Dictionary containing parameters needed for the partitioning algorithm.
+
+        '''
+
+        if self.meshingScheme == 'DV':
+
+            # c det
+            if 'c' in partitionParams:
+                c = partitionParams['c']
+
+                if c != 0:
+                    # convert c from integer to the corresponding width/height
+                    width = (self.xFloats[xmax-1]-self.xFloats[xmin-1]) / c
+                    height = (self.yFloats[ymax-1]-self.yFloats[ymin-1]) / c
+                    self.c = max( width, height )
+                else:
+                    # c=0 means we don't use this paramter for an exit criteria
+                    self.c = 0
+            else:
+                c = 10
+                # convert c from integer to the corresponding width/height
+                width = (self.xFloats[xmax-1]-self.xFloats[xmin-1]) / c
+                height = (self.yFloats[ymax-1]-self.yFloats[ymin-1]) / c
+                self.c = max( width, height )
+
+            if 'alpha' in partitionParams:
+                self.alpha = partitionParams['alpha']
+            else:
+                self.alpha = 0.05
+
+            if 'nmin' in partitionParams:
+                self.nmin = partitionParams['nmin']
+            else:
+                self.nmin = 5
+
+            if 'numParts' in partitionParams:
+                self.numParts = partitionParams['numParts']
+            else:
+                self.numParts = 2
+
+            # if self.convertToOrd == False:
+            #     self.convertToOrd = True
+
+        elif self.meshingScheme == 'clustering':
+            if 'clusterAlg' in partitionParams:
+                self.clusterAlg = partitionParams['clusterAlg']
+            else:
+                self.clusterAlg = KMeans
+
+            if 'numClusters' in partitionParams:
+                self.numClusters = partitionParams['numClusters']
+            else:
+                self.numClusters = 5
+
+            if 'weights' in partitionParams:
+                self.weights = partitionParams['weights']
+            else:
+                self.weights = None
+
+            if 'pad' in partitionParams:
+                self.pad = partitionParams['pad']
+            else:
+                self.pad = 0.1
+
+            if 'boxOption' in partitionParams:
+                self.boxOption = partitionParams['boxOption']
+            else:
+                self.boxOption = "boundPoints"
+
+            if 'boxSize' in partitionParams:
+                self.boxSize = partitionParams['boxSize']
+            else:
+                self.boxSize = 2
+
+            # if self.convertToOrd == True:
+            #     self.convertToOrd = False
+
+        if 'split' in partitionParams:
+            self.split = partitionParams['split']
+        else:
+            self.split = False
 
 #--------------------------------------------------
 
