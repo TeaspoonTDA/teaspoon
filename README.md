@@ -3,14 +3,13 @@ Description
 
 <p align="right">
   <img src="https://github.com/myersau3/teaspoon/blob/master/source/teaspoon.png">
-</p>
-
-![image](https://github.com/myersau3/teaspoon/blob/master/source/teaspoon.png.jpg){: style="float: left"}
 
 The emerging field of topological signal processing brings methods from Topological Data Analysis (TDA) to create new tools for signal processing by incorporating aspects of shape.
 This python package, teaspoon for tsp or topological signal processing, brings together available software for computing persistent homology, the main workhorse of TDA, with modules that expand the functionality of teaspoon as a state-of-the-art topological signal processing tool.
 These modules include methods for incorporating tools from machine learning, complex networks, information, and parameter selection along with a dynamical systems library to streamline the creation and benchmarking of new methods.
 All code is open source with up to date documentation, making the code easy to use, in particular for signal processing experts with limited experience in topological methods.
+
+</p>
 
 Full documentation of this package is available [here](http://elizabethmunch.com/code/teaspoon/index.html). The full documentation includes information about installation, module documentation with examples, contributing, the license, and citing teaspoon.
 
