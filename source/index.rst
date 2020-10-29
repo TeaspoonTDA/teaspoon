@@ -1,9 +1,10 @@
 Welcome to teaspoon's documentation page!
 ==========================================
 
-This page provides a summary of the functionality of teaspoon as well as documentation for the various topological signal processing modules:
-
-Additionally, this package provides wrappers for using various persistent homology and other Topological Data Analysis software packages through python.
+The emerging field of topological signal processing brings methods from Topological Data Analysis (TDA) to create new tools for signal processing by incorporating aspects of shape.
+This python package, teaspoon for tsp or topological signal processing, brings together available software for computing persistent homology, the main workhorse of TDA, with modules that expand the functionality of teaspoon as a state-of-the-art topological signal processing tool.
+These modules include methods for incorporating tools from machine learning, complex networks, information, and parameter selection along with a dynamical systems library to streamline the creation and benchmarking of new methods.
+All code is open source with up to date documentation, making the code easy to use, in particular for signal processing experts with limited experience in topological methods.
 
 
 Table of Contents
@@ -24,14 +25,11 @@ Table of Contents
 Collaborators
 ***************
 
-The code is an compilation of work done by `Elizabeth Munch <http://www.elizabethmunch.com>`_ along with her students and collaborators.  People who have contributed to teaspoon include:
+The code is a compilation of work done by `Elizabeth Munch <http://www.elizabethmunch.com>`_ and `Firas Khasawneh <http://www.firaskhasawneh.com/>`_ along with her students and collaborators.  People who have contributed to teaspoon include:
 
-- `Firas Khasawneh <http://www.firaskhasawneh.com>`_
-- Jesse Berwald
-- Brian Bollen
-- Audun Myers
+- `Audun Myers <https://github.com/myersau3>`_
 - Melih Yesilli
-- Sarah Tymochko
+- `Sarah Tymochko <https://www.egr.msu.edu/~tymochko/>`_
 
 
 Current Issues and To-do Items
@@ -41,6 +39,7 @@ This is a list of to do items:
 
 	- Finish updating documentation
 	- Make pip install-able
+	- Validate (or make it so) that teaspoon can be imorted as "import teaspoon" and then functions can be called from there (e.g. teaspoon.MakeData.DynSysLib...).
 
 This is a list of the current issues for Sphinx:
 
