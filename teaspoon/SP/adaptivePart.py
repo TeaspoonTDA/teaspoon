@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Methods of partitioning birth-lifetime plane for persistence diagrams. This is
-used for the adaptive partitioning version of template function featurization. 
+used for the adaptive partitioning version of template function featurization.
 
 """
 
@@ -267,7 +267,7 @@ class Partitions:
     # and 'npts' which contains the number of points in the bin
     # r: is the number of partitions
     # alpha: the significance level to test for independence
-    def return_partition_DV(self, data, borders, r=2, alpha=0.05):
+    def return_partition_DV(self, data, borders, r=2, alpha=0.05, c=0, nmin=5):
         '''
         Recursive method that partitions the data based on the DV method.
 
@@ -315,6 +315,19 @@ class Partitions:
                        & (data[:, 1] >= Ymin)
                        & (data[:, 1] <= Ymax))
 
+        partitions = []
+
+        # Exit Criteria:
+        # if either height or width is less than the max size, return
+        width = self.xFloats[int(Xmax-1)] - self.xFloats[int(Xmin-1)]
+        height = self.yFloats[int(Ymax-1)] - self.yFloats[int(Ymin-1)]
+        if ( ( c != 0 ) and ( min(width,height) < c) ):
+            # print('Box getting too small, min(width,height)<', c)
+            # reject futher partitions, and return original bin
+            partitions.insert(0, {'nodes': np.array([Xmin, Xmax, Ymin, Ymax]),
+                      'npts': len(idx[0])})
+            return partitions
+
         # extract the points in the bin
         Xsub = data[idx, 0]
         Ysub = data[idx, 1]
@@ -335,7 +348,6 @@ class Partitions:
 
         # first exit criteria: we cannot split inot unique boundaries any more
         # preallocate the partition list
-        partitions = []
         if (len(np.unique(edges1, return_counts=True)[1]) < r + 1 or
              len(np.unique(edges2, return_counts=True)[1])< r + 1):
 
@@ -371,6 +383,15 @@ class Partitions:
         # get the counts. Flatten columnwise to match the bin definition in the
         # loop that creates the dictionaries below
         binCounts = binned_data.statistic.flatten('F')
+
+        # Exit Criteria:
+        # check if sum of bin counts is less than threshold of nmin per bin
+        # nmin is necessary because chisquare breaks down if you have less than
+        # 5 points in each bin
+        if nmin != 0:
+            if np.sum(binCounts) < nmin * (r**2):
+                partitions.insert(0, {'nodes': np.array([Xmin, Xmax, Ymin, Ymax]),'npts': len(idx[0])})
+                return partitions
 
         # define an empty list to hold the dictionaries of the fresh partitions
         bins = []
@@ -523,6 +544,8 @@ class Partitions:
 
         if self.meshingScheme == 'DV':
 
+            xmin, xmax, ymin, ymax = self.borders['nodes']
+
             # c det
             if 'c' in partitionParams:
                 c = partitionParams['c']
@@ -614,26 +637,28 @@ if __name__ == "__main__":
     sigma = np.array([[1, cov], [cov, 1]])  # covariance matrix
 
     # create the multivariate random variable
-    nsamples = 2000  # number of random samples
+    nsamples = 100  # number of random samples
     x, y = np.random.multivariate_normal(mu, sigma, nsamples).T
 
 
-    # perform ordinal sampling (ranking) transformation
-    xRanked = rankdata(x, method='ordinal')
-    yRanked = rankdata(y, method='ordinal')
+    # # perform ordinal sampling (ranking) transformation
+    # xRanked = rankdata(x, method='ordinal')
+    # yRanked = rankdata(y, method='ordinal')
 
     # obtain the adaptive mesh
-    numParts = 4
+    numParts = 2
 
     # get the adaptive partition of the data
-    partitionList = Partitions(np.column_stack((xRanked, yRanked)),
-                                       meshingScheme = "DV", numParts=numParts)
+    partitionList = Partitions(np.column_stack((x, y)),
+                                       meshingScheme = "DV",
+                                       partitionParams={'numParts':numParts},
+                                       convertToOrd = True)
 
     # plot the partitions
     partitionList.plot()
 
     # overlay the data
-    plt.plot(xRanked, yRanked, 'r*')
+    plt.plot(x, y, 'r*')
 
     # add formatting
     plt.axis('tight')
