@@ -206,72 +206,55 @@
             
   <div class="section" id="module-teaspoon.TDA.Distance">
 <span id="distances"></span><h1><span class="section-number">2.3.2. </span>Distances<a class="headerlink" href="#module-teaspoon.TDA.Distance" title="Permalink to this headline">¶</a></h1>
-<p>Has code for computing pairwise distance for diagrams.</p>
-<p>Created on Jun 9, 2016</p>
-<dl class="field-list simple">
-<dt class="field-odd">author</dt>
-<dd class="field-odd"><p>liz</p>
-</dd>
-</dl>
+<p>This module provides algorithms to compute pairwise distances between persistence diagrams.</p>
 <dl class="py function">
 <dt id="teaspoon.TDA.Distance.dgmDist_Hera">
 <code class="sig-prename descclassname">teaspoon.TDA.Distance.</code><code class="sig-name descname">dgmDist_Hera</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">D1</span></em>, <em class="sig-param"><span class="n">D2</span></em>, <em class="sig-param"><span class="n">wassDeg</span><span class="o">=</span><span class="default_value">'Bottleneck'</span></em>, <em class="sig-param"><span class="n">relError</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">internal_p</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Distance.html#dgmDist_Hera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Distance.dgmDist_Hera" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default values for wasserstein_dist from Hera:</p>
-<blockquote>
-<div><p>internal_p must be in <span class="math notranslate nohighlight">\([1.0, \infty]\)</span> (to explicitly set internal_p to <span class="math notranslate nohighlight">\(\infty\)</span>, supply inf).By default wasserstein degree is 1.0, relative error is 0.01, internal norm is l_infinity.</p>
-</div></blockquote>
-<p>hera input format:</p>
-<blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bottleneck_dist</span> <span class="n">file1</span> <span class="n">file2</span>  <span class="p">[</span><span class="n">relative_error</span><span class="p">]</span>
-<span class="n">wasserstein_dist</span> <span class="n">file1</span> <span class="n">file2</span>  <span class="p">[</span><span class="n">wasserstein</span> <span class="n">degree</span><span class="p">]</span> <span class="p">[</span><span class="n">relative</span> <span class="n">error</span><span class="p">]</span> <span class="p">[</span><span class="n">internal</span> <span class="n">norm</span><span class="p">]</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>Parameters:</p>
-<dl class="field-list">
-<dt class="field-odd">Parameter D1</dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Parameter D2</dt>
-<dd class="field-even"><p>Persistence diagrams given as Lx2 numpy arrays.</p>
-</dd>
-<dt class="field-odd">Parameter wassDeg</dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Options are:</dt><dd><ul class="simple">
-<li><p>‘Bottleneck’ or anything containing ‘bot’. Runs the bottleneck_dist command</p></li>
-<li><p>np.inf: Also returns bottleneck distance with the bottleneck_dist command</p></li>
-<li><p>an integer q: Computes the q-th Wasserstein distance</p></li>
+<dd><dl class="simple">
+<dt>Hera input format:</dt><dd><ul class="simple">
+<li><p>bottleneck_dist file1 file2  [relative_error]</p></li>
+<li><p>wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]  where file1 and file2 represent the persistence diagrams.</p></li>
 </ul>
 </dd>
 </dl>
-</dd>
-<dt class="field-even">Parameter relError</dt>
-<dd class="field-even"><ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>D1</strong><strong>)</strong> (<em>ndarray</em>) – Persistence diagram –(Nx2) matrix.</p></li>
+<li><p><strong>(</strong><strong>D2</strong><strong>)</strong> (<em>ndarray</em>) – Persistence diagram –(Nx2) matrix.</p></li>
+<li><p><strong>wassDeg</strong> – Options are:
+- ‘Bottleneck’ or anything containing ‘bot’. Runs the bottleneck_dist command
+- np.inf: Also returns bottleneck distance with the bottleneck_dist command
+- an integer q: Computes the q-th Wasserstein distance</p></li>
+<li><p><strong>relError</strong> – <ul>
 <li><p>An input to both bottleneck_dist and wasserstein_dist.</p></li>
 <li><dl>
 <dt>For wasserstein_dist from hera documentation:</dt><dd><p>If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).
 Otherwise the output is an approximation of the exact distance. Precisely:
-if d_exact is the true distance and d_approx is the output, then</p>
+if <span class="math notranslate nohighlight">\(d_{exact}\)</span> is the true distance and d_approx is the output, then</p>
 <blockquote>
 <div><p><span class="math notranslate nohighlight">\(\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \mathrm{relativeError}\)</span>.</p>
 </div></blockquote>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt>For bottleneck_dist from hera documentation:</dt><dd><dl class="simple">
-<dt>If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same). Otherwise the output is an approximation of the exact distance. Precisely: if d_exact is the true distance and d_approx is the output, then</dt><dd><p><span class="math notranslate nohighlight">\(\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \mathrm{relativeError}.\)</span></p>
-</dd>
-</dl>
+<li><dl>
+<dt>For bottleneck_dist from hera documentation:</dt><dd><p>If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).
+Otherwise the output is an approximation of the exact distance.
+Precisely: if <span class="math notranslate nohighlight">\(d_{exact}\)</span> is the true distance and d_approx is the output, then</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \mathrm{relativeError}.\)</span></p>
+</div></blockquote>
 </dd>
 </dl>
 </li>
 <li><p>Default value in Hera is 0.01 for Wasserstein distance and 0 (exact computation) for bottleneck distance.</p></li>
 <li><p>Values passed to hera must be positive.</p></li>
 </ul>
-</dd>
-<dt class="field-odd">Parameter internal_p</dt>
-<dd class="field-odd"><p>This is only controllable for Wasserstein distance computation.  Matched points are measured by <span class="math notranslate nohighlight">\(L_p\)</span> distance.
-Default is internal_p = infinity.</p>
+</p></li>
+<li><p><strong>internal_p</strong> – This is only controllable for Wasserstein distance computation.  Matched points are measured by <span class="math notranslate nohighlight">\(L_p\)</span> distance.
+Default is internal_p = infinity.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="field-list simple">
@@ -281,6 +264,34 @@ Default is internal_p = infinity.</p>
 </dl>
 </dd></dl>
 
+<div class="section" id="example">
+<h2><span class="section-number">2.3.2.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>The following example computes the distance between two persistence diagrams:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+<span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span><span class="p">,</span> <span class="n">Annulus</span><span class="p">,</span> <span class="n">Cube</span><span class="p">,</span> <span class="n">Clusters</span><span class="p">,</span> <span class="n">Sphere</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Distance</span> <span class="kn">import</span> <span class="n">dgmDist_Hera</span>
+<span class="n">numPts</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Generate Torus</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+
+<span class="c1"># Generate Annulus</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">Annulus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+
+<span class="c1"># Compute persistence diagrams</span>
+<span class="n">PD1</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;dgms&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">PD2</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="s1">&#39;dgms&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Distance between diagrams</span>
+<span class="n">dgmDist_Hera</span><span class="p">(</span><span class="n">PD1</span><span class="p">,</span><span class="n">PD2</span><span class="p">,</span><span class="n">wassDeg</span><span class="o">=</span><span class="s1">&#39;Bottleneck&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output for this example is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.6366935</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 

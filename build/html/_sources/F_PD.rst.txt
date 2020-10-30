@@ -43,7 +43,7 @@ Output of the plotting functions is:
 
 .. figure:: figures/All_Landscapes.png
    :align: center
-   :scale: 30 %
+   :scale: 25 %
 
    All landscape functions for the given persistence diagram
    
@@ -87,7 +87,7 @@ Output of the plotting functions is:
 	
 .. figure:: figures/Des_Landscapes.png
    :align: center
-   :scale: 30 %
+   :scale: 25 %
 
    Chosen landscape functions for the given persistence diagram
 
@@ -130,7 +130,7 @@ Feature matrix generation
 
 .. figure:: figures/Mesh_Generation_Example.png
    :align: center
-   :scale: 20 %
+   :scale: 15 %
 
    Feature matrix generation steps explained with an simple example.
 
@@ -151,7 +151,7 @@ Then, these y values become the feature for each landscape functions, and they c
 
 .. figure:: figures/Mesh_Points.png
    :align: center
-   :scale: 30 %
+   :scale: 20 %
 
    Mesh obtained using second landscape function for the example provided in :numref:`F_Matrix`.
 

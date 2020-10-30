@@ -218,15 +218,19 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        array: Array of the time indices as t and the simulation time series ts from the simulation for all dimensions of dynamcal system (e.g. 3 for Lorenz).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+    <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
+    <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">DynSysLib</span> <span class="k">as</span> <span class="n">DSL</span>
     <span class="c1">#needed packages</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    
-    <span class="c1">#import other teaspoon packages</span>
-    <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
-    <span class="kn">import</span> <span class="nn">teaspoon</span>
+    <span class="kn">import</span> <span class="nn">autonomous_dissipative_flows</span>
+    <span class="kn">import</span> <span class="nn">maps</span>
+    <span class="kn">import</span> <span class="nn">periodic_functions</span>
+    <span class="kn">import</span> <span class="nn">noise_models</span>
+    <span class="kn">import</span> <span class="nn">medical_data</span>
+    <span class="kn">import</span> <span class="nn">delayed_flows</span>
+    <span class="kn">import</span> <span class="nn">conservative_flows</span>
+    <span class="kn">import</span> <span class="nn">driven_dissipative_flows</span>
     
     <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span>  <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="c1">#primes the time and time series datas.</span>
     
@@ -269,7 +273,7 @@
                                   <span class="s1">&#39;labyrinth_chaos&#39;</span><span class="p">,</span> <span class="s1">&#39;henon_heiles_system&#39;</span><span class="p">]</span>
     
     <span class="k">if</span> <span class="n">UserGuide</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span> <span class="c1">#prints the user guide and all available dynamical systems.</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">UserGuide</span>
+        <span class="kn">import</span> <span class="nn">UserGuide</span>
         <span class="n">UserGuide</span><span class="o">.</span><span class="n">UserGuide</span><span class="p">(</span><span class="n">list_of_autonomous_dissipative_flows</span><span class="p">,</span>
                             <span class="n">list_of_conservative_flows</span><span class="p">,</span>
                             <span class="n">list_of_periodic_functions</span><span class="p">,</span>
@@ -294,49 +298,41 @@
         
 <span class="c1"># In[ ]: AUTONOMOUS DISSIPATIVE FLOWS</span>
     <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">list_of_autonomous_dissipative_flows</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">autonomous_dissipative_flows</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">autonomous_dissipative_flows</span><span class="o">.</span><span class="n">autonomous_dissipative_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> 
                                              <span class="n">SampleSize</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">)</span>
 
 <span class="c1"># In[ ]: MAPS</span>
     <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">list_of_maps</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">maps</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">maps</span><span class="o">.</span><span class="n">maps</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> 
                                              <span class="n">SampleSize</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">)</span>
 
 <span class="c1"># In[ ]: PERIODIC</span>
     <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">list_of_periodic_functions</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">periodic_functions</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">periodic_functions</span><span class="o">.</span><span class="n">periodic_functions</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> 
                                              <span class="n">SampleSize</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">)</span>
                 
 <span class="c1"># In[ ]: NOISE</span>
     <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">list_of_noise_models</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">noise_models</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">noise_models</span><span class="o">.</span><span class="n">noise_models</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> 
                                              <span class="n">SampleSize</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">)</span>
 
 <span class="c1"># In[ ]: MEDICAL</span>
     <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">list_of_medical_data</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">medical_data</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">medical_data</span><span class="o">.</span><span class="n">medical_data</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> 
                                              <span class="n">SampleSize</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">)</span>
     
 <span class="c1"># In[ ]: DDE</span>
     <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">list_of_delayed_flows</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">delayed_flows</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">delayed_flows</span><span class="o">.</span><span class="n">delayed_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> 
                                              <span class="n">SampleSize</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">)</span>
          
 <span class="c1"># In[ ]: driven_dissipative_flows</span>
     <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">list_of_driven_dissipative_flows</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">driven_dissipative_flows</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">driven_dissipative_flows</span><span class="o">.</span><span class="n">driven_dissipative_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> 
                                              <span class="n">SampleSize</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">)</span>
         
 <span class="c1"># In[ ]: conservative_flows</span>
     <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">list_of_conservative_flows</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">conservative_flows</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">conservative_flows</span><span class="o">.</span><span class="n">conservative_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> 
                                              <span class="n">SampleSize</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">)</span>
 
@@ -356,13 +352,7 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     
     
-    <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
-    
-    
-    <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib</span> <span class="kn">import</span> <span class="n">DynSysLib</span> <span class="k">as</span> <span class="n">DSL</span> 
-    
+    <span class="kn">import</span> <span class="nn">DynSysLib</span> <span class="k">as</span> <span class="nn">DSL</span>
     <span class="n">system</span> <span class="o">=</span> <span class="s1">&#39;rossler&#39;</span> <span class="c1">#define the system of interest</span>
     <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span> <span class="c1">#set the dynamic state</span>
     <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">DSL</span><span class="o">.</span><span class="n">DynamicSystems</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="p">,</span> <span class="n">UserGuide</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>

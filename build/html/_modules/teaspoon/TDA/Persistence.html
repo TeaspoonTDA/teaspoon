@@ -199,8 +199,7 @@
   <h1>Source code for teaspoon.TDA.Persistence</h1><div class="highlight"><pre>
 <span></span><span class="c1">## @package teaspoon.TDA.Persistence</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Wrapper for using various fast persistence software inside of python.</span>
-
+<span class="sd">This module includes wrappers for using various fast persistence software inside of python.</span>
 <span class="sd">All diagrams are stored as a 2xN numpy matrix.</span>
 <span class="sd">When a code returns multiple dimensions, these are returned as a dictionary</span>
 
@@ -242,6 +241,7 @@
 
 <div class="viewcode-block" id="prepareFolders"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.prepareFolders">[docs]</a><span class="k">def</span> <span class="nf">prepareFolders</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates the &quot;.teaspoonData&quot; folder.</span>
 <span class="sd">    Checks that necessary folder structure system exists.</span>
 <span class="sd">    Empties out all previously saved files to avoid confusion.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -290,7 +290,7 @@
 
 <div class="viewcode-block" id="readRipserString"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.readRipserString">[docs]</a><span class="k">def</span> <span class="nf">readRipserString</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Read string from Ripser</span>
+<span class="sd">    Reads string from Ripser</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">birth_death_str</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\d*[.]?\d*)&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
@@ -308,7 +308,7 @@
 
 <div class="viewcode-block" id="readRipserOutput"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.readRipserOutput">[docs]</a><span class="k">def</span> <span class="nf">readRipserOutput</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">drop_inf_class</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Read output from Ripser</span>
+<span class="sd">    Reads output from Ripser</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># split into persistence diagrams</span>
     <span class="n">Dgms</span> <span class="o">=</span> <span class="p">{}</span>
@@ -374,14 +374,11 @@
 <span class="sd">    .. note::</span>
 <span class="sd">        Ripser needs to be installed on machine in advance https://github.com/Ripser/ripser</span>
 
-
-
-
-<span class="sd">    :Parameter P:</span>
+<span class="sd">    :param P:</span>
 <span class="sd">        A point cloud as an NxD numpy array.</span>
 <span class="sd">        N is the number of points, D is the dimension of</span>
 <span class="sd">        Euclidean space.</span>
-<span class="sd">    :Parameter maxDim:</span>
+<span class="sd">    :param maxDim:</span>
 <span class="sd">        An integer representing the maximum dimension</span>
 <span class="sd">        for computing persistent homology</span>
 
@@ -420,26 +417,21 @@
     <span class="c1"># stepSize</span>
     <span class="c1"># numSteps</span>
     <span class="c1">#     Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until stepSize*numSteps.</span>
-
+    
+    <span class="c1"># .. note::</span>
+    <span class="c1">#     Vidit has options for radius scaling factor.</span>
+    
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Writes the point cloud to a file in the perseus format.</span>
+<span class="sd">    </span>
+<span class="sd">    .. todo:: Figure out if this should be 1 or 2</span>
 
-<span class="sd">    .. note::</span>
-
-<span class="sd">        Vidit has options for radius scaling factor.</span>
-
-<span class="sd">    .. todo::</span>
-
-<span class="sd">        Figure out if this should be 1 or 2</span>
-
-<span class="sd">    Parameters:</span>
-
-<span class="sd">    :Parameter P:</span>
-<span class="sd">        An NxD array.  Represents $N$ points in $R^D$.</span>
-<span class="sd">    :Parameter filename:</span>
+<span class="sd">    :param P:</span>
+<span class="sd">        An NxD array.  Represents :math:`N` points in :math:`\mathbb{R}^{D}`</span>
+<span class="sd">    :param filename:</span>
 <span class="sd">        location for saving the file</span>
-<span class="sd">    :Parameter stepSize:</span>
-<span class="sd">    :Parameter numSteps:</span>
+<span class="sd">    :param stepSize:</span>
+<span class="sd">    :param numSteps:</span>
 <span class="sd">        Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.</span>
 <span class="sd">        So, persistence will be calculated from parameter 0 until stepSize*numSteps.</span>
 
@@ -505,17 +497,17 @@
 <span class="sd">        make the choice uniform across outputs.</span>
 
 
-<span class="sd">    :Parameter P:</span>
-<span class="sd">        An NxD array.  Represents N points in R^D.</span>
-<span class="sd">    :Parameter maxRadius:</span>
-<span class="sd">    :Parameter stepSize:</span>
-<span class="sd">    :Parameter numSteps:</span>
+<span class="sd">    :param P:</span>
+<span class="sd">        An NxD array.  Represents N points in :math:`\mathbb{R}^{D}`.</span>
+<span class="sd">    :param maxRadius:</span>
+<span class="sd">    :param stepSize:</span>
+<span class="sd">    :param numSteps:</span>
 <span class="sd">        Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until</span>
 <span class="sd">        maxRadius = stepSize*numSteps.</span>
 <span class="sd">        Only 2 of the three entries should be passed.</span>
 <span class="sd">        If numSteps and stepSize are passed (regardless of whether maxRadius is passed), they will be used for the computation.  Otherwise, the two non-none valued entries will be used to calculate the third.</span>
-<span class="sd">    :Parameter suppressOutput:</span>
-<span class="sd">        If true, gets rid of printed output from perseus.</span>
+<span class="sd">    :param suppressOutput:</span>
+<span class="sd">        If true, it gets rid of printed output from perseus.</span>
 
 <span class="sd">    :returns:</span>
 
@@ -628,9 +620,9 @@
 
 <span class="sd">    .. note:: Ripser needs to be installed on machine in advance. This code doesn&#39;t check for it&#39;s existence.</span>
 
-<span class="sd">    :Parameter distMat:</span>
+<span class="sd">    :param distMat:</span>
 <span class="sd">        A distance matrix given as a NxN numpy array</span>
-<span class="sd">    :Parameter maxDim:</span>
+<span class="sd">    :param maxDim:</span>
 <span class="sd">        An integer representing the maximum dimension</span>
 <span class="sd">        for computing persistent homology</span>
 
@@ -687,11 +679,11 @@
 <span class="c1">#---------------Perseus-------------------------------#</span>
 
 <span class="c1">## @todo</span>
-<div class="viewcode-block" id="distMat_Perseus"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.distMat_Perseus">[docs]</a><span class="k">def</span> <span class="nf">distMat_Perseus</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">distMat_Perseus</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Not yet implemented</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sorry, not yet implemented.  Try distMat_Ripser instead!&#39;</span><span class="p">)</span></div>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sorry, not yet implemented.  Try distMat_Ripser instead!&#39;</span><span class="p">)</span>
 
 <span class="c1">#-----------------------------------------------------#</span>
 <span class="c1">#-----------------------------------------------------#</span>
@@ -704,18 +696,11 @@
 
 
 <div class="viewcode-block" id="writeMatrixFileForPerseus"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.writeMatrixFileForPerseus">[docs]</a><span class="k">def</span> <span class="nf">writeMatrixFileForPerseus</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">filesavename</span><span class="p">):</span>
-    <span class="c1"># Given 2D matrix M, write into file format read by Perseus.</span>
-    <span class="c1"># Info on format can be found at:</span>
-    <span class="c1"># http://people.maths.ox.ac.uk/nanda/perseus/index.html</span>
-
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given 2D matrix M, write into file format read by Perseus.</span>
-<span class="sd">    Info on format can be found at:</span>
-<span class="sd">    http://people.maths.ox.ac.uk/nanda/perseus/index.html</span>
-
-
-<span class="sd">.. todo:: Set this up to work with higher-dimensional cubical complexes</span>
-
+<span class="sd">    Info on format can be found at:http://people.maths.ox.ac.uk/nanda/perseus/index.html</span>
+<span class="sd">    </span>
+<span class="sd">    .. todo:: Set this up to work with higher-dimensional cubical complexes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">Top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">],[</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">M</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">M</span><span class="p">)[</span><span class="mi">1</span><span class="p">]]])</span>
@@ -732,28 +717,26 @@
 <span class="sd">    using Vidit Nanda&#39;s `perseus &lt;http://people.maths.ox.ac.uk/nanda/perseus/index.html&gt;`_.</span>
 
 <span class="sd">    .. note::</span>
-
-
-
-
 <span class="sd">        - perseus must be in the bash path</span>
 <span class="sd">        - matrix must be 2-dimensional</span>
 
 <span class="sd">    .. todo:: Update this to accept higher dimensional cubical complexes</span>
 
-<span class="sd">    :Parameter M:</span>
-<span class="sd">        a 2D numpy array</span>
-<span class="sd">    :Parameter numDigits:</span>
-<span class="sd">        Perseus only accepts positive integer valued matrices.  To</span>
-<span class="sd">        compensate, we apply the transformation</span>
+<span class="sd">    :param M:</span>
+<span class="sd">        A 2D numpy array</span>
+<span class="sd">    :param numDigits:</span>
+<span class="sd">        Perseus only accepts positive integer valued matrices. To</span>
+<span class="sd">        compensate, we apply the transformation </span>
+<span class="sd">        </span>
 <span class="sd">            x -&gt; x* (10**numDigits) + M.min()</span>
+<span class="sd">            </span>
 <span class="sd">        then calculate persistence on the resulting matrix.</span>
-<span class="sd">        The persistence diagram birth/death times are then converted</span>
+<span class="sd">        The persistence diagram birth/death times are then converted </span>
 <span class="sd">        back via the inverse transform.</span>
-<span class="sd">    :Parameter suppressOutput:</span>
+<span class="sd">    :param suppressOutput:</span>
 <span class="sd">        If true, gets rid of printed output from perseus.</span>
 
-<span class="sd">    :returns: A dictionary with integer keys 0,1,...,N</span>
+<span class="sd">    :returns: A dictionary with integer keys 0,1,...,N.</span>
 <span class="sd">        The key gives the dimension of the persistence diagram.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -834,12 +817,13 @@
 
 <div class="viewcode-block" id="minPers"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minPers">[docs]</a><span class="k">def</span> <span class="nf">minPers</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gets minimum persistence for a given diagram</span>
+<span class="sd">    Finds minimum persistence for a given diagram</span>
 
-<span class="sd">    :Parameter Dgm:</span>
-<span class="sd">        a 2D numpy array</span>
+<span class="sd">    :param Dgm:</span>
+<span class="sd">        A 2D numpy array</span>
 
-<span class="sd">    :returns: float</span>
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Minimum persistence for the given diagram</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -850,12 +834,13 @@
 
 <div class="viewcode-block" id="maxPers"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxPers">[docs]</a><span class="k">def</span> <span class="nf">maxPers</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gets maximum persistence for a given diagram</span>
+<span class="sd">    Finds maximum persistence for a given diagram</span>
 
-<span class="sd">    :Parameter Dgm:</span>
-<span class="sd">        a 2D numpy array</span>
+<span class="sd">    :param Dgm:</span>
+<span class="sd">        A 2D numpy array</span>
 
-<span class="sd">    :returns: float</span>
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Maximum persistence for the given diagram </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -872,12 +857,12 @@
 
 <div class="viewcode-block" id="maxBirth"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxBirth">[docs]</a><span class="k">def</span> <span class="nf">maxBirth</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gets maximum birth for a given diagram</span>
+<span class="sd">    Finds maximum birth for a given diagram</span>
 
-<span class="sd">    :Parameter Dgm:</span>
-<span class="sd">        a 2D numpy array</span>
+<span class="sd">    :param Dgm:</span>
+<span class="sd">        A 2D numpy array</span>
 
-<span class="sd">    :returns: float</span>
+<span class="sd">    :returns: (float) Maximum birth time for the given diagram </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -894,12 +879,13 @@
 
 <div class="viewcode-block" id="minBirth"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minBirth">[docs]</a><span class="k">def</span> <span class="nf">minBirth</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gets minimum birth  for a given diagram</span>
+<span class="sd">    Finds minimum birth  for a given diagram</span>
 
-<span class="sd">    :Parameter Dgm:</span>
-<span class="sd">        a 2D numpy array</span>
+<span class="sd">    :param Dgm:</span>
+<span class="sd">        A 2D numpy array</span>
 
-<span class="sd">    :returns: float</span>
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Minimum birth time for the given diagram </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -921,10 +907,11 @@
 <span class="sd">    column with label dgm_col.</span>
 <span class="sd">    Gets minimum persistence for a pandas.Series with diagrams as entries</span>
 
-<span class="sd">    :Parameter DgmSeries:</span>
-<span class="sd">        a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
+<span class="sd">    :param DgmSeries:</span>
+<span class="sd">        A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
 
-<span class="sd">    :returns: float</span>
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Minimum persistence over all diagrams</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="nb">min</span> <span class="p">(</span> <span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minPers</span><span class="p">))</span></div>
@@ -936,10 +923,11 @@
 <span class="sd">    column with label dgm_col.</span>
 <span class="sd">    Gets maximum persistence for a pandas.Series with diagrams as entries</span>
 
-<span class="sd">    :Parameter DgmsSeries:</span>
-<span class="sd">        a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
+<span class="sd">    :param DgmsSeries:</span>
+<span class="sd">        A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
 
-<span class="sd">    :returns: float</span>
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Maximum persistence over all diagrams</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="nb">max</span> <span class="p">(</span> <span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">maxPers</span><span class="p">))</span></div>
@@ -951,10 +939,11 @@
 <span class="sd">    column with label dgm_col.</span>
 <span class="sd">    Gets minimum persistence for a pandas.Series with diagrams as entries</span>
 
-<span class="sd">    :Parameter DgmSeries:</span>
-<span class="sd">        a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
+<span class="sd">    :param DgmSeries:</span>
+<span class="sd">        A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
 
-<span class="sd">    :returns: float</span>
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Minimum birth time over all diagrams</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="nb">min</span> <span class="p">(</span> <span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minBirth</span><span class="p">))</span></div>
@@ -964,12 +953,13 @@
 <span class="sd">    Takes data frame DgmsDF.</span>
 <span class="sd">    Finds maximum persistence over all diagrams in</span>
 <span class="sd">    column with label dgm_col.</span>
-<span class="sd">    Gets maximum persistence for a pandas.Series with diagrams as entries</span>
+<span class="sd">    It gets maximum persistence for a pandas.Series with diagrams as entries.</span>
 
-<span class="sd">    :Parameter DgmSeries:</span>
-<span class="sd">        a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
+<span class="sd">    :param DgmSeries:</span>
+<span class="sd">        A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
 
-<span class="sd">    :returns: float</span>
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Maximum persistence over all diagrams</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="nb">max</span> <span class="p">(</span> <span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">maxBirth</span><span class="p">))</span></div>

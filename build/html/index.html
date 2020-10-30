@@ -201,8 +201,10 @@
             
   <div class="section" id="welcome-to-teaspoon-s-documentation-page">
 <h1>Welcome to teaspoon’s documentation page!<a class="headerlink" href="#welcome-to-teaspoon-s-documentation-page" title="Permalink to this headline">¶</a></h1>
-<p>This page provides a summary of the functionality of teaspoon as well as documentation for the various topological signal processing modules:</p>
-<p>Additionally, this package provides wrappers for using various persistent homology and other Topological Data Analysis software packages through python.</p>
+<p>The emerging field of topological signal processing brings methods from Topological Data Analysis (TDA) to create new tools for signal processing by incorporating aspects of shape.
+This python package, teaspoon for tsp or topological signal processing, brings together available software for computing persistent homology, the main workhorse of TDA, with modules that expand the functionality of teaspoon as a state-of-the-art topological signal processing tool.
+These modules include methods for incorporating tools from machine learning, complex networks, information, and parameter selection along with a dynamical systems library to streamline the creation and benchmarking of new methods.
+All code is open source with up to date documentation, making the code easy to use, in particular for signal processing experts with limited experience in topological methods.</p>
 <div class="section" id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -248,8 +250,14 @@
 <li class="toctree-l4"><a class="reference internal" href="PHN.html#examples">2.3.1.1. Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
-<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="distances.html#example">2.3.2.1. Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="drawing.html#examples">2.3.3.1. Examples</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 </ul>
 </li>
@@ -296,14 +304,11 @@
 </div>
 <div class="section" id="collaborators">
 <h2>Collaborators<a class="headerlink" href="#collaborators" title="Permalink to this headline">¶</a></h2>
-<p>The code is an compilation of work done by <a class="reference external" href="http://www.elizabethmunch.com">Elizabeth Munch</a> along with her students and collaborators.  People who have contributed to teaspoon include:</p>
+<p>The code is a compilation of work done by <a class="reference external" href="http://www.elizabethmunch.com">Elizabeth Munch</a> and <a class="reference external" href="http://www.firaskhasawneh.com/">Firas Khasawneh</a> along with her students and collaborators.  People who have contributed to teaspoon include:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://www.firaskhasawneh.com">Firas Khasawneh</a></p></li>
-<li><p>Jesse Berwald</p></li>
-<li><p>Brian Bollen</p></li>
-<li><p>Audun Myers</p></li>
+<li><p><a class="reference external" href="https://github.com/myersau3">Audun Myers</a></p></li>
 <li><p>Melih Yesilli</p></li>
-<li><p>Sarah Tymochko</p></li>
+<li><p><a class="reference external" href="https://www.egr.msu.edu/~tymochko/">Sarah Tymochko</a></p></li>
 </ul>
 </div>
 <div class="section" id="current-issues-and-to-do-items">
@@ -313,6 +318,7 @@
 <div><ul class="simple">
 <li><p>Finish updating documentation</p></li>
 <li><p>Make pip install-able</p></li>
+<li><p>Validate (or make it so) that teaspoon can be imorted as “import teaspoon” and then functions can be called from there (e.g. teaspoon.MakeData.DynSysLib…).</p></li>
 </ul>
 </div></blockquote>
 <p>This is a list of the current issues for Sphinx:</p>

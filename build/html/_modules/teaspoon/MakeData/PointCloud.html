@@ -197,14 +197,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for teaspoon.MakeData.PointCloud</h1><div class="highlight"><pre>
-<span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Generates data sets related to persistence diagrams and point clouds.</span>
-
-<span class="sd">All point clouds are returned as a numpy array, larger collection data is returned as a pandas DataFrame.</span>
-
-<span class="sd">&#39;&#39;&#39;</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">euclidean</span>
 <span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
@@ -226,14 +219,14 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
-<span class="sd">        Number of points to generate</span>
-<span class="sd">    :Parameter r:</span>
-<span class="sd">        Radius of the circle</span>
-<span class="sd">    :Parameter gamma:</span>
-<span class="sd">        Standard deviation of the normally distributed noise.</span>
-<span class="sd">    :Parameter seed:</span>
-<span class="sd">        Fixes the seed.  Good if we want to replicate results.</span>
+<span class="sd">        N</span>
+<span class="sd">            Number of points to generate</span>
+<span class="sd">        r</span>
+<span class="sd">            Radius of the circle</span>
+<span class="sd">        gamma</span>
+<span class="sd">            Standard deviation of the normally distributed noise.</span>
+<span class="sd">        seed</span>
+<span class="sd">            Fixes the seed.  Good if we want to replicate results.</span>
 
 <span class="sd">    :returns:</span>
 <span class="sd">        P- A Nx2 numpy array with the points drawn as the rows.</span>
@@ -264,12 +257,12 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
-<span class="sd">        Number of points to generate</span>
-<span class="sd">    :Parameter r:</span>
-<span class="sd">        Radius of the sphere</span>
-<span class="sd">    :Parameter seed:</span>
-<span class="sd">        Fixes the seed.  Good if we want to replicate results.</span>
+<span class="sd">        N</span>
+<span class="sd">            Number of points to generate</span>
+<span class="sd">        r</span>
+<span class="sd">            Radius of the sphere</span>
+<span class="sd">        seed</span>
+<span class="sd">            Fixes the seed.  Good if we want to replicate results.</span>
 
 
 <span class="sd">    :returns:</span>
@@ -297,19 +290,18 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
-<span class="sd">        Number of points to generate</span>
-<span class="sd">    :Parameter r:</span>
-<span class="sd">        Inner radius of the annulus</span>
-<span class="sd">    :Parameter R:</span>
-<span class="sd">        Outer radius of the annulus</span>
-<span class="sd">    :Parameter seed:</span>
-<span class="sd">        Fixes the seed.  Good if we want to replicate results.</span>
+<span class="sd">        N</span>
+<span class="sd">            Number of points to generate</span>
+<span class="sd">        r</span>
+<span class="sd">            Inner radius of the annulus</span>
+<span class="sd">        R</span>
+<span class="sd">            Outer radius of the annulus</span>
+<span class="sd">        seed</span>
+<span class="sd">            Fixes the seed.  Good if we want to replicate results.</span>
 
 
 <span class="sd">    :returns:</span>
-<span class="sd">    P -</span>
-<span class="sd">        A Nx2 numpy array with the points drawn as the rows.</span>
+<span class="sd">        P - A Nx2 numpy array with the points drawn as the rows.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -351,19 +343,17 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
-<span class="sd">        Number of points to generate</span>
-<span class="sd">    :Parameter r:</span>
-<span class="sd">        Inner radius of the torus</span>
-<span class="sd">    :Parameter R:</span>
-<span class="sd">        Outer radius of the torus</span>
-<span class="sd">    :Parameter seed:</span>
-<span class="sd">        Fixes the seed.  Good if we want to replicate results.</span>
-
+<span class="sd">        N</span>
+<span class="sd">            Number of points to generate</span>
+<span class="sd">        r</span>
+<span class="sd">            Inner radius of the torus</span>
+<span class="sd">        R</span>
+<span class="sd">            Outer radius of the torus</span>
+<span class="sd">        seed</span>
+<span class="sd">            Fixes the seed.  Good if we want to replicate results.</span>
 
 <span class="sd">    :returns:</span>
-<span class="sd">    P -</span>
-<span class="sd">        A Nx3 numpy array with the points drawn as the rows.</span>
+<span class="sd">        P - A Nx3 numpy array with the points drawn as the rows.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -414,16 +404,15 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
-<span class="sd">        Number of points to generate</span>
-<span class="sd">    :Parameter diam:</span>
-<span class="sd">        Points are pulled from the box</span>
-<span class="sd">        [0,diam]x[0,diam]x...x[0,diam]</span>
-<span class="sd">    :Parameter dim:</span>
-<span class="sd">        Points are embedded in R^dim</span>
+<span class="sd">        N</span>
+<span class="sd">            Number of points to generate</span>
+<span class="sd">        diam</span>
+<span class="sd">            Points are pulled from the box [0,diam]x[0,diam]x...x[0,diam]</span>
+<span class="sd">        dim</span>
+<span class="sd">            Points are embedded in R^dim</span>
 
 <span class="sd">    :returns:</span>
-<span class="sd">    P - A Nxdim numpy array with the points drawn as the rows.</span>
+<span class="sd">        P - A Nxdim numpy array with the points drawn as the rows.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -448,22 +437,22 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
-<span class="sd">        Number of points to be generated</span>
-<span class="sd">    :Parameter centers:</span>
-<span class="sd">        k x d numpy array, where centers[i,:] is the center of</span>
-<span class="sd">        the ith cluster in R^d.</span>
-<span class="sd">    :Parameter sd:</span>
-<span class="sd">        standard deviation of clusters.</span>
-<span class="sd">        </span>
-<span class="sd">        .. todo:: Make this enterable as a vector so each cluster can have a different sd?</span>
+<span class="sd">         N</span>
+<span class="sd">            Number of points to be generated</span>
+<span class="sd">         centers</span>
+<span class="sd">            k x d numpy array, where centers[i,:] is the center of</span>
+<span class="sd">            the ith cluster in R^d.</span>
+<span class="sd">         sd</span>
+<span class="sd">            standard deviation of clusters.</span>
 
-<span class="sd">    :Parameter seed:</span>
-<span class="sd">        Fixes the seed.  Good if we want to replicate results.</span>
+<span class="sd">            .. todo:: Make this enterable as a vector so each cluster can have a different sd?</span>
+
+<span class="sd">         seed</span>
+<span class="sd">            Fixes the seed.  Good if we want to replicate results.</span>
 
 <span class="sd">    :returns:</span>
 
-<span class="sd">    P - A Nxd numpy array with the points drawn as the rows.</span>
+<span class="sd">        P - A Nxd numpy array with the points drawn as the rows.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -519,11 +508,11 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
+<span class="sd">     N</span>
 <span class="sd">        Original number of points drawn for the persistence diagram.</span>
-<span class="sd">    :Parameter mu, sd:</span>
+<span class="sd">     mu, sd</span>
 <span class="sd">        Mean and standard deviation of the normal distribution used to generate the points.</span>
-<span class="sd">    :Parameter seed:</span>
+<span class="sd">     seed</span>
 <span class="sd">        Used to fix the seed if passed an integer; otherwise should be `None`.</span>
 
 <span class="sd">    :returns:</span>
@@ -565,18 +554,18 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
-<span class="sd">        The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</span>
-<span class="sd">    :Parameter numDgms:</span>
-<span class="sd">        The number of diagrams for the collection.  Can either be an integer, in which case `numDgms` is the number of diagrams of *each type* that are generated, thus returning a data set with `2*numDgms` diagrams.  Alternatively, `numDgms` can be passed as a length two list `(n,m)` where `n` diagrams of the first type and `m` diagrams of the second type are drawn, for a total of `n+m` diagrams.</span>
-<span class="sd">    :Parameter muRed, muBlue:</span>
-<span class="sd">        The means used for the normal distribution in normalDiagram() for the two different types.</span>
-<span class="sd">    :Parameter sd:</span>
-<span class="sd">        The standard deviation for the normal distribution used for normalDiagram().</span>
-<span class="sd">    :Parameter permute:</span>
-<span class="sd">        If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.</span>
-<span class="sd">    :Parameter seed:</span>
-<span class="sd">        Used to fix the seed if passed an integer; otherwise should be `None`.</span>
+<span class="sd">        N</span>
+<span class="sd">            The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</span>
+<span class="sd">        numDgms</span>
+<span class="sd">            The number of diagrams for the collection.  Can either be an integer, in which case `numDgms` is the number of diagrams of *each type* that are generated, thus returning a data set with `2*numDgms` diagrams.  Alternatively, `numDgms` can be passed as a length two list `(n,m)` where `n` diagrams of the first type and `m` diagrams of the second type are drawn, for a total of `n+m` diagrams.</span>
+<span class="sd">        muRed, muBlue</span>
+<span class="sd">            The means used for the normal distribution in normalDiagram() for the two different types.</span>
+<span class="sd">        sd</span>
+<span class="sd">            The standard deviation for the normal distribution used for normalDiagram().</span>
+<span class="sd">        permute</span>
+<span class="sd">            If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.</span>
+<span class="sd">        seed</span>
+<span class="sd">            Used to fix the seed if passed an integer; otherwise should be `None`.</span>
 
 <span class="sd">    :returns:</span>
 <span class="sd">        A pandas dataframe with columns ```[&#39;Dgm&#39;, &#39;mean&#39;, &#39;sd&#39;, &#39;trainingLabel&#39;]```. In this case, the entry in `trainingLabel` is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.</span>
@@ -631,17 +620,17 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
+<span class="sd">     N</span>
 <span class="sd">        The number of initial points pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</span>
-<span class="sd">    :Parameter numDgms:</span>
+<span class="sd">     numDgms</span>
 <span class="sd">        The number of diagrams for the collection given as an integer.</span>
-<span class="sd">    :Parameter muStart, muEnd:</span>
+<span class="sd">     muStart, muEnd</span>
 <span class="sd">        The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by `muStart` and `muEnd`.</span>
-<span class="sd">    :Parameter sd:</span>
+<span class="sd">     sd</span>
 <span class="sd">        The standard deviation for the normal distribution used for normalDiagram().</span>
-<span class="sd">    :Parameter permute:</span>
+<span class="sd">     permute</span>
 <span class="sd">        If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.</span>
-<span class="sd">    :Parameter seed:</span>
+<span class="sd">     seed</span>
 <span class="sd">        Used to fix the seed if passed an integer; otherwise should be `None`.</span>
 
 <span class="sd">    :returns:</span>
@@ -690,18 +679,18 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter N:</span>
-<span class="sd">        The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</span>
-<span class="sd">    :Parameter numDgms:</span>
-<span class="sd">        The number of diagrams for the collection given as an integer.</span>
-<span class="sd">    :Parameter muCenter:</span>
-<span class="sd">        The means used for the normal distribution in normalDiagram() are drawn from the normal distribution with mean `muCenter`.</span>
-<span class="sd">    :Parameter sd:</span>
-<span class="sd">        The standard deviation for the normal distribution used for normalDiagram(), as well as for the standard deviation passed to normalDiagram().</span>
-<span class="sd">    :Parameter permute:</span>
-<span class="sd">        If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.</span>
-<span class="sd">    :Parameter seed:</span>
-<span class="sd">        Used to fix the seed if passed an integer; otherwise should be `None`.</span>
+<span class="sd">         N</span>
+<span class="sd">            The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than `N` pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</span>
+<span class="sd">         numDgms</span>
+<span class="sd">            The number of diagrams for the collection given as an integer.</span>
+<span class="sd">         muCenter</span>
+<span class="sd">            The means used for the normal distribution in normalDiagram() are drawn from the normal distribution with mean `muCenter`.</span>
+<span class="sd">         sd</span>
+<span class="sd">            The standard deviation for the normal distribution used for normalDiagram(), as well as for the standard deviation passed to normalDiagram().</span>
+<span class="sd">         permute</span>
+<span class="sd">            If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.</span>
+<span class="sd">         seed</span>
+<span class="sd">            Used to fix the seed if passed an integer; otherwise should be `None`.</span>
 
 <span class="sd">    :returns:</span>
 <span class="sd">        A pandas dataframe with columns ```[&#39;Dgm&#39;, &#39;mean&#39;, &#39;sd&#39;, &#39;trainingLabel&#39;]```.  In this case, `trainingLabel` is the distance from the mean used for that persistence diagram to `muCenter`.</span>
@@ -754,14 +743,14 @@
 
 <span class="sd">    Parameters:</span>
 
-<span class="sd">    :Parameter numDgms:</span>
-<span class="sd">        The number of diagrams generated of each type. The resulting dataset will have `6*numDgms` diagrams.</span>
-<span class="sd">    :Parameter numPts:</span>
-<span class="sd">        The number of points in each point cloud.</span>
-<span class="sd">    :Parameter permute:</span>
-<span class="sd">        If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.</span>
-<span class="sd">    :Parameter seed:</span>
-<span class="sd">        Used to fix the seed if passed an integer; otherwise should be `None`.</span>
+<span class="sd">         numDgms</span>
+<span class="sd">            The number of diagrams generated of each type. The resulting dataset will have `6*numDgms` diagrams.</span>
+<span class="sd">         numPts</span>
+<span class="sd">            The number of points in each point cloud.</span>
+<span class="sd">         permute</span>
+<span class="sd">            If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.</span>
+<span class="sd">         seed</span>
+<span class="sd">            Used to fix the seed if passed an integer; otherwise should be `None`.</span>
 
 <span class="sd">    :returns:</span>
 <span class="sd">        A pandas DataFrame with columns ```[&#39;Dgm0&#39;, &#39;Dgm1&#39;, &#39;trainingLabel&#39;]```.  The `trainingLabel` row has entries with labels given as the boldface above.</span>
@@ -834,8 +823,8 @@
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Clusters</span><span class="p">(</span><span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span> 
-                                        <span class="n">N</span> <span class="o">=</span> <span class="n">numPts</span><span class="p">,</span> 
+        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Clusters</span><span class="p">(</span><span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span>
+                                        <span class="n">N</span> <span class="o">=</span> <span class="n">numPts</span><span class="p">,</span>
                                         <span class="n">sd</span> <span class="o">=</span> <span class="o">.</span><span class="mi">05</span><span class="p">,</span>
                                         <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
         <span class="c1"># Dgms.append([dgmOut[0],dgmOut[1]])</span>

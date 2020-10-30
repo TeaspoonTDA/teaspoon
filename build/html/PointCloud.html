@@ -217,33 +217,22 @@ Specifically, the possible shapes are:</p>
 <li><p>Torus</p></li>
 </ul>
 <p>Additionally, this module can also generate random persistence diagrams.</p>
-<span class="target" id="module-teaspoon.MakeData.PointCloud"></span><p>Generates data sets related to persistence diagrams and point clouds.</p>
-<p>All point clouds are returned as a numpy array, larger collection data is returned as a pandas DataFrame.</p>
-<dl class="py function">
+<span class="target" id="module-teaspoon.MakeData.PointCloud"></span><dl class="py function">
 <dt id="teaspoon.MakeData.PointCloud.Annulus">
 <code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">Annulus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">r</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">R</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Annulus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Annulus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns point cloud sampled from uniform distribution on
 annulus in R^2 of inner radius r and outer radius R</p>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>Number of points to generate</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – Number of points to generate</p></li>
+<li><p><strong>r</strong> – Inner radius of the annulus</p></li>
+<li><p><strong>R</strong> – Outer radius of the annulus</p></li>
+<li><p><strong>seed</strong> – Fixes the seed.  Good if we want to replicate results.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Parameter r</dt>
-<dd class="field-even"><p>Inner radius of the annulus</p>
-</dd>
-<dt class="field-odd">Parameter R</dt>
-<dd class="field-odd"><p>Outer radius of the annulus</p>
-</dd>
-<dt class="field-even">Parameter seed</dt>
-<dd class="field-even"><p>Fixes the seed.  Good if we want to replicate results.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>P -</dt><dd><p>A Nx2 numpy array with the points drawn as the rows.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>P - A Nx2 numpy array with the points drawn as the rows.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -257,22 +246,17 @@ at the origin with radius r.</p>
 using a normal distribution.  Note that this means the resulting
 distribution is not bounded, so your favorite stability theorem doesn’t
 immediately apply.</p>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>Number of points to generate</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – Number of points to generate</p></li>
+<li><p><strong>r</strong> – Radius of the circle</p></li>
+<li><p><strong>gamma</strong> – Standard deviation of the normally distributed noise.</p></li>
+<li><p><strong>seed</strong> – Fixes the seed.  Good if we want to replicate results.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Parameter r</dt>
-<dd class="field-even"><p>Radius of the circle</p>
-</dd>
-<dt class="field-odd">Parameter gamma</dt>
-<dd class="field-odd"><p>Standard deviation of the normally distributed noise.</p>
-</dd>
-<dt class="field-even">Parameter seed</dt>
-<dd class="field-even"><p>Fixes the seed.  Good if we want to replicate results.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>P- A Nx2 numpy array with the points drawn as the rows.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>P- A Nx2 numpy array with the points drawn as the rows.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -284,26 +268,21 @@ immediately apply.</p>
 centers is a k x d numpy array, where centers[i,:] is the center of
 the ith cluster in R^d.
 Points are drawn from a normal distribution with std dev = sd</p>
-<p>Parameters:</p>
-<dl class="field-list">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>Number of points to be generated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – Number of points to be generated</p></li>
+<li><p><strong>centers</strong> – k x d numpy array, where centers[i,:] is the center of
+the ith cluster in R^d.</p></li>
+<li><p><strong>sd</strong> – <p>standard deviation of clusters.</p>
+</p></li>
+<li><p><strong>seed</strong> – Fixes the seed.  Good if we want to replicate results.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Parameter centers</dt>
-<dd class="field-even"><p>k x d numpy array, where centers[i,:] is the center of
-the ith cluster in R^d.</p>
-</dd>
-<dt class="field-odd">Parameter sd</dt>
-<dd class="field-odd"><p>standard deviation of clusters.</p>
-</dd>
-<dt class="field-even">Parameter seed</dt>
-<dd class="field-even"><p>Fixes the seed.  Good if we want to replicate results.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>P - A Nxd numpy array with the points drawn as the rows.</p>
 </dd>
 </dl>
-<p>P - A Nxd numpy array with the points drawn as the rows.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -311,23 +290,18 @@ the ith cluster in R^d.</p>
 <code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">Cube</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">diam</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Cube"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Cube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate N points in R^dim from the box
 [0,diam]x[0,diam]x…x[0,diam]</p>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>Number of points to generate</p>
-</dd>
-<dt class="field-even">Parameter diam</dt>
-<dd class="field-even"><p>Points are pulled from the box
-[0,diam]x[0,diam]x…x[0,diam]</p>
-</dd>
-<dt class="field-odd">Parameter dim</dt>
-<dd class="field-odd"><p>Points are embedded in R^dim</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – Number of points to generate</p></li>
+<li><p><strong>diam</strong> – Points are pulled from the box [0,diam]x[0,diam]x…x[0,diam]</p></li>
+<li><p><strong>dim</strong> – Points are embedded in R^dim</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dd class="field-even"><p>P - A Nxdim numpy array with the points drawn as the rows.</p>
 </dd>
 </dl>
-<p>P - A Nxdim numpy array with the points drawn as the rows.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -337,16 +311,13 @@ the ith cluster in R^d.</p>
 at the origin with radius r.
 If noise is set to a positive number, the points
 can be at distance r +/- noise from the origin.</p>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>Number of points to generate</p>
-</dd>
-<dt class="field-even">Parameter r</dt>
-<dd class="field-even"><p>Radius of the sphere</p>
-</dd>
-<dt class="field-odd">Parameter seed</dt>
-<dd class="field-odd"><p>Fixes the seed.  Good if we want to replicate results.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – Number of points to generate</p></li>
+<li><p><strong>r</strong> – Radius of the sphere</p></li>
+<li><p><strong>seed</strong> – Fixes the seed.  Good if we want to replicate results.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>P- A Nx3 numpy array with the points drawn as the rows.</p>
@@ -368,26 +339,17 @@ z = r * sin(theta)</p>
 <p>and psi with uniform density on [0,2pi).</p>
 <p>For theta, draw theta uniformly from [0,2pi) and
 eta from [1-r/R,1+r/R].  If eta&lt; 1 + (r/R) cos(theta), return theta.</p>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>Number of points to generate</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – Number of points to generate</p></li>
+<li><p><strong>r</strong> – Inner radius of the torus</p></li>
+<li><p><strong>R</strong> – Outer radius of the torus</p></li>
+<li><p><strong>seed</strong> – Fixes the seed.  Good if we want to replicate results.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Parameter r</dt>
-<dd class="field-even"><p>Inner radius of the torus</p>
-</dd>
-<dt class="field-odd">Parameter R</dt>
-<dd class="field-odd"><p>Outer radius of the torus</p>
-</dd>
-<dt class="field-even">Parameter seed</dt>
-<dd class="field-even"><p>Fixes the seed.  Good if we want to replicate results.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>P -</dt><dd><p>A Nx3 numpy array with the points drawn as the rows.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>P - A Nx3 numpy array with the points drawn as the rows.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -397,16 +359,14 @@ eta from [1-r/R,1+r/R].  If eta&lt; 1 + (r/R) cos(theta), return theta.</p>
 <code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">normalDiagram</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">mu</span><span class="o">=</span><span class="default_value">2, 4</span></em>, <em class="sig-param"><span class="n">sd</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#normalDiagram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.normalDiagram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.
 Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite> and standard deviation <cite>sd</cite>, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.</p>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>Original number of points drawn for the persistence diagram.</p>
-</dd>
-<dt class="field-even">Parameter mu, sd</dt>
-<dd class="field-even"><p>Mean and standard deviation of the normal distribution used to generate the points.</p>
-</dd>
-<dt class="field-odd">Parameter seed</dt>
-<dd class="field-odd"><p>Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – Original number of points drawn for the persistence diagram.</p></li>
+<li><p><strong>mu</strong> – Mean and standard deviation of the normal distribution used to generate the points.</p></li>
+<li><p><strong>sd</strong> – Mean and standard deviation of the normal distribution used to generate the points.</p></li>
+<li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A persistence diagram given as a numpy array of size <cite>Kx2</cite>.</p>
@@ -418,28 +378,20 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 <dt id="teaspoon.MakeData.PointCloud.testSetClassification">
 <code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">testSetClassification</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">numDgms</span><span class="o">=</span><span class="default_value">10, 10</span></em>, <em class="sig-param"><span class="n">muRed</span><span class="o">=</span><span class="default_value">1, 3</span></em>, <em class="sig-param"><span class="n">muBlue</span><span class="o">=</span><span class="default_value">2, 5</span></em>, <em class="sig-param"><span class="n">sd</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">permute</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetClassification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetClassification" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a collection of diagrams using the normalDiagram() function for classification tests.</p>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</p></li>
+<li><p><strong>numDgms</strong> – The number of diagrams for the collection.  Can either be an integer, in which case <cite>numDgms</cite> is the number of diagrams of <em>each type</em> that are generated, thus returning a data set with <cite>2*numDgms</cite> diagrams.  Alternatively, <cite>numDgms</cite> can be passed as a length two list <cite>(n,m)</cite> where <cite>n</cite> diagrams of the first type and <cite>m</cite> diagrams of the second type are drawn, for a total of <cite>n+m</cite> diagrams.</p></li>
+<li><p><strong>muRed</strong> – The means used for the normal distribution in normalDiagram() for the two different types.</p></li>
+<li><p><strong>muBlue</strong> – The means used for the normal distribution in normalDiagram() for the two different types.</p></li>
+<li><p><strong>sd</strong> – The standard deviation for the normal distribution used for normalDiagram().</p></li>
+<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</p></li>
+<li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Parameter numDgms</dt>
-<dd class="field-even"><p>The number of diagrams for the collection.  Can either be an integer, in which case <cite>numDgms</cite> is the number of diagrams of <em>each type</em> that are generated, thus returning a data set with <cite>2*numDgms</cite> diagrams.  Alternatively, <cite>numDgms</cite> can be passed as a length two list <cite>(n,m)</cite> where <cite>n</cite> diagrams of the first type and <cite>m</cite> diagrams of the second type are drawn, for a total of <cite>n+m</cite> diagrams.</p>
-</dd>
-<dt class="field-odd">Parameter muRed, muBlue</dt>
-<dd class="field-odd"><p>The means used for the normal distribution in normalDiagram() for the two different types.</p>
-</dd>
-<dt class="field-even">Parameter sd</dt>
-<dd class="field-even"><p>The standard deviation for the normal distribution used for normalDiagram().</p>
-</dd>
-<dt class="field-odd">Parameter permute</dt>
-<dd class="field-odd"><p>If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</p>
-</dd>
-<dt class="field-even">Parameter seed</dt>
-<dd class="field-even"><p>Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>. In this case, the entry in <cite>trainingLabel</cite> is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>. In this case, the entry in <cite>trainingLabel</cite> is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -459,22 +411,17 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 </ul>
 </dd>
 </dl>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter numDgms</dt>
-<dd class="field-odd"><p>The number of diagrams generated of each type. The resulting dataset will have <cite>6*numDgms</cite> diagrams.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numDgms</strong> – The number of diagrams generated of each type. The resulting dataset will have <cite>6*numDgms</cite> diagrams.</p></li>
+<li><p><strong>numPts</strong> – The number of points in each point cloud.</p></li>
+<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</p></li>
+<li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Parameter numPts</dt>
-<dd class="field-even"><p>The number of points in each point cloud.</p>
-</dd>
-<dt class="field-odd">Parameter permute</dt>
-<dd class="field-odd"><p>If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</p>
-</dd>
-<dt class="field-even">Parameter seed</dt>
-<dd class="field-even"><p>Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A pandas DataFrame with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm0',</span> <span class="pre">'Dgm1',</span> <span class="pre">'trainingLabel']`</span></code>.  The <cite>trainingLabel</cite> row has entries with labels given as the boldface above.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pandas DataFrame with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm0',</span> <span class="pre">'Dgm1',</span> <span class="pre">'trainingLabel']`</span></code>.  The <cite>trainingLabel</cite> row has entries with labels given as the boldface above.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -483,28 +430,19 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 <dt id="teaspoon.MakeData.PointCloud.testSetRegressionBall">
 <code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">testSetRegressionBall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">numDgms</span><span class="o">=</span><span class="default_value">40</span></em>, <em class="sig-param"><span class="n">muCenter</span><span class="o">=</span><span class="default_value">1, 3</span></em>, <em class="sig-param"><span class="n">sd</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">permute</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetRegressionBall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetRegressionBall" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a collection of diagrams with means distributed normally using the normalDiagram() function; used for regression tests.</p>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</p></li>
+<li><p><strong>numDgms</strong> – The number of diagrams for the collection given as an integer.</p></li>
+<li><p><strong>muCenter</strong> – The means used for the normal distribution in normalDiagram() are drawn from the normal distribution with mean <cite>muCenter</cite>.</p></li>
+<li><p><strong>sd</strong> – The standard deviation for the normal distribution used for normalDiagram(), as well as for the standard deviation passed to normalDiagram().</p></li>
+<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</p></li>
+<li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Parameter numDgms</dt>
-<dd class="field-even"><p>The number of diagrams for the collection given as an integer.</p>
-</dd>
-<dt class="field-odd">Parameter muCenter</dt>
-<dd class="field-odd"><p>The means used for the normal distribution in normalDiagram() are drawn from the normal distribution with mean <cite>muCenter</cite>.</p>
-</dd>
-<dt class="field-even">Parameter sd</dt>
-<dd class="field-even"><p>The standard deviation for the normal distribution used for normalDiagram(), as well as for the standard deviation passed to normalDiagram().</p>
-</dd>
-<dt class="field-odd">Parameter permute</dt>
-<dd class="field-odd"><p>If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</p>
-</dd>
-<dt class="field-even">Parameter seed</dt>
-<dd class="field-even"><p>Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muCenter</cite>.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muCenter</cite>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -513,28 +451,20 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 <dt id="teaspoon.MakeData.PointCloud.testSetRegressionLine">
 <code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">testSetRegressionLine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">numDgms</span><span class="o">=</span><span class="default_value">40</span></em>, <em class="sig-param"><span class="n">muStart</span><span class="o">=</span><span class="default_value">1, 3</span></em>, <em class="sig-param"><span class="n">muEnd</span><span class="o">=</span><span class="default_value">2, 5</span></em>, <em class="sig-param"><span class="n">sd</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">permute</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetRegressionLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetRegressionLine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a collection of diagrams with means distributed along a line using the normalDiagram() function for regression tests.</p>
-<p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameter N</dt>
-<dd class="field-odd"><p>The number of initial points pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – The number of initial points pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</p></li>
+<li><p><strong>numDgms</strong> – The number of diagrams for the collection given as an integer.</p></li>
+<li><p><strong>muStart</strong> – The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by <cite>muStart</cite> and <cite>muEnd</cite>.</p></li>
+<li><p><strong>muEnd</strong> – The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by <cite>muStart</cite> and <cite>muEnd</cite>.</p></li>
+<li><p><strong>sd</strong> – The standard deviation for the normal distribution used for normalDiagram().</p></li>
+<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</p></li>
+<li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Parameter numDgms</dt>
-<dd class="field-even"><p>The number of diagrams for the collection given as an integer.</p>
-</dd>
-<dt class="field-odd">Parameter muStart, muEnd</dt>
-<dd class="field-odd"><p>The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by <cite>muStart</cite> and <cite>muEnd</cite>.</p>
-</dd>
-<dt class="field-even">Parameter sd</dt>
-<dd class="field-even"><p>The standard deviation for the normal distribution used for normalDiagram().</p>
-</dd>
-<dt class="field-odd">Parameter permute</dt>
-<dd class="field-odd"><p>If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</p>
-</dd>
-<dt class="field-even">Parameter seed</dt>
-<dd class="field-even"><p>Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muStart</cite>.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muStart</cite>.</p>
 </dd>
 </dl>
 </dd></dl>
