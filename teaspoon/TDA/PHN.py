@@ -65,8 +65,10 @@ def PH_network(A, method = 'unweighted', distance = 'shortest_path'):
     import numpy as np
     
     #import sub modules
-    import distance_matrix
-    
+    import os,sys
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+    from teaspoon.TDA import distance_matrix
     
     D = distance_matrix.DistanceMatrix(np.array(A), method = method, distance = distance)  
     #get distance matrix. Specify if weighting is desired or shortest path 

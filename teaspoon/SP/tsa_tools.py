@@ -81,16 +81,15 @@ def takens(ts, n= None, tau= None):
     sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
     
     if tau == None:
-        from parameter_selection import MI_delay
+        from teaspoon.parameter_selection import MI_delay
         tau = MI_delay.MI_for_delay(ts, method = 'basic', h_method = 'sturge', k = 2, ranking = True)
     if n == None:
-        from parameter_selection import FNN_n
+        from teaspoon.parameter_selection import FNN_n
         perc_FNN, n = FNN_n.FNN_n(ts, tau)
-    
     
     #takens embedding method. Not the fastest algoriothm, but it works. Need to improve
     L = len(ts) #total length of time series
-    SSR = []
+    SSR = [] 
     for i in range(L - tau * (n - 1)): 
         v_i = ts[i:i + tau * n:tau]
         SSR.append(v_i)
