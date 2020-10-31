@@ -17,7 +17,17 @@ In order to use all wrappers in teaspoon.TDA, the following need to be installed
 
 <span style="color:red">Warning</span>: the teaspoon installation will not install nor check for the install of these packages. In particular, perseus should be installed so that typing `perseus` in a terminal runs it, even though the default perseus installation for some operating systems ends up with an executable with a different name.
 
+**Required Packages:**
 
+* pip install pyentrp
+* pip install numpy
+* pip install matplotlib
+* pip install os
+* pip install sys
+* pip install itertools
+* pip install sci-kit
+* pip install networkx
+* pip install scipy
 
 Installation
 **************

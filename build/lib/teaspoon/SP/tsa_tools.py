@@ -21,16 +21,16 @@ def permutation_sequence(ts, n = None, tau = None): #finds permutation sequency 
     
     import os
     import sys
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
     time_series = ts
     
     if n == None:
-        from parameter_selection import MsPE
+        from teaaspoon.parameter_selection import MsPE
         tau = int(MsPE.MsPE_tau(ts)) 
         n = MsPE.MsPE_n(ts, tau)
         
     if tau == None:
-        from parameter_selection import MsPE
+        from teaaspoon.parameter_selection import MsPE
         tau = int(MsPE.MsPE_tau(ts))
     
     m, delay = n, tau
@@ -78,19 +78,18 @@ def takens(ts, n= None, tau= None):
     import numpy as np
     import os
     import sys
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
     
     if tau == None:
-        from parameter_selection import MI_delay
+        from teaspoon.parameter_selection import MI_delay
         tau = MI_delay.MI_for_delay(ts, method = 'basic', h_method = 'sturge', k = 2, ranking = True)
     if n == None:
-        from parameter_selection import FNN_n
+        from teaspoon.parameter_selection import FNN_n
         perc_FNN, n = FNN_n.FNN_n(ts, tau)
-    
     
     #takens embedding method. Not the fastest algoriothm, but it works. Need to improve
     L = len(ts) #total length of time series
-    SSR = []
+    SSR = [] 
     for i in range(L - tau * (n - 1)): 
         v_i = ts[i:i + tau * n:tau]
         SSR.append(v_i)

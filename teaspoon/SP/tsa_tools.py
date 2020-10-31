@@ -21,16 +21,16 @@ def permutation_sequence(ts, n = None, tau = None): #finds permutation sequency 
     
     import os
     import sys
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
     time_series = ts
     
     if n == None:
-        from parameter_selection import MsPE
+        from teaaspoon.parameter_selection import MsPE
         tau = int(MsPE.MsPE_tau(ts)) 
         n = MsPE.MsPE_n(ts, tau)
         
     if tau == None:
-        from parameter_selection import MsPE
+        from teaaspoon.parameter_selection import MsPE
         tau = int(MsPE.MsPE_tau(ts))
     
     m, delay = n, tau
@@ -78,7 +78,7 @@ def takens(ts, n= None, tau= None):
     import numpy as np
     import os
     import sys
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
     
     if tau == None:
         from teaspoon.parameter_selection import MI_delay
