@@ -19,19 +19,15 @@ def DynamicSystems(system, dynamic_state = None, L = None, fs = None,
     Returns:
         array: Array of the time indices as t and the simulation time series ts from the simulation for all dimensions of dynamcal system (e.g. 3 for Lorenz).
     """
-    import os,sys
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..','..'))
-    from teaspoon.MakeData.DynSysLib import DynSysLib as DSL
+    
     #needed packages
     import numpy as np
-    import autonomous_dissipative_flows
-    import maps
-    import periodic_functions
-    import noise_models
-    import medical_data
-    import delayed_flows
-    import conservative_flows
-    import driven_dissipative_flows
+    
+    #import other teaspoon packages
+    import os,sys
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
+    import teaspoon
     
     t, ts =  [None], [None] #primes the time and time series datas.
     
@@ -74,7 +70,7 @@ def DynamicSystems(system, dynamic_state = None, L = None, fs = None,
                                   'labyrinth_chaos', 'henon_heiles_system']
     
     if UserGuide == True: #prints the user guide and all available dynamical systems.
-        import UserGuide
+        from teaspoon.MakeData.DynSysLib import UserGuide
         UserGuide.UserGuide(list_of_autonomous_dissipative_flows,
                             list_of_conservative_flows,
                             list_of_periodic_functions,
@@ -99,41 +95,49 @@ def DynamicSystems(system, dynamic_state = None, L = None, fs = None,
         
 # In[ ]: AUTONOMOUS DISSIPATIVE FLOWS
     if system in list_of_autonomous_dissipative_flows:
+        from teaspoon.MakeData.DynSysLib import autonomous_dissipative_flows
         t, ts = autonomous_dissipative_flows.autonomous_dissipative_flows(system, dynamic_state, L, fs, 
                                              SampleSize, parameters, InitialConditions)
 
 # In[ ]: MAPS
     if system in list_of_maps:
+        from teaspoon.MakeData.DynSysLib import maps
         t, ts = maps.maps(system, dynamic_state, L, fs, 
                                              SampleSize, parameters, InitialConditions)
 
 # In[ ]: PERIODIC
     if system in list_of_periodic_functions:
+        from teaspoon.MakeData.DynSysLib import periodic_functions
         t, ts = periodic_functions.periodic_functions(system, dynamic_state, L, fs, 
                                              SampleSize, parameters, InitialConditions)
                 
 # In[ ]: NOISE
     if system in list_of_noise_models:
+        from teaspoon.MakeData.DynSysLib import noise_models
         t, ts = noise_models.noise_models(system, dynamic_state, L, fs, 
                                              SampleSize, parameters, InitialConditions)
 
 # In[ ]: MEDICAL
     if system in list_of_medical_data:
+        from teaspoon.MakeData.DynSysLib import medical_data
         t, ts = medical_data.medical_data(system, dynamic_state, L, fs, 
                                              SampleSize, parameters, InitialConditions)
     
 # In[ ]: DDE
     if system in list_of_delayed_flows:
+        from teaspoon.MakeData.DynSysLib import delayed_flows
         t, ts = delayed_flows.delayed_flows(system, dynamic_state, L, fs, 
                                              SampleSize, parameters, InitialConditions)
          
 # In[ ]: driven_dissipative_flows
     if system in list_of_driven_dissipative_flows:
+        from teaspoon.MakeData.DynSysLib import driven_dissipative_flows
         t, ts = driven_dissipative_flows.driven_dissipative_flows(system, dynamic_state, L, fs, 
                                              SampleSize, parameters, InitialConditions)
         
 # In[ ]: conservative_flows
     if system in list_of_conservative_flows:
+        from teaspoon.MakeData.DynSysLib import conservative_flows
         t, ts = conservative_flows.conservative_flows(system, dynamic_state, L, fs, 
                                              SampleSize, parameters, InitialConditions)
 
@@ -153,7 +157,13 @@ def DynamicSystems(system, dynamic_state = None, L = None, fs = None,
 if __name__ == "__main__":
     
     
-    import DynSysLib as DSL
+    import os,sys
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..','..'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
+    
+    
+    from teaspoon.MakeData.DynSysLib import DynSysLib as DSL 
+    
     system = 'rossler' #define the system of interest
     dynamic_state = 'periodic' #set the dynamic state
     t, ts = DSL.DynamicSystems(system, dynamic_state, UserGuide = True)
