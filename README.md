@@ -22,7 +22,7 @@ The package can be installed using the following pip installation::
 
 	pip install teaspoon
 
-The current draft of the code may still have dependency issues which will be fixed by version 1.0.0.
+The current draft of the code may still have dependency issues which will be fixed by version 1.0.0. Please reference the requirments page in the [documentation](http://elizabethmunch.com/code/teaspoon/index.html) for more details on other required installations.
 
 Contacts
 =============
