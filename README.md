@@ -17,12 +17,12 @@ The code is a compilation of work done by [Elizabeth Munch](http://www.elizabeth
 
 Installation
 =============
-The teaspoon package is available through pip install with version details found [here](https://test.pypi.org/project/teaspoon/).
+The teaspoon package is available through pip install with version details found [here](https://pypi.org/project/teaspoon/).
 The package can be installed using the following pip installation::
 
-	pip install -i https://test.pypi.org/simple/ teaspoon
+	pip install teaspoon
 
-The software will soon be available on PyPI!
+The current draft of the code may still have dependency issues which will be fixed by version 1.0.0.
 
 Contacts
 =============
