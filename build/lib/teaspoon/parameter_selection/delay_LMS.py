@@ -57,7 +57,6 @@ def LMSforDelay(ts, fs, plotting = False):#1-D lms function
                         #the +0.000001 is a 0.00001% cutoff guarentee; If there is no noise in the system, 
                         #LMS will best fit to 0.
     fmax = MaximumFrequency(xf,yf, cutoff) #gets maximum frequency from |FFT|
-    print(fmax)
     delay = (fs/(3*fmax)) #Suggested delay from Melosik's paper (0/1 test)
     
     if int(delay) == 0:

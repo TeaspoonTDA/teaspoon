@@ -58,6 +58,7 @@ def MsPE_tau(time_series, delay_end = 200, plotting = False):
                 end = True
     
     if plotting == True:
+        import matplotlib.pyplot as plt
         plt.figure(2) 
         TextSize = 17
         plt.figure(figsize=(8,3))

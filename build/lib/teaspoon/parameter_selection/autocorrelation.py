@@ -39,15 +39,6 @@ def autoCorrelation_tau(ts, cutoff = 0.36788, AC_method = 'spearman', plotting =
         ts_o = pd.Series(ts_o)
         ts_d = pd.Series(ts_d)
         
-        TextSize = 20
-        plt.figure(figsize = (4,4))
-        plt.plot(ts_o, ts_d, 'k.')
-        plt.xticks(size = TextSize)
-        plt.yticks(size = TextSize)
-        plt.xlabel(r'$x(t)$', size = TextSize)
-        plt.ylabel(r'$x(t+ \tau)$', size = TextSize)
-        plt.show()
-        
         if AC_method == 'pearson':
             R = ts_o.corr(ts_d, method='pearson')
         if AC_method == 'spearman':
@@ -74,18 +65,15 @@ def autoCorrelation_tau(ts, cutoff = 0.36788, AC_method = 'spearman', plotting =
 
 if __name__ == '__main__':
     
+    from teaspoon.parameter_selection.autocorrelation import autoCorrelation_tau
     import numpy as np
     
     fs = 10
-    T = 20
-    t = np.linspace(0, T, fs*T) 
-    ts = np.sin(t)
-
-    Delay = autoCorrelation_tau(ts, cutoff = 1/np.exp(1), AC_method = 'pearson', plotting = True) 
-    #calculates delay from autocorrelation (Pearson's)
+    t = np.linspace(0, 100, fs*100)
+    ts = np.sin(t) + np.sin((1/np.pi)*t)
     
-    print('Delay from AC: ', Delay)
-
+    tau = autoCorrelation_tau(ts, cutoff = 1/np.exp(1), AC_method = 'pearson', plotting = True)
+    print('Delay from AC: ', tau)
 
 
 
