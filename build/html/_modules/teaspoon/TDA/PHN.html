@@ -264,8 +264,10 @@
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     
     <span class="c1">#import sub modules</span>
-    <span class="kn">import</span> <span class="nn">distance_matrix</span>
-    
+    <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
+    <span class="kn">from</span> <span class="nn">teaspoon.TDA</span> <span class="kn">import</span> <span class="n">distance_matrix</span>
     
     <span class="n">D</span> <span class="o">=</span> <span class="n">distance_matrix</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">method</span> <span class="o">=</span> <span class="n">method</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">distance</span><span class="p">)</span>  
     <span class="c1">#get distance matrix. Specify if weighting is desired or shortest path </span>

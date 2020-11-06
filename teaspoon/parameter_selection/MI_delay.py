@@ -588,14 +588,16 @@ def MI_for_delay(ts, plotting = False, method = 'basic', h_method = 'sturge', k 
 # In[ ]:
 if __name__ == "__main__":
     
+    from teaspoon.parameter_selection.MI_delay import MI_for_delay
     import numpy as np
     
     fs = 10
-    t = np.linspace(0, 100, fs*100) 
-    ts = np.sin(t) + np.sin(1/np.pi * t)
+    t = np.linspace(0, 100, fs*100)
+    ts = np.sin(t) + np.sin((1/np.pi)*t)
     
     tau = MI_for_delay(ts, plotting = True, method = 'basic', h_method = 'sturge', k = 2, ranking = True)
     print('Delay from MI: ',tau)
+
 
     
 
