@@ -244,7 +244,7 @@ The following is an example implementing the minimum amount of needed::
 
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
-    import DynSysLib as DSL
+    import teaspoon.MakeData.DynSysLib.DynSysLib as DSL
     
     system = 'rossler'
     dynamic_state = 'periodic'
@@ -279,7 +279,7 @@ The following is another example implementing all of the possible inputs (dynami
 
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
-    import DynSysLib as DSL
+    import teaspoon.MakeData.DynSysLib.DynSysLib as DSL
     
     system = 'rossler'
     UserGuide = True
