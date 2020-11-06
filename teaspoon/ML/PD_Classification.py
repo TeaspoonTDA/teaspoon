@@ -379,7 +379,7 @@ def CL_KM(PD,params):
     """
 
     This function takes parameter object and persistence diagrams and computes pairwise kernels for training set and kernel matrix between test set and training set separately.
-    The main difference of this function from others is that it uses  `LIBSVM <https://www.csie.ntu.edu.tw/~cjlin/libsvm/>`_ for classification.
+    The main difference of this function from others is that it uses  `LIBSVM <https://www.csie.ntu.edu.tw/~cjlin/libsvm/>`_ (see `here <https://www.csie.ntu.edu.tw/~cjlin/libsvm/COPYRIGHT>`_ for LibSVM copyright statement)   for classification.
     Computed kernels are used in SVM algorithm to perform classification.
 
     :param ndarray (PD):
@@ -390,7 +390,7 @@ def CL_KM(PD,params):
 
     :Returns:
 
-        :results: 1x3 matrix that includes the classification results and total elapsed time. First and second column is for test set score and deviation, while third column is the elapsed time.
+        results: 1x3 matrix that includes the classification results and total elapsed time. First and second column is for test set score and deviation, while third column is the elapsed time.
 
     **Note:** User needs to change the path to LIBSVM folder at line 13.
 

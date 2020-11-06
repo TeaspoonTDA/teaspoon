@@ -1,0 +1,909 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>teaspoon.ML.Base &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> teaspoon
+          
+
+          
+            
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html">2.1.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">5. Citing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>teaspoon.ML.Base</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for teaspoon.ML.Base</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This is the main code for running ML code in teaspoon.</span>
+
+<span class="sd">Here, we start with an instance of the `ParameterBucket` class. The intention of this</span>
+<span class="sd">object is to keep all determined parameters in one easy to use object. A new</span>
+<span class="sd">`ParameterBucket` subclass can be defined to inform any featurization method of interest.</span>
+<span class="sd">For instance, a simple example of using tent functions as defined in *Approximating</span>
+<span class="sd">Continuous Functions on Persistence Diagrams Using Template Functions* (Perea, Munch,</span>
+<span class="sd">Khasawneh 2018) is shown below.</span>
+
+<span class="sd">import teaspoon.ML.Base as Base</span>
+<span class="sd">import teaspoon.MakeData.PointCloud as gPC</span>
+<span class="sd">import teaspoon.ML.feature_functions as fF</span>
+<span class="sd">from sklearn.linear_model import RidgeClassifierCV</span>
+
+<span class="sd">params = Base.TentParameters(clf_model = RidgeClassifierCV,</span>
+<span class="sd">                             feature_function = fF.tent,</span>
+<span class="sd">                              test_size = .33,</span>
+<span class="sd">                              seed = 48824,</span>
+<span class="sd">                              d = 10,</span>
+<span class="sd">                              delta = 1,</span>
+<span class="sd">                              epsilon = 0</span>
+<span class="sd">                             )</span>
+
+<span class="sd">DgmsDF = gPC.testSetClassification(N = 20,</span>
+<span class="sd">                                  numDgms = 50,</span>
+<span class="sd">                                  muRed = (1,3),</span>
+<span class="sd">                                  muBlue = (2,5),</span>
+<span class="sd">                                  sd = 1,</span>
+<span class="sd">                                   seed = 48824</span>
+<span class="sd">                                  )</span>
+
+<span class="sd">out = Base.getPercentScore(DgmsDF,dgm_col = &#39;Dgm&#39;, labels_col = &#39;trainingLabel&#39;, params = params )</span>
+
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module: Base</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;teaspoon&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;teaspoon&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;teaspoon&#39;</span><span class="p">,</span><span class="s1">&#39;ML&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;teaspoon&#39;</span><span class="p">,</span><span class="s1">&#39;ML&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;teaspoon&#39;</span><span class="p">,</span><span class="s1">&#39;TSP&#39;</span><span class="p">))</span>
+
+<span class="kn">import</span> <span class="nn">feature_functions</span> <span class="k">as</span> <span class="nn">fF</span>
+<span class="kn">from</span> <span class="nn">TDA</span> <span class="kn">import</span> <span class="n">Persistence</span> <span class="k">as</span> <span class="n">pP</span>
+<span class="kn">from</span> <span class="nn">SP.adaptivePart</span> <span class="kn">import</span> <span class="n">Partitions</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">RidgeCV</span><span class="p">,</span> <span class="n">RidgeClassifierCV</span><span class="p">,</span> <span class="n">LassoCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">scale</span><span class="p">,</span> <span class="n">PolynomialFeatures</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span><span class="p">,</span><span class="n">NuSVC</span><span class="p">,</span><span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="k">class</span> <span class="nc">ParameterBucket</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+					<span class="n">clf_model</span> <span class="o">=</span> <span class="n">RidgeClassifierCV</span><span class="p">,</span>
+					<span class="n">feature_function</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">tent</span><span class="p">,</span>
+					<span class="n">test_size</span> <span class="o">=</span> <span class="o">.</span><span class="mi">33</span><span class="p">,</span>
+					<span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+					<span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+					<span class="c1"># d=10,</span>
+					<span class="c1"># delta = 1,</span>
+					<span class="c1"># epsilon = 0,</span>
+					<span class="c1"># maxPower = 1,</span>
+					<span class="c1">#</span>
+					<span class="c1"># feature_function=None,</span>
+					<span class="c1"># boundingBoxMatrix = None):</span>
+		<span class="sd">&quot;&quot;&quot;!@brief Creates a new ParameterBucket object.</span>
+
+<span class="sd">		This object is being used to keep track of all the parameters needed</span>
+<span class="sd">		for the tents ML featurization.</span>
+
+<span class="sd">		Parameters that are included in the ParameterBucket initially:</span>
+
+<span class="sd">		@param description</span>
+<span class="sd">			A description, has no effect on code. This can be set on initialization.</span>
+<span class="sd">		@param clf_model</span>
+<span class="sd">			The choice of tool used for classification or regression, passed as the function.  This code has been tested using `sklearn` functions `RidgeClassiferCV` for classification and `RidgeCV` for regression.</span>
+<span class="sd">		@param feature_function</span>
+<span class="sd">			The function you want to use for featurization.  This should be a function that takes as inputs a diagram and a ParameterBucket, and returns a vector of features. The default is ML.feature_functions.tents()</span>
+<span class="sd">		@param test_size</span>
+<span class="sd">			A number in \f$[0,1]\f$.  Gives the percentage of data points to be reserved for the testing set if this is being used for a train/test split experiment.  Otherwise, ignored.</span>
+<span class="sd">		@param seed</span>
+<span class="sd">			The seed for the pseudo-random number generator.  Pass None if you don&#39;t want it fixed; otherwise, pass an integer.</span>
+<span class="sd">		@param kwargs</span>
+<span class="sd">			Any leftover inputs are stored as attributes. Some common attributes used elsewhere are `d`, `delta`, and `epsilon` to describe the mesh. If its set, `boundingbox` keeps track of a box which encloses all points in all diagrams in a particular series; see setBoundingBox().</span>
+
+<span class="sd">		&quot;&quot;&quot;</span>
+
+
+		<span class="c1"># Parameters that used to be included. Documentation left here to figure out stuff for later.</span>
+		<span class="c1">#</span>
+		<span class="c1"># @param d, delta, epsilon</span>
+		<span class="c1">#     The bounding box for the persistence diagram in the (birth, lifetime) coordinates is [0,d * delta] x [epsilon, d* delta + epsilon].  In the usual coordinates, this creates a parallelogram.</span>
+		<span class="c1"># @param maxPower</span>
+		<span class="c1">#     The maximum degree used for the monomial combinations of the tent functions.  Testing suggests we usually want this to be 1.  Increasing causes large increase in number of features.</span>
+		<span class="c1"># @param boundingBoxMatrix</span>
+		<span class="c1"># 	Not yet implemented.  See self.findBoundingBox()</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">clf_model</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">=</span> <span class="n">feature_function</span>
+		<span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;!</span>
+<span class="sd">		@brief Nicely prints all currently set values in the ParameterBucket.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">attrs</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+		<span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;Variables in parameter bucket</span><span class="se">\n</span><span class="s1">&#39;</span>
+		<span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;---</span><span class="se">\n</span><span class="s1">&#39;</span>
+		<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+			<span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; : &#39;</span>
+			<span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">attrs</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+		<span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;---</span><span class="se">\n</span><span class="s1">&#39;</span>
+		<span class="k">return</span> <span class="n">output</span>
+
+
+	<span class="k">def</span> <span class="nf">makeAdaptivePartition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DgmsPD</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s1">&#39;BirthDeath&#39;</span><span class="p">,</span><span class="n">meshingScheme</span> <span class="o">=</span> <span class="s1">&#39;DV&#39;</span><span class="p">):</span>
+		<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">		Combines all persistence diagrams in the series together, then generates an adaptive partition mesh and includes it in the parameter bucket as self.partitions</span>
+
+<span class="sd">		The partitions can be viewed using self.partitions.plot()</span>
+<span class="sd">		TODO: This can&#39;t handle infinite points in the diagram yet</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
+		<span class="c1"># TODO Deal with infinite points???</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="n">AllDgms</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">DgmsPD</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+				<span class="n">DgmsSeries</span> <span class="o">=</span> <span class="n">DgmsPD</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+				<span class="n">AllDgms</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">))</span>
+
+			<span class="n">AllPoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">AllDgms</span><span class="p">)</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="c1"># you had a series to start with</span>
+			<span class="n">AllPoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">DgmsPD</span><span class="p">))</span>
+
+		<span class="c1"># Remove inifinite points</span>
+
+		<span class="n">AllPoints</span> <span class="o">=</span> <span class="n">pP</span><span class="o">.</span><span class="n">removeInfiniteClasses</span><span class="p">(</span><span class="n">AllPoints</span><span class="p">)</span>
+
+		<span class="n">x</span> <span class="o">=</span> <span class="n">AllPoints</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+		<span class="n">y</span> <span class="o">=</span> <span class="n">AllPoints</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+		<span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;BirthDeath&#39;</span><span class="p">:</span>
+			<span class="n">life</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="n">x</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">life</span> <span class="o">=</span> <span class="n">y</span>
+		<span class="n">fullData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">life</span><span class="p">))</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="o">=</span> <span class="n">Partitions</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">fullData</span><span class="p">,</span> <span class="n">meshingScheme</span> <span class="o">=</span> <span class="n">meshingScheme</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">setBoundingBox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">DgmsPD</span><span class="p">,</span><span class="n">pad</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;!@brief Sets a bounding box in the birth-lifetime planeself.</span>
+
+<span class="sd">		@param DgmsPD a pd.Series or pd.DataFrame with a persistence diagram in each entry.</span>
+<span class="sd">		@param pad is the additional padding desired outside of the points in the diagrams.</span>
+
+
+
+
+<span class="sd">		Sets</span>
+<span class="sd">		`self.boundingBox`</span>
+<span class="sd">		to be a dictionary with two keys, &#39;birthAxis&#39; and &#39;lifetimeAxis&#39;, each outputing</span>
+<span class="sd">		a tuple of length 2 so that all points in all diagrams (written in (birth,lifetime) coordinates) in the series are contained in the box `self.birthAxis X self.lifetimeAxis`.</span>
+<span class="sd">		If `pad` is non-zero, the boundaries of the bounding box on all sides except the one touching the diagonal 		are at least `pad` distance away from the closest point.</span>
+
+
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">DgmsPD</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+			<span class="n">topPers</span> <span class="o">=</span> <span class="n">pP</span><span class="o">.</span><span class="n">maxPersistenceSeries</span><span class="p">(</span><span class="n">DgmsPD</span><span class="p">)</span>
+			<span class="n">bottomPers</span> <span class="o">=</span> <span class="n">pP</span><span class="o">.</span><span class="n">minPersistenceSeries</span><span class="p">(</span><span class="n">DgmsPD</span><span class="p">)</span>
+			<span class="n">topBirth</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">DgmsPD</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pP</span><span class="o">.</span><span class="n">maxBirth</span><span class="p">))</span>
+			<span class="n">bottomBirth</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">DgmsPD</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pP</span><span class="o">.</span><span class="n">minBirth</span><span class="p">))</span>
+		<span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">DgmsPD</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span> <span class="c1">#Assumes that you handed me a dataframe</span>
+			<span class="n">topPers</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="n">bottomPers</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="n">topBirth</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="n">bottomBirth</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">DgmsPD</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+				<span class="n">D</span> <span class="o">=</span> <span class="n">DgmsPD</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+				<span class="n">topPers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pP</span><span class="o">.</span><span class="n">maxPersistenceSeries</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+				<span class="n">bottomPers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pP</span><span class="o">.</span><span class="n">minPersistenceSeries</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+				<span class="n">topBirth</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pP</span><span class="o">.</span><span class="n">maxBirth</span><span class="p">)))</span>
+				<span class="n">bottomBirth</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pP</span><span class="o">.</span><span class="n">minBirth</span><span class="p">)))</span>
+			<span class="n">topPers</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">topPers</span><span class="p">)</span>
+			<span class="n">bottomPers</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bottomPers</span><span class="p">)</span>
+			<span class="n">topBirth</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">topBirth</span><span class="p">)</span>
+			<span class="n">bottomBirth</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bottomBirth</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You gave me a&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">DgmsPD</span><span class="p">))</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This function requires a pandas Series or DataFrame full of persistence diagrams.&#39;</span><span class="p">)</span>
+
+		<span class="c1"># print(topPers,bottomPers,topBirth,bottomBirth)</span>
+
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">boundingBox</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">boundingBox</span><span class="p">[</span><span class="s1">&#39;birthAxis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">bottomBirth</span> <span class="o">-</span> <span class="n">pad</span><span class="p">,</span> <span class="n">topBirth</span> <span class="o">+</span> <span class="n">pad</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">boundingBox</span><span class="p">[</span><span class="s1">&#39;lifetimeAxis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">bottomPers</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">topPers</span> <span class="o">+</span> <span class="n">pad</span><span class="p">)</span>
+
+
+	<span class="k">def</span> <span class="nf">testEnclosesDgms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DgmSeries</span><span class="p">):</span>
+		<span class="sd">&#39;&#39;&#39;!</span>
+<span class="sd">		@brief Tests to see if the parameters enclose the persistence diagrams in the DgmSeries</span>
+
+<span class="sd">		@returns boolean</span>
+
+<span class="sd">		@todo Change this to work with self.boundingbox instead of d, delta, and epsilon</span>
+<span class="sd">		&#39;&#39;&#39;</span>
+
+		<span class="c1"># Height of parallelogram; equivalently maximum lifetime enclosed</span>
+		<span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span>
+		<span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span>
+
+		<span class="n">minBirth</span> <span class="o">=</span> <span class="n">pP</span><span class="o">.</span><span class="n">minBirthSeries</span><span class="p">(</span><span class="n">DgmSeries</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">minBirth</span> <span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This code assumes positive birth times.&quot;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">False</span>
+
+		<span class="n">maxBirth</span> <span class="o">=</span> <span class="n">pP</span><span class="o">.</span><span class="n">maxBirthSeries</span><span class="p">(</span><span class="n">DgmSeries</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">maxBirth</span> <span class="o">&gt;</span> <span class="n">width</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are birth times outside the bounding box.&#39;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">False</span>
+
+		<span class="n">minPers</span> <span class="o">=</span> <span class="n">pP</span><span class="o">.</span><span class="n">minPersistenceSeries</span><span class="p">(</span><span class="n">DgmSeries</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">minPers</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are points below the epsilon shift.&#39;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">False</span>
+
+		<span class="n">maxPers</span> <span class="o">=</span> <span class="n">pP</span><span class="o">.</span><span class="n">maxPersistenceSeries</span><span class="p">(</span><span class="n">DgmSeries</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">maxPers</span> <span class="o">&gt;</span> <span class="n">height</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are points above the box.&#39;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">False</span>
+
+		<span class="k">return</span> <span class="kc">True</span>
+
+
+
+<span class="c1">## A new type of parameter ParameterBucket</span>
+<span class="c1">#</span>
+<span class="c1"># This is the type specially built for tents</span>
+<span class="k">class</span> <span class="nc">InterpPolyParameters</span><span class="p">(</span><span class="n">ParameterBucket</span><span class="p">):</span>
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+					<span class="n">useAdaptivePart</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+					<span class="n">meshingScheme</span> <span class="o">=</span> <span class="s1">&#39;DV&#39;</span><span class="p">,</span>
+					<span class="n">jacobi_poly</span> <span class="o">=</span> <span class="s1">&#39;cheb1&#39;</span><span class="p">,</span>
+				<span class="n">clf_model</span> <span class="o">=</span> <span class="n">RidgeClassifierCV</span><span class="p">,</span>
+				<span class="n">test_size</span> <span class="o">=</span> <span class="o">.</span><span class="mi">33</span><span class="p">,</span>
+				<span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+				<span class="n">maxPower</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+				<span class="o">**</span><span class="n">kwargs</span>
+					<span class="p">):</span>
+		<span class="c1"># Set all the necessary parameters for tents function</span>
+		<span class="c1"># TODO</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">interp_polynomial</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">jacobi_poly</span> <span class="o">=</span> <span class="n">jacobi_poly</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">useAdaptivePart</span> <span class="o">=</span> <span class="n">useAdaptivePart</span> <span class="c1">#This should be boolean</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">meshingScheme</span> <span class="o">=</span> <span class="n">meshingScheme</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">clf_model</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">maxPower</span> <span class="o">=</span> <span class="n">maxPower</span>
+		<span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+	<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="c1"># Check for all the parameters required for tents function</span>
+		<span class="c1"># TODO</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This hasn&#39;t been made yet. Ask me later.&quot;</span><span class="p">)</span>
+		<span class="k">pass</span>
+
+
+
+
+<span class="c1">## A new type of parameter ParameterBucket</span>
+<span class="c1">#</span>
+<span class="c1"># This is the type specially built for tents</span>
+<span class="k">class</span> <span class="nc">TentParameters</span><span class="p">(</span><span class="n">ParameterBucket</span><span class="p">):</span>
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+				<span class="n">clf_model</span> <span class="o">=</span> <span class="n">RidgeClassifierCV</span><span class="p">,</span>
+				<span class="n">test_size</span> <span class="o">=</span> <span class="o">.</span><span class="mi">33</span><span class="p">,</span>
+				<span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+				<span class="n">maxPower</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+				<span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+		<span class="c1"># Set all the necessary parameters for tents function</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">tent</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">useAdaptivePart</span> <span class="o">=</span> <span class="kc">False</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">delta</span> <span class="o">=</span> <span class="n">delta</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">clf_model</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">maxPower</span> <span class="o">=</span> <span class="n">maxPower</span>
+		<span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+	<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="c1"># Check for all the parameters required for tents function</span>
+		<span class="c1"># TODO</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This hasn&#39;t been made yet. Ask me later.&quot;</span><span class="p">)</span>
+		<span class="k">pass</span>
+
+
+
+
+
+	<span class="k">def</span> <span class="nf">chooseDeltaEpsWithPadding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DgmsPD</span><span class="p">,</span> <span class="n">pad</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;!@brief Sets delta and epsilon for tent function mesh</span>
+
+<span class="sd">		@param DgmsSeries is pd.series consisting of persistence diagrams</span>
+<span class="sd">		@param pad is the additional padding outside of the points in the diagrams</span>
+
+<span class="sd">		This code assumes that self.d has been set.</span>
+
+<span class="sd">		The result is to set self.delta\f$=\delta\f$ and self.epsilon\f$=\epsilon\f$ so that the bounding box for the persistence diagram in the (birth, lifetime) coordinates is</span>
+<span class="sd">		\f[  [0,d \cdot \delta] \, \times \, [\epsilon, d \cdot \delta + \epsilon].  \f]</span>
+<span class="sd">		In the usual coordinates, this creates a parallelogram.</span>
+
+
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">DgmsPD</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+			<span class="n">AllDgms</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">DgmsPD</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+				<span class="n">DgmsSeries</span> <span class="o">=</span> <span class="n">DgmsPD</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+				<span class="n">AllDgms</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">))</span>
+
+			<span class="n">DgmsSeries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">AllDgms</span><span class="p">)</span>
+
+		<span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">DgmsPD</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+			<span class="n">DgmSeries</span> <span class="o">=</span> <span class="n">DgmsPD</span>
+
+		<span class="n">topPers</span> <span class="o">=</span> <span class="n">pP</span><span class="o">.</span><span class="n">maxPersistenceSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">)</span>
+		<span class="n">bottomPers</span> <span class="o">=</span> <span class="n">pP</span><span class="o">.</span><span class="n">minPersistenceSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">)</span>
+		<span class="n">topBirth</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pP</span><span class="o">.</span><span class="n">maxBirth</span><span class="p">))</span>
+
+		<span class="n">height</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">topPers</span><span class="p">,</span><span class="n">topBirth</span><span class="p">)</span>
+
+		<span class="n">bottomBirth</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pP</span><span class="o">.</span><span class="n">minBirth</span><span class="p">))</span>
+
+
+		<span class="k">if</span> <span class="n">bottomBirth</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This code assumes that birth time is always positive</span><span class="se">\n</span><span class="s1">but you have negative birth times....&#39;</span><span class="p">)</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your minimum birth time was&#39;</span><span class="p">,</span> <span class="n">bottomBirth</span><span class="p">)</span>
+
+		<span class="n">epsilon</span> <span class="o">=</span> <span class="n">bottomPers</span><span class="o">/</span><span class="mi">2</span>
+
+		<span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">height</span> <span class="o">+</span> <span class="n">pad</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span>
+
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">delta</span> <span class="o">=</span> <span class="n">delta</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span>
+
+
+
+<span class="c1">#-------------------------------------------------------------------------</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+<span class="c1">#--------ML on diagrams using featurization ------------------------------</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+
+
+<span class="c1">## Applies the passed featurization function to all diagrams in the series and outputs the feature matrix</span>
+<span class="c1"># @param DgmSeries : pd.Series.</span>
+<span class="c1">#	The structure holding the persistence diagrams.</span>
+<span class="c1"># @param params : ParameterBucket.</span>
+<span class="c1"># 	A parameter bucket used for calculations.</span>
+<span class="k">def</span> <span class="nf">build_G</span><span class="p">(</span><span class="n">DgmSeries</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+
+	<span class="c1"># if not hasattr(params,&#39;partitions&#39;):</span>
+	<span class="c1"># 	print(&#39;You have to have a partition bucket set in the&#39;)</span>
+	<span class="c1"># 	print(&#39;params.  I should probably tell you how to do&#39;)</span>
+	<span class="c1"># 	print(&#39;this here.  Exiting...&#39;)</span>
+	<span class="c1"># 	return</span>
+
+	<span class="n">applyFeaturization</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">)</span>
+	<span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">DgmSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">applyFeaturization</span> <span class="p">)))</span>
+
+	<span class="c1"># Include powers if necessary</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">maxPower</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+			<span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">maxPower</span><span class="p">)</span>
+			<span class="n">G</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+	<span class="k">except</span><span class="p">:</span>
+		<span class="k">pass</span>
+	<span class="k">return</span> <span class="n">G</span>
+
+
+<span class="c1">#-------------------------------------------------------------------------</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+<span class="c1">#--------ML on diagrams using featurization ------------------------------</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+
+<span class="c1">## Main function to run ML with featurization on persistence diagrams.</span>
+<span class="c1"># Takes data frame DgmsDF and specified persistence diagram column labels,</span>
+<span class="c1"># computes the G matrix using build_G.</span>
+<span class="c1"># Does classification using labels from labels_col in the data frame.</span>
+<span class="c1"># Returns trained model.</span>
+<span class="c1">#</span>
+<span class="c1"># 	@param DgmsDF</span>
+<span class="c1"># 		A pandas data frame containing, at least, a column of</span>
+<span class="c1"># 		diagrams and a column of labels</span>
+<span class="c1"># 	@param labels_col</span>
+<span class="c1"># 		A string.  The label for the column in DgmsDF containing</span>
+<span class="c1"># 		the training labels.</span>
+<span class="c1"># 	@param dgm_col</span>
+<span class="c1"># 		The label(s) for the column containing the diagrams given as a string or list of strings.</span>
+<span class="c1"># 	@param params</span>
+<span class="c1"># 		A class of type ParameterBucket</span>
+<span class="c1"># 		Should store:</span>
+<span class="c1"># 			- **d**:</span>
+<span class="c1"># 				An integer, the number of elements for griding up</span>
+<span class="c1"># 				the x and y axis of the diagram.  Will result in</span>
+<span class="c1"># 				d*(d+1) tent functions</span>
+<span class="c1"># 			- **delta**, **epsilon**:</span>
+<span class="c1"># 				Controls location and width of mesh elements for x and y axis of the</span>
+<span class="c1"># 				diagram.</span>
+<span class="c1"># 			- **clfClass**:</span>
+<span class="c1"># 				The class which will be used for classification.  Currently tested</span>
+<span class="c1">#				using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.</span>
+<span class="c1">#</span>
+<span class="c1"># @return</span>
+<span class="c1"># 	The classifier object. Coefficients can be found from clf.coef_</span>
+<span class="k">def</span> <span class="nf">ML_via_featurization</span><span class="p">(</span><span class="n">DgmsDF</span><span class="p">,</span>
+			<span class="n">labels_col</span> <span class="o">=</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">,</span>
+			<span class="n">dgm_col</span> <span class="o">=</span> <span class="s1">&#39;Dgm1&#39;</span><span class="p">,</span>
+			<span class="n">params</span> <span class="o">=</span> <span class="n">TentParameters</span><span class="p">(),</span>
+			<span class="n">normalize</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+			<span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
+			<span class="p">):</span>
+
+
+	<span class="n">clf</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">clf_model</span><span class="p">()</span>
+
+	<span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training estimator.&#39;</span><span class="p">)</span>
+		<span class="n">startTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+	<span class="c1">#check to see if only one column label was passed. If so, turn it into a list.</span>
+	<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">dgm_col</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+		<span class="n">dgm_col</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm_col</span><span class="p">]</span>
+
+	<span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Making G...&#39;</span><span class="p">)</span>
+
+	<span class="n">listOfG</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">dgmColLabel</span> <span class="ow">in</span> <span class="n">dgm_col</span><span class="p">:</span>
+		<span class="n">G</span> <span class="o">=</span> <span class="n">build_G</span><span class="p">(</span><span class="n">DgmsDF</span><span class="p">[</span><span class="n">dgmColLabel</span><span class="p">],</span><span class="n">params</span><span class="p">)</span>
+		<span class="n">listOfG</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+	<span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">listOfG</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+	<span class="n">numFeatures</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">G</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+	<span class="c1"># Normalize G</span>
+	<span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+		<span class="n">G</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+
+	<span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of features used is&#39;</span><span class="p">,</span> <span class="n">numFeatures</span><span class="p">,</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
+
+	<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="n">DgmsDF</span><span class="p">[</span><span class="n">labels_col</span><span class="p">]))</span>
+
+	<span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Checking score on training set...&#39;</span><span class="p">)</span>
+
+	<span class="n">score</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="n">DgmsDF</span><span class="p">[</span><span class="n">labels_col</span><span class="p">]))</span>
+
+	<span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Score on training set: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+	<span class="n">clf</span><span class="o">.</span><span class="n">trainingScore</span> <span class="o">=</span> <span class="n">score</span>
+
+
+	<span class="k">return</span> <span class="n">clf</span>
+
+
+
+
+<span class="c1">#-------------------------------------------------------------------------</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+<span class="c1">#---------------Get percent score-----------------------------------------</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+
+
+
+
+<span class="c1">## Main testing function for classification or regression methods.</span>
+<span class="c1"># Does train/test split, creates classifier, and returns score on test.</span>
+<span class="c1">#</span>
+<span class="c1"># 	@param DgmsDF</span>
+<span class="c1"># 		A pandas data frame containing, at least, a column of</span>
+<span class="c1"># 		diagrams and a column of labels</span>
+<span class="c1"># 	@param labels_col</span>
+<span class="c1"># 		A string.  The label for the column in DgmsDF containing the training labels.</span>
+<span class="c1"># 	@param dgm_col</span>
+<span class="c1"># 		A string or list of strings giving the label for the column containing the diagrams.</span>
+<span class="c1"># 	@param params</span>
+<span class="c1"># 		A class of type ParameterBucket.</span>
+<span class="c1"># 		Should store at least:</span>
+<span class="c1">#			- **featureFunction**:</span>
+<span class="c1">#				The function use for featurizing the persistence diagrams. Should take in</span>
+<span class="c1">#				a diagram and a ParameterBucket and output a vector of real numbers as features.</span>
+<span class="c1"># 			- **clfClass**:</span>
+<span class="c1"># 				The model which will be used for classification.  Currently tested</span>
+<span class="c1">#				using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.</span>
+<span class="c1">#			- **seed**:</span>
+<span class="c1">#				None if we don&#39;t want to mess with the seed for the train_test_split function. Else, pass integer.</span>
+<span class="c1">#			- **test_split**:</span>
+<span class="c1">#				The percentage of the data to be reserved for the test part of the train/test split.</span>
+<span class="c1">#</span>
+<span class="c1"># 	@return</span>
+<span class="c1">#		Returned as a dictionary of entries:</span>
+<span class="c1"># 		- **score**</span>
+<span class="c1"># 			The percent correct when predicting on the test set.</span>
+<span class="c1"># 		- **DgmsDF**</span>
+<span class="c1"># 			The original data frame passed back with a column labeled</span>
+<span class="c1"># 			&#39;Prediction&#39; added with the predictions gotten for the</span>
+<span class="c1"># 			test set. Data points in the training set will have an</span>
+<span class="c1"># 			entry of NaN</span>
+<span class="c1"># 		- **clf**</span>
+<span class="c1"># 			The fitted model</span>
+<span class="c1">#</span>
+
+
+
+<div class="viewcode-block" id="LandscapesParameterBucket"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.Base.LandscapesParameterBucket">[docs]</a><span class="k">class</span> <span class="nc">LandscapesParameterBucket</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="LandscapesParameterBucket.__init__"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.Base.LandscapesParameterBucket.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clf_model</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">,</span>
+                    <span class="n">feature_function</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Landscape</span><span class="p">,</span>
+                    <span class="n">PL_Number</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">Labels</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="n">test_size</span> <span class="o">=</span> <span class="o">.</span><span class="mi">33</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param (clf_model):</span>
+<span class="sd">            Classification algorithm that will be used. Default is SVC.</span>
+
+<span class="sd">        :param (feature_function):</span>
+<span class="sd">            The function that generates features using landscapes</span>
+
+<span class="sd">        :param list (PL_Number):</span>
+<span class="sd">            Landscape numbers that user wants to use in feature matrix generation. If this parameter is not given, algorithm will generate feature matrix using first landscapes.</span>
+
+<span class="sd">        :param list (Labels):</span>
+<span class="sd">            Classification labels. Warning message will appear if user does not provide labels.</span>
+
+<span class="sd">        :param float (test_size):</span>
+<span class="sd">            The number that defines the size of test set. It should be entered between 0 and 1. Default is 0.33.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">clf_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">=</span> <span class="n">feature_function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PL_Number</span> <span class="o">=</span> <span class="n">PL_Number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Labels</span> <span class="o">=</span> <span class="n">Labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Nicely prints all currently set values in the ParameterBucket.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;Variables in parameter bucket</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;-----------------------------</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">!=</span><span class="s1">&#39;Labels&#39;</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; : &#39;</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">attrs</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;-----------------------------</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Labels</span><span class="o">==</span><span class="kc">None</span><span class="p">):</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="n">colored</span><span class="p">(</span><span class="s1">&#39;Warning:&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Classification labels are missing.&#39;</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
+
+<div class="viewcode-block" id="CL_ParameterBucket"><a class="viewcode-back" href="../../../CL.html#teaspoon.ML.Base.CL_ParameterBucket">[docs]</a><span class="k">class</span> <span class="nc">CL_ParameterBucket</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="CL_ParameterBucket.__init__"><a class="viewcode-back" href="../../../CL.html#teaspoon.ML.Base.CL_ParameterBucket.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clf_model</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">,</span>
+                 <span class="n">Labels</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">test_size</span> <span class="o">=</span> <span class="o">.</span><span class="mi">33</span><span class="p">,</span>
+                 <span class="n">TF_Learning</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param (clf_model):</span>
+<span class="sd">            Classification algorithm that will be used. Default is SVC.</span>
+
+<span class="sd">        :param list (Labels):</span>
+<span class="sd">            Classification labels. Warning message will appear if user does not provide labels.</span>
+
+<span class="sd">        :param float (test_size):</span>
+<span class="sd">            The number that defines the size of test set. It should be entered between 0 and 1. Default is 0.33.</span>
+
+<span class="sd">        :param (str) TF_Learning:</span>
+<span class="sd">            This option will enable performing transfer learning, if it is true.</span>
+
+<span class="sd">        :param (\*\*kwargs): Additional parameters</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">clf_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Labels</span> <span class="o">=</span> <span class="n">Labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TF_Learning</span> <span class="o">=</span> <span class="n">TF_Learning</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Nicely prints all currently set values in the ParameterBucket.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;Variables in parameter bucket</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;-----------------------------</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39;Labels&#39;</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">==</span> <span class="s1">&#39;training_labels&#39;</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39;test_labels&#39;</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; : &#39;</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">attrs</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;-----------------------------</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">TF_Learning</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Labels</span><span class="o">==</span><span class="kc">None</span><span class="p">):</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="n">colored</span><span class="p">(</span><span class="s1">&#39;Warning:&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Classification labels are missing.&#39;</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Munch
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

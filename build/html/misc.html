@@ -1,7 +1,8 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -11,18 +12,12 @@
   
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
   
   
   
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,6 +30,10 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="2.5. MakeData Module Documentation" href="MakeData.html" />
@@ -52,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> teaspoon
+            <a href="index.html" class="icon icon-home"> teaspoon
           
 
           
@@ -78,7 +77,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -140,7 +138,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -179,7 +176,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
           <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
         
@@ -206,8 +203,157 @@
             
   <div class="section" id="miscellaneous-functions">
 <h1><span class="section-number">2.4.4. </span>Miscellaneous Functions<a class="headerlink" href="#miscellaneous-functions" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="adaptive-partitioning">
-<h2><span class="section-number">2.4.4.1. </span>Adaptive Partitioning<a class="headerlink" href="#adaptive-partitioning" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaspoon.SP.adaptivePart">
+<span id="adaptive-partitioning"></span><h2><span class="section-number">2.4.4.1. </span>Adaptive Partitioning<a class="headerlink" href="#module-teaspoon.SP.adaptivePart" title="Permalink to this headline">¶</a></h2>
+<p>Methods of partitioning birth-lifetime plane for persistence diagrams. This is
+used for the adaptive partitioning version of template function featurization.</p>
+<dl class="py class">
+<dt id="teaspoon.SP.adaptivePart.Partitions">
+<em class="property">class </em><code class="sig-prename descclassname">teaspoon.SP.adaptivePart.</code><code class="sig-name descname">Partitions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">convertToOrd</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">meshingScheme</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">partitionParams</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data structure for storing a partition coming from an adapative meshing scheme.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – A numpy array of type many by 2</p></li>
+<li><p><strong>convertToOrd</strong> (<em>bool</em>) – Boolean variable to decide if you want to use ordinals for
+partitioning. Ordinals make things faster but not as nice partitions.</p></li>
+<li><p><strong>meshingScheme</strong> (<em>str</em>) – <p>The type of meshing scheme you want to use. Options include:</p>
+<blockquote>
+<div><ul>
+<li><p>’DV’ method is based on (mention paper here). For more details see function return_partition_DV.</p></li>
+<li><p>’clustering’ uses a clustering algorithm to find clusters in the data, then takes the bounding box of all points assigned to each cluster. For more details see the function return_partition_clustering.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>partitionParams</strong> (<em>dict</em>) – <p>Dictionary of parameters needed for the particular meshing scheme selected.
+For the explanation of the parameters see the function for the specific meshingScheme
+(i.e. return_partition_DV or return_partition_clustering)</p>
+<blockquote>
+<div><ul>
+<li><p>For ‘DV’ the adjustable parameters are ‘alpha’, ‘c’, ‘nmin’, ‘numParts’, ‘split’.</p></li>
+<li><p>For ‘clustering’ the adjustable parameters are ‘numClusters’, ‘clusterAlg’, ‘weights’, ‘boxOption’, ‘boxWidth’, ‘split’.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>kwargs</strong> – Any leftover inputs are stored as attributes.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="teaspoon.SP.adaptivePart.Partitions.convertOrdToFloat">
+<code class="sig-name descname">convertOrdToFloat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">partitionEntry</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.convertOrdToFloat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.convertOrdToFloat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to nodes of a partition entry from ordinal back to floats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>partitionEntry</strong> (<em>dict</em>) – The partition that you want to convert.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Partition entry with converted nodes. Also sets dictionary element to the converted version.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="teaspoon.SP.adaptivePart.Partitions.getOrdinal">
+<code class="sig-name descname">getOrdinal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.getOrdinal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.getOrdinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overrides the builtin magic method in the case where you had non-ordinal data but still want the ordinal stuff back.
+If the data wasn’t ordinal, this has the exact same effect as self[key].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="teaspoon.SP.adaptivePart.Partitions.isOrdinal">
+<code class="sig-name descname">isOrdinal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dd</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.isOrdinal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.isOrdinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for error checking. Used to make sure input is in ordinal coordinates.
+It checks that when the two data columns are sorted they are each equal to an ordered vector with the same number of rows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dd</strong> – Data in a manyx2 numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="teaspoon.SP.adaptivePart.Partitions.iterOrdinal">
+<code class="sig-name descname">iterOrdinal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.iterOrdinal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.iterOrdinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Functions just like iter magic method without converting each entry back to its float</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="teaspoon.SP.adaptivePart.Partitions.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the partitions. Can plot in ordinal or float, whichever is in the partition bucket when it’s called.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="teaspoon.SP.adaptivePart.Partitions.return_partition_DV">
+<code class="sig-name descname">return_partition_DV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">borders</span></em>, <em class="sig-param"><span class="n">r</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em>, <em class="sig-param"><span class="n">c</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">nmin</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.return_partition_DV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.return_partition_DV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursive method that partitions the data based on the DV method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – A manyx2 numpy array that contains all the data in ordinal format.</p></li>
+<li><p><strong>borders</strong> (<em>dict</em>) – A dictionary that contains ‘nodes’ with a numpy array of Xmin, Xmax, Ymin, Ymax.</p></li>
+<li><p><strong>r</strong> (<em>int</em>) – The number of partitions to split in each direction
+(i.e. r=2 means each partition is recursively split into a
+2 by 2 grid of partitions)</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – The required significance level for independence to stop partitioning</p></li>
+<li><p><strong>c</strong> (<em>int</em>) – Parameter for an exit criteria. Partitioning stops if min(width of
+partition, height of partition) &lt; max(width of bounding box, height
+of bounding box)/c.</p></li>
+<li><p><strong>nmin</strong> (<em>int</em>) – Minimum average number of points in each partition to keep recursion going.
+The default is 5 because chisquare test breaks down with less than 5 points
+per partition, thus we recommend choosing nmin &gt;= 5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of dictionaries. Each dictionary corresponds to a partition and
+contains ‘nodes’, a numpy array of Xmin, Xmax, Ymin, Ymax of the partition,
+and ‘npts’, the number of points in the partition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="teaspoon.SP.adaptivePart.Partitions.return_partition_clustering">
+<code class="sig-name descname">return_partition_clustering</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">clusterAlg=&lt;class 'sklearn.cluster._kmeans.KMeans'&gt;</em>, <em class="sig-param">num_clusters=5</em>, <em class="sig-param">weights=None</em>, <em class="sig-param">boxOption='boundPoints'</em>, <em class="sig-param">boxSize=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.return_partition_clustering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.return_partition_clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Partitioning method based on clustering algorithms. First cluster the data, then using the cluster centers and labels determine the partitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – A manyx2 numpy array that contains all the original data (not ordinals).</p></li>
+<li><p><strong>cluster_algorithm</strong> (<em>function</em>) – Clustering algorithm you want to use. Only options right now are
+KMeans and MiniBatchKMeans from scikit learn.</p></li>
+<li><p><strong>num_clusters</strong> (<em>int</em>) – The number of clusters you want. This is the number of partitions
+you want to divide your space into.</p></li>
+<li><p><strong>weights</strong> (<em>np.array</em>) – An array of the same length as data containing weights of points to use weighted clustering</p></li>
+<li><p><strong>boxOption</strong> (<em>str</em>) – Specifies how to choose the boxes based on cluster centers. Only option right now is
+“boundPoints” which takes the bounding box of all data points assigned to that cluster center.
+Additional options may be added in the future.</p></li>
+<li><p><strong>boxSize</strong> (<em>int</em>) – This input is not used as of now.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of dictionaries. Each dictionary corresponds to a partition and contains ‘nodes’,
+a numpy array of Xmin, Xmax, Ymin, Ymax of the partition, and ‘center’, the center of the
+cluster for that partition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="teaspoon.SP.adaptivePart.Partitions.setParameters">
+<code class="sig-name descname">setParameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">partitionParams</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.setParameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.setParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to set the parameters depending on the meshing scheme.
+If any are not specified, it is set to a default value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>partitionParams</strong> – Dictionary containing parameters needed for the partitioning algorithm.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -231,19 +377,11 @@
 
   <div role="contentinfo">
     <p>
-        
         &copy; Copyright 2020, Munch
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -254,6 +392,7 @@
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {
