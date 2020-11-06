@@ -4,18 +4,15 @@
 
 The following is an example implementing autocorrelation for selecting tau::
 
+    from teaspoon.parameter_selection.autocorrelation import autoCorrelation_tau
     import numpy as np
-    import matplotlib.pyplot as plt
-    from scipy.integrate import odeint
-    from PE_parameter_functions import autocorrelation
     
-    t = np.linspace(0, 100, 1000)
-    ts = np.sin(t)
-
-    Delay = autocorrelation.autoCorrelation_tau(ts, cutoff = 1/np.exp(1), AC_method = 'pearson', plotting = True) 
-    #calculates delay from autocorrelation (Pearson's)
+    fs = 10
+    t = np.linspace(0, 100, fs*100)
+    ts = np.sin(t) + np.sin((1/np.pi)*t)
     
-    print('Delay from AC: ', Delay)
+    tau = autoCorrelation_tau(ts, cutoff = 1/np.exp(1), AC_method = 'pearson', plotting = False)
+    print('Delay from AC: ', tau)
 
 Where the output for this example is::
 

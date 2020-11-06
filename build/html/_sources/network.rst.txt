@@ -24,17 +24,20 @@ The network output has the data structure of an adjacency matrix. An example is 
 
     #import needed packages
     import numpy as np
+    from teaspoon.SP.network import knn_graph
+    from teaspoon.SP.network import ordinal_partition_graph
+    
     t = np.linspace(0,30,200)
     ts = np.sin(t) + np.sin(2*t) #generate a simple time series
     
     A_knn = knn_graph(ts) #ordinal partition network from time series
     
     A_op = ordinal_partition_graph(ts) #knn network from time series
+    
 
 
 Additionally, there is methods to change the data structure to anything available in networkx through changing the adjacency matrix to the networkx data structure (dictionary of dictionaries) with an example as follows::
 
-    import numpy as np
     t = np.linspace(0,30,200)
     ts = np.sin(t) + np.sin(2*t) #generate a simple time series
     

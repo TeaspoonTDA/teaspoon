@@ -6,8 +6,7 @@
 The following is an example implementing the MsPE method for selecting both n and tau::
 
     import numpy as np
-    import matplotlib.pyplot as plt
-    from PE_parameter_functions import MsPE
+    from teaspoon.parameter_selection.MsPE import MsPE_n,  MsPE_tau
     
     t = np.linspace(0, 100, 1000)
     ts = np.sin(t)
@@ -17,8 +16,11 @@ The following is an example implementing the MsPE method for selecting both n an
     #d_e = max delay tau to search through
     
     #plotting option will show you how delay tau or dimension n were selected
-    tau = int(MsPE.MsPE_tau(ts, d_e, plotting = True)) 
-    n = MsPE.MsPE_n(ts, tau, m_s, m_e, plotting = True)
+    tau = int(MsPE_tau(ts, d_e, plotting = True))
+    n = MsPE_n(ts, tau, m_s, m_e, plotting = True)
+    
+    print('Embedding Delay:       '+str(tau))
+    print('Embedding Dimension:   '+str(n))
     
     print('Embedding Delay:       '+str(tau))
     print('Embedding Dimension:   '+str(n))

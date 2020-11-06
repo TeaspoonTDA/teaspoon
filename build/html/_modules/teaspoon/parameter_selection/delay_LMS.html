@@ -256,7 +256,6 @@
                         <span class="c1">#the +0.000001 is a 0.00001% cutoff guarentee; If there is no noise in the system, </span>
                         <span class="c1">#LMS will best fit to 0.</span>
     <span class="n">fmax</span> <span class="o">=</span> <span class="n">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span><span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span> <span class="c1">#gets maximum frequency from |FFT|</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">fmax</span><span class="p">)</span>
     <span class="n">delay</span> <span class="o">=</span> <span class="p">(</span><span class="n">fs</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">fmax</span><span class="p">))</span> <span class="c1">#Suggested delay from Melosik&#39;s paper (0/1 test)</span>
     
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>

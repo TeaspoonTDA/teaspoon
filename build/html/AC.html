@@ -239,18 +239,15 @@ delay based on the correlation being less than a specified cutoff (default  is 1
 
 </div>
 <p>The following is an example implementing autocorrelation for selecting tau:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
-<span class="kn">from</span> <span class="nn">PE_parameter_functions</span> <span class="kn">import</span> <span class="n">autocorrelation</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.parameter_selection.autocorrelation</span> <span class="kn">import</span> <span class="n">autoCorrelation_tau</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
 
-<span class="n">Delay</span> <span class="o">=</span> <span class="n">autocorrelation</span><span class="o">.</span><span class="n">autoCorrelation_tau</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">cutoff</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">AC_method</span> <span class="o">=</span> <span class="s1">&#39;pearson&#39;</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="c1">#calculates delay from autocorrelation (Pearson&#39;s)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delay from AC: &#39;</span><span class="p">,</span> <span class="n">Delay</span><span class="p">)</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="n">autoCorrelation_tau</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">cutoff</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">AC_method</span> <span class="o">=</span> <span class="s1">&#39;pearson&#39;</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delay from AC: &#39;</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Where the output for this example is:</p>
