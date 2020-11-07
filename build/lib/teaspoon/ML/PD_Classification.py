@@ -23,8 +23,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__),'teaspoon','ML'))
 import teaspoon.ML.feature_functions as fF
 import teaspoon.ML.Base as Base
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__),'libsvm','python'))
-from svmutil import *
+
+# sys.path.insert(0, os.path.join(os.path.dirname(__file__),'libsvm','python'))
+# from svmutil import *
 
 def CL_PL(PL,params):
     """
@@ -375,99 +376,107 @@ def CL_PS(F_PSignature,params,*args):
     return results
 
 
-def CL_KM(PD,params):
-    """
+# def CL_KM(PD,params):
+#     """
 
-    This function takes parameter object and persistence diagrams and computes pairwise kernels for training set and kernel matrix between test set and training set separately.
-    The main difference of this function from others is that it uses  `LIBSVM <https://www.csie.ntu.edu.tw/~cjlin/libsvm/>`_ (see `here <https://www.csie.ntu.edu.tw/~cjlin/libsvm/COPYRIGHT>`_ for LIBSVM copyright statement) for classification.
-    Computed kernels are used in SVM algorithm to perform classification.
+#     This function takes parameter object and persistence diagrams and computes pairwise kernels for training set and kernel matrix between test set and training set separately.
+#     The main difference of this function from others is that it uses  `LIBSVM <https://www.csie.ntu.edu.tw/~cjlin/libsvm/>`_ (see `here <https://www.csie.ntu.edu.tw/~cjlin/libsvm/COPYRIGHT>`_ for LIBSVM copyright statement) for classification.
+#     Computed kernels are used in SVM algorithm to perform classification.
 
-    :param ndarray (PD):
-        Object array that includes the persistence diagrams
+#     :param ndarray (PD):
+#         Object array that includes the persistence diagrams
 
-    :param object (params):
-        Parameterbucket object for classification. Please see :ref:`CL_PB` for more details.
+#     :param object (params):
+#         Parameterbucket object for classification. Please see :ref:`CL_PB` for more details.
 
-    :Returns:
+#     :Returns:
 
-        **results:** 1x3 matrix that includes the classification results and total elapsed time. First and second column is for test set score and deviation, while third column is the elapsed time.
+#         **results:** 1x3 matrix that includes the classification results and total elapsed time. First and second column is for test set score and deviation, while third column is the elapsed time.
 
-    **Note:** User needs to change the path to LIBSVM folder at line 13.
+#     """
 
-    """
-    sigma =params.sigma
-    test_size=params.test_size
-    Label = params.Labels
-    start = time.time()
-    run_number = 3
+#     sigma =params.sigma
+#     test_size=params.test_size
+#     Label = params.Labels
+#     start = time.time()
+#     run_number = 3
 
 
-    # accuracy and mean squared error matrices
-    accuracy_kernel_test = np.zeros((run_number))
-    mse_kernel = np.zeros((run_number))
+#     # accuracy and mean squared error matrices
+#     accuracy_kernel_test = np.zeros((run_number))
+#     accuracy_kernel_train = np.zeros((run_number))
 
-    for rep in range(0,run_number):
+#     for rep in range(0,run_number):
 
-        #split data into test set and training set
-        PD_train,PD_test,Label_train,Label_test= train_test_split(PD,Label, test_size=0.33)
+#         #split data into test set and training set
+#         PD_train,PD_test,Label_train,Label_test= train_test_split(PD,Label, test_size=0.33)
 
-        N1=len(PD_train)
+#         N1=len(PD_train)
 
-        # find the combinations so that we can only compute the upper diagonal and diagonal elements of pairwise kernel matrix
-        poss_comb = np.array(list(combinations(range(1,N1+1), 2)))
+#         # find the combinations so that we can only compute the upper diagonal and diagonal elements of pairwise kernel matrix
+#         poss_comb = np.array(list(combinations(range(1,N1+1), 2)))
 
-        # create training kernel matrix
-        KernelTrain = np.zeros((len(poss_comb),1))
-        #loop computes kernels for training set (except diagonal ones)
-        for i in range (0,len(poss_comb)):
-            perDgm1=PD_train[(poss_comb[i,0])-1]
-            perDgm2=PD_train[(poss_comb[i,1])-1]
-            KernelTrain[i,0] = fF.KernelMethod(perDgm2,perDgm1,sigma)
+#         # create training kernel matrix
+#         KernelTrain = np.zeros((len(poss_comb),1))
+#         #loop computes kernels for training set (except diagonal ones)
+#         for i in range (0,len(poss_comb)):
+#             perDgm1=PD_train[(poss_comb[i,0])-1]
+#             perDgm2=PD_train[(poss_comb[i,1])-1]
+#             KernelTrain[i,0] = fF.KernelMethod(perDgm2,perDgm1,sigma)
 
-        KernelTrain=np.ravel(KernelTrain)
-        KernelTrain=squareform(KernelTrain)
+#         KernelTrain=np.ravel(KernelTrain)
+#         KernelTrain=squareform(KernelTrain)
 
-        #compute diagonal kernels separately and add them to kernel matrix
-        for i in range(0,N1):
-            perdgm1=PD_train[i]
-            KernelTrain[i,i] = fF.KernelMethod(perdgm1,perdgm1,sigma)
+#         #compute diagonal kernels separately and add them to kernel matrix
+#         for i in range(0,N1):
+#             perdgm1=PD_train[i]
+#             KernelTrain[i,i] = fF.KernelMethod(perdgm1,perdgm1,sigma)
+        
+#         # classifier        
+#         clf = SVC(kernel='precomputed')
+#         # train the classifier
+#         clf.fit(KernelTrain, PD_test)
+        
+#         # Row1=np.zeros((N1,1))
 
-        Row1=np.zeros((N1,1))
+#         # #concatane row matrix and kernel matrix
+#         # KernelTrain=np.concatenate((Row1, KernelTrain),axis=1)
+#         # KernelTrain[:,:1]=np.arange(N1)[:,np.newaxis]+1
 
-        #concatane row matrix and kernel matrix
-        KernelTrain=np.concatenate((Row1, KernelTrain),axis=1)
-        KernelTrain[:,:1]=np.arange(N1)[:,np.newaxis]+1
+#         # #Training
+#         # m = svm_train(Label_train, [list(row) for row in KernelTrain], '-c 4 -t 4')
 
-        #Training
-        m = svm_train(Label_train, [list(row) for row in KernelTrain], '-c 4 -t 4')
+#         N2=len(PD_test)
+#         #test set kernel matrix
+#         KernelTest = np.zeros((N2,N1))
+#         for i in range (0,N2):
+#             perDgm1=PD_test[i]
+#             for k in range (0,N1):
+#                 perDgm2=PD_train[k]
+#                 KernelTest[i,k] = fF.KernelMethod(perDgm1,perDgm2,sigma)
 
-        N2=len(PD_test)
-        #test set kernel matrix
-        KernelTest = np.zeros((N2,N1))
-        for i in range (0,N2):
-            perDgm1=PD_test[i]
-            for k in range (0,N1):
-                perDgm2=PD_train[k]
-                KernelTest[i,k] = fF.KernelMethod(perDgm1,perDgm2,sigma)
+#         #Testing
 
-        #Testing
+#         # p_label, p_acc, p_val = svm_predict(Label_test,[list(row) for row in KernelTest], m)
+#         # accuracy_kernel_test[rep] = p_acc[0]
+#         # mse_kernel[rep] = p_acc[1]
+#         accuracy_kernel_train[rep]=clf.score(KernelTrain,Label_train)
+#         accuracy_kernel_test[rep]=clf.score(KernelTest,Label_test)
+    
+#     results = np.zeros((1,5))
+#     results[0,0] = np.mean(accuracy_kernel_test)
+#     results[0,1] = np.std(accuracy_kernel_test)
+#     results[0,2] = np.mean(accuracy_kernel_test)
+#     results[0,3] = np.std(accuracy_kernel_test)
+    
+#     end = time.time()
+#     results[0,4] = end-start
 
-        p_label, p_acc, p_val = svm_predict(Label_test,[list(row) for row in KernelTest], m)
-        accuracy_kernel_test[rep] = p_acc[0]
-        mse_kernel[rep] = p_acc[1]
+#     print ('Test set score: {}'.format(results[0,0]))
+#     print ('Test set deviation: {}'.format(results[0,1]))
+#     print ('Total elapsed time: {}'.format(results[0,2]))
 
-    results = np.zeros((1,3))
-    results[0,0] = np.mean(accuracy_kernel_test)
-    results[0,1] = np.std(accuracy_kernel_test)
-
-    end = time.time()
-    results[0,2] = end-start
-
-    print ('Test set score: {}'.format(results[0,0]))
-    print ('Test set deviation: {}'.format(results[0,1]))
-    print ('Total elapsed time: {}'.format(results[0,2]))
-
-    return results
+#     return results
 
 
 
