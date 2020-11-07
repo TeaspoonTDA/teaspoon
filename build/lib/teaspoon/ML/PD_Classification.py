@@ -20,10 +20,10 @@ sys.path.insert(0, os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..','teaspoon','ML'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'teaspoon','ML'))
 
-import feature_functions as fF
-import Base
+import teaspoon.ML.feature_functions as fF
+import teaspoon.ML.Base as Base
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__),'libsvm-3.23','python'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),'libsvm','python'))
 from svmutil import *
 
 def CL_PL(PL,params):
@@ -39,7 +39,7 @@ def CL_PL(PL,params):
 
     :Returns:
 
-        :results: 1x5 matrix that includes the classification results and total elapsed time. First and second columns are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth represents total elapsed time for classification.
+        **results:** 1x5 matrix that includes the classification results and total elapsed time. First and second columns are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth represents total elapsed time for classification.
 
     """
     start =time.time()
@@ -127,7 +127,7 @@ def CL_PI(F_PImage1,params,*args):
 
     :Returns:
 
-        :results: 1x5 matrix that includes the classification results and total elapsed time. First and second columns are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth represents total elapsed time for classification.
+        **results:** 1x5 matrix that includes the classification results and total elapsed time. First and second columns are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth represents total elapsed time for classification.
 
 
     """
@@ -213,7 +213,7 @@ def CL_CC(PD1,params,*args):
 
     :Returns:
 
-        :results: Kx4 matrix that includes the classification results. First and second column are for test set score and deviation, while third and fourth column are for training set score and deviation.
+        **results:** Kx4 matrix that includes the classification results. First and second column are for test set score and deviation, while third and fourth column are for training set score and deviation.
 
     """
 
@@ -312,7 +312,7 @@ def CL_PS(F_PSignature,params,*args):
 
     :Returns:
 
-        :results: 1x5 matrix that includes the classification results and total elapsed time. First and second column are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth includes total elapsed time for classification.
+        **results:** 1x5 matrix that includes the classification results and total elapsed time. First and second column are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth includes total elapsed time for classification.
 
 
     """
@@ -379,7 +379,7 @@ def CL_KM(PD,params):
     """
 
     This function takes parameter object and persistence diagrams and computes pairwise kernels for training set and kernel matrix between test set and training set separately.
-    The main difference of this function from others is that it uses  `LIBSVM <https://www.csie.ntu.edu.tw/~cjlin/libsvm/>`_ for classification.
+    The main difference of this function from others is that it uses  `LIBSVM <https://www.csie.ntu.edu.tw/~cjlin/libsvm/>`_ (see `here <https://www.csie.ntu.edu.tw/~cjlin/libsvm/COPYRIGHT>`_ for LIBSVM copyright statement) for classification.
     Computed kernels are used in SVM algorithm to perform classification.
 
     :param ndarray (PD):
@@ -390,7 +390,7 @@ def CL_KM(PD,params):
 
     :Returns:
 
-        :results: 1x3 matrix that includes the classification results and total elapsed time. First and second column is for test set score and deviation, while third column is the elapsed time.
+        **results:** 1x3 matrix that includes the classification results and total elapsed time. First and second column is for test set score and deviation, while third column is the elapsed time.
 
     **Note:** User needs to change the path to LIBSVM folder at line 13.
 

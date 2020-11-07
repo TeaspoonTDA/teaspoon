@@ -1,10 +1,10 @@
 
-'''
-Machine learning featurization method
+# '''
+# Machine learning featurization method
 
-If you make use of this code, please cite the following paper:<br/>
-J.A. Perea, E. Munch, and F. Khasawneh.  "Approximating Continuous Functions On Persistence Diagrams." Preprint, 2017.
-'''
+# If you make use of this code, please cite the following paper:<br/>
+# J.A. Perea, E. Munch, and F. Khasawneh.  "Approximating Continuous Functions On Persistence Diagrams." Preprint, 2017.
+# '''
 
 
 import numpy as np
@@ -1090,47 +1090,47 @@ def F_PSignature(PL,L_Number=[]):
     return feature_PS
 
 
-def KernelMethod(perDgm1, perDgm2, sigma):
-    """
+# def KernelMethod(perDgm1, perDgm2, sigma):
+#     """
     
-    This function computes the kernel for given two persistence diagram based on the formula provided in Ref. :cite:`5 <Reininghaus2015>`.
-    There are three inputs and these are two persistence diagrams and the kernel scale sigma.
+#     This function computes the kernel for given two persistence diagram based on the formula provided in Ref. :cite:`5 <Reininghaus2015>`.
+#     There are three inputs and these are two persistence diagrams and the kernel scale sigma.
 
-    :param ndarray (perDgm1):
-        Object array that includes first persistence diagram set
+#     :param ndarray (perDgm1):
+#         Object array that includes first persistence diagram set
         
-    :param ndarray (perDgm2):
-        Object array that includes second persistence diagram set
+#     :param ndarray (perDgm2):
+#         Object array that includes second persistence diagram set
     
-    :param float (sigma):
-        Kernel scale
+#     :param float (sigma):
+#         Kernel scale
         
-    :Returns:
+#     :Returns:
 
-        :Kernel:
-            (float) The kernel value for given two persistence diagrams.
+#         :Kernel:
+#             (float) The kernel value for given two persistence diagrams.
 
-    """
+#     """
 
-    L1=len(perDgm1)
-    L2=len(perDgm2)
-    kernel = np.zeros((L2,L1))
+#     L1=len(perDgm1)
+#     L2=len(perDgm2)
+#     kernel = np.zeros((L2,L1))
     
-    Kernel=0
+#     Kernel=0
     
-    for i in range (0,L1):
-        p=perDgm1[i]
-        p = np.reshape(p,(2,1))
-        for j in range(0,L2):
-            q = perDgm2[j]
-            q = np.reshape(q,(2,1))
-            q_bar = np.zeros((2,1))
-            q_bar[0] = q[1]
-            q_bar[1] = q[0]
-            dist1 = lnorm(p-q)
-            dist2 = lnorm(p-q_bar)
-            kernel[j,i] = np.exp(-(math.pow(dist1,2))/(8*sigma))-np.exp(-(math.pow(dist2,2))/(8*sigma))
-            Kernel = Kernel+kernel[j,i]
-    Kernel = Kernel*(1/(8*pi*sigma))   
+#     for i in range (0,L1):
+#         p=perDgm1[i]
+#         p = np.reshape(p,(2,1))
+#         for j in range(0,L2):
+#             q = perDgm2[j]
+#             q = np.reshape(q,(2,1))
+#             q_bar = np.zeros((2,1))
+#             q_bar[0] = q[1]
+#             q_bar[1] = q[0]
+#             dist1 = lnorm(p-q)
+#             dist2 = lnorm(p-q_bar)
+#             kernel[j,i] = np.exp(-(math.pow(dist1,2))/(8*sigma))-np.exp(-(math.pow(dist2,2))/(8*sigma))
+#             Kernel = Kernel+kernel[j,i]
+#     Kernel = Kernel*(1/(8*pi*sigma))   
     
-    return Kernel
+#     return Kernel

@@ -1,10 +1,10 @@
 
-'''
-Machine learning featurization method
+# '''
+# Machine learning featurization method
 
-If you make use of this code, please cite the following paper:<br/>
-J.A. Perea, E. Munch, and F. Khasawneh.  "Approximating Continuous Functions On Persistence Diagrams." Preprint, 2017.
-'''
+# If you make use of this code, please cite the following paper:<br/>
+# J.A. Perea, E. Munch, and F. Khasawneh.  "Approximating Continuous Functions On Persistence Diagrams." Preprint, 2017.
+# '''
 
 
 import numpy as np
