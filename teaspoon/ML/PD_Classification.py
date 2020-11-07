@@ -393,8 +393,6 @@ def CL_PS(F_PSignature,params,*args):
 
 #         **results:** 1x3 matrix that includes the classification results and total elapsed time. First and second column is for test set score and deviation, while third column is the elapsed time.
 
-#     **Note:** User needs to change the path to LIBSVM folder at line 13.
-
 #     """
 
 #     sigma =params.sigma
