@@ -1,97 +1,129 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu May 14 13:50:21 2020
-
-@author: yesillim
+This file provides examples for featurization functions in machine learning moduel of teaspoon.
 """
-import numpy as np
-from termcolor import colored
-import matplotlib.pyplot as plt
-import sys, os
-from ML.feature_functions import PLandscape,F_Landscape,PLandscapes,KernelMethod,F_Image, F_CCoordinates,F_PSignature
-from ML.Base import LandscapesParameterBucket
-a=[]
-# simple persistence diagram
-a.append(np.array([(1,5),(1,4),(2,14),(3,4),(4,8.1),(6,7),(7,8.5),(9,12)]))
-a.append(np.array([(1.2,3.6),(2,2.6),(2,7),(3.7,4),(5,7.3),(5.5,7),(9,11),(9,12),(12,17)]))
 
-#%% Persistence landscapes
+#%% -------------- Persistence Landscapes Class -------------------------------
 
-# Landscape computation function examples. 
-# out1=PLandscapes(a[0])
-# out2=PLandscapes(a[0],[2,3])
+import teaspoon.ML.feature_functions as Ff
+from teaspoon.MakeData.PointCloud import testSetManifolds
 
-# 1st Example ----------------------------------------
-PLC  = PLandscape(a[0])
-number = PLC .PL_number
-points  = PLC .AllPL
-des = PLC .DesPL
-print(number)
-print(points)
-print(des)
+# generate persistence diagrams
+df = testSetManifolds(numDgms = 50, numPts = 100) 
+Diagrams_H1 = df['Dgm1']
+
+# Compute the persistence landscapes 
+PLC = Ff.PLandscape(Diagrams_H1[0])
+print(PLC.PL_number)
+print(PLC.AllPL)
+print(PLC.DesPL)
 fig = PLC.PLandscape_plot(PLC.AllPL['Points'])
-
 # fig.savefig('All_Landscapes.png',bbox_inches = 'tight', dpi=300)
 
-#2nd Example ----------------------------------------
-PLC  = PLandscape(a[0],[2,3])
-print(PLC .PL_number)
-print(PLC .AllPL)
-print(PLC .DesPL)
+
+PLC  = Ff.PLandscape(Diagrams_H1[0],[2,3])
+print(PLC.PL_number)
+print(PLC.DesPL)
 fig = PLC.PLandscape_plot(PLC.AllPL['Points'],[2,3])
 fig.show()
 # fig.savefig('Des_Landscapes.png',bbox_inches = 'tight', dpi=300)
 
-# 3rd example ---------------------------------------
-from sklearn.svm import LinearSVC,NuSVC,SVC
+#%% ----------- Parameter Bucket for Persistence Land ------------------------
+
+from teaspoon.ML.Base import LandscapesParameterBucket
+from sklearn.svm import LinearSVC
+from termcolor import colored
 params = LandscapesParameterBucket()
 params.clf_model = LinearSVC
-params.test_size =0.5
+params.test_size =0.33
 params.Labels = None
 params.PL_Number = [2]
 print(params)
 
 
+import numpy as np
+import teaspoon.ML.feature_functions as Ff
+from teaspoon.MakeData.PointCloud import testSetManifolds
+
+# generate persistence diagrams
+df = testSetManifolds(numDgms = 50, numPts = 100) 
+Diagrams_H1= df['Dgm1'].sort_index().values
+
+# Compute the persistence landscapes  for first and second persistence diagrams
 PerLand=np.ndarray(shape=(2),dtype=object)
 for i in range(0, 2):
-    Land=PLandscape(a[i])
+    Land=Ff.PLandscape(Diagrams_H1[i])
     PerLand[i]=Land.AllPL
 
-labels = [0,1]
+feature, Sorted_mesh = Ff.F_Landscape(PerLand,params)
 
-feature, Sorted_mesh = F_Landscape(PerLand,params)
+#%% ---------------------- Persistence Images -------------------------------
 
+import teaspoon.ML.feature_functions as Ff
+from teaspoon.MakeData.PointCloud import testSetManifolds
 
-#%% Persistence images
+# generate persistence diagrams
+df = testSetManifolds(numDgms = 50, numPts = 100) 
+Diagrams_H1= df['Dgm1'].sort_index().values
+
 TF_Learning = False
-D_Img=[]
+D_Img=[1,75]
 plot=False
-feature_PI = F_Image(a,0.1,0.15,plot,TF_Learning, D_Img)
+feature_PI = Ff.F_Image(Diagrams_H1,0.01,0.15,plot,TF_Learning, D_Img)
+# if user wants to plot images
+plot=True
+feature_PI = Ff.F_Image(Diagrams_H1,0.01,0.15,plot,TF_Learning, D_Img)
+fig = feature_PI['figures']
 
-feature = F_Image(a,0.01,0.15,plot,TF_Learning, D_Img)
+fig[0].savefig('PI_Example_1.png',bbox_inches = 'tight', dpi=300)
+fig[1].savefig('PI_Example_2.png',bbox_inches = 'tight', dpi=300)
 
-# fig[1].savefig('PI_Example_2.png',bbox_inches = 'tight', dpi=300)
+#%% ---------------------- Carlsson Coordinates -------------------------------
 
+import teaspoon.ML.feature_functions as Ff
+from teaspoon.MakeData.PointCloud import testSetManifolds
 
-#%% Carlsson Coordinates
+# generate persistence diagrams
+df = testSetManifolds(numDgms = 50, numPts = 100) 
+Diagrams_H1= df['Dgm1'].sort_index().values
+
+#compute feature matrix
 FN=3
-PD=a
-FeatureMatrix,TotalNumComb,CombList=F_CCoordinates(PD,FN)
+FeatureMatrix,TotalNumComb,CombList = Ff.F_CCoordinates(Diagrams_H1,FN)
+print(TotalNumComb)
+print(CombList)
 
-#%% path signatures
+#%% ---------------------- Path Signatures -----------------------------------
 
-PerLand=np.ndarray(shape=(2),dtype=object)
-for i in range(0, 2):
-    Land=PLandscape(a[i])
-    PerLand[i]=Land.AllPL
-
+import numpy as np
+import teaspoon.ML.feature_functions as Ff
+from teaspoon.MakeData.PointCloud import testSetManifolds
+# generate persistence diagrams
+df = testSetManifolds(numDgms = 1, numPts = 100) 
+Diagrams_H1= df['Dgm1'].sort_index().values
+#compute persistence landscapes
+PerLand=np.ndarray(shape=(6),dtype=object)
+for i in range(0, 6):
+    Land=Ff.PLandscape(Diagrams_H1[i])
+    PerLand[i]=Land.AllP
+#choose landscape number for which feature matrix will be computed
 L_number = [2]
+#compute feature matrix
+feature_PS = Ff.F_PSignature(PerLand,L_number)
 
-feature_PS = F_PSignature(PerLand,L_number)
-
-#%% kernel method 
-perDgm1 = a[0]
-perDgm2 = a[1]
+#%% ---------------------- Kernel Method -----------------------------------
+import teaspoon.ML.feature_functions as Ff
+from teaspoon.MakeData.PointCloud import testSetManifolds
+# generate persistence diagrams
+df = testSetManifolds(numDgms = 1, numPts = 100) 
+Diagrams_H1 = df['Dgm1']
+#compute kernel between two persistence diagram
 sigma=0.25
-kernel = KernelMethod(perDgm1, perDgm2, sigma)
+kernel = Ff.KernelMethod(Diagrams_H1[0], Diagrams_H1[1], sigma)
 print(kernel)
+
+
+
+
+
+

@@ -261,12 +261,13 @@ Path Signatures
 	#compute feature matrix
 	feature_PS = Ff.F_PSignature(PerLand,L_number)
 
+
 Kernel Method
 -------------
 
 .. currentmodule:: teaspoon.ML.feature_functions
 .. autofunction:: KernelMethod
-
+ 
 **Example:**
 
 	>>> import teaspoon.ML.feature_functions as Ff

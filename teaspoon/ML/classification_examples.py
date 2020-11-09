@@ -1,212 +1,218 @@
-import sys
-import os.path
-import pickle
-import pandas as pd
+"""
+
+This file provides examples for classification using featurization methods 
+available in machine learning moduel of teaspoon.
+
+"""
+#%%  -------------- Persistence Landscapes -------------------------------
 import numpy as np
-sys.path.insert(0,os.path.join('D:'+os.path.sep,'Research Stuff','libsvm-3.23','python',))
-from sklearn.svm import LinearSVC,NuSVC,SVC
+import teaspoon.ML.feature_functions as Ff
+import teaspoon.ML.PD_Classification as PD_CL
 
-from ML.PD_Classification import CL_PL,CL_PI, CL_CC, CL_PS,CL_KM
-from ML.Base import LandscapesParameterBucket,CL_ParameterBucket
-from ML.feature_functions import F_Image,F_PSignature
-from MakeData import PointCloud as gpc
+from teaspoon.ML.Base import LandscapesParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.svm import SVC
 
-#generate persistence diagrams
+# generate persistence diagrams
+df = testSetManifolds(numDgms = 10, numPts = 100) 
+Diagrams_H1= df['Dgm1'].sort_index().values
+Labels = df['trainingLabel'].sort_index().values
 
-#%% load the data
-
-folderToLoad = os.path.join('D:'+os.path.sep,
-                                    'Data Archive',
-                                    'Persistence Landscapes',
-                                    )
-sys.path.insert(0,folderToLoad)
-
-folderToLoad2 = os.path.join('D:'+os.path.sep,
-                                    'Research Stuff',
-                                    'Embedding Dataset',
-                                    )
-sys.path.insert(0,folderToLoad2)
-
-
-with open(os.path.join(folderToLoad, "Persistence_Landscapes_2inch_chatter(593Case).txt"), "rb") as fp:
-    PL = pickle.load(fp)
-
-Diagrams=pd.read_csv(os.path.join(folderToLoad2, "Persistence_Diagram_Turning_Chatter_2inch(593Case).csv"))
-
-#Compressing 
-compressed_pd_train = Diagrams.groupby(['RPM','DOC','Label','Case']).apply(lambda x: np.transpose(np.array([x.birth_time, x.death_time])))
-compressed_pd_train = compressed_pd_train.reset_index()
-compressed_pd_train = compressed_pd_train.rename(columns={0: "PD"})
-PD1 = compressed_pd_train.iloc[:, 4].values
-N=len(PD1)
-labels1=(compressed_pd_train.iloc[:, 2].values).reshape(N,1)   
-
-
-Diagrams=pd.read_csv(os.path.join(folderToLoad2, "Persistence_Diagram_Turning_Chatter_4.5inch.csv"))
-
-#Compressing 
-compressed_pd_test = Diagrams.groupby(['RPM','DOC','Label','Case']).apply(lambda x: np.transpose(np.array([x.birth_time, x.death_time])))
-compressed_pd_test = compressed_pd_test.reset_index()
-compressed_pd_test = compressed_pd_test.rename(columns={0: "PD"})
-PD2 = compressed_pd_test.iloc[:, 4].values
-N=len(PD2)
-labels2=(compressed_pd_test.iloc[:, 2].values).reshape(N,1)   
-
-#convert diagrams into data frame
-df_train=compressed_pd_train
-df_test=compressed_pd_test
-dgmColLabel = ['PD']
-
-
-#%% landscapes
-from ML.Base import LandscapesParameterBucket
-from ML.PD_Classification import CL_PL
-import ML.feature_functions as fF
-
-
+#parameters for classification
 params = LandscapesParameterBucket()
 params.clf_model = SVC
-params.test_size =0.33
-params.Labels = labels1
-params.PL_Number = [1]
+params.test_size = 0.33
+params.Labels = Labels
+params.PL_Number = [1,2,3,4,5,6,7,8]
 print(params)
 
-result = CL_PL(PL,params)
+# Compute the persistence landscapes
+PerLand=np.ndarray(shape=(60),dtype=object)
+for i in range(0, 60):
+    Land=Ff.PLandscape(Diagrams_H1[i])
+    PerLand[i]=Land.AllPL
 
-#%% images
+# Perform classification
+result = PD_CL.CL_PL(PerLand,params)
+#%%  -------------- Persistence Images -------------------------------
+import numpy as np
+import teaspoon.ML.feature_functions as Ff
+import teaspoon.ML.PD_Classification as CL_PD
 
-from ML.Base import CL_ParameterBucket
-from ML.feature_functions import F_Image
-from ML.PD_Classification import CL_PI
+from teaspoon.ML.Base import CL_ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.svm import SVC
 
-params = CL_ParameterBucket()
-params.clf_model = SVC
-params.test_size =0.33
-params.Labels = labels1
-print(params)
+# generate two sets of persistence diagrams
+df_1 = testSetManifolds(numDgms = 10, numPts = 100)
+df_2 = testSetManifolds(numDgms = 10, numPts = 100)
+Diagrams_H1_1= df_1['Dgm1'].sort_index().values
+Diagrams_H1_2= df_2['Dgm1'].sort_index().values
+
+Labels_1 = df_1['trainingLabel'].sort_index().values
+Labels_2 = df_2['trainingLabel'].sort_index().values
+
 TF_Learning = False
 plot = False
 D_Img=[]
-plot=[]
-F_Images = F_Image(PD1,0.1,0.10,plot,TF_Learning,D_Img)
-results = CL_PI(F_Images['F_Matrix'],params)
 
-# transfer learning 
 params = CL_ParameterBucket()
-params.TF_Learning = True
 params.clf_model = SVC
 params.test_size =0.33
-params.training_labels = labels1
-params.test_labels = labels2
+params.Labels = Labels_1
+params.TF_Learning  = False
 print(params)
-TF_Learning = True
-F_Images = F_Image(PD1,0.1,0.10,plot,TF_Learning,D_Img,PD2)
-F_train = F_Images['F_train']
-F_test = F_Images['F_test']
-results = CL_PI(F_Images['F_train'],params,F_Images['F_test'])
 
 
+F_Images =Ff.F_Image(Diagrams_H1_1,0.1,0.10,plot,TF_Learning,D_Img)
+results = CL_PD.CL_PI(F_Images['F_Matrix'],params)
 
-#%% carlsson coordinates
-
-
-import ML.Base
-from ML.Base import CL_ParameterBucket
-from ML.PD_Classification import CL_CC
-## Traditional Classification
+# classification using transfer learning
+# compute the feature matrix for second set of persistence diagrams
+TF_Learning =True
+F_Images_2 = Ff.F_Image(Diagrams_H1_1,0.1,0.10,plot,TF_Learning,D_Img,Diagrams_H1_2)
 
 params = CL_ParameterBucket()
 params.clf_model = SVC
 params.test_size =0.33
-params.Labels = labels1
+params.training_labels = Labels_1
+params.test_labels = Labels_2
+params.TF_Learning  = True
+print(params)
+
+results = CL_PD.CL_PI(F_Images_2['F_train'],params,F_Images_2['F_test'])
+#%%  -------------- Carlsson Coordinates -------------------------------
+
+import numpy as np
+import teaspoon.ML.feature_functions as Ff
+import teaspoon.ML.PD_Classification as CL_PD
+
+from teaspoon.ML.Base import CL_ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.svm import SVC
+
+# generate two sets of persistence diagrams
+df_1 = testSetManifolds(numDgms = 10, numPts = 100)
+df_2 = testSetManifolds(numDgms = 10, numPts = 100)
+Diagrams_H1_1= df_1['Dgm1'].sort_index().values
+Diagrams_H1_2= df_2['Dgm1'].sort_index().values
+# labels
+Labels_1 = df_1['trainingLabel'].sort_index().values
+Labels_2 = df_2['trainingLabel'].sort_index().values
+
+# parameters used in classification without transfer learning
+params = CL_ParameterBucket()
+params.clf_model = SVC
+params.test_size =0.33
+params.Labels = Labels_1
 params.TF_Learning =False
 params.FN = 5
 print(params)
+# classification on one persistence diagram set
+results = CL_PD.CL_CC(Diagrams_H1_1,params)
 
-results = CL_CC(PD1,params)
-
-## Transfer Learning
+# parameters used in classification with transfer learning
 params = CL_ParameterBucket()
 params.clf_model = SVC
 params.test_size =0.33
-params.training_labels = labels1
-params.test_labels = labels2
+params.training_labels = Labels_1
+params.test_labels = Labels_2
 params.TF_Learning =True
 params.FN = 5
 print(params)
 
-results = CL_CC(PD1,params,PD2)
+results = CL_PD.CL_CC(Diagrams_H1_1,params,Diagrams_H1_2)
 
+#%%  -------------- Path Signatures -------------------------------
 
-#%% paths signatures
-from MakeData import PointCloud as gpc
-from ML.Base import CL_ParameterBucket
-from ML.PD_Classification import CL_PS
-import ML.feature_functions as fF
+import numpy as np
+import teaspoon.ML.feature_functions as Ff
+import teaspoon.ML.PD_Classification as CL_PD
 
-# generate persistence diagrams
-df1 = gpc.testSetManifolds(numDgms = 5, numPts = 30) 
-Diagrams1 = df1['Dgm1'].values
-Labels1 = df1['trainingLabel']
+from teaspoon.ML.Base import CL_ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.svm import SVC
 
-df2 = gpc.testSetManifolds(numDgms = 5, numPts = 30) 
-Diagrams2 = df1['Dgm1'].values
-Labels2 = df1['trainingLabel']
+# generate two sets of persistence diagrams
+df_1 = testSetManifolds(numDgms = 2, numPts = 100)
+df_2 = testSetManifolds(numDgms = 2, numPts = 100)
+Diagrams_H1_1= df_1['Dgm1'].sort_index().values
+Diagrams_H1_2= df_2['Dgm1'].sort_index().values
+# labels
+Labels_1 = df_1['trainingLabel'].sort_index().values
+Labels_2 = df_2['trainingLabel'].sort_index().values
 
+#compute persistence landscapes for both sets of persistence diagram
+PerLand1=np.ndarray(shape=(12),dtype=object)
+PerLand2=np.ndarray(shape=(12),dtype=object)
 
-# compute landscape for landscapes
-PerLand1=np.ndarray(shape=(len(Diagrams1)),dtype=object)
-PerLand2=np.ndarray(shape=(len(Diagrams2)),dtype=object)
-for i in range(0, len(Diagrams1)):
-    Land1=fF.PLandscape(Diagrams1[i])
-    PerLand1[i]=Land1.AllPL
-    Land2=fF.PLandscape(Diagrams2[i])
-    PerLand2[i]=Land2.AllPL
+for i in range(0, 12):
+    Land=Ff.PLandscape(Diagrams_H1_1[i])
+    PerLand1[i]=Land.AllPL
+    Land=Ff.PLandscape(Diagrams_H1_2[i])
+    PerLand2[i]=Land.AllPL
 
 # compute features using first landscapes
-features1 = fF.F_PSignature(PerLand1,L_Number=[1])
-features2 = fF.F_PSignature(PerLand2,L_Number=[1])
-
+features1 = Ff.F_PSignature(PerLand1,L_Number=[1])
+features2 = Ff.F_PSignature(PerLand2,L_Number=[1])
 # traditional classification
-
 # adjust parameters
 params = CL_ParameterBucket()
 params.clf_model = SVC
 params.test_size =0.33
-params.Labels = Labels1
+params.Labels = Labels_1
 params.TF_Learning = False
 print(params)
 
-#classification
-results = CL_PS(features1,params)
+results = CL_PD.CL_PS(features1,params)
 
-#transfer learning 
+#transfer learning
 params = CL_ParameterBucket()
 params.clf_model = SVC
 params.test_size =0.33
-params.training_labels = Labels1
-params.test_labels = Labels2
+params.training_labels = Labels_1
+params.test_labels = Labels_2
 params.TF_Learning = True
 print(params)
 
-results = CL_PS(features1,params,features2)
+results = CL_PD.CL_PS(features1,params,features2)
+#%%  -------------- Kernel Method  -------------------------------
 
-#%% Kernel Method
-a=[]
-# simple persistence diagram
-a.append(np.array([(1,5),(1,4),(2,14),(3,4),(4,8.1),(6,7),(7,8.5),(9,12)]))
-a.append(np.array([(1.2,3.6),(2,2.6),(2,7),(3.7,4),(5,7.3),(5.5,7),(9,11),(9,12),(12,17)]))
-a.append(np.array([(2,8),(3,4),(5.6,7)]))
+import numpy as np
+import teaspoon.ML.feature_functions as Ff
+from teaspoon.ML.PD_Classification import CL_KM
+from teaspoon.ML.Base import CL_ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
 
-labels = [0,1,0]
+# generate two sets of persistence diagrams
+df_1 = testSetManifolds(numDgms = 5, numPts = 100)
+Diagrams_H1_1= df_1['Dgm1'].sort_index().values
+Labels_1 = df_1['trainingLabel'].sort_index().values
+
+#convert string labels into integers ones 
+Labels_ = np.zeros((len(Diagrams_H1_1)))
+for i in range(len(Diagrams_H1_1)):
+    if Labels_1[i]=='Torus':
+        Labels_[i]=0
+    elif Labels_1[i]=='Annulus':
+        Labels_[i]=1
+    elif Labels_1[i]=='Cube':
+        Labels_[i]=2   
+    elif Labels_1[i]=='3Cluster':
+        Labels_[i]=3     
+    elif Labels_1[i]=='3Clusters of 3Clusters':  
+        Labels_[i]=4           
+    elif Labels_1[i]=='Sphere':  
+        Labels_[i]=5 
 
 params = CL_ParameterBucket()
 params.test_size =0.33
-params.Labels = labels
+params.Labels = Labels_
 params.sigma = 0.25
-results = CL_KM(a,params)
+results = CL_KM(Diagrams_H1_1,params)
 
-#%% template functions
+
+#%%  -------------- Template Functions -------------------------------
 
 # traditional classification
 from ML.Base import ParameterBucket

@@ -18,35 +18,45 @@ Persistence Landscapes
 Persistence diagrams and landscapes are computed beforehand.
 The time series data is available in :cite:`Khasawneh2019`.
 
-	>>> import pickle
+**Example:**
+
 	>>> import numpy as np
-	>>> from teaspoon.ML.PD_Classification import CL_PL
-	>>> from teaspoon.ML.Base import import LandscapesParameterBucket
+	>>> import teaspoon.ML.feature_functions as Ff
+	>>> import teaspoon.ML.PD_Classification as PD_CL
+	>>> from teaspoon.ML.Base import LandscapesParameterBucket
+	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
 	>>> from sklearn.svm import SVC
-	>>> with open("Persistence_Landscapes_3.5inch_chatter.txt", "rb") as fp:
-			PL = pickle.load(fp)
-	>>> labels = pd.read_csv("Labels_3p5inch.csv")
+	>>> # generate persistence diagrams
+	>>> df = testSetManifolds(numDgms = 10, numPts = 100) 
+	>>> Diagrams_H1= df['Dgm1'].sort_index().values
+	>>> Labels = df['trainingLabel'].sort_index().values
+	>>> #parameters for classification
 	>>> params = LandscapesParameterBucket()
 	>>> params.clf_model = SVC
-	>>> params.test_size =0.33
-	>>> params.Labels = labels
-	>>> params.PL_Number = [1,2,3]
+	>>> params.test_size = 0.33
+	>>> params.Labels = Labels
+	>>> params.PL_Number = [1,2,3,4,5,6,7,8]
 	>>> print(params)
 	Variables in parameter bucket
 	-----------------------------
 	clf_model : <class 'sklearn.svm._classes.SVC'>
-	feature_function : <function F_Landscape at 0x000001F97A549708>
-	PL_Number : [1, 2, 3]
+	feature_function : <function F_Landscape at 0x000001A97957BD38>
+	PL_Number : [1, 2, 3, 4, 5, 6, 7, 8]
 	test_size : 0.33
 	-----------------------------
-	>>> result = CL_PL(PL,params,labels)
-	Landscapes used in feature matrix generation: [1, 2, 3]
-	Test set score: 0.8913043478260869
-	Test set deviation: 0.09770523936627927
-	Training set score: 0.925
-	Training set deviation: 0.017750567445242397
-	Total elapsed time: 0.713921070098877
-
+	>>> # Compute the persistence landscapes 
+	>>> PerLand=np.ndarray(shape=(60),dtype=object)
+	>>> for i in range(0, 60):
+	>>>     Land=Ff.PLandscape(Diagrams_H1[i])
+	>>>     PerLand[i]=Land.AllPL
+	>>> # Perform classification
+	>>> result = PD_CL.CL_PL(PerLand,params)
+	Landscapes used in feature matrix generation: [1, 2, 3, 4, 5, 6, 7, 8]
+	Test set score: 0.58
+	Test set deviation: 0.12288205727444508
+	Training set score: 0.7449999999999999
+	Training set deviation: 0.05099019513592784
+	Total elapsed time: 0.6263787746429443
 
 .. _CL_PB:
 
@@ -68,46 +78,52 @@ Persistence Images
 
 **Example:**
 
-	>>> import pandas as pd
-	>>> from teaspoon.ML.PD_Classification import CL_PI
+	>>> import numpy as np
+	>>> import teaspoon.ML.feature_functions as Ff
+	>>> import teaspoon.ML.PD_Classification as CL_PD
 	>>> from teaspoon.ML.Base import CL_ParameterBucket
+	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
 	>>> from sklearn.svm import SVC
-	>>> from ML.feature_functions import F_Image
-	>>> #traditional classification
-	>>> PD1 = pd.read_csv("Persistence_Diagram_Turning_Chatter_2inch.csv")
-	>>> labels1 = pd.read_csv("Labels_2inch.csv")
-	>>> PD2 = pd.read_csv("Persistence_Diagram_Turning_Chatter_4p5inch.csv")
-	>>> labels2 = pd.read_csv("Labels_4p5inch.csv")
+	>>> # generate two sets of persistence diagrams
+	>>> df_1 = testSetManifolds(numDgms = 10, numPts = 100)
+	>>> df_2 = testSetManifolds(numDgms = 10, numPts = 100)
+	>>> Diagrams_H1_1= df_1['Dgm1'].sort_index().values
+	>>> Diagrams_H1_2= df_2['Dgm1'].sort_index().values
+	>>> Labels_1 = df_1['trainingLabel'].sort_index().values
+	>>> Labels_2 = df_2['trainingLabel'].sort_index().values
+	>>> # classification without using transfer learning
+	>>> TF_Learning = False
+	>>> plot = False
+	>>> D_Img=[]
+	>>> #classification parameters
 	>>> params = CL_ParameterBucket()
 	>>> params.clf_model = SVC
 	>>> params.test_size =0.33
-	>>> params.Labels = labels1
+	>>> params.Labels = Labels_1
 	>>> print(params)
 	Variables in parameter bucket
 	-----------------------------
 	clf_model : <class 'sklearn.svm._classes.SVC'>
 	test_size : 0.33
 	TF_Learning : False
-	-----------------------------
-	>>> params = CL_ParameterBucket()
-	>>> TF_Learning = False
-	>>> plot = False
-	>>> D_Img=[]
-	>>> F_Images = F_Image(PD1,0.1,0.10,plot,TF_Learning,D_Img)
-	>>> results = CL_PI(F_Images['F_Matrix'],params)
-	Test set score: 0.8362244897959183
-	Test set deviation: 0.02514535006194208
-	Training set score: 0.8269521410579346
-	Training set deviation: 0.013981550716753569
-	Total elapsed time: 9.852953910827637
-	>>> #transfer learning
+	-----------------------------	
+	>>> F_Images =Ff.F_Image(Diagrams_H1_1,0.1,0.10,plot,TF_Learning,D_Img)
+	>>> results = CL_PD.CL_PI(F_Images['F_Matrix'],params)
+	Test set score: 0.63
+	Test set deviation: 0.1268857754044952
+	Training set score: 0.7675
+	Training set deviation: 0.05921359641163505
+	Total elapsed time: 0.04411721229553223
+	>>> # classification using transfer learning
+	>>> # compute the feature matrix for second set of persistence diagrams
+	>>> TF_Learning =True
+	>>> F_Images_2 = Ff.F_Image(Diagrams_H1_1,0.1,0.10,plot,TF_Learning,D_Img,Diagrams_H1_2)
 	>>> params = CL_ParameterBucket()
 	>>> params.clf_model = SVC
 	>>> params.test_size =0.33
-	>>> params.training_labels = labels1
-	>>> params.test_labels = labels2
-	>>> params.TF_Learning =True
-	>>> params.FN = 5
+	>>> params.training_labels = Labels_1
+	>>> params.test_labels = Labels_2
+	>>> params.TF_Learning  = True
 	>>> print(params)
 	Variables in parameter bucket
 	-----------------------------
@@ -115,14 +131,14 @@ Persistence Images
 	test_size : 0.33
 	TF_Learning : True
 	-----------------------------
-	>>> TF_Learning = True
-	>>> F_Images = F_Image(PD1,0.1,0.10,plot,TF_Learning,D_Img,PD2)
-	>>> results = CL_PI(F_Images['F_train'],params,F_Images['F_test'])
-	Test set score: 0.6419354838709678
-	Test set deviation: 0.019819686657168545
-	Training set score: 0.8299748110831235
-	Training set deviation: 0.006875236304260034
-	Total elapsed time: 9.155236959457397
+	>>> results = CL_PD.CL_PI(F_Images_2['F_train'],params,F_Images_2['F_test'])
+	Test set score: 0.6666666666666667
+	Test set deviation: 0.06734350297014738
+	Training set score: 0.6925000000000001
+	Training set deviation: 0.04616546328154847
+	Total elapsed time: 0.06018877029418945
+
+
 
 Carlsson Coordinates
 --------------------
@@ -133,19 +149,25 @@ Carlsson Coordinates
 
 **Example:**
 
-	>>> import pandas as pd
+	>>> import numpy as np
+	>>> import teaspoon.ML.feature_functions as Ff
+	>>> import teaspoon.ML.PD_Classification as CL_PD
 	>>> from teaspoon.ML.Base import CL_ParameterBucket
-	>>> from teaspoon.ML.PD_Classification import CL_CC
+	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
 	>>> from sklearn.svm import SVC
-	>>> #traditional classification
-	>>> PD1 = pd.read_csv("Persistence_Diagram_Turning_Chatter_2inch.csv")
-	>>> labels1 = pd.read_csv("Labels_2inch.csv")
-	>>> PD2 = pd.read_csv("Persistence_Diagram_Turning_Chatter_4p5inch.csv")
-	>>> labels2 = pd.read_csv("Labels_4p5inch.csv")
+	>>> # generate two sets of persistence diagrams
+	>>> df_1 = testSetManifolds(numDgms = 10, numPts = 100)
+	>>> df_2 = testSetManifolds(numDgms = 10, numPts = 100)
+	>>> Diagrams_H1_1= df_1['Dgm1'].sort_index().values
+	>>> Diagrams_H1_2= df_2['Dgm1'].sort_index().values
+	>>> # labels
+	>>> Labels_1 = df_1['trainingLabel'].sort_index().values
+	>>> Labels_2 = df_2['trainingLabel'].sort_index().values
+	>>> # parameters used in classification without transfer learning
 	>>> params = CL_ParameterBucket()
 	>>> params.clf_model = SVC
 	>>> params.test_size =0.33
-	>>> params.Labels = labels1
+	>>> params.Labels = Labels_1
 	>>> params.TF_Learning =False
 	>>> params.FN = 5
 	>>> print(params)
@@ -156,15 +178,39 @@ Carlsson Coordinates
 	TF_Learning : False
 	FN : 5
 	-----------------------------
-	>>> results = CL_CC(PD1,params)
+	>>> # classification on one persistence diagram set
+	>>> results = CL_PD.CL_CC(Diagrams_H1_1,params)
 	Number of combinations: 31
 	Highest accuracy among all combinations:
-	Test set score: 0.8612244897959185
-	Test set deviation: 0.023358210494407318
-	Training set score: 0.8780856423173804
-	Training set deviation: 0.009302864137339745
-	Total elapsed time: 3.000014066696167
-
+	Test set score: 0.635
+	Test set deviation: 0.11191514642799695
+	Training set score: 0.7325
+	Training set deviation: 0.053677276383959714
+	Total elapsed time: 0.2777674198150635
+	>>> # parameters used in classification with transfer learning
+	>>> params = CL_ParameterBucket()
+	>>> params.clf_model = SVC
+	>>> params.test_size =0.33
+	>>> params.training_labels = Labels_1
+	>>> params.test_labels = Labels_2
+	>>> params.TF_Learning =True
+	>>> params.FN = 5
+	>>> print(params)
+	Variables in parameter bucket
+	-----------------------------
+	clf_model : <class 'sklearn.svm._classes.SVC'>
+	test_size : 0.33
+	TF_Learning : True
+	FN : 5
+	-----------------------------
+	>>> results = CL_PD.CL_CC(Diagrams_H1_1,params,Diagrams_H1_2)
+	Number of combinations: 31
+	Highest accuracy among all combinations:
+	Test set score: 0.6976190476190476
+	Test set deviation: 0.05639390134441434
+	Training set score: 0.735
+	Training set deviation: 0.04769696007084728
+	Total elapsed time: 0.2907731533050537
 
 Path Signatures
 ---------------
@@ -174,21 +220,31 @@ Path Signatures
 
 **Example:**
 
-	>>> from teaspoon.MakeData import PointCloud as gpc
+	>>> import numpy as np
+	>>> import teaspoon.ML.feature_functions as Ff
+	>>> import teaspoon.ML.PD_Classification as CL_PD
 	>>> from teaspoon.ML.Base import CL_ParameterBucket
-	>>> from teaspoon.ML.PD_Classification import CL_PS
-	>>> import teaspoon.ML.feature_functions as fF
-	>>> # generate persistence diagrams
-	>>> df1 = gpc.testSetManifolds(numDgms = 5, numPts = 30)
-	>>> Diagrams1 = df1['Dgm1'].values
-	>>> Labels1 = df1['trainingLabel']
-        >>>
-	>>> df2 = gpc.testSetManifolds(numDgms = 5, numPts = 30)
-	>>> Diagrams2 = df2['Dgm1'].values
-	>>> Labels2 = df2['trainingLabel']
+	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> from sklearn.svm import SVC
+	>>> # generate two sets of persistence diagrams
+	>>> df_1 = testSetManifolds(numDgms = 5, numPts = 100)
+	>>> df_2 = testSetManifolds(numDgms = 5, numPts = 100)
+	>>> Diagrams_H1_1= df_1['Dgm1'].sort_index().values
+	>>> Diagrams_H1_2= df_2['Dgm1'].sort_index().values
+	>>> # labels
+	>>> Labels_1 = df_1['trainingLabel'].sort_index().values
+	>>> Labels_2 = df_2['trainingLabel'].sort_index().values
+	>>> #compute persistence landscapes for both sets of persistence diagram
+	>>> PerLand1=np.ndarray(shape=(60),dtype=object)
+	>>> PerLand2=np.ndarray(shape=(60),dtype=object)
+	>>> for i in range(0, 30):
+	>>>     Land=Ff.PLandscape(Diagrams_H1_1[i])
+	>>>     PerLand1[i]=Land.AllPL
+	>>>     Land=Ff.PLandscape(Diagrams_H1_2[i])
+	>>>     PerLand2[i]=Land.AllPL
 	>>> # compute features using first landscapes
-	>>> features1 = fF.F_PSignature(PerLand1,L_Number=[1])
-	>>> features2 = fF.F_PSignature(PerLand2,L_Number=[1])
+	>>> features1 = Ff.F_PSignature(PerLand1,L_Number=[1])
+	>>> features2 = Ff.F_PSignature(PerLand2,L_Number=[1])
 	>>> # traditional classification
 	>>> # adjust parameters
 	>>> params = CL_ParameterBucket()
@@ -204,11 +260,11 @@ Path Signatures
 	TF_Learning : False
 	-----------------------------
 	>>> results = CL_PS(features,params)
-	Test set score: 0.38
-	Test set deviation: 0.13999999999999999
-	Training set score: 0.6199999999999999
-	Training set deviation: 0.07141428428542848
-	Total elapsed time: 0.014008522033691406
+	Test set score: 0.05
+	Test set deviation: 0.15000000000000002
+	Training set score: 0.575
+	Training set deviation: 0.13919410907075053
+	Total elapsed time: 0.009609222412109375
 	>>> #transfer learning
 	>>> params = CL_ParameterBucket()
 	>>> params.clf_model = SVC
@@ -217,39 +273,56 @@ Path Signatures
 	>>> params.test_labels = Labels2
 	>>> params.TF_Learning = True
 	>>> print(params)
+	Variables in parameter bucket
 	-----------------------------
 	clf_model : <class 'sklearn.svm._classes.SVC'>
 	test_size : 0.33
 	TF_Learning : True
 	-----------------------------
 	>>> results = CL_PS(features1,params,features2)
-	Test set score: 0.4666666666666666
-	Test set deviation: 0.10168645954315535
-	Training set score: 0.5599999999999999
-	Training set deviation: 0.09949874371066199
-	Total elapsed time: 0.015541315078735352
-
+	Test set score: 0.4444444444444445
+	Test set deviation: 0.09938079899999067
+	Training set score: 0.5625
+	Training set deviation: 0.0625
+	Total elapsed time: 0.009023904800415039
 
 Kernel Method
--------------
+-------------  
 
 .. currentmodule:: teaspoon.ML.PD_Classification
-.. autofunction:: CL_KM
+.. autofunction:: CL_KM 
+  
+**Example:**
 
-**Example:** For this method, we use simple persistence diagram set since the methods is computationally expensive.
-
+	>>> import numpy as np
+	>>> import teaspoon.ML.feature_functions as Ff
 	>>> from teaspoon.ML.PD_Classification import CL_KM
-	>>> from teaspoon.ML.PD_ParameterBucket import CL_ParameterBucket
-	>>> PD=[]
-	>>> # simple persistence diagram
-	>>> PD.append(np.array([(1,5),(1,4),(2,14),(3,4),(4,8.1),(6,7),(7,8.5),(9,12)]))
-	>>> PD.append(np.array([(1.2,3.6),(2,2.6),(2,7),(3.7,4),(5,7.3),(5.5,7),(9,11),(9,12),(12,17)]))
-	>>> PD.append(np.array([(2,8),(3,4),(5.6,7)]))
+	>>> from teaspoon.ML.Base import CL_ParameterBucket
+	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> # generate two sets of persistence diagrams
+	>>> df_1 = testSetManifolds(numDgms = 5, numPts = 100)
+	>>> Diagrams_H1_1= df_1['Dgm1'].sort_index().values
+	>>> Labels_1 = df_1['trainingLabel'].sort_index().values
+	>>> #convert string labels into integers ones 
+	>>> Labels_ = np.zeros((len(Diagrams_H1_1)))
+	>>> for i in range(len(Diagrams_H1_1)):
+	>>>     if Labels_1[i]=='Torus':
+	>>>         Labels_[i]=0
+	>>>     elif Labels_1[i]=='Annulus':
+	>>>         Labels_[i]=1
+	>>>     elif Labels_1[i]=='Cube':
+	>>>         Labels_[i]=2   
+	>>>     elif Labels_1[i]=='3Cluster':
+	>>>         Labels_[i]=3     
+	>>>     elif Labels_1[i]=='3Clusters of 3Clusters':  
+	>>>         Labels_[i]=4           
+	>>>     elif Labels_1[i]=='Sphere':  
+	>>>         Labels_[i]=5 
 	>>> params = CL_ParameterBucket()
 	>>> params.test_size =0.33
-	>>> params.Labels = labels
+	>>> params.Labels = Labels_
 	>>> params.sigma = 0.25
-	>>> results = CL_KM(a,params)
-	Test set score: 66.66666666666667
-	Test set deviation: 47.14045207910317
-	Total elapsed time: 0.016573667526245117
+	>>> results = CL_KM(Diagrams_H1_1,params)
+	Test set score: 23.333333333333332
+	Test set deviation: 9.428090415820632
+	Total elapsed time: 23.333333333333332
