@@ -105,7 +105,7 @@ Diagrams_H1= df['Dgm1'].sort_index().values
 PerLand=np.ndarray(shape=(6),dtype=object)
 for i in range(0, 6):
     Land=Ff.PLandscape(Diagrams_H1[i])
-    PerLand[i]=Land.AllP
+    PerLand[i]=Land.AllPL
 #choose landscape number for which feature matrix will be computed
 L_number = [2]
 #compute feature matrix
