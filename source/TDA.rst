@@ -10,5 +10,6 @@ This branch of the documentation covers tool used for topological data analysis.
    Distances <distances.rst>
    Drawing <drawing.rst>
    Persistence <persistence.rst>
+   Zero Dimensional Sublevel Set Persistence (SLSP) Module <sublevel_set_persistence.rst>
 
 
