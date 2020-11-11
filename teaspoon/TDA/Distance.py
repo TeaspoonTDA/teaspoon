@@ -44,6 +44,9 @@ from .Persistence import  prepareFolders
 
 def dgmDist_Hera(D1,D2, wassDeg = 'Bottleneck', relError = None, internal_p = None):
     """
+    .. note::
+        Hera must be installed and in the bash path to use this function https://bitbucket.org/grey_narn/hera
+
     Hera input format:
             - bottleneck_dist file1 file2  [relative_error]
             - wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]  where file1 and file2 represent the persistence diagrams.
@@ -63,7 +66,7 @@ def dgmDist_Hera(D1,D2, wassDeg = 'Bottleneck', relError = None, internal_p = No
             if :math:`d_{exact}` is the true distance and d_approx is the output, then
                 :math:`\\frac{| d_{exact} - d_{approx} |}{ d_{exact} } < \\mathrm{relativeError}`.
         - For bottleneck_dist from hera documentation:
-            If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same). 
+            If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).
             Otherwise the output is an approximation of the exact distance.
             Precisely: if :math:`d_{exact}` is the true distance and d_approx is the output, then
                 :math:`\\frac{| d_{exact} - d_{approx} |}{ d_{exact} } < \\mathrm{relativeError}.`
