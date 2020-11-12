@@ -25,7 +25,7 @@ Table of Contents
 Collaborators
 ***************
 
-The code is a compilation of work done by `Elizabeth Munch <http://www.elizabethmunch.com>`_ and `Firas Khasawneh <http://www.firaskhasawneh.com/>`_ along with her students and collaborators.  People who have contributed to teaspoon include:
+The code is a compilation of work done by `Elizabeth Munch <http://www.elizabethmunch.com>`_ and `Firas Khasawneh <http://www.firaskhasawneh.com/>`_ along with their students and collaborators.  People who have contributed to teaspoon include:
 
 - `Audun Myers <https://github.com/myersau3>`_
 - Melih Yesilli
