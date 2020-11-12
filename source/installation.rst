@@ -32,8 +32,6 @@ In order to use all wrappers in teaspoon.TDA, the following need to be installed
 Installation
 **************
 
-This package will soon be available through a pip install::
+This package is available through a pip install::
 
 	pip install teaspoon
-
-
