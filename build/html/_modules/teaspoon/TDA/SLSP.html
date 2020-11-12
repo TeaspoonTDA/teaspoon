@@ -198,143 +198,115 @@
            <div itemprop="articleBody">
             
   <h1>Source code for teaspoon.TDA.SLSP</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="Persistence0D"><a class="viewcode-back" href="../../../sublevel_set_persistence.html#teaspoon.TDA.SLSP.Persistence0D">[docs]</a><span></span><span class="k">def</span> <span class="nf">Persistence0D</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">edge_values</span> <span class="o">=</span> <span class="s1">&#39;automatic&#39;</span><span class="p">):</span> 
+<div class="viewcode-block" id="Persistence0D"><a class="viewcode-back" href="../../../sublevel_set_persistence.html#teaspoon.TDA.SLSP.Persistence0D">[docs]</a><span></span><span class="k">def</span> <span class="nf">Persistence0D</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span> 
     <span class="sd">&quot;&quot;&quot;This function calculates the zero-dimensional sublevel set persistence over a closed time domain.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): time series.</span>
-<span class="sd">        </span>
-<span class="sd">    Other Parameters:</span>
-<span class="sd">        edge_values (Optional[string]): either &#39;automatic&#39;, &#39;NN&#39;, &#39;PP&#39;, &#39;PN&#39;, or &#39;NP&#39;. Default is &#39;automatic&#39;. This argument treats the end points of the time series as an infinity with automatic calulating the slope at each end and assigning the appropriate infinity value or the user may assign this to one of the 4 possible end point values of &#39;NN&#39; as negative negative, &#39;PP&#39; as positive positive, etc.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        [px2 array]: peristence diagram with p persistence pairs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="c1">#import needed packages</span>
-    <span class="kn">import</span> <span class="nn">operator</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">find_peaks</span>
+    <span class="n">sample_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
     
-    <span class="n">sample_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
-    <span class="n">min_or_max</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># set to find maxima on positive sample_data compared to minima</span>
-    
-    <span class="n">slope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">edge_values</span> <span class="o">==</span> <span class="s1">&#39;automatic&#39;</span><span class="p">:</span>
-        <span class="n">slope_o</span><span class="p">,</span> <span class="n">slope_f</span> <span class="o">=</span> <span class="o">-</span><span class="n">slope</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">slope</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">edge_values</span> <span class="o">==</span> <span class="s1">&#39;PN&#39;</span><span class="p">:</span> <span class="c1">#assumes trend at edges continues to infinity</span>
-            <span class="n">slope_o</span><span class="p">,</span> <span class="n">slope_f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>
-        <span class="k">if</span> <span class="n">edge_values</span> <span class="o">==</span> <span class="s1">&#39;NN&#39;</span><span class="p">:</span> <span class="c1">#assumes trend at edges continues to infinity</span>
-            <span class="n">slope_o</span><span class="p">,</span> <span class="n">slope_f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>
-        <span class="k">if</span> <span class="n">edge_values</span> <span class="o">==</span> <span class="s1">&#39;PP&#39;</span><span class="p">:</span> <span class="c1">#assumes trend at edges continues to infinity</span>
-            <span class="n">slope_o</span><span class="p">,</span> <span class="n">slope_f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span>
-        <span class="k">if</span> <span class="n">edge_values</span> <span class="o">==</span> <span class="s1">&#39;NP&#39;</span><span class="p">:</span> <span class="c1">#assumes trend at edges continues to infinity</span>
-            <span class="n">slope_o</span><span class="p">,</span> <span class="n">slope_f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span>
-    <span class="n">NegEnd</span><span class="p">,</span> <span class="n">PosEnd</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
     
     <span class="c1">#assumes trend at edges continues to infinity</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span>
+    <span class="n">slope_o</span><span class="p">,</span> <span class="n">slope_f</span> <span class="o">=</span> <span class="o">-</span><span class="n">slope</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">slope</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">NegEnd</span><span class="p">,</span> <span class="n">PosEnd</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">slope_o</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">sample_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">NegEnd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span> <span class="n">sample_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">PosEnd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>    
     <span class="k">if</span> <span class="n">slope_f</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">sample_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_data</span><span class="p">),</span> <span class="n">NegEnd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span> <span class="n">sample_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_data</span><span class="p">),</span> <span class="n">PosEnd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
     
     <span class="c1">#get extrema locations</span>
     <span class="n">maxloc</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">find_peaks</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span>
     <span class="n">minloc</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">find_peaks</span><span class="p">(</span><span class="o">-</span><span class="n">sample_data</span><span class="p">)</span>
     <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span>
 
+    
     <span class="c1"># add outside borders as infinity extrema</span>
     <span class="k">if</span> <span class="n">slope_o</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">minloc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">minloc</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span> <span class="n">maxloc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">maxloc</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">slope_f</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">minloc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">minloc</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">minloc</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span> <span class="n">maxloc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">maxloc</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">maxloc</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
-        
-        
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">maxloc</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">minloc</span><span class="p">):</span> 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">maxloc</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">minloc</span><span class="p">):</span> <span class="c1">#if both outside borders are infinity</span>
             <span class="n">maxloc</span> <span class="o">=</span> <span class="n">maxloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#removes one of the positive infinity values</span>
         <span class="k">else</span><span class="p">:</span> <span class="c1">#if both outside borders are negative infinity</span>
             <span class="n">minloc</span> <span class="o">=</span> <span class="n">minloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#removes one of the negative infinity values</span>
 
+
+    <span class="c1">#gets minmax matrix</span>
     <span class="n">maxloc</span><span class="p">,</span> <span class="n">minloc</span> <span class="o">=</span> <span class="p">[</span><span class="n">maxloc</span><span class="p">],</span> <span class="p">[</span><span class="n">minloc</span><span class="p">]</span>
     <span class="n">max_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_data</span><span class="p">[</span><span class="n">maxloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
     <span class="n">min_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_data</span><span class="p">[</span><span class="n">minloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
     <span class="c1"># create a matrix that will be used in the following part of the code</span>
-    <span class="n">minmax_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">min_vals</span><span class="p">,</span> <span class="n">max_vals</span><span class="p">,</span> <span class="n">minloc</span><span class="p">,</span> <span class="n">maxloc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">min_vals</span><span class="p">,</span> <span class="n">max_vals</span><span class="p">,</span> <span class="n">minloc</span><span class="p">,</span> <span class="n">maxloc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
 
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maxloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="c1">#initialize result data structures</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">maxloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="c1"># prellocate the persistence diagram</span>
     <span class="n">persistenceDgm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
     <span class="c1"># preallocate the vector that will hold the time a desired feature was born</span>
-    <span class="n">feature_ind_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">feature_ind_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">birth_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">death_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
     
-    <span class="c1"># find the pairwise diferences</span>
-    <span class="c1"># get the min-max pairs</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">minmax_mat</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span> <span class="c1">#while there is still values left in the matrix</span>
-        <span class="c1">#stack the first two columns of minmax matrix (min values and max values)</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span> <span class="c1">#while there is still values left in the matrix</span>
+        <span class="c1">#stack the first two columns of minmax matrix (peaks and valleys)</span>
         <span class="k">if</span> <span class="n">maxloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">minloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span> <span class="c1">#if first value is a peak</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">minmax_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">minmax_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">T</span> 
+            <span class="n">peaks_valleys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">T</span> 
         <span class="k">else</span><span class="p">:</span>                           <span class="c1">#if first value is a valley</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">minmax_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">minmax_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">T</span>
-            
-        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">minmax_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">]),)</span> <span class="c1">#flattens y to 1 dimension for pairwise distance comparison</span>
-        <span class="n">pairwiseDiff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="c1">#gets all pairwise distances</span>
-        
-        <span class="c1"># find index of the smallest difference</span>
-        <span class="n">differences</span> <span class="o">=</span> <span class="n">pairwiseDiff</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pairwiseDiff</span><span class="p">),)</span>
-        <span class="n">smallestDiff_ind</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">differences</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-        
-        
-            
-            
+            <span class="n">peaks_valleys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">T</span>
+        <span class="c1">#flattens peaks_valleys to 1-D and orders chronologically for pairwise distance comparison</span>
+        <span class="n">time_sorted_peaks_valls</span> <span class="o">=</span> <span class="n">peaks_valleys</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">]),)</span> 
+        <span class="n">pairwiseDiff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">time_sorted_peaks_valls</span><span class="p">))</span> <span class="c1">#gets all pairwise distances</span>
+        <span class="n">smallestDiff_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">pairwiseDiff</span><span class="p">)</span>
+        <span class="c1">#gets indices of smallest pairwise distance peak-valley pair</span>
         <span class="k">if</span> <span class="n">maxloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">minloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span> <span class="c1">#if first value is a peak</span>
-            <span class="n">ind1</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">smallestDiff_ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
-            <span class="n">ind2</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">smallestDiff_ind</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+            <span class="n">ind1</span><span class="p">,</span> <span class="n">ind2</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">smallestDiff_ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">smallestDiff_ind</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>                           <span class="c1">#if first value is a valley</span>
-            <span class="n">ind1</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">smallestDiff_ind</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
-            <span class="n">ind2</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">smallestDiff_ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
-
+            <span class="n">ind1</span><span class="p">,</span> <span class="n">ind2</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">smallestDiff_ind</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">smallestDiff_ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
         
-        <span class="c1"># find the index to the peak that is on one end of the </span>
-        <span class="c1"># smallest difference</span>
-        <span class="n">peak_val</span> <span class="o">=</span> <span class="n">minmax_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">ind1</span><span class="p">]</span>
-        <span class="c1"># find the index to the peak val</span>
-        <span class="n">peak_ind</span> <span class="o">=</span> <span class="n">minmax_mat</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">ind1</span><span class="p">]</span> 
-
+        
+        <span class="c1"># find the peak value from min pairwise distance</span>
+        <span class="n">peak_val</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">ind1</span><span class="p">]</span>
+        <span class="c1"># find the time series index to the peak value</span>
+        <span class="n">peak_ind</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">ind1</span><span class="p">]</span> 
         <span class="c1"># remove the peak for next iteration</span>
-        <span class="n">minmax_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">ind1</span><span class="p">],</span> <span class="n">minmax_mat</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">ind1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
+        <span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">ind1</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">ind1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
         
-        
-        <span class="c1"># find the closest local minima to peak_ind</span>
-        <span class="n">valley_val</span> <span class="o">=</span> <span class="n">minmax_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">ind2</span><span class="p">]</span>
-        
-        <span class="c1"># find the index to the valley val</span>
-        <span class="n">valley_ind</span> <span class="o">=</span> <span class="n">minmax_mat</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">ind2</span><span class="p">]</span>
-        
+    
+        <span class="c1"># find the valley value from min pairwise distance</span>
+        <span class="n">valley_val</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">ind2</span><span class="p">]</span>
+        <span class="c1"># find the time series index to the valley val</span>
+        <span class="n">valley_ind</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">ind2</span><span class="p">]</span>
         <span class="c1"># remove the valley for next iteration</span>
-        <span class="n">minmax_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">ind2</span><span class="p">],</span> <span class="n">minmax_mat</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">ind2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
-
-        <span class="c1"># record the &#39;time&#39; the desired feature was born</span>
-        <span class="n">feature_ind_1</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">min_or_max</span><span class="p">)</span><span class="o">*</span><span class="n">valley_ind</span> <span class="o">+</span> <span class="n">min_or_max</span> <span class="o">*</span><span class="n">peak_ind</span>
-        <span class="n">feature_ind_2</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">min_or_max</span><span class="p">)</span><span class="o">*</span><span class="n">valley_ind</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">min_or_max</span><span class="p">)</span><span class="o">*</span><span class="n">peak_ind</span>
+        <span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">ind2</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">ind2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
+        
+        
+        <span class="c1"># record time series indices and birth and deaths and store persistence diagram point</span>
+        <span class="n">birth_ind</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">valley_ind</span>
+        <span class="n">death_ind</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">peak_ind</span>
         <span class="n">persDgmPnt</span> <span class="o">=</span> <span class="p">[</span><span class="n">valley_val</span><span class="p">,</span> <span class="n">peak_val</span><span class="p">]</span>
         <span class="n">persistenceDgm</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">persDgmPnt</span>
         
-        <span class="c1"># remove the NaN (delete the peaks and valleys that were just used)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span><span class="n">minmax_mat</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">minmax_mat</span><span class="p">[</span><span class="n">j</span><span class="p">])])</span>
-            <span class="n">minmax_mat</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
-        <span class="n">minmax_mat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">minmax_mat</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
         
-    <span class="k">if</span> <span class="n">edge_values</span> <span class="o">==</span> <span class="s1">&#39;ignore&#39;</span><span class="p">:</span>
-        <span class="n">feature_ind_1</span><span class="p">,</span> <span class="n">feature_ind_2</span><span class="p">,</span> <span class="n">persistenceDgm</span> <span class="o">=</span> <span class="n">feature_ind_1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">feature_ind_2</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">persistenceDgm</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
-    
-    <span class="k">return</span> <span class="n">feature_ind_1</span><span class="p">,</span> <span class="n">feature_ind_2</span><span class="p">,</span> <span class="n">persistenceDgm</span></div>
+        <span class="c1"># remove the NaN (delete the peaks and valleys that were just used)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span> <span class="c1">#go through each row in minmax matrix (4x4 matrix)</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">])])</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+        <span class="n">M</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        
+        <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="c1">#incremenet i</span>
+    <span class="k">return</span> <span class="n">birth_ind</span><span class="p">,</span> <span class="n">death_ind</span><span class="p">,</span> <span class="n">persistenceDgm</span></div>
 
 
 
@@ -347,7 +319,7 @@
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     
     
-    <span class="n">fs</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">7</span>
+    <span class="n">fs</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">122234</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">fs</span><span class="o">*</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">A</span> <span class="o">=</span> <span class="mi">20</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
@@ -373,7 +345,6 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ts</span><span class="p">)],</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ts</span><span class="p">)],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
     
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    
     
     
     

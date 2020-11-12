@@ -1290,50 +1290,50 @@
     <span class="k">return</span> <span class="n">feature_PS</span></div>
 
 
-<span class="c1"># def KernelMethod(perDgm1, perDgm2, sigma):</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-    
-<span class="c1">#     This function computes the kernel for given two persistence diagram based on the formula provided in Ref. :cite:`5 &lt;Reininghaus2015&gt;`.</span>
-<span class="c1">#     There are three inputs and these are two persistence diagrams and the kernel scale sigma.</span>
+<div class="viewcode-block" id="KernelMethod"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.KernelMethod">[docs]</a><span class="k">def</span> <span class="nf">KernelMethod</span><span class="p">(</span><span class="n">perDgm1</span><span class="p">,</span> <span class="n">perDgm2</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    This function computes the kernel for given two persistence diagram based on the formula provided in Ref. :cite:`5 &lt;Reininghaus2015&gt;`.</span>
+<span class="sd">    There are three inputs and these are two persistence diagrams and the kernel scale sigma.</span>
 
-<span class="c1">#     :param ndarray (perDgm1):</span>
-<span class="c1">#         Object array that includes first persistence diagram set</span>
-        
-<span class="c1">#     :param ndarray (perDgm2):</span>
-<span class="c1">#         Object array that includes second persistence diagram set</span>
-    
-<span class="c1">#     :param float (sigma):</span>
-<span class="c1">#         Kernel scale</span>
-        
-<span class="c1">#     :Returns:</span>
+<span class="sd">    :param ndarray (perDgm1):</span>
+<span class="sd">        Object array that includes first persistence diagram set</span>
+<span class="sd">        </span>
+<span class="sd">    :param ndarray (perDgm2):</span>
+<span class="sd">        Object array that includes second persistence diagram set</span>
+<span class="sd">    </span>
+<span class="sd">    :param float (sigma):</span>
+<span class="sd">        Kernel scale</span>
+<span class="sd">        </span>
+<span class="sd">    :Returns:</span>
 
-<span class="c1">#         :Kernel:</span>
-<span class="c1">#             (float) The kernel value for given two persistence diagrams.</span>
+<span class="sd">        :Kernel:</span>
+<span class="sd">            (float) The kernel value for given two persistence diagrams.</span>
 
-<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="c1">#     L1=len(perDgm1)</span>
-<span class="c1">#     L2=len(perDgm2)</span>
-<span class="c1">#     kernel = np.zeros((L2,L1))</span>
+    <span class="n">L1</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">perDgm1</span><span class="p">)</span>
+    <span class="n">L2</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">perDgm2</span><span class="p">)</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L2</span><span class="p">,</span><span class="n">L1</span><span class="p">))</span>
     
-<span class="c1">#     Kernel=0</span>
+    <span class="n">Kernel</span><span class="o">=</span><span class="mi">0</span>
     
-<span class="c1">#     for i in range (0,L1):</span>
-<span class="c1">#         p=perDgm1[i]</span>
-<span class="c1">#         p = np.reshape(p,(2,1))</span>
-<span class="c1">#         for j in range(0,L2):</span>
-<span class="c1">#             q = perDgm2[j]</span>
-<span class="c1">#             q = np.reshape(q,(2,1))</span>
-<span class="c1">#             q_bar = np.zeros((2,1))</span>
-<span class="c1">#             q_bar[0] = q[1]</span>
-<span class="c1">#             q_bar[1] = q[0]</span>
-<span class="c1">#             dist1 = lnorm(p-q)</span>
-<span class="c1">#             dist2 = lnorm(p-q_bar)</span>
-<span class="c1">#             kernel[j,i] = np.exp(-(math.pow(dist1,2))/(8*sigma))-np.exp(-(math.pow(dist2,2))/(8*sigma))</span>
-<span class="c1">#             Kernel = Kernel+kernel[j,i]</span>
-<span class="c1">#     Kernel = Kernel*(1/(8*pi*sigma))   </span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L1</span><span class="p">):</span>
+        <span class="n">p</span><span class="o">=</span><span class="n">perDgm1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">p</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L2</span><span class="p">):</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">perDgm2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">q</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">q_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">q_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">q_bar</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">dist1</span> <span class="o">=</span> <span class="n">lnorm</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">q</span><span class="p">)</span>
+            <span class="n">dist2</span> <span class="o">=</span> <span class="n">lnorm</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">q_bar</span><span class="p">)</span>
+            <span class="n">kernel</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">dist1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">dist2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span>
+            <span class="n">Kernel</span> <span class="o">=</span> <span class="n">Kernel</span><span class="o">+</span><span class="n">kernel</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">Kernel</span> <span class="o">=</span> <span class="n">Kernel</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span>   
     
-<span class="c1">#     return Kernel</span>
+    <span class="k">return</span> <span class="n">Kernel</span></div>
 </pre></div>
 
            </div>

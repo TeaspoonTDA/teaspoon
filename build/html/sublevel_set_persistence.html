@@ -209,20 +209,17 @@
 <span id="zero-dimensional-sublevel-set-persistence"></span><h1><span class="section-number">2.3.5. </span>Zero-Dimensional Sublevel Set Persistence<a class="headerlink" href="#module-teaspoon.TDA.SLSP" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="teaspoon.TDA.SLSP.Persistence0D">
-<code class="sig-prename descclassname">teaspoon.TDA.SLSP.</code><code class="sig-name descname">Persistence0D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts</span></em>, <em class="sig-param"><span class="n">edge_values</span><span class="o">=</span><span class="default_value">'automatic'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/SLSP.html#Persistence0D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.SLSP.Persistence0D" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">teaspoon.TDA.SLSP.</code><code class="sig-name descname">Persistence0D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/SLSP.html#Persistence0D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.SLSP.Persistence0D" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function calculates the zero-dimensional sublevel set persistence over a closed time domain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>ts</strong> (<em>1-D array</em>) – time series.</p>
 </dd>
-<dt class="field-even">Other Parameters</dt>
-<dd class="field-even"><p><strong>edge_values</strong> (<em>Optional[string]</em>) – either ‘automatic’, ‘NN’, ‘PP’, ‘PN’, or ‘NP’. Default is ‘automatic’. This argument treats the end points of the time series as an infinity with automatic calulating the slope at each end and assigning the appropriate infinity value or the user may assign this to one of the 4 possible end point values of ‘NN’ as negative negative, ‘PP’ as positive positive, etc.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>peristence diagram with p persistence pairs.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>peristence diagram with p persistence pairs.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>[px2 array]</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[px2 array]</p>
 </dd>
 </dl>
 </dd></dl>

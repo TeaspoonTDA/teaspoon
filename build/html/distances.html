@@ -113,6 +113,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2.3.2. Distances</a></li>
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -210,7 +211,11 @@
 <dl class="py function">
 <dt id="teaspoon.TDA.Distance.dgmDist_Hera">
 <code class="sig-prename descclassname">teaspoon.TDA.Distance.</code><code class="sig-name descname">dgmDist_Hera</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">D1</span></em>, <em class="sig-param"><span class="n">D2</span></em>, <em class="sig-param"><span class="n">wassDeg</span><span class="o">=</span><span class="default_value">'Bottleneck'</span></em>, <em class="sig-param"><span class="n">relError</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">internal_p</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Distance.html#dgmDist_Hera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Distance.dgmDist_Hera" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hera must be installed and in the bash path to use this function <a class="reference external" href="https://bitbucket.org/grey_narn/hera">https://bitbucket.org/grey_narn/hera</a></p>
+</div>
+<dl class="simple">
 <dt>Hera input format:</dt><dd><ul class="simple">
 <li><p>bottleneck_dist file1 file2  [relative_error]</p></li>
 <li><p>wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]  where file1 and file2 represent the persistence diagrams.</p></li>

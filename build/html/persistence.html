@@ -37,7 +37,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="sublevel_set_persistence.html" />
+    <link rel="next" title="2.3.5. Zero-Dimensional Sublevel Set Persistence" href="sublevel_set_persistence.html" />
     <link rel="prev" title="2.3.3. Drawing" href="drawing.html" /> 
 </head>
 
@@ -113,6 +113,7 @@
 <li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -287,54 +288,6 @@ If numSteps and stepSize are passed (regardless of whether maxRadius is passed),
 </dd></dl>
 
 <dl class="py function">
-<dt id="teaspoon.TDA.Persistence.VR_Ripser">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">VR_Ripser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">maxDim</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#VR_Ripser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.VR_Ripser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes persistence up to dimension maxDim using Uli Bauer’s Ripser.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Ripser needs to be installed on machine in advance <a class="reference external" href="https://github.com/Ripser/ripser">https://github.com/Ripser/ripser</a></p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>P</strong> – A point cloud as an NxD numpy array.
-N is the number of points, D is the dimension of
-Euclidean space.</p></li>
-<li><p><strong>maxDim</strong> – An integer representing the maximum dimension
-for computing persistent homology</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A dictionary Dgms where Dgms[k] is a lx2 matrix
-giving points in the k-dimensional pers diagram</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.distMat_Ripser">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">distMat_Ripser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distMat</span></em>, <em class="sig-param"><span class="n">maxDim</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#distMat_Ripser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.distMat_Ripser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes persistence up to maxDim using Uli Bauer’s <a class="reference external" href="https://github.com/Ripser/ripser">Ripser</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Ripser needs to be installed on machine in advance. This code doesn’t check for it’s existence.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>distMat</strong> – A distance matrix given as a NxN numpy array</p></li>
-<li><p><strong>maxDim</strong> – An integer representing the maximum dimension
-for computing persistent homology</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A dictionary Dgms where Dgms[k] is a lx2 matrix
-giving points in the k-dimensional pers diagram</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt id="teaspoon.TDA.Persistence.maxBirth">
 <code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">maxBirth</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Dgm</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxBirth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds maximum birth for a given diagram</p>
@@ -459,62 +412,81 @@ Gets minimum persistence for a pandas.Series with diagrams as entries</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="teaspoon.TDA.Persistence.prepareFolders">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">prepareFolders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#prepareFolders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.prepareFolders" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates the “.teaspoonData” folder.
-Checks that necessary folder structure system exists.
-Empties out all previously saved files to avoid confusion.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.readPerseusOutput">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">readPerseusOutput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">outputFileName</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#readPerseusOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.readPerseusOutput" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads in the diagrams in the format that Perseus uses.
-Returns a dictionary with integer keys representing the dimension of each diagram.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.readRipserOutput">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">readRipserOutput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">out</span></em>, <em class="sig-param"><span class="n">drop_inf_class</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#readRipserOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.readRipserOutput" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads output from Ripser</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.readRipserString">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">readRipserString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#readRipserString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.readRipserString" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads string from Ripser</p>
-</dd></dl>
-
-<dl class="py function">
 <dt id="teaspoon.TDA.Persistence.removeInfiniteClasses">
 <code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">removeInfiniteClasses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Dgm</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#removeInfiniteClasses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.removeInfiniteClasses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simply deletes classes that have infinite lifetimes.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.writeMatrixFileForPerseus">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">writeMatrixFileForPerseus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">filesavename</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#writeMatrixFileForPerseus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.writeMatrixFileForPerseus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given 2D matrix M, write into file format read by Perseus.
-Info on format can be found at:http://people.maths.ox.ac.uk/nanda/perseus/index.html</p>
-</dd></dl>
+<div class="section" id="examples">
+<h2><span class="section-number">2.3.4.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The following example computes the distance between two persistence diagrams:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">Cubical_Perseus</span>
 
-<dl class="py function">
-<dt id="teaspoon.TDA.Persistence.writePointCloudFileForPerseus">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">writePointCloudFileForPerseus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">stepSize</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">numSteps</span><span class="o">=</span><span class="default_value">500</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#writePointCloudFileForPerseus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.writePointCloudFileForPerseus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes the point cloud to a file in the perseus format.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>P</strong> – An NxD array.  Represents <span class="math notranslate nohighlight">\(N\)</span> points in <span class="math notranslate nohighlight">\(\mathbb{R}^{D}\)</span></p></li>
-<li><p><strong>filename</strong> – location for saving the file</p></li>
-<li><p><strong>stepSize</strong> – </p></li>
-<li><p><strong>numSteps</strong> – Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.
-So, persistence will be calculated from parameter 0 until stepSize*numSteps.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<span class="c1"># Load Image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;Teaspoon_Img_Example.csv&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 
+<span class="n">Cubical_Perseus</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the input image is:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/Teaspoon_Img_Example.png"><img alt="_images/Teaspoon_Img_Example.png" src="_images/Teaspoon_Img_Example.png" style="width: 200px;" /></a>
+</div></blockquote>
+<p>And the output of the code is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span> <span class="p">,</span> <span class="mf">0.99</span><span class="p">],</span>
+           <span class="p">[</span><span class="mf">0.1</span> <span class="p">,</span> <span class="mf">0.99</span><span class="p">]]),</span>
+ <span class="mi">0</span><span class="p">:</span> <span class="n">array</span><span class="p">([[</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span>
+           <span class="p">[</span><span class="mf">0.</span>  <span class="p">,</span>  <span class="n">inf</span><span class="p">]]),</span>
+ <span class="mi">2</span><span class="p">:</span> <span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>The input csv file can be found <a class="reference download internal" download="" href="_downloads/717c856ad6a056283d7b198fe4699871/Teaspoon_Img_Example.csv"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a></p>
+<p>The following example computes the minimum and maximum birth times, as well as the maximum persistence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Draw</span> <span class="kn">import</span> <span class="n">drawDgm</span>
+<span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">maxBirth</span><span class="p">,</span> <span class="n">minBirth</span><span class="p">,</span> <span class="n">maxPers</span>
+
+<span class="n">numPts</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Generate Torus</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+
+<span class="c1"># Compute persistence diagrams</span>
+<span class="n">PD1</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;dgms&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum Birth: &#39;</span><span class="p">,</span> <span class="n">maxBirth</span><span class="p">(</span><span class="n">PD1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minimum Birth: &#39;</span><span class="p">,</span> <span class="n">minBirth</span><span class="p">(</span><span class="n">PD1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max Persistence: &#39;</span><span class="p">,</span> <span class="n">maxPers</span><span class="p">(</span><span class="n">PD1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The output of this code is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Maximum</span> <span class="n">Birth</span><span class="p">:</span>  <span class="mf">1.0100464820861816</span>
+<span class="n">Minimum</span> <span class="n">Birth</span><span class="p">:</span>  <span class="mf">0.17203105986118317</span>
+<span class="n">Max</span> <span class="n">Persistence</span><span class="p">:</span>  <span class="mf">1.3953008949756622</span>
+</pre></div>
+</div>
+<p>The following example computes the minimum and maximum birth times and the
+maximum persistence across all persistence diagrams in the specified column of
+the DataFrame:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">maxBirthSeries</span><span class="p">,</span> <span class="n">minBirthSeries</span><span class="p">,</span> <span class="n">maxPersistenceSeries</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum Birth of all diagrams: &#39;</span><span class="p">,</span> <span class="n">maxBirthSeries</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minimum Birth of all diagrams: &#39;</span><span class="p">,</span> <span class="n">minBirthSeries</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max Persistence of all diagrams: &#39;</span><span class="p">,</span> <span class="n">maxPersistenceSeries</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>The output of this code is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Maximum</span> <span class="n">Birth</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">diagrams</span><span class="p">:</span>  <span class="mf">1.2070081233978271</span>
+<span class="n">Minimum</span> <span class="n">Birth</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">diagrams</span><span class="p">:</span>  <span class="mf">0.028233738616108894</span>
+<span class="n">Max</span> <span class="n">Persistence</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">diagrams</span><span class="p">:</span>  <span class="mf">1.6290252953767776</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -525,7 +497,7 @@ So, persistence will be calculated from parameter 0 until stepSize*numSteps.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sublevel_set_persistence.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sublevel_set_persistence.html" class="btn btn-neutral float-right" title="2.3.5. Zero-Dimensional Sublevel Set Persistence" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="drawing.html" class="btn btn-neutral float-left" title="2.3.3. Drawing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
