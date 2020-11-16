@@ -150,7 +150,7 @@ def Persistence0D(ts, ends = False):
     while len(Q) > 0: #while there is still values left in the matrix
         
         #get persistence pair
-        m = int(Q.T[0][np.argmin(Q.T[1])])
+        m = int(Q[0][0])
         peak_val, peak_ind, vall_val, vall_ind, I1, I2 = get_persistence_pair(m, M)
 
         # update M and Q
