@@ -35,7 +35,6 @@ def initialize_M(sample_data, ends):
     
     # create a matrix that will be used in the following part of the code
     M = [min_vals.tolist(), max_vals.tolist(), minloc.tolist(), maxloc.tolist()]
-    
     return M 
 
 def initialize_Q(M):
@@ -73,6 +72,7 @@ def update_M(M, I1, I2):
     M[1].pop(I1)
     M[2].pop(I2)
     M[3].pop(I1)
+
     return M
     
 def update_Q(m, Q):
@@ -172,7 +172,7 @@ if __name__ == "__main__": #___________________example_________________________
     
     import time
     start = time.time()
-    fs, T = 100, 20000
+    fs, T = 100, 10000
     t = np.linspace(-0.2,T,fs*T+1)
     A = 20
     ts = A*np.sin(np.pi*t) + A*np.sin(1*t)

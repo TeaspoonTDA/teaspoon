@@ -84,9 +84,9 @@ def update_Q(m, Q):
     #get new priority value for new ptr pair
     if m != 0 and m != len(Q)-1:
         indices = np.arange(len(Q))
-        ind_m_prime = indices[Q.T[0] == m - 1][0]
-        ind_m = indices[Q.T[0] == m][0]
-        ind_m_next = indices[Q.T[0] == m + 1][0]
+        ind_m_prime = indices[Q.T[0] == m-1][0]
+        ind_m = 0
+        ind_m_next = indices[Q.T[0] == m+1][0]
         v_new = Q[ind_m_prime][1] + Q[ind_m_next][1] - Q[ind_m][1]
         #get new row for Q
         q = np.array([m-1, v_new])
@@ -180,7 +180,7 @@ if __name__ == "__main__": #___________________example_________________________
     
     import time
     start = time.time()
-    fs, T = 100, 20000
+    fs, T = 100, 10000
     t = np.linspace(-0.2,T,fs*T+1)
     A = 20
     ts = A*np.sin(np.pi*t) + A*np.sin(1*t)
