@@ -118,17 +118,14 @@ if __name__ == "__main__": #___________________example_________________________
     import matplotlib.gridspec as gridspec
     import numpy as np
     
-    import time
-    start = time.time()
-    fs, T = 100, 20000
+    
+    fs, T = 100, 122234
     t = np.linspace(-0.2,T,fs*T+1)
     A = 20
     ts = A*np.sin(np.pi*t) + A*np.sin(1*t)
     
     feature_ind_1, feature_ind_2, persistenceDgm = Persistence0D(ts)
     D = persistenceDgm
-    end = time.time()
-    print('time elapsed: ', end - start)
     print(' Persistence Diagram Pairs: ', D)
     
     gs = gridspec.GridSpec(1,2) 
@@ -148,4 +145,8 @@ if __name__ == "__main__": #___________________example_________________________
     plt.plot([min(ts), max(ts)], [min(ts), max(ts)], 'k--')
     
     plt.show()
+    
+    
+    
+    
     
