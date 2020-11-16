@@ -65,6 +65,8 @@ def initialize_Q(M):
     ptr = np.arange(len(v))
     #generate priority matrix Q
     Q = np.array([ptr, v]).T
+    I_sort = np.argsort(v)
+    Q = Q[I_sort]
     return Q
     
 def update_M(M, I1, I2):
@@ -81,13 +83,18 @@ def update_Q(m, Q):
 
     #get new priority value for new ptr pair
     if m != 0 and m != len(Q)-1:
-        v_new = Q[m+1][1] + Q[m-1][1] - Q[m][1]
+        indices = np.arange(len(Q))
+        ind_m_prime = indices[Q.T[0] == m - 1][0]
+        ind_m = indices[Q.T[0] == m][0]
+        ind_m_next = indices[Q.T[0] == m + 1][0]
+        v_new = Q[ind_m_prime][1] + Q[ind_m_next][1] - Q[ind_m][1]
         #get new row for Q
         q = np.array([m-1, v_new])
         #remove old rows of Q that were combined into 1
-        Q = np.delete(Q, [m-1, m, m+1], axis= 0)
+        Q = np.delete(Q, [ind_m_prime, ind_m, ind_m_next], axis= 0)
         #add new [ptr, v] to Q 
-        Q = np.insert(Q, int(q[0]), [q], axis = 0)
+        insert_index = np.searchsorted(Q.T[1], v_new)
+        Q = np.insert(Q, insert_index, [q], axis = 0)
         #decrease index of those greater than points removed by 2 since two were removed
         Q.T[0][Q.T[0] > m] = Q.T[0][Q.T[0] > m] - 2
     else: # else if it on an edge or the last few left
@@ -141,6 +148,7 @@ def Persistence0D(ts, ends = False):
     #Initialize data for results
     birth_indices, death_indices, persistenceDgm = [], [], []
     while len(Q) > 0: #while there is still values left in the matrix
+        
         #get persistence pair
         m = int(Q.T[0][np.argmin(Q.T[1])])
         peak_val, peak_ind, vall_val, vall_ind, I1, I2 = get_persistence_pair(m, M)
