@@ -9,7 +9,7 @@ All code is open source with up to date documentation, making the code easy to u
 
 Full documentation of this package is available [here](http://elizabethmunch.com/code/teaspoon/index.html). The full documentation includes information about installation, module documentation with examples, contributing, the license, and citing teaspoon.
 
-The code is a compilation of work done by [Elizabeth Munch](http://www.elizabethmunch.com) and [Firas Khasawneh](http://www.firaskhasawneh.com/) along with her students and collaborators.  People who have contributed to teaspoon include:
+The code is a compilation of work done by [Elizabeth Munch](http://www.elizabethmunch.com) and [Firas Khasawneh](http://www.firaskhasawneh.com/) along with their students and collaborators.  People who have contributed to teaspoon include:
 
 - [Audun Myers](https://github.com/myersau3)
 - Melih Yesilli
