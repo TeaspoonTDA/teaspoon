@@ -89,10 +89,11 @@ def takens(ts, n= None, tau= None):
     
     #takens embedding method. Not the fastest algoriothm, but it works. Need to improve
     L = len(ts) #total length of time series
-    SSR = [] 
-    for i in range(L - tau * (n - 1)): 
-        v_i = ts[i:i + tau * n:tau]
-        SSR.append(v_i)
+    SSR = []  
+    for i in range(n): 
+        SSR.append(ts[i*tau:L-(n-i-1)*tau])
+    SSR = np.array(SSR).T
+        
     return np.array(SSR)
 
 

@@ -4,7 +4,48 @@ def maps(system, dynamic_state = None, L = None, fs = None,
     import numpy as np
     run = True
     if run == True:
-        
+                                   
+    # In[ ]: https://www.mathworks.com/matlabcentral/fileexchange/34820-gingerbread_man-iterated-chaotic-map-with-parameters-attractor-explorer
+    
+        if system == 'gingerbread_man_map': 
+            
+            #setting simulation time series parameters
+            if fs == None: fs = 1
+            if SampleSize == None: SampleSize = 500
+            if L == None: L = 2000.0
+            t = np.linspace(0, L, int(L*fs))
+            
+            #setting system parameters
+            if parameters != None:
+                if len(parameters) != 2:
+                    print('Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
+                    parameters = None
+                else:
+                    A = parameters[0]
+            if parameters == None:
+                a = 1.0
+                b = 1.0
+                
+                    
+            #defining simulation functions
+            def gingerbread_man(a, b, x, y):
+                return 1 - a*y + b*np.abs(x), x
+                
+            if InitialConditions == None:
+                if dynamic_state == 'periodic': InitialConditions = [0.5, 1.5]
+                if dynamic_state == 'chaotic': InitialConditions = [0.5, 1.8]
+                
+                
+            xtemp = InitialConditions[0]
+            ytemp = InitialConditions[1]
+            x, y = [], []
+            for n in range(0,int(L)):
+                xtemp, ytemp = gingerbread_man(a,b,xtemp,ytemp)
+                x.append(xtemp)
+                y.append(ytemp)
+                    
+            ts = [x[-SampleSize:], y[-SampleSize:]]
+            t = t[-SampleSize:]        
                                  
     # In[ ]: Complete
     

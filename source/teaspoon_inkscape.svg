@@ -12,13 +12,13 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="47.82476mm"
-   height="58.840374mm"
-   viewBox="0 0 47.824761 58.840373"
+   width="63.739235mm"
+   height="60.248241mm"
+   viewBox="0 0 63.739236 60.24824"
    version="1.1"
    id="svg512421"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="label_inkscape_file.svg">
+   sodipodi:docname="teaspoon_inkscape.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -26,15 +26,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="660.49515"
-     inkscape:cy="42.785722"
+     inkscape:zoom="1.979899"
+     inkscape:cx="141.00753"
+     inkscape:cy="97.826887"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
-     inkscape:window-x="-8"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      showguides="false" />
@@ -297,7 +297,7 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(452.86164,-234.95133)"
+     transform="translate(195.35855,-257.91205)"
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
@@ -873,7 +873,7 @@
 <polygon
    id="polygon124805"
    style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-opacity:1"
-   points="152.93,664.27 151.6,662.92 151.77,662.74 152.93,663.75 154.08,662.74 154.26,662.92 " />
+   points="151.77,662.74 152.93,663.75 154.08,662.74 154.26,662.92 152.93,664.27 151.6,662.92 " />
 <path
    inkscape:connector-curvature="0"
    id="path124807"
@@ -922,7 +922,7 @@
        ns0:jacobian_sqrt="0.821363"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
 <polygon
-   points="152.93,664.27 151.6,662.92 151.77,662.74 152.93,663.75 154.08,662.74 154.26,662.92 "
+   points="151.77,662.74 152.93,663.75 154.08,662.74 154.26,662.92 152.93,664.27 151.6,662.92 "
    style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-opacity:1"
    id="polygon125021" />
 <path
@@ -975,7 +975,7 @@
 <polygon
    id="polygon125280"
    style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-opacity:1"
-   points="152.93,664.27 151.6,662.92 151.77,662.74 152.93,663.75 154.08,662.74 154.26,662.92 " />
+   points="151.77,662.74 152.93,663.75 154.08,662.74 154.26,662.92 152.93,664.27 151.6,662.92 " />
 <path
    inkscape:connector-curvature="0"
    id="path125282"
@@ -1024,7 +1024,7 @@
        ns0:jacobian_sqrt="0.821363"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
 <polygon
-   points="152.93,664.27 151.6,662.92 151.77,662.74 152.93,663.75 154.08,662.74 154.26,662.92 "
+   points="151.77,662.74 152.93,663.75 154.08,662.74 154.26,662.92 152.93,664.27 151.6,662.92 "
    style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-opacity:1"
    id="polygon125525" />
 <path
@@ -1122,7 +1122,7 @@
        ns0:jacobian_sqrt="0.821363"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
 <polygon
-   points="152.93,663.75 154.08,662.74 154.26,662.92 152.93,664.27 151.6,662.92 151.77,662.74 "
+   points="154.26,662.92 152.93,664.27 151.6,662.92 151.77,662.74 152.93,663.75 154.08,662.74 "
    style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-opacity:1"
    id="polygon125675" />
 <path
@@ -1175,7 +1175,7 @@
 <polygon
    id="polygon125689"
    style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-opacity:1"
-   points="151.77,662.74 152.93,663.75 154.08,662.74 154.26,662.92 152.93,664.27 151.6,662.92 " />
+   points="154.08,662.74 154.26,662.92 152.93,664.27 151.6,662.92 151.77,662.74 152.93,663.75 " />
 <path
    id="path125691"
    style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-opacity:1"
@@ -1414,14 +1414,6 @@
          id="tspan128694"
          sodipodi:role="line">Teaspoon</tspan></text>
     <rect
-       y="215.92953"
-       x="252.427"
-       height="21.381563"
-       width="75.102737"
-       id="rect128750"
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.34682184;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       transform="rotate(90)" />
-    <rect
        transform="rotate(90)"
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.34682184;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect128752"
@@ -1454,5 +1446,91 @@
        height="15.64748"
        x="-306.53247"
        y="254.55971" />
+    <rect
+       transform="rotate(21.749552)"
+       y="299.63837"
+       x="-38.653351"
+       height="38.841541"
+       width="5.8324356"
+       id="rect171868"
+       style="opacity:1;fill:#8c8c8c;fill-opacity:1;stroke:none;stroke-width:0.23688968;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       style="opacity:1;fill:#8c8c8c;fill-opacity:1;stroke:none;stroke-width:0.23688968;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect171870"
+       width="5.8324356"
+       height="38.841541"
+       x="-138.82605"
+       y="261.06317"
+       transform="rotate(1.2229206)" />
+    <rect
+       transform="rotate(46.61453)"
+       y="286.88351"
+       x="88.071259"
+       height="38.841541"
+       width="5.8324356"
+       id="rect171872"
+       style="opacity:1;fill:#8c8c8c;fill-opacity:1;stroke:none;stroke-width:0.23688968;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       y="257.91205"
+       x="-168.03615"
+       height="18.676483"
+       width="30.118326"
+       id="rect171874"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.20526822;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       y="262.1221"
+       x="-195.16473"
+       height="14.530383"
+       width="63.351593"
+       id="rect171876"
+       style="opacity:0.503;fill:#bbbdbe;fill-opacity:0.34324323;stroke:#979696;stroke-width:0.38764212;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <circle
+       style="opacity:1;fill:#8c8c8c;fill-opacity:1;stroke:none;stroke-width:0.20780757;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle171878"
+       cx="-142.4238"
+       cy="304.50992"
+       r="8.5625134" />
+    <circle
+       r="9.3070784"
+       cy="308.85321"
+       cx="-161.65822"
+       id="circle171880"
+       style="opacity:1;fill:#8c8c8c;fill-opacity:1;stroke:none;stroke-width:0.22587773;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <ellipse
+       ry="11.416683"
+       rx="11.354635"
+       style="opacity:1;fill:#8c8c8c;fill-opacity:1;stroke:none;stroke-width:0.27632281;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse171882"
+       cx="-181.94769"
+       cy="297.43661" />
+    <circle
+       r="8.0788937"
+       cy="304.50992"
+       cx="-142.4238"
+       id="circle171884"
+       style="opacity:1;fill:#95490e;fill-opacity:1;stroke:none;stroke-width:0.20780757;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <circle
+       r="8.8217831"
+       style="opacity:1;fill:#47270c;fill-opacity:1;stroke:none;stroke-width:0.22587773;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle171886"
+       cx="-161.65822"
+       cy="308.85321" />
+    <circle
+       r="10.89072"
+       cy="297.43661"
+       cx="-181.94769"
+       id="circle171888"
+       style="opacity:1;fill:#de8c27;fill-opacity:1;stroke:none;stroke-width:0.27632281;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.82898712px;line-height:1.25;font-family:Century;-inkscape-font-specification:'Century, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.37315172"
+       x="-188.84927"
+       y="272.64371"
+       id="text171892"><tspan
+         sodipodi:role="line"
+         id="tspan171890"
+         x="-188.84927"
+         y="272.64371"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.82898712px;font-family:Century;-inkscape-font-specification:'Century, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.37315172">Teaspoon</tspan></text>
   </g>
 </svg>

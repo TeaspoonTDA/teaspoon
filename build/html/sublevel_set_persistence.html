@@ -210,7 +210,10 @@
 <dl class="py function">
 <dt id="teaspoon.TDA.SLSP.Persistence0D">
 <code class="sig-prename descclassname">teaspoon.TDA.SLSP.</code><code class="sig-name descname">Persistence0D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/SLSP.html#Persistence0D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.SLSP.Persistence0D" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function calculates the zero-dimensional sublevel set persistence over a closed time domain.</p>
+<dd><dl class="simple">
+<dt>This function calculates the zero-dimensional sublevel set persistence over a closed time domain</dt><dd><p>using a recursively updated priority Q as a SortedList data structure. The algorithm is approximately O(log(n)).</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>ts</strong> (<em>1-D array</em>) – time series.</p>
@@ -231,7 +234,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<span class="n">fs</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">7</span>
+<span class="n">fs</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">fs</span><span class="o">*</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">A</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">ts</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
@@ -239,6 +242,7 @@
 <span class="n">feature_ind_1</span><span class="p">,</span> <span class="n">feature_ind_2</span><span class="p">,</span> <span class="n">persistenceDgm</span> <span class="o">=</span> <span class="n">Persistence0D</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
 <span class="n">D</span> <span class="o">=</span> <span class="n">persistenceDgm</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Persistence Diagram Pairs: &#39;</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+
 
 <span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -268,7 +272,7 @@
 </pre></div>
 </div>
 <div class="figure align-default">
-<a class="reference internal image-reference" href="_images/SLSP_example.png"><img alt="_images/SLSP_example.png" src="_images/SLSP_example.png" style="width: 504.75px; height: 251.25px;" /></a>
+<a class="reference internal image-reference" href="_images/SLSP_example.png"><img alt="_images/SLSP_example.png" src="_images/SLSP_example.png" style="width: 499.5px; height: 246.75px;" /></a>
 </div>
 <span class="target" id="module-teaspoon.TDA.SLSP_tools"></span><dl class="py function">
 <dt id="teaspoon.TDA.SLSP_tools.cutoff">
@@ -300,7 +304,7 @@
 </dd></dl>
 
 <p>The following is an example implementing the zero-dimensional sublevel set persistence algorithm:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
 <span class="kn">from</span> <span class="nn">teaspoon.TDA.SLSP</span> <span class="kn">import</span> <span class="n">Persistence0D</span>
@@ -310,7 +314,7 @@
 <span class="n">dist</span> <span class="o">=</span> <span class="s1">&#39;Gaussian&#39;</span>
 
 <span class="c1">#---------------Generate a time series with additive noise------------</span>
-<span class="n">fs</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">12</span>
+<span class="n">fs</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">fs</span><span class="o">*</span><span class="n">T</span><span class="p">)</span>
 <span class="n">A</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">#signal amplitude and standard deviation</span>
 <span class="n">ts_0</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -323,19 +327,11 @@
 <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">persistenceDgm</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#get death times</span>
 <span class="n">L</span> <span class="o">=</span> <span class="n">D</span><span class="o">-</span><span class="n">B</span> <span class="c1">#get lifetimes as difference between birth and death</span>
 
-<span class="n">I_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_ind_1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#indices of birth times</span>
+<span class="n">I_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_ind_1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="c1">#indices of birth times</span>
 <span class="n">T_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">I_B</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#time values at birth times</span>
 
-
-<span class="c1">#----------Remove infinity values-----------------------------</span>
-<span class="n">T_B</span> <span class="o">=</span> <span class="n">T_B</span><span class="p">[</span><span class="n">L</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)]</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">L</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)]</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">L</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)]</span>
-<span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">L</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)]</span>
-
-
 <span class="c1">#-------------get cutoff for persistence diagram---------------------</span>
-<span class="n">C</span><span class="p">,</span> <span class="n">param</span> <span class="o">=</span> <span class="n">cutoff</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="n">distribution</span> <span class="o">=</span> <span class="n">dist</span><span class="p">)</span> <span class="c1">#get cutoff</span>
+<span class="n">C</span><span class="p">,</span> <span class="n">param</span> <span class="o">=</span> <span class="n">cutoff</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="n">distribution</span> <span class="o">=</span> <span class="n">dist</span><span class="p">)</span> <span class="c1">#get cutoff</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Distribution parameter estimate: &#39;</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;C: &#39;</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
 
@@ -384,11 +380,11 @@
 </div>
 <p>Where the output for this example is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Distribution</span> <span class="n">parameter</span> <span class="n">estimate</span><span class="p">:</span>  <span class="mf">1.0665900603015368</span>
-<span class="n">C</span><span class="p">:</span>  <span class="mf">8.147040608971896</span>
+<span class="n">C</span><span class="p">:</span>  <span class="mf">7.408859563871353</span>
 </pre></div>
 </div>
 <div class="figure align-default">
-<a class="reference internal image-reference" href="_images/SLSP_tools_cutoff.png"><img alt="_images/SLSP_tools_cutoff.png" src="_images/SLSP_tools_cutoff.png" style="width: 720.3px; height: 232.39999999999998px;" /></a>
+<a class="reference internal image-reference" href="_images/SLSP_tools_cutoff.png"><img alt="_images/SLSP_tools_cutoff.png" src="_images/SLSP_tools_cutoff.png" style="width: 713.3px; height: 228.89999999999998px;" /></a>
 </div>
 </div>
 

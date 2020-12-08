@@ -862,7 +862,6 @@ def autonomous_dissipative_flows(system, dynamic_state = None, L = None, fs = No
             if parameters == None:
                 if dynamic_state == 'periodic': a = 0.7
                 if dynamic_state == 'chaotic': a = 0.6
-                b = 2.5
                 
             #defining simulation functions
             def simplest_piecewise_linear_chaotic_flow(state, t):
@@ -898,7 +897,6 @@ def autonomous_dissipative_flows(system, dynamic_state = None, L = None, fs = No
             if parameters == None:
                 if dynamic_state == 'periodic': a = 1.0
                 if dynamic_state == 'chaotic': a = 0.8
-                b = 2.5
                 
             #defining simulation functions
             def double_scroll(state, t):

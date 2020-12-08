@@ -10,7 +10,7 @@ dist = 'Gaussian'
 #---------------Generate a time series with additive noise------------
 fs, T = 40, 12
 t = np.linspace(0,T,fs*T)
-A, sd = 20, 1 #signal amplitude and standard deviation
+A, sd = 20,1 #signal amplitude and standard deviation
 ts_0 = A*np.sin(np.pi*t) + A*np.sin(t)
 noise = np.random.normal(0,sd,len(ts_0)) #gaussian distribution additive noise
 ts = ts_0 + noise #add noise to time series
@@ -21,27 +21,14 @@ B = np.flip(persistenceDgm.T[0], axis = 0) #get birth times
 D = np.flip(persistenceDgm.T[1], axis = 0) #get death times
 L = D-B #get lifetimes as difference between birth and death
 
-I_B = np.array(feature_ind_1.astype(int)).T[0]-1 #indices of birth times
+I_B = np.array(feature_ind_1.astype(int)).T-1 #indices of birth times
 T_B = np.flip(t[I_B], axis = 0) #time values at birth times
 
 
-#----------Remove infinity values-----------------------------
-T_B = T_B[L != float('inf')]
-B = B[L != float('inf')]
-D = D[L != float('inf')]
-L = L[L != float('inf')]
-
-
 #-------------get cutoff for persistence diagram---------------------
-C, param = cutoff(L, alpha = 0.001, n = len(ts), distribution = dist) #get cutoff
+C, param = cutoff(L, alpha = 0.01, n = len(ts), distribution = dist) #get cutoff
 print('Distribution parameter estimate: ', param)
 print('C: ', C)
-
-
-
-
-
-
 
 
 

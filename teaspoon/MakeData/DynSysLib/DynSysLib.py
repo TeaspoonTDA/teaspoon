@@ -52,7 +52,7 @@ def DynamicSystems(system, dynamic_state = None, L = None, fs = None,
     list_of_maps = ['logistic_map', 'henon_map', 'sine_map', 'tent_map', 'linear_congruential_generator_map', 
                         'rickers_population_map', 'gauss_map', 'cusp_map', 'pinchers_map', 'sine_circle_map',
                         'lozi_map', 'delayed_logstic_map', 'tinkerbell_map',  'burgers_map', 'holmes_cubic_map',
-                        'kaplan_yorke_map']
+                        'kaplan_yorke_map', 'gingerbread_man_map']
     
     list_of_noise_models = ['gaussian_noise','uniform_noise', 
                                 'rayleigh_noise', 'exponential_noise']
@@ -62,9 +62,10 @@ def DynamicSystems(system, dynamic_state = None, L = None, fs = None,
     
     list_of_delayed_flows = ['mackey_glass']
     
-    list_of_driven_dissipative_flows = ['driven_pendulum', 'driven_can_der_pol_oscillator', 'shaw_van_der_pol_oscillator',
+    list_of_driven_dissipative_flows = ['driven_pendulum', 'driven_van_der_pol_oscillator', 'shaw_van_der_pol_oscillator',
                                         'forced_brusselator', 'ueda_oscillator', 'duffings_two_well_oscillator',
-                                        'duffing_van_der_pol_oscillator', 'rayleigh_duffing_oscillator']
+                                        'duffing_van_der_pol_oscillator', 'rayleigh_duffing_oscillator',
+                                        'base_excited_magnetic_pendulum']
     
     list_of_conservative_flows = ['simplest_driven_chaotic_flow', 'nose_hoover_oscillator',
                                   'labyrinth_chaos', 'henon_heiles_system']
@@ -164,19 +165,17 @@ if __name__ == "__main__":
     
     from teaspoon.MakeData.DynSysLib import DynSysLib as DSL 
     
-    system = 'rossler' #define the system of interest
-    dynamic_state = 'periodic' #set the dynamic state
+    system = 'rayleigh_duffing_oscillator' #define the system of interest
+    dynamic_state = 'chaotic' #set the dynamic state
     t, ts = DSL.DynamicSystems(system, dynamic_state, UserGuide = True)
-
-    
     
     #this plots the resulting time series
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
     
-    TextSize = 15
-    plt.figure(figsize = (14,4))
-    gs = gridspec.GridSpec(1,2) 
+    TextSize = 20
+    plt.figure(figsize = (7,6.5))
+    gs = gridspec.GridSpec(3,1) 
     
     ax = plt.subplot(gs[0, 0])
     plt.xticks(size = TextSize)
@@ -186,7 +185,7 @@ if __name__ == "__main__":
     plt.plot(t,ts[0], 'k')
     
     if len(ts) > 1:
-        ax = plt.subplot(gs[0, 1])
+        ax = plt.subplot(gs[1:3, 0])
         plt.plot(ts[0], ts[1],'k.', markersize = 2)
         plt.plot(ts[0], ts[1],'k', alpha = 0.25)
         plt.xticks(size = TextSize)
@@ -194,5 +193,6 @@ if __name__ == "__main__":
         plt.xlabel(r'$x(t)$', size = TextSize)
         plt.ylabel(r'$y(t)$', size = TextSize)
         
+    plt.subplots_adjust(hspace= 0.52)
     plt.show()
     

@@ -2,7 +2,7 @@ Dynamic Systems Library (DynSysLib)
 =======================================================
 
 
-This page provides a summary of the Python Dynamical Systems Library (DynSysLib) for simulating a wide variety of dynamical systems. 
+This page provides a summary of the Python Dynamical Systems Library (DynSysLib) for simulating a wide variety of dynamical systems. Full documentation of all of the currently available dynamical systems can be downloaded :download:`here <figures/dynamic_systems_library.pdf>`.
 
 .. image:: figures/time_series_chaotic_animation.gif
    :alt: Left floating image
@@ -18,7 +18,6 @@ Figure: x-solution to simulated rossler system for a chaotic response.
 .. automodule:: teaspoon.MakeData.DynSysLib.DynSysLib
     :members:
     
-
 
 Of the optional other parameters either the **dynamic_state parameter** or the system **parameters** must be used.
 
@@ -52,7 +51,7 @@ The following table provides a list of all the available dynamical systems as ca
    * - logistic_map
      - chua
      - driven_pendulum
-     - driven_can_der_pol_oscillator
+     - driven_van_der_pol_oscillator
      - sine
      - gaussian_noise
      - ECG

@@ -1,129 +1,135 @@
-def initialize_M(sample_data):
+def interleave(list1, list2): # ~O(n) function that interleaves (alternates values from) two lists/arrays
+    newlist = []
+    a1, a2 = len(list1), len(list2)
+    for i in range(max(a1, a2)):
+        if i < a1:
+            newlist.append(list1[i])
+        if i < a2:
+            newlist.append(list2[i])
+    return newlist
+
+def initialize_Q_M(sample_data):
     #import packages
     import numpy as np
     from scipy.signal import find_peaks
+    from sortedcontainers import SortedList
     
-    slope = np.diff(sample_data)
-    slope_o, slope_f = -slope[0], slope[-1]
-        
+    slope_o, slope_f = sample_data[0]-sample_data[1], sample_data[-1]-sample_data[-2]
+
     #assumes trend at edges continues to infinity
     NegEnd, PosEnd = -float('inf'), float('inf')
-    if slope_o < 0: sample_data = np.insert(sample_data, 0, NegEnd, axis=0)
-    else: sample_data = np.insert(sample_data, 0, PosEnd, axis=0)    
-    if slope_f < 0: sample_data = np.insert(sample_data, len(sample_data), NegEnd, axis=0)
-    else: sample_data = np.insert(sample_data, len(sample_data), PosEnd, axis=0)
+    if slope_o < 0: sample_data[0] = NegEnd
+    else: sample_data[0] = PosEnd
+    if slope_f < 0: sample_data[-1] = NegEnd
+    else: sample_data[-1] = PosEnd
+        
     #get extrema locations
-    maxloc, _ = find_peaks(sample_data)
-    minloc, _ = find_peaks(-sample_data)
+    max_locs, _ = find_peaks(sample_data)
+    min_locs, _ = find_peaks(-sample_data)
     
     # add outside borders as infinity extrema
-    if slope_o < 0: minloc = np.insert(minloc, 0, 0, axis=0)
-    else: maxloc = np.insert(maxloc, 0, 0, axis=0)
-    if slope_f < 0: minloc = np.insert(minloc, len(minloc), -1, axis=0)
-    else: maxloc = np.insert(maxloc, len(maxloc), -1, axis=0)
+    if slope_o < 0: min_locs = np.insert(min_locs, 0, 0, axis=0)
+    else: max_locs = np.insert(max_locs, 0, 0, axis=0)
+    if slope_f < 0: min_locs = np.insert(min_locs, len(min_locs), -1, axis=0)
+    else: max_locs = np.insert(max_locs, len(max_locs), -1, axis=0)
     
-    max_vals, min_vals = sample_data[maxloc], sample_data[minloc]
+    #get extrema values
+    max_vals, min_vals = sample_data[max_locs], sample_data[min_locs]
     
-    # create a matrix that will be used in the following part of the code
-    M = [min_vals.tolist(), max_vals.tolist(), minloc.tolist(), maxloc.tolist()]
-    
-    return M 
+    if max_locs[0] < min_locs[0]: #if peak first
+        PV = interleave(max_vals, min_vals) #chronologically ordered peaks and  valleys
+        I_PV = interleave(max_locs, min_locs) #indices of ordered peaks and valleys
+    else: #if valley first
+        PV = interleave(min_vals, max_vals) #chronologically ordered peaks and  valleys
+        I_PV = interleave(min_locs, max_locs) #indices of ordered peaks and valleys
         
-def initialize_Q(M):
-    from sortedcontainers import SortedList
-    import numpy as np
-    def interleave(list1, list2):
-        newlist = []
-        a1, a2 = len(list1), len(list2)
-        for i in range(max(a1, a2)):
-            if i < a1:
-                newlist.append(list1[i])
-            if i < a2:
-                newlist.append(list2[i])
-        return newlist
-    min_vals, max_vals = M[0], M[1]
-    #flattens maxima and minima into chronologically sorted PV array
-    if M[3][0] < M[2][0] > 0: #if peak first
-        PV = interleave(max_vals, min_vals)
-    else:
-        PV = interleave(min_vals, max_vals)
-    I_ref = np.repeat(np.arange(len(PV)), 2)[1:-1]
-    I_ref = np.reshape(I_ref, (int(len(I_ref)/2),2)).T
-    #get priority array
-    v = abs(np.diff(PV)) #gets all pairwise distances
+    #get priority value array as chronological pairwise difference
+    v = abs(np.diff(PV)) 
+    
+    # get pointer to M array before sorting
     ptr = np.arange(len(v))
-    #generate priority matrix Q
-    Q = (np.array([v, ptr, I_ref[0], I_ref[1]]).T).tolist()
-    dictionary = Q
+    
+    #generate priority matrix Q by stacking together v, ptr, PV and I_PV
+    Q = (np.array([ v, ptr, PV[:-1], PV[1:], I_PV[:-1], I_PV[1:] ]).T).tolist()
+    
+    #generate dictionary for quick looking up indices in Q
+    M = Q
+    # M is defined as the unordered Q because it allows for pointers back to Q by a value lookup O(log(n)),
+    # which is a lot faster than trying to update all the pointers in M to Q for each deleted pair.
+    
+    #created sorted list from Q
     Q = SortedList(Q)
-    I = np.arange(len(Q))
     
-    return Q, dictionary, I
+    #get indice array for knowing which element of Q have been deleted.
+    I = np.arange(len(Q)).tolist()
+    I = SortedList(I)
+    
+    return Q, M, I
 
 
 
-def update_Q(m, Q, D, I):
-    # import packages
-    import numpy as np
-    
-    # get new priority value for new ptr pair
-    I_m = np.argwhere(I == m)[0][0] #this is O(n)
-    I_prev, I_next = I_m-1, I_m+1
-    
-    #get indices for peak/valley pairs in M
-    i = np.array([I[I_m], I[I_next]])
-    
-    #get new difference value after min peak/vall diff removed
-    v_new = Q[Q.index(D[I[I_next]])][0] + Q[Q.index(D[I[I_prev]])][0] - Q[Q.index(D[I[I_m]])][0]
-    
-    # define new element of Q
-    q = [v_new, I[I_prev], I_prev, I_next+1]
-    
-    # remove old rows of Q that were combined into 1
-    Q.remove(D[I[I_prev]])
-    Q.remove(D[I[I_m]])
-    Q.remove(D[I[I_next]])
-    
-    # add new [v, ptr, indices] to Q 
-    Q.add(q)
-    
-    #update dictionary
-    D[I[I_prev]] = q
-    
-    #update index array
-    I = np.delete(I, [I_m, I_next])
 
-    return Q, D, I, (i/2).astype(int)
+def update_Q_M(Q, M, I): 
 
-
-def get_persistence_pair(m, M, i, p_min):
-    minloc, maxloc = M[2], M[3]
-    #gets indices of smallest pairwise distance peak-valley pair
-    if maxloc[0] < minloc[0]: #if first, non-edge extrema is a peak
-        I1, I2 = i[0], i[1]
-    else:  #if first, non-edge extrema is a valley
-        I1, I2 = i[1], i[0]
+    # get indices to delete from priority value by searching indices left in I
+    i_q = I.bisect_left(int(Q[0][1])) #index of I where correct index is found using binary search ~ O(log(n)) 
+    i_prev, i_next = i_q-1, i_q+1 # get previous and next index ~ O(1)
     
-    #with not updating M, it is possible to need to flip indices
-    comp_val = 2*np.abs(M[1][I2] - M[0][I1] - p_min)/np.abs(M[1][I2] - M[0][I1] + p_min)
-    if comp_val > 0.01 and comp_val != float('inf'):
-        I1, I2 = I2, I1
+    #get related indices in Q ~ O(log(n))
+    I_next, I_q, I_prev = Q.index(M[I[i_next]]), 0, Q.index(M[I[i_prev]])
     
-    # find the valley value and time series index from M
-    valley_value, valley_index = M[0][I1], M[2][I1]
-    # find the peak value and time series index from M
-    peak_value, peak_index = M[1][I2], M[3][I2] 
+    # get new difference value after peak/vall diff removed ~ O(1)
+    v_new = Q[I_next][0] + Q[I_prev][0] - Q[I_q][0]
     
+    # define new element of Q ~ O(1)
+    v1, v2, I_v1, I_v2 = Q[I_prev][2], Q[I_next][3], Q[I_prev][4], Q[I_next][5]
+    q_new = [v_new, I[i_prev], v1, v2, I_v1, I_v2]
     
-    
-    return peak_value, peak_index, valley_value, valley_index
-
+    #get current minimum difference array from priority queue ~ O(1)
+    q = Q[I_q]
         
+    # remove old rows of Q that were combined into one using dictionary values
+    Q.pop(0) # ~ O(1)
+    Q.remove(M[I[i_prev]]) # ~ O(log(n))
+    Q.remove(M[I[i_next]]) # ~ O(log(n))
+    
+    # add new element to Q from combining removed elements
+    Q.add(q_new) # ~ O(log(n))
+    
+    #update dictionary (don't need to remove dictionary values of other used elements). ~ O(1)
+    M[I[i_prev]] = q_new
+    
+    #update index array by removing elements indices where elements of Q were removed. ~ O(2log(n))
+    I.pop(i_next)
+    I.pop(i_q)
+    # Why use I? : 
+        # I is a list that keeps track of which element that is "left" in M. 
+        # The reason we are not directly deleting elements from M is that we chose to use M = Q.unsorted(), 
+        # which allows for quick lookup by index. Otherwise we would need to update multiple elements of M
+        # for each iteration, slowing everything down.
+
+    return Q, M, I, q
+
+
+
+
+
+def get_persistence_pair(q):
+    #get persistence values from priority element
+    b, d, I_b, I_d = q[2], q[3], q[4], q[5]
+    
+    #sort persistence pair values so birth < death value
+    if b>d: b, d, I_b, I_d = d, b, I_d, I_b # ~ O(1)
+    
+    return b, d, I_b, I_d
+
+
 
 
 
 def Persistence0D(ts): 
-    """This function calculates the zero-dimensional sublevel set persistence over a closed time domain.
+    """This function calculates the zero-dimensional sublevel set persistence over a closed time domain 
+       using a recursively updated priority Q as a SortedList data structure. The algorithm is approximately O(log(n)).
     
     Args:
         ts (1-D array): time series.
@@ -139,23 +145,22 @@ def Persistence0D(ts):
     sample_data = np.array(ts).astype(float)
     
     #initialize minmax matrix M and priority Q as a sorted list
-    M = initialize_M(sample_data)
-    Q, D, I = initialize_Q(M) #auxillary data dictionary (D) and removal indices I
+    Q, M, I = initialize_Q_M(sample_data) #auxillary data dictionary (D) and removal indices I
     
     #Initialize data for results
     birth_indices, death_indices, persistenceDgm = [], [], []
-    
     while len(Q) >= 3: #while there is still values left in the matrix
-        #get persistence pair
-        m = int(Q[0][1])
-        p_min = Q[0][0] #minimum priority valeu
+    
         # update Q with auxilary data D (dictionary), I (indices from M), i (indices for peak/valley)
-        Q, D, I, i = update_Q(m, Q, D, I)
-        peak_val, peak_ind, vall_val, vall_ind = get_persistence_pair(m, M, i, p_min)
+        Q, M, I, q = update_Q_M(Q, M, I)
+        
+        # get persistence pair from priority element
+        b, d, I_b, I_d = get_persistence_pair(q)
+        
         # record time series indices and birth and deaths and store persistence diagram point
-        birth_indices.append(vall_ind)
-        death_indices.append(peak_ind)
-        persistenceDgm.append([vall_val, peak_val])
+        birth_indices.append(I_b)
+        death_indices.append(I_d)
+        persistenceDgm.append([b, d])
         
     return np.array(birth_indices), np.array(death_indices), np.array(persistenceDgm)
 
@@ -164,31 +169,26 @@ def Persistence0D(ts):
 
 # In[ ]: 
 if __name__ == "__main__": #___________________example_________________________
-    
+
+    from teaspoon.TDA.SLSP import Persistence0D
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
     import numpy as np
     
     
-    
-    import time
-    start = time.time()
-    fs, T = 100, 1000
+    fs, T = 100, 10
     t = np.linspace(-0.2,T,fs*T+1)
     A = 20
-    ts = A*np.sin(np.pi*t) + A*np.sin(1*t)
+    ts = A*np.sin(np.pi*t) + A*np.sin(1*t) 
     
     feature_ind_1, feature_ind_2, persistenceDgm = Persistence0D(ts)
     D = persistenceDgm
-    end = time.time()
-    print('time elapsed: ', end - start)
-    #print(' Persistence Diagram Pairs: ', D)
+    print(' Persistence Diagram Pairs: ', D)
     
-
     
     gs = gridspec.GridSpec(1,2)
     plt.figure(figsize=(11,5))
-        
+    
     ax = plt.subplot(gs[0, 0])
     plt.title('Time Series')
     plt.xlabel('$t$')
@@ -203,8 +203,3 @@ if __name__ == "__main__": #___________________example_________________________
     plt.plot([min(ts), max(ts)], [min(ts), max(ts)], 'k--')
     
     plt.show()
-    
-    
-    
-    
-    

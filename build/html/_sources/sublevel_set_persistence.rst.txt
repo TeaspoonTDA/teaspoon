@@ -12,18 +12,19 @@ The following is an example implementing the zero-dimensional sublevel set persi
     import numpy as np
     
     
-    fs, T = 100, 7
+    fs, T = 100, 10
     t = np.linspace(-0.2,T,fs*T+1)
     A = 20
-    ts = A*np.sin(np.pi*t) + A*np.sin(1*t)
+    ts = A*np.sin(np.pi*t) + A*np.sin(1*t) 
     
     feature_ind_1, feature_ind_2, persistenceDgm = Persistence0D(ts)
     D = persistenceDgm
     print(' Persistence Diagram Pairs: ', D)
     
-    gs = gridspec.GridSpec(1,2) 
+    
+    gs = gridspec.GridSpec(1,2)
     plt.figure(figsize=(11,5))
-        
+    
     ax = plt.subplot(gs[0, 0])
     plt.title('Time Series')
     plt.xlabel('$t$')
@@ -65,7 +66,7 @@ Where the output for this example is::
 
 The following is an example implementing the zero-dimensional sublevel set persistence algorithm::
 
-    import matplotlib.pyplot as plt
+        import matplotlib.pyplot as plt
     import numpy as np
     import matplotlib.gridspec as gridspec
     from teaspoon.TDA.SLSP import Persistence0D
@@ -75,7 +76,7 @@ The following is an example implementing the zero-dimensional sublevel set persi
     dist = 'Gaussian'
 
     #---------------Generate a time series with additive noise------------
-    fs, T = 40, 12
+    fs, T = 40, 10
     t = np.linspace(0,T,fs*T)
     A, sd = 20, 1 #signal amplitude and standard deviation
     ts_0 = A*np.sin(np.pi*t) + A*np.sin(t) 
@@ -88,19 +89,11 @@ The following is an example implementing the zero-dimensional sublevel set persi
     D = np.flip(persistenceDgm.T[1], axis = 0) #get death times
     L = D-B #get lifetimes as difference between birth and death
     
-    I_B = np.array(feature_ind_1.astype(int)).T[0]-1 #indices of birth times
+    I_B = np.array(feature_ind_1.astype(int)).T #indices of birth times
     T_B = np.flip(t[I_B], axis = 0) #time values at birth times
     
-    
-    #----------Remove infinity values-----------------------------
-    T_B = T_B[L != float('inf')]
-    B = B[L != float('inf')]
-    D = D[L != float('inf')]
-    L = L[L != float('inf')]
-    
-    
     #-------------get cutoff for persistence diagram---------------------
-    C, param = cutoff(L, alpha = 0.001, n = len(ts), distribution = dist) #get cutoff
+    C, param = cutoff(L, alpha = 0.01, n = len(ts), distribution = dist) #get cutoff
     print('Distribution parameter estimate: ', param)
     print('C: ', C)
     
@@ -150,7 +143,7 @@ The following is an example implementing the zero-dimensional sublevel set persi
 Where the output for this example is::
 
     Distribution parameter estimate:  1.0665900603015368
-    C:  8.147040608971896
+    C:  7.408859563871353
 
 .. figure:: figures/SLSP_tools_cutoff.png
    :scale: 70 %
