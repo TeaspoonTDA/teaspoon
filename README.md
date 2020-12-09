@@ -1,90 +1,30 @@
 Description
 ==============
 
+The emerging field of topological signal processing brings methods from Topological Data Analysis (TDA) to create new tools for signal processing by incorporating aspects of shape.
+This python package, teaspoon for tsp or topological signal processing, brings together available software for computing persistent homology, the main workhorse of TDA, with modules that expand the functionality of teaspoon as a state-of-the-art topological signal processing tool.
+These modules include methods for incorporating tools from machine learning, complex networks, information, and parameter selection along with a dynamical systems library to streamline the creation and benchmarking of new methods.
+All code is open source with up to date documentation, making the code easy to use, in particular for signal processing experts with limited experience in topological methods.
 
 
-This package provides wrappers for using various persistent homology and other Topological Data Analysis software packages through python.
+Full documentation of this package is available [here](http://elizabethmunch.com/code/teaspoon/index.html). The full documentation includes information about installation, module documentation with examples, contributing, the license, and citing teaspoon.
 
+The code is a compilation of work done by [Elizabeth Munch](http://www.elizabethmunch.com) and [Firas Khasawneh](http://www.firaskhasawneh.com/) along with their students and collaborators.  People who have contributed to teaspoon include:
 
-The code is an compilation of work done by [Elizabeth Munch](http://www.elizabethmunch.com) along with her students and collaborators.  People who have contributed to teaspoon include:
-
-
-- [Firas Khasawneh](http://www.firaskhasawneh.com)
-- Jesse Berwald
-- Brian Bollen
-
-
-Locations
-==============
-
-
-- **Code**: [https://github.com/lizliz/teaspoon](https://github.com/lizliz/teaspoon).
-
-- **Documentation**: [http://elizabethmunch.com/code/teaspoon/index.html](http://elizabethmunch.com/code/teaspoon/index.html)
-
-
-Requirements
-==============
-
-Please note that this code is still pre-alpha, so many things are not fully up and running yet.
-
-Bugs reports and feature reqests can be posted on the [github issues](https://github.com/lizliz/teaspoon/issues) page.
-
-In order to use all wrappers in teaspoon.TDA, the following need to be installed so they can be run command line.
-
-- [Ripser](https://github.com/Ripser/ripser). Code by Ulrich Bauer for computing persistent homology of a point cloud or distance matrix.
-- [Perseus](http://people.maths.ox.ac.uk/nanda/perseus/index.html). Code by Vidit Nanda for computing persistent homology of point clouds, cubical complexes, and distance matrices.
-- [Hera](https://bitbucket.org/grey_narn/hera). Code by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov for computing bottleneck and Wasserstein distances.
-
-<span style="color:red">Warning</span>: the teaspoon installation will not install nor check for the install of these packages. In particular, perseus should be installed so that typing `perseus` in a terminal runs it, even though the default perseus installation for some operating systems ends up with an executable with a different name.
-
+- [Audun Myers](https://www.audunmyers.com)
+- [Melih Yesilli](https://www.melihcanyesilli.com)
+- [Sarah Tymochko](https://www.egr.msu.edu/~tymochko/)
 
 Installation
-==============
-
-### <span style="color:red">Warning</span>:
-This code is still pre-alpha.  In particular, using the pip install seems to be finicky at best.  
-If you are having installation issues, please make a note of what you've done, including copying error message outputs, as a comment into the [installation issue on github](https://github.com/lizliz/teaspoon/issues) so we can start figuring out what is up with this system.
-
-
-
-### Installing using pip:
-
-So far, the most success has been had with pip installation.  Run the following commands to clone and install teaspoon. In particular, the `pip install .` command needs to be run in the folder with the `setup.py` file.
-
-```{bash}
-git clone https://github.com/lizliz/teaspoon.git
-cd teaspoon
-pip install .
-```
-
-### Installing using python:
-
-According to the internet, the pip version of install appears to be better. However, if you don't use pip, another option is to cd into the teaspoon directory and run:
-
-```{bash}
-python setup.py install
-```
-
-### Alternatively, just add the folder to the python path.
-
-If the above aren't working, add the following line to your `.bashrc` file.
-```{bash}
-export PYTHONPATH="${PYTHONPATH}:/path/to/teaspoon"
-```
-
-Documentation
 =============
+The teaspoon package is available through pip install with version details found [here](https://pypi.org/project/teaspoon/).
+The package can be installed using the following pip installation::
 
-Documentation is done using [doxygen](http://www.doxygen.org).
-The most recent version of the [teaspoon documentation is hosted here](http://elizabethmunch.com/code/teaspoon/index.html).  
-Further info on documentation can be found in the [contributing](https://github.com/lizliz/teaspoon/blob/master/CONTRIBUTING.md) page.
+	pip install teaspoon
 
+The current draft of the code may still have dependency issues which will be fixed by version 1.0.0. Please reference the requirments page in the [documentation](http://elizabethmunch.com/code/teaspoon/index.html) for more details on other required installations.
 
-Contributing
-=================
-See the [contributing](http://github.com/lizliz/teaspoon/blob/master/CONTRIBUTING.md) page for more information on workflows.
-
-Contact
+Contacts
 =============
-Liz Munch: [muncheli@egr.msu.edu](mailto:muncheli@egr.msu.edu).
+* Liz Munch: [muncheli@msu.edu](mailto:muncheli@msu.edu).
+* Firas Khasawneh: [khasawn3@egr.msu.edu](mailto:khasawn3@egr.msu.edu).
