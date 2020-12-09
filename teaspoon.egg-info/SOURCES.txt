@@ -39,6 +39,7 @@ teaspoon/TDA/Persistence.py
 teaspoon/TDA/SLSP.py
 teaspoon/TDA/SLSP_tools.py
 teaspoon/TDA/__init__.py
+teaspoon/TDA/c_profile_test.py
 teaspoon/TDA/distance_matrix.py
 teaspoon/parameter_selection/FNN_n.py
 teaspoon/parameter_selection/MI_delay.py

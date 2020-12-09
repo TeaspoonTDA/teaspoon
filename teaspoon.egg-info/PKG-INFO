@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: teaspoon
-Version: 1.0.0
+Version: 1.1.0
 Summary: A Topological Signal Processing Package
 Home-page: https://github.com/lizliz/teaspoon
 Author: Elizabeth Munch and Firas Khasawneh
@@ -17,9 +17,9 @@ Description: Description
         
         Full documentation of this package is available [here](http://elizabethmunch.com/code/teaspoon/index.html). The full documentation includes information about installation, module documentation with examples, contributing, the license, and citing teaspoon.
         
-        The code is a compilation of work done by [Elizabeth Munch](http://www.elizabethmunch.com) and [Firas Khasawneh](http://www.firaskhasawneh.com/) along with her students and collaborators.  People who have contributed to teaspoon include:
+        The code is a compilation of work done by [Elizabeth Munch](http://www.elizabethmunch.com) and [Firas Khasawneh](http://www.firaskhasawneh.com/) along with their students and collaborators.  People who have contributed to teaspoon include:
         
-        - [Audun Myers](https://github.com/myersau3)
+        - [Audun Myers](https://www.audunmyers.com)
         - Melih Yesilli
         - [Sarah Tymochko](https://www.egr.msu.edu/~tymochko/)
         
