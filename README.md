@@ -12,7 +12,7 @@ Full documentation of this package is available [here](http://elizabethmunch.com
 The code is a compilation of work done by [Elizabeth Munch](http://www.elizabethmunch.com) and [Firas Khasawneh](http://www.firaskhasawneh.com/) along with their students and collaborators.  People who have contributed to teaspoon include:
 
 - [Audun Myers](https://www.audunmyers.com)
-- Melih Yesilli
+- [Melih Yesilli](https://www.melihcanyesilli.com)
 - [Sarah Tymochko](https://www.egr.msu.edu/~tymochko/)
 
 Installation
