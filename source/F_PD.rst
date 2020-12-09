@@ -22,13 +22,13 @@ Landscape class
 
 **Example:** In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted. 
     	
-	>>> import teaspoon.ML.feature_functions as Ff
+	>>> from teaspoon.ML.feature_functions import PLandscape
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
 	>>> # generate persistence diagrams
 	>>> df = testSetManifolds(numDgms = 50, numPts = 100) 
 	>>> Diagrams_H1 = df['Dgm1']
 	>>> # Compute the persistence landscapes 
-	>>> PLC = Ff.PLandscape(Diagrams_H1[0])
+	>>> PLC = PLandscape(Diagrams_H1[0])
 	>>> print(PLC.PL_number)
 	18
 	>>> print(PLC.AllPL)
@@ -88,7 +88,7 @@ If user specify the desired landscapes, output will be:
 	       [1.43779945, 0.2846272 ],
 	       [1.46482104, 0.31164879],
 	       [1.77646983, 0.        ]])]
-	>>> PLC.PLandscape_plot(points['Points'])
+	>>> fig = PLC.PLandscape_plot(PLC.AllPL['Points'],[2,3])
 
 Output of the plotting functions is:
 	
@@ -247,6 +247,7 @@ Path Signatures
 	
 	import numpy as np
 	import teaspoon.ML.feature_functions as Ff
+	from teaspoon.ML.feature_functions import PLandscape
 	from teaspoon.MakeData.PointCloud import testSetManifolds
 	# generate persistence diagrams
 	df = testSetManifolds(numDgms = 1, numPts = 100) 
@@ -254,7 +255,7 @@ Path Signatures
 	#compute persistence landscapes
 	PerLand=np.ndarray(shape=(6),dtype=object)
 	for i in range(0, 6):
-	    Land=Ff.PLandscape(Diagrams_H1[i])
+	    Land=PLandscape(Diagrams_H1[i])
 	    PerLand[i]=Land.AllP
 	#choose landscape number for which feature matrix will be computed
 	L_number = [2]

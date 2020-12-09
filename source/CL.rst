@@ -21,7 +21,7 @@ The time series data is available in :cite:`Khasawneh2019`.
 **Example:**
 
 	>>> import numpy as np
-	>>> import teaspoon.ML.feature_functions as Ff
+	>>> from teaspoon.ML.feature_functions import PLandscape
 	>>> import teaspoon.ML.PD_Classification as PD_CL
 	>>> from teaspoon.ML.Base import LandscapesParameterBucket
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
@@ -47,7 +47,7 @@ The time series data is available in :cite:`Khasawneh2019`.
 	>>> # Compute the persistence landscapes 
 	>>> PerLand=np.ndarray(shape=(60),dtype=object)
 	>>> for i in range(0, 60):
-	>>>     Land=Ff.PLandscape(Diagrams_H1[i])
+	>>>     Land=PLandscape(Diagrams_H1[i])
 	>>>     PerLand[i]=Land.AllPL
 	>>> # Perform classification
 	>>> result = PD_CL.CL_PL(PerLand,params)
