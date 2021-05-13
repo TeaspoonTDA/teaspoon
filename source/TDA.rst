@@ -5,11 +5,10 @@ This branch of the documentation covers tool used for topological data analysis.
 
 .. toctree::
    :maxdepth: 1
-   
+
    Persistent Homology of Networks (PHN) Module <PHN.rst>
    Distances <distances.rst>
    Drawing <drawing.rst>
    Persistence <persistence.rst>
    Zero Dimensional Sublevel Set Persistence (SLSP) Module <sublevel_set_persistence.rst>
-
-
+   Bifurcations using ZigZag (BuZZ) <buzz.rst>
