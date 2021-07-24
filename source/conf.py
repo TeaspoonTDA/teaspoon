@@ -21,8 +21,8 @@ release = '0.1.0'
 
 
 # -- General configuration ---------------------------------------------------
-extensions = ['sphinx.ext.autodoc', 
-              'sphinx.ext.coverage', 
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.coverage',
               'sphinx.ext.napoleon',
               'sphinx_rtd_theme',
               'matplotlib.sphinxext.mathmpl',
@@ -39,7 +39,7 @@ extensions = ['sphinx.ext.autodoc',
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 exclude_patterns = []
-
+bibtex_bibfiles = ['references.bib']
 
 
 # -- Options for HTML output -------------------------------------------------
