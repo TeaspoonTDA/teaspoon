@@ -14,4 +14,4 @@ If contributing to the documentation, the following python packages need to be p
 	- pip install sphinxcontrib-bibtex
 	- pip install sphinx-rtd-theme
 
-Also, please make sure your sphinx installation is up-to-date and that you are running **make html** from the teaspoon directory.
+Assuming your sphinx installation is up-to-date, you can run `make` from the teaspoon directory to update the documentation. Note that github pages requires that the documentation is in a folder named `docs`.
