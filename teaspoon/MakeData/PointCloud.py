@@ -4,11 +4,8 @@ from scipy.spatial.distance import euclidean
 from ripser import ripser
 
 
-
-
-
 #-------------Circles and Annuli---------------------------------------#
-def Circle(N = 100, r=1, gamma=None, seed = None):
+def Circle(N=100, r=1, gamma=None, seed=None):
     """
     Generate N points in R^2 from the circle centered
     at the origin with radius r.
@@ -34,22 +31,22 @@ def Circle(N = 100, r=1, gamma=None, seed = None):
 
     """
     np.random.seed(seed)
-    theta = np.random.rand(N,1)
+    theta = np.random.rand(N, 1)
     theta = theta.reshape((N,))
-    P = np.zeros([N,2])
+    P = np.zeros([N, 2])
 
-    P[:,0] = r*np.cos(2*np.pi*theta)
-    P[:,1] = r*np.sin(2*np.pi*theta)
+    P[:, 0] = r*np.cos(2*np.pi*theta)
+    P[:, 1] = r*np.sin(2*np.pi*theta)
 
     if gamma is not None:
         # better be a number of some type!
-        noise = np.random.normal(0, gamma, size=(N,2))
+        noise = np.random.normal(0, gamma, size=(N, 2))
         P += noise
 
     return P
 
 
-def Sphere(N = 100, r = 1, noise = 0, seed = None):
+def Sphere(N=100, r=1, noise=0, seed=None):
     """
     Generate N points in R^3 from the sphere centered
     at the origin with radius r.
@@ -73,18 +70,18 @@ def Sphere(N = 100, r = 1, noise = 0, seed = None):
     np.random.seed(seed)
 
     Rvect = 2*noise*np.random.random(N) + r
-    thetaVect =   np.pi * np.random.random(N)
+    thetaVect = np.pi * np.random.random(N)
     phiVect = 2 * np.pi * np.random.random(N)
 
-    P = np.zeros((N,3))
-    P[:,0] = Rvect * np.sin(thetaVect) * np.cos(phiVect)
-    P[:,1] = Rvect * np.sin(thetaVect) * np.sin(phiVect)
-    P[:,2] = Rvect * np.cos(thetaVect)
+    P = np.zeros((N, 3))
+    P[:, 0] = Rvect * np.sin(thetaVect) * np.cos(phiVect)
+    P[:, 1] = Rvect * np.sin(thetaVect) * np.sin(phiVect)
+    P[:, 2] = Rvect * np.cos(thetaVect)
 
     return P
 
 
-def Annulus(N=200,r=1,R=2, seed = None):
+def Annulus(N=200, r=1, R=2, seed=None):
     '''
     Returns point cloud sampled from uniform distribution on
     annulus in R^2 of inner radius r and outer radius R
@@ -106,24 +103,24 @@ def Annulus(N=200,r=1,R=2, seed = None):
 
     '''
     np.random.seed(seed)
-    P = np.random.uniform(-R,R,[2*N,2])
-    S = P[:,0]**2 + P[:,1]**2
-    P = P[np.logical_and(S>= r**2, S<= R**2)]
-    #print np.shape(P)
+    P = np.random.uniform(-R, R, [2*N, 2])
+    S = P[:, 0]**2 + P[:, 1]**2
+    P = P[np.logical_and(S >= r**2, S <= R**2)]
+    # print np.shape(P)
 
-    while P.shape[0]<N:
-        Q = np.random.uniform(-R,R,[2*N,2])
-        S = Q[:,0]**2 + Q[:,1]**2
-        Q = Q[np.logical_and(S>= r**2, S<= R**2)]
-        P = np.append(P,Q,0)
-        #print np.shape(P)
+    while P.shape[0] < N:
+        Q = np.random.uniform(-R, R, [2*N, 2])
+        S = Q[:, 0]**2 + Q[:, 1]**2
+        Q = Q[np.logical_and(S >= r**2, S <= R**2)]
+        P = np.append(P, Q, 0)
+        # print np.shape(P)
 
-    return P[:N,:]
+    return P[:N, :]
 
 
 #-------------Torus a la Diaconis paper--------------------------------#
 
-def Torus(N = 100, r = 1,R = 2,  seed = None):
+def Torus(N=100, r=1, R=2,  seed=None):
     '''
     Sampling method taken from Sampling from a Manifold by Diaconis,
     Holmes and Shahshahani, arXiv:1206.6913
@@ -159,46 +156,42 @@ def Torus(N = 100, r = 1,R = 2,  seed = None):
     '''
 
     np.random.seed(seed)
-    psi = np.random.rand(N,1)
+    psi = np.random.rand(N, 1)
     psi = 2*np.pi*psi
 
     outputTheta = []
-    while len(outputTheta)<N:
-        theta = np.random.rand(2*N,1)
+    while len(outputTheta) < N:
+        theta = np.random.rand(2*N, 1)
         theta = 2*np.pi*theta
 
-        eta = np.random.rand(2*N,1)
+        eta = np.random.rand(2*N, 1)
         eta = eta / np.pi
 
-        fx = (1+ r/float(R)*np.cos(theta)) / (2*np.pi)
+        fx = (1 + r/float(R)*np.cos(theta)) / (2*np.pi)
 
-        outputTheta = theta[eta<fx]
-
+        outputTheta = theta[eta < fx]
 
     theta = outputTheta[:N]
-    theta = theta.reshape(N,1)
+    theta = theta.reshape(N, 1)
 
-
-    x = ( R + r*np.cos(theta) ) * np.cos(psi)
-    y = ( R + r*np.cos(theta) ) * np.sin(psi)
+    x = (R + r*np.cos(theta)) * np.cos(psi)
+    y = (R + r*np.cos(theta)) * np.sin(psi)
     z = r * np.sin(theta)
     x = x.reshape((N,))
     y = y.reshape((N,))
     z = z.reshape((N,))
 
-    P = np.zeros([N,3])
-    P[:,0] = x
-    P[:,1] = y
-    P[:,2] = z
+    P = np.zeros([N, 3])
+    P[:, 0] = x
+    P[:, 1] = y
+    P[:, 2] = z
 
     return P
 
 
-
-
 #----------------------------------------------------------------------#
 
-def Cube(N = 100, diam = 1, dim = 2, seed = None):
+def Cube(N=100, diam=1, dim=2, seed=None):
     """
     Generate N points in R^dim from the box
     [0,diam]x[0,diam]x...x[0,diam]
@@ -218,18 +211,17 @@ def Cube(N = 100, diam = 1, dim = 2, seed = None):
     """
     np.random.seed(seed)
 
-    P = diam*np.random.random((N,dim))
+    P = diam*np.random.random((N, dim))
 
     return P
 
 
-
 #----------------------------------------------------------------------#
 
-def Clusters(N = 100,
-            centers = np.array(((0,0),(3,3))),
-            sd = 1,
-            seed = None):
+def Clusters(N=100,
+             centers=np.array(((0, 0), (3, 3))),
+             sd=1,
+             seed=None):
     """
     Generate k clusters of points, N points in total (evenly divided?)
     centers is a k x d numpy array, where centers[i,:] is the center of
@@ -259,37 +251,35 @@ def Clusters(N = 100,
 
     np.random.seed(seed)
 
-
     # Dimension for embedding
     d = np.shape(centers)[1]
 
     # Identity matrix for covariance
     I = sd * np.eye(d)
 
-
     # Number of clusters
     k = np.shape(centers)[0]
 
     ptsPerCluster = N//k
-    ptsForLastCluster = N//k + N%k
+    ptsForLastCluster = N//k + N % k
 
     for i in range(k):
         if i == k-1:
-            newPts = np.random.multivariate_normal(centers[i,:], I, ptsForLastCluster)
+            newPts = np.random.multivariate_normal(
+                centers[i, :], I, ptsForLastCluster)
         else:
-            newPts = np.random.multivariate_normal(centers[i,:], I, ptsPerCluster)
+            newPts = np.random.multivariate_normal(
+                centers[i, :], I, ptsPerCluster)
 
         if i == 0:
             P = newPts[:]
         else:
-            P = np.concatenate([P,newPts])
+            P = np.concatenate([P, newPts])
 
     return P
 
 
-
 #----------------------------------------------------------------------#
-
 
 
 #----------------------------------------------------------------------#
@@ -302,7 +292,7 @@ def Clusters(N = 100,
 #----------------------------------------------------------------------#
 #------------Normally distributed points in (birth,death) plane--------#
 #----------------------------------------------------------------------#
-def normalDiagram(N=20, mu=(2,4), sd=1, seed = None):
+def normalDiagram(N=20, mu=(2, 4), sd=1, seed=None):
     """
     Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.
     Pulls `N` points from a normal distribution with mean `mu` and standard deviation `sd`, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.
@@ -321,35 +311,32 @@ def normalDiagram(N=20, mu=(2,4), sd=1, seed = None):
 
     """
 
-
     np.random.seed(seed)
-    dgm = np.zeros((N,2))
-    dgm[:,0] = np.random.normal(mu[0],sd,N).T
-    dgm[:,1] = np.random.normal(mu[1],sd,N).T
+    dgm = np.zeros((N, 2))
+    dgm[:, 0] = np.random.normal(mu[0], sd, N).T
+    dgm[:, 1] = np.random.normal(mu[1], sd, N).T
 
     # Get rid of points below the diagonal
-    good = np.where(dgm[:,1]-dgm[:,0] > 0)[0]
+    good = np.where(dgm[:, 1]-dgm[:, 0] > 0)[0]
 
-    dgm = dgm[good,:]
+    dgm = dgm[good, :]
 
     # Get rid of points with negative birth times
-    good = np.where(dgm[:,0] >0)
-    dgm = dgm[good,:]
+    good = np.where(dgm[:, 0] > 0)
+    dgm = dgm[good, :]
 
-    dgm = dgm[0,:,:]
-
+    dgm = dgm[0, :, :]
 
     return dgm
 
 
-
-def testSetClassification(N = 20,
-                    numDgms = (10,10),
-                    muRed = (1,3),
-                    muBlue = (2,5),
-                    sd = 1,
-                    permute = True,
-                    seed = None):
+def testSetClassification(N=20,
+                          numDgms=(10, 10),
+                          muRed=(1, 3),
+                          muBlue=(2, 5),
+                          sd=1,
+                          permute=True,
+                          seed=None):
     '''
     Generate a collection of diagrams using the normalDiagram() function for classification tests.
 
@@ -373,18 +360,18 @@ def testSetClassification(N = 20,
     '''
 
     if type(numDgms) == int:
-        numDgms = (numDgms,numDgms)
+        numDgms = (numDgms, numDgms)
 
     columns = ['Dgm', 'mean', 'sd', 'trainingLabel']
     index = range(sum(numDgms))
-    DgmsDF = pd.DataFrame(columns = columns, index = index)
+    DgmsDF = pd.DataFrame(columns=columns, index=index)
 
     counter = 0
 
     for i in range(numDgms[0]):
         if not seed == None:
             seed += 1
-        dgm = normalDiagram(N=N, mu=muRed, sd=sd, seed = seed)
+        dgm = normalDiagram(N=N, mu=muRed, sd=sd, seed=seed)
         DgmsDF.loc[counter] = [dgm, muRed, sd, -1]
         counter += 1
         # Dgms.append(dgm)
@@ -392,7 +379,7 @@ def testSetClassification(N = 20,
     for j in range(numDgms[1]):
         if not seed == None:
             seed += 1
-        dgm = normalDiagram(N=N, mu=muBlue, sd=sd, seed = seed)
+        dgm = normalDiagram(N=N, mu=muBlue, sd=sd, seed=seed)
         DgmsDF.loc[counter] = [dgm, muBlue, sd, 1]
         counter += 1
         # Dgms.append(dgm)
@@ -401,21 +388,20 @@ def testSetClassification(N = 20,
     if permute:
         DgmsDF = DgmsDF.reindex(np.random.permutation(DgmsDF.index))
 
-
     return DgmsDF
 
 
-#------Experiment testing regression----------------------------
-#---------------LINEAR---------------------------------------
-#-----------------------------------------------
+# ------Experiment testing regression----------------------------
+# ---------------LINEAR---------------------------------------
+# -----------------------------------------------
 
-def testSetRegressionLine(N = 20,
-                    numDgms = 40,
-                    muStart = (1,3),
-                    muEnd = (2,5),
-                    sd = 1,
-                    permute = True,
-                    seed = None):
+def testSetRegressionLine(N=20,
+                          numDgms=40,
+                          muStart=(1, 3),
+                          muEnd=(2, 5),
+                          sd=1,
+                          permute=True,
+                          seed=None):
     '''
     Generate a collection of diagrams with means distributed along a line using the normalDiagram() function for regression tests.
 
@@ -441,40 +427,36 @@ def testSetRegressionLine(N = 20,
 
     columns = ['Dgm', 'mean', 'sd', 'trainingLabel']
     index = range(numDgms)
-    DgmsDF = pd.DataFrame(columns = columns, index = index)
+    DgmsDF = pd.DataFrame(columns=columns, index=index)
 
-    t = np.random.random((numDgms,1))
+    t = np.random.random((numDgms, 1))
     centers = np.array((muStart))*t + np.array((muEnd))*(1-t)
 
     for i in index:
         if not seed == None:
             seed += 1
-        mu = centers[i,:]
-        dgm = normalDiagram(N=N, mu=mu, sd=sd, seed = seed)
-        distToStart = euclidean(muStart,mu)
+        mu = centers[i, :]
+        dgm = normalDiagram(N=N, mu=mu, sd=sd, seed=seed)
+        distToStart = euclidean(muStart, mu)
         DgmsDF.loc[i] = [dgm, mu, sd, distToStart]
-
-
 
     # Permute the data
     if permute:
         DgmsDF = DgmsDF.reindex(np.random.permutation(DgmsDF.index))
 
-
     return DgmsDF
 
 
-#------Experiment testing regression----------------------------
-#---------------2D-ball around center-----------------------
-#-----------------------------------------------
+# ------Experiment testing regression----------------------------
+# ---------------2D-ball around center-----------------------
+# -----------------------------------------------
 
-def testSetRegressionBall(N = 20,
-                    numDgms = 40,
-                    muCenter = (1,3),
-                    sd = 1,
-                    permute = True,
-                    seed = None):
-
+def testSetRegressionBall(N=20,
+                          numDgms=40,
+                          muCenter=(1, 3),
+                          sd=1,
+                          permute=True,
+                          seed=None):
     '''
     Generate a collection of diagrams with means distributed normally using the normalDiagram() function; used for regression tests.
 
@@ -500,37 +482,32 @@ def testSetRegressionBall(N = 20,
 
     columns = ['Dgm', 'mean', 'sd', 'trainingLabel']
     index = range(numDgms)
-    DgmsDF = pd.DataFrame(columns = columns, index = index)
+    DgmsDF = pd.DataFrame(columns=columns, index=index)
 
-    centers =  np.random.normal(loc=muCenter, scale = sd, size = (numDgms,2))
+    centers = np.random.normal(loc=muCenter, scale=sd, size=(numDgms, 2))
 
     for i in index:
         if not seed == None:
             seed += 1
-        mu = centers[i,:]
-        dgm = normalDiagram(N=N, mu=mu, sd=sd, seed = seed)
-        distToStart = euclidean(muCenter,mu)
+        mu = centers[i, :]
+        dgm = normalDiagram(N=N, mu=mu, sd=sd, seed=seed)
+        distToStart = euclidean(muCenter, mu)
         DgmsDF.loc[i] = [dgm, mu, sd, distToStart]
-
-
 
     # Permute the data
     if permute:
         DgmsDF = DgmsDF.reindex(np.random.permutation(DgmsDF.index))
 
-
     return DgmsDF
-
 
 
 #------------------------------------------------------------#
 
-def testSetManifolds(numDgms = 50,
-                        numPts = 300,
-                        permute = True,
-                        seed = None
-                        ):
-
+def testSetManifolds(numDgms=50,
+                     numPts=300,
+                     permute=True,
+                     seed=None
+                     ):
     '''
     Generates a collection of diagrams from different underlying topological spaces.  This set is useful for testing classification tasks.
 
@@ -558,10 +535,9 @@ def testSetManifolds(numDgms = 50,
 
     '''
 
-
     columns = ['Dgm0', 'Dgm1', 'trainingLabel']
     index = range(6*numDgms)
-    DgmsDF = pd.DataFrame(columns = columns, index = index)
+    DgmsDF = pd.DataFrame(columns=columns, index=index)
 
     counter = 0
 
@@ -570,85 +546,83 @@ def testSetManifolds(numDgms = 50,
     else:
         fixSeed = False
 
-    #-
+    # -
     print('Generating torus clouds...')
     for i in range(numDgms):
         if fixSeed:
             seed += 1
-        dgmOut = ripser(Torus(N=numPts,seed = seed))['dgms']  # using ripser package
-        DgmsDF.loc[counter] = [dgmOut[0],dgmOut[1], 'Torus']
-        counter +=1
+        dgmOut = ripser(Torus(N=numPts, seed=seed))[
+            'dgms']  # using ripser package
+        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], 'Torus']
+        counter += 1
 
-    #-
+    # -
     print('Generating annuli clouds...')
     for i in range(numDgms):
         if fixSeed:
             seed += 1
-        dgmOut = ripser(Annulus(N=numPts,seed = seed))['dgms']
-        DgmsDF.loc[counter] = [dgmOut[0],dgmOut[1], 'Annulus']
-        counter +=1
+        dgmOut = ripser(Annulus(N=numPts, seed=seed))['dgms']
+        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], 'Annulus']
+        counter += 1
 
-    #-
+    # -
     print('Generating cube clouds...')
     for i in range(numDgms):
         if fixSeed:
             seed += 1
-        dgmOut = ripser(Cube(N=numPts,seed = seed))['dgms']
+        dgmOut = ripser(Cube(N=numPts, seed=seed))['dgms']
         # Dgms.append([dgmOut[0],dgmOut[1]])
-        DgmsDF.loc[counter] = [dgmOut[0],dgmOut[1], 'Cube']
-        counter +=1
+        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], 'Cube']
+        counter += 1
 
-    #-
+    # -
     print('Generating three cluster clouds...')
     # Centered at (0,0), (0,5), and (5,0) with sd =1
     # Then scaled by .3 to make birth/death times closer to the other examples
-    centers = np.array( [ [0,0], [0,2], [2,0]  ])
+    centers = np.array([[0, 0], [0, 2], [2, 0]])
     # centers = np.array( [ [0,0], [0,2], [2,0]  ])
     for i in range(numDgms):
         if fixSeed:
             seed += 1
-        dgmOut = ripser(Clusters(centers=centers, N = numPts, seed = seed, sd = .05))['dgms']
-        DgmsDF.loc[counter] = [dgmOut[0],dgmOut[1], '3Cluster']
-        counter +=1
+        dgmOut = ripser(Clusters(centers=centers, N=numPts,
+                        seed=seed, sd=.05))['dgms']
+        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], '3Cluster']
+        counter += 1
 
-
-
-    #-
+    # -
     print('Generating three clusters of three clusters clouds...')
 
-    centers = np.array( [ [0,0], [0,1.5], [1.5,0]  ])
+    centers = np.array([[0, 0], [0, 1.5], [1.5, 0]])
     theta = np.pi/4
-    centersUp = np.dot(centers,np.array([(np.sin(theta),np.cos(theta)),(np.cos(theta),-np.sin(theta))])) + [0,5]
-    centersUpRight = centers + [3,5]
-    centers = np.concatenate( (centers,  centersUp, centersUpRight))
+    centersUp = np.dot(centers, np.array(
+        [(np.sin(theta), np.cos(theta)), (np.cos(theta), -np.sin(theta))])) + [0, 5]
+    centersUpRight = centers + [3, 5]
+    centers = np.concatenate((centers,  centersUp, centersUpRight))
     for i in range(numDgms):
         if fixSeed:
             seed += 1
         dgmOut = ripser(Clusters(centers=centers,
-                                        N = numPts,
-                                        sd = .05,
-                                        seed = seed))['dgms']
+                                 N=numPts,
+                                 sd=.05,
+                                 seed=seed))['dgms']
         # Dgms.append([dgmOut[0],dgmOut[1]])
-        DgmsDF.loc[counter] = [dgmOut[0],dgmOut[1], '3Clusters of 3Clusters']
-        counter +=1
+        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], '3Clusters of 3Clusters']
+        counter += 1
 
-
-
-    #-
+    # -
     print('Generating sphere clouds...')
 
     for i in range(numDgms):
         if fixSeed:
             seed += 1
-        dgmOut = ripser(Sphere(N = numPts, noise = .05,seed = seed))['dgms']
-        DgmsDF.loc[counter] = [dgmOut[0],dgmOut[1], 'Sphere']
-        counter +=1
+        dgmOut = ripser(Sphere(N=numPts, noise=.05, seed=seed))['dgms']
+        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], 'Sphere']
+        counter += 1
 
     print('Finished generating clouds and computing persistence.\n')
 
     # Permute the diagrams if necessary.
     if permute:
         DgmsDF = DgmsDF.reindex(np.random.permutation(DgmsDF.index))
-
 
     return DgmsDF

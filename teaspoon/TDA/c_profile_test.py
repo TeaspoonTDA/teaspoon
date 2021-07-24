@@ -7,4 +7,4 @@ Created on Fri Nov 27 09:51:07 2020
 
 import cProfile
 
-cProfile.run(filename = 'SLSP.py')
+cProfile.run(filename='SLSP.py')

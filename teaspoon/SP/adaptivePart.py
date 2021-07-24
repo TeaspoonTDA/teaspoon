@@ -16,6 +16,7 @@ import matplotlib.patches as patches
 from copy import deepcopy
 from sklearn.cluster import KMeans, MiniBatchKMeans
 
+
 class Partitions:
     '''
     A data structure for storing a partition coming from an adapative meshing scheme.
@@ -47,11 +48,10 @@ class Partitions:
 
     '''
 
-
-    def __init__(self, data = None,
-                 convertToOrd = False,
-                 meshingScheme = None,
-                 partitionParams = {},
+    def __init__(self, data=None,
+                 convertToOrd=False,
+                 meshingScheme=None,
+                 partitionParams={},
                  **kwargs):
 
         self.convertToOrd = convertToOrd
@@ -73,28 +73,27 @@ class Partitions:
                     print("Converting the data to ordinal...")
 
                     # perform ordinal sampling (ranking) transformation
-                    xRanked = rankdata(data[:,0], method='ordinal')
-                    yRanked = rankdata(data[:,1], method='ordinal')
+                    xRanked = rankdata(data[:, 0], method='ordinal')
+                    yRanked = rankdata(data[:, 1], method='ordinal')
 
                     # copy original data and save
-                    xFloats = np.copy(data[:,0])
+                    xFloats = np.copy(data[:, 0])
                     xFloats.sort()
-                    yFloats = np.copy(data[:,1])
+                    yFloats = np.copy(data[:, 1])
                     yFloats.sort()
 
                     self.xFloats = xFloats
                     self.yFloats = yFloats
 
-
-                    data = np.column_stack((xRanked,yRanked))
+                    data = np.column_stack((xRanked, yRanked))
 
                 # and return an empty partition bucket
 
             # If there is data, set the bounding box to be the max and min in the data
-            xmin = data[:,0].min()
-            xmax = data[:,0].max()
-            ymin = data[:,1].min()
-            ymax = data[:,1].max()
+            xmin = data[:, 0].min()
+            xmax = data[:, 0].max()
+            ymin = data[:, 1].min()
+            ymax = data[:, 1].max()
 
             # self.borders stores x and y min and max of overall bounding box in 'nodes' and the number of points in the bounding box in 'npts'
             self.borders = {}
@@ -107,31 +106,31 @@ class Partitions:
             # If there is data, use the chosen meshing scheme to build the partitions.
             if meshingScheme == 'DV':
 
-                self.partitionBucket = self.return_partition_DV(data = data,
-                                        borders = self.borders,
-                                        r = self.numParts,
-                                        alpha = self.alpha,
-                                        c = self.c,
-                                        nmin = self.nmin)
+                self.partitionBucket = self.return_partition_DV(data=data,
+                                                                borders=self.borders,
+                                                                r=self.numParts,
+                                                                alpha=self.alpha,
+                                                                c=self.c,
+                                                                nmin=self.nmin)
 
             elif meshingScheme == 'clustering':
 
-                self.partitionBucket = self.return_partition_clustering(data = data,
-                                        clusterAlg = self.clusterAlg,
-                                        num_clusters = self.numClusters,
-                                        weights= self.weights,
-                                        boxOption = self.boxOption,
-                                        boxSize = self.boxSize)
+                self.partitionBucket = self.return_partition_clustering(data=data,
+                                                                        clusterAlg=self.clusterAlg,
+                                                                        num_clusters=self.numClusters,
+                                                                        weights=self.weights,
+                                                                        boxOption=self.boxOption,
+                                                                        boxSize=self.boxSize)
 
-            else: # meshingScheme == None
-            # Note that right now, this will just do the dumb thing for every other input
+            else:  # meshingScheme == None
+                # Note that right now, this will just do the dumb thing for every other input
                 self.partitionBucket = [self.borders]
                 #  set the partitions to just be the bounding box
 
         else:
             self.partitionBucket = []
 
-    def convertOrdToFloat(self,partitionEntry):
+    def convertOrdToFloat(self, partitionEntry):
         '''
         Converts to nodes of a partition entry from ordinal back to floats.
 
@@ -152,13 +151,12 @@ class Partitions:
         yLow = int(bdyList[2])-1
         yHigh = int(bdyList[3])-1
 
-
         if hasattr(self, 'xFloats'):
             xLowFloat = self.xFloats[xLow]
-            xHighFloat= self.xFloats[xHigh]
+            xHighFloat = self.xFloats[xHigh]
             yLowFloat = self.yFloats[yLow]
             yHighFloat = self.yFloats[yHigh]
-            convertedBdyList = [xLowFloat, xHighFloat, yLowFloat,yHighFloat]
+            convertedBdyList = [xLowFloat, xHighFloat, yLowFloat, yHighFloat]
             partitionEntry['nodes'] = convertedBdyList
             return partitionEntry
         else:
@@ -169,15 +167,15 @@ class Partitions:
     def __len__(self):
         return len(self.partitionBucket)
 
-    def __getitem__(self,key):
-        if hasattr(self,'xFloats'): #if the data wasn't ordinal
+    def __getitem__(self, key):
+        if hasattr(self, 'xFloats'):  # if the data wasn't ordinal
             entry = self.partitionBucket[key].copy()
             entry = self.convertOrdToFloat(entry)
             return entry
         else:
             return self.partitionBucket[key]
 
-    def getOrdinal(self,key):
+    def getOrdinal(self, key):
         '''
         Overrides the builtin magic method in the case where you had non-ordinal data but still want the ordinal stuff back.
         If the data wasn't ordinal, this has the exact same effect as self[key].
@@ -193,8 +191,8 @@ class Partitions:
     def __iter__(self):
         # iterates over the converted entries in the
         # parameter bucket
-        if hasattr(self,'xFloats'):
-            return map( self.convertOrdToFloat, deepcopy(self.partitionBucket)  )
+        if hasattr(self, 'xFloats'):
+            return map(self.convertOrdToFloat, deepcopy(self.partitionBucket))
         else:
             return iter(self.partitionBucket)
 
@@ -217,7 +215,7 @@ class Partitions:
         output += '---\n'
         for key in attrs.keys():
             output += str(key) + ' : '
-            output += str(attrs[key])+ '\n'
+            output += str(attrs[key]) + '\n'
             output += '---\n'
         return output
 
@@ -256,17 +254,15 @@ class Partitions:
 
         '''
         return np.all(np.equal(np.sort(dd, axis=0),
-                        np.reshape(np.repeat(np.arange(start=1,stop=dd.shape[0]+1),
-                                             2), (dd.shape[0], 2))))
-
-
-
+                               np.reshape(np.repeat(np.arange(start=1, stop=dd.shape[0]+1),
+                                                    2), (dd.shape[0], 2))))
 
     # data: is a manyx2 numpy array that contains all the original data
     # borders: a dictionary that contains 'nodes' with a numpyu array of Xmin, Xmax, Ymin, Ymax,
     # and 'npts' which contains the number of points in the bin
     # r: is the number of partitions
     # alpha: the significance level to test for independence
+
     def return_partition_DV(self, data, borders, r=2, alpha=0.05, c=0, nmin=5):
         '''
         Recursive method that partitions the data based on the DV method.
@@ -311,7 +307,7 @@ class Partitions:
         # find the number of bins
     #    numBins = r ** 2
         idx = np.where((data[:, 0] >= Xmin)
-                       & (data[:, 0] <= Xmax )
+                       & (data[:, 0] <= Xmax)
                        & (data[:, 1] >= Ymin)
                        & (data[:, 1] <= Ymax))
 
@@ -321,11 +317,11 @@ class Partitions:
         # if either height or width is less than the max size, return
         width = self.xFloats[int(Xmax-1)] - self.xFloats[int(Xmin-1)]
         height = self.yFloats[int(Ymax-1)] - self.yFloats[int(Ymin-1)]
-        if ( ( c != 0 ) and ( min(width,height) < c) ):
+        if ((c != 0) and (min(width, height) < c)):
             # print('Box getting too small, min(width,height)<', c)
             # reject futher partitions, and return original bin
             partitions.insert(0, {'nodes': np.array([Xmin, Xmax, Ymin, Ymax]),
-                      'npts': len(idx[0])})
+                                  'npts': len(idx[0])})
             return partitions
 
         # extract the points in the bin
@@ -339,8 +335,10 @@ class Partitions:
         idx_y = np.where((data[:, 1] >= Ymin) & (data[:, 1] <= Ymax))
 
         # get the subpartitions
-        ai = np.floor(np.percentile(data[idx_x, 0], 1/r * np.arange(1, r) * 100))
-        bj = np.floor(np.percentile(data[idx_y, 1], 1/r * np.arange(1, r) * 100))
+        ai = np.floor(np.percentile(
+            data[idx_x, 0], 1/r * np.arange(1, r) * 100))
+        bj = np.floor(np.percentile(
+            data[idx_y, 1], 1/r * np.arange(1, r) * 100))
 
         # get the bin edges
         edges1 = np.concatenate(([Xmin], ai, [Xmax]))
@@ -349,15 +347,15 @@ class Partitions:
         # first exit criteria: we cannot split inot unique boundaries any more
         # preallocate the partition list
         if (len(np.unique(edges1, return_counts=True)[1]) < r + 1 or
-             len(np.unique(edges2, return_counts=True)[1])< r + 1):
+                len(np.unique(edges2, return_counts=True)[1]) < r + 1):
 
             # reject futher partitions, and return original bin
             partitions.insert(0, {'nodes': np.array([Xmin, Xmax, Ymin, Ymax]),
-                      'npts': len(idx[0])})
+                                  'npts': len(idx[0])})
             return partitions
 
         # figure out the shift in the edges so that boundaries do not overlap
-        xShift = np.zeros( (2 * r, 2 * r))
+        xShift = np.zeros((2 * r, 2 * r))
         yShift = xShift
         xShift[:, 1:-1] = np.tile(np.array([[-1, 0]]), (2 * r, r - 1))
         yShift = xShift.T
@@ -365,11 +363,11 @@ class Partitions:
         # find the boundaries for each bin
         # duplicate inner nodes for x mesh
         dupMidNodesX = np.append(np.insert(np.repeat((edges1[1:-1]), 2, axis=0),
-                                          0, edges1[0]), edges1[-1])
+                                           0, edges1[0]), edges1[-1])
 
         # duplicate inner nodes for y mesh
         dupMidNodesY = np.append(np.insert(np.repeat((edges2[1:-1]), 2, axis=0),
-                                          0, edges2[0]), edges2[-1])
+                                           0, edges2[0]), edges2[-1])
         # reshape
         dupMidNodesY = np.reshape(dupMidNodesY, (-1, 1))
 
@@ -390,7 +388,8 @@ class Partitions:
         # 5 points in each bin
         if nmin != 0:
             if np.sum(binCounts) < nmin * (r**2):
-                partitions.insert(0, {'nodes': np.array([Xmin, Xmax, Ymin, Ymax]),'npts': len(idx[0])})
+                partitions.insert(0, {'nodes': np.array(
+                    [Xmin, Xmax, Ymin, Ymax]), 'npts': len(idx[0])})
                 return partitions
 
         # define an empty list to hold the dictionaries of the fresh partitions
@@ -403,36 +402,35 @@ class Partitions:
             # this is the loop over x
             for xInd in np.arange(r):
                 # get the bin number
-                binNo = yInd * r  + xInd
+                binNo = yInd * r + xInd
                 xLow, xHigh = xBinBound[yInd, 2*xInd + np.arange(2)]
                 yLow, yHigh = yBinBound[2*yInd + np.arange(2), xInd]
                 bins.append({'nodes': np.array([xLow, xHigh, yLow, yHigh]),
-                    'npts': binCounts[binNo] })
+                             'npts': binCounts[binNo]})
 
         # calculate the chi square statistic
         chi2 = chisquare(binCounts)
 
         # check for independence and start recursion
         # if the chi2 test fails, do further partitioning:
-        if (chi2.pvalue < alpha and Xmax!=Xmin and Ymax!=Ymin).all():
+        if (chi2.pvalue < alpha and Xmax != Xmin and Ymax != Ymin).all():
             for binInfo in bins:
-                if binInfo['npts'] !=0:  # if the bin is not empty:
+                if binInfo['npts'] != 0:  # if the bin is not empty:
                     # append entries to the tuple
                     partitions.extend(self.return_partition_DV(data=data,
-                                                            borders=binInfo,
-                                                            r=r, alpha=alpha))
+                                                               borders=binInfo,
+                                                               r=r, alpha=alpha))
 
         # Second exit criteria:
         # if the partitions are independent, reject further partitioning and
         # save the orignal, unpartitioned bin
-        elif len(idx[0]) !=0:
+        elif len(idx[0]) != 0:
             partitions.insert(0, {'nodes': np.array([Xmin, Xmax, Ymin, Ymax]),
-                      'npts': len(idx[0])})
+                                  'npts': len(idx[0])})
 
         return partitions
 
-
-    def return_partition_clustering(self, data, clusterAlg = KMeans, num_clusters=5, weights = None, boxOption="boundPoints", boxSize=2):
+    def return_partition_clustering(self, data, clusterAlg=KMeans, num_clusters=5, weights=None, boxOption="boundPoints", boxSize=2):
         '''
         Partitioning method based on clustering algorithms. First cluster the data, then using the cluster centers and labels determine the partitions.
 
@@ -467,14 +465,15 @@ class Partitions:
         '''
 
         if weights == 0:
-            sample_weights = data[:,0]
+            sample_weights = data[:, 0]
         elif weights == 1:
-            sample_weights = data[:,1]
+            sample_weights = data[:, 1]
         else:
             sample_weights = None
 
         # Fit using whatever the chosen cluster algorithm is
-        kmeans = clusterAlg(n_clusters=num_clusters).fit(data,sample_weight = sample_weights)
+        kmeans = clusterAlg(n_clusters=num_clusters).fit(
+            data, sample_weight=sample_weights)
 
         # Get the centers of each cluster and the labels for the data points
         centers = kmeans.cluster_centers_
@@ -489,17 +488,17 @@ class Partitions:
             for l in np.unique(labels):
                 cluster = data[labels == l]
 
-                xmin = min(cluster[:,0])
-                xmax = max(cluster[:,0])
-                ymin = min(cluster[:,1])
-                ymax = max(cluster[:,1])
+                xmin = min(cluster[:, 0])
+                xmax = max(cluster[:, 0])
+                ymin = min(cluster[:, 1])
+                ymax = max(cluster[:, 1])
 
                 # issues if bounding box touches x-axis so print a warning if it does
                 # if ymin == 0:
                 #     print("Uh oh can't have points with zero lifetime!")
 
-
-                bins.insert(0,{'nodes': [xmin,xmax,ymin,ymax], 'center': centers[l]})
+                bins.insert(
+                    0, {'nodes': [xmin, xmax, ymin, ymax], 'center': centers[l]})
 
         # # Using this option, put the equal size box centered at each cluster center
         # # These are then the partitions and we ignore anything outside them
@@ -554,7 +553,7 @@ class Partitions:
                     # convert c from integer to the corresponding width/height
                     width = (self.xFloats[xmax-1]-self.xFloats[xmin-1]) / c
                     height = (self.yFloats[ymax-1]-self.yFloats[ymin-1]) / c
-                    self.c = max( width, height )
+                    self.c = max(width, height)
                 else:
                     # c=0 means we don't use this paramter for an exit criteria
                     self.c = 0
@@ -563,7 +562,7 @@ class Partitions:
                 # convert c from integer to the corresponding width/height
                 width = (self.xFloats[xmax-1]-self.xFloats[xmin-1]) / c
                 height = (self.yFloats[ymax-1]-self.yFloats[ymin-1]) / c
-                self.c = max( width, height )
+                self.c = max(width, height)
 
             if 'alpha' in partitionParams:
                 self.alpha = partitionParams['alpha']
@@ -622,7 +621,8 @@ class Partitions:
         else:
             self.split = False
 
-#--------------------------------------------------
+# --------------------------------------------------
+
 
 # this part tests the adaptive meshing algorithm
 if __name__ == "__main__":
@@ -633,13 +633,12 @@ if __name__ == "__main__":
 
     # create a bivariate Gaussian
     mu = np.array([0, 0])  # the means
-    cov = 0.7 # covariance
+    cov = 0.7  # covariance
     sigma = np.array([[1, cov], [cov, 1]])  # covariance matrix
 
     # create the multivariate random variable
     nsamples = 100  # number of random samples
     x, y = np.random.multivariate_normal(mu, sigma, nsamples).T
-
 
     # # perform ordinal sampling (ranking) transformation
     # xRanked = rankdata(x, method='ordinal')
@@ -650,9 +649,9 @@ if __name__ == "__main__":
 
     # get the adaptive partition of the data
     partitionList = Partitions(np.column_stack((x, y)),
-                                       meshingScheme = "DV",
-                                       partitionParams={'numParts':numParts},
-                                       convertToOrd = True)
+                               meshingScheme="DV",
+                               partitionParams={'numParts': numParts},
+                               convertToOrd=True)
 
     # plot the partitions
     partitionList.plot()
