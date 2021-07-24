@@ -223,6 +223,7 @@
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span><span class="p">,</span> <span class="n">MiniBatchKMeans</span>
 
+
 <div class="viewcode-block" id="Partitions"><a class="viewcode-back" href="../../../misc.html#teaspoon.SP.adaptivePart.Partitions">[docs]</a><span class="k">class</span> <span class="nc">Partitions</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    A data structure for storing a partition coming from an adapative meshing scheme.</span>
@@ -254,11 +255,10 @@
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">convertToOrd</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">meshingScheme</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">partitionParams</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">convertToOrd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">meshingScheme</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">partitionParams</span><span class="o">=</span><span class="p">{},</span>
                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">convertToOrd</span> <span class="o">=</span> <span class="n">convertToOrd</span>
@@ -280,28 +280,27 @@
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Converting the data to ordinal...&quot;</span><span class="p">)</span>
 
                     <span class="c1"># perform ordinal sampling (ranking) transformation</span>
-                    <span class="n">xRanked</span> <span class="o">=</span> <span class="n">rankdata</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">)</span>
-                    <span class="n">yRanked</span> <span class="o">=</span> <span class="n">rankdata</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">)</span>
+                    <span class="n">xRanked</span> <span class="o">=</span> <span class="n">rankdata</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">)</span>
+                    <span class="n">yRanked</span> <span class="o">=</span> <span class="n">rankdata</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">)</span>
 
                     <span class="c1"># copy original data and save</span>
-                    <span class="n">xFloats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">xFloats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
                     <span class="n">xFloats</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-                    <span class="n">yFloats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">yFloats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
                     <span class="n">yFloats</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
                     <span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span> <span class="o">=</span> <span class="n">xFloats</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">yFloats</span> <span class="o">=</span> <span class="n">yFloats</span>
 
-
-                    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">xRanked</span><span class="p">,</span><span class="n">yRanked</span><span class="p">))</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">xRanked</span><span class="p">,</span> <span class="n">yRanked</span><span class="p">))</span>
 
                 <span class="c1"># and return an empty partition bucket</span>
 
             <span class="c1"># If there is data, set the bounding box to be the max and min in the data</span>
-            <span class="n">xmin</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-            <span class="n">xmax</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-            <span class="n">ymin</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-            <span class="n">ymax</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">xmin</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">xmax</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">ymin</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">ymax</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 
             <span class="c1"># self.borders stores x and y min and max of overall bounding box in &#39;nodes&#39; and the number of points in the bounding box in &#39;npts&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">borders</span> <span class="o">=</span> <span class="p">{}</span>
@@ -314,31 +313,31 @@
             <span class="c1"># If there is data, use the chosen meshing scheme to build the partitions.</span>
             <span class="k">if</span> <span class="n">meshingScheme</span> <span class="o">==</span> <span class="s1">&#39;DV&#39;</span><span class="p">:</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_partition_DV</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
-                                        <span class="n">borders</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">borders</span><span class="p">,</span>
-                                        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numParts</span><span class="p">,</span>
-                                        <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span>
-                                        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">,</span>
-                                        <span class="n">nmin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nmin</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_partition_DV</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                                                                <span class="n">borders</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">borders</span><span class="p">,</span>
+                                                                <span class="n">r</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">numParts</span><span class="p">,</span>
+                                                                <span class="n">alpha</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span>
+                                                                <span class="n">c</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">,</span>
+                                                                <span class="n">nmin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nmin</span><span class="p">)</span>
 
             <span class="k">elif</span> <span class="n">meshingScheme</span> <span class="o">==</span> <span class="s1">&#39;clustering&#39;</span><span class="p">:</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_partition_clustering</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
-                                        <span class="n">clusterAlg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusterAlg</span><span class="p">,</span>
-                                        <span class="n">num_clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numClusters</span><span class="p">,</span>
-                                        <span class="n">weights</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span>
-                                        <span class="n">boxOption</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxOption</span><span class="p">,</span>
-                                        <span class="n">boxSize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxSize</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_partition_clustering</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                                                                        <span class="n">clusterAlg</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">clusterAlg</span><span class="p">,</span>
+                                                                        <span class="n">num_clusters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">numClusters</span><span class="p">,</span>
+                                                                        <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span>
+                                                                        <span class="n">boxOption</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boxOption</span><span class="p">,</span>
+                                                                        <span class="n">boxSize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boxSize</span><span class="p">)</span>
 
-            <span class="k">else</span><span class="p">:</span> <span class="c1"># meshingScheme == None</span>
-            <span class="c1"># Note that right now, this will just do the dumb thing for every other input</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># meshingScheme == None</span>
+                <span class="c1"># Note that right now, this will just do the dumb thing for every other input</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">borders</span><span class="p">]</span>
                 <span class="c1">#  set the partitions to just be the bounding box</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span> <span class="o">=</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="Partitions.convertOrdToFloat"><a class="viewcode-back" href="../../../misc.html#teaspoon.SP.adaptivePart.Partitions.convertOrdToFloat">[docs]</a>    <span class="k">def</span> <span class="nf">convertOrdToFloat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">partitionEntry</span><span class="p">):</span>
+<div class="viewcode-block" id="Partitions.convertOrdToFloat"><a class="viewcode-back" href="../../../misc.html#teaspoon.SP.adaptivePart.Partitions.convertOrdToFloat">[docs]</a>    <span class="k">def</span> <span class="nf">convertOrdToFloat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partitionEntry</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Converts to nodes of a partition entry from ordinal back to floats.</span>
 
@@ -359,13 +358,12 @@
         <span class="n">yLow</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bdyList</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
         <span class="n">yHigh</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bdyList</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
 
-
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;xFloats&#39;</span><span class="p">):</span>
             <span class="n">xLowFloat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span><span class="p">[</span><span class="n">xLow</span><span class="p">]</span>
-            <span class="n">xHighFloat</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span><span class="p">[</span><span class="n">xHigh</span><span class="p">]</span>
+            <span class="n">xHighFloat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span><span class="p">[</span><span class="n">xHigh</span><span class="p">]</span>
             <span class="n">yLowFloat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yFloats</span><span class="p">[</span><span class="n">yLow</span><span class="p">]</span>
             <span class="n">yHighFloat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yFloats</span><span class="p">[</span><span class="n">yHigh</span><span class="p">]</span>
-            <span class="n">convertedBdyList</span> <span class="o">=</span> <span class="p">[</span><span class="n">xLowFloat</span><span class="p">,</span> <span class="n">xHighFloat</span><span class="p">,</span> <span class="n">yLowFloat</span><span class="p">,</span><span class="n">yHighFloat</span><span class="p">]</span>
+            <span class="n">convertedBdyList</span> <span class="o">=</span> <span class="p">[</span><span class="n">xLowFloat</span><span class="p">,</span> <span class="n">xHighFloat</span><span class="p">,</span> <span class="n">yLowFloat</span><span class="p">,</span> <span class="n">yHighFloat</span><span class="p">]</span>
             <span class="n">partitionEntry</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">convertedBdyList</span>
             <span class="k">return</span> <span class="n">partitionEntry</span>
         <span class="k">else</span><span class="p">:</span>
@@ -376,15 +374,15 @@
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;xFloats&#39;</span><span class="p">):</span> <span class="c1">#if the data wasn&#39;t ordinal</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;xFloats&#39;</span><span class="p">):</span>  <span class="c1"># if the data wasn&#39;t ordinal</span>
             <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convertOrdToFloat</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">entry</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
-<div class="viewcode-block" id="Partitions.getOrdinal"><a class="viewcode-back" href="../../../misc.html#teaspoon.SP.adaptivePart.Partitions.getOrdinal">[docs]</a>    <span class="k">def</span> <span class="nf">getOrdinal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+<div class="viewcode-block" id="Partitions.getOrdinal"><a class="viewcode-back" href="../../../misc.html#teaspoon.SP.adaptivePart.Partitions.getOrdinal">[docs]</a>    <span class="k">def</span> <span class="nf">getOrdinal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Overrides the builtin magic method in the case where you had non-ordinal data but still want the ordinal stuff back.</span>
 <span class="sd">        If the data wasn&#39;t ordinal, this has the exact same effect as self[key].</span>
@@ -400,8 +398,8 @@
     <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># iterates over the converted entries in the</span>
         <span class="c1"># parameter bucket</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;xFloats&#39;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">map</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">convertOrdToFloat</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">)</span>  <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;xFloats&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">convertOrdToFloat</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">)</span>
 
@@ -424,7 +422,7 @@
         <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;---</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; : &#39;</span>
-            <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">attrs</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">attrs</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
             <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;---</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">return</span> <span class="n">output</span>
 
@@ -463,17 +461,15 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">dd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
-                        <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="n">dd</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
-                                             <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">dd</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">))))</span></div>
-
-
-
+                               <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">dd</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+                                                    <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">dd</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">))))</span></div>
 
     <span class="c1"># data: is a manyx2 numpy array that contains all the original data</span>
     <span class="c1"># borders: a dictionary that contains &#39;nodes&#39; with a numpyu array of Xmin, Xmax, Ymin, Ymax,</span>
     <span class="c1"># and &#39;npts&#39; which contains the number of points in the bin</span>
     <span class="c1"># r: is the number of partitions</span>
     <span class="c1"># alpha: the significance level to test for independence</span>
+
 <div class="viewcode-block" id="Partitions.return_partition_DV"><a class="viewcode-back" href="../../../misc.html#teaspoon.SP.adaptivePart.Partitions.return_partition_DV">[docs]</a>    <span class="k">def</span> <span class="nf">return_partition_DV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">borders</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nmin</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Recursive method that partitions the data based on the DV method.</span>
@@ -518,7 +514,7 @@
         <span class="c1"># find the number of bins</span>
     <span class="c1">#    numBins = r ** 2</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Xmin</span><span class="p">)</span>
-                       <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Xmax</span> <span class="p">)</span>
+                       <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Xmax</span><span class="p">)</span>
                        <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Ymin</span><span class="p">)</span>
                        <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Ymax</span><span class="p">))</span>
 
@@ -528,11 +524,11 @@
         <span class="c1"># if either height or width is less than the max size, return</span>
         <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">Xmax</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">Xmin</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
         <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yFloats</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">Ymax</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">yFloats</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">Ymin</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
-        <span class="k">if</span> <span class="p">(</span> <span class="p">(</span> <span class="n">c</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="nb">min</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">c</span><span class="p">)</span> <span class="p">):</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">c</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">c</span><span class="p">)):</span>
             <span class="c1"># print(&#39;Box getting too small, min(width,height)&lt;&#39;, c)</span>
             <span class="c1"># reject futher partitions, and return original bin</span>
             <span class="n">partitions</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nodes&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Xmin</span><span class="p">,</span> <span class="n">Xmax</span><span class="p">,</span> <span class="n">Ymin</span><span class="p">,</span> <span class="n">Ymax</span><span class="p">]),</span>
-                      <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
+                                  <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
             <span class="k">return</span> <span class="n">partitions</span>
 
         <span class="c1"># extract the points in the bin</span>
@@ -546,8 +542,10 @@
         <span class="n">idx_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Ymin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Ymax</span><span class="p">))</span>
 
         <span class="c1"># get the subpartitions</span>
-        <span class="n">ai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">idx_x</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="o">/</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
-        <span class="n">bj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">idx_y</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="o">/</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+        <span class="n">ai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">idx_x</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="o">/</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+        <span class="n">bj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">idx_y</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="o">/</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
 
         <span class="c1"># get the bin edges</span>
         <span class="n">edges1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">Xmin</span><span class="p">],</span> <span class="n">ai</span><span class="p">,</span> <span class="p">[</span><span class="n">Xmax</span><span class="p">]))</span>
@@ -556,15 +554,15 @@
         <span class="c1"># first exit criteria: we cannot split inot unique boundaries any more</span>
         <span class="c1"># preallocate the partition list</span>
         <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">edges1</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">or</span>
-             <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">edges2</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span><span class="o">&lt;</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">edges2</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
 
             <span class="c1"># reject futher partitions, and return original bin</span>
             <span class="n">partitions</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nodes&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Xmin</span><span class="p">,</span> <span class="n">Xmax</span><span class="p">,</span> <span class="n">Ymin</span><span class="p">,</span> <span class="n">Ymax</span><span class="p">]),</span>
-                      <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
+                                  <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
             <span class="k">return</span> <span class="n">partitions</span>
 
         <span class="c1"># figure out the shift in the edges so that boundaries do not overlap</span>
-        <span class="n">xShift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">))</span>
+        <span class="n">xShift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">))</span>
         <span class="n">yShift</span> <span class="o">=</span> <span class="n">xShift</span>
         <span class="n">xShift</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">yShift</span> <span class="o">=</span> <span class="n">xShift</span><span class="o">.</span><span class="n">T</span>
@@ -572,11 +570,11 @@
         <span class="c1"># find the boundaries for each bin</span>
         <span class="c1"># duplicate inner nodes for x mesh</span>
         <span class="n">dupMidNodesX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="n">edges1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
-                                          <span class="mi">0</span><span class="p">,</span> <span class="n">edges1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">edges1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                                           <span class="mi">0</span><span class="p">,</span> <span class="n">edges1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">edges1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
         <span class="c1"># duplicate inner nodes for y mesh</span>
         <span class="n">dupMidNodesY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="n">edges2</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
-                                          <span class="mi">0</span><span class="p">,</span> <span class="n">edges2</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">edges2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                                           <span class="mi">0</span><span class="p">,</span> <span class="n">edges2</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">edges2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="c1"># reshape</span>
         <span class="n">dupMidNodesY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dupMidNodesY</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
@@ -597,7 +595,8 @@
         <span class="c1"># 5 points in each bin</span>
         <span class="k">if</span> <span class="n">nmin</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">binCounts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">nmin</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">):</span>
-                <span class="n">partitions</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nodes&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Xmin</span><span class="p">,</span> <span class="n">Xmax</span><span class="p">,</span> <span class="n">Ymin</span><span class="p">,</span> <span class="n">Ymax</span><span class="p">]),</span><span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
+                <span class="n">partitions</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nodes&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">Xmin</span><span class="p">,</span> <span class="n">Xmax</span><span class="p">,</span> <span class="n">Ymin</span><span class="p">,</span> <span class="n">Ymax</span><span class="p">]),</span> <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
                 <span class="k">return</span> <span class="n">partitions</span>
 
         <span class="c1"># define an empty list to hold the dictionaries of the fresh partitions</span>
@@ -610,36 +609,35 @@
             <span class="c1"># this is the loop over x</span>
             <span class="k">for</span> <span class="n">xInd</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
                 <span class="c1"># get the bin number</span>
-                <span class="n">binNo</span> <span class="o">=</span> <span class="n">yInd</span> <span class="o">*</span> <span class="n">r</span>  <span class="o">+</span> <span class="n">xInd</span>
+                <span class="n">binNo</span> <span class="o">=</span> <span class="n">yInd</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="n">xInd</span>
                 <span class="n">xLow</span><span class="p">,</span> <span class="n">xHigh</span> <span class="o">=</span> <span class="n">xBinBound</span><span class="p">[</span><span class="n">yInd</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">xInd</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
                 <span class="n">yLow</span><span class="p">,</span> <span class="n">yHigh</span> <span class="o">=</span> <span class="n">yBinBound</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">yInd</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">xInd</span><span class="p">]</span>
                 <span class="n">bins</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;nodes&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xLow</span><span class="p">,</span> <span class="n">xHigh</span><span class="p">,</span> <span class="n">yLow</span><span class="p">,</span> <span class="n">yHigh</span><span class="p">]),</span>
-                    <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="n">binCounts</span><span class="p">[</span><span class="n">binNo</span><span class="p">]</span> <span class="p">})</span>
+                             <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="n">binCounts</span><span class="p">[</span><span class="n">binNo</span><span class="p">]})</span>
 
         <span class="c1"># calculate the chi square statistic</span>
         <span class="n">chi2</span> <span class="o">=</span> <span class="n">chisquare</span><span class="p">(</span><span class="n">binCounts</span><span class="p">)</span>
 
         <span class="c1"># check for independence and start recursion</span>
         <span class="c1"># if the chi2 test fails, do further partitioning:</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">chi2</span><span class="o">.</span><span class="n">pvalue</span> <span class="o">&lt;</span> <span class="n">alpha</span> <span class="ow">and</span> <span class="n">Xmax</span><span class="o">!=</span><span class="n">Xmin</span> <span class="ow">and</span> <span class="n">Ymax</span><span class="o">!=</span><span class="n">Ymin</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">chi2</span><span class="o">.</span><span class="n">pvalue</span> <span class="o">&lt;</span> <span class="n">alpha</span> <span class="ow">and</span> <span class="n">Xmax</span> <span class="o">!=</span> <span class="n">Xmin</span> <span class="ow">and</span> <span class="n">Ymax</span> <span class="o">!=</span> <span class="n">Ymin</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
             <span class="k">for</span> <span class="n">binInfo</span> <span class="ow">in</span> <span class="n">bins</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">binInfo</span><span class="p">[</span><span class="s1">&#39;npts&#39;</span><span class="p">]</span> <span class="o">!=</span><span class="mi">0</span><span class="p">:</span>  <span class="c1"># if the bin is not empty:</span>
+                <span class="k">if</span> <span class="n">binInfo</span><span class="p">[</span><span class="s1">&#39;npts&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># if the bin is not empty:</span>
                     <span class="c1"># append entries to the tuple</span>
                     <span class="n">partitions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">return_partition_DV</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-                                                            <span class="n">borders</span><span class="o">=</span><span class="n">binInfo</span><span class="p">,</span>
-                                                            <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">))</span>
+                                                               <span class="n">borders</span><span class="o">=</span><span class="n">binInfo</span><span class="p">,</span>
+                                                               <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">))</span>
 
         <span class="c1"># Second exit criteria:</span>
         <span class="c1"># if the partitions are independent, reject further partitioning and</span>
         <span class="c1"># save the orignal, unpartitioned bin</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">partitions</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nodes&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Xmin</span><span class="p">,</span> <span class="n">Xmax</span><span class="p">,</span> <span class="n">Ymin</span><span class="p">,</span> <span class="n">Ymax</span><span class="p">]),</span>
-                      <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
+                                  <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
 
         <span class="k">return</span> <span class="n">partitions</span></div>
 
-
-<div class="viewcode-block" id="Partitions.return_partition_clustering"><a class="viewcode-back" href="../../../misc.html#teaspoon.SP.adaptivePart.Partitions.return_partition_clustering">[docs]</a>    <span class="k">def</span> <span class="nf">return_partition_clustering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">clusterAlg</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">,</span> <span class="n">num_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">boxOption</span><span class="o">=</span><span class="s2">&quot;boundPoints&quot;</span><span class="p">,</span> <span class="n">boxSize</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="Partitions.return_partition_clustering"><a class="viewcode-back" href="../../../misc.html#teaspoon.SP.adaptivePart.Partitions.return_partition_clustering">[docs]</a>    <span class="k">def</span> <span class="nf">return_partition_clustering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">clusterAlg</span><span class="o">=</span><span class="n">KMeans</span><span class="p">,</span> <span class="n">num_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">boxOption</span><span class="o">=</span><span class="s2">&quot;boundPoints&quot;</span><span class="p">,</span> <span class="n">boxSize</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Partitioning method based on clustering algorithms. First cluster the data, then using the cluster centers and labels determine the partitions.</span>
 
@@ -674,14 +672,15 @@
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="k">if</span> <span class="n">weights</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">sample_weights</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">sample_weights</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">weights</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">sample_weights</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">sample_weights</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sample_weights</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># Fit using whatever the chosen cluster algorithm is</span>
-        <span class="n">kmeans</span> <span class="o">=</span> <span class="n">clusterAlg</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">num_clusters</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">sample_weight</span> <span class="o">=</span> <span class="n">sample_weights</span><span class="p">)</span>
+        <span class="n">kmeans</span> <span class="o">=</span> <span class="n">clusterAlg</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">num_clusters</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weights</span><span class="p">)</span>
 
         <span class="c1"># Get the centers of each cluster and the labels for the data points</span>
         <span class="n">centers</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
@@ -696,17 +695,17 @@
             <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
                 <span class="n">cluster</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="n">l</span><span class="p">]</span>
 
-                <span class="n">xmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
-                <span class="n">xmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
-                <span class="n">ymin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
-                <span class="n">ymax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">xmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+                <span class="n">xmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+                <span class="n">ymin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">ymax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
 
                 <span class="c1"># issues if bounding box touches x-axis so print a warning if it does</span>
                 <span class="c1"># if ymin == 0:</span>
                 <span class="c1">#     print(&quot;Uh oh can&#39;t have points with zero lifetime!&quot;)</span>
 
-
-                <span class="n">bins</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,{</span><span class="s1">&#39;nodes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="n">ymin</span><span class="p">,</span><span class="n">ymax</span><span class="p">],</span> <span class="s1">&#39;center&#39;</span><span class="p">:</span> <span class="n">centers</span><span class="p">[</span><span class="n">l</span><span class="p">]})</span>
+                <span class="n">bins</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nodes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">],</span> <span class="s1">&#39;center&#39;</span><span class="p">:</span> <span class="n">centers</span><span class="p">[</span><span class="n">l</span><span class="p">]})</span>
 
         <span class="c1"># # Using this option, put the equal size box centered at each cluster center</span>
         <span class="c1"># # These are then the partitions and we ignore anything outside them</span>
@@ -761,7 +760,7 @@
                     <span class="c1"># convert c from integer to the corresponding width/height</span>
                     <span class="n">width</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span><span class="p">[</span><span class="n">xmax</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span><span class="p">[</span><span class="n">xmin</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">c</span>
                     <span class="n">height</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">yFloats</span><span class="p">[</span><span class="n">ymax</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">yFloats</span><span class="p">[</span><span class="n">ymin</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">c</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># c=0 means we don&#39;t use this paramter for an exit criteria</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
@@ -770,7 +769,7 @@
                 <span class="c1"># convert c from integer to the corresponding width/height</span>
                 <span class="n">width</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span><span class="p">[</span><span class="n">xmax</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">xFloats</span><span class="p">[</span><span class="n">xmin</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">c</span>
                 <span class="n">height</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">yFloats</span><span class="p">[</span><span class="n">ymax</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">yFloats</span><span class="p">[</span><span class="n">ymin</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">c</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="s1">&#39;alpha&#39;</span> <span class="ow">in</span> <span class="n">partitionParams</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">partitionParams</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span>
@@ -829,7 +828,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">split</span> <span class="o">=</span> <span class="kc">False</span></div></div>
 
-<span class="c1">#--------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------</span>
+
 
 <span class="c1"># this part tests the adaptive meshing algorithm</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -840,13 +840,12 @@
 
     <span class="c1"># create a bivariate Gaussian</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># the means</span>
-    <span class="n">cov</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="c1"># covariance</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="mf">0.7</span>  <span class="c1"># covariance</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">cov</span><span class="p">],</span> <span class="p">[</span><span class="n">cov</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>  <span class="c1"># covariance matrix</span>
 
     <span class="c1"># create the multivariate random variable</span>
     <span class="n">nsamples</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># number of random samples</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-
 
     <span class="c1"># # perform ordinal sampling (ranking) transformation</span>
     <span class="c1"># xRanked = rankdata(x, method=&#39;ordinal&#39;)</span>
@@ -857,9 +856,9 @@
 
     <span class="c1"># get the adaptive partition of the data</span>
     <span class="n">partitionList</span> <span class="o">=</span> <span class="n">Partitions</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)),</span>
-                                       <span class="n">meshingScheme</span> <span class="o">=</span> <span class="s2">&quot;DV&quot;</span><span class="p">,</span>
-                                       <span class="n">partitionParams</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;numParts&#39;</span><span class="p">:</span><span class="n">numParts</span><span class="p">},</span>
-                                       <span class="n">convertToOrd</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+                               <span class="n">meshingScheme</span><span class="o">=</span><span class="s2">&quot;DV&quot;</span><span class="p">,</span>
+                               <span class="n">partitionParams</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;numParts&#39;</span><span class="p">:</span> <span class="n">numParts</span><span class="p">},</span>
+                               <span class="n">convertToOrd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="c1"># plot the partitions</span>
     <span class="n">partitionList</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>

@@ -213,7 +213,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="drawDgm"><a class="viewcode-back" href="../../../drawing.html#teaspoon.TDA.Draw.drawDgm">[docs]</a><span class="k">def</span> <span class="nf">drawDgm</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">boundary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">epsilon</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="drawDgm"><a class="viewcode-back" href="../../../drawing.html#teaspoon.TDA.Draw.drawDgm">[docs]</a><span class="k">def</span> <span class="nf">drawDgm</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Draws simple persistence diagram plot</span>
 
@@ -230,8 +230,8 @@
     <span class="c1"># Separate out the infinite classes if they exist</span>
     <span class="n">includesInfPts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="ow">in</span> <span class="n">D</span>
     <span class="k">if</span> <span class="n">includesInfPts</span><span class="p">:</span>
-        <span class="n">Dinf</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">D</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),:]</span>
-        <span class="n">D</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">D</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),:]</span>
+        <span class="n">Dinf</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">D</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">:]</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">D</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">:]</span>
 
     <span class="c1"># Get the max birth/death time if it&#39;s not already specified</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">boundary</span><span class="p">:</span>
@@ -241,18 +241,18 @@
     <span class="c1">#     fig = plt.figure()</span>
     <span class="c1"># ax = fig.gca()</span>
     <span class="c1"># Plot the diagonal</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">boundary</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">boundary</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">boundary</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">boundary</span><span class="p">])</span>
 
     <span class="c1"># Plot the diagram points</span>
     <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">D</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">D</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">D</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">D</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">D</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">D</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">D</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">D</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">includesInfPts</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Dinf</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="o">.</span><span class="mi">98</span><span class="o">*</span><span class="n">boundary</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Dinf</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="o">.</span><span class="mi">98</span><span class="o">*</span><span class="n">boundary</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 
-        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-.</span><span class="mi">01</span><span class="o">*</span><span class="n">boundary</span><span class="p">,</span><span class="n">boundary</span><span class="p">,</span><span class="o">-.</span><span class="mi">01</span><span class="o">*</span><span class="n">boundary</span><span class="p">,</span><span class="n">boundary</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-.</span><span class="mi">01</span><span class="o">*</span><span class="n">boundary</span><span class="p">,</span> <span class="n">boundary</span><span class="p">,</span> <span class="o">-.</span><span class="mi">01</span><span class="o">*</span><span class="n">boundary</span><span class="p">,</span> <span class="n">boundary</span><span class="p">])</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Death&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Birth&#39;</span><span class="p">)</span></div>
@@ -267,7 +267,7 @@
 <span class="sd">        Even if D&gt;2, only the first two coordinates are plotted.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span></div>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">P</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">P</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span></div>
 </pre></div>
 
            </div>

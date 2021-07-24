@@ -211,11 +211,8 @@
 <span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
 
 
-
-
-
 <span class="c1">#-------------Circles and Annuli---------------------------------------#</span>
-<div class="viewcode-block" id="Circle"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Circle">[docs]</a><span class="k">def</span> <span class="nf">Circle</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Circle"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Circle">[docs]</a><span class="k">def</span> <span class="nf">Circle</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate N points in R^2 from the circle centered</span>
 <span class="sd">    at the origin with radius r.</span>
@@ -241,22 +238,22 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,))</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 
-    <span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span>
-    <span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">P</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">P</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">gamma</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># better be a number of some type!</span>
-        <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
         <span class="n">P</span> <span class="o">+=</span> <span class="n">noise</span>
 
     <span class="k">return</span> <span class="n">P</span></div>
 
 
-<div class="viewcode-block" id="Sphere"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Sphere">[docs]</a><span class="k">def</span> <span class="nf">Sphere</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Sphere"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Sphere">[docs]</a><span class="k">def</span> <span class="nf">Sphere</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate N points in R^3 from the sphere centered</span>
 <span class="sd">    at the origin with radius r.</span>
@@ -280,18 +277,18 @@
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
     <span class="n">Rvect</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">noise</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="n">r</span>
-    <span class="n">thetaVect</span> <span class="o">=</span>   <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">thetaVect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
     <span class="n">phiVect</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 
-    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-    <span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rvect</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetaVect</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phiVect</span><span class="p">)</span>
-    <span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rvect</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetaVect</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phiVect</span><span class="p">)</span>
-    <span class="n">P</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rvect</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">thetaVect</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">P</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rvect</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetaVect</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phiVect</span><span class="p">)</span>
+    <span class="n">P</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rvect</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetaVect</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phiVect</span><span class="p">)</span>
+    <span class="n">P</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rvect</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">thetaVect</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">P</span></div>
 
 
-<div class="viewcode-block" id="Annulus"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Annulus">[docs]</a><span class="k">def</span> <span class="nf">Annulus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Annulus"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Annulus">[docs]</a><span class="k">def</span> <span class="nf">Annulus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Returns point cloud sampled from uniform distribution on</span>
 <span class="sd">    annulus in R^2 of inner radius r and outer radius R</span>
@@ -313,24 +310,24 @@
 
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">R</span><span class="p">,</span><span class="n">R</span><span class="p">,[</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-    <span class="n">S</span> <span class="o">=</span> <span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">S</span><span class="o">&gt;=</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">S</span><span class="o">&lt;=</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span>
-    <span class="c1">#print np.shape(P)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">R</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">P</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">P</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">S</span> <span class="o">&gt;=</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">S</span> <span class="o">&lt;=</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="c1"># print np.shape(P)</span>
 
-    <span class="k">while</span> <span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">N</span><span class="p">:</span>
-        <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">R</span><span class="p">,</span><span class="n">R</span><span class="p">,[</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-        <span class="n">S</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Q</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
-        <span class="n">Q</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">S</span><span class="o">&gt;=</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">S</span><span class="o">&lt;=</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span>
-        <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-        <span class="c1">#print np.shape(P)</span>
+    <span class="k">while</span> <span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">R</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Q</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">S</span> <span class="o">&gt;=</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">S</span> <span class="o">&lt;=</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># print np.shape(P)</span>
 
-    <span class="k">return</span> <span class="n">P</span><span class="p">[:</span><span class="n">N</span><span class="p">,:]</span></div>
+    <span class="k">return</span> <span class="n">P</span><span class="p">[:</span><span class="n">N</span><span class="p">,</span> <span class="p">:]</span></div>
 
 
 <span class="c1">#-------------Torus a la Diaconis paper--------------------------------#</span>
 
-<div class="viewcode-block" id="Torus"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Torus">[docs]</a><span class="k">def</span> <span class="nf">Torus</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Torus"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Torus">[docs]</a><span class="k">def</span> <span class="nf">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Sampling method taken from Sampling from a Manifold by Diaconis,</span>
 <span class="sd">    Holmes and Shahshahani, arXiv:1206.6913</span>
@@ -366,46 +363,42 @@
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">psi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">psi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">psi</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">psi</span>
 
     <span class="n">outputTheta</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputTheta</span><span class="p">)</span><span class="o">&lt;</span><span class="n">N</span><span class="p">:</span>
-        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputTheta</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">theta</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">theta</span>
 
-        <span class="n">eta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">eta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">eta</span> <span class="o">=</span> <span class="n">eta</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 
-        <span class="n">fx</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span> <span class="n">r</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+        <span class="n">fx</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
 
-        <span class="n">outputTheta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">eta</span><span class="o">&lt;</span><span class="n">fx</span><span class="p">]</span>
-
+        <span class="n">outputTheta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">eta</span> <span class="o">&lt;</span> <span class="n">fx</span><span class="p">]</span>
 
     <span class="n">theta</span> <span class="o">=</span> <span class="n">outputTheta</span><span class="p">[:</span><span class="n">N</span><span class="p">]</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-
-    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span> <span class="n">R</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span> <span class="n">R</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,))</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,))</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,))</span>
 
-    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">N</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-    <span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
-    <span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
-    <span class="n">P</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">N</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">P</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">P</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">P</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span>
 
     <span class="k">return</span> <span class="n">P</span></div>
 
 
-
-
 <span class="c1">#----------------------------------------------------------------------#</span>
 
-<div class="viewcode-block" id="Cube"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Cube">[docs]</a><span class="k">def</span> <span class="nf">Cube</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">diam</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Cube"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Cube">[docs]</a><span class="k">def</span> <span class="nf">Cube</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">diam</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate N points in R^dim from the box</span>
 <span class="sd">    [0,diam]x[0,diam]x...x[0,diam]</span>
@@ -425,18 +418,17 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
-    <span class="n">P</span> <span class="o">=</span> <span class="n">diam</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">dim</span><span class="p">))</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">diam</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">P</span></div>
 
 
-
 <span class="c1">#----------------------------------------------------------------------#</span>
 
-<div class="viewcode-block" id="Clusters"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Clusters">[docs]</a><span class="k">def</span> <span class="nf">Clusters</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
-            <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))),</span>
-            <span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Clusters"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Clusters">[docs]</a><span class="k">def</span> <span class="nf">Clusters</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+             <span class="n">centers</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))),</span>
+             <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+             <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate k clusters of points, N points in total (evenly divided?)</span>
 <span class="sd">    centers is a k x d numpy array, where centers[i,:] is the center of</span>
@@ -466,37 +458,35 @@
 
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
-
     <span class="c1"># Dimension for embedding</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">centers</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># Identity matrix for covariance</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">sd</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 
-
     <span class="c1"># Number of clusters</span>
     <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">centers</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="n">ptsPerCluster</span> <span class="o">=</span> <span class="n">N</span><span class="o">//</span><span class="n">k</span>
-    <span class="n">ptsForLastCluster</span> <span class="o">=</span> <span class="n">N</span><span class="o">//</span><span class="n">k</span> <span class="o">+</span> <span class="n">N</span><span class="o">%</span><span class="n">k</span>
+    <span class="n">ptsForLastCluster</span> <span class="o">=</span> <span class="n">N</span><span class="o">//</span><span class="n">k</span> <span class="o">+</span> <span class="n">N</span> <span class="o">%</span> <span class="n">k</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">newPts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="n">I</span><span class="p">,</span> <span class="n">ptsForLastCluster</span><span class="p">)</span>
+            <span class="n">newPts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span>
+                <span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">I</span><span class="p">,</span> <span class="n">ptsForLastCluster</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">newPts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="n">I</span><span class="p">,</span> <span class="n">ptsPerCluster</span><span class="p">)</span>
+            <span class="n">newPts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span>
+                <span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">I</span><span class="p">,</span> <span class="n">ptsPerCluster</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">P</span> <span class="o">=</span> <span class="n">newPts</span><span class="p">[:]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">P</span><span class="p">,</span><span class="n">newPts</span><span class="p">])</span>
+            <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">P</span><span class="p">,</span> <span class="n">newPts</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">P</span></div>
 
 
-
 <span class="c1">#----------------------------------------------------------------------#</span>
-
 
 
 <span class="c1">#----------------------------------------------------------------------#</span>
@@ -509,7 +499,7 @@
 <span class="c1">#----------------------------------------------------------------------#</span>
 <span class="c1">#------------Normally distributed points in (birth,death) plane--------#</span>
 <span class="c1">#----------------------------------------------------------------------#</span>
-<div class="viewcode-block" id="normalDiagram"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.normalDiagram">[docs]</a><span class="k">def</span> <span class="nf">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="normalDiagram"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.normalDiagram">[docs]</a><span class="k">def</span> <span class="nf">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.</span>
 <span class="sd">    Pulls `N` points from a normal distribution with mean `mu` and standard deviation `sd`, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.</span>
@@ -528,35 +518,32 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">dgm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-    <span class="n">dgm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">sd</span><span class="p">,</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">dgm</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">sd</span><span class="p">,</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">dgm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sd</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sd</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 
     <span class="c1"># Get rid of points below the diagonal</span>
-    <span class="n">good</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dgm</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">dgm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">good</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="n">dgm</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">[</span><span class="n">good</span><span class="p">,:]</span>
+    <span class="n">dgm</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">[</span><span class="n">good</span><span class="p">,</span> <span class="p">:]</span>
 
     <span class="c1"># Get rid of points with negative birth times</span>
-    <span class="n">good</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dgm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">dgm</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">[</span><span class="n">good</span><span class="p">,:]</span>
+    <span class="n">good</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">dgm</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">[</span><span class="n">good</span><span class="p">,</span> <span class="p">:]</span>
 
-    <span class="n">dgm</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:]</span>
-
+    <span class="n">dgm</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
 
     <span class="k">return</span> <span class="n">dgm</span></div>
 
 
-
-<div class="viewcode-block" id="testSetClassification"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetClassification">[docs]</a><span class="k">def</span> <span class="nf">testSetClassification</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-                    <span class="n">numDgms</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span>
-                    <span class="n">muRed</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
-                    <span class="n">muBlue</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
-                    <span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                    <span class="n">permute</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                    <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="testSetClassification"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetClassification">[docs]</a><span class="k">def</span> <span class="nf">testSetClassification</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                          <span class="n">numDgms</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+                          <span class="n">muRed</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                          <span class="n">muBlue</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                          <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                          <span class="n">permute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Generate a collection of diagrams using the normalDiagram() function for classification tests.</span>
 
@@ -580,18 +567,18 @@
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">numDgms</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">numDgms</span> <span class="o">=</span> <span class="p">(</span><span class="n">numDgms</span><span class="p">,</span><span class="n">numDgms</span><span class="p">)</span>
+        <span class="n">numDgms</span> <span class="o">=</span> <span class="p">(</span><span class="n">numDgms</span><span class="p">,</span> <span class="n">numDgms</span><span class="p">)</span>
 
     <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Dgm&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;sd&#39;</span><span class="p">,</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span>
     <span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">numDgms</span><span class="p">))</span>
-    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">)</span>
+    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
 
     <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">seed</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">muRed</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+        <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">muRed</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm</span><span class="p">,</span> <span class="n">muRed</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="c1"># Dgms.append(dgm)</span>
@@ -599,7 +586,7 @@
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">seed</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">muBlue</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+        <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">muBlue</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm</span><span class="p">,</span> <span class="n">muBlue</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="c1"># Dgms.append(dgm)</span>
@@ -608,21 +595,20 @@
     <span class="k">if</span> <span class="n">permute</span><span class="p">:</span>
         <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">DgmsDF</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
 
-
     <span class="k">return</span> <span class="n">DgmsDF</span></div>
 
 
-<span class="c1">#------Experiment testing regression----------------------------</span>
-<span class="c1">#---------------LINEAR---------------------------------------</span>
-<span class="c1">#-----------------------------------------------</span>
+<span class="c1"># ------Experiment testing regression----------------------------</span>
+<span class="c1"># ---------------LINEAR---------------------------------------</span>
+<span class="c1"># -----------------------------------------------</span>
 
-<div class="viewcode-block" id="testSetRegressionLine"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetRegressionLine">[docs]</a><span class="k">def</span> <span class="nf">testSetRegressionLine</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-                    <span class="n">numDgms</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
-                    <span class="n">muStart</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
-                    <span class="n">muEnd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
-                    <span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                    <span class="n">permute</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                    <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="testSetRegressionLine"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetRegressionLine">[docs]</a><span class="k">def</span> <span class="nf">testSetRegressionLine</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                          <span class="n">numDgms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+                          <span class="n">muStart</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                          <span class="n">muEnd</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                          <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                          <span class="n">permute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Generate a collection of diagrams with means distributed along a line using the normalDiagram() function for regression tests.</span>
 
@@ -648,40 +634,36 @@
 
     <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Dgm&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;sd&#39;</span><span class="p">,</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span>
     <span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">)</span>
-    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">)</span>
+    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
 
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">numDgms</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">numDgms</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
     <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">muStart</span><span class="p">))</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">muEnd</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">seed</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">mu</span> <span class="o">=</span> <span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span>
-        <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
-        <span class="n">distToStart</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">muStart</span><span class="p">,</span><span class="n">mu</span><span class="p">)</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">distToStart</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">muStart</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
         <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">distToStart</span><span class="p">]</span>
-
-
 
     <span class="c1"># Permute the data</span>
     <span class="k">if</span> <span class="n">permute</span><span class="p">:</span>
         <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">DgmsDF</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
 
-
     <span class="k">return</span> <span class="n">DgmsDF</span></div>
 
 
-<span class="c1">#------Experiment testing regression----------------------------</span>
-<span class="c1">#---------------2D-ball around center-----------------------</span>
-<span class="c1">#-----------------------------------------------</span>
+<span class="c1"># ------Experiment testing regression----------------------------</span>
+<span class="c1"># ---------------2D-ball around center-----------------------</span>
+<span class="c1"># -----------------------------------------------</span>
 
-<div class="viewcode-block" id="testSetRegressionBall"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetRegressionBall">[docs]</a><span class="k">def</span> <span class="nf">testSetRegressionBall</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-                    <span class="n">numDgms</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
-                    <span class="n">muCenter</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
-                    <span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                    <span class="n">permute</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                    <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-
+<div class="viewcode-block" id="testSetRegressionBall"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetRegressionBall">[docs]</a><span class="k">def</span> <span class="nf">testSetRegressionBall</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                          <span class="n">numDgms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+                          <span class="n">muCenter</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                          <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                          <span class="n">permute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Generate a collection of diagrams with means distributed normally using the normalDiagram() function; used for regression tests.</span>
 
@@ -707,37 +689,32 @@
 
     <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Dgm&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;sd&#39;</span><span class="p">,</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span>
     <span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">)</span>
-    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">)</span>
+    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
 
-    <span class="n">centers</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">muCenter</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">sd</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">numDgms</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">muCenter</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">numDgms</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">seed</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">mu</span> <span class="o">=</span> <span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span>
-        <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
-        <span class="n">distToStart</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">muCenter</span><span class="p">,</span><span class="n">mu</span><span class="p">)</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">distToStart</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">muCenter</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
         <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">distToStart</span><span class="p">]</span>
-
-
 
     <span class="c1"># Permute the data</span>
     <span class="k">if</span> <span class="n">permute</span><span class="p">:</span>
         <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">DgmsDF</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
 
-
     <span class="k">return</span> <span class="n">DgmsDF</span></div>
-
 
 
 <span class="c1">#------------------------------------------------------------#</span>
 
-<div class="viewcode-block" id="testSetManifolds"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetManifolds">[docs]</a><span class="k">def</span> <span class="nf">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
-                        <span class="n">numPts</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
-                        <span class="n">permute</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                        <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span>
-                        <span class="p">):</span>
-
+<div class="viewcode-block" id="testSetManifolds"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetManifolds">[docs]</a><span class="k">def</span> <span class="nf">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                     <span class="n">numPts</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+                     <span class="n">permute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">seed</span><span class="o">=</span><span class="kc">None</span>
+                     <span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Generates a collection of diagrams from different underlying topological spaces.  This set is useful for testing classification tasks.</span>
 
@@ -765,10 +742,9 @@
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
-
     <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Dgm0&#39;</span><span class="p">,</span> <span class="s1">&#39;Dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span>
     <span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">numDgms</span><span class="p">)</span>
-    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">)</span>
+    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
 
     <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -777,86 +753,84 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">fixSeed</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="c1">#-</span>
+    <span class="c1"># -</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating torus clouds...&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>  <span class="c1"># using ripser package</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Torus&#39;</span><span class="p">]</span>
-        <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span>
+            <span class="s1">&#39;dgms&#39;</span><span class="p">]</span>  <span class="c1"># using ripser package</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Torus&#39;</span><span class="p">]</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="c1">#-</span>
+    <span class="c1"># -</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating annuli clouds...&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Annulus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Annulus&#39;</span><span class="p">]</span>
-        <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Annulus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Annulus&#39;</span><span class="p">]</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="c1">#-</span>
+    <span class="c1"># -</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating cube clouds...&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Cube</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
+        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Cube</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
         <span class="c1"># Dgms.append([dgmOut[0],dgmOut[1]])</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Cube&#39;</span><span class="p">]</span>
-        <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Cube&#39;</span><span class="p">]</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="c1">#-</span>
+    <span class="c1"># -</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating three cluster clouds...&#39;</span><span class="p">)</span>
     <span class="c1"># Centered at (0,0), (0,5), and (5,0) with sd =1</span>
     <span class="c1"># Then scaled by .3 to make birth/death times closer to the other examples</span>
-    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>  <span class="p">])</span>
+    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
     <span class="c1"># centers = np.array( [ [0,0], [0,2], [2,0]  ])</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Clusters</span><span class="p">(</span><span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">numPts</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="o">.</span><span class="mi">05</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;3Cluster&#39;</span><span class="p">]</span>
-        <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Clusters</span><span class="p">(</span><span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span>
+                        <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">sd</span><span class="o">=.</span><span class="mi">05</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;3Cluster&#39;</span><span class="p">]</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
-
-
-    <span class="c1">#-</span>
+    <span class="c1"># -</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating three clusters of three clusters clouds...&#39;</span><span class="p">)</span>
 
-    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>  <span class="p">])</span>
+    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span>
-    <span class="n">centersUp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)),(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">))]))</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-    <span class="n">centersUpRight</span> <span class="o">=</span> <span class="n">centers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">centers</span><span class="p">,</span>  <span class="n">centersUp</span><span class="p">,</span> <span class="n">centersUpRight</span><span class="p">))</span>
+    <span class="n">centersUp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)),</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">))]))</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">centersUpRight</span> <span class="o">=</span> <span class="n">centers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">centers</span><span class="p">,</span>  <span class="n">centersUp</span><span class="p">,</span> <span class="n">centersUpRight</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Clusters</span><span class="p">(</span><span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span>
-                                        <span class="n">N</span> <span class="o">=</span> <span class="n">numPts</span><span class="p">,</span>
-                                        <span class="n">sd</span> <span class="o">=</span> <span class="o">.</span><span class="mi">05</span><span class="p">,</span>
-                                        <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
+                                 <span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span>
+                                 <span class="n">sd</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span>
+                                 <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
         <span class="c1"># Dgms.append([dgmOut[0],dgmOut[1]])</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;3Clusters of 3Clusters&#39;</span><span class="p">]</span>
-        <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;3Clusters of 3Clusters&#39;</span><span class="p">]</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
-
-
-    <span class="c1">#-</span>
+    <span class="c1"># -</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating sphere clouds...&#39;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Sphere</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="n">numPts</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="o">.</span><span class="mi">05</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Sphere&#39;</span><span class="p">]</span>
-        <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Sphere</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span> <span class="n">noise</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Sphere&#39;</span><span class="p">]</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Finished generating clouds and computing persistence.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="c1"># Permute the diagrams if necessary.</span>
     <span class="k">if</span> <span class="n">permute</span><span class="p">:</span>
         <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">DgmsDF</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
-
 
     <span class="k">return</span> <span class="n">DgmsDF</span></div>
 </pre></div>

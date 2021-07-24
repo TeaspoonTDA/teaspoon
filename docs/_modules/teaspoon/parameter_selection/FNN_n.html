@@ -212,128 +212,125 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
+
 <span class="k">def</span> <span class="nf">ts_recon</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="n">xlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">dim</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tau</span>
-    <span class="n">a</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">xlen</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">xlen</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,(</span><span class="n">xlen</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">delayVec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,(</span><span class="n">dim</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">dim</span><span class="p">)</span><span class="o">*</span><span class="n">tau</span>
-    <span class="n">delayVec</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">delayVec</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="n">dim</span><span class="p">))</span>
-    <span class="n">delayMat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">delayVec</span><span class="p">,(</span><span class="n">xlen</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">a</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="n">dim</span><span class="p">))</span>
-    <span class="n">indRecon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">vec</span><span class="p">,(</span><span class="n">xlen</span><span class="p">,</span><span class="n">dim</span><span class="p">))</span> <span class="o">+</span> <span class="n">delayMat</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xlen</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">xlen</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">xlen</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">delayVec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">dim</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">dim</span><span class="p">)</span><span class="o">*</span><span class="n">tau</span>
+    <span class="n">delayVec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">delayVec</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+    <span class="n">delayMat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">delayVec</span><span class="p">,</span> <span class="p">(</span><span class="n">xlen</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+    <span class="n">indRecon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="p">(</span><span class="n">xlen</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span> <span class="o">+</span> <span class="n">delayMat</span>
     <span class="n">indRecon</span> <span class="o">=</span> <span class="n">indRecon</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="n">tsrecon</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="n">indRecon</span><span class="p">]</span>
-    <span class="n">tsrecon</span> <span class="o">=</span> <span class="n">tsrecon</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">tsrecon</span> <span class="o">=</span> <span class="n">tsrecon</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">tsrecon</span>
 
 
-<div class="viewcode-block" id="FNN_n"><a class="viewcode-back" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n">[docs]</a><span class="k">def</span> <span class="nf">FNN_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">maxDim</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">Rtol</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">Atol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+<div class="viewcode-block" id="FNN_n"><a class="viewcode-back" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n">[docs]</a><span class="k">def</span> <span class="nf">FNN_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">maxDim</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Rtol</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">Atol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function implements the False Nearest Neighbors (FNN) algorithm described by Kennel et al. </span>
 <span class="sd">    to select the minimum embedding dimension.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>
 <span class="sd">       tau (int):  Embedding delay.</span>
-<span class="sd">       </span>
-<span class="sd">       </span>
+
+
 <span class="sd">    Kwargs:</span>
 <span class="sd">       maxDim (int):  maximum dimension in dimension search. Default is 10.</span>
-<span class="sd">       </span>
+
 <span class="sd">       plotting (bool): Plotting for user interpretation. Defaut is False.</span>
-<span class="sd">       </span>
+
 <span class="sd">       Rtol (float): Ratio tolerance. Defaut is 15.</span>
-<span class="sd">       </span>
+
 <span class="sd">       Atol (float): A tolerance. Defaut is 2.</span>
-<span class="sd">       </span>
+
 <span class="sd">       threshold (float): Tolerance threshold for percent of nearest neighbors. Defaut is 10.</span>
-<span class="sd">       </span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">       (int): n, The embedding dimension.</span>
-<span class="sd">       </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">KDTree</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">maxDim</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tau</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
-        <span class="n">maxDim</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">maxDim</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tau</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span><span class="mi">1</span><span class="p">))</span> <span class="c1">#ts is a column vector</span>
-    <span class="n">st_dev</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#standart deviation of the time series</span>
-    
-    <span class="n">Xfnn</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">maxDim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">maxDim</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tau</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># ts is a column vector</span>
+    <span class="n">st_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>  <span class="c1"># standart deviation of the time series</span>
+
+    <span class="n">Xfnn</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">dim_array</span> <span class="o">=</span> <span class="p">[]</span>
-    
+
     <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span>  <span class="n">flag</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">while</span> <span class="n">flag</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
-        <span class="n">dim</span><span class="o">=</span><span class="n">i</span>
-        <span class="n">tsrecon</span> <span class="o">=</span> <span class="n">ts_recon</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span><span class="c1">#delay reconstruction</span>
-        
-        <span class="n">tree</span><span class="o">=</span><span class="n">KDTree</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">)</span>
-        <span class="n">D</span><span class="p">,</span><span class="n">IDX</span><span class="o">=</span><span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        
-        <span class="c1">#Calculate the false nearest neighbor ratio for each dimension</span>
-        <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">D_mp1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind_m</span><span class="p">,:]</span><span class="o">-</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind</span><span class="p">,:])),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-            <span class="c1">#Criteria 1 : increase in distance between neighbors is large</span>
-            <span class="n">num1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind_m</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span><span class="n">Dm</span><span class="p">)</span><span class="o">-</span><span class="n">Rtol</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
-            <span class="c1">#Criteria 2 : nearest neighbor not necessarily close to y(n)</span>
-            <span class="n">num2</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">Atol</span><span class="o">-</span><span class="n">D_mp1</span><span class="o">/</span><span class="n">st_dev</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
-            <span class="n">num</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">))</span>
-            <span class="n">den</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">num2</span><span class="p">)</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">tsrecon</span> <span class="o">=</span> <span class="n">ts_recon</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>  <span class="c1"># delay reconstruction</span>
+
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">)</span>
+        <span class="n">D</span><span class="p">,</span> <span class="n">IDX</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Calculate the false nearest neighbor ratio for each dimension</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">D_mp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind_m</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="p">:])),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+            <span class="c1"># Criteria 1 : increase in distance between neighbors is large</span>
+            <span class="n">num1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind_m</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">Dm</span><span class="p">)</span><span class="o">-</span><span class="n">Rtol</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+            <span class="c1"># Criteria 2 : nearest neighbor not necessarily close to y(n)</span>
+            <span class="n">num2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">Atol</span><span class="o">-</span><span class="n">D_mp1</span><span class="o">/</span><span class="n">st_dev</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">))</span>
+            <span class="n">den</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">num2</span><span class="p">)</span>
             <span class="n">Xfnn</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">num</span><span class="o">/</span><span class="n">den</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
             <span class="n">dim_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dim</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="n">den</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span> <span class="o">&lt;=</span> <span class="mi">10</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="n">maxDim</span><span class="p">:</span>
                 <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
-                
+
         <span class="c1"># Save the index to D and k(n) in dimension m for comparison with the</span>
-        <span class="c1"># same distance in m+1 dimension   </span>
-        <span class="n">xlen2</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">-</span><span class="n">dim</span><span class="o">*</span><span class="n">tau</span>
-        <span class="n">Dm</span><span class="o">=</span><span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">xlen2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">ind_m</span><span class="o">=</span><span class="n">IDX</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">xlen2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">ind</span><span class="o">=</span><span class="n">ind_m</span><span class="o">&lt;=</span><span class="n">xlen2</span><span class="o">-</span><span class="mi">1</span>
-        <span class="n">ind_m</span><span class="o">=</span><span class="n">ind_m</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
-        <span class="n">Dm</span><span class="o">=</span><span class="n">Dm</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+        <span class="c1"># same distance in m+1 dimension</span>
+        <span class="n">xlen2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">-</span><span class="n">dim</span><span class="o">*</span><span class="n">tau</span>
+        <span class="n">Dm</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">xlen2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ind_m</span> <span class="o">=</span> <span class="n">IDX</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">xlen2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">ind_m</span> <span class="o">&lt;=</span> <span class="n">xlen2</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">ind_m</span> <span class="o">=</span> <span class="n">ind_m</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+        <span class="n">Dm</span> <span class="o">=</span> <span class="n">Dm</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
     <span class="n">Xfnn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Xfnn</span><span class="p">)</span>
-        
+
     <span class="k">if</span> <span class="n">plotting</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
         <span class="n">TextSize</span> <span class="o">=</span> <span class="mi">14</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dim_array</span><span class="p">,</span> <span class="n">Xfnn</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Dimension $n$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Percent FNN&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Dimension $n$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Percent FNN&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">myersau3.EGR</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">python_png</span><span class="se">\\</span><span class="s1">FNN_fig.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span><span class="n">dpi</span> <span class="o">=</span> <span class="mi">400</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">myersau3.EGR</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">python_png</span><span class="se">\\</span><span class="s1">FNN_fig.png&#39;</span><span class="p">,</span>
+                    <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    
-    <span class="k">return</span> <span class="n">Xfnn</span><span class="p">,</span> <span class="n">dim</span><span class="o">-</span><span class="mi">1</span></div>
 
+    <span class="k">return</span> <span class="n">Xfnn</span><span class="p">,</span> <span class="n">dim</span><span class="o">-</span><span class="mi">1</span></div>
 
 
 <span class="c1"># In[ ]:</span>
 
-
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    
+
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    
+
     <span class="n">fs</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> 
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
-    <span class="n">tau</span><span class="o">=</span><span class="mi">15</span> <span class="c1">#embedding delay</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># embedding delay</span>
 
-    <span class="n">perc_FNN</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span><span class="n">FNN_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FNN embedding Dimension: &#39;</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    
-    
-          
-        
-        
+    <span class="n">perc_FNN</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">FNN_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FNN embedding Dimension: &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 </pre></div>
 
            </div>

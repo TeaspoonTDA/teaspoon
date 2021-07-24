@@ -213,9 +213,10 @@
 <span class="sd">that causes the first minima in the mutual information between permutations.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+
 <div class="viewcode-block" id="mutualPerm"><a class="viewcode-back" href="../../../PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm">[docs]</a><span class="k">def</span> <span class="nf">mutualPerm</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function calculates the mutual information between permutations with tau = 1 and tau = delay  </span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>
 <span class="sd">       delay (int): Permutation delay</span>
@@ -229,39 +230,40 @@
     <span class="kn">import</span> <span class="nn">math</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">ts</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">ts</span>
-    <span class="n">Bins_x</span><span class="p">,</span> <span class="n">PA_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">stats_permutation_entropy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">Bins_y</span><span class="p">,</span> <span class="n">PA_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">stats_permutation_entropy</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">delay</span><span class="p">))</span>
+    <span class="n">Bins_x</span><span class="p">,</span> <span class="n">PA_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">stats_permutation_entropy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">Bins_y</span><span class="p">,</span> <span class="n">PA_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">stats_permutation_entropy</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">delay</span><span class="p">))</span>
     <span class="n">Bins_x</span><span class="p">,</span> <span class="n">Bins_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bins_x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bins_y</span><span class="p">)</span>
     <span class="n">PA_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">PA_y</span><span class="p">)</span>
     <span class="n">PA_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">PA_x</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">PA_y</span><span class="p">)]</span>
-    <span class="n">types</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span>  <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> 
-                     <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">PAs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">PA_x</span><span class="p">,</span><span class="n">PA_y</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">Bins_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span>  <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">PAs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">PA_x</span><span class="p">,</span> <span class="n">PA_y</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">Bins_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">PA_x</span><span class="p">)):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
             <span class="k">if</span> <span class="n">PAs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">types</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">PAs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">types</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="n">Bins_xy</span><span class="p">[</span><span class="n">PAs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">PAs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+                <span class="n">Bins_xy</span><span class="p">[</span><span class="n">PAs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">PAs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">count</span> <span class="o">=</span> <span class="n">count</span><span class="o">+</span><span class="mi">1</span>
-                
+
     <span class="n">P_xy</span> <span class="o">=</span> <span class="n">Bins_xy</span><span class="o">/</span><span class="n">count</span>
     <span class="n">P_x</span> <span class="o">=</span> <span class="n">Bins_x</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">Bins_x</span><span class="p">)</span>
     <span class="n">P_y</span> <span class="o">=</span> <span class="n">Bins_y</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">Bins_y</span><span class="p">)</span>
     <span class="n">I</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">P_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">P_y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">P_xy</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-                <span class="n">I_xy</span> <span class="o">=</span> <span class="n">P_xy</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">P_xy</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">P_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">P_y</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span> 
+                <span class="n">I_xy</span> <span class="o">=</span> <span class="n">P_xy</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">P_xy</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">P_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">P_y</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
                 <span class="n">I</span> <span class="o">=</span> <span class="n">I</span> <span class="o">+</span> <span class="n">I_xy</span>
     <span class="k">return</span> <span class="n">I</span></div>
-            
+
 
 <span class="k">def</span> <span class="nf">stats_permutation_entropy</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">delay</span><span class="p">):</span>
-    
+
     <span class="k">def</span> <span class="nf">util_hash_term</span><span class="p">(</span><span class="n">perm</span><span class="p">):</span>
         <span class="n">deg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">perm</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">deg</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">deg</span><span class="p">)])</span>
+
     <span class="k">def</span> <span class="nf">util_granulate_time_series</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">scale</span><span class="p">))</span>
@@ -269,7 +271,7 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
             <span class="n">cts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">time_series</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">scale</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">scale</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">cts</span>
-    
+
     <span class="kn">import</span> <span class="nn">itertools</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span>
@@ -280,24 +282,27 @@
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span> <span class="o">-</span> <span class="n">delay</span> <span class="o">*</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
         <span class="c1"># sorted_time_series =    np.sort(time_series[i:i+delay*m:delay], kind=&#39;quicksort&#39;)</span>
-        <span class="n">sorted_index_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">time_series</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">delay</span> <span class="o">*</span> <span class="n">m</span><span class="p">:</span><span class="n">delay</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;quicksort&#39;</span><span class="p">))</span>
-        <span class="n">hashvalue</span> <span class="o">=</span> <span class="n">util_hash_term</span><span class="p">(</span><span class="n">sorted_index_array</span><span class="p">);</span>
+        <span class="n">sorted_index_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span>
+            <span class="n">time_series</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">delay</span> <span class="o">*</span> <span class="n">m</span><span class="p">:</span><span class="n">delay</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;quicksort&#39;</span><span class="p">))</span>
+        <span class="n">hashvalue</span> <span class="o">=</span> <span class="n">util_hash_term</span><span class="p">(</span><span class="n">sorted_index_array</span><span class="p">)</span>
         <span class="n">c</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">hashlist</span> <span class="o">==</span> <span class="n">hashvalue</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">perm_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">perm_order</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">hashlist</span> <span class="o">==</span> <span class="n">hashvalue</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">c</span><span class="p">]</span> <span class="c1">#if element != 0</span>
+        <span class="n">perm_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">perm_order</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">hashlist</span> <span class="o">==</span> <span class="n">hashvalue</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">c</span><span class="p">]</span>  <span class="c1"># if element != 0</span>
     <span class="n">Bins</span> <span class="o">=</span> <span class="n">c</span>
     <span class="n">perm_seq</span> <span class="o">=</span> <span class="n">perm_order</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
     <span class="k">return</span> <span class="n">Bins</span><span class="p">,</span> <span class="n">perm_seq</span>
 
-<div class="viewcode-block" id="PAMI_for_delay"><a class="viewcode-back" href="../../../PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay">[docs]</a><span class="k">def</span> <span class="nf">PAMI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PAMI_for_delay"><a class="viewcode-back" href="../../../PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay">[docs]</a><span class="k">def</span> <span class="nf">PAMI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function calculates the mutual information between permutations with tau = 1 and tau = delay  </span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>
 
 <span class="sd">    Kwargs:</span>
 <span class="sd">       plotting (bool): Plotting for user interpretation. defaut is False.</span>
-<span class="sd">       </span>
+
 <span class="sd">       n (int): dimension for calculating delay. delault is 5 as explain in On the Automatic Parameter Selection for Permutation Entropy</span>
 
 <span class="sd">    Returns:</span>
@@ -307,7 +312,7 @@
     <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">find_peaks</span>
-    
+
     <span class="n">cutoff</span> <span class="o">=</span> <span class="mf">0.01</span>
     <span class="n">max_delay</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">m</span> <span class="o">=</span> <span class="mi">2</span>
@@ -321,8 +326,8 @@
         <span class="n">tau_a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
         <span class="n">window_a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">delay</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">MI_Perm</span> <span class="o">=</span> <span class="n">mutualPerm</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-        <span class="n">MP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MI_Perm</span><span class="p">)</span> <span class="c1">#calculates mutual information</span>
-        <span class="n">peaks</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">find_peaks</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">MP</span><span class="p">),</span> <span class="n">height</span><span class="o">=-</span><span class="n">cutoff</span><span class="p">)</span>
+        <span class="n">MP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MI_Perm</span><span class="p">)</span>  <span class="c1"># calculates mutual information</span>
+        <span class="n">peaks</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">find_peaks</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">MP</span><span class="p">),</span> <span class="n">height</span><span class="o">=-</span><span class="n">cutoff</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">MI_Perm</span> <span class="o">&lt;</span> <span class="n">cutoff</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">peaks</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">delay</span> <span class="o">&gt;</span> <span class="n">max_delay</span><span class="p">:</span>
@@ -335,44 +340,31 @@
     <span class="n">delay_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">delay_2</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">plotting</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">TextSize</span> <span class="o">=</span> <span class="mi">12</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tau_a</span><span class="p">,</span> <span class="n">MP</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;n = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tau(n-1)$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$I_p(\tau,n)$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tau_a</span><span class="p">,</span> <span class="n">MP</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;n = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tau(n-1)$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$I_p(\tau,n)$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    
+
     <span class="k">return</span> <span class="n">delay_n</span></div>
 
 <span class="c1"># In[ ]: running functions on time series</span>
-    
+
+
 <span class="c1"># _______________________________________EXAMPLE_________________________________________</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    
+
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    
+
     <span class="n">fs</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> 
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="n">tau</span> <span class="o">=</span> <span class="n">PAMI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delay from PAMI: &#39;</span><span class="p">,</span><span class="n">tau</span><span class="p">)</span>
-    
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">PAMI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delay from PAMI: &#39;</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 </pre></div>
 
            </div>

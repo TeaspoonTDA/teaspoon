@@ -216,13 +216,14 @@
 <span class="sd">On the 0/1 test for chaos in continuous systems by Melosik and Marszalek.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="LMSforDelay"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay">[docs]</a><span class="k">def</span> <span class="nf">LMSforDelay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span><span class="c1">#1-D lms function</span>
+
+<div class="viewcode-block" id="LMSforDelay"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay">[docs]</a><span class="k">def</span> <span class="nf">LMSforDelay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>  <span class="c1"># 1-D lms function</span>
     <span class="sd">&quot;&quot;&quot;This function takes a time series (ts) and the sampling frequency (fs) and uses </span>
 <span class="sd">    the fast fourier transform and gaussian noise statistics in the fourier spectrum </span>
 <span class="sd">    (using least median of squares (LMS) in statistical analysis) to determine a suitable</span>
 <span class="sd">    embedding delay for permutation entropy using the theory developed in </span>
 <span class="sd">    On the 0/1 test for chaos in continuous systems by Melosik and Marszalek. </span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>
 <span class="sd">       fs (float): Sampling frequency of time series (equispaced).</span>
@@ -234,60 +235,66 @@
 <span class="sd">       (int): tau, The embedding delay for permutation formation.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">Significance_Cutoff</span> <span class="o">=</span> <span class="mf">0.01</span>
-    <span class="c1">#Input: (ts) time series of data (one dimensional), (fs) sampling frequency</span>
-    <span class="c1">#Output: Suggested delay for downsampling data set. If 0, the time series is undersampled.</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-    
-    <span class="n">xf</span><span class="p">,</span> <span class="n">yf</span> <span class="o">=</span> <span class="n">AbsFFT</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span> <span class="c1">#gets |FFT| domain resulting from time series</span>
-    
-    
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#poisition of median rounded up</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span> <span class="c1">#Ordered Observations</span>
 
-    <span class="c1">#Finding smallest difference</span>
-    <span class="n">z0</span><span class="p">,</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">z</span><span class="p">,[</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">z</span><span class="p">,[</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span><span class="c1">#breaks x into two arrays for finding minimum difference</span>
+    <span class="n">Significance_Cutoff</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="c1"># Input: (ts) time series of data (one dimensional), (fs) sampling frequency</span>
+    <span class="c1"># Output: Suggested delay for downsampling data set. If 0, the time series is undersampled.</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+    <span class="n">xf</span><span class="p">,</span> <span class="n">yf</span> <span class="o">=</span> <span class="n">AbsFFT</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>  <span class="c1"># gets |FFT| domain resulting from time series</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># poisition of median rounded up</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>  <span class="c1"># Ordered Observations</span>
+
+    <span class="c1"># Finding smallest difference</span>
+    <span class="c1"># breaks x into two arrays for finding minimum difference</span>
+    <span class="n">z0</span><span class="p">,</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="p">[</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="p">[</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">l0</span><span class="p">,</span> <span class="n">l1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">z0</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">l0</span> <span class="o">!=</span> <span class="n">l1</span><span class="p">:</span> <span class="c1">#verifies the two arrays are the same length</span>
-        <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#removes last element from x1 to make l1 and l0 the same size</span>
-        
+
+    <span class="k">if</span> <span class="n">l0</span> <span class="o">!=</span> <span class="n">l1</span><span class="p">:</span>  <span class="c1"># verifies the two arrays are the same length</span>
+        <span class="c1"># removes last element from x1 to make l1 and l0 the same size</span>
+        <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
     <span class="n">z_diff</span> <span class="o">=</span> <span class="n">z1</span><span class="o">-</span><span class="n">z0</span>
     <span class="n">z_diff_min_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">z_diff</span><span class="p">)</span>
-    
-    <span class="c1">#finding the best fit value ignoring outliers</span>
+
+    <span class="c1"># finding the best fit value ignoring outliers</span>
     <span class="n">b</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">z0</span><span class="p">[</span><span class="n">z_diff_min_index</span><span class="p">]</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">z1</span><span class="p">[</span><span class="n">z_diff_min_index</span><span class="p">]</span>
-    <span class="n">cutoff</span> <span class="o">=</span> <span class="n">Significance_Cutoff</span><span class="o">+</span><span class="mi">7</span><span class="o">*</span><span class="n">b</span> <span class="c1">#the 5 times the best fit point (b) is from statstical analysis</span>
-                        <span class="c1">#the +0.000001 is a 0.00001% cutoff guarentee; If there is no noise in the system, </span>
-                        <span class="c1">#LMS will best fit to 0.</span>
-    <span class="n">fmax</span> <span class="o">=</span> <span class="n">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span><span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span> <span class="c1">#gets maximum frequency from |FFT|</span>
-    <span class="n">delay</span> <span class="o">=</span> <span class="p">(</span><span class="n">fs</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">fmax</span><span class="p">))</span> <span class="c1">#Suggested delay from Melosik&#39;s paper (0/1 test)</span>
-    
+    <span class="c1"># the 5 times the best fit point (b) is from statstical analysis</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="n">Significance_Cutoff</span><span class="o">+</span><span class="mi">7</span><span class="o">*</span><span class="n">b</span>
+    <span class="c1"># the +0.000001 is a 0.00001% cutoff guarentee; If there is no noise in the system,</span>
+    <span class="c1"># LMS will best fit to 0.</span>
+    <span class="c1"># gets maximum frequency from |FFT|</span>
+    <span class="n">fmax</span> <span class="o">=</span> <span class="n">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span>
+    <span class="n">delay</span> <span class="o">=</span> <span class="p">(</span><span class="n">fs</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">fmax</span><span class="p">))</span>  <span class="c1"># Suggested delay from Melosik&#39;s paper (0/1 test)</span>
+
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">delay</span> <span class="o">=</span> <span class="mi">1</span>
-        
+
     <span class="k">if</span> <span class="n">plotting</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">TextSize</span> <span class="o">=</span> <span class="mi">14</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">xf</span><span class="p">)],[</span><span class="n">cutoff</span><span class="p">,</span><span class="n">cutoff</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Cutoff: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">cutoff</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fmax</span><span class="p">,</span><span class="n">cutoff</span><span class="p">,</span><span class="s1">&#39;r.&#39;</span><span class="p">,</span><span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Max Freq: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">fmax</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Normalized $|\rm FFT|$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (Hz)&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">xf</span><span class="p">)],</span> <span class="p">[</span><span class="n">cutoff</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cutoff: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">cutoff</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fmax</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span> <span class="s1">&#39;r.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Max Freq: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">fmax</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Normalized $|\rm FFT|$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (Hz)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-        
+
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MaximumFrequency"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency">[docs]</a><span class="k">def</span> <span class="nf">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span><span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
+
+<div class="viewcode-block" id="MaximumFrequency"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency">[docs]</a><span class="k">def</span> <span class="nf">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">       xf (array): frequency array from FFT.</span>
 <span class="sd">       yf (array): normalized FFT values.</span>
@@ -296,21 +303,22 @@
 <span class="sd">       (float): maxfreq, the maximum frequency above threshold in fourier spectrum.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="n">check</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yf</span><span class="p">)):</span> <span class="c1">#finds max frequency and number of counts with a high FFT magnitude</span>
-        <span class="k">if</span> <span class="n">yf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">cutoff</span><span class="p">:</span> <span class="c1">#if the |FFT| is greater than 5 times the 1-D LMS fit</span>
-            <span class="n">maxfreq</span> <span class="o">=</span> <span class="n">xf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1">#finds last frequency with significance outside of cutoff</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yf</span><span class="p">)):</span>  <span class="c1"># finds max frequency and number of counts with a high FFT magnitude</span>
+        <span class="k">if</span> <span class="n">yf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">cutoff</span><span class="p">:</span>  <span class="c1"># if the |FFT| is greater than 5 times the 1-D LMS fit</span>
+            <span class="c1"># finds last frequency with significance outside of cutoff</span>
+            <span class="n">maxfreq</span> <span class="o">=</span> <span class="n">xf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="n">check</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="n">check</span> <span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">check</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">maxfreq</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">xf</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No signficant frequency. Possibly too much noise.&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">maxfreq</span> </div>
+    <span class="k">return</span> <span class="n">maxfreq</span></div>
 
 
-<div class="viewcode-block" id="AbsFFT"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT">[docs]</a><span class="k">def</span> <span class="nf">AbsFFT</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span> 
+<div class="viewcode-block" id="AbsFFT"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT">[docs]</a><span class="k">def</span> <span class="nf">AbsFFT</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
-<span class="sd">    </span>
+
 <span class="sd">   Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>
 <span class="sd">       fs (float): Sampling frequency of time series (equispaced).</span>
@@ -321,42 +329,38 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">scipy.fftpack</span> <span class="kn">import</span> <span class="n">fft</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="c1">#time series must be one dimensional array</span>
+    <span class="c1"># time series must be one dimensional array</span>
     <span class="n">fs</span> <span class="o">=</span> <span class="n">fs</span><span class="o">/</span><span class="mi">2</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">,))</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">fs</span> <span class="c1">#calculates the time between each data point</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">fs</span>  <span class="c1"># calculates the time between each data point</span>
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
 
-    <span class="c1">#creates array for time data points to associate to time series</span>
-    <span class="n">xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">t</span><span class="p">,</span> <span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">),[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span> 
-    <span class="c1">#converts array of time data points to appropriate frequency range and removes first term</span>
+    <span class="c1"># creates array for time data points to associate to time series</span>
+    <span class="n">xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">t</span><span class="p">,</span> <span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># converts array of time data points to appropriate frequency range and removes first term</span>
 
-    <span class="n">yf</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#computes fast fourier transform on time series</span>
-    <span class="n">yf</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]))</span> <span class="c1">#converts fourier transform to spectral density scale</span>
-    <span class="n">yf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">yf</span><span class="p">,[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#removes first term (tends to be infinity or overly large)</span>
-    <span class="n">yf</span> <span class="o">=</span> <span class="n">yf</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span> <span class="c1">#Normalizes fourier transform based on maximum density</span>
+    <span class="n">yf</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>  <span class="c1"># computes fast fourier transform on time series</span>
+    <span class="c1"># converts fourier transform to spectral density scale</span>
+    <span class="n">yf</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="c1"># removes first term (tends to be infinity or overly large)</span>
+    <span class="n">yf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">yf</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">yf</span> <span class="o">=</span> <span class="n">yf</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>  <span class="c1"># Normalizes fourier transform based on maximum density</span>
     <span class="k">return</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">)</span></div>
 
 
-
 <span class="c1"># In[ ]:</span>
-
 
 <span class="c1"># _______________________________________EXAMPLE_________________________________________</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    
+
     <span class="n">fs</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> 
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 
-    <span class="n">tau</span> <span class="o">=</span> <span class="n">LMSforDelay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">LMSforDelay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Permutation Embedding Delay: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">tau</span><span class="p">)))</span>
-
-        
-    
-    
 </pre></div>
 
            </div>

@@ -206,135 +206,122 @@
             
   <h1>Source code for teaspoon.SP.network</h1><div class="highlight"><pre>
 <span></span>
-<span class="k">def</span> <span class="nf">Adjaceny_OP</span><span class="p">(</span><span class="n">perm_seq</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span> <span class="c1">#Gets Adjacency Matrix (weighted and direction) using permutation sequence</span>
+<span class="c1"># Gets Adjacency Matrix (weighted and direction) using permutation sequence</span>
+<span class="k">def</span> <span class="nf">Adjaceny_OP</span><span class="p">(</span><span class="n">perm_seq</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1">#number of possible nodes</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span> <span class="c1">#prepares A</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm_seq</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#go through all permutation transitions (This could be faster wiuthout for loop)</span>
-        <span class="n">A</span><span class="p">[</span><span class="n">perm_seq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">perm_seq</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1">#for each transition between permutations increment A_ij</span>
-    <span class="k">return</span> <span class="n">A</span> <span class="c1">#this A is directional and weighted</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># number of possible nodes</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>  <span class="c1"># prepares A</span>
+    <span class="c1"># go through all permutation transitions (This could be faster wiuthout for loop)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm_seq</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># for each transition between permutations increment A_ij</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">perm_seq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">perm_seq</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">A</span>  <span class="c1"># this A is directional and weighted</span>
 
 
 <span class="k">def</span> <span class="nf">Adjacency_KNN</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
     <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
-        <span class="n">KNN_i</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">indices</span><span class="p">[</span><span class="n">h</span><span class="p">]</span><span class="o">!=</span><span class="n">h</span><span class="p">]</span> <span class="c1">#indices of k nearest neighbors</span>
-        <span class="n">A</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">KNN_i</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span> <span class="c1">#increment A_ij for kNN indices</span>
-        <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">KNN_i</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">A</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">KNN_i</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">indices</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">!=</span> <span class="n">h</span><span class="p">]</span>  <span class="c1"># indices of k nearest neighbors</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">KNN_i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment A_ij for kNN indices</span>
+        <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">KNN_i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">A</span>
 
 
-<div class="viewcode-block" id="knn_graph"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.knn_graph">[docs]</a><span class="k">def</span> <span class="nf">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">4</span><span class="p">):</span>
-    
+<div class="viewcode-block" id="knn_graph"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.knn_graph">[docs]</a><span class="k">def</span> <span class="nf">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function creates an k-NN network represented as an adjacency matrix A using a 1-D time series</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
-<span class="sd">    </span>
+
 <span class="sd">    Other Parameters:</span>
 <span class="sd">        n (Optional[int]): embedding dimension for state space reconstruction. Default is uses FNN algorithm from parameter_selection module.</span>
 <span class="sd">        tau (Optional[int]): embedding delay fro state space reconstruction. Default uses MI algorithm from parameter_selection module.</span>
 <span class="sd">        k (Optional[int]): number of nearest neighbors for graph formation.</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        [2-D square array]: A (2-D weighted and directed square adjacency matrix)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="c1">#import sub modules</span>
+
+    <span class="c1"># import sub modules</span>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
     <span class="kn">from</span> <span class="nn">teaspoon.SP</span> <span class="kn">import</span> <span class="n">tsa_tools</span>
-    
+
     <span class="k">if</span> <span class="n">tau</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">parameter_selection</span> <span class="kn">import</span> <span class="n">MI_delay</span>
-        <span class="n">tau</span> <span class="o">=</span> <span class="n">MI_delay</span><span class="o">.</span><span class="n">MI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;basic&#39;</span><span class="p">,</span> <span class="n">h_method</span> <span class="o">=</span> <span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">MI_delay</span><span class="o">.</span><span class="n">MI_for_delay</span><span class="p">(</span>
+            <span class="n">ts</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;basic&#39;</span><span class="p">,</span> <span class="n">h_method</span><span class="o">=</span><span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">parameter_selection</span> <span class="kn">import</span> <span class="n">FNN_n</span>
         <span class="n">perc_FNN</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">FNN_n</span><span class="o">.</span><span class="n">FNN_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
-    
-    <span class="n">ETS</span> <span class="o">=</span> <span class="n">tsa_tools</span><span class="o">.</span><span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span> <span class="c1">#get embedded time series</span>
-    
-    <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">tsa_tools</span><span class="o">.</span><span class="n">k_NN</span><span class="p">(</span><span class="n">ETS</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span> <span class="n">k</span><span class="p">)</span> 
-    <span class="c1">#gets distances between embedded vectors and the indices of the nearest neighbors for every vector</span>
-        
-    <span class="n">A</span> <span class="o">=</span> <span class="n">Adjacency_KNN</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="c1">#get adjacency matrix (weighted, directional)</span>
-    
+
+    <span class="n">ETS</span> <span class="o">=</span> <span class="n">tsa_tools</span><span class="o">.</span><span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>  <span class="c1"># get embedded time series</span>
+
+    <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">tsa_tools</span><span class="o">.</span><span class="n">k_NN</span><span class="p">(</span><span class="n">ETS</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+    <span class="c1"># gets distances between embedded vectors and the indices of the nearest neighbors for every vector</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">Adjacency_KNN</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>  <span class="c1"># get adjacency matrix (weighted, directional)</span>
+
     <span class="k">return</span> <span class="n">A</span></div>
 
 
-<div class="viewcode-block" id="ordinal_partition_graph"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.ordinal_partition_graph">[docs]</a><span class="k">def</span> <span class="nf">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    
+<div class="viewcode-block" id="ordinal_partition_graph"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.ordinal_partition_graph">[docs]</a><span class="k">def</span> <span class="nf">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function creates an ordinal partition network represented as an adjacency matrix A using a 1-D time series</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
-<span class="sd">    </span>
+
 <span class="sd">    Other Parameters:</span>
 <span class="sd">        n (Optional[int]): embedding dimension for state space reconstruction. Default is uses MsPE algorithm from parameter_selection module.</span>
 <span class="sd">        tau (Optional[int]): embedding delay fro state space reconstruction. Default uses MsPE algorithm from parameter_selection module.</span>
 <span class="sd">        k (Optional[int]): number of nearest neighbors for graph formation.</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        [2-D square array]: A (2-D weighted and directed square adjacency matrix)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="c1">#import sub modules</span>
+
+    <span class="c1"># import sub modules</span>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">import</span> <span class="nn">sys</span>
-    
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
+
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
     <span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">permutation_sequence</span>
-    
+
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">parameter_selection</span> <span class="kn">import</span> <span class="n">MsPE</span>
-        <span class="n">tau</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">MsPE</span><span class="o">.</span><span class="n">MsPE_tau</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span> 
+        <span class="n">tau</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">MsPE</span><span class="o">.</span><span class="n">MsPE_tau</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">MsPE</span><span class="o">.</span><span class="n">MsPE_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
-        
+
     <span class="k">if</span> <span class="n">tau</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">parameter_selection</span> <span class="kn">import</span> <span class="n">MsPE</span>
-        <span class="n">tau</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">MsPE</span><span class="o">.</span><span class="n">MsPE_tau</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span> 
-    
+        <span class="n">tau</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">MsPE</span><span class="o">.</span><span class="n">MsPE_tau</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+
     <span class="n">PS</span> <span class="o">=</span> <span class="n">permutation_sequence</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
-        
-    <span class="n">A</span> <span class="o">=</span> <span class="n">Adjaceny_OP</span><span class="p">(</span><span class="n">PS</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="c1">#gets adjacency matrix from permutation sequence transtitions</span>
-    
+
+    <span class="c1"># gets adjacency matrix from permutation sequence transtitions</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">Adjaceny_OP</span><span class="p">(</span><span class="n">PS</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">A</span></div>
-    
 
-    
+
 <span class="c1"># In[ ]:</span>
-    
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span> <span class="c1">#Only runs if running from this file (This will show basic example)</span>
 
-    <span class="c1">#import needed packages</span>
+<span class="c1"># Only runs if running from this file (This will show basic example)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="c1"># import needed packages</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1">#generate a simple time series</span>
-    
-    <span class="n">A_knn</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#ordinal partition network from time series</span>
-    
-    <span class="n">A_op</span> <span class="o">=</span> <span class="n">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#knn network from time series</span>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>  <span class="c1"># generate a simple time series</span>
+
+    <span class="n">A_knn</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>  <span class="c1"># ordinal partition network from time series</span>
+
+    <span class="n">A_op</span> <span class="o">=</span> <span class="n">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>  <span class="c1"># knn network from time series</span>
 </pre></div>
 
            </div>
