@@ -1,5 +1,6 @@
-Welcome to teaspoon's documentation page!
+teaspoon: Topological Signal Processing in Python
 ==========================================
+
 
 The emerging field of topological signal processing brings methods from Topological Data Analysis (TDA) to create new tools for signal processing by incorporating aspects of shape.
 This python package, teaspoon for tsp or topological signal processing, brings together available software for computing persistent homology, the main workhorse of TDA, with modules that expand the functionality of teaspoon as a state-of-the-art topological signal processing tool.
@@ -47,4 +48,5 @@ This is a list of the current issues for Sphinx:
 
 Contact Information
 ********************
-Liz Munch: muncheli@egr.msu.edu
+- `Liz Munch <http://www.elizabethmunch.com>`_: `muncheli@msu.edu <mailto:muncheli@msu.edu>`_
+- `Firas Khasawneh <https://www.firaskhasawneh.com>`_: `khasawn3@egr.msu.edu <mailto:khasawn3@egr.msu.edu>`_
