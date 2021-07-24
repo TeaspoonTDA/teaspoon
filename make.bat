@@ -10,7 +10,6 @@ if "%SPHINXBUILD%" == "" (
 set SOURCEDIR=source
 set BUILDDIR=docs
 
-echo.Hi there mom
 
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
