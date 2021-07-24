@@ -234,42 +234,34 @@
 </dl>
 </dd></dl>
 
-<p>The following is an example implementing the zero-dimensional sublevel set persistence algorithm:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.TDA.SLSP</span> <span class="kn">import</span> <span class="n">Persistence0D</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-
-<span class="n">fs</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">fs</span><span class="o">*</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-
-<span class="n">feature_ind_1</span><span class="p">,</span> <span class="n">feature_ind_2</span><span class="p">,</span> <span class="n">persistenceDgm</span> <span class="o">=</span> <span class="n">Persistence0D</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">persistenceDgm</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Persistence Diagram Pairs: &#39;</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
-
-
-<span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Time Series&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$x(t)$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Persistence Diagram&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Birth&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Death&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ts</span><span class="p">)],</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ts</span><span class="p">)],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
+<dl>
+<dt>The following is an example implementing the zero-dimensional sublevel set persistence algorithm::</dt><dd><p>from teaspoon.TDA.SLSP import Persistence0D
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+import numpy as np</p>
+<p>fs, T = 100, 10
+t = np.linspace(-0.2,T,fs*T+1)
+A = 20
+ts = A*np.sin(np.pi*t) + A*np.sin(1*t)</p>
+<p>feature_ind_1, feature_ind_2, persistenceDgm = Persistence0D(ts)
+D = persistenceDgm
+print(‘ Persistence Diagram Pairs: ‘, D)</p>
+<p>gs = gridspec.GridSpec(1,2)
+plt.figure(figsize=(11,5))</p>
+<p>ax = plt.subplot(gs[0, 0])
+plt.title(‘Time Series’)
+plt.xlabel(‘$t$’)
+plt.ylabel(‘$x(t)$’)
+plt.plot(t, ts)</p>
+<p>ax = plt.subplot(gs[0, 1])
+plt.title(‘Persistence Diagram’)
+plt.xlabel(‘Birth’)
+plt.ylabel(‘Death’)
+plt.plot(D.T[0], D.T[1], ‘ro’)
+plt.plot([min(ts), max(ts)], [min(ts), max(ts)], ‘k–’)</p>
+<p>plt.show()</p>
+</dd>
+</dl>
 <p>Where the output for this example is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Persistence</span> <span class="n">Diagram</span> <span class="n">Pairs</span><span class="p">:</span>
 <span class="p">[[</span><span class="o">-</span><span class="mf">27.87625241</span>   <span class="mf">0.4981549</span> <span class="p">]</span>
