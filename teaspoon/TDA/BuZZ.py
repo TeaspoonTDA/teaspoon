@@ -2,7 +2,6 @@ import numpy as np
 import dionysus as dio
 import pandas as pd
 import matplotlib.pyplot as plt
-from BuZZ.utils import minmax_subsample
 import time
 from ripser import ripser
 import warnings
@@ -40,12 +39,13 @@ class PtClouds(object):
             self.ptclouds_full = pd.DataFrame(columns=['PtCloud'])
             self.ptclouds_full['PtCloud'] = ptclouds
 
-        self.use_Landmarks(num_landmarks = num_landmarks)
+        self.use_Landmarks(num_landmarks=num_landmarks)
 
         self.num_landmarks = num_landmarks
 
         if cplx_type.lower() not in ['rips', 'landmark']:
-            warnings.warn("Complex type not recognized. Setting to rips by default.")
+            warnings.warn(
+                "Complex type not recognized. Setting to rips by default.")
             self.cplx_type = 'rips'
         else:
             self.cplx_type = cplx_type.lower()
@@ -63,11 +63,11 @@ class PtClouds(object):
         output += '---\n'
         for key in attrs.keys():
             output += str(key) + ' : '
-            output += str(attrs[key])+ '\n'
+            output += str(attrs[key]) + '\n'
         output += '---\n'
         return output
 
-    def use_Landmarks(self, num_landmarks = None):
+    def use_Landmarks(self, num_landmarks=None):
         '''
         Uses landmark complex by subsampling each point cloud using a max min approach.
 
@@ -86,8 +86,8 @@ class PtClouds(object):
         # Subsample num_landmarks points from each point cloud using MinMax approach
         self.ptclouds = pd.DataFrame(columns=['PtCloud'])
         for i, pc in enumerate(self.ptclouds_full['PtCloud']):
-            self.ptclouds.loc[i,'PtCloud'] = minmax_subsample(pc, num_landmarks, seed=None)
-
+            self.ptclouds.loc[i, 'PtCloud'] = minmax_subsample(
+                pc, num_landmarks, seed=None)
 
     def run_Zigzag(self, r, k=2):
         '''
@@ -122,16 +122,19 @@ class PtClouds(object):
         elif type(r) == int or type(r) == float:
             self.r = r
         else:
-            warnings.warn("Input for r is invalid. Retry with list, int or float")
+            warnings.warn(
+                "Input for r is invalid. Retry with list, int or float")
             return
 
         ft_st = time.time()
 
         # Set up inputs for dionysus zigzag persistence
         if type(self.r) == float or type(self.r) == int:
-            filtration, times = self.setup_Zigzag_fixed(r = self.r, k = self.k, verbose = self.verbose)
+            filtration, times = self.setup_Zigzag_fixed(
+                r=self.r, k=self.k, verbose=self.verbose)
         else:
-            filtration, times = self.setup_Zigzag_changing(r = self.r, k = self.k, verbose = self.verbose)
+            filtration, times = self.setup_Zigzag_changing(
+                r=self.r, k=self.k, verbose=self.verbose)
 
         self.filtration = filtration
         self.times_list = times
@@ -142,23 +145,22 @@ class PtClouds(object):
 
         # Run zigzag presistence using dionysus
         zz_st = time.time()
-        zz, dgms, cells = dio.zigzag_homology_persistence(self.filtration,self.times_list)
+        zz, dgms, cells = dio.zigzag_homology_persistence(
+            self.filtration, self.times_list)
         zz_end = time.time()
 
         if self.verbose:
             print('Time to compute zigzag: ', str(zz_end-zz_st))
             print('Total Time: ', str(zz_end - ft_st), '\n')
 
-        dgms = [ np.array([ [p.birth,p.death] for p in dgm]) for dgm in dgms ]
+        dgms = [np.array([[p.birth, p.death] for p in dgm]) for dgm in dgms]
 
         self.zz = zz
-        self.zz_dgms = dgms[0:k] # only keep appropriate dimensions
+        self.zz_dgms = dgms[0:k]  # only keep appropriate dimensions
         self.zz_cells = cells
 
         self.setup_time = ft_end - ft_st
         self.zigzag_time = zz_end - zz_st
-
-
 
     def setup_Zigzag_fixed(self, r, k=2, verbose=False):
         '''
@@ -190,7 +192,8 @@ class PtClouds(object):
         lst = list(self.ptclouds['PtCloud'])
 
         # simps_df = pd.DataFrame(columns = ['Simp','B,D'])
-        simps_list = []; times_list = []
+        simps_list = []
+        times_list = []
 
         # Vertex counter
         vertind = 0
@@ -205,11 +208,12 @@ class PtClouds(object):
         A = rips_set
 
         # # Add all simps to the list with birth,death=[0,1]
-        simps_list =  simps_list + [s for s in A]
-        times_list = times_list + [[0,1] for j in range(len(A))]
+        simps_list = simps_list + [s for s in A]
+        times_list = times_list + [[0, 1] for j in range(len(A))]
 
         # Initialize with vertices for X_0
-        verts = set([dio.Simplex([j+vertind],0) for j,pc in enumerate(lst[0])])
+        verts = set([dio.Simplex([j+vertind], 0)
+                    for j, pc in enumerate(lst[0])])
 
         init_end = time.time()
         if verbose:
@@ -217,10 +221,10 @@ class PtClouds(object):
 
         loop_st = time.time()
         # Loop over the rest of the point clouds
-        for i in range(1,len(lst)):
+        for i in range(1, len(lst)):
 
             # Calculate rips of X_{i-1} \cup X_i
-            rips = dio.fill_rips(np.vstack([lst[i-1],lst[i]]), k=2, r=r)
+            rips = dio.fill_rips(np.vstack([lst[i-1], lst[i]]), k=2, r=r)
 
             # Adjust vertex numbers, sort, and make into a set
             rips = fix_dio_vert_nums(rips, vertind)
@@ -231,7 +235,8 @@ class PtClouds(object):
             vertind = vertind+len(verts)
 
             # Set of vertices in R(X_i)
-            verts_next = set([dio.Simplex([j+vertind],0) for j,pc in enumerate(lst[i])])
+            verts_next = set([dio.Simplex([j+vertind], 0)
+                             for j, pc in enumerate(lst[i])])
 
             # Set of simplices with verts in X_{i}
             B = set(verts_next.intersection(rips_set))
@@ -262,14 +267,13 @@ class PtClouds(object):
                 else:
                     M.add(simp)
 
-
             # Add simplices in B with the corresponding birth,death times
             simps_list = simps_list + [s for s in B]
-            times_list = times_list + [ [i-0.5,i+1] for j in range(len(B)) ]
+            times_list = times_list + [[i-0.5, i+1] for j in range(len(B))]
 
             # Add simplicies in M with corresponding birth,death times
             simps_list = simps_list + [s for s in M]
-            times_list = times_list + [ [i-0.5,i] for j in range(len(M)) ]
+            times_list = times_list + [[i-0.5, i] for j in range(len(M))]
 
             # Reinitialize for next iteration
             verts = verts_next
@@ -284,7 +288,6 @@ class PtClouds(object):
         f_end = time.time()
 
         return filtration, times_list
-
 
     def setup_Zigzag_changing(self, r, k=2, verbose=False):
         '''
@@ -320,7 +323,7 @@ class PtClouds(object):
         if len(r) < len(lst):
             if verbose:
                 print('Warning: too few radii given, duplicating last entry')
-            r = r + ([r[-1]]* (len(lst)- len(r)))
+            r = r + ([r[-1]] * (len(lst) - len(r)))
         elif len(r) > len(lst):
             if verbose:
                 print('Warning: too many radii given, only using first ', len(lst))
@@ -328,7 +331,8 @@ class PtClouds(object):
         self.r = r
 
         # simps_df = pd.DataFrame(columns = ['Simp','B,D'])
-        simps_list = []; times_list = []
+        simps_list = []
+        times_list = []
 
         # Vertex counter
         vertind = 0
@@ -345,12 +349,13 @@ class PtClouds(object):
         A = rips_set
 
         # Add all simps to the list with birth,death=[0,1]
-        simps_list =  simps_list + [s for s in A]
-        times_list = times_list + [[0,1] for j in range(len(A))]
+        simps_list = simps_list + [s for s in A]
+        times_list = times_list + [[0, 1] for j in range(len(A))]
 
         # Initialize with vertices for X_0
         # In the loop, this will store vertices in X_{i-1}
-        verts = set([dio.Simplex([j+vertind],0) for j,pc in enumerate(lst[0])])
+        verts = set([dio.Simplex([j+vertind], 0)
+                    for j, pc in enumerate(lst[0])])
 
         init_end = time.time()
         if verbose:
@@ -358,10 +363,11 @@ class PtClouds(object):
 
         loop_st = time.time()
         # Loop over the rest of the point clouds
-        for i in range(1,len(lst)):
+        for i in range(1, len(lst)):
 
             # Calculate rips of X_{i-1} \cup X_i
-            rips = dio.fill_rips(np.vstack([lst[i-1],lst[i]]), k=2, r=max(r[i-1],r[i]))
+            rips = dio.fill_rips(
+                np.vstack([lst[i-1], lst[i]]), k=2, r=max(r[i-1], r[i]))
 
             # Adjust vertex numbers, sort, and make into a set
             rips = fix_dio_vert_nums(rips, vertind)
@@ -372,7 +378,8 @@ class PtClouds(object):
             vertind = vertind+len(verts)
 
             # Set of vertices in X_{i}
-            verts_next = set([dio.Simplex([j+vertind],0) for j,pc in enumerate(lst[i])])
+            verts_next = set([dio.Simplex([j+vertind], 0)
+                             for j, pc in enumerate(lst[i])])
 
             # Set of simplices with verts in X_{i}
             B = set(verts_next.intersection(rips_set))
@@ -385,7 +392,7 @@ class PtClouds(object):
             for simp in rips:
 
                 # Get list of vertices of simp
-                bdy = get_verts(simp) #set([s for s in simp.boundary()])
+                bdy = get_verts(simp)  # set([s for s in simp.boundary()])
 
                 # If it has no boundary and its in B, its a vertex in B and has been handled
                 if not bdy:
@@ -402,8 +409,8 @@ class PtClouds(object):
                             # If we've already added it to the list...
                             else:
                                 # Edit the lists to include new birth,death times
-                                simps_list, times_list = edit_Simp_Times(simp,[i-0.5,i],simps_list,times_list)
-
+                                simps_list, times_list = edit_Simp_Times(
+                                    simp, [i-0.5, i], simps_list, times_list)
 
                 # If all of its verts are in B...
                 elif bdy.intersection(B) == bdy:
@@ -431,16 +438,16 @@ class PtClouds(object):
                     # If we've already added it to the list...
                     else:
                         # Edit the lists to include new birth,death times
-                        simps_list, times_list = edit_Simp_Times(simp,[i-0.5,i],simps_list,times_list)
-
+                        simps_list, times_list = edit_Simp_Times(
+                            simp, [i-0.5, i], simps_list, times_list)
 
             # Add simps and times that are in B
             simps_list = simps_list + [simp for simp in B]
-            times_list = times_list + [[i-0.5,i+1] for j in range(len(B))]
+            times_list = times_list + [[i-0.5, i+1] for j in range(len(B))]
 
             # Add simps and times that are in M
             simps_list = simps_list + [simp for simp in M]
-            times_list = times_list + [[i-0.5,i] for j in range(len(M))]
+            times_list = times_list + [[i-0.5, i] for j in range(len(M))]
 
             # Reinitialize for next iteration
             verts = verts_next
@@ -454,8 +461,6 @@ class PtClouds(object):
         filtration = dio.Filtration(simps_list)
 
         return filtration, times_list
-
-
 
     def plot_ZZ_PtClouds(self, save=False, savename='PC.png', v_plts=None, h_plts=None):
         '''
@@ -477,7 +482,7 @@ class PtClouds(object):
 
         '''
 
-        if not hasattr(self,'ptclouds'):
+        if not hasattr(self, 'ptclouds'):
             print('No point clouds found...')
             print('Quitting...')
             return
@@ -485,23 +490,24 @@ class PtClouds(object):
         PC_list = list(self.ptclouds['PtCloud'])
         All_PC = np.vstack(PC_list)
 
-        xmin = min(All_PC[:,0]) - 0.5 #0.1*min(All_PC[:,0])
-        xmax = max(All_PC[:,0]) + 0.5 #0.1*max(All_PC[:,0])
+        xmin = min(All_PC[:, 0]) - 0.5  # 0.1*min(All_PC[:,0])
+        xmax = max(All_PC[:, 0]) + 0.5  # 0.1*max(All_PC[:,0])
 
-        ymin = min(All_PC[:,1]) - 0.5 #0.1*min(All_PC[:,1])
-        ymax = max(All_PC[:,1]) + 0.5 #0.1*max(All_PC[:,1])
+        ymin = min(All_PC[:, 1]) - 0.5  # 0.1*min(All_PC[:,1])
+        ymax = max(All_PC[:, 1]) + 0.5  # 0.1*max(All_PC[:,1])
 
 #         plt.rcParams.update({'font.size': 18})
 
         if h_plts is not None:
-            v_plts = int(np.ceil( (2*len(PC_list)-1)/ h_plts ))
+            v_plts = int(np.ceil((2*len(PC_list)-1) / h_plts))
         elif v_plts is not None:
-            h_plts = int(np.ceil( (2*len(PC_list)-1)/ v_plts ))
+            h_plts = int(np.ceil((2*len(PC_list)-1) / v_plts))
         else:
-            v_plts = int(np.ceil( (2*len(PC_list)-1)/ 8 ))
+            v_plts = int(np.ceil((2*len(PC_list)-1) / 8))
             h_plts = 8
 
-        fig, axs = plt.subplots(v_plts, h_plts, sharex=True, sharey=True, figsize=[h_plts*2.5,v_plts*3])
+        fig, axs = plt.subplots(v_plts, h_plts, sharex=True, sharey=True, figsize=[
+                                h_plts*2.5, v_plts*3])
         axs = axs.ravel()
 
         # Make color list
@@ -512,34 +518,37 @@ class PtClouds(object):
             cs = cs * int(np.ceil(len(PC_list)/10))
 
         # Plotting...
-        for i,ax in enumerate(axs):
+        for i, ax in enumerate(axs):
 
             if i >= 2*len(PC_list)-1:
                 ax.axis('off')
                 continue
 
             # Plot point clouds alone
-            if i%2==0:
-                ax.scatter(PC_list[int(i/2)][:,0], PC_list[int(i/2)][:,1], c=cs[int(i/2)])
-                ax.set_title( '$X_{'+str(int(i/2))+'}$' ) #int(i/2))
-                ax.set_xlim([xmin,xmax])
-                ax.set_ylim([ymin,ymax])
+            if i % 2 == 0:
+                ax.scatter(PC_list[int(i/2)][:, 0],
+                           PC_list[int(i/2)][:, 1], c=cs[int(i/2)])
+                ax.set_title('$X_{'+str(int(i/2))+'}$')  # int(i/2))
+                ax.set_xlim([xmin, xmax])
+                ax.set_ylim([ymin, ymax])
 
             # Plot union of point clouds
             else:
-                ax.scatter(PC_list[int((i-1)/2)][:,0], PC_list[int((i-1)/2)][:,1], c=cs[int((i-1)/2)])
-                ax.scatter(PC_list[int((i+1)/2)][:,0], PC_list[int((i+1)/2)][:,1], c=cs[int((i+1)/2)])
-                ax.set_title( '$X_{'+str(int((i-1)/2))+'} \cup X_{' + str(int((i+1)/2)) + '}$' )
-                ax.set_xlim([xmin,xmax])
-                ax.set_ylim([ymin,ymax])
+                ax.scatter(PC_list[int((i-1)/2)][:, 0],
+                           PC_list[int((i-1)/2)][:, 1], c=cs[int((i-1)/2)])
+                ax.scatter(PC_list[int((i+1)/2)][:, 0],
+                           PC_list[int((i+1)/2)][:, 1], c=cs[int((i+1)/2)])
+                ax.set_title('$X_{'+str(int((i-1)/2)) +
+                             '} \cup X_{' + str(int((i+1)/2)) + '}$')
+                ax.set_xlim([xmin, xmax])
+                ax.set_ylim([ymin, ymax])
 
-        plt.tight_layout() #pad=2.0)
+        plt.tight_layout()  # pad=2.0)
 
         # Save figure
         if save:
             print('Saving fig at ', savename, '...')
             plt.savefig(savename, dpi=500, bbox_inches='tight')
-
 
     def plot_ZZ_Full_PtClouds(self, save=False, savename='PC_Full.png', v_plts=None, h_plts=None):
         '''
@@ -562,7 +571,7 @@ class PtClouds(object):
 
         '''
 
-        if not hasattr(self,'ptclouds_full'):
+        if not hasattr(self, 'ptclouds_full'):
             print('No point clouds found...')
             print('Quitting...')
             return
@@ -570,23 +579,24 @@ class PtClouds(object):
         PC_list = list(self.ptclouds_full['PtCloud'])
         All_PC = np.vstack(PC_list)
 
-        xmin = min(All_PC[:,0]) - 0.5
-        xmax = max(All_PC[:,0]) + 0.5
+        xmin = min(All_PC[:, 0]) - 0.5
+        xmax = max(All_PC[:, 0]) + 0.5
 
-        ymin = min(All_PC[:,1]) - 0.5
-        ymax = max(All_PC[:,1]) + 0.5
+        ymin = min(All_PC[:, 1]) - 0.5
+        ymax = max(All_PC[:, 1]) + 0.5
 
 #         plt.rcParams.update({'font.size': 18})
 
         if h_plts is not None:
-            v_plts = int(np.ceil( (2*len(PC_list)-1)/ h_plts ))
+            v_plts = int(np.ceil((2*len(PC_list)-1) / h_plts))
         elif v_plts is not None:
-            h_plts = int(np.ceil( (2*len(PC_list)-1)/ v_plts ))
+            h_plts = int(np.ceil((2*len(PC_list)-1) / v_plts))
         else:
-            v_plts = int(np.ceil( (2*len(PC_list)-1)/ 8 ))
+            v_plts = int(np.ceil((2*len(PC_list)-1) / 8))
             h_plts = 8
 
-        fig, axs = plt.subplots(v_plts, h_plts ,sharey=True, sharex=True,figsize=[h_plts*2.5,v_plts*3])
+        fig, axs = plt.subplots(v_plts, h_plts, sharey=True, sharex=True, figsize=[
+                                h_plts*2.5, v_plts*3])
         axs = axs.ravel()
 
         # Make color list
@@ -597,25 +607,29 @@ class PtClouds(object):
             cs = cs * int(np.ceil(len(PC_list)/10))
 
         # Plotting...
-        for i,ax in enumerate(axs):
+        for i, ax in enumerate(axs):
             if i >= 2*len(PC_list)-1:
                 ax.axis('off')
                 continue
 
             # Plot point clouds alone
-            if i%2==0:
-                ax.scatter(PC_list[int(i/2)][:,0], PC_list[int(i/2)][:,1], c=cs[int(i/2)])
-                ax.set_title( f'$X_{str(int(i/2))}$' ) #int(i/2))
-                ax.set_xlim([xmin,xmax])
-                ax.set_ylim([ymin,ymax])
+            if i % 2 == 0:
+                ax.scatter(PC_list[int(i/2)][:, 0],
+                           PC_list[int(i/2)][:, 1], c=cs[int(i/2)])
+                ax.set_title(f'$X_{str(int(i/2))}$')  # int(i/2))
+                ax.set_xlim([xmin, xmax])
+                ax.set_ylim([ymin, ymax])
 
             # Plot union of point clouds
             else:
-                ax.scatter(PC_list[int((i-1)/2)][:,0], PC_list[int((i-1)/2)][:,1], c=cs[int((i-1)/2)])
-                ax.scatter(PC_list[int((i+1)/2)][:,0], PC_list[int((i+1)/2)][:,1], c=cs[int((i+1)/2)])
-                ax.set_title( f'$X_{str(int((i-1)/2))} \cup X_{str(int((i+1)/2))}$' )
-                ax.set_xlim([xmin,xmax])
-                ax.set_ylim([ymin,ymax])
+                ax.scatter(PC_list[int((i-1)/2)][:, 0],
+                           PC_list[int((i-1)/2)][:, 1], c=cs[int((i-1)/2)])
+                ax.scatter(PC_list[int((i+1)/2)][:, 0],
+                           PC_list[int((i+1)/2)][:, 1], c=cs[int((i+1)/2)])
+                ax.set_title(
+                    f'$X_{str(int((i-1)/2))} \cup X_{str(int((i+1)/2))}$')
+                ax.set_xlim([xmin, xmax])
+                ax.set_ylim([ymin, ymax])
 
         plt.tight_layout()
 
@@ -623,7 +637,6 @@ class PtClouds(object):
         if save:
             print('Saving fig at ', savename, '...')
             plt.savefig(savename, dpi=500, bbox_inches='tight')
-
 
     def plot_ZZ_Cplx(self, save=False, savename='Cplx.png', v_plts=None, h_plts=None):
         '''
@@ -645,7 +658,7 @@ class PtClouds(object):
 
         '''
 
-        if not hasattr(self,'filtration'):
+        if not hasattr(self, 'filtration'):
             print('No filtration calculated yet...')
             print('Use run_Zigzag first then you can use this function...')
             print('Quitting...')
@@ -659,23 +672,24 @@ class PtClouds(object):
         else:
             r_plot = self.r
 
-        xmin = min(All_PC[:,0]) - 0.5
-        xmax = max(All_PC[:,0]) + 0.5
+        xmin = min(All_PC[:, 0]) - 0.5
+        xmax = max(All_PC[:, 0]) + 0.5
 
-        ymin = min(All_PC[:,1]) - 0.5
-        ymax = max(All_PC[:,1]) + 0.5
+        ymin = min(All_PC[:, 1]) - 0.5
+        ymax = max(All_PC[:, 1]) + 0.5
 
 #         plt.rcParams.update({'font.size': 18})
 
         if h_plts is not None:
-            v_plts = int(np.ceil( (2*len(PC_list)-1)/ h_plts ))
+            v_plts = int(np.ceil((2*len(PC_list)-1) / h_plts))
         elif v_plts is not None:
-            h_plts = int(np.ceil( (2*len(PC_list)-1)/ v_plts ))
+            h_plts = int(np.ceil((2*len(PC_list)-1) / v_plts))
         else:
-            v_plts = int(np.ceil( (2*len(PC_list)-1)/ 8 ))
+            v_plts = int(np.ceil((2*len(PC_list)-1) / 8))
             h_plts = 8
 
-        fig, axs = plt.subplots(v_plts, h_plts ,sharey=True, sharex=True, figsize=[h_plts*2.5,v_plts*3])
+        fig, axs = plt.subplots(v_plts, h_plts, sharey=True, sharex=True, figsize=[
+                                h_plts*2.5, v_plts*3])
         axs = axs.ravel()
 
         # Make color list
@@ -683,37 +697,43 @@ class PtClouds(object):
 
         # Make sure color list is long enough
         if len(PC_list) > 10:
-            cs = cs * (int(np.ceil(len(PC_list)/10)) +1)
+            cs = cs * (int(np.ceil(len(PC_list)/10)) + 1)
 
         # Plotting vertices
-        for i,ax in enumerate(axs):
+        for i, ax in enumerate(axs):
 
             if i >= 2*len(PC_list)-1:
                 ax.axis('off')
                 continue
 
             # Plot point clouds alone
-            if i%2==0:
-                ax.scatter(PC_list[int(i/2)][:,0], PC_list[int(i/2)][:,1], c=cs[int(i/2)])
+            if i % 2 == 0:
+                ax.scatter(PC_list[int(i/2)][:, 0],
+                           PC_list[int(i/2)][:, 1], c=cs[int(i/2)])
                 if self.cplx_type == 'rips' or self.cplx_type == 'landmark':
-                    ax.set_title( '$R(X_{' + str(int(i/2))+ '})$' )#',' +str(r_plot[int(i/2)])+ ')$' )
+                    # ',' +str(r_plot[int(i/2)])+ ')$' )
+                    ax.set_title('$R(X_{' + str(int(i/2)) + '})$')
                 elif self.cplx_type == 'witness':
-                    ax.set_title( f'$W(X_{str(int(i/2))})$' )
-                ax.set_xlim([xmin,xmax])
-                ax.set_ylim([ymin,ymax])
+                    ax.set_title(f'$W(X_{str(int(i/2))})$')
+                ax.set_xlim([xmin, xmax])
+                ax.set_ylim([ymin, ymax])
 
             # Plot union of point clouds
             else:
-                ax.scatter(PC_list[int((i-1)/2)][:,0], PC_list[int((i-1)/2)][:,1], c=cs[int((i-1)/2)])
-                ax.scatter(PC_list[int((i+1)/2)][:,0], PC_list[int((i+1)/2)][:,1], c=cs[int((i+1)/2)])
+                ax.scatter(PC_list[int((i-1)/2)][:, 0],
+                           PC_list[int((i-1)/2)][:, 1], c=cs[int((i-1)/2)])
+                ax.scatter(PC_list[int((i+1)/2)][:, 0],
+                           PC_list[int((i+1)/2)][:, 1], c=cs[int((i+1)/2)])
                 if self.cplx_type == 'rips' or self.cplx_type == 'landmark':
-                    ax.set_title('$R(X_{' + str(int((i-1)/2)) + '} \cup X_{' + str(int((i+1)/2))+ '})$' )# ', '+ str(max(r_plot[int((i-1)/2)], r_plot[int((i+1)/2)])) + ')$' )
+                    # ', '+ str(max(r_plot[int((i-1)/2)], r_plot[int((i+1)/2)])) + ')$' )
+                    ax.set_title(
+                        '$R(X_{' + str(int((i-1)/2)) + '} \cup X_{' + str(int((i+1)/2)) + '})$')
 
                 elif self.cplx_type == 'witness':
-                    ax.set_title( f'$W(X_{str(int((i-1)/2))} \cup X_{str(int((i+1)/2))})$' )
-                ax.set_xlim([xmin,xmax])
-                ax.set_ylim([ymin,ymax])
-
+                    ax.set_title(
+                        f'$W(X_{str(int((i-1)/2))} \cup X_{str(int((i+1)/2))})$')
+                ax.set_xlim([xmin, xmax])
+                ax.set_ylim([ymin, ymax])
 
         # Plotting edges
         for i, s in enumerate(self.filtration):
@@ -724,7 +744,8 @@ class PtClouds(object):
                     if j == int((2*len(PC_list)-1)):
                         break
                     else:
-                        axs[j].plot( [All_PC[vs[0]][0], All_PC[vs[1]][0]], [All_PC[vs[0]][1], All_PC[vs[1]][1]], c='k' )
+                        axs[j].plot([All_PC[vs[0]][0], All_PC[vs[1]][0]], [
+                                    All_PC[vs[0]][1], All_PC[vs[1]][1]], c='k')
 
         plt.tight_layout()
 
@@ -734,8 +755,7 @@ class PtClouds(object):
             plt.savefig(savename, dpi=500, bbox_inches='tight')
 
 
-
-def edit_Simp_Times(simp,new_bd_times,simps_list,times_list):
+def edit_Simp_Times(simp, new_bd_times, simps_list, times_list):
     '''
     Helper function to adjust appearance/disappearance times of a particular simplex.
 
@@ -794,10 +814,11 @@ def fix_dio_vert_nums(Cplx, vertind):
         vlist = []
         for v in s:
             vlist.append(v+vertind)
-        s = dio.Simplex(vlist,s.data)
+        s = dio.Simplex(vlist, s.data)
 
         New_Cplx.append(s)
     return New_Cplx
+
 
 def get_verts(simp):
     '''
@@ -814,12 +835,12 @@ def get_verts(simp):
 
     '''
     if simp.dimension == 2:
-        return [dio.Simplex([v],0) for v in t]
+        return [dio.Simplex([v], 0) for v in t]
     else:
         return set([s for s in simp.boundary()])
 
 
-### Utilities
+# Utilities
 
 def minmax_subsample(pts, n, seed=3):
     '''
@@ -840,20 +861,20 @@ def minmax_subsample(pts, n, seed=3):
     D = pairwise_distances(pts, metric='euclidean')
 
     # Initialize array for subsampled points
-    newpts = np.zeros((n,2))
+    newpts = np.zeros((n, 2))
 
     # Pick a random starting point and add it to array
-    st = random.randint(0,len(pts)-1)
-    newpts[0,:]= pts[st,:]
+    st = random.randint(0, len(pts)-1)
+    newpts[0, :] = pts[st, :]
 
     # Only look at distances from starting point
-    ds = D[st,:]
-    for i in range(1,n):
+    ds = D[st, :]
+    for i in range(1, n):
 
         # Find point furthest away
         idx = np.argmax(ds)
 
-        newpts[i,:] = pts[idx,:]
+        newpts[i, :] = pts[idx, :]
 
         ds = np.minimum(ds, D[idx, :])
 

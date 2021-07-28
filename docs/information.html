@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>2.4.3. Information Module &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2.4.4. Miscellaneous Functions" href="misc.html" />
+    <link rel="prev" title="2.4.2. Network Representation of Time Series" href="network.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> teaspoon
+          
+
+          
+            
+            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html">2.1.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
+        
+          <li><a href="SP.html"><span class="section-number">2.4. </span>Signal Processing (SP) Module Documentation</a> &raquo;</li>
+        
+      <li><span class="section-number">2.4.3. </span>Information Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/information.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="information-module">
+<h1><span class="section-number">2.4.3. </span>Information Module<a class="headerlink" href="#information-module" title="Permalink to this headline">¶</a></h1>
+<p>This page provides a summary of the functions available in the information module.</p>
+<p>Currently, the following functions are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#perm-ent"><span class="std std-ref">Permutation Entropy</span></a></p></li>
+<li><p><a class="reference internal" href="#multiscale-pe"><span class="std std-ref">Multi-scale Permutation Entropy</span></a></p></li>
+<li><p><a class="reference internal" href="#pers-ent"><span class="std std-ref">Persistent Entropy</span></a></p></li>
+</ul>
+<div class="section" id="entropy">
+<h2><span class="section-number">2.4.3.1. </span>Entropy<a class="headerlink" href="#entropy" title="Permalink to this headline">¶</a></h2>
+<p>One of the most common ways to represent information from a data source is through the measurement of entropy. In this sub-module we have included some implementations of measuring entropy from a signal (permutation entropy) and persistence diagram (persistent entropy). Entropy is calculated as</p>
+<div class="math notranslate nohighlight">
+\[h = -\sum_{x \in X} p(x) {\rm log}_2(p(x),\]</div>
+<p>where p(x) is the probability of data type x, which is an element of the finite set of data types X. Additional, the log is base 2 so that the entropy as units of information. Persistent entropy is normalized on a scale from [0,1] with no units as</p>
+<div class="math notranslate nohighlight">
+\[h' = \frac{h}{\# \{ x \in X \} },\]</div>
+<p>where # denotes the number of data types in X.</p>
+<div class="section" id="permutation-entropy">
+<span id="perm-ent"></span><h3><span class="section-number">2.4.3.1.1. </span>Permutation Entropy<a class="headerlink" href="#permutation-entropy" title="Permalink to this headline">¶</a></h3>
+<p>Permutation entropy uses the data types of permutations (see <a class="reference internal" href="tsa.html#permutation-sequence"><span class="std std-ref">Permutation Sequence Generation</span></a> for details on permutations) and calculates the probability of each as their respective occurance in a time series.</p>
+<span class="target" id="module-teaspoon.SP.information.entropy"></span><dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.SP.information.entropy.PE">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.information.entropy.</span></span><span class="sig-name descname"><span class="pre">PE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/information/entropy.html#PE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.information.entropy.PE" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes a time series and calculates Permutation Entropy (PE).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ts</strong> (<em>array</em>) – Time series (1d).</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Permutation dimension. Default is 5.</p></li>
+<li><p><strong>tau</strong> (<em>int</em>) – Permutation delay. Default is 10.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>normalize (bool): Normalizes the permutation entropy on scale from 0 to 1. defaut is False.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>PE, the permutation entropy.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>  <span class="c1">#generate a simple time series</span>
+
+<span class="kn">from</span> <span class="nn">teaspoon.SP.information.entropy</span> <span class="kn">import</span> <span class="n">PE</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">PE</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Permutation entropy: &#39;</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output of example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Permutation</span> <span class="n">entropy</span><span class="p">:</span>  <span class="mf">0.4350397222113192</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multi-scale-permutation-entropy">
+<span id="multiscale-pe"></span><h3><span class="section-number">2.4.3.1.2. </span>Multi-scale Permutation Entropy<a class="headerlink" href="#multi-scale-permutation-entropy" title="Permalink to this headline">¶</a></h3>
+<p>Multi-scale Permutation Entropy applies the permutation entropy calculation over multiple time scales (delays).</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.information.entropy.</span></span><span class="sig-name descname"><span class="pre">MsPE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/information/entropy.html#MsPE"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="simple">
+<dt>This function takes a time series and calculates Multi-scale Permutation Entropy (MsPE)</dt><dd><p>over multiple time scales</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ts</strong> (<em>array</em>) – Time series (1d).</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Permutation dimension. Default is 5.</p></li>
+<li><p><strong>delay_end</strong> (<em>int</em>) – maximum delay in search. default is 200.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>plotting (bool): Plotting for user interpretation. defaut is False.
+normalize (bool): Normalizes the permutation entropy on scale from 0 to 1. defaut is False.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>MsPE, the permutation entropy over multiple time scales.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>  <span class="c1">#generate a simple time series</span>
+
+<span class="kn">from</span> <span class="nn">teaspoon.SP.information.entropy</span> <span class="kn">import</span> <span class="n">MsPE</span>
+<span class="n">delays</span><span class="p">,</span><span class="n">H</span> <span class="o">=</span> <span class="n">MsPE</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">delay_end</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">TextSize</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delays</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$h(3)$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tau$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Output of example:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/mspe_example.png"><img alt="_images/mspe_example.png" src="_images/mspe_example.png" style="width: 516.0px; height: 222.0px;" /></a>
+</div>
+</div>
+<div class="section" id="persistent-entropy">
+<span id="pers-ent"></span><h3><span class="section-number">2.4.3.1.3. </span>Persistent Entropy<a class="headerlink" href="#persistent-entropy" title="Permalink to this headline">¶</a></h3>
+<p>Persistent entropy uses the data types of lifetimes from a persistence diagram and calculates their respective probability as</p>
+<div class="math notranslate nohighlight">
+\[p(\ell) = \frac{\ell}{\sum_{\ell \in L}\ell},\]</div>
+<p>where L is the set of lifetimes.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.information.entropy.</span></span><span class="sig-name descname"><span class="pre">PersistentEntropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lifetimes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/information/entropy.html#PersistentEntropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>This function takes a time series and calculates Permutation Entropy (PE).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lifetimes</strong> (<em>array</em>) – Lifetimes from persistence diagram (1d).</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>normalize (bool): Normalizes the entropy on scale from 0 to 1. defaut is False.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>PerEn, the persistence diagram entropy.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1">#generate a simple time series with noise</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+<span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">takens</span>
+<span class="c1">#embed the time series into 2 dimension space using takens embedding</span>
+<span class="n">embedded_ts</span> <span class="o">=</span> <span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+<span class="c1">#calculate the rips filtration persistent homology</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">embedded_ts</span><span class="p">,</span> <span class="n">maxdim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">diagram</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
+
+<span class="c1">#--------------------Plot embedding and persistence diagram---------------</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">TextSize</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">MS</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x(t)$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x(t+\tau)$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">embedded_ts</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">embedded_ts</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">top</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">top</span><span class="o">*</span><span class="mf">1.25</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">top</span><span class="o">*</span><span class="mf">1.25</span><span class="p">],</span><span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Birth&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Death&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">TextSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span><span class="s1">&#39;go&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="n">MS</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1">#-------------------------------------------------------------------------</span>
+
+<span class="c1">#get lifetimes (L) as difference between birth (B) and death (D) times</span>
+<span class="n">B</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">B</span>
+
+<span class="kn">from</span> <span class="nn">teaspoon.SP.information.entropy</span> <span class="kn">import</span> <span class="n">PersistentEntropy</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">PersistentEntropy</span><span class="p">(</span><span class="n">lifetimes</span> <span class="o">=</span> <span class="n">L</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Persistent entropy: &#39;</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output of example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Persistent</span> <span class="n">entropy</span><span class="p">:</span>  <span class="mf">1.7693450019916783</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/persistent_entropy_example.png"><img alt="_images/persistent_entropy_example.png" src="_images/persistent_entropy_example.png" style="width: 745.0px; height: 329.0px;" /></a>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="misc.html" class="btn btn-neutral float-right" title="2.4.4. Miscellaneous Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="network.html" class="btn btn-neutral float-left" title="2.4.2. Network Representation of Time Series" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Munch.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>teaspoon.TDA.SLSP_tools &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> teaspoon
+          
+
+          
+            
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html">2.1.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">5. Citing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>teaspoon.TDA.SLSP_tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for teaspoon.TDA.SLSP_tools</h1><div class="highlight"><pre>
+<span></span>
+<div class="viewcode-block" id="cutoff"><a class="viewcode-back" href="../../../sublevel_set_persistence.html#teaspoon.TDA.SLSP_tools.cutoff">[docs]</a><span class="k">def</span> <span class="nf">cutoff</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;Gaussian&#39;</span><span class="p">,</span> <span class="n">signal_compensation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">noise_param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function calculates the zero-dimensional sublevel set persistence over a closed time domain.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        L (1-D array): Zero-dimensional sublevel set persistence lifetimes.</span>
+<span class="sd">        n (int): Length of time series.</span>
+
+<span class="sd">    Other Parameters:</span>
+<span class="sd">        alpha (Optional[float]): Confidence level. Default is 0.1% = 0.001.</span>
+<span class="sd">        distribution (optional[string]): Assumed distribution of additve noise. &#39;Gaussian&#39; is default. Current options are &#39;Gaussian&#39;, , &#39;Uniform&#39;, &#39;Rayleigh&#39;, and &#39;Exponential&#39;</span>
+<span class="sd">        signal_compensation (optional[boolean]): Signal compensation option for cutoff adjustment.</span>
+<span class="sd">        noise_param (optional[float]): If the additive noise distribution parameter is known or estimated, it can be provided directly.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [float]: Cutoff for the peristence diagram.</span>
+<span class="sd">        [float]: Estimated noise distribution parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">scipy</span>
+    <span class="c1"># ------------------Error Checks----------------</span>
+    <span class="n">distributions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;Uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;Rayleigh&#39;</span><span class="p">,</span> <span class="s1">&#39;Exponential&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">distribution</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">distributions</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: provided distribution not in available distributions.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;available distributions: &#39;</span><span class="p">,</span> <span class="n">distributions</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Defaulting to Gaussian distribution.&#39;</span><span class="p">)</span>
+        <span class="n">distribution</span> <span class="o">=</span> <span class="s1">&#39;Gaussian&#39;</span>
+
+    <span class="n">M_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="c1"># ------------------Initial cutoff calculation based on distribution----------------</span>
+
+    <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;Gaussian&#39;</span><span class="p">:</span>
+        <span class="n">D_mean</span> <span class="o">=</span> <span class="mf">1.692</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mf">1.15</span>
+        <span class="k">if</span> <span class="n">noise_param</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sigma_est</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">M_L</span><span class="o">/</span><span class="n">D_mean</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sigma_est</span> <span class="o">=</span> <span class="n">noise_param</span>
+        <span class="n">cutoff</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mf">1.5</span><span class="p">)</span><span class="o">*</span><span class="n">sigma_est</span> <span class="o">*</span> \
+            <span class="n">scipy</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">erfinv</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">param_est</span> <span class="o">=</span> <span class="n">sigma_est</span>
+
+    <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;Uniform&#39;</span><span class="p">:</span>
+        <span class="n">D_mean</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mf">1.00</span>
+        <span class="k">if</span> <span class="n">noise_param</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">delta_est</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">M_L</span><span class="o">/</span><span class="n">D_mean</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">delta_est</span> <span class="o">=</span> <span class="n">noise_param</span>
+        <span class="n">cutoff</span> <span class="o">=</span> <span class="n">delta_est</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)))</span>
+        <span class="n">param_est</span> <span class="o">=</span> <span class="n">delta_est</span>
+
+    <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;Rayleigh&#39;</span><span class="p">:</span>
+        <span class="n">D_mean</span> <span class="o">=</span> <span class="mf">1.10126</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mf">1.13</span>
+        <span class="k">if</span> <span class="n">noise_param</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sigma_est</span> <span class="o">=</span> <span class="mf">1.01</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">M_L</span><span class="o">/</span><span class="n">D_mean</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sigma_est</span> <span class="o">=</span> <span class="n">noise_param</span>
+        <span class="n">cutoff</span> <span class="o">=</span> <span class="n">sigma_est</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)))</span> <span class="o">-</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">))))</span>
+        <span class="n">param_est</span> <span class="o">=</span> <span class="n">sigma_est</span>
+
+    <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;Exponential&#39;</span><span class="p">:</span>
+        <span class="n">D_mean</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mf">1.25</span>
+        <span class="k">if</span> <span class="n">noise_param</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">beta_est</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">M_L</span><span class="o">/</span><span class="n">D_mean</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">beta_est</span> <span class="o">=</span> <span class="n">noise_param</span>
+        <span class="n">cutoff</span> <span class="o">=</span> <span class="o">-</span><span class="n">beta_est</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span>
+                                  <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">n</span><span class="p">))</span>
+        <span class="n">param_est</span> <span class="o">=</span> <span class="n">beta_est</span>
+
+    <span class="c1"># -------------------Compensation for median reduction from signal---------------</span>
+
+    <span class="n">Delta</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">noise_param</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">Delta</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">L</span> <span class="o">&gt;</span> <span class="n">cutoff</span><span class="p">])</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">signal_compensation</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
+                <span class="n">L_R</span> <span class="o">=</span> <span class="n">Delta</span>
+                <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">M_L</span> <span class="o">+</span> <span class="n">L_R</span><span class="p">)</span><span class="o">/</span><span class="n">M_L</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;Gaussian&#39;</span><span class="p">:</span>
+                    <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">0.8436165995</span><span class="p">,</span> <span class="mf">0.8089660065</span>
+                <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;Uniform&#39;</span><span class="p">:</span>
+                    <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">0.8804987172</span><span class="p">,</span> <span class="mf">0.638907256</span>
+                <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;Rayleigh&#39;</span><span class="p">:</span>
+                    <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">0.725841855</span><span class="p">,</span> <span class="mf">0.6046880833</span>
+                <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;Exponential&#39;</span><span class="p">:</span>
+                    <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">0.4362525576</span><span class="p">,</span> <span class="mf">0.3930373465</span>
+                <span class="n">R</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">c1</span><span class="o">*</span><span class="p">(</span><span class="n">Delta</span><span class="o">/</span><span class="p">(</span><span class="n">M_L</span><span class="o">+</span><span class="n">Delta</span><span class="p">))</span><span class="o">**</span><span class="n">c2</span><span class="p">)</span>
+
+            <span class="n">cutoff</span> <span class="o">=</span> <span class="n">cutoff</span><span class="o">*</span><span class="n">R</span>
+            <span class="n">param_est</span> <span class="o">=</span> <span class="n">param_est</span><span class="o">*</span><span class="n">R</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">param_est</span> <span class="o">=</span> <span class="n">noise_param</span>
+
+    <span class="k">return</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">param_est</span></div>
+
+
+<span class="k">def</span> <span class="nf">signficant_extrema</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">from</span> <span class="nn">teaspoon.TDA.SLSP</span> <span class="kn">import</span> <span class="n">Persistence0D</span>
+    <span class="n">ts_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+    <span class="n">ts_n</span> <span class="o">=</span> <span class="n">ts_n</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">5</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ts</span><span class="p">)),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+    <span class="n">feature_ind_1</span><span class="p">,</span> <span class="n">feature_ind_2</span><span class="p">,</span> <span class="n">persistenceDgm</span> <span class="o">=</span> <span class="n">Persistence0D</span><span class="p">(</span>
+        <span class="n">ts_n</span><span class="p">,</span> <span class="s1">&#39;localMin&#39;</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">persistenceDgm</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">persistenceDgm</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">D</span><span class="o">-</span><span class="n">B</span>
+
+    <span class="n">I_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_ind_1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">I_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_ind_2</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">height</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">C</span><span class="p">,</span> <span class="n">noise_parameter_estimate</span> <span class="o">=</span> <span class="n">cutoff</span><span class="p">(</span>
+            <span class="n">L</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="n">signal_compensation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">height</span>
+    <span class="n">I_vall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">I_B</span><span class="p">[</span><span class="n">L</span> <span class="o">&gt;</span> <span class="n">C</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+    <span class="n">I_peak</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">I_D</span><span class="p">[</span><span class="n">L</span> <span class="o">&gt;</span> <span class="n">C</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">I_vall</span><span class="p">,</span> <span class="n">I_peak</span>
+
+
+<span class="c1"># In[ ]:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>  <span class="c1"># ___________________example_________________________</span>
+
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+    <span class="kn">from</span> <span class="nn">teaspoon.TDA.SLSP</span> <span class="kn">import</span> <span class="n">Persistence0D</span>
+    <span class="kn">from</span> <span class="nn">teaspoon.TDA.SLSP_tools</span> <span class="kn">import</span> <span class="n">cutoff</span>
+
+    <span class="c1"># ----------------Assume the additive noise distribution---------------</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="s1">&#39;Gaussian&#39;</span>
+
+    <span class="c1"># ---------------Generate a time series with additive noise------------</span>
+    <span class="n">fs</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">fs</span><span class="o">*</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span>  <span class="c1"># signal amplitude and standard deviation</span>
+    <span class="n">ts_0</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="c1"># gaussian distribution additive noise</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts_0</span><span class="p">))</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">ts_0</span> <span class="o">+</span> <span class="n">noise</span>  <span class="c1"># add noise to time series</span>
+
+    <span class="c1"># --------------Run sublevel set persistence--------------------------</span>
+    <span class="n">feature_ind_1</span><span class="p">,</span> <span class="n">feature_ind_2</span><span class="p">,</span> <span class="n">persistenceDgm</span> <span class="o">=</span> <span class="n">Persistence0D</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">persistenceDgm</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># get birth times</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">persistenceDgm</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># get death times</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">D</span><span class="o">-</span><span class="n">B</span>  <span class="c1"># get lifetimes as difference between birth and death</span>
+
+    <span class="n">I_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_ind_1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># indices of birth times</span>
+    <span class="n">T_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">I_B</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># time values at birth times</span>
+
+    <span class="c1"># -------------get cutoff for persistence diagram---------------------</span>
+    <span class="n">C</span><span class="p">,</span> <span class="n">param</span> <span class="o">=</span> <span class="n">cutoff</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span>
+        <span class="n">ts</span><span class="p">),</span> <span class="n">distribution</span><span class="o">=</span><span class="n">dist</span><span class="p">)</span>  <span class="c1"># get cutoff</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Distribution parameter estimate: &#39;</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;C: &#39;</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+
+    <span class="c1"># -------------------------PLOTTING THE RESULTS-----------------------</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">TextSize</span> <span class="o">=</span> <span class="mi">15</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$x(t)$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$L$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_B</span><span class="p">[</span><span class="n">L</span> <span class="o">&gt;</span> <span class="n">C</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">L</span> <span class="o">&gt;</span> <span class="n">C</span><span class="p">],</span> <span class="s1">&#39;bd&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$L$ (signal)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_B</span><span class="p">[</span><span class="n">L</span> <span class="o">&lt;</span> <span class="n">C</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">L</span> <span class="o">&lt;</span> <span class="n">C</span><span class="p">],</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$L$ (noise)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$C^*_\alpha$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">TextSize</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$D$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$B$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">L</span> <span class="o">&gt;</span> <span class="n">C</span><span class="p">],</span> <span class="n">D</span><span class="p">[</span><span class="n">L</span> <span class="o">&gt;</span> <span class="n">C</span><span class="p">],</span> <span class="s1">&#39;bd&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;signal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">L</span> <span class="o">&lt;</span> <span class="n">C</span><span class="p">],</span> <span class="n">D</span><span class="p">[</span><span class="n">L</span> <span class="o">&lt;</span> <span class="n">C</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;noise&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">D</span><span class="p">)],</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">D</span><span class="p">)],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">D</span><span class="p">)],</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">+</span><span class="n">C</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="o">+</span><span class="n">C</span><span class="p">],</span>
+             <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$C_\alpha$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">D</span><span class="p">)],</span> <span class="n">y1</span><span class="o">=</span><span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">+</span><span class="n">C</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="o">+</span><span class="n">C</span><span class="p">],</span> <span class="n">y2</span><span class="o">=</span><span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">D</span><span class="p">)],</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">TextSize</span> <span class="o">-</span>
+               <span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Munch.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

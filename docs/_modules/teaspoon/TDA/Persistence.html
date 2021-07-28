@@ -1,0 +1,1040 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>teaspoon.TDA.Persistence &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> teaspoon
+          
+
+          
+            
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html">2.1.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">5. Citing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>teaspoon.TDA.Persistence</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for teaspoon.TDA.Persistence</h1><div class="highlight"><pre>
+<span></span><span class="c1"># @package teaspoon.TDA.Persistence</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module includes wrappers for using various fast persistence software inside of python.</span>
+<span class="sd">All diagrams are stored as a 2xN numpy matrix.</span>
+<span class="sd">When a code returns multiple dimensions, these are returned as a dictionary</span>
+
+<span class="sd">::</span>
+
+<span class="sd">    {</span>
+<span class="sd">        0: DgmDimension0,</span>
+<span class="sd">        1: DgmDimension1,</span>
+<span class="sd">        ...</span>
+<span class="sd">    }</span>
+
+
+<span class="sd">Infinite classes are given an entry of np.inf.</span>
+<span class="sd">During computation, all data files are saved in a hidden folder &quot;.teaspoonData&quot;.</span>
+<span class="sd">This folder is created if it doesn&#39;t already exist.</span>
+<span class="sd">Files are repeatedly emptied out of it, so do not save anything in it that you might want later!</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module: Persistence</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#------------------Helper code------------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+
+
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">DEVNULL</span><span class="p">,</span> <span class="n">STDOUT</span><span class="p">,</span> <span class="n">call</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">prepareFolders</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates the &quot;.teaspoonData&quot; folder.</span>
+<span class="sd">    Checks that necessary folder structure system exists.</span>
+<span class="sd">    Empties out all previously saved files to avoid confusion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ---- Make folders for saving files</span>
+
+    <span class="n">folders</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.teaspoonData&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;.teaspoonData&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;.teaspoonData&#39;</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;output&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">folders</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">location</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">readPerseusOutput</span><span class="p">(</span><span class="n">outputFileName</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads in the diagrams in the format that Perseus uses.</span>
+<span class="sd">    Returns a dictionary with integer keys representing the dimension of each diagram.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">outputFiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">outputFileName</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Delete the file with the betti numbers</span>
+    <span class="n">outputFiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">outputFiles</span> <span class="k">if</span> <span class="s1">&#39;betti&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+
+    <span class="c1"># Make a dictionary of the persistence diagrams</span>
+    <span class="n">Dgms</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">outputFiles</span><span class="p">:</span>
+
+        <span class="c1"># Remove the dimension from the file name</span>
+        <span class="c1"># This works because the file is of the form</span>
+        <span class="c1"># outputFileName_1.txt</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">outputFileName</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+
+        <span class="c1"># Read in the diagram</span>
+        <span class="c1"># warning wrapper is there to ignore the empty file warnings</span>
+        <span class="c1"># However, this actually suppresses all warnings, for better or worse....</span>
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+            <span class="n">Dgm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="c1"># Add the diagram to the dictionary</span>
+        <span class="n">Dgms</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dgm</span>
+
+    <span class="k">return</span> <span class="n">Dgms</span>
+
+
+<span class="k">def</span> <span class="nf">readRipserString</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads string from Ripser</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">birth_death_str</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\d*[.]?\d*)&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+    <span class="c1"># stuff = list(filter(None, birth_death_str))</span>
+    <span class="n">stuff</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">birth_death_str</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">stuff</span><span class="p">:</span>
+        <span class="c1">#        print(&quot;empty stuff: {}&quot;. format(stuff))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#        print(&quot;full stuff: {}&quot;.format(stuff))</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">stuff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">readRipserOutput</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">drop_inf_class</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads output from Ripser</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># split into persistence diagrams</span>
+    <span class="n">Dgms</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Find locations where the text splits the output</span>
+    <span class="n">breaks</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;persistence&#39;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">breaks</span><span class="p">)):</span>
+        <span class="c1"># Get the dimension using regex</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="n">out</span><span class="p">[</span><span class="n">breaks</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+        <span class="c1"># Extract the portions of the output between</span>
+        <span class="c1"># the places that say persistence.</span>
+        <span class="c1"># Note the len(out)-1 for the endIndex is because</span>
+        <span class="c1"># the last entry of out is a blank space &#39; &#39;</span>
+        <span class="c1">#		startIndex = breaks[j]</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">breaks</span><span class="p">):</span>
+            <span class="n">endIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">endIndex</span> <span class="o">=</span> <span class="n">breaks</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">Dgm</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="n">breaks</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span> <span class="n">endIndex</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">Dgm</span><span class="p">)</span>
+        <span class="n">Dgm</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="o">.</span><span class="n">strip</span><span class="p">()[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">Dgm</span><span class="p">]</span>
+
+        <span class="c1"># use regular expressions to extract the birth/death times</span>
+        <span class="n">Dgm</span> <span class="o">=</span> <span class="p">[[</span><span class="n">readRipserString</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">Dgm</span><span class="p">]</span>
+
+        <span class="c1"># get rid of spurious dimensions, and reshape into D x 2</span>
+        <span class="n">Dgm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">Dgm</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+        <span class="c1"># check that the diagram is not empty</span>
+        <span class="k">if</span> <span class="n">Dgm</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># for 0-dim persistence, set birth time to zero</span>
+            <span class="k">if</span> <span class="n">dim</span> <span class="ow">is</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># if the last entry is nan it signals an infinite class,set to inf</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">Dgm</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+                <span class="n">Dgm</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+            <span class="c1"># remove the row with infinite classes, if requested</span>
+            <span class="k">if</span> <span class="n">drop_inf_class</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">Dgm</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+                <span class="n">Dgm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># add the diagram to the dictionary</span>
+        <span class="n">Dgms</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dgm</span>
+    <span class="k">return</span> <span class="n">Dgms</span>
+
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#-------------------Point cloud input-----------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+
+
+<span class="c1">#------------Ripser-----------------------------------#</span>
+
+<span class="k">def</span> <span class="nf">VR_Ripser</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">maxDim</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes persistence up to dimension maxDim using Uli Bauer&#39;s Ripser.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Ripser needs to be installed on machine in advance https://github.com/Ripser/ripser</span>
+
+<span class="sd">    :param P:</span>
+<span class="sd">        A point cloud as an NxD numpy array.</span>
+<span class="sd">        N is the number of points, D is the dimension of</span>
+<span class="sd">        Euclidean space.</span>
+<span class="sd">    :param maxDim:</span>
+<span class="sd">        An integer representing the maximum dimension</span>
+<span class="sd">        for computing persistent homology</span>
+
+<span class="sd">    :returns:</span>
+
+<span class="sd">        A dictionary Dgms where Dgms[k] is a lx2 matrix</span>
+<span class="sd">        giving points in the k-dimensional pers diagram</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Compute pairwise distance matrix, then use the other</span>
+    <span class="c1"># Ripser input style to do the work.</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">P</span><span class="p">))</span>
+
+    <span class="n">Dgms</span> <span class="o">=</span> <span class="n">distMat_Ripser</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">maxDim</span><span class="o">=</span><span class="n">maxDim</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Dgms</span>
+
+
+<span class="c1">#------------Perseus----------------------------------#</span>
+<span class="k">def</span> <span class="nf">writePointCloudFileForPerseus</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span>
+                                  <span class="n">stepSize</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>
+                                  <span class="n">numSteps</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+    <span class="c1"># Writes the point cloud to a file in the perseus format.</span>
+
+    <span class="c1"># Notes:</span>
+    <span class="c1">#     Vidit has options for radius scaling factor. TODO: Figure out if this should be 1 or 2</span>
+
+    <span class="c1"># Parameters</span>
+    <span class="c1"># ----------</span>
+    <span class="c1"># P</span>
+    <span class="c1">#     An NxD array.  Represents $N$ points in $R^D$.</span>
+    <span class="c1"># filename</span>
+    <span class="c1">#     location for saving the file</span>
+    <span class="c1"># stepSize</span>
+    <span class="c1"># numSteps</span>
+    <span class="c1">#     Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until stepSize*numSteps.</span>
+
+    <span class="c1"># .. note::</span>
+    <span class="c1">#     Vidit has options for radius scaling factor.</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes the point cloud to a file in the perseus format.</span>
+
+<span class="sd">    .. todo:: Figure out if this should be 1 or 2</span>
+
+<span class="sd">    :param P:</span>
+<span class="sd">        An NxD array.  Represents :math:`N` points in :math:`\mathbb{R}^{D}`</span>
+<span class="sd">    :param filename:</span>
+<span class="sd">        location for saving the file</span>
+<span class="sd">    :param stepSize:</span>
+<span class="sd">    :param numSteps:</span>
+<span class="sd">        Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.</span>
+<span class="sd">        So, persistence will be calculated from parameter 0 until stepSize*numSteps.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dimension</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">P</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">radiusScalingFactor</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dimension</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">secondLine</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusScalingFactor</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+    <span class="n">secondLine</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">stepSize</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+    <span class="n">secondLine</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">numSteps</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">secondLine</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">P</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="s1">&#39; 0 &#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+
+
+<span class="c1"># Does brips version of perseus.</span>
+<span class="c1"># Computes VR persitsence on points in Euclidean space.</span>
+<span class="c1">#</span>
+<span class="c1"># @remark</span>
+<span class="c1"># 1) Requires choice of maxRadius, numSteps, and/or stepSize.</span>
+<span class="c1">#    Bad choices will give junk results.</span>
+<span class="c1"># 2) TODO: This appears to spit out radius rather than diameter</span>
+<span class="c1">#    persistence computations.  Need to figure this out and</span>
+<span class="c1">#    make the choice uniform across outputs.</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># @param P</span>
+<span class="c1">#     An NxD array.  Represents N points in R^D.</span>
+<span class="c1"># @param maxRadius</span>
+<span class="c1"># @param stepSize</span>
+<span class="c1"># @param numSteps</span>
+<span class="c1">#     Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until</span>
+<span class="c1">#     maxRadius = stepSize*numSteps.</span>
+<span class="c1">#     Only 2 of the three entries should be passed.</span>
+<span class="c1">#     If numSteps and stepSize are passed (regardless of whether maxRadius is passed), they will be used for the computation.  Otherwise, the two non-none valued entries will be used to calculate the third.</span>
+<span class="c1">#</span>
+<span class="c1"># @param suppressOutput</span>
+<span class="c1">#     If true, gets rid of printed output from perseus.</span>
+<span class="c1">#</span>
+<span class="c1"># @return</span>
+<span class="c1">#     A dictionary with integer keys 0,1,...,N</span>
+<span class="c1">#    The key gives the dimension of the persistence diagram.</span>
+<div class="viewcode-block" id="VR_Perseus"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.VR_Perseus">[docs]</a><span class="k">def</span> <span class="nf">VR_Perseus</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+               <span class="n">maxRadius</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">numSteps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">stepSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">suppressOutput</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Does brips version of perseus.</span>
+<span class="sd">    Computes VR persitsence on points in Euclidean space.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        Requires choice of maxRadius, numSteps, and/or stepSize.</span>
+<span class="sd">        Bad choices will give junk results.</span>
+
+<span class="sd">    .. todo::</span>
+
+<span class="sd">        This appears to spit out radius rather than diameter</span>
+<span class="sd">        persistence computations.  Need to figure this out and</span>
+<span class="sd">        make the choice uniform across outputs.</span>
+
+
+<span class="sd">    :param P:</span>
+<span class="sd">        An NxD array.  Represents N points in :math:`\mathbb{R}^{D}`.</span>
+<span class="sd">    :param maxRadius:</span>
+<span class="sd">    :param stepSize:</span>
+<span class="sd">    :param numSteps:</span>
+<span class="sd">        Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until</span>
+<span class="sd">        maxRadius = stepSize*numSteps.</span>
+<span class="sd">        Only 2 of the three entries should be passed.</span>
+<span class="sd">        If numSteps and stepSize are passed (regardless of whether maxRadius is passed), they will be used for the computation.  Otherwise, the two non-none valued entries will be used to calculate the third.</span>
+<span class="sd">    :param suppressOutput:</span>
+<span class="sd">        If true, it gets rid of printed output from perseus.</span>
+
+<span class="sd">    :returns:</span>
+
+<span class="sd">        A dictionary with integer keys 0,1,...,N</span>
+
+<span class="sd">        The key gives the dimension of the persistence diagram.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ---- Clean up and/or create local folder system</span>
+    <span class="n">prepareFolders</span><span class="p">()</span>
+
+    <span class="n">inputFileName</span> <span class="o">=</span> <span class="s1">&#39;.teaspoonData/input/inputMatrix.txt&#39;</span>
+    <span class="n">outputFileName</span> <span class="o">=</span> <span class="s1">&#39;.teaspoonData/output/perseusMatrix&#39;</span>
+
+    <span class="c1"># Determine stepSize given the maxRadius and the number of steps desired.</span>
+    <span class="c1"># maxRadius = stepSize*numSteps.</span>
+    <span class="k">if</span> <span class="n">stepSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">numSteps</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You need to pass at least two of the three entries:&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;maxRadius = stepSize*numSteps...&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stepSize</span> <span class="o">=</span> <span class="n">maxRadius</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">numSteps</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">numSteps</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">stepSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You need to pass at least two of the three entries:&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;maxRadius = stepSize*numSteps...&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">numSteps</span> <span class="o">=</span> <span class="n">maxRadius</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">stepSize</span><span class="p">)</span>
+
+    <span class="c1"># Write the necessary file</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;using stepsize&#39;</span><span class="p">,</span> <span class="n">stepSize</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Using numSteps&#39;</span><span class="p">,</span> <span class="n">numSteps</span><span class="p">)</span>
+    <span class="n">writePointCloudFileForPerseus</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">inputFileName</span><span class="p">,</span> <span class="n">stepSize</span><span class="p">,</span> <span class="n">numSteps</span><span class="p">)</span>
+
+    <span class="c1"># Run perseus</span>
+    <span class="k">if</span> <span class="n">suppressOutput</span><span class="p">:</span>
+        <span class="n">stdout</span> <span class="o">=</span> <span class="n">DEVNULL</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">stdout</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;perseus brips &#39;</span> <span class="o">+</span> <span class="n">inputFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">outputFileName</span>
+        <span class="n">call</span><span class="p">(</span><span class="n">command</span><span class="p">,</span>
+             <span class="n">stdout</span><span class="o">=</span><span class="n">stdout</span><span class="p">,</span>
+             <span class="n">stderr</span><span class="o">=</span><span class="n">STDOUT</span><span class="p">,</span>
+             <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There appears to be a problem running perseus...&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Do you have it properly installed?&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exiting...&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Read in the outputs</span>
+    <span class="n">Dgms</span> <span class="o">=</span> <span class="n">readPerseusOutput</span><span class="p">(</span><span class="n">outputFileName</span><span class="p">)</span>
+
+    <span class="c1"># Convert diagrams back to distance:</span>
+    <span class="c1">#   Perseus spits out birth/death times in terms of the</span>
+    <span class="c1">#   number of the step at which an event happened.</span>
+    <span class="c1">#   Note step 1  is when the radius is  0</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">Dgms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">Dgm</span> <span class="o">=</span> <span class="n">Dgms</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="c1"># Change any -1 death times to infinity</span>
+        <span class="n">infLocs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Dgm</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">Dgm</span><span class="p">[</span><span class="n">infLocs</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+        <span class="c1"># Subtract 1 to deal with the the counting from 1 issue</span>
+        <span class="n">Dgm</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">Dgm</span> <span class="o">=</span> <span class="n">Dgm</span><span class="o">*</span><span class="n">stepSize</span>
+
+        <span class="n">Dgms</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dgm</span>
+
+    <span class="k">return</span> <span class="n">Dgms</span></div>
+
+
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#---------------Distance Matrix input-----------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+
+
+<span class="c1">#-------------Ripser----------------------------------#</span>
+
+
+<span class="c1"># \brief Computes persistence up to maxDim using Uli Bauer&#39;s [Ripser](https://github.com/Ripser/ripser).</span>
+<span class="c1">#</span>
+<span class="c1"># \remark Ripser needs to be installed on machine in advance. This code doesn&#39;t check for it&#39;s existence.</span>
+<span class="c1">#</span>
+<span class="c1"># @param distMat -</span>
+<span class="c1">#     A distance matrix given as a NxN numpy array</span>
+<span class="c1"># @param maxDim -</span>
+<span class="c1">#     An integer representing the maximum dimension</span>
+<span class="c1">#     for computing persistent homology</span>
+<span class="c1">#</span>
+<span class="c1"># @return</span>
+<span class="c1">#     A dictionary Dgms where Dgms[k] is a lx2 matrix</span>
+<span class="c1">#     giving points in the k-dimensional pers diagram</span>
+<span class="k">def</span> <span class="nf">distMat_Ripser</span><span class="p">(</span><span class="n">distMat</span><span class="p">,</span> <span class="n">maxDim</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes persistence up to maxDim using Uli Bauer&#39;s `Ripser &lt;https://github.com/Ripser/ripser&gt;`_.</span>
+
+<span class="sd">    .. note:: Ripser needs to be installed on machine in advance. This code doesn&#39;t check for it&#39;s existence.</span>
+
+<span class="sd">    :param distMat:</span>
+<span class="sd">        A distance matrix given as a NxN numpy array</span>
+<span class="sd">    :param maxDim:</span>
+<span class="sd">        An integer representing the maximum dimension</span>
+<span class="sd">        for computing persistent homology</span>
+
+<span class="sd">    :returns:</span>
+
+<span class="sd">        A dictionary Dgms where Dgms[k] is a lx2 matrix</span>
+<span class="sd">        giving points in the k-dimensional pers diagram</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check/setup the folder structure</span>
+    <span class="c1"># Note: empties the folders in preparation</span>
+    <span class="n">prepareFolders</span><span class="p">()</span>
+
+    <span class="n">current_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;.teaspoonData&#39;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;input</span><span class="si">{0}</span><span class="s1">pointCloud.txt&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+
+<span class="c1">#	inputFileName = tempfile.TemporaryFile(dir=base_dir).name</span>
+
+    <span class="n">inputFileName</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_path</span><span class="p">,</span> <span class="n">base_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1">#     = &#39;.teaspoonData/input/pointCloud.txt&#39;</span>
+    <span class="c1"># outputFileName = &#39;.teaspoonData/output/perseusMatrix&#39;</span>
+    <span class="c1"># Note: Uli&#39;s readme says that the lower-triangluar distance</span>
+    <span class="c1">#       matrix is preferred. TODO: try writing just the point</span>
+    <span class="c1">#       cloud to the file and let his faster code do the</span>
+    <span class="c1">#       heavy lifting to see if it goes faster.</span>
+
+    <span class="c1"># Compute pairwise distance matrix</span>
+    <span class="c1"># X = squareform(pdist(P))</span>
+
+    <span class="c1"># Open file to write the point cloud info</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">inputFileName</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">F</span><span class="p">:</span>
+        <span class="c1"># Write lower triang matrix to file</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">distMat</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="c1"># Get part of row before diagonal</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">distMat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">i</span><span class="p">]))[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># [1:-1] cuts off brackets</span>
+            <span class="n">F</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">L</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;ripser --dim &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">maxDim</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">inputFileName</span>
+
+    <span class="c1"># Run ripser and pull the output from the terminal.</span>
+    <span class="n">proc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Parse the output</span>
+    <span class="n">Dgms</span> <span class="o">=</span> <span class="n">readRipserOutput</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Dgms</span>
+
+<span class="c1">#---------------Perseus-------------------------------#</span>
+
+<span class="c1"># @todo</span>
+
+
+<span class="k">def</span> <span class="nf">distMat_Perseus</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Not yet implemented</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sorry, not yet implemented.  Try distMat_Ripser instead!&#39;</span><span class="p">)</span>
+
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#---------------Image matrix input--------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+<span class="c1">#-----------------------------------------------------#</span>
+
+
+<span class="c1">#---------------Perseus-------------------------------#</span>
+
+
+<span class="k">def</span> <span class="nf">writeMatrixFileForPerseus</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">filesavename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given 2D matrix M, write into file format read by Perseus.</span>
+<span class="sd">    Info on format can be found at:http://people.maths.ox.ac.uk/nanda/perseus/index.html</span>
+
+<span class="sd">    .. todo:: Set this up to work with higher-dimensional cubical complexes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">M</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">M</span><span class="p">)[</span><span class="mi">1</span><span class="p">]]])</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">M</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">M</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">Top</span><span class="p">,</span> <span class="n">M</span><span class="p">])</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">filesavename</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%i</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Cubical_Perseus"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.Cubical_Perseus">[docs]</a><span class="k">def</span> <span class="nf">Cubical_Perseus</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">numDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">suppressOutput</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes persistence for a matrix of function values</span>
+<span class="sd">    using Vidit Nanda&#39;s `perseus &lt;http://people.maths.ox.ac.uk/nanda/perseus/index.html&gt;`_.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        - perseus must be in the bash path</span>
+<span class="sd">        - matrix must be 2-dimensional</span>
+
+<span class="sd">    .. todo:: Update this to accept higher dimensional cubical complexes</span>
+
+<span class="sd">    :param M:</span>
+<span class="sd">        A 2D numpy array</span>
+<span class="sd">    :param numDigits:</span>
+<span class="sd">        Perseus only accepts positive integer valued matrices. To</span>
+<span class="sd">        compensate, we apply the transformation </span>
+
+<span class="sd">            x -&gt; x* (10**numDigits) + M.min()</span>
+
+<span class="sd">        then calculate persistence on the resulting matrix.</span>
+<span class="sd">        The persistence diagram birth/death times are then converted </span>
+<span class="sd">        back via the inverse transform.</span>
+<span class="sd">    :param suppressOutput:</span>
+<span class="sd">        If true, gets rid of printed output from perseus.</span>
+
+<span class="sd">    :returns: A dictionary with integer keys 0,1,...,N.</span>
+<span class="sd">        The key gives the dimension of the persistence diagram.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ---- Clean up and/or create local folder system</span>
+    <span class="n">prepareFolders</span><span class="p">()</span>
+
+    <span class="n">inputFileName</span> <span class="o">=</span> <span class="s1">&#39;.teaspoonData/input/inputMatrix.txt&#39;</span>
+    <span class="n">outputFileName</span> <span class="o">=</span> <span class="s1">&#39;.teaspoonData/output/perseusMatrix&#39;</span>
+
+    <span class="c1"># --- Fix integer/positivity assumption</span>
+
+    <span class="n">rangeM</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">M</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">rangeM</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="n">rangeM</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">numDigits</span><span class="p">)</span>
+        <span class="c1"># print (&#39;M has been modified to compensate for negatives and sigfigs...&#39;)</span>
+
+    <span class="k">elif</span> <span class="n">numDigits</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">M</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="n">numDigits</span>
+        <span class="c1"># print (&#39;M has been modified to compensate for sigfigs...&#39;)</span>
+
+    <span class="k">elif</span> <span class="n">numDigits</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of digits must be a positive integer.  Exiting...&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Write the matrix to a file in the way perseus understands.</span>
+    <span class="n">writeMatrixFileForPerseus</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">inputFileName</span><span class="p">)</span>
+
+    <span class="c1"># Run perseus</span>
+    <span class="k">if</span> <span class="n">suppressOutput</span><span class="p">:</span>
+        <span class="n">stdout</span> <span class="o">=</span> <span class="n">DEVNULL</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">stdout</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;perseus cubtop &#39;</span> <span class="o">+</span> <span class="n">inputFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">outputFileName</span>
+        <span class="n">call</span><span class="p">(</span><span class="n">command</span><span class="p">,</span>
+             <span class="n">stdout</span><span class="o">=</span><span class="n">stdout</span><span class="p">,</span>
+             <span class="n">stderr</span><span class="o">=</span><span class="n">STDOUT</span><span class="p">,</span>
+             <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There appears to be a problem running perseus...&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Do you have it properly installed?&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exiting...&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Read in the diagrams</span>
+    <span class="n">Dgms</span> <span class="o">=</span> <span class="n">readPerseusOutput</span><span class="p">(</span><span class="n">outputFileName</span><span class="p">)</span>
+
+    <span class="c1"># and put the sigfigs back if they were edited</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">Dgms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">Dgm</span> <span class="o">=</span> <span class="n">Dgms</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="c1"># Change any -1 death times to infinity</span>
+        <span class="n">infLocs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Dgm</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">Dgm</span><span class="p">[</span><span class="n">infLocs</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+        <span class="c1"># and put the sigfigs back if they were edited</span>
+        <span class="k">if</span> <span class="n">rangeM</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">Dgms</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dgm</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">numDigits</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">rangeM</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">Dgms</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dgm</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">numDigits</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">Dgms</span></div>
+
+
+<span class="c1"># ----------------------------------------------</span>
+<span class="c1"># ----------------------------------------------</span>
+<span class="c1"># ---Simple operations on pers dgms-------------</span>
+<span class="c1"># ----------------------------------------------</span>
+<span class="c1"># ----------------------------------------------</span>
+
+<div class="viewcode-block" id="minPers"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minPers">[docs]</a><span class="k">def</span> <span class="nf">minPers</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds minimum persistence for a given diagram</span>
+
+<span class="sd">    :param Dgm:</span>
+<span class="sd">        A 2D numpy array</span>
+
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Minimum persistence for the given diagram</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="maxPers"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxPers">[docs]</a><span class="k">def</span> <span class="nf">maxPers</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds maximum persistence for a given diagram</span>
+
+<span class="sd">    :param Dgm:</span>
+<span class="sd">        A 2D numpy array</span>
+
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Maximum persistence for the given diagram </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+            <span class="c1"># Get rid of rows with death time infinity</span>
+            <span class="n">numRows</span> <span class="o">=</span> <span class="n">Dgm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">rowsWithoutInf</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">[</span><span class="n">rowsWithoutInf</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">m</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="maxBirth"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxBirth">[docs]</a><span class="k">def</span> <span class="nf">maxBirth</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds maximum birth for a given diagram</span>
+
+<span class="sd">    :param Dgm:</span>
+<span class="sd">        A 2D numpy array</span>
+
+<span class="sd">    :returns: (float) Maximum birth time for the given diagram </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+            <span class="c1"># Get rid of rows with death time infinity</span>
+            <span class="n">numRows</span> <span class="o">=</span> <span class="n">Dgm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">rowsWithoutInf</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Dgm</span><span class="p">[</span><span class="n">rowsWithoutInf</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="minBirth"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minBirth">[docs]</a><span class="k">def</span> <span class="nf">minBirth</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds minimum birth  for a given diagram</span>
+
+<span class="sd">    :param Dgm:</span>
+<span class="sd">        A 2D numpy array</span>
+
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Minimum birth time for the given diagram </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">m</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+<span class="c1"># \brief Gets minimum persistence for a pandas.Series with diagrams as entries</span>
+<span class="c1">#</span>
+<span class="c1"># @param DgmSeries</span>
+<span class="c1">#     a pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
+<span class="c1">#</span>
+<span class="c1"># @return float</span>
+
+
+<div class="viewcode-block" id="minPersistenceSeries"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minPersistenceSeries">[docs]</a><span class="k">def</span> <span class="nf">minPersistenceSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Takes data frame DgmsDF.</span>
+<span class="sd">    Finds minimum persistence over all diagrams in</span>
+<span class="sd">    column with label dgm_col.</span>
+<span class="sd">    Gets minimum persistence for a pandas.Series with diagrams as entries</span>
+
+<span class="sd">    :param DgmSeries:</span>
+<span class="sd">        A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
+
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Minimum persistence over all diagrams</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minPers</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="maxPersistenceSeries"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxPersistenceSeries">[docs]</a><span class="k">def</span> <span class="nf">maxPersistenceSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Takes data frame DgmsDF.</span>
+<span class="sd">    Finds maximum persistence over all diagrams in</span>
+<span class="sd">    column with label dgm_col.</span>
+<span class="sd">    Gets maximum persistence for a pandas.Series with diagrams as entries</span>
+
+<span class="sd">    :param DgmsSeries:</span>
+<span class="sd">        A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
+
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Maximum persistence over all diagrams</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">maxPers</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="minBirthSeries"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minBirthSeries">[docs]</a><span class="k">def</span> <span class="nf">minBirthSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Takes data frame DgmsDF.</span>
+<span class="sd">    Finds minimum persistence over all diagrams in</span>
+<span class="sd">    column with label dgm_col.</span>
+<span class="sd">    Gets minimum persistence for a pandas.Series with diagrams as entries</span>
+
+<span class="sd">    :param DgmSeries:</span>
+<span class="sd">        A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
+
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Minimum birth time over all diagrams</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minBirth</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="maxBirthSeries"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxBirthSeries">[docs]</a><span class="k">def</span> <span class="nf">maxBirthSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Takes data frame DgmsDF.</span>
+<span class="sd">    Finds maximum persistence over all diagrams in</span>
+<span class="sd">    column with label dgm_col.</span>
+<span class="sd">    It gets maximum persistence for a pandas.Series with diagrams as entries.</span>
+
+<span class="sd">    :param DgmSeries:</span>
+<span class="sd">        A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</span>
+
+<span class="sd">    :returns: </span>
+<span class="sd">        (float) Maximum persistence over all diagrams</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">maxBirth</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="removeInfiniteClasses"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.removeInfiniteClasses">[docs]</a><span class="k">def</span> <span class="nf">removeInfiniteClasses</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Simply deletes classes that have infinite lifetimes.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">keepRows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Dgm</span><span class="p">[</span><span class="n">keepRows</span><span class="p">,</span> <span class="p">:]</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Munch.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>
