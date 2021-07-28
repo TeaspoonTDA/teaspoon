@@ -35,6 +35,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -212,8 +213,70 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="distances">
-<h1><span class="section-number">2.3.2. </span>Distances<a class="headerlink" href="#distances" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-teaspoon.TDA.Distance">
+<span id="distances"></span><h1><span class="section-number">2.3.2. </span>Distances<a class="headerlink" href="#module-teaspoon.TDA.Distance" title="Permalink to this headline">¶</a></h1>
+<p>This module provides algorithms to compute pairwise distances between persistence diagrams.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Distance.dgmDist_Hera">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Distance.</span></span><span class="sig-name descname"><span class="pre">dgmDist_Hera</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wassDeg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Bottleneck'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relError</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Distance.html#dgmDist_Hera"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Distance.dgmDist_Hera" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hera must be installed and in the bash path to use this function <a class="reference external" href="https://bitbucket.org/grey_narn/hera">https://bitbucket.org/grey_narn/hera</a></p>
+</div>
+<dl class="simple">
+<dt>Hera input format:</dt><dd><ul class="simple">
+<li><p>bottleneck_dist file1 file2  [relative_error]</p></li>
+<li><p>wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]  where file1 and file2 represent the persistence diagrams.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>D1</strong><strong>)</strong> (<em>ndarray</em>) – Persistence diagram –(Nx2) matrix.</p></li>
+<li><p><strong>(</strong><strong>D2</strong><strong>)</strong> (<em>ndarray</em>) – Persistence diagram –(Nx2) matrix.</p></li>
+<li><p><strong>wassDeg</strong> – Options are:
+- ‘Bottleneck’ or anything containing ‘bot’. Runs the bottleneck_dist command
+- np.inf: Also returns bottleneck distance with the bottleneck_dist command
+- an integer q: Computes the q-th Wasserstein distance</p></li>
+<li><p><strong>relError</strong> – <ul>
+<li><p>An input to both bottleneck_dist and wasserstein_dist.</p></li>
+<li><dl>
+<dt>For wasserstein_dist from hera documentation:</dt><dd><p>If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).
+Otherwise the output is an approximation of the exact distance. Precisely:
+if <span class="math notranslate nohighlight">\(d_{exact}\)</span> is the true distance and d_approx is the output, then</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \mathrm{relativeError}\)</span>.</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>For bottleneck_dist from hera documentation:</dt><dd><p>If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).
+Otherwise the output is an approximation of the exact distance.
+Precisely: if <span class="math notranslate nohighlight">\(d_{exact}\)</span> is the true distance and d_approx is the output, then</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \mathrm{relativeError}.\)</span></p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><p>Default value in Hera is 0.01 for Wasserstein distance and 0 (exact computation) for bottleneck distance.</p></li>
+<li><p>Values passed to hera must be positive.</p></li>
+</ul>
+</p></li>
+<li><p><strong>internal_p</strong> – This is only controllable for Wasserstein distance computation.  Matched points are measured by <span class="math notranslate nohighlight">\(L_p\)</span> distance.
+Default is internal_p = infinity.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A float for the distance between the diagrams</p>
+</dd>
+</dl>
+</dd></dl>
+
 <div class="section" id="example">
 <h2><span class="section-number">2.3.2.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>The following example computes the distance between two persistence diagrams:</p>

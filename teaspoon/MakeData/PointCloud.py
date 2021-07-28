@@ -7,8 +7,8 @@ from ripser import ripser
 #-------------Circles and Annuli---------------------------------------#
 def Circle(N=100, r=1, gamma=None, seed=None):
     """
-    Generate N points in R^2 from the circle centered
-    at the origin with radius r.
+    Generate :math:`N` points in :math:`\mathbb{R}^2` from the circle centered
+    at the origin with radius :math:`r`.
 
     If `gamma` is not `None`, then we add noise
     using a normal distribution.  Note that this means the resulting
@@ -27,7 +27,7 @@ def Circle(N=100, r=1, gamma=None, seed=None):
             Fixes the seed.  Good if we want to replicate results.
 
     :returns:
-        P- A Nx2 numpy array with the points drawn as the rows.
+        P- An :math:`N \\times 3` numpy array with a point per row.
 
     """
     np.random.seed(seed)
@@ -48,10 +48,10 @@ def Circle(N=100, r=1, gamma=None, seed=None):
 
 def Sphere(N=100, r=1, noise=0, seed=None):
     """
-    Generate N points in R^3 from the sphere centered
-    at the origin with radius r.
+    Generate :math: `N` points in :math:`\mathbb{R}^3` from the sphere centered
+    at the origin with radius :math: `r`.
     If noise is set to a positive number, the points
-    can be at distance r +/- noise from the origin.
+    can be at distance :math:`r \pm` noise from the origin.
 
     Parameters:
 
@@ -60,11 +60,11 @@ def Sphere(N=100, r=1, noise=0, seed=None):
         r
             Radius of the sphere
         seed
-            Fixes the seed.  Good if we want to replicate results.
+            Value for seed, or `None`.
 
 
     :returns:
-        P- A Nx3 numpy array with the points drawn as the rows.
+        P- An :math:`N \\times 3` numpy array with a point per row.
 
     """
     np.random.seed(seed)
@@ -84,7 +84,7 @@ def Sphere(N=100, r=1, noise=0, seed=None):
 def Annulus(N=200, r=1, R=2, seed=None):
     '''
     Returns point cloud sampled from uniform distribution on
-    annulus in R^2 of inner radius r and outer radius R
+    annulus in :math:`\mathbb{R}^2` of inner radius `r` and outer radius `R`
 
     Parameters:
 
@@ -99,7 +99,7 @@ def Annulus(N=200, r=1, R=2, seed=None):
 
 
     :returns:
-        P - A Nx2 numpy array with the points drawn as the rows.
+        P - An :math:`N \\times 2` numpy array with one point per row.
 
     '''
     np.random.seed(seed)
@@ -123,21 +123,23 @@ def Annulus(N=200, r=1, R=2, seed=None):
 def Torus(N=100, r=1, R=2,  seed=None):
     '''
     Sampling method taken from Sampling from a Manifold by Diaconis,
-    Holmes and Shahshahani, arXiv:1206.6913
+    Holmes and Shahshahani, arXiv:1206.6913.
 
     Generates torus with points
-    x = ( R + r*cos(theta) ) * cos(psi),
-    y = ( R + r*cos(theta) ) * sin(psi),
-    z = r * sin(theta)
 
-    Need to draw theta with distribution
+    .. math::
+        x = ( R + r \cos(\\theta) )  \cos(\psi),
+    .. math::
+        y = ( R + r\cos(\\theta) ) \sin(\psi),
+    .. math::
+        z = r \sin(\\theta)
 
-    g(theta) = (1+ r*cos(theta)/R ) / (2pi) on 0 <= theta < 2pi
+    Need to draw :math: `\\theta` with distribution
 
-    and psi with uniform density on [0,2pi).
+    .. math::
+        g(\\theta) = (1+ r \cos(\\theta)/R ) / (2\pi)
 
-    For theta, draw theta uniformly from [0,2pi) and
-    eta from [1-r/R,1+r/R].  If eta< 1 + (r/R) cos(theta), return theta.
+    on :math:`0 \leq \\theta < 2\pi`, and :math:`\psi` with uniform density on :math:`[0,2\pi)`. Draw :math:`\\theta` uniformly from :math:`[0,2\pi)` and :math:`\eta` from :math:`[1-r/R,1+r/R]`.  If :math:`\eta< 1 + (r/R) \cos(\\theta)`, return :math:`\\theta`.
 
     Parameters:
 
@@ -148,10 +150,10 @@ def Torus(N=100, r=1, R=2,  seed=None):
         R
             Outer radius of the torus
         seed
-            Fixes the seed.  Good if we want to replicate results.
+            Value for seed, or `None`.
 
     :returns:
-        P - A Nx3 numpy array with the points drawn as the rows.
+        P - An :math:`N \\times 3` numpy array with one point per row.
 
     '''
 
@@ -193,20 +195,20 @@ def Torus(N=100, r=1, R=2,  seed=None):
 
 def Cube(N=100, diam=1, dim=2, seed=None):
     """
-    Generate N points in R^dim from the box
-    [0,diam]x[0,diam]x...x[0,diam]
+    Generate `N` points in :math:`\mathbb{R}^{dim}` from the box
+    :math:`[0,diam]\\times[0,diam]\\times ...\\times [0,diam]`
 
     Parameters:
 
         N
             Number of points to generate
         diam
-            Points are pulled from the box [0,diam]x[0,diam]x...x[0,diam]
+            Points are pulled from the box :math:`[0,diam]^{dim}`
         dim
-            Points are embedded in R^dim
+            Points are embedded in :math:`\mathbb{R}^{dim}`
 
     :returns:
-        P - A Nxdim numpy array with the points drawn as the rows.
+        P - An :math:`N \\times dim` numpy array with a point per row.
 
     """
     np.random.seed(seed)
@@ -223,29 +225,26 @@ def Clusters(N=100,
              sd=1,
              seed=None):
     """
-    Generate k clusters of points, N points in total (evenly divided?)
-    centers is a k x d numpy array, where centers[i,:] is the center of
-    the ith cluster in R^d.
-    Points are drawn from a normal distribution with std dev = sd
+    Generate `k` clusters of points in :math:`\mathbb{R}^d`, `N` points in total, approximately evenly divided.
+    The centers are given as a :math:`k \\times d` numpy array, where `centers[i,:]` is the center of the ith cluster in :math:`\mathbb{R}^d`.
+    Points are drawn from a normal distribution all with the same standard deviation `sd`.
 
     Parameters:
 
          N
             Number of points to be generated
          centers
-            k x d numpy array, where centers[i,:] is the center of
-            the ith cluster in R^d.
+            :math:`k \\times d` numpy array, where `centers[i,:]` is the center of
+            the ith cluster in :math:`\mathbb{R}^d`.
          sd
-            standard deviation of clusters.
-
-            .. todo:: Make this enterable as a vector so each cluster can have a different sd?
+            Standard deviation of clusters.
 
          seed
-            Fixes the seed.  Good if we want to replicate results.
+            Fixed value for the seed, or `None`.
 
     :returns:
 
-        P - A Nxd numpy array with the points drawn as the rows.
+        P - An :math:`N \\times d` numpy array with a point per row.
 
     """
 
@@ -294,8 +293,8 @@ def Clusters(N=100,
 #----------------------------------------------------------------------#
 def normalDiagram(N=20, mu=(2, 4), sd=1, seed=None):
     """
-    Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.
-    Pulls `N` points from a normal distribution with mean `mu` and standard deviation `sd`, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.
+    Generates a diagram with points drawn from a normal distribution in the persistence diagram plane.
+    Pulls `N` points from a normal distribution with mean `\mu` and standard deviation `sd`, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.
 
     Parameters:
 
@@ -307,7 +306,7 @@ def normalDiagram(N=20, mu=(2, 4), sd=1, seed=None):
         Used to fix the seed if passed an integer; otherwise should be `None`.
 
     :returns:
-        A persistence diagram given as a numpy array of size `Kx2`.
+        A persistence diagram given as a numpy array of size :math:`K \\times 2`.
 
     """
 
@@ -351,12 +350,12 @@ def testSetClassification(N=20,
         sd
             The standard deviation for the normal distribution used for normalDiagram().
         permute
-            If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.
+            If ``permute=True``, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.
         seed
             Used to fix the seed if passed an integer; otherwise should be `None`.
 
     :returns:
-        A pandas dataframe with columns ```['Dgm', 'mean', 'sd', 'trainingLabel']```. In this case, the entry in `trainingLabel` is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.
+        A pandas dataframe with columns ``['Dgm', 'mean', 'sd', 'trainingLabel']``. In this case, the entry in `trainingLabel` is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.
     '''
 
     if type(numDgms) == int:
@@ -369,7 +368,7 @@ def testSetClassification(N=20,
     counter = 0
 
     for i in range(numDgms[0]):
-        if not seed == None:
+        if not seed is None:
             seed += 1
         dgm = normalDiagram(N=N, mu=muRed, sd=sd, seed=seed)
         DgmsDF.loc[counter] = [dgm, muRed, sd, -1]
@@ -377,7 +376,7 @@ def testSetClassification(N=20,
         # Dgms.append(dgm)
 
     for j in range(numDgms[1]):
-        if not seed == None:
+        if not seed is None:
             seed += 1
         dgm = normalDiagram(N=N, mu=muBlue, sd=sd, seed=seed)
         DgmsDF.loc[counter] = [dgm, muBlue, sd, 1]
@@ -433,7 +432,7 @@ def testSetRegressionLine(N=20,
     centers = np.array((muStart))*t + np.array((muEnd))*(1-t)
 
     for i in index:
-        if not seed == None:
+        if not seed is None:
             seed += 1
         mu = centers[i, :]
         dgm = normalDiagram(N=N, mu=mu, sd=sd, seed=seed)
@@ -487,7 +486,7 @@ def testSetRegressionBall(N=20,
     centers = np.random.normal(loc=muCenter, scale=sd, size=(numDgms, 2))
 
     for i in index:
-        if not seed == None:
+        if not seed is None:
             seed += 1
         mu = centers[i, :]
         dgm = normalDiagram(N=N, mu=mu, sd=sd, seed=seed)

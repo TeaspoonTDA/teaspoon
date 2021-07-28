@@ -214,8 +214,8 @@
 <span class="c1">#-------------Circles and Annuli---------------------------------------#</span>
 <div class="viewcode-block" id="Circle"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Circle">[docs]</a><span class="k">def</span> <span class="nf">Circle</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate N points in R^2 from the circle centered</span>
-<span class="sd">    at the origin with radius r.</span>
+<span class="sd">    Generate :math:`N` points in :math:`\mathbb{R}^2` from the circle centered</span>
+<span class="sd">    at the origin with radius :math:`r`.</span>
 
 <span class="sd">    If `gamma` is not `None`, then we add noise</span>
 <span class="sd">    using a normal distribution.  Note that this means the resulting</span>
@@ -234,7 +234,7 @@
 <span class="sd">            Fixes the seed.  Good if we want to replicate results.</span>
 
 <span class="sd">    :returns:</span>
-<span class="sd">        P- A Nx2 numpy array with the points drawn as the rows.</span>
+<span class="sd">        P- An :math:`N \\times 3` numpy array with a point per row.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -255,10 +255,10 @@
 
 <div class="viewcode-block" id="Sphere"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Sphere">[docs]</a><span class="k">def</span> <span class="nf">Sphere</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate N points in R^3 from the sphere centered</span>
-<span class="sd">    at the origin with radius r.</span>
+<span class="sd">    Generate :math: `N` points in :math:`\mathbb{R}^3` from the sphere centered</span>
+<span class="sd">    at the origin with radius :math: `r`.</span>
 <span class="sd">    If noise is set to a positive number, the points</span>
-<span class="sd">    can be at distance r +/- noise from the origin.</span>
+<span class="sd">    can be at distance :math:`r \pm` noise from the origin.</span>
 
 <span class="sd">    Parameters:</span>
 
@@ -267,11 +267,11 @@
 <span class="sd">        r</span>
 <span class="sd">            Radius of the sphere</span>
 <span class="sd">        seed</span>
-<span class="sd">            Fixes the seed.  Good if we want to replicate results.</span>
+<span class="sd">            Value for seed, or `None`.</span>
 
 
 <span class="sd">    :returns:</span>
-<span class="sd">        P- A Nx3 numpy array with the points drawn as the rows.</span>
+<span class="sd">        P- An :math:`N \\times 3` numpy array with a point per row.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -291,7 +291,7 @@
 <div class="viewcode-block" id="Annulus"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Annulus">[docs]</a><span class="k">def</span> <span class="nf">Annulus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Returns point cloud sampled from uniform distribution on</span>
-<span class="sd">    annulus in R^2 of inner radius r and outer radius R</span>
+<span class="sd">    annulus in :math:`\mathbb{R}^2` of inner radius `r` and outer radius `R`</span>
 
 <span class="sd">    Parameters:</span>
 
@@ -306,7 +306,7 @@
 
 
 <span class="sd">    :returns:</span>
-<span class="sd">        P - A Nx2 numpy array with the points drawn as the rows.</span>
+<span class="sd">        P - An :math:`N \\times 2` numpy array with one point per row.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -330,21 +330,23 @@
 <div class="viewcode-block" id="Torus"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Torus">[docs]</a><span class="k">def</span> <span class="nf">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Sampling method taken from Sampling from a Manifold by Diaconis,</span>
-<span class="sd">    Holmes and Shahshahani, arXiv:1206.6913</span>
+<span class="sd">    Holmes and Shahshahani, arXiv:1206.6913.</span>
 
 <span class="sd">    Generates torus with points</span>
-<span class="sd">    x = ( R + r*cos(theta) ) * cos(psi),</span>
-<span class="sd">    y = ( R + r*cos(theta) ) * sin(psi),</span>
-<span class="sd">    z = r * sin(theta)</span>
 
-<span class="sd">    Need to draw theta with distribution</span>
+<span class="sd">    .. math::</span>
+<span class="sd">        x = ( R + r \cos(\\theta) )  \cos(\psi),</span>
+<span class="sd">    .. math::</span>
+<span class="sd">        y = ( R + r\cos(\\theta) ) \sin(\psi),</span>
+<span class="sd">    .. math::</span>
+<span class="sd">        z = r \sin(\\theta)</span>
 
-<span class="sd">    g(theta) = (1+ r*cos(theta)/R ) / (2pi) on 0 &lt;= theta &lt; 2pi</span>
+<span class="sd">    Need to draw :math: `\\theta` with distribution</span>
 
-<span class="sd">    and psi with uniform density on [0,2pi).</span>
+<span class="sd">    .. math::</span>
+<span class="sd">        g(\\theta) = (1+ r \cos(\\theta)/R ) / (2\pi)</span>
 
-<span class="sd">    For theta, draw theta uniformly from [0,2pi) and</span>
-<span class="sd">    eta from [1-r/R,1+r/R].  If eta&lt; 1 + (r/R) cos(theta), return theta.</span>
+<span class="sd">    on :math:`0 \leq \\theta &lt; 2\pi`, and :math:`\psi` with uniform density on :math:`[0,2\pi)`. Draw :math:`\\theta` uniformly from :math:`[0,2\pi)` and :math:`\eta` from :math:`[1-r/R,1+r/R]`.  If :math:`\eta&lt; 1 + (r/R) \cos(\\theta)`, return :math:`\\theta`.</span>
 
 <span class="sd">    Parameters:</span>
 
@@ -355,10 +357,10 @@
 <span class="sd">        R</span>
 <span class="sd">            Outer radius of the torus</span>
 <span class="sd">        seed</span>
-<span class="sd">            Fixes the seed.  Good if we want to replicate results.</span>
+<span class="sd">            Value for seed, or `None`.</span>
 
 <span class="sd">    :returns:</span>
-<span class="sd">        P - A Nx3 numpy array with the points drawn as the rows.</span>
+<span class="sd">        P - An :math:`N \\times 3` numpy array with one point per row.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -400,20 +402,20 @@
 
 <div class="viewcode-block" id="Cube"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.Cube">[docs]</a><span class="k">def</span> <span class="nf">Cube</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">diam</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate N points in R^dim from the box</span>
-<span class="sd">    [0,diam]x[0,diam]x...x[0,diam]</span>
+<span class="sd">    Generate `N` points in :math:`\mathbb{R}^{dim}` from the box</span>
+<span class="sd">    :math:`[0,diam]\\times[0,diam]\\times ...\\times [0,diam]`</span>
 
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        N</span>
 <span class="sd">            Number of points to generate</span>
 <span class="sd">        diam</span>
-<span class="sd">            Points are pulled from the box [0,diam]x[0,diam]x...x[0,diam]</span>
+<span class="sd">            Points are pulled from the box :math:`[0,diam]^{dim}`</span>
 <span class="sd">        dim</span>
-<span class="sd">            Points are embedded in R^dim</span>
+<span class="sd">            Points are embedded in :math:`\mathbb{R}^{dim}`</span>
 
 <span class="sd">    :returns:</span>
-<span class="sd">        P - A Nxdim numpy array with the points drawn as the rows.</span>
+<span class="sd">        P - An :math:`N \\times dim` numpy array with a point per row.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -430,29 +432,26 @@
              <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
              <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate k clusters of points, N points in total (evenly divided?)</span>
-<span class="sd">    centers is a k x d numpy array, where centers[i,:] is the center of</span>
-<span class="sd">    the ith cluster in R^d.</span>
-<span class="sd">    Points are drawn from a normal distribution with std dev = sd</span>
+<span class="sd">    Generate `k` clusters of points in :math:`\mathbb{R}^d`, `N` points in total, approximately evenly divided.</span>
+<span class="sd">    The centers are given as a :math:`k \\times d` numpy array, where `centers[i,:]` is the center of the ith cluster in :math:`\mathbb{R}^d`.</span>
+<span class="sd">    Points are drawn from a normal distribution all with the same standard deviation `sd`.</span>
 
 <span class="sd">    Parameters:</span>
 
 <span class="sd">         N</span>
 <span class="sd">            Number of points to be generated</span>
 <span class="sd">         centers</span>
-<span class="sd">            k x d numpy array, where centers[i,:] is the center of</span>
-<span class="sd">            the ith cluster in R^d.</span>
+<span class="sd">            :math:`k \\times d` numpy array, where `centers[i,:]` is the center of</span>
+<span class="sd">            the ith cluster in :math:`\mathbb{R}^d`.</span>
 <span class="sd">         sd</span>
-<span class="sd">            standard deviation of clusters.</span>
-
-<span class="sd">            .. todo:: Make this enterable as a vector so each cluster can have a different sd?</span>
+<span class="sd">            Standard deviation of clusters.</span>
 
 <span class="sd">         seed</span>
-<span class="sd">            Fixes the seed.  Good if we want to replicate results.</span>
+<span class="sd">            Fixed value for the seed, or `None`.</span>
 
 <span class="sd">    :returns:</span>
 
-<span class="sd">        P - A Nxd numpy array with the points drawn as the rows.</span>
+<span class="sd">        P - An :math:`N \\times d` numpy array with a point per row.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -501,8 +500,8 @@
 <span class="c1">#----------------------------------------------------------------------#</span>
 <div class="viewcode-block" id="normalDiagram"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.normalDiagram">[docs]</a><span class="k">def</span> <span class="nf">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.</span>
-<span class="sd">    Pulls `N` points from a normal distribution with mean `mu` and standard deviation `sd`, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.</span>
+<span class="sd">    Generates a diagram with points drawn from a normal distribution in the persistence diagram plane.</span>
+<span class="sd">    Pulls `N` points from a normal distribution with mean `\mu` and standard deviation `sd`, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.</span>
 
 <span class="sd">    Parameters:</span>
 
@@ -514,7 +513,7 @@
 <span class="sd">        Used to fix the seed if passed an integer; otherwise should be `None`.</span>
 
 <span class="sd">    :returns:</span>
-<span class="sd">        A persistence diagram given as a numpy array of size `Kx2`.</span>
+<span class="sd">        A persistence diagram given as a numpy array of size :math:`K \\times 2`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -558,12 +557,12 @@
 <span class="sd">        sd</span>
 <span class="sd">            The standard deviation for the normal distribution used for normalDiagram().</span>
 <span class="sd">        permute</span>
-<span class="sd">            If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.</span>
+<span class="sd">            If ``permute=True``, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.</span>
 <span class="sd">        seed</span>
 <span class="sd">            Used to fix the seed if passed an integer; otherwise should be `None`.</span>
 
 <span class="sd">    :returns:</span>
-<span class="sd">        A pandas dataframe with columns ```[&#39;Dgm&#39;, &#39;mean&#39;, &#39;sd&#39;, &#39;trainingLabel&#39;]```. In this case, the entry in `trainingLabel` is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.</span>
+<span class="sd">        A pandas dataframe with columns ``[&#39;Dgm&#39;, &#39;mean&#39;, &#39;sd&#39;, &#39;trainingLabel&#39;]``. In this case, the entry in `trainingLabel` is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">numDgms</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>

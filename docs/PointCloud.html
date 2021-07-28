@@ -230,7 +230,7 @@ Specifically, the possible shapes are:</p>
 <dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Annulus">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Annulus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Annulus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Annulus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns point cloud sampled from uniform distribution on
-annulus in R^2 of inner radius r and outer radius R</p>
+annulus in <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> of inner radius <cite>r</cite> and outer radius <cite>R</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -241,7 +241,7 @@ annulus in R^2 of inner radius r and outer radius R</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>P - A Nx2 numpy array with the points drawn as the rows.</p>
+<dd class="field-even"><p>P - An <span class="math notranslate nohighlight">\(N \times 2\)</span> numpy array with one point per row.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -249,8 +249,8 @@ annulus in R^2 of inner radius r and outer radius R</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Circle">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Circle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Circle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate N points in R^2 from the circle centered
-at the origin with radius r.</p>
+<dd><p>Generate <span class="math notranslate nohighlight">\(N\)</span> points in <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> from the circle centered
+at the origin with radius <span class="math notranslate nohighlight">\(r\)</span>.</p>
 <p>If <cite>gamma</cite> is not <cite>None</cite>, then we add noise
 using a normal distribution.  Note that this means the resulting
 distribution is not bounded, so your favorite stability theorem doesn’t
@@ -265,7 +265,7 @@ immediately apply.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>P- A Nx2 numpy array with the points drawn as the rows.</p>
+<dd class="field-even"><p>P- An <span class="math notranslate nohighlight">\(N \times 3\)</span> numpy array with a point per row.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -273,23 +273,21 @@ immediately apply.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Clusters">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([[0,</span> <span class="pre">0],</span> <span class="pre">[3,</span> <span class="pre">3]])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Clusters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Clusters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate k clusters of points, N points in total (evenly divided?)
-centers is a k x d numpy array, where centers[i,:] is the center of
-the ith cluster in R^d.
-Points are drawn from a normal distribution with std dev = sd</p>
+<dd><p>Generate <cite>k</cite> clusters of points in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</span>, <cite>N</cite> points in total, approximately evenly divided.
+The centers are given as a <span class="math notranslate nohighlight">\(k \times d\)</span> numpy array, where <cite>centers[i,:]</cite> is the center of the ith cluster in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</span>.
+Points are drawn from a normal distribution all with the same standard deviation <cite>sd</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>N</strong> – Number of points to be generated</p></li>
-<li><p><strong>centers</strong> – k x d numpy array, where centers[i,:] is the center of
-the ith cluster in R^d.</p></li>
-<li><p><strong>sd</strong> – <p>standard deviation of clusters.</p>
-</p></li>
-<li><p><strong>seed</strong> – Fixes the seed.  Good if we want to replicate results.</p></li>
+<li><p><strong>centers</strong> – <span class="math notranslate nohighlight">\(k \times d\)</span> numpy array, where <cite>centers[i,:]</cite> is the center of
+the ith cluster in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</span>.</p></li>
+<li><p><strong>sd</strong> – Standard deviation of clusters.</p></li>
+<li><p><strong>seed</strong> – Fixed value for the seed, or <cite>None</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>P - A Nxd numpy array with the points drawn as the rows.</p>
+<dd class="field-even"><p>P - An <span class="math notranslate nohighlight">\(N \times d\)</span> numpy array with a point per row.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -297,18 +295,18 @@ the ith cluster in R^d.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Cube">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Cube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Cube" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate N points in R^dim from the box
-[0,diam]x[0,diam]x…x[0,diam]</p>
+<dd><p>Generate <cite>N</cite> points in <span class="math notranslate nohighlight">\(\mathbb{R}^{dim}\)</span> from the box
+<span class="math notranslate nohighlight">\([0,diam]\times[0,diam]\times ...\times [0,diam]\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>N</strong> – Number of points to generate</p></li>
-<li><p><strong>diam</strong> – Points are pulled from the box [0,diam]x[0,diam]x…x[0,diam]</p></li>
-<li><p><strong>dim</strong> – Points are embedded in R^dim</p></li>
+<li><p><strong>diam</strong> – Points are pulled from the box <span class="math notranslate nohighlight">\([0,diam]^{dim}\)</span></p></li>
+<li><p><strong>dim</strong> – Points are embedded in <span class="math notranslate nohighlight">\(\mathbb{R}^{dim}\)</span></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>P - A Nxdim numpy array with the points drawn as the rows.</p>
+<dd class="field-even"><p>P - An <span class="math notranslate nohighlight">\(N \times dim\)</span> numpy array with a point per row.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -316,20 +314,20 @@ the ith cluster in R^d.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Sphere">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Sphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Sphere" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate N points in R^3 from the sphere centered
-at the origin with radius r.
+<dd><p>Generate :math: <cite>N</cite> points in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> from the sphere centered
+at the origin with radius :math: <cite>r</cite>.
 If noise is set to a positive number, the points
-can be at distance r +/- noise from the origin.</p>
+can be at distance <span class="math notranslate nohighlight">\(r \pm\)</span> noise from the origin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>N</strong> – Number of points to generate</p></li>
 <li><p><strong>r</strong> – Radius of the sphere</p></li>
-<li><p><strong>seed</strong> – Fixes the seed.  Good if we want to replicate results.</p></li>
+<li><p><strong>seed</strong> – Value for seed, or <cite>None</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>P- A Nx3 numpy array with the points drawn as the rows.</p>
+<dd class="field-even"><p>P- An <span class="math notranslate nohighlight">\(N \times 3\)</span> numpy array with a point per row.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -338,27 +336,29 @@ can be at distance r +/- noise from the origin.</p>
 <dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Torus">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Torus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Torus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Torus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sampling method taken from Sampling from a Manifold by Diaconis,
-Holmes and Shahshahani, arXiv:1206.6913</p>
-<p>Generates torus with points
-x = ( R + r*cos(theta) ) * cos(psi),
-y = ( R + r*cos(theta) ) * sin(psi),
-z = r * sin(theta)</p>
-<p>Need to draw theta with distribution</p>
-<p>g(theta) = (1+ r*cos(theta)/R ) / (2pi) on 0 &lt;= theta &lt; 2pi</p>
-<p>and psi with uniform density on [0,2pi).</p>
-<p>For theta, draw theta uniformly from [0,2pi) and
-eta from [1-r/R,1+r/R].  If eta&lt; 1 + (r/R) cos(theta), return theta.</p>
+Holmes and Shahshahani, arXiv:1206.6913.</p>
+<p>Generates torus with points</p>
+<div class="math notranslate nohighlight">
+\[x = ( R + r \cos(\theta) )  \cos(\psi),\]</div>
+<div class="math notranslate nohighlight">
+\[y = ( R + r\cos(\theta) ) \sin(\psi),\]</div>
+<div class="math notranslate nohighlight">
+\[z = r \sin(\theta)\]</div>
+<p>Need to draw :math: <cite>theta</cite> with distribution</p>
+<div class="math notranslate nohighlight">
+\[g(\theta) = (1+ r \cos(\theta)/R ) / (2\pi)\]</div>
+<p>on <span class="math notranslate nohighlight">\(0 \leq \theta &lt; 2\pi\)</span>, and <span class="math notranslate nohighlight">\(\psi\)</span> with uniform density on <span class="math notranslate nohighlight">\([0,2\pi)\)</span>. Draw <span class="math notranslate nohighlight">\(\theta\)</span> uniformly from <span class="math notranslate nohighlight">\([0,2\pi)\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span> from <span class="math notranslate nohighlight">\([1-r/R,1+r/R]\)</span>.  If <span class="math notranslate nohighlight">\(\eta&lt; 1 + (r/R) \cos(\theta)\)</span>, return <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>N</strong> – Number of points to generate</p></li>
 <li><p><strong>r</strong> – Inner radius of the torus</p></li>
 <li><p><strong>R</strong> – Outer radius of the torus</p></li>
-<li><p><strong>seed</strong> – Fixes the seed.  Good if we want to replicate results.</p></li>
+<li><p><strong>seed</strong> – Value for seed, or <cite>None</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>P - A Nx3 numpy array with the points drawn as the rows.</p>
+<dd class="field-even"><p>P - An <span class="math notranslate nohighlight">\(N \times 3\)</span> numpy array with one point per row.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -366,7 +366,7 @@ eta from [1-r/R,1+r/R].  If eta&lt; 1 + (r/R) cos(theta), return theta.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.normalDiagram">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">normalDiagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(2,</span> <span class="pre">4)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#normalDiagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.normalDiagram" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a diagram with points drawn from a normal distribution  in the persistence diagram plane.
+<dd><p>Generates a diagram with points drawn from a normal distribution in the persistence diagram plane.
 Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite> and standard deviation <cite>sd</cite>, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -378,7 +378,7 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A persistence diagram given as a numpy array of size <cite>Kx2</cite>.</p>
+<dd class="field-even"><p>A persistence diagram given as a numpy array of size <span class="math notranslate nohighlight">\(K \times 2\)</span>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -395,12 +395,12 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 <li><p><strong>muRed</strong> – The means used for the normal distribution in normalDiagram() for the two different types.</p></li>
 <li><p><strong>muBlue</strong> – The means used for the normal distribution in normalDiagram() for the two different types.</p></li>
 <li><p><strong>sd</strong> – The standard deviation for the normal distribution used for normalDiagram().</p></li>
-<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</p></li>
+<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">permute=True</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</p></li>
 <li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>. In this case, the entry in <cite>trainingLabel</cite> is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.</p>
+<dd class="field-even"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']</span></code>. In this case, the entry in <cite>trainingLabel</cite> is -1 if the diagram was drawn from the red type, and 1 if drawn from the blue type.</p>
 </dd>
 </dl>
 </dd></dl>

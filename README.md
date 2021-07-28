@@ -7,7 +7,7 @@ These modules include methods for incorporating tools from machine learning, com
 All code is open source with up to date documentation, making the code easy to use, in particular for signal processing experts with limited experience in topological methods.
 
 
-Full documentation of this package is available [here](http://elizabethmunch.com/code/teaspoon/index.html). The full documentation includes information about installation, module documentation with examples, contributing, the license, and citing teaspoon.
+Full documentation of this package is available [here](https://lizliz.github.io/teaspoon/). The full documentation includes information about installation, module documentation with examples, contributing, the license, and citing teaspoon.
 
 The code is a compilation of work done by [Elizabeth Munch](http://www.elizabethmunch.com) and [Firas Khasawneh](http://www.firaskhasawneh.com/) along with their students and collaborators.  People who have contributed to teaspoon include:
 
@@ -20,9 +20,9 @@ Installation
 The teaspoon package is available through pip install with version details found [here](https://pypi.org/project/teaspoon/).
 The package can be installed using the following pip installation::
 
-	pip install teaspoon
+	``pip install teaspoon``
 
-The current draft of the code may still have dependency issues which will be fixed by version 1.0.0. Please reference the requirments page in the [documentation](http://elizabethmunch.com/code/teaspoon/index.html) for more details on other required installations.
+The current draft of the code may still have dependency issues which will be fixed by version 1.0.0. Please reference the requirements page in the [documentation](https://lizliz.github.io/teaspoon/) for more details on other required installations.
 
 Contacts
 =============

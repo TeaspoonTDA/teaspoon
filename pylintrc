@@ -257,16 +257,28 @@ function-naming-style=camelCase
 #function-rgx=
 
 # Good variable names which should always be accepted, separated by a comma.
-good-names=i,
-           j,
+good-names=d,D,
+           i,I,
+           j,J,
            k,
            ex,
            Run,
+           m,M,n,N,
+           p,P,q,Q,r,R,s,S,s,T,
+           x,
+           y,
+           z,
+           sd,
+           mu,
+           DgmsDF,
+           Annulus,Sphere,Torus,Cube,Clusters,PointCloud,Circle,
+           N,
+           Rvect,
            _
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
-good-names-rgxs=
+good-names-rgxs="[a-zA-Z0-9_]{1,30}$"
 
 # Include a hint for the correct naming format with invalid-name.
 include-naming-hint=no
