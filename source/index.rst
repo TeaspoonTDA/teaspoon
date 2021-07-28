@@ -29,7 +29,7 @@ Table of Contents
 Collaborators
 ***************
 
-The code is a compilation of work done by `Elizabeth Munch <http://www.elizabethmunch.com>`_ and `Firas Khasawneh <http://www.firaskhasawneh.com/>`_ along with their students and collaborators.  People who have contributed to teaspoon include:
+The code is a compilation of work done by `Elizabeth Munch <http://www.elizabethmunch.com>`_ and `Firas Khasawneh <http://www.firaskhasawneh.com/>`__ along with their students and collaborators.  People who have contributed to teaspoon include:
 
 - `Audun Myers <https://github.com/myersau3>`_
 - Melih Yesilli
@@ -52,4 +52,4 @@ This is a list of the current issues for Sphinx:
 Contact Information
 ********************
 - `Liz Munch <http://www.elizabethmunch.com>`_: `muncheli@msu.edu <mailto:muncheli@msu.edu>`_
-- `Firas Khasawneh <https://www.firaskhasawneh.com>`_: `khasawn3@egr.msu.edu <mailto:khasawn3@egr.msu.edu>`_
+- `Firas Khasawneh <https://www.firaskhasawneh.com>`__: `khasawn3@egr.msu.edu <mailto:khasawn3@egr.msu.edu>`_
