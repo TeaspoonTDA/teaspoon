@@ -52,8 +52,8 @@ from sklearn.linear_model import LogisticRegression, Ridge, RidgeCV, RidgeClassi
 import pandas as pd
 import numpy as np
 import time
-from SP.adaptivePart import Partitions
-from TDA import Persistence as pP
+from teaspoon.SP.adaptivePart import Partitions
+from teaspoon.TDA import Persistence as pP
 import feature_functions as fF
 import os
 import sys
