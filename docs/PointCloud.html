@@ -314,8 +314,8 @@ the ith cluster in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Sphere">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Sphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Sphere" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate :math: <cite>N</cite> points in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> from the sphere centered
-at the origin with radius :math: <cite>r</cite>.
+<dd><p>Generate <span class="math notranslate nohighlight">\(N\)</span> points in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> from the sphere centered
+at the origin with radius <span class="math notranslate nohighlight">\(r\)</span>.
 If noise is set to a positive number, the points
 can be at distance <span class="math notranslate nohighlight">\(r \pm\)</span> noise from the origin.</p>
 <dl class="field-list simple">
@@ -344,7 +344,7 @@ Holmes and Shahshahani, arXiv:1206.6913.</p>
 \[y = ( R + r\cos(\theta) ) \sin(\psi),\]</div>
 <div class="math notranslate nohighlight">
 \[z = r \sin(\theta)\]</div>
-<p>Need to draw :math: <cite>theta</cite> with distribution</p>
+<p>Need to draw <span class="math notranslate nohighlight">\(\theta\)</span> with distribution</p>
 <div class="math notranslate nohighlight">
 \[g(\theta) = (1+ r \cos(\theta)/R ) / (2\pi)\]</div>
 <p>on <span class="math notranslate nohighlight">\(0 \leq \theta &lt; 2\pi\)</span>, and <span class="math notranslate nohighlight">\(\psi\)</span> with uniform density on <span class="math notranslate nohighlight">\([0,2\pi)\)</span>. Draw <span class="math notranslate nohighlight">\(\theta\)</span> uniformly from <span class="math notranslate nohighlight">\([0,2\pi)\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span> from <span class="math notranslate nohighlight">\([1-r/R,1+r/R]\)</span>.  If <span class="math notranslate nohighlight">\(\eta&lt; 1 + (r/R) \cos(\theta)\)</span>, return <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
@@ -425,12 +425,12 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>numDgms</strong> – The number of diagrams generated of each type. The resulting dataset will have <cite>6*numDgms</cite> diagrams.</p></li>
 <li><p><strong>numPts</strong> – The number of points in each point cloud.</p></li>
-<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</p></li>
+<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">permute=True</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</p></li>
 <li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A pandas DataFrame with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm0',</span> <span class="pre">'Dgm1',</span> <span class="pre">'trainingLabel']`</span></code>.  The <cite>trainingLabel</cite> row has entries with labels given as the boldface above.</p>
+<dd class="field-even"><p>A pandas DataFrame with columns <code class="docutils literal notranslate"><span class="pre">['Dgm0',</span> <span class="pre">'Dgm1',</span> <span class="pre">'trainingLabel']</span></code>.  The <cite>trainingLabel</cite> row has entries with labels given as the boldface above.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -446,12 +446,12 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 <li><p><strong>numDgms</strong> – The number of diagrams for the collection given as an integer.</p></li>
 <li><p><strong>muCenter</strong> – The means used for the normal distribution in normalDiagram() are drawn from the normal distribution with mean <cite>muCenter</cite>.</p></li>
 <li><p><strong>sd</strong> – The standard deviation for the normal distribution used for normalDiagram(), as well as for the standard deviation passed to normalDiagram().</p></li>
-<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</p></li>
+<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">permute=True</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</p></li>
 <li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muCenter</cite>.</p>
+<dd class="field-even"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muCenter</cite>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -468,12 +468,12 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 <li><p><strong>muStart</strong> – The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by <cite>muStart</cite> and <cite>muEnd</cite>.</p></li>
 <li><p><strong>muEnd</strong> – The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by <cite>muStart</cite> and <cite>muEnd</cite>.</p></li>
 <li><p><strong>sd</strong> – The standard deviation for the normal distribution used for normalDiagram().</p></li>
-<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">`permute=True`</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</p></li>
+<li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">permute=True</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</p></li>
 <li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">`['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']`</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muStart</cite>.</p>
+<dd class="field-even"><p>A pandas dataframe with columns <code class="docutils literal notranslate"><span class="pre">['Dgm',</span> <span class="pre">'mean',</span> <span class="pre">'sd',</span> <span class="pre">'trainingLabel']</span></code>.  In this case, <cite>trainingLabel</cite> is the distance from the mean used for that persistence diagram to <cite>muStart</cite>.</p>
 </dd>
 </dl>
 </dd></dl>

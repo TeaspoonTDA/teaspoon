@@ -48,8 +48,8 @@ def Circle(N=100, r=1, gamma=None, seed=None):
 
 def Sphere(N=100, r=1, noise=0, seed=None):
     """
-    Generate :math: `N` points in :math:`\mathbb{R}^3` from the sphere centered
-    at the origin with radius :math: `r`.
+    Generate :math:`N` points in :math:`\mathbb{R}^3` from the sphere centered
+    at the origin with radius :math:`r`.
     If noise is set to a positive number, the points
     can be at distance :math:`r \pm` noise from the origin.
 
@@ -134,7 +134,7 @@ def Torus(N=100, r=1, R=2,  seed=None):
     .. math::
         z = r \sin(\\theta)
 
-    Need to draw :math: `\\theta` with distribution
+    Need to draw :math:`\\theta` with distribution
 
     .. math::
         g(\\theta) = (1+ r \cos(\\theta)/R ) / (2\pi)
@@ -415,12 +415,12 @@ def testSetRegressionLine(N=20,
      sd
         The standard deviation for the normal distribution used for normalDiagram().
      permute
-        If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.
+        If ``permute=True``, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.
      seed
         Used to fix the seed if passed an integer; otherwise should be `None`.
 
     :returns:
-        A pandas dataframe with columns ```['Dgm', 'mean', 'sd', 'trainingLabel']```.  In this case, `trainingLabel` is the distance from the mean used for that persistence diagram to `muStart`.
+        A pandas dataframe with columns ``['Dgm', 'mean', 'sd', 'trainingLabel']``.  In this case, `trainingLabel` is the distance from the mean used for that persistence diagram to `muStart`.
 
     '''
 
@@ -470,12 +470,12 @@ def testSetRegressionBall(N=20,
          sd
             The standard deviation for the normal distribution used for normalDiagram(), as well as for the standard deviation passed to normalDiagram().
          permute
-            If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.
+            If ``permute=True``, the data frame returned has its rows randomly permuted.  If `False`, the rows will be be sorted by the location of the means.
          seed
             Used to fix the seed if passed an integer; otherwise should be `None`.
 
     :returns:
-        A pandas dataframe with columns ```['Dgm', 'mean', 'sd', 'trainingLabel']```.  In this case, `trainingLabel` is the distance from the mean used for that persistence diagram to `muCenter`.
+        A pandas dataframe with columns ``['Dgm', 'mean', 'sd', 'trainingLabel']``.  In this case, `trainingLabel` is the distance from the mean used for that persistence diagram to `muCenter`.
 
     '''
 
@@ -525,12 +525,12 @@ def testSetManifolds(numDgms=50,
          numPts
             The number of points in each point cloud.
          permute
-            If ```permute=True```, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.
+            If ``permute=True``, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.
          seed
             Used to fix the seed if passed an integer; otherwise should be `None`.
 
     :returns:
-        A pandas DataFrame with columns ```['Dgm0', 'Dgm1', 'trainingLabel']```.  The `trainingLabel` row has entries with labels given as the boldface above.
+        A pandas DataFrame with columns ``['Dgm0', 'Dgm1', 'trainingLabel']``.  The `trainingLabel` row has entries with labels given as the boldface above.
 
     '''
 
