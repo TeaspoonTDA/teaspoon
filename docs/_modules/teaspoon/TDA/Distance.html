@@ -242,8 +242,10 @@
 <span class="sd">        Thew second persistence diagram</span>
 <span class="sd">    y_axis: optional, default=&quot;death&quot;</span>
 <span class="sd">        What the y-axis of the diagram represents. Should be one of</span>
+
 <span class="sd">            * ``&quot;lifetime&quot;``</span>
 <span class="sd">            * ``&quot;death&quot;``</span>
+
 <span class="sd">    p: int, optional (default=2)</span>
 <span class="sd">        The p in the p-Wasserstein distance to compute</span>
 <span class="sd">    q: 1, 2 or np.inf, optional (default = 2)</span>
@@ -336,31 +338,38 @@
 <span class="sd">        Hera must be installed and in the bash path to use this function https://bitbucket.org/grey_narn/hera</span>
 
 <span class="sd">    Hera input format:</span>
-<span class="sd">            - bottleneck_dist file1 file2  [relative_error]</span>
-<span class="sd">            - wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]  where file1 and file2 represent the persistence diagrams.</span>
+
+<span class="sd">        * bottleneck_dist file1 file2  [relative_error]</span>
+<span class="sd">        * wasserstein_dist file1 file2  [wasserstein degree] [relative error] [internal norm]  where file1 and file2 represent the persistence diagrams.</span>
+
 <span class="sd">    :param ndarray (D1):</span>
 <span class="sd">            Persistence diagram --(Nx2) matrix.</span>
 <span class="sd">    :param ndarray (D2):</span>
 <span class="sd">            Persistence diagram --(Nx2) matrix.</span>
 <span class="sd">    :param wassDeg: Options are:</span>
-<span class="sd">            - &#39;Bottleneck&#39; or anything containing &#39;bot&#39;. Runs the bottleneck_dist command</span>
-<span class="sd">            - np.inf: Also returns bottleneck distance with the bottleneck_dist command</span>
-<span class="sd">            - an integer q: Computes the q-th Wasserstein distance</span>
+
+<span class="sd">        - &#39;Bottleneck&#39; or anything containing &#39;bot&#39;. Runs the bottleneck_dist command</span>
+<span class="sd">        - np.inf: Also returns bottleneck distance with the bottleneck_dist command</span>
+<span class="sd">        - an integer q: Computes the q-th Wasserstein distance</span>
+
 <span class="sd">    :param relError:</span>
+
 <span class="sd">        - An input to both bottleneck_dist and wasserstein_dist.</span>
 <span class="sd">        - For wasserstein_dist from hera documentation:</span>
 <span class="sd">            If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).</span>
 <span class="sd">            Otherwise the output is an approximation of the exact distance. Precisely:</span>
 <span class="sd">            if :math:`d_{exact}` is the true distance and d_approx is the output, then</span>
-<span class="sd">                :math:`\\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \\mathrm{relativeError}`.</span>
+<span class="sd">            :math:`\\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \\mathrm{relativeError}`.</span>
 <span class="sd">        - For bottleneck_dist from hera documentation:</span>
 <span class="sd">            If two diagrams are equal, then the exact distance 0.0 is printed (the order of points in file1 and file2 need not be the same).</span>
 <span class="sd">            Otherwise the output is an approximation of the exact distance.</span>
 <span class="sd">            Precisely: if :math:`d_{exact}` is the true distance and d_approx is the output, then</span>
-<span class="sd">                :math:`\\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \\mathrm{relativeError}.`</span>
+<span class="sd">            :math:`\\frac{| d_{exact} - d_{approx} |}{ d_{exact} } &lt; \\mathrm{relativeError}.`</span>
 <span class="sd">        - Default value in Hera is 0.01 for Wasserstein distance and 0 (exact computation) for bottleneck distance.</span>
 <span class="sd">        - Values passed to hera must be positive.</span>
+
 <span class="sd">        .. todo:: Does this mean strictly positive? What is the behavior when passing 0?</span>
+
 <span class="sd">    :param internal_p:</span>
 <span class="sd">        This is only controllable for Wasserstein distance computation.  Matched points are measured by :math:`L_p` distance.</span>
 <span class="sd">        Default is internal_p = infinity.</span>

@@ -1,40 +1,44 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>2.2.2. Classification &mdash; teaspoon 0.1.0 documentation</title>
   
 
   
-  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="2.3. Topological Data Analysis (TDA) Module Documentation" href="TDA.html" />
@@ -78,6 +82,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -141,6 +146,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -175,11 +181,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
         
@@ -190,7 +198,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/CL.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -211,8 +219,8 @@ This page includes the documentation of the classification codes and some exampl
 <div class="section" id="module-teaspoon.ML.PD_Classification">
 <span id="persistence-landscapes"></span><h2><span class="section-number">2.2.2.1. </span>Persistence Landscapes<a class="headerlink" href="#module-teaspoon.ML.PD_Classification" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="module-PD_Classification"></span><dl class="py function">
-<dt id="teaspoon.ML.PD_Classification.CL_PL">
-<code class="sig-prename descclassname">teaspoon.ML.PD_Classification.</code><code class="sig-name descname">CL_PL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PL</span></em>, <em class="sig-param"><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_PL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_PL" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_PL">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_PL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_PL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_PL" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function perform classification using persistence landscapes. There are two inputs and these are persistence landscape set and parameter bucket object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -229,7 +237,7 @@ This page includes the documentation of the classification codes and some exampl
 
 <p><strong>Example:</strong> We classify chatter in time series obtained from cutting signals in turning.
 Persistence diagrams and landscapes are computed beforehand.
-The time series data is available in <a class="bibtex reference internal" href="ML.html#khasawneh2019" id="id1">[7]</a>.</p>
+The time series data is available in <span id="id1">[<a class="reference internal" href="ML.html#id17" title="Firas A. Khasawneh, Andreas Otto, and Melih C. Yesilli. Turning dataset for chatter diagnosis using machine learning. 2019. doi:10.17632/HVM4WH3JZX.1.">7</a>]</span>.</p>
 <p><strong>Example:</strong></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">PLandscape</span>
@@ -274,11 +282,11 @@ The time series data is available in <a class="bibtex reference internal" href="
 <div class="section" id="parameter-bucket-for-classification">
 <span id="cl-pb"></span><h2><span class="section-number">2.2.2.2. </span>Parameter Bucket for Classification<a class="headerlink" href="#parameter-bucket-for-classification" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="teaspoon.ML.Base.CL_ParameterBucket">
-<em class="property">class </em><code class="sig-prename descclassname">teaspoon.ML.Base.</code><code class="sig-name descname">CL_ParameterBucket</code><span class="sig-paren">(</span><em class="sig-param">clf_model=&lt;class 'sklearn.svm._classes.SVC'&gt;</em>, <em class="sig-param">Labels=None</em>, <em class="sig-param">test_size=0.33</em>, <em class="sig-param">TF_Learning=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/Base.html#CL_ParameterBucket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.Base.CL_ParameterBucket" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="teaspoon.ML.Base.CL_ParameterBucket">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">teaspoon.ML.Base.</span></span><span class="sig-name descname"><span class="pre">CL_ParameterBucket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">clf_model=&lt;class</span> <span class="pre">'sklearn.svm._classes.SVC'&gt;</span></em>, <em class="sig-param"><span class="pre">Labels=None</span></em>, <em class="sig-param"><span class="pre">test_size=0.33</span></em>, <em class="sig-param"><span class="pre">TF_Learning=False</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/Base.html#CL_ParameterBucket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.Base.CL_ParameterBucket" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py method">
-<dt id="teaspoon.ML.Base.CL_ParameterBucket.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">clf_model=&lt;class 'sklearn.svm._classes.SVC'&gt;</em>, <em class="sig-param">Labels=None</em>, <em class="sig-param">test_size=0.33</em>, <em class="sig-param">TF_Learning=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/Base.html#CL_ParameterBucket.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.Base.CL_ParameterBucket.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="teaspoon.ML.Base.CL_ParameterBucket.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">clf_model=&lt;class</span> <span class="pre">'sklearn.svm._classes.SVC'&gt;</span></em>, <em class="sig-param"><span class="pre">Labels=None</span></em>, <em class="sig-param"><span class="pre">test_size=0.33</span></em>, <em class="sig-param"><span class="pre">TF_Learning=False</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/Base.html#CL_ParameterBucket.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.Base.CL_ParameterBucket.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -298,8 +306,8 @@ The time series data is available in <a class="bibtex reference internal" href="
 <div class="section" id="persistence-images">
 <h2><span class="section-number">2.2.2.3. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="teaspoon.ML.PD_Classification.CL_PI">
-<code class="sig-prename descclassname">teaspoon.ML.PD_Classification.</code><code class="sig-name descname">CL_PI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">F_PImage1</span></em>, <em class="sig-param"><span class="n">params</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_PI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_PI" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_PI">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_PI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_PImage1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_PI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_PI" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes parameter object and feature matrix/matrices which is/are generated using persistence images and returns classification results in a matrix.
 Function is capable of performing transfer learning if user specifies it in parameter bucket object and provides two feature matrices.</p>
 <dl class="field-list simple">
@@ -382,8 +390,8 @@ Function is capable of performing transfer learning if user specifies it in para
 <div class="section" id="carlsson-coordinates">
 <h2><span class="section-number">2.2.2.4. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="teaspoon.ML.PD_Classification.CL_CC">
-<code class="sig-prename descclassname">teaspoon.ML.PD_Classification.</code><code class="sig-name descname">CL_CC</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PD1</span></em>, <em class="sig-param"><span class="n">params</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_CC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_CC" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_CC">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_CC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_CC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_CC" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes persistence diagrams and parameter bucket object and returns classification results in a matrix.
 Function is capable of performing transfer learning if user specifies it in parameter bucket object and provides two persistence diagrams object array.</p>
 <dl class="field-list simple">
@@ -469,8 +477,8 @@ Function is capable of performing transfer learning if user specifies it in para
 <div class="section" id="path-signatures">
 <h2><span class="section-number">2.2.2.5. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="teaspoon.ML.PD_Classification.CL_PS">
-<code class="sig-prename descclassname">teaspoon.ML.PD_Classification.</code><code class="sig-name descname">CL_PS</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">F_PSignature</span></em>, <em class="sig-param"><span class="n">params</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_PS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_PS" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_PS">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_PS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_PSignature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_PS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_PS" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes parameter object and feature matrix which is generated using signatures of paths and returns classification results in a matrix.
 Function is capable of performing transfer learning if user specifies it in parameter bucket object and provides two feature matrices.</p>
 <dl class="field-list simple">
@@ -559,8 +567,8 @@ Function is capable of performing transfer learning if user specifies it in para
 <div class="section" id="kernel-method">
 <h2><span class="section-number">2.2.2.6. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="teaspoon.ML.PD_Classification.CL_KM">
-<code class="sig-prename descclassname">teaspoon.ML.PD_Classification.</code><code class="sig-name descname">CL_KM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PD</span></em>, <em class="sig-param"><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_KM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_KM" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_KM">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_KM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_KM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_KM" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes parameter object and persistence diagrams and computes pairwise kernels for training set and kernel matrix between test set and training set separately.
 The main difference of this function from others is that it uses  <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">LIBSVM</a> (see <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/COPYRIGHT">here</a> for LIBSVM copyright statement) for classification.
 Function will ask user to input the path to the folder where LIBSVM/python file is available, then it will import related functions.
@@ -621,29 +629,29 @@ Computed kernels are used in SVM algorithm to perform classification.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="TDA.html" class="btn btn-neutral float-right" title="2.3. Topological Data Analysis (TDA) Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="F_PD.html" class="btn btn-neutral float-left" title="2.2.1. Featurization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="TDA.html" class="btn btn-neutral float-right" title="2.3. Topological Data Analysis (TDA) Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="F_PD.html" class="btn btn-neutral float-left" title="2.2.1. Featurization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Munch
+        &#169; Copyright 2020, Munch.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -651,7 +659,6 @@ Computed kernels are used in SVM algorithm to perform classification.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -670,6 +677,7 @@ Computed kernels are used in SVM algorithm to perform classification.</p>
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-XXXXXXX-1', 'auto');
+    
     ga('send', 'pageview');
     </script>
 
