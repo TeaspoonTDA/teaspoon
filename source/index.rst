@@ -1,5 +1,5 @@
 teaspoon: Topological Signal Processing in Python
-==========================================
+=================================================
 
 
 The emerging field of topological signal processing brings methods from Topological Data Analysis (TDA) to create new tools for signal processing by incorporating aspects of shape.
