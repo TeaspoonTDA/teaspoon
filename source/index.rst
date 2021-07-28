@@ -7,6 +7,9 @@ This python package, teaspoon for tsp or topological signal processing, brings t
 These modules include methods for incorporating tools from machine learning, complex networks, information, and parameter selection along with a dynamical systems library to streamline the creation and benchmarking of new methods.
 All code is open source with up to date documentation, making the code easy to use, in particular for signal processing experts with limited experience in topological methods.
 
+.. image:: figures/takens_embedding_gif_v2.gif
+  :width: 600 px
+
 
 Table of Contents
 *******************
