@@ -21,9 +21,9 @@ class parameterSelection(unittest.TestCase):
         t = np.linspace(0, 100, fs*100)
         ts = np.sin(t) + np.sin((1/np.pi)*t)
 
-        tau = MI_for_delay(ts, plotting = True, method = 'basic', h_method = 'sturge', k = 2, ranking = True)
+        tau = MI_for_delay(ts, plotting = False, method = 'basic', h_method = 'sturge', k = 2, ranking = True)
 
-        self.assertEqual(tau, 2, "tau should be 2")
+        self.assertAlmostEqual(tau, 20, delta=10)
 
 
 
@@ -34,7 +34,7 @@ class parameterSelection(unittest.TestCase):
         ts = np.sin(t) + np.sin((1/np.pi)*t)
 
         tau = autoCorrelation_tau(ts, cutoff = 1/np.exp(1), AC_method = 'pearson', plotting = False)
-        print('Delay from AC: ', tau)
+        self.assertAlmostEqual(tau, 20, delta=10)
 
 
 
@@ -42,8 +42,8 @@ class parameterSelection(unittest.TestCase):
         fs = 10
         t = np.linspace(0, 100, fs*100)
         ts = np.sin(t)
-        tau = PAMI_for_delay(ts, n = 3, plotting = True)
-        print('Delay from PAMI: ',tau)
+        tau = PAMI_for_delay(ts, n = 3, plotting = False)
+        self.assertAlmostEqual(tau, 20, delta=10)
 
 
 
@@ -53,8 +53,8 @@ class parameterSelection(unittest.TestCase):
         t = np.linspace(0, 100, fs*100)
         ts = np.sin(t) + np.random.normal(0,0.1, len(t))
 
-        tau = LMSforDelay(ts, fs, plotting = True)
-        print('Delay from Fourier: ' + str(int(tau)))
+        tau = LMSforDelay(ts, fs, plotting = False)
+        self.assertAlmostEqual(tau, 20, delta=10)
 
 
     def test_MsPE(self):
@@ -67,11 +67,11 @@ class parameterSelection(unittest.TestCase):
         #d_e = max delay tau to search through
 
         #plotting option will show you how delay tau or dimension n were selected
-        tau = int(MsPE_tau(ts, d_e, plotting = True))
-        n = MsPE_n(ts, tau, m_s, m_e, plotting = True)
+        tau = int(MsPE_tau(ts, d_e, plotting = False))
+        n = MsPE_n(ts, tau, m_s, m_e, plotting = False)
 
-        print('Embedding Delay:       '+str(tau))
-        print('Embedding Dimension:   '+str(n))
+        self.assertAlmostEqual(tau, 20, delta=10)
+        self.assertAlmostEqual(n, 5, delta=3)
 
     def test_FNN(self):
 
@@ -82,8 +82,8 @@ class parameterSelection(unittest.TestCase):
 
         tau=15 #embedding delay
 
-        perc_FNN, n = FNN_n(ts, tau, plotting = True)
-        print('FNN embedding Dimension: ',n)
+        perc_FNN, n = FNN_n(ts, tau, plotting = False)
+        self.assertAlmostEqual(n, 5, delta=3) 
 
 
 if __name__ == '__main__':
