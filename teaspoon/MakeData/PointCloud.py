@@ -4,8 +4,6 @@ from scipy.spatial.distance import euclidean
 from ripser import ripser
 
 
-
-
 #-------------Circles and Annuli---------------------------------------#
 def Circle(N=100, r=1, gamma=None, seed=None):
     """
@@ -365,7 +363,7 @@ def testSetClassification(N=20,
 
     columns = ['Dgm', 'mean', 'sd', 'trainingLabel']
     index = list(range(sum(numDgms)))
-    DgmsDF = pd.DataFrame(columns=columns, index=index,dtype=object)
+    DgmsDF = pd.DataFrame(columns=columns, index=index, dtype=object)
 
     counter = 0
 
@@ -373,7 +371,7 @@ def testSetClassification(N=20,
         if not seed is None:
             seed += 1
         dgm = normalDiagram(N=N, mu=muRed, sd=sd, seed=seed)
-        data = {'Dgm':dgm, 'mean': muRed, 'sd': sd, 'trainingLabel':-1}
+        data = {'Dgm': dgm, 'mean': muRed, 'sd': sd, 'trainingLabel': -1}
         DgmsDF.loc[counter] = data
         counter += 1
 
@@ -381,7 +379,7 @@ def testSetClassification(N=20,
         if not seed is None:
             seed += 1
         dgm = normalDiagram(N=N, mu=muBlue, sd=sd, seed=seed)
-        data = {'Dgm':dgm, 'mean': muRed, 'sd': sd, 'trainingLabel':1}
+        data = {'Dgm': dgm, 'mean': muRed, 'sd': sd, 'trainingLabel': 1}
         DgmsDF.loc[counter] = data
         counter += 1
 
@@ -439,9 +437,8 @@ def testSetRegressionLine(N=20,
         mu = centers[i, :]
         dgm = normalDiagram(N=N, mu=mu, sd=sd, seed=seed)
         distToStart = euclidean(muStart, mu)
-        data = {'Dgm':dgm, 'mean': mu, 'sd': sd, 'trainingLabel':distToStart}
+        data = {'Dgm': dgm, 'mean': mu, 'sd': sd, 'trainingLabel': distToStart}
         DgmsDF.loc[counter] = data
-
 
     # Permute the data
     if permute:
@@ -495,7 +492,7 @@ def testSetRegressionBall(N=20,
         mu = centers[i, :]
         dgm = normalDiagram(N=N, mu=mu, sd=sd, seed=seed)
         distToStart = euclidean(muCenter, mu)
-        data = {'Dgm':dgm, 'mean': mu, 'sd': sd, 'trainingLabel':distToStart}
+        data = {'Dgm': dgm, 'mean': mu, 'sd': sd, 'trainingLabel': distToStart}
         DgmsDF.loc[counter] = data
 
     # Permute the data
@@ -511,7 +508,7 @@ def testSetManifolds(numDgms=50,
                      numPts=300,
                      permute=True,
                      seed=None,
-                     verbose = False
+                     verbose=False
                      ):
     '''
     Generates a collection of diagrams from different underlying topological spaces.  This set is useful for testing classification tasks.
@@ -559,7 +556,7 @@ def testSetManifolds(numDgms=50,
             seed += 1
         dgmOut = ripser(Torus(N=numPts, seed=seed))[
             'dgms']  # using ripser package
-        data = {'Dgm0':dgmOut[0], 'Dgm1':dgmOut[1], 'trainingLabel':'Torus'}
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1], 'trainingLabel': 'Torus'}
         DgmsDF.loc[counter] = data
         counter += 1
 
@@ -570,7 +567,8 @@ def testSetManifolds(numDgms=50,
         if fixSeed:
             seed += 1
         dgmOut = ripser(Annulus(N=numPts, seed=seed))['dgms']
-        data = {'Dgm0':dgmOut[0], 'Dgm1':dgmOut[1], 'trainingLabel':'Annulus'}
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
+                'trainingLabel': 'Annulus'}
         DgmsDF.loc[counter] = data
         counter += 1
 
@@ -581,7 +579,7 @@ def testSetManifolds(numDgms=50,
         if fixSeed:
             seed += 1
         dgmOut = ripser(Cube(N=numPts, seed=seed))['dgms']
-        data = {'Dgm0':dgmOut[0], 'Dgm1':dgmOut[1], 'trainingLabel':'Cube'}
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1], 'trainingLabel': 'Cube'}
         DgmsDF.loc[counter] = data
         counter += 1
 
@@ -597,7 +595,8 @@ def testSetManifolds(numDgms=50,
             seed += 1
         dgmOut = ripser(Clusters(centers=centers, N=numPts,
                         seed=seed, sd=.05))['dgms']
-        data = {'Dgm0':dgmOut[0], 'Dgm1':dgmOut[1], 'trainingLabel':'3Cluster'}
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
+                'trainingLabel': '3Cluster'}
         DgmsDF.loc[counter] = data
         counter += 1
 
@@ -619,7 +618,8 @@ def testSetManifolds(numDgms=50,
                                  sd=.05,
                                  seed=seed))['dgms']
         # Dgms.append([dgmOut[0],dgmOut[1]])
-        data = {'Dgm0':dgmOut[0], 'Dgm1':dgmOut[1], 'trainingLabel':'3Clusters of 3Clusters'}
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
+                'trainingLabel': '3Clusters of 3Clusters'}
         DgmsDF.loc[counter] = data
         counter += 1
 
@@ -632,7 +632,8 @@ def testSetManifolds(numDgms=50,
         if fixSeed:
             seed += 1
         dgmOut = ripser(Sphere(N=numPts, noise=.05, seed=seed))['dgms']
-        data = {'Dgm0':dgmOut[0], 'Dgm1':dgmOut[1], 'trainingLabel':'Sphere'}
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
+                'trainingLabel': 'Sphere'}
         DgmsDF.loc[counter] = data
         counter += 1
 
