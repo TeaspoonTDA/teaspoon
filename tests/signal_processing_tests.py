@@ -39,7 +39,6 @@ class signalProcessing(unittest.TestCase):
         # import matplotlib.pyplot as plt
         # plt.plot(t[:len(PS)], PS, 'k')
         # plt. show()
-        print(PS)
         self.assertEqual(PS.max(), 6)
 
 
