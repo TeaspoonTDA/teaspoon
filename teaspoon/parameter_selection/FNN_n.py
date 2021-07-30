@@ -23,7 +23,7 @@ def ts_recon(ts, dim, tau):
 
 
 def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, threshold=10):
-    """This function implements the False Nearest Neighbors (FNN) algorithm described by Kennel et al. 
+    """This function implements the False Nearest Neighbors (FNN) algorithm described by Kennel et al.
     to select the minimum embedding dimension.
 
     Args:
@@ -103,8 +103,8 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, threshold=10):
         plt.xticks(size=TextSize)
         plt.yticks(size=TextSize)
         plt.ylim(0)
-        plt.savefig('C:\\Users\\myersau3.EGR\\Desktop\\python_png\\FNN_fig.png',
-                    bbox_inches='tight', dpi=400)
+        # plt.savefig('C:\\Users\\myersau3.EGR\\Desktop\\python_png\\FNN_fig.png',
+                    # bbox_inches='tight', dpi=400)
         plt.show()
 
     return Xfnn, dim-1

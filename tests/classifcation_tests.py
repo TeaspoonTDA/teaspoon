@@ -19,11 +19,21 @@ from sklearn.linear_model import RidgeCV, RidgeClassifierCV
 
 import unittest
 
+import warnings
+
+
 
 
 class TestManifolds(unittest.TestCase):
 
     def test_learning_Manifolds(self):
+
+        """
+        From Liz, 7/30/21
+        This is a hot mess.  Something was wrong with a deprication warning and now it's just a mess in here
+
+        set the name of this function to test_learning_Manifolds to get the unittest to find it again
+        """
 
         # ----------------------------------
         # define a parameters bucket
@@ -47,7 +57,7 @@ class TestManifolds(unittest.TestCase):
 
 
         # --- Test manifold classification
-        df = gpc.testSetManifolds(numDgms=50, numPts=100)  # numpTs=200
+        df = gpc.testSetManifolds(numDgms=5, numPts=100)  # numpTs=200
         # dgmColLabel = ['Dgm0', 'Dgm1']
         dgmColLabel = ['Dgm1']
         params.clfClass = RidgeClassifierCV
@@ -78,7 +88,7 @@ class TestManifolds(unittest.TestCase):
         # ----------------------------------
         # Run the experiment
         # ----------------------------------
-        num_runs = 10
+        num_runs = 1
         yy = np.zeros((num_runs))
         for i in np.arange(num_runs):
             xx = getPercentScore(df,
@@ -90,17 +100,16 @@ class TestManifolds(unittest.TestCase):
                                  )
             yy[i] = xx['score']
 
-        print('\navg success rate = {}\nStdev = {}'.format(np.mean(yy), np.std(yy)))
+        # print('\navg success rate = {}\nStdev = {}'.format(np.mean(yy), np.std(yy)))
 
-        kernel = stats.gaussian_kde(yy)
-        values = np.linspace(yy.min(), yy.max(), 1000)
+        # kernel = stats.gaussian_kde(yy)
+        # values = np.linspace(yy.min(), yy.max(), 1000)
         # plotting
         #plt.plot(values, kernel(values), '.')
         # plt.show()
 
 
-        print('Tested mainfold learning ')
-        self.assertEqual(0, 1, "Need to check the manifold learning ")
+        self.assertAlmostEqual(np.mean(yy), 0.8, delta = 0.3)
 
 
 
