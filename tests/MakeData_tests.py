@@ -16,7 +16,7 @@ import unittest
 
 class Rossler(unittest.TestCase):
 
-    def test_Rossler(self):
+    def Rossler(self):
 
 
         system = 'rossler'
@@ -45,7 +45,7 @@ class Rossler(unittest.TestCase):
         # plt.show()
         print('Ran Rossler in MakeData_tests')
 
-    def test_Rossler2(self):
+    def Rossler2(self):
 
 
 
