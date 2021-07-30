@@ -9,10 +9,10 @@ Created on Tue Apr 24 10:43:11 2018
 # cd to the teaspoon folder, load the package and import the needed modules
 import numpy as np
 #import teaspoon.MakeData.PointCloud as gpc
-from MakeData import PointCloud as gpc
-from ML.PD_Classification import getPercentScore
-from ML.Base import ParameterBucket
-import ML.feature_functions as fF
+from teaspoon.MakeData import PointCloud as gpc
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML.Base import ParameterBucket
+import teaspoon.ML.feature_functions as fF
 from scipy import stats
 import matplotlib.pyplot as plt
 from sklearn.linear_model import RidgeCV, RidgeClassifierCV

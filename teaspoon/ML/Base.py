@@ -54,7 +54,7 @@ import numpy as np
 import time
 from teaspoon.SP.adaptivePart import Partitions
 from teaspoon.TDA import Persistence as pP
-import feature_functions as fF
+import teaspoon.ML.feature_functions as fF
 import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
