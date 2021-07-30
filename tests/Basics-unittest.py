@@ -20,6 +20,7 @@ class TestAnnulus(unittest.TestCase):
         bar
         """
 
+        print('Testing that an annulus has a single long bar. ')
         numPts = 100
         seed = 0
 
