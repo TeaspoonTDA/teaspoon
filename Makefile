@@ -22,5 +22,8 @@ BUILDDIR      = docs
 	# For github pages to work, the docs have ot be in /docs/
 	@$(SPHINXBUILD)  "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-	# echogi "Running autopep8"
+	# Running autopep8
 	@autopep8 -r --in-place teaspoon/
+
+	# Running unittests
+	@python -m unittest
