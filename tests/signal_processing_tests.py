@@ -11,6 +11,7 @@ from teaspoon.SP.network import knn_graph
 from teaspoon.SP.network import ordinal_partition_graph
 from teaspoon.SP.network_tools import make_network
 from teaspoon.SP.information.entropy import MsPE
+from teaspoon.SP.information.entropy import PE
 from ripser import ripser
 
 from teaspoon.SP.information.entropy import PersistentEntropy
@@ -85,7 +86,6 @@ class signalProcessing(unittest.TestCase):
         t = np.linspace(0,30,200)
         ts = np.sin(t) + np.sin(2*t) #generate a simple time series
 
-        from teaspoon.SP.network import knn_graph
         A = knn_graph(ts)
 
         G, pos = make_network(A)
@@ -109,7 +109,6 @@ class signalProcessing(unittest.TestCase):
         t = np.linspace(0,100,2000)
         ts = np.sin(t)  #generate a simple time series
 
-        from teaspoon.SP.information.entropy import PE
         h = PE(ts, n = 6, tau = 15, normalize = True)
         print('Permutation entropy: ', h)
 
