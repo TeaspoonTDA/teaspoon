@@ -230,7 +230,7 @@
 
 
 <div class="viewcode-block" id="FNN_n"><a class="viewcode-back" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n">[docs]</a><span class="k">def</span> <span class="nf">FNN_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">maxDim</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Rtol</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">Atol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function implements the False Nearest Neighbors (FNN) algorithm described by Kennel et al. </span>
+    <span class="sd">&quot;&quot;&quot;This function implements the False Nearest Neighbors (FNN) algorithm described by Kennel et al.</span>
 <span class="sd">    to select the minimum embedding dimension.</span>
 
 <span class="sd">    Args:</span>
@@ -310,8 +310,8 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">myersau3.EGR</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">python_png</span><span class="se">\\</span><span class="s1">FNN_fig.png&#39;</span><span class="p">,</span>
-                    <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+        <span class="c1"># plt.savefig(&#39;C:\\Users\\myersau3.EGR\\Desktop\\python_png\\FNN_fig.png&#39;,</span>
+        <span class="c1"># bbox_inches=&#39;tight&#39;, dpi=400)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">Xfnn</span><span class="p">,</span> <span class="n">dim</span><span class="o">-</span><span class="mi">1</span></div>

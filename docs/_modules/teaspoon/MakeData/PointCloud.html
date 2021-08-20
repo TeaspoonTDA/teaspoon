@@ -569,8 +569,8 @@
         <span class="n">numDgms</span> <span class="o">=</span> <span class="p">(</span><span class="n">numDgms</span><span class="p">,</span> <span class="n">numDgms</span><span class="p">)</span>
 
     <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Dgm&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;sd&#39;</span><span class="p">,</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">numDgms</span><span class="p">))</span>
-    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">numDgms</span><span class="p">)))</span>
+    <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
 
     <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -578,17 +578,17 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">muRed</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm</span><span class="p">,</span> <span class="n">muRed</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm&#39;</span><span class="p">:</span> <span class="n">dgm</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">muRed</span><span class="p">,</span> <span class="s1">&#39;sd&#39;</span><span class="p">:</span> <span class="n">sd</span><span class="p">,</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="c1"># Dgms.append(dgm)</span>
 
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">muBlue</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm</span><span class="p">,</span> <span class="n">muBlue</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm&#39;</span><span class="p">:</span> <span class="n">dgm</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">muRed</span><span class="p">,</span> <span class="s1">&#39;sd&#39;</span><span class="p">:</span> <span class="n">sd</span><span class="p">,</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="c1"># Dgms.append(dgm)</span>
 
     <span class="c1"># Permute the data</span>
     <span class="k">if</span> <span class="n">permute</span><span class="p">:</span>
@@ -644,7 +644,8 @@
         <span class="n">mu</span> <span class="o">=</span> <span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
         <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">distToStart</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">muStart</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">distToStart</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm&#39;</span><span class="p">:</span> <span class="n">dgm</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">mu</span><span class="p">,</span> <span class="s1">&#39;sd&#39;</span><span class="p">:</span> <span class="n">sd</span><span class="p">,</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="n">distToStart</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
 
     <span class="c1"># Permute the data</span>
     <span class="k">if</span> <span class="n">permute</span><span class="p">:</span>
@@ -698,7 +699,8 @@
         <span class="n">mu</span> <span class="o">=</span> <span class="n">centers</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
         <span class="n">dgm</span> <span class="o">=</span> <span class="n">normalDiagram</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">distToStart</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">muCenter</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">distToStart</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm&#39;</span><span class="p">:</span> <span class="n">dgm</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">mu</span><span class="p">,</span> <span class="s1">&#39;sd&#39;</span><span class="p">:</span> <span class="n">sd</span><span class="p">,</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="n">distToStart</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
 
     <span class="c1"># Permute the data</span>
     <span class="k">if</span> <span class="n">permute</span><span class="p">:</span>
@@ -712,7 +714,8 @@
 <div class="viewcode-block" id="testSetManifolds"><a class="viewcode-back" href="../../../PointCloud.html#teaspoon.MakeData.PointCloud.testSetManifolds">[docs]</a><span class="k">def</span> <span class="nf">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
                      <span class="n">numPts</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
                      <span class="n">permute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                     <span class="n">seed</span><span class="o">=</span><span class="kc">None</span>
+                     <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
                      <span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Generates a collection of diagrams from different underlying topological spaces.  This set is useful for testing classification tasks.</span>
@@ -753,36 +756,43 @@
         <span class="n">fixSeed</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="c1"># -</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating torus clouds...&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating torus clouds...&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span>
             <span class="s1">&#39;dgms&#39;</span><span class="p">]</span>  <span class="c1"># using ripser package</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Torus&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm0&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Dgm1&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Torus&#39;</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># -</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating annuli clouds...&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating annuli clouds...&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Annulus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Annulus&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm0&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Dgm1&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Annulus&#39;</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># -</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating cube clouds...&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating cube clouds...&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Cube</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
-        <span class="c1"># Dgms.append([dgmOut[0],dgmOut[1]])</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Cube&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm0&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Dgm1&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Cube&#39;</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># -</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating three cluster clouds...&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating three cluster clouds...&#39;</span><span class="p">)</span>
     <span class="c1"># Centered at (0,0), (0,5), and (5,0) with sd =1</span>
     <span class="c1"># Then scaled by .3 to make birth/death times closer to the other examples</span>
     <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
@@ -792,11 +802,14 @@
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Clusters</span><span class="p">(</span><span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span>
                         <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">sd</span><span class="o">=.</span><span class="mi">05</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;3Cluster&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm0&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Dgm1&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="s1">&#39;3Cluster&#39;</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># -</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating three clusters of three clusters clouds...&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating three clusters of three clusters clouds...&#39;</span><span class="p">)</span>
 
     <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span>
@@ -812,20 +825,27 @@
                                  <span class="n">sd</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span>
                                  <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
         <span class="c1"># Dgms.append([dgmOut[0],dgmOut[1]])</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;3Clusters of 3Clusters&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm0&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Dgm1&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="s1">&#39;3Clusters of 3Clusters&#39;</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># -</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating sphere clouds...&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating sphere clouds...&#39;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numDgms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fixSeed</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dgmOut</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">Sphere</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span> <span class="n">noise</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
-        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Sphere&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dgm0&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Dgm1&#39;</span><span class="p">:</span> <span class="n">dgmOut</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s1">&#39;trainingLabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Sphere&#39;</span><span class="p">}</span>
+        <span class="n">DgmsDF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Finished generating clouds and computing persistence.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Finished generating clouds and computing persistence.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="c1"># Permute the diagrams if necessary.</span>
     <span class="k">if</span> <span class="n">permute</span><span class="p">:</span>

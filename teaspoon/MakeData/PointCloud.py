@@ -362,8 +362,8 @@ def testSetClassification(N=20,
         numDgms = (numDgms, numDgms)
 
     columns = ['Dgm', 'mean', 'sd', 'trainingLabel']
-    index = range(sum(numDgms))
-    DgmsDF = pd.DataFrame(columns=columns, index=index)
+    index = list(range(sum(numDgms)))
+    DgmsDF = pd.DataFrame(columns=columns, index=index, dtype=object)
 
     counter = 0
 
@@ -371,17 +371,17 @@ def testSetClassification(N=20,
         if not seed is None:
             seed += 1
         dgm = normalDiagram(N=N, mu=muRed, sd=sd, seed=seed)
-        DgmsDF.loc[counter] = [dgm, muRed, sd, -1]
+        data = {'Dgm': dgm, 'mean': muRed, 'sd': sd, 'trainingLabel': -1}
+        DgmsDF.loc[counter] = data
         counter += 1
-        # Dgms.append(dgm)
 
     for j in range(numDgms[1]):
         if not seed is None:
             seed += 1
         dgm = normalDiagram(N=N, mu=muBlue, sd=sd, seed=seed)
-        DgmsDF.loc[counter] = [dgm, muBlue, sd, 1]
+        data = {'Dgm': dgm, 'mean': muRed, 'sd': sd, 'trainingLabel': 1}
+        DgmsDF.loc[counter] = data
         counter += 1
-        # Dgms.append(dgm)
 
     # Permute the data
     if permute:
@@ -437,7 +437,8 @@ def testSetRegressionLine(N=20,
         mu = centers[i, :]
         dgm = normalDiagram(N=N, mu=mu, sd=sd, seed=seed)
         distToStart = euclidean(muStart, mu)
-        DgmsDF.loc[i] = [dgm, mu, sd, distToStart]
+        data = {'Dgm': dgm, 'mean': mu, 'sd': sd, 'trainingLabel': distToStart}
+        DgmsDF.loc[counter] = data
 
     # Permute the data
     if permute:
@@ -491,7 +492,8 @@ def testSetRegressionBall(N=20,
         mu = centers[i, :]
         dgm = normalDiagram(N=N, mu=mu, sd=sd, seed=seed)
         distToStart = euclidean(muCenter, mu)
-        DgmsDF.loc[i] = [dgm, mu, sd, distToStart]
+        data = {'Dgm': dgm, 'mean': mu, 'sd': sd, 'trainingLabel': distToStart}
+        DgmsDF.loc[counter] = data
 
     # Permute the data
     if permute:
@@ -505,7 +507,8 @@ def testSetRegressionBall(N=20,
 def testSetManifolds(numDgms=50,
                      numPts=300,
                      permute=True,
-                     seed=None
+                     seed=None,
+                     verbose=False
                      ):
     '''
     Generates a collection of diagrams from different underlying topological spaces.  This set is useful for testing classification tasks.
@@ -546,36 +549,43 @@ def testSetManifolds(numDgms=50,
         fixSeed = False
 
     # -
-    print('Generating torus clouds...')
+    if verbose:
+        print('Generating torus clouds...')
     for i in range(numDgms):
         if fixSeed:
             seed += 1
         dgmOut = ripser(Torus(N=numPts, seed=seed))[
             'dgms']  # using ripser package
-        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], 'Torus']
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1], 'trainingLabel': 'Torus'}
+        DgmsDF.loc[counter] = data
         counter += 1
 
     # -
-    print('Generating annuli clouds...')
+    if verbose:
+        print('Generating annuli clouds...')
     for i in range(numDgms):
         if fixSeed:
             seed += 1
         dgmOut = ripser(Annulus(N=numPts, seed=seed))['dgms']
-        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], 'Annulus']
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
+                'trainingLabel': 'Annulus'}
+        DgmsDF.loc[counter] = data
         counter += 1
 
     # -
-    print('Generating cube clouds...')
+    if verbose:
+        print('Generating cube clouds...')
     for i in range(numDgms):
         if fixSeed:
             seed += 1
         dgmOut = ripser(Cube(N=numPts, seed=seed))['dgms']
-        # Dgms.append([dgmOut[0],dgmOut[1]])
-        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], 'Cube']
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1], 'trainingLabel': 'Cube'}
+        DgmsDF.loc[counter] = data
         counter += 1
 
     # -
-    print('Generating three cluster clouds...')
+    if verbose:
+        print('Generating three cluster clouds...')
     # Centered at (0,0), (0,5), and (5,0) with sd =1
     # Then scaled by .3 to make birth/death times closer to the other examples
     centers = np.array([[0, 0], [0, 2], [2, 0]])
@@ -585,11 +595,14 @@ def testSetManifolds(numDgms=50,
             seed += 1
         dgmOut = ripser(Clusters(centers=centers, N=numPts,
                         seed=seed, sd=.05))['dgms']
-        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], '3Cluster']
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
+                'trainingLabel': '3Cluster'}
+        DgmsDF.loc[counter] = data
         counter += 1
 
     # -
-    print('Generating three clusters of three clusters clouds...')
+    if verbose:
+        print('Generating three clusters of three clusters clouds...')
 
     centers = np.array([[0, 0], [0, 1.5], [1.5, 0]])
     theta = np.pi/4
@@ -605,20 +618,27 @@ def testSetManifolds(numDgms=50,
                                  sd=.05,
                                  seed=seed))['dgms']
         # Dgms.append([dgmOut[0],dgmOut[1]])
-        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], '3Clusters of 3Clusters']
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
+                'trainingLabel': '3Clusters of 3Clusters'}
+        DgmsDF.loc[counter] = data
         counter += 1
 
     # -
-    print('Generating sphere clouds...')
+
+    if verbose:
+        print('Generating sphere clouds...')
 
     for i in range(numDgms):
         if fixSeed:
             seed += 1
         dgmOut = ripser(Sphere(N=numPts, noise=.05, seed=seed))['dgms']
-        DgmsDF.loc[counter] = [dgmOut[0], dgmOut[1], 'Sphere']
+        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
+                'trainingLabel': 'Sphere'}
+        DgmsDF.loc[counter] = data
         counter += 1
 
-    print('Finished generating clouds and computing persistence.\n')
+    if verbose:
+        print('Finished generating clouds and computing persistence.\n')
 
     # Permute the diagrams if necessary.
     if permute:

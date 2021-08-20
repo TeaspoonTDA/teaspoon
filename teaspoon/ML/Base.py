@@ -41,6 +41,20 @@ out = Base.getPercentScore(DgmsDF,dgm_col = 'Dgm', labels_col = 'trainingLabel',
 """
 
 
+# sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+# sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+# sys.path.insert(0, os.path.join(
+#     os.path.dirname(__file__), '..', '..', 'teaspoon'))
+# sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'teaspoon'))
+# sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'teaspoon', 'ML'))
+# sys.path.insert(0, os.path.join(os.path.dirname(
+#     __file__), '..', '..', 'teaspoon', 'ML'))
+# sys.path.insert(0, os.path.join(os.path.dirname(
+#     __file__), '..', '..', 'teaspoon', 'TSP'))
+
+
+
+
 from sklearn.svm import LinearSVC, NuSVC, SVC
 import itertools
 from scipy.special import comb
@@ -54,21 +68,9 @@ import numpy as np
 import time
 from teaspoon.SP.adaptivePart import Partitions
 from teaspoon.TDA import Persistence as pP
-import feature_functions as fF
+import teaspoon.ML.feature_functions as fF
 import os
 import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, os.path.join(
-    os.path.dirname(__file__), '..', '..', 'teaspoon'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'teaspoon'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'teaspoon', 'ML'))
-sys.path.insert(0, os.path.join(os.path.dirname(
-    __file__), '..', '..', 'teaspoon', 'ML'))
-sys.path.insert(0, os.path.join(os.path.dirname(
-    __file__), '..', '..', 'teaspoon', 'TSP'))
-
-
 class ParameterBucket(object):
     def __init__(self, description='',
                  clf_model=RidgeClassifierCV,
