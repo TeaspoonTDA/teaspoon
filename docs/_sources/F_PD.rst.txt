@@ -3,8 +3,55 @@
 =============
 Featurization
 =============
-This documentation includes five different persistence diagram featurization methods.
-These are persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.
+This documentation includes six different persistence diagram featurization methods.
+These are template functions, persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.
+
+
+.. _template_functions:
+
+Template Functions
+------------------
+
+.. currentmodule:: teaspoon.ML.feature_functions
+.. autofunction:: F_Template
+
+
+A simple example of using tent functions as defined in [*Approximating
+Continuous Functions on Persistence Diagrams Using Template Functions* (Perea, Munch,
+Khasawneh 2018)](https://arxiv.org/abs/1902.07190) is shown below.
+
+
+  >>> import teaspoon.ML.Base as Base
+  >>> import teaspoon.MakeData.PointCloud as gPC
+  >>> import teaspoon.ML.feature_functions as fF
+  >>> from sklearn.linear_model import RidgeClassifierCV
+  >>> # Create a parameter bucket
+  >>> params = Base.TentParameters(clf_model = RidgeClassifierCV,
+  >>>                              feature_function = fF.tent,
+  >>>                              test_size = .33,
+  >>>                              seed = 48824,
+  >>>                              d = 10,
+  >>>                              delta = 1,
+  >>>                              epsilon = 0
+  >>>                              )
+  >>> # Create a test set
+  >>> DgmsDF = gPC.testSetClassification(N = 20,
+  >>>                               numDgms = 50,
+  >>>                               muRed = (1,3),
+  >>>                               muBlue = (2,5),
+  >>>                               seed = 48824
+  >>>                               sd = 1,
+  >>>                               )
+  >>> # Run train/test experiment
+  >>> out = Base.getPercentScore(DgmsDF,
+  >>>                            dgm_col = 'Dgm',
+  >>>                            labels_col = 'trainingLabel',
+  >>>                            params = params )
+
+
+
+
+
 
 .. _persistence_landscapes:
 
@@ -15,19 +62,19 @@ Landscape class
 ~~~~~~~~~~~~~~~
 
 .. autoclass:: teaspoon.ML.feature_functions.PLandscape
-    :members: 
+    :members:
     :undoc-members:
     :private-members:
     :special-members: __init__
 
-**Example:** In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted. 
-    	
+**Example:** In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted.
+
 	>>> from teaspoon.ML.feature_functions import PLandscape
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
 	>>> # generate persistence diagrams
-	>>> df = testSetManifolds(numDgms = 50, numPts = 100) 
+	>>> df = testSetManifolds(numDgms = 50, numPts = 100)
 	>>> Diagrams_H1 = df['Dgm1']
-	>>> # Compute the persistence landscapes 
+	>>> # Compute the persistence landscapes
 	>>> PLC = PLandscape(Diagrams_H1[0])
 	>>> print(PLC.PL_number)
 	18
@@ -62,7 +109,7 @@ Output of the plotting functions is:
    :scale: 10 %
 
    All landscape functions for the given persistence diagram
-   
+
 If user specify the desired landscapes, output will be:
 
 	>>> PLC  = PLandscape(Diagrams_H1[0],[2,3])
@@ -91,7 +138,7 @@ If user specify the desired landscapes, output will be:
 	>>> fig = PLC.PLandscape_plot(PLC.AllPL['Points'],[2,3])
 
 Output of the plotting functions is:
-	
+
 .. figure:: figures/Des_Landscapes.png
    :align: center
    :scale: 25 %
@@ -99,10 +146,10 @@ Output of the plotting functions is:
    Chosen landscape functions for the given persistence diagram
 
 .. _PB_Landscape:
-   
+
 Parameter bucket for landscapes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
-   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. autoclass:: teaspoon.ML.Base.LandscapesParameterBucket
     :members:
     :undoc-members:
@@ -110,7 +157,7 @@ Parameter bucket for landscapes
     :special-members: __init__
 
 **Example:** If user does not provide classification labels, parameter bucket will return a warning as shown below.
- 
+
 	>>> from teaspoon.ML.Base import LandscapesParameterBucket
 	>>> from sklearn.svm import LinearSVC
 	>>> from termcolor import colored
@@ -130,7 +177,7 @@ Parameter bucket for landscapes
 	-----------------------------
 	Warning: Classification labels are missing.
 
-Feature matrix generation  
+Feature matrix generation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. _F_Matrix:
@@ -141,11 +188,11 @@ Feature matrix generation
 
    Feature matrix generation steps explained with an simple example.
 
-:numref:`F_Matrix` explains the steps for generation feature matrix using persistence landscapes. There are three persistence landscape sets for three different persistence diagram. 
+:numref:`F_Matrix` explains the steps for generation feature matrix using persistence landscapes. There are three persistence landscape sets for three different persistence diagram.
 We choose one landscape function among them. In the example above, second landscape function is selected and plotted for each landscape set.
-The plot in the third column includes all selected landscape functions. 
+The plot in the third column includes all selected landscape functions.
 In other words, we plot all selected landscapes in same figure.
-The next step is to find the mesh points using node points of landscapes. 
+The next step is to find the mesh points using node points of landscapes.
 Node points are projected on x-axis.
 The red dots in the plot represent these projections.
 Then, we sort these points (red dots) and remove the duplicates if there is any.
@@ -169,21 +216,21 @@ Then, these y values become the feature for each landscape functions, and they c
     :special-members:
 
 .. _persistence_images:
-	
+
 Persistence Images
 ------------------
-	
+
 .. currentmodule:: teaspoon.ML.feature_functions
 .. autofunction:: F_Image
-	
+
 
 **Example**::
-	
+
 	import teaspoon.ML.feature_functions as Ff
 	from teaspoon.MakeData.PointCloud import testSetManifolds
-	
+
 	# generate persistence diagrams
-	df = testSetManifolds(numDgms = 50, numPts = 100) 
+	df = testSetManifolds(numDgms = 50, numPts = 100)
 	Diagrams_H1= df['Dgm1'].sort_index().values
 
 	TF_Learning = False
@@ -202,8 +249,8 @@ The algorithm will return two images as shown in :numref:`PI_Example`.
 .. figure:: figures/PI_Example.png
    :align: center
    :scale: 20 %
-   
-   Example persistence images.    
+
+   Example persistence images.
 
 .. _carlsson_coordinates:
 
@@ -214,11 +261,11 @@ Carlsson Coordinates
 .. autofunction:: F_CCoordinates
 
 **Example:**
-	
+
 	>>> import teaspoon.ML.feature_functions as Ff
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
 	>>> # generate persistence diagrams
-	>>> df = testSetManifolds(numDgms = 50, numPts = 100) 
+	>>> df = testSetManifolds(numDgms = 50, numPts = 100)
 	>>> Diagrams_H1= df['Dgm1'].sort_index().values
 	>>> FN=3
 	>>> FeatureMatrix,TotalNumComb,CombList = Ff.F_CCoordinates(Diagrams_H1,FN)
@@ -231,7 +278,7 @@ Carlsson Coordinates
 	 [1. 2. 0. 0. 0.]
 	 [1. 3. 0. 0. 0.]
 	 [2. 3. 0. 0. 0.]
-	 [1. 2. 3. 0. 0.]]	
+	 [1. 2. 3. 0. 0.]]
 
 
 .. _path_signatures:
@@ -241,16 +288,16 @@ Path Signatures
 ---------------
 
 .. currentmodule:: teaspoon.ML.feature_functions
-.. autofunction:: F_PSignature	 
+.. autofunction:: F_PSignature
 
 **Example**::
-	
+
 	import numpy as np
 	import teaspoon.ML.feature_functions as Ff
 	from teaspoon.ML.feature_functions import PLandscape
 	from teaspoon.MakeData.PointCloud import testSetManifolds
 	# generate persistence diagrams
-	df = testSetManifolds(numDgms = 1, numPts = 100) 
+	df = testSetManifolds(numDgms = 1, numPts = 100)
 	Diagrams_H1= df['Dgm1'].sort_index().values
 	#compute persistence landscapes
 	PerLand=np.ndarray(shape=(6),dtype=object)
@@ -268,13 +315,13 @@ Kernel Method
 
 .. currentmodule:: teaspoon.ML.feature_functions
 .. autofunction:: KernelMethod
- 
+
 **Example:**
 
 	>>> import teaspoon.ML.feature_functions as Ff
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
 	>>> # generate persistence diagrams
-	>>> df = testSetManifolds(numDgms = 1, numPts = 100) 
+	>>> df = testSetManifolds(numDgms = 1, numPts = 100)
 	>>> Diagrams_H1 = df['Dgm1']
 	>>> #compute kernel between two persistence diagram
 	>>> sigma=0.25
