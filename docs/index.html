@@ -1,75 +1,34 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>teaspoon: Topological Signal Processing in Python &mdash; teaspoon 0.1.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. Getting Started" href="installation.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-          
-
-          
             <a href="#" class="icon icon-home"> teaspoon
-          
-
-          
-            
             <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -77,18 +36,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
@@ -142,80 +90,39 @@
 <li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="#">teaspoon</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-        
       <li>teaspoon: Topological Signal Processing in Python</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="teaspoon-topological-signal-processing-in-python">
-<h1>teaspoon: Topological Signal Processing in Python<a class="headerlink" href="#teaspoon-topological-signal-processing-in-python" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="teaspoon-topological-signal-processing-in-python">
+<h1>teaspoon: Topological Signal Processing in Python<a class="headerlink" href="#teaspoon-topological-signal-processing-in-python" title="Permalink to this headline"></a></h1>
 <p>The emerging field of topological signal processing brings methods from Topological Data Analysis (TDA) to create new tools for signal processing by incorporating aspects of shape.
 This python package, teaspoon for tsp or topological signal processing, brings together available software for computing persistent homology, the main workhorse of TDA, with modules that expand the functionality of teaspoon as a state-of-the-art topological signal processing tool.
 These modules include methods for incorporating tools from machine learning, complex networks, information, and parameter selection along with a dynamical systems library to streamline the creation and benchmarking of new methods.
 All code is open source with up to date documentation, making the code easy to use, in particular for signal processing experts with limited experience in topological methods.</p>
 <a class="reference internal image-reference" href="_images/takens_embedding_gif_v2.gif"><img alt="_images/takens_embedding_gif_v2.gif" src="_images/takens_embedding_gif_v2.gif" style="width: 600px;" /></a>
-<div class="section" id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
@@ -318,18 +225,18 @@ All code is open source with up to date documentation, making the code easy to u
 <li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="collaborators">
-<h2>Collaborators<a class="headerlink" href="#collaborators" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="collaborators">
+<h2>Collaborators<a class="headerlink" href="#collaborators" title="Permalink to this headline"></a></h2>
 <p>The code is a compilation of work done by <a class="reference external" href="http://www.elizabethmunch.com">Elizabeth Munch</a> and <a class="reference external" href="http://www.firaskhasawneh.com/">Firas Khasawneh</a> along with their students and collaborators.  People who have contributed to teaspoon include:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/myersau3">Audun Myers</a></p></li>
 <li><p>Melih Yesilli</p></li>
 <li><p><a class="reference external" href="https://www.egr.msu.edu/~tymochko/">Sarah Tymochko</a></p></li>
 </ul>
-</div>
-<div class="section" id="current-issues-and-to-do-items">
-<h2>Current Issues and To-do Items<a class="headerlink" href="#current-issues-and-to-do-items" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="current-issues-and-to-do-items">
+<h2>Current Issues and To-do Items<a class="headerlink" href="#current-issues-and-to-do-items" title="Permalink to this headline"></a></h2>
 <p>This is a list of to do items:</p>
 <blockquote>
 <div><ul class="simple">
@@ -342,74 +249,55 @@ All code is open source with up to date documentation, making the code easy to u
 <li><p>Finish last few function documentations with examples.</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="contact-information">
-<h2>Contact Information<a class="headerlink" href="#contact-information" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="contact-information">
+<h2>Contact Information<a class="headerlink" href="#contact-information" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://www.elizabethmunch.com">Liz Munch</a>: <a class="reference external" href="mailto:muncheli&#37;&#52;&#48;msu&#46;edu">muncheli<span>&#64;</span>msu<span>&#46;</span>edu</a></p></li>
 <li><p><a class="reference external" href="https://www.firaskhasawneh.com">Firas Khasawneh</a>: <a class="reference external" href="mailto:khasawn3&#37;&#52;&#48;egr&#46;msu&#46;edu">khasawn3<span>&#64;</span>egr<span>&#46;</span>msu<span>&#46;</span>edu</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation.html" class="btn btn-neutral float-right" title="1. Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Munch.
-
-    </p>
+    <p>&#169; Copyright 2020, Munch.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>
