@@ -16,9 +16,9 @@ Template Functions
 .. autofunction:: F_Template
 
 
-A simple example of using tent functions as defined in [*Approximating
+A simple example of using tent functions as defined in *Approximating
 Continuous Functions on Persistence Diagrams Using Template Functions* (Perea, Munch,
-Khasawneh 2018)](https://arxiv.org/abs/1902.07190) is shown below.
+Khasawneh 2018) https://arxiv.org/abs/1902.07190 is shown below.
 
 
   >>> import teaspoon.ML.Base as Base
