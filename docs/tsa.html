@@ -1,76 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>2.4.1. Time Series Analysis (TSA) Tools &mdash; teaspoon 0.1.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="2.4.2. Network Representation of Time Series" href="network.html" />
     <link rel="prev" title="2.4. Signal Processing (SP) Module Documentation" href="SP.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> teaspoon
-          
-
-          
-            
             <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -78,18 +37,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
@@ -143,77 +91,34 @@
 <li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">teaspoon</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
-        
           <li><a href="SP.html"><span class="section-number">2.4. </span>Signal Processing (SP) Module Documentation</a> &raquo;</li>
-        
       <li><span class="section-number">2.4.1. </span>Time Series Analysis (TSA) Tools</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/tsa.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="time-series-analysis-tsa-tools">
-<span id="tsa"></span><h1><span class="section-number">2.4.1. </span>Time Series Analysis (TSA) Tools<a class="headerlink" href="#time-series-analysis-tsa-tools" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="time-series-analysis-tsa-tools">
+<span id="tsa"></span><h1><span class="section-number">2.4.1. </span>Time Series Analysis (TSA) Tools<a class="headerlink" href="#time-series-analysis-tsa-tools" title="Permalink to this headline"></a></h1>
 <p>The following are the available TSA functions:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#takens"><span class="std std-ref">Takens’ Embedding</span></a></p></li>
@@ -221,8 +126,8 @@
 <li><p><a class="reference internal" href="#knn"><span class="std std-ref">k Nearest Neighbors</span></a></p></li>
 </ul>
 <p>Further detailed documentation and examples are provided below for each (or click link).</p>
-<div class="section" id="takens-embedding">
-<span id="takens"></span><h2><span class="section-number">2.4.1.1. </span>Takens’ Embedding<a class="headerlink" href="#takens-embedding" title="Permalink to this headline">¶</a></h2>
+<section id="takens-embedding">
+<span id="takens"></span><h2><span class="section-number">2.4.1.1. </span>Takens’ Embedding<a class="headerlink" href="#takens-embedding" title="Permalink to this headline"></a></h2>
 <p>The Takens’ embedding algorhtm reconstructs the state space from a single time series with delay-coordinate embedding as shown in the animation below.</p>
 <a class="with-shadow float-center reference internal image-reference" href="_images/takens_embedding_gif_v2.gif"><img alt="_images/takens_embedding_gif_v2.gif" class="with-shadow float-center" src="_images/takens_embedding_gif_v2.gif" style="width: 683.55px; height: 246.74999999999997px;" /></a>
 <p>Figure: Takens’ embedding animation for a simple time series and embedding of dimension two. This embeds the 1-D signal into n=2 dimensions with delayed coordinates.</p>
@@ -262,12 +167,12 @@
 </pre></div>
 </div>
 <p>Output of example:</p>
-<div class="figure align-default">
+<figure class="align-default">
 <a class="reference internal image-reference" href="_images/takens_example.png"><img alt="_images/takens_example.png" src="_images/takens_example.png" style="width: 266.7px; height: 172.89999999999998px;" /></a>
-</div>
-</div>
-<div class="section" id="permutation-sequence-generation">
-<span id="permutation-sequence"></span><h2><span class="section-number">2.4.1.2. </span>Permutation Sequence Generation<a class="headerlink" href="#permutation-sequence-generation" title="Permalink to this headline">¶</a></h2>
+</figure>
+</section>
+<section id="permutation-sequence-generation">
+<span id="permutation-sequence"></span><h2><span class="section-number">2.4.1.2. </span>Permutation Sequence Generation<a class="headerlink" href="#permutation-sequence-generation" title="Permalink to this headline"></a></h2>
 <p>The function provides an array of the permutations found throughout the time series as shown in the</p>
 <a class="with-shadow float-center reference internal image-reference" href="_images/permutation_sequence_animation.gif"><img alt="_images/permutation_sequence_animation.gif" class="with-shadow float-center" src="_images/permutation_sequence_animation.gif" style="width: 640.8000000000001px; height: 270.0px;" /></a>
 <p>Figure: Permutation sequence animation for a simple time series and permutations of dimension three.</p>
@@ -307,12 +212,12 @@
 </pre></div>
 </div>
 <p>Output of example:</p>
-<div class="figure align-default">
+<figure class="align-default">
 <a class="reference internal image-reference" href="_images/PS_example.png"><img alt="_images/PS_example.png" src="_images/PS_example.png" style="width: 252.7px; height: 172.89999999999998px;" /></a>
-</div>
-</div>
-<div class="section" id="k-nearest-neighbors">
-<span id="knn"></span><h2><span class="section-number">2.4.1.3. </span>k Nearest Neighbors<a class="headerlink" href="#k-nearest-neighbors" title="Permalink to this headline">¶</a></h2>
+</figure>
+</section>
+<section id="k-nearest-neighbors">
+<span id="knn"></span><h2><span class="section-number">2.4.1.3. </span>k Nearest Neighbors<a class="headerlink" href="#k-nearest-neighbors" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.SP.tsa_tools.</span></span><span class="sig-name descname"><span class="pre">k_NN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embedded_time_series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/tsa_tools.html#k_NN"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -355,71 +260,52 @@
 </pre></div>
 </div>
 <p>Output of example:</p>
-<div class="figure align-default">
+<figure class="align-default">
 <a class="reference internal image-reference" href="_images/knn_example.png"><img alt="_images/knn_example.png" src="_images/knn_example.png" style="width: 266.7px; height: 172.89999999999998px;" /></a>
-</div>
-</div>
-</div>
+</figure>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="network.html" class="btn btn-neutral float-right" title="2.4.2. Network Representation of Time Series" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="SP.html" class="btn btn-neutral float-left" title="2.4. Signal Processing (SP) Module Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="network.html" class="btn btn-neutral float-right" title="2.4.2. Network Representation of Time Series" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Munch.
-
-    </p>
+    <p>&#169; Copyright 2020, Munch.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>
