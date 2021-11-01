@@ -1,74 +1,32 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>teaspoon.ML.feature_functions &mdash; teaspoon 0.1.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-          
-
-          
             <a href="../../../index.html" class="icon icon-home"> teaspoon
-          
-
-          
-            
             <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -76,18 +34,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
@@ -141,69 +88,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../citing.html">5. Citing</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">teaspoon</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-        
       <li>teaspoon.ML.feature_functions</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for teaspoon.ML.feature_functions</h1><div class="highlight"><pre>
 <span></span>
 <span class="c1"># &#39;&#39;&#39;</span>
@@ -218,7 +126,7 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">PersistenceImages.persistence_images</span> <span class="k">as</span> <span class="nn">pimg</span>
+<span class="kn">from</span> <span class="nn">persim</span> <span class="kn">import</span> <span class="n">PersistenceImager</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
 <span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span> <span class="k">as</span> <span class="n">lnorm</span>
@@ -666,7 +574,7 @@
 <span class="sd">    This function computes persistence landscapes for given persistence diagrams.</span>
 <span class="sd">    Function has two inputs which are persistence diagrams and chosen landscapes function.</span>
 <span class="sd">    Algorithm computes all persistence landscapes for the persistence diagram.</span>
-<span class="sd">    The output is an dictionary that includes all landscape functions, total number of landscapes and desired landscapes (if user specify L_number). </span>
+<span class="sd">    The output is an dictionary that includes all landscape functions, total number of landscapes and desired landscapes (if user specify L_number).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># :param ndarray (A):</span>
@@ -842,13 +750,13 @@
 <span class="sd">        :Returns:</span>
 
 <span class="sd">            :PL_number:</span>
-<span class="sd">                (int) Total number of landscapes for given persistence diagram </span>
+<span class="sd">                (int) Total number of landscapes for given persistence diagram</span>
 
 <span class="sd">            :DesPL:</span>
 <span class="sd">                (ndarray) Includes only selected landscapes functions given in L_number</span>
 
-<span class="sd">            :AllPL: </span>
-<span class="sd">                (ndarray) Includes all landscape functions of the persistece diagram    </span>
+<span class="sd">            :AllPL:</span>
+<span class="sd">                (ndarray) Includes all landscape functions of the persistece diagram</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -885,7 +793,7 @@
 <span class="sd">        :Returns:</span>
 
 <span class="sd">            :PL_plot:</span>
-<span class="sd">                (fig) The figure that includes chosen or all landsape functions  </span>
+<span class="sd">                (fig) The figure that includes chosen or all landsape functions</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -912,7 +820,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    This function computes the features for selected persistence landscape numbers.</span>
-<span class="sd">    There are three inputs to the function. </span>
+<span class="sd">    There are three inputs to the function.</span>
 <span class="sd">    These are all landscape functions for each persistence diagram, parameter bucket object and the maximum level of landscape function.</span>
 <span class="sd">    If user does not specify the third input, algorithm will automatically compute it.</span>
 <span class="sd">    The second parameter includes the parameters needed to compute features and perform classification.</span>
@@ -929,7 +837,7 @@
 <span class="sd">        :feature:</span>
 <span class="sd">            (Array) NxM matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and M is the numbers of features which is equal to length of sorted mesh of landscapes functions.</span>
 
-<span class="sd">        :Sorted_mesh: </span>
+<span class="sd">        :Sorted_mesh:</span>
 <span class="sd">            (list) It includes the sorted mesh for each landscape function chosen by user.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1004,13 +912,13 @@
 <span class="sd">        Object array that includes all persistence diagrams</span>
 
 <span class="sd">    :param float (PS):</span>
-<span class="sd">        Pixel size. </span>
+<span class="sd">        Pixel size.</span>
 
 <span class="sd">    :param float (var):</span>
-<span class="sd">        Variance of the Gaussian distribution. </span>
+<span class="sd">        Variance of the Gaussian distribution.</span>
 
 <span class="sd">    :param list (D_Img):</span>
-<span class="sd">        The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams. </span>
+<span class="sd">        The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams.</span>
 
 <span class="sd">    :param (TF_Learning): If it is true, then algorithm will need the second persistence diagram set and it will compute feature matrices for training set and test set.</span>
 
@@ -1059,7 +967,7 @@
 
         <span class="c1"># determine the bounds of the images based on bounds of training set and test set diagrams</span>
         <span class="c1"># adjust the image parameters and compute images</span>
-        <span class="n">pers_imager</span> <span class="o">=</span> <span class="n">pimg</span><span class="o">.</span><span class="n">PersistenceImager</span><span class="p">()</span>
+        <span class="n">pers_imager</span> <span class="o">=</span> <span class="n">PersistenceImager</span><span class="p">()</span>
         <span class="n">pers_imager</span><span class="o">.</span><span class="n">pixel_size</span> <span class="o">=</span> <span class="n">PS</span>
         <span class="n">pers_imager</span><span class="o">.</span><span class="n">birth_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_bth_lim_test</span><span class="p">,</span> <span class="n">max_bth_lim_train</span><span class="p">))</span>
         <span class="n">pers_imager</span><span class="o">.</span><span class="n">pers_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_per_lim_test</span><span class="p">,</span> <span class="n">max_per_lim_train</span><span class="p">))</span>
@@ -1106,7 +1014,7 @@
             <span class="n">persistence_range</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">per_diag</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">per_diag</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
 
         <span class="c1"># adjust the image parameters and compute images</span>
-        <span class="n">pers_imager</span> <span class="o">=</span> <span class="n">pimg</span><span class="o">.</span><span class="n">PersistenceImager</span><span class="p">()</span>
+        <span class="n">pers_imager</span> <span class="o">=</span> <span class="n">PersistenceImager</span><span class="p">()</span>
         <span class="n">pers_imager</span><span class="o">.</span><span class="n">pixel_size</span> <span class="o">=</span> <span class="n">PS</span>
         <span class="n">pers_imager</span><span class="o">.</span><span class="n">birth_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">birth_range</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">pers_imager</span><span class="o">.</span><span class="n">pers_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">persistence_range</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
@@ -1141,7 +1049,7 @@
 <span class="sd">    This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. :eq:`1st_coord` - :eq:`5th_coord`.</span>
 <span class="sd">    The first four functions are taken from Ref. :cite:`2 &lt;Adcock2016&gt;` and the last one is obtained from Ref. :cite:`3 &lt;Khasawneh2018&gt;`.</span>
 <span class="sd">    There are two inputs to the function. These are persistence diagrams and number of coordinates that user wants to use in feature matrix.</span>
-<span class="sd">    Algorithm will return feature matrix object array that includes feature matrices for different combinations, and total number of combinations will be :math:`\sum_{i=1}^{FN} {FN \choose i}`. </span>
+<span class="sd">    Algorithm will return feature matrix object array that includes feature matrices for different combinations, and total number of combinations will be :math:`\sum_{i=1}^{FN} {FN \choose i}`.</span>
 
 <span class="sd">    .. math:: f_{1}(PD) = \sum b_{i}(d_{i}-b_{i})</span>
 <span class="sd">       :label: 1st_coord</span>
@@ -1169,10 +1077,10 @@
 <span class="sd">        :FeatureMatrix:</span>
 <span class="sd">                (Array) NxFN matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and FN is the number of feature chosen.</span>
 
-<span class="sd">        :TotalNumComb: </span>
+<span class="sd">        :TotalNumComb:</span>
 <span class="sd">                (int) Number of combinations.</span>
 
-<span class="sd">        :CombList: </span>
+<span class="sd">        :CombList:</span>
 <span class="sd">                (list) List of combinations.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1381,59 +1289,41 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Munch.
-
-    </p>
+    <p>&#169; Copyright 2020, Munch.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

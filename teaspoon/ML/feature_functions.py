@@ -11,7 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.pyplot as plt
-import PersistenceImages.persistence_images as pimg
+from persim import PersistenceImager
 import math
 from math import pi
 from numpy.linalg import norm as lnorm
@@ -459,7 +459,7 @@ def PLandscapes(A, L_number=[]):
     This function computes persistence landscapes for given persistence diagrams.
     Function has two inputs which are persistence diagrams and chosen landscapes function.
     Algorithm computes all persistence landscapes for the persistence diagram.
-    The output is an dictionary that includes all landscape functions, total number of landscapes and desired landscapes (if user specify L_number). 
+    The output is an dictionary that includes all landscape functions, total number of landscapes and desired landscapes (if user specify L_number).
 
     """
     # :param ndarray (A):
@@ -635,13 +635,13 @@ class PLandscape():
         :Returns:
 
             :PL_number:
-                (int) Total number of landscapes for given persistence diagram 
+                (int) Total number of landscapes for given persistence diagram
 
             :DesPL:
                 (ndarray) Includes only selected landscapes functions given in L_number
 
-            :AllPL: 
-                (ndarray) Includes all landscape functions of the persistece diagram    
+            :AllPL:
+                (ndarray) Includes all landscape functions of the persistece diagram
 
         """
 
@@ -678,7 +678,7 @@ class PLandscape():
         :Returns:
 
             :PL_plot:
-                (fig) The figure that includes chosen or all landsape functions  
+                (fig) The figure that includes chosen or all landsape functions
 
         """
         import matplotlib.pyplot as plt
@@ -705,7 +705,7 @@ def F_Landscape(PL, params, max_l_number=None):
     """
 
     This function computes the features for selected persistence landscape numbers.
-    There are three inputs to the function. 
+    There are three inputs to the function.
     These are all landscape functions for each persistence diagram, parameter bucket object and the maximum level of landscape function.
     If user does not specify the third input, algorithm will automatically compute it.
     The second parameter includes the parameters needed to compute features and perform classification.
@@ -722,7 +722,7 @@ def F_Landscape(PL, params, max_l_number=None):
         :feature:
             (Array) NxM matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and M is the numbers of features which is equal to length of sorted mesh of landscapes functions.
 
-        :Sorted_mesh: 
+        :Sorted_mesh:
             (list) It includes the sorted mesh for each landscape function chosen by user.
 
     """
@@ -797,13 +797,13 @@ def F_Image(PD1, PS, var, plot, TF_Learning, D_Img=[], *args):
         Object array that includes all persistence diagrams
 
     :param float (PS):
-        Pixel size. 
+        Pixel size.
 
     :param float (var):
-        Variance of the Gaussian distribution. 
+        Variance of the Gaussian distribution.
 
     :param list (D_Img):
-        The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams. 
+        The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams.
 
     :param (TF_Learning): If it is true, then algorithm will need the second persistence diagram set and it will compute feature matrices for training set and test set.
 
@@ -852,7 +852,7 @@ def F_Image(PD1, PS, var, plot, TF_Learning, D_Img=[], *args):
 
         # determine the bounds of the images based on bounds of training set and test set diagrams
         # adjust the image parameters and compute images
-        pers_imager = pimg.PersistenceImager()
+        pers_imager = PersistenceImager()
         pers_imager.pixel_size = PS
         pers_imager.birth_range = (0, max(max_bth_lim_test, max_bth_lim_train))
         pers_imager.pers_range = (0, max(max_per_lim_test, max_per_lim_train))
@@ -899,7 +899,7 @@ def F_Image(PD1, PS, var, plot, TF_Learning, D_Img=[], *args):
             persistence_range[i, 0] = max(per_diag[:, 1]-per_diag[:, 0])
 
         # adjust the image parameters and compute images
-        pers_imager = pimg.PersistenceImager()
+        pers_imager = PersistenceImager()
         pers_imager.pixel_size = PS
         pers_imager.birth_range = (0, max(birth_range[:, 0])+1)
         pers_imager.pers_range = (0, max(persistence_range[:, 0])+1)
@@ -934,7 +934,7 @@ def F_CCoordinates(PD, FN):
     This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. :eq:`1st_coord` - :eq:`5th_coord`.
     The first four functions are taken from Ref. :cite:`2 <Adcock2016>` and the last one is obtained from Ref. :cite:`3 <Khasawneh2018>`.
     There are two inputs to the function. These are persistence diagrams and number of coordinates that user wants to use in feature matrix.
-    Algorithm will return feature matrix object array that includes feature matrices for different combinations, and total number of combinations will be :math:`\sum_{i=1}^{FN} {FN \choose i}`. 
+    Algorithm will return feature matrix object array that includes feature matrices for different combinations, and total number of combinations will be :math:`\sum_{i=1}^{FN} {FN \choose i}`.
 
     .. math:: f_{1}(PD) = \sum b_{i}(d_{i}-b_{i})
        :label: 1st_coord
@@ -962,10 +962,10 @@ def F_CCoordinates(PD, FN):
         :FeatureMatrix:
                 (Array) NxFN matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and FN is the number of feature chosen.
 
-        :TotalNumComb: 
+        :TotalNumComb:
                 (int) Number of combinations.
 
-        :CombList: 
+        :CombList:
                 (list) List of combinations.
 
     """
