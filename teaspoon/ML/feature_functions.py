@@ -11,14 +11,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.pyplot as plt
-from persim import PersistenceImager
+import PersistenceImages.persistence_images as pimg
 import math
 from math import pi
 from numpy.linalg import norm as lnorm
 from sympy.abc import t
 from sympy import Piecewise
 from sympy import diff, integrate
-from termcolor import colored
 from itertools import combinations
 
 # -------------------------------------------- #
@@ -441,6 +440,22 @@ def interp_polynomial(Dgm, params, dgm_type='BirthDeath'):
 
 # this function returns the points from querSet that are within the baseRecatangle
 def getSubset(querySet, baseRectangle):
+    """
+    
+
+    Parameters
+    ----------
+    querySet : TYPE
+        DESCRIPTION.
+    baseRectangle : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    TYPE
+        DESCRIPTION.
+
+    """
     # get the rectangel corners
     xmin = baseRectangle['nodes'][0]
     xmax = baseRectangle['nodes'][1]
@@ -653,7 +668,7 @@ class PLandscape():
             # if user gives landscape number which does not exist:
             for i in range(0, len(L_number)):
                 if L_number[i] > out['LN']:
-                    print(colored('Warning:', 'red')+' Landscape number {} does not exist. Number of Landscapes are {}. Please enter desired landscape values less than or equal to {}.'.format(
+                    print('Warning:'+' Landscape number {} does not exist. Number of Landscapes are {}. Please enter desired landscape values less than or equal to {}.'.format(
                         L_number, out['LN'], out['LN']))
                 break
         # Warning: If user enters a specific landscape number which does not exist for current persistence diagrams,
@@ -892,7 +907,7 @@ def F_Image(PD1, PS, var, plot, TF_Learning, D_Img=[], *args):
         persistence_range = np.zeros((N1, 1))
         birth_range = np.zeros((N1, 1))
 
-        # find a bounds of the image
+        # find the bounds of the image
         for i in range(0, N1):
             per_diag = PD1[i]
             birth_range[i, 0] = max(per_diag[:, 0])
