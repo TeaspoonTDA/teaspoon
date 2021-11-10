@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.2.2. Classification &mdash; teaspoon 0.1.0 documentation</title>
@@ -18,7 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2.3. Topological Data Analysis (TDA) Module Documentation" href="TDA.html" />
+    <link rel="next" title="2.2.2.1. Persistence Landscapes" href="CL_PL.html" />
     <link rel="prev" title="2.2.1. Featurization" href="F_PD.html" /> 
 </head>
 
@@ -66,7 +66,6 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -119,414 +118,48 @@
              
   <section id="classification">
 <h1><span class="section-number">2.2.2. </span>Classification<a class="headerlink" href="#classification" title="Permalink to this headline"></a></h1>
-<p>In <a class="reference internal" href="F_PD.html#featurization"><span class="std std-ref">Featurization</span></a>, we provide documentation on how to generate feature matrix using persistence diagrams with five different techniques.
-This page includes the documentation of the classification codes and some examples.</p>
-<section id="module-teaspoon.ML.PD_Classification">
-<span id="persistence-landscapes"></span><h2><span class="section-number">2.2.2.1. </span>Persistence Landscapes<a class="headerlink" href="#module-teaspoon.ML.PD_Classification" title="Permalink to this headline"></a></h2>
-<span class="target" id="module-PD_Classification"></span><dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_PL">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_PL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_PL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_PL" title="Permalink to this definition"></a></dt>
-<dd><p>This function perform classification using persistence landscapes. There are two inputs and these are persistence landscape set and parameter bucket object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>(</strong><strong>PL</strong><strong>)</strong> (<em>ndarray</em>) – Object array that includes all landscape functions for each persistence diagram</p></li>
-<li><p><strong>(</strong><strong>params</strong><strong>)</strong> (<em>object</em>) – Parameterbucket object for landscapes. Please see <a class="reference internal" href="F_PD.html#pb-landscape"><span class="std std-ref">Parameter bucket for landscapes</span></a> for more details.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>results:</strong> 1x5 matrix that includes the classification results and total elapsed time. First and second columns are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth represents total elapsed time for classification.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p><strong>Example:</strong> We classify chatter in time series obtained from cutting signals in turning.
-Persistence diagrams and landscapes are computed beforehand.
-The time series data is available in <span id="id1">[<a class="reference internal" href="ML.html#id17" title="Firas A. Khasawneh, Andreas Otto, and Melih C. Yesilli. Turning dataset for chatter diagnosis using machine learning. 2019. doi:10.17632/HVM4WH3JZX.1.">7</a>]</span>.</p>
-<p><strong>Example:</strong></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">PLandscape</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.PD_Classification</span> <span class="k">as</span> <span class="nn">PD_CL</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">LandscapesParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labels</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#parameters for classification</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">LandscapesParameterBucket</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.33</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">Labels</span> <span class="o">=</span> <span class="n">Labels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">PL_Number</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Variables in parameter bucket</span>
-<span class="go">-----------------------------</span>
-<span class="go">clf_model : &lt;class &#39;sklearn.svm._classes.SVC&#39;&gt;</span>
-<span class="go">feature_function : &lt;function F_Landscape at 0x000001A97957BD38&gt;</span>
-<span class="go">PL_Number : [1, 2, 3, 4, 5, 6, 7, 8]</span>
-<span class="go">test_size : 0.33</span>
-<span class="go">-----------------------------</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Compute the persistence landscapes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PerLand</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">Land</span><span class="o">=</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">PerLand</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">Land</span><span class="o">.</span><span class="n">AllPL</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Perform classification</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">PD_CL</span><span class="o">.</span><span class="n">CL_PL</span><span class="p">(</span><span class="n">PerLand</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Landscapes used in feature matrix generation: [1, 2, 3, 4, 5, 6, 7, 8]</span>
-<span class="go">Test set score: 0.58</span>
-<span class="go">Test set deviation: 0.12288205727444508</span>
-<span class="go">Training set score: 0.7449999999999999</span>
-<span class="go">Training set deviation: 0.05099019513592784</span>
-<span class="go">Total elapsed time: 0.6263787746429443</span>
-</pre></div>
-</div>
-</section>
-<section id="parameter-bucket-for-classification">
-<span id="cl-pb"></span><h2><span class="section-number">2.2.2.2. </span>Parameter Bucket for Classification<a class="headerlink" href="#parameter-bucket-for-classification" title="Permalink to this headline"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="teaspoon.ML.Base.CL_ParameterBucket">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">teaspoon.ML.Base.</span></span><span class="sig-name descname"><span class="pre">CL_ParameterBucket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">clf_model=&lt;class</span> <span class="pre">'sklearn.svm._classes.SVC'&gt;</span></em>, <em class="sig-param"><span class="pre">Labels=None</span></em>, <em class="sig-param"><span class="pre">test_size=0.33</span></em>, <em class="sig-param"><span class="pre">TF_Learning=False</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/Base.html#CL_ParameterBucket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.Base.CL_ParameterBucket" title="Permalink to this definition"></a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="teaspoon.ML.Base.CL_ParameterBucket.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">clf_model=&lt;class</span> <span class="pre">'sklearn.svm._classes.SVC'&gt;</span></em>, <em class="sig-param"><span class="pre">Labels=None</span></em>, <em class="sig-param"><span class="pre">test_size=0.33</span></em>, <em class="sig-param"><span class="pre">TF_Learning=False</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/Base.html#CL_ParameterBucket.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.Base.CL_ParameterBucket.__init__" title="Permalink to this definition"></a></dt>
+<p>In <a class="reference internal" href="F_PD.html#featurization"><span class="std std-ref">Featurization</span></a>, we provide examples on how to generate feature matrices from persistence diagrams.
+Here, we show how to perform classification using supervised machine learning algorithms.</p>
+<span class="target" id="module-teaspoon.ML.PD_Classification"></span><dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.getPercentScore">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">getPercentScore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">DgmsDF</span></em>, <em class="sig-param"><span class="pre">labels_col='trainingLabel'</span></em>, <em class="sig-param"><span class="pre">dgm_col='Dgm1'</span></em>, <em class="sig-param"><span class="pre">params=&lt;teaspoon.ML.Base.ParameterBucket</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">precomputed=False</span></em>, <em class="sig-param"><span class="pre">saving=False</span></em>, <em class="sig-param"><span class="pre">saving_path=None</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#getPercentScore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.getPercentScore" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>(</strong><strong>clf_model</strong><strong>)</strong> – Classification algorithm that will be used. Default is SVC.</p></li>
-<li><p><strong>(</strong><strong>Labels</strong><strong>)</strong> (<em>list</em>) – Classification labels. Warning message will appear if user does not provide labels.</p></li>
-<li><p><strong>(</strong><strong>test_size</strong><strong>)</strong> (<em>float</em>) – The number that defines the size of test set. It should be entered between 0 and 1. Default is 0.33.</p></li>
-<li><p><strong>TF_Learning</strong> (<em>(</em><em>str</em><em>)</em>) – This option will enable performing transfer learning, if it is true.</p></li>
-<li><p><strong>(</strong><strong>**kwargs</strong><strong>)</strong> – Additional parameters</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
-<section id="persistence-images">
-<h2><span class="section-number">2.2.2.3. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_PI">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_PI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_PImage1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_PI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_PI" title="Permalink to this definition"></a></dt>
-<dd><p>This function takes parameter object and feature matrix/matrices which is/are generated using persistence images and returns classification results in a matrix.
-Function is capable of performing transfer learning if user specifies it in parameter bucket object and provides two feature matrices.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>(</strong><strong>F_PImage</strong><strong>)</strong> (<em>ndarray</em>) – Feature matrix generated with persistence images. If user choose to perform transfer learning, algorithm will assume this parameter as the feature matrix of training set.</p></li>
-<li><p><strong>(</strong><strong>params</strong><strong>)</strong> (<em>object</em>) – Parameterbucket object for classification. Please see <a class="reference internal" href="#cl-pb"><span class="std std-ref">Parameter Bucket for Classification</span></a> for more details.</p></li>
-<li><p><strong>(</strong><strong>*args</strong><strong>)</strong> – Optional paramters. For transfer learning, algorithm needs second feature matrix for test set.</p></li>
+<li><p><strong>DgmsDF</strong> (<em>dataframe</em>) – Data frame that includes persistence diagrams and labels. If user choose to performs transfer learning, DgmsDF_test should be given to algorithm. When transfer learning is performed, first diagram input is assumed as training set.</p></li>
+<li><p><strong>labels_col</strong> (<em>str</em>) – Name of the column that stores the labels for persistence diagrams in a Pandas dataframe. The default is ‘trainingLabel’.</p></li>
+<li><p><strong>dgm_col</strong> (<em>str</em>) – Name of the column that stores the persistence diagrams in a Pandas dataframe. The default is ‘Dgm1’.</p></li>
+<li><p><strong>params</strong> (<em>parameterbucket object</em>) – Parameter bucket object. The default is Base.ParameterBucket().</p></li>
+<li><p><strong>precomputed</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If user already computed the persitence landscapes, this should be set to True, otherwise algorithm will
+spend time on computing these. This option is only valid when persistence landscapes are used as featurization
+methods. If this parameter is True, algorithm treat ‘DgmsDF’ as persistence landscapes. The default is False.</p></li>
+<li><p><strong>saving</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If user wants to save classification results, this should be set to True and saving_path needs to be provided. The default is False.</p></li>
+<li><p><strong>saving_path</strong> (<em>str</em><em>, </em><em>optional</em>) – The path where user wants to save the results. This should be provided when saving is True. The default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Additional parameters. When user wants to apply transfer learning, the second set of persistence diagrams and their labels should be passed in a
+dataframe format.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>results:</strong> 1x5 matrix that includes the classification results and total elapsed time. First and second columns are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth represents total elapsed time for classification.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p><strong>Example:</strong></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">Ff</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.PD_Classification</span> <span class="k">as</span> <span class="nn">CL_PD</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">CL_ParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate two sets of persistence diagrams</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df_1</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df_2</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1_1</span><span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1_2</span><span class="o">=</span> <span class="n">df_2</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labels_1</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labels_2</span> <span class="o">=</span> <span class="n">df_2</span><span class="p">[</span><span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># classification without using transfer learning</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TF_Learning</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">D_Img</span><span class="o">=</span><span class="p">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#classification parameters</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">CL_ParameterBucket</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span><span class="mf">0.33</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">Labels</span> <span class="o">=</span> <span class="n">Labels_1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Variables in parameter bucket</span>
-<span class="go">-----------------------------</span>
-<span class="go">clf_model : &lt;class &#39;sklearn.svm._classes.SVC&#39;&gt;</span>
-<span class="go">test_size : 0.33</span>
-<span class="go">TF_Learning : False</span>
-<span class="go">-----------------------------</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">F_Images</span> <span class="o">=</span><span class="n">Ff</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">Diagrams_H1_1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.10</span><span class="p">,</span><span class="n">plot</span><span class="p">,</span><span class="n">TF_Learning</span><span class="p">,</span><span class="n">D_Img</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">CL_PD</span><span class="o">.</span><span class="n">CL_PI</span><span class="p">(</span><span class="n">F_Images</span><span class="p">[</span><span class="s1">&#39;F_Matrix&#39;</span><span class="p">],</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Test set score: 0.63</span>
-<span class="go">Test set deviation: 0.1268857754044952</span>
-<span class="go">Training set score: 0.7675</span>
-<span class="go">Training set deviation: 0.05921359641163505</span>
-<span class="go">Total elapsed time: 0.04411721229553223</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># classification using transfer learning</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compute the feature matrix for second set of persistence diagrams</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TF_Learning</span> <span class="o">=</span><span class="kc">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">F_Images_2</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">Diagrams_H1_1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.10</span><span class="p">,</span><span class="n">plot</span><span class="p">,</span><span class="n">TF_Learning</span><span class="p">,</span><span class="n">D_Img</span><span class="p">,</span><span class="n">Diagrams_H1_2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">CL_ParameterBucket</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span><span class="mf">0.33</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">training_labels</span> <span class="o">=</span> <span class="n">Labels_1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_labels</span> <span class="o">=</span> <span class="n">Labels_2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">TF_Learning</span>  <span class="o">=</span> <span class="kc">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Variables in parameter bucket</span>
-<span class="go">-----------------------------</span>
-<span class="go">clf_model : &lt;class &#39;sklearn.svm._classes.SVC&#39;&gt;</span>
-<span class="go">test_size : 0.33</span>
-<span class="go">TF_Learning : True</span>
-<span class="go">-----------------------------</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">CL_PD</span><span class="o">.</span><span class="n">CL_PI</span><span class="p">(</span><span class="n">F_Images_2</span><span class="p">[</span><span class="s1">&#39;F_train&#39;</span><span class="p">],</span><span class="n">params</span><span class="p">,</span><span class="n">F_Images_2</span><span class="p">[</span><span class="s1">&#39;F_test&#39;</span><span class="p">])</span>
-<span class="go">Test set score: 0.6666666666666667</span>
-<span class="go">Test set deviation: 0.06734350297014738</span>
-<span class="go">Training set score: 0.6925000000000001</span>
-<span class="go">Training set deviation: 0.04616546328154847</span>
-<span class="go">Total elapsed time: 0.06018877029418945</span>
-</pre></div>
-</div>
-</section>
-<section id="carlsson-coordinates">
-<h2><span class="section-number">2.2.2.4. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Permalink to this headline"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_CC">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_CC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_CC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_CC" title="Permalink to this definition"></a></dt>
-<dd><p>This function takes persistence diagrams and parameter bucket object and returns classification results in a matrix.
-Function is capable of performing transfer learning if user specifies it in parameter bucket object and provides two persistence diagrams object array.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>(</strong><strong>PD1</strong><strong>)</strong> (<em>ndarray</em>) – Object array that includes the persistence diagrams. If user wants to perform transfer learning, PD1 will be assumed as training set persistence diagrams, while PD2 is set for test set diagrams.</p></li>
-<li><p><strong>(</strong><strong>params</strong><strong>)</strong> (<em>object</em>) – Parameterbucket object for classification. Please see <a class="reference internal" href="#cl-pb"><span class="std std-ref">Parameter Bucket for Classification</span></a> for more details.</p></li>
-<li><p><strong>(</strong><strong>*args</strong><strong>)</strong> (<em>ndarray</em>) – If user choose the transfer learning option, test set persistence diagrams should be given to algorithm as an input.</p></li>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>c_report_train</strong> (<em>dict</em>) – Classification report for training set results.</p></li>
+<li><p><strong>c_report_test</strong> (<em>dict</em>) – Classification report for test set results.</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>results:</strong> Kx4 matrix that includes the classification results. First and second column are for test set score and deviation, while third and fourth column are for training set score and deviation.</p>
+</p>
 </dd>
 </dl>
 </dd></dl>
 
-<p><strong>Example:</strong></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">Ff</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.PD_Classification</span> <span class="k">as</span> <span class="nn">CL_PD</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">CL_ParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate two sets of persistence diagrams</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df_1</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df_2</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1_1</span><span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1_2</span><span class="o">=</span> <span class="n">df_2</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># labels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labels_1</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labels_2</span> <span class="o">=</span> <span class="n">df_2</span><span class="p">[</span><span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># parameters used in classification without transfer learning</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">CL_ParameterBucket</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span><span class="mf">0.33</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">Labels</span> <span class="o">=</span> <span class="n">Labels_1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">TF_Learning</span> <span class="o">=</span><span class="kc">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">FN</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Variables in parameter bucket</span>
-<span class="go">-----------------------------</span>
-<span class="go">clf_model : &lt;class &#39;sklearn.svm._classes.SVC&#39;&gt;</span>
-<span class="go">test_size : 0.33</span>
-<span class="go">TF_Learning : False</span>
-<span class="go">FN : 5</span>
-<span class="go">-----------------------------</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># classification on one persistence diagram set</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">CL_PD</span><span class="o">.</span><span class="n">CL_CC</span><span class="p">(</span><span class="n">Diagrams_H1_1</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Number of combinations: 31</span>
-<span class="go">Highest accuracy among all combinations:</span>
-<span class="go">Test set score: 0.635</span>
-<span class="go">Test set deviation: 0.11191514642799695</span>
-<span class="go">Training set score: 0.7325</span>
-<span class="go">Training set deviation: 0.053677276383959714</span>
-<span class="go">Total elapsed time: 0.2777674198150635</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># parameters used in classification with transfer learning</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">CL_ParameterBucket</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span><span class="mf">0.33</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">training_labels</span> <span class="o">=</span> <span class="n">Labels_1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_labels</span> <span class="o">=</span> <span class="n">Labels_2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">TF_Learning</span> <span class="o">=</span><span class="kc">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">FN</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Variables in parameter bucket</span>
-<span class="go">-----------------------------</span>
-<span class="go">clf_model : &lt;class &#39;sklearn.svm._classes.SVC&#39;&gt;</span>
-<span class="go">test_size : 0.33</span>
-<span class="go">TF_Learning : True</span>
-<span class="go">FN : 5</span>
-<span class="go">-----------------------------</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">CL_PD</span><span class="o">.</span><span class="n">CL_CC</span><span class="p">(</span><span class="n">Diagrams_H1_1</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">Diagrams_H1_2</span><span class="p">)</span>
-<span class="go">Number of combinations: 31</span>
-<span class="go">Highest accuracy among all combinations:</span>
-<span class="go">Test set score: 0.6976190476190476</span>
-<span class="go">Test set deviation: 0.05639390134441434</span>
-<span class="go">Training set score: 0.735</span>
-<span class="go">Training set deviation: 0.04769696007084728</span>
-<span class="go">Total elapsed time: 0.2907731533050537</span>
-</pre></div>
-</div>
-</section>
-<section id="path-signatures">
-<h2><span class="section-number">2.2.2.5. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Permalink to this headline"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_PS">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_PS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_PSignature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_PS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_PS" title="Permalink to this definition"></a></dt>
-<dd><p>This function takes parameter object and feature matrix which is generated using signatures of paths and returns classification results in a matrix.
-Function is capable of performing transfer learning if user specifies it in parameter bucket object and provides two feature matrices.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>(</strong><strong>F_PSignature</strong><strong>)</strong> (<em>ndarray</em>) – Feature matrix generated with path signatures. If user performs transfer learning, this parameter will be assumed as training set feature matrix.</p></li>
-<li><p><strong>(</strong><strong>params</strong><strong>)</strong> (<em>object</em>) – Parameterbucket object for classification. Please see <a class="reference internal" href="#cl-pb"><span class="std std-ref">Parameter Bucket for Classification</span></a> for more details.</p></li>
-<li><p><strong>(</strong><strong>*args</strong><strong>)</strong> – Optional parameters. If TF_Learning in parameter bucket is true, algorithms will need test set feature matrix.</p></li>
+<p>Please see following subsections for classification examples of each featurization approach.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CL_PL.html">2.2.2.1. Persistence Landscapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CL_PI.html">2.2.2.2. Persistence Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CL_CC.html">2.2.2.3. Carlsson Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CL_TF.html">2.2.2.4. Template Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CL_PS.html">2.2.2.5. Path Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CL_KM.html">2.2.2.6. Kernel Method</a></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>results:</strong> 1x5 matrix that includes the classification results and total elapsed time. First and second column are for test set score and deviation, while third and fourth column are for training set score and deviation. The fifth includes total elapsed time for classification.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p><strong>Example:</strong></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">Ff</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.PD_Classification</span> <span class="k">as</span> <span class="nn">CL_PD</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">CL_ParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate two sets of persistence diagrams</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df_1</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df_2</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1_1</span><span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1_2</span><span class="o">=</span> <span class="n">df_2</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># labels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labels_1</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labels_2</span> <span class="o">=</span> <span class="n">df_2</span><span class="p">[</span><span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#compute persistence landscapes for both sets of persistence diagram</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PerLand1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PerLand2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">Land</span><span class="o">=</span><span class="n">Ff</span><span class="o">.</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">Diagrams_H1_1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">PerLand1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">Land</span><span class="o">.</span><span class="n">AllPL</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">Land</span><span class="o">=</span><span class="n">Ff</span><span class="o">.</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">Diagrams_H1_2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">PerLand2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">Land</span><span class="o">.</span><span class="n">AllPL</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compute features using first landscapes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">features1</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">PerLand1</span><span class="p">,</span><span class="n">L_Number</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">features2</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">PerLand2</span><span class="p">,</span><span class="n">L_Number</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># traditional classification</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># adjust parameters</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">CL_ParameterBucket</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span><span class="mf">0.33</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">Labels</span> <span class="o">=</span> <span class="n">Labels1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">TF_Learning</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Variables in parameter bucket</span>
-<span class="go">-----------------------------</span>
-<span class="go">clf_model : &lt;class &#39;sklearn.svm._classes.SVC&#39;&gt;</span>
-<span class="go">test_size : 0.33</span>
-<span class="go">TF_Learning : False</span>
-<span class="go">-----------------------------</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">CL_PS</span><span class="p">(</span><span class="n">features</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Test set score: 0.05</span>
-<span class="go">Test set deviation: 0.15000000000000002</span>
-<span class="go">Training set score: 0.575</span>
-<span class="go">Training set deviation: 0.13919410907075053</span>
-<span class="go">Total elapsed time: 0.009609222412109375</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#transfer learning</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">CL_ParameterBucket</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span><span class="mf">0.33</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">training_labels</span> <span class="o">=</span> <span class="n">Labels1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_labels</span> <span class="o">=</span> <span class="n">Labels2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">TF_Learning</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Variables in parameter bucket</span>
-<span class="go">-----------------------------</span>
-<span class="go">clf_model : &lt;class &#39;sklearn.svm._classes.SVC&#39;&gt;</span>
-<span class="go">test_size : 0.33</span>
-<span class="go">TF_Learning : True</span>
-<span class="go">-----------------------------</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">CL_PS</span><span class="p">(</span><span class="n">features1</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">features2</span><span class="p">)</span>
-<span class="go">Test set score: 0.4444444444444445</span>
-<span class="go">Test set deviation: 0.09938079899999067</span>
-<span class="go">Training set score: 0.5625</span>
-<span class="go">Training set deviation: 0.0625</span>
-<span class="go">Total elapsed time: 0.009023904800415039</span>
-</pre></div>
 </div>
-</section>
-<section id="kernel-method">
-<h2><span class="section-number">2.2.2.6. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Permalink to this headline"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.CL_KM">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">CL_KM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#CL_KM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.CL_KM" title="Permalink to this definition"></a></dt>
-<dd><p>This function takes parameter object and persistence diagrams and computes pairwise kernels for training set and kernel matrix between test set and training set separately.
-The main difference of this function from others is that it uses  <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">LIBSVM</a> (see <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/COPYRIGHT">here</a> for LIBSVM copyright statement) for classification.
-Function will ask user to input the path to the folder where LIBSVM/python file is available, then it will import related functions.
-Computed kernels are used in SVM algorithm to perform classification.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>(</strong><strong>PD</strong><strong>)</strong> (<em>ndarray</em>) – Object array that includes the persistence diagrams</p></li>
-<li><p><strong>(</strong><strong>params</strong><strong>)</strong> (<em>object</em>) – Parameterbucket object for classification. Please see <a class="reference internal" href="#cl-pb"><span class="std std-ref">Parameter Bucket for Classification</span></a> for more details.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>results:</strong> 1x3 matrix that includes the classification results and total elapsed time. First and second column is for test set score and deviation, while third column is the elapsed time.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p><strong>Example:</strong></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">Ff</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.PD_Classification</span> <span class="kn">import</span> <span class="n">CL_KM</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">CL_ParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate two sets of persistence diagrams</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df_1</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1_1</span><span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labels_1</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s1">&#39;trainingLabel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#convert string labels into integers ones</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labels_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">Diagrams_H1_1</span><span class="p">)))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Diagrams_H1_1</span><span class="p">)):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">if</span> <span class="n">Labels_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Torus&#39;</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="n">Labels_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">elif</span> <span class="n">Labels_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Annulus&#39;</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="n">Labels_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">elif</span> <span class="n">Labels_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Cube&#39;</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="n">Labels_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">elif</span> <span class="n">Labels_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;3Cluster&#39;</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="n">Labels_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">3</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">elif</span> <span class="n">Labels_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;3Clusters of 3Clusters&#39;</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="n">Labels_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">elif</span> <span class="n">Labels_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Sphere&#39;</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="n">Labels_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">CL_ParameterBucket</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span><span class="mf">0.33</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">Labels</span> <span class="o">=</span> <span class="n">Labels_</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.25</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">CL_KM</span><span class="p">(</span><span class="n">Diagrams_H1_1</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Test set score: 23.333333333333332</span>
-<span class="go">Test set deviation: 9.428090415820632</span>
-<span class="go">Total elapsed time: 23.333333333333332</span>
-</pre></div>
-</div>
-</section>
 </section>
 
 
@@ -534,7 +167,7 @@ Computed kernels are used in SVM algorithm to perform classification.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="F_PD.html" class="btn btn-neutral float-left" title="2.2.1. Featurization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="TDA.html" class="btn btn-neutral float-right" title="2.3. Topological Data Analysis (TDA) Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="CL_PL.html" class="btn btn-neutral float-right" title="2.2.2.1. Persistence Landscapes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
