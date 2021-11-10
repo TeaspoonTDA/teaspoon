@@ -5,258 +5,703 @@ available in machine learning moduel of teaspoon.
 
 """
 # %%  -------------- Persistence Landscapes -------------------------------
-from ML.PD_Classification import getPercentScore
-import ML.feature_functions as fF
-from ML.Base import ParameterBucket
-from teaspoon.ML.PD_Classification import CL_KM
-from teaspoon.ML.Base import CL_ParameterBucket
-import teaspoon.ML.PD_Classification as CL_PD
-import numpy as np
-import teaspoon.ML.feature_functions as Ff
-import teaspoon.ML.PD_Classification as PD_CL
 
-from teaspoon.ML.Base import LandscapesParameterBucket
+
+"""
+This example includes classification of persistence diagrams using persistence 
+landscapes. In this example, landscapes are not precomputed. They are computed in
+during classification.
+"""
+
+#########---------------Diagrams to Landsapes ---------------------------#####
+
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
 from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+labels_col='trainingLabel'
+dgm_col='Dgm1'
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_Landscape
+params.PL_Number = [1,2]
+params.k_fold_cv=5
+params.clf_model = SVC
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
+
+#%% parameter turning for persistence landscapes
+import numpy as np
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+labels_col='trainingLabel'
+dgm_col='Dgm1'
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_Landscape
+params.PL_Number = [1,2]
+params.k_fold_cv=5
+params.clf_model = SVC
+params.param_tuning = True
+
+gamma_range = np.logspace(-3, 3, num=10)
+lambda_range = np.logspace(-3, 3, num=10)
+params.parToTune = [] # the list that contains the paramters to tune for each classifier
+params.parToTune.append({'C': lambda_range, 'kernel': ('rbf','sigmoid'),'gamma':gamma_range}) # SVM paramters
+
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
+
+
+#%%#########---------------Precomputed Landscapes---------------------------#####
+"""
+If user provides the precomputed persistence landscapes, "precomputed" parameter
+needs to be set to True so that algorithm will treat the given inputs as persistence landscapes.
+"""
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+import numpy as np
+import pandas as pd
+
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+labels_col='trainingLabel'
+dgm_col='Dgm1'
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
+
+
+# compute the persistence diagrams for given diagrams
+PL = np.ndarray(shape=(len(DgmsDF)), dtype=object)
+
+# compute persistence landscape for training set 
+for i in range(len(DgmsDF)):
+    PLs = fF.PLandscape(DgmsDF[dgm_col][i])
+    PL[i] = PLs.AllPL
+    
+# conver the landscapes into dataframe to be consistent with data structure in the classification algorithm
+PL = pd.DataFrame(PL)
+PL[labels_col] = DgmsDF[labels_col]
+PL = PL.rename(columns={0: "PerLand"})
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_Landscape
+params.PL_Number = [1]
+params.k_fold_cv=5
+params.clf_model = SVC
+c_report_train,c_report_test=getPercentScore(PL,
+                                            labels_col='trainingLabel',
+                                            dgm_col="PerLand",
+                                            params=params,
+                                            precomputed = True,
+                                            saving = False,
+                                            saving_path = None)
+
+#%%########-----------Diagrams to Landsapes (Transfer Learning)----------#####
+
+"""
+This example includes classification of persistence diagrams using persistence 
+landscapes. In this example, landscapes are not precomputed. They are computed in
+during classification. Two sets of persistence diagrams are provided by user and 
+we apply transfer learning between these two sets.
+
+"""
+
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+# generate persistence diagrams
+DgmsDF_train = testSetManifolds(numDgms=20, numPts=100)
+DgmsDF_test = testSetManifolds(numDgms=20, numPts=100)
+
+labels_col='trainingLabel'
+dgm_col='Dgm1'
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x_train,x_test = DgmsDF_train[labels_col],DgmsDF_test[labels_col]
+y_train = label_encoder.fit_transform(x_train)
+y_test = label_encoder.fit_transform(x_test)
+DgmsDF_train[labels_col],DgmsDF_test[labels_col] = y_train,y_test
+
+
+
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_Landscape
+params.PL_Number = [1]
+params.k_fold_cv=5
+params.clf_model = SVC
+params.TF_Learning=True
+c_report_train,c_report_test=getPercentScore(DgmsDF_train,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None,
+                                            DgmsDF_test = DgmsDF_test)
+
+
+
+#%%########-----Precomputed Landscapes (Transfer Learning)---------------#####
+
+from ML.PD_Classification import getPercentScore
+from ML import feature_functions as fF
+from ML.Base import ParameterBucket
+from MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+import numpy as np
+import pandas as pd
+
+# generate persistence diagrams
+DgmsDF_train = testSetManifolds(numDgms=20, numPts=100)
+DgmsDF_test = testSetManifolds(numDgms=20, numPts=100)
+
+labels_col='trainingLabel'
+dgm_col='Dgm1'
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x_train,x_test = DgmsDF_train[labels_col],DgmsDF_test[labels_col]
+y_train = label_encoder.fit_transform(x_train)
+y_test = label_encoder.fit_transform(x_test)
+DgmsDF_train[labels_col],DgmsDF_test[labels_col] = y_train,y_test
+
+
+# compute the persistence diagrams for given diagrams
+PL_train = np.ndarray(shape=(len(DgmsDF_train)), dtype=object)
+PL_test = np.ndarray(shape=(len(DgmsDF_test)), dtype=object)
+
+# compute persistence landscape for training set 
+for i in range(len(DgmsDF_train)):
+    PLs = fF.PLandscape(DgmsDF_train[dgm_col][i])
+    PL_train[i] = PLs.AllPL
+# compute persistence landscape for training set 
+for i in range(len(DgmsDF_test)):
+    PLs = fF.PLandscape(DgmsDF_test[dgm_col][i])
+    PL_test[i] = PLs.AllPL
+    
+# convert the landscapes into dataframe to be consistent with data structure in the classification algorithm
+PL_train, PL_test = pd.DataFrame(PL_train),pd.DataFrame(PL_test)
+PL_train[labels_col], PL_test[labels_col] = DgmsDF_train[labels_col], DgmsDF_test[labels_col]
+PL_train = PL_train.rename(columns={0: "PerLand"})
+PL_test = PL_test.rename(columns={0: "PerLand"})
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_Landscape
+params.PL_Number = [1]
+params.k_fold_cv=5
+params.clf_model = SVC
+params.TF_Learning = True
+c_report_train,c_report_test=getPercentScore(PL_train,
+                                            labels_col='trainingLabel',
+                                            dgm_col='PerLand',
+                                            params=params,
+                                            precomputed = True,
+                                            saving = False,
+                                            saving_path = None,
+                                            DgmsDF_test=PL_test)
+
+# if user wants to tune parameters for the selected classifier
+params.param_tuning = True
+gamma_range = np.logspace(-3, 3, num=10)
+lambda_range = np.logspace(-3, 3, num=10)
+params.parToTune = [] # the list that contains the paramters to tune for each classifier
+params.parToTune.append({'C': lambda_range, 'kernel': ('rbf','sigmoid'),'gamma':gamma_range}) # SVM paramters
+c_report_train,c_report_test=getPercentScore(PL_train,
+                                            labels_col='trainingLabel',
+                                            dgm_col='PerLand',
+                                            precomputed = True,
+                                            params=params,
+                                            saving_path = None,
+                                            DgmsDF_test=PL_test)
+
+
+
+
+# %%  -------------- Persistence Images ------------------
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import SVC
 
 # generate persistence diagrams
-df = testSetManifolds(numDgms=10, numPts=100)
-Diagrams_H1 = df['Dgm1'].sort_index().values
-Labels = df['trainingLabel'].sort_index().values
+DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+labels_col='trainingLabel'
+dgm_col='Dgm1'
 
-# parameters for classification
-params = LandscapesParameterBucket()
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_Image
+params.k_fold_cv=5
 params.clf_model = SVC
-params.test_size = 0.33
-params.Labels = Labels
-params.PL_Number = [1, 2, 3, 4, 5, 6, 7, 8]
-print(params)
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
 
-# Compute the persistence landscapes
-PerLand = np.ndarray(shape=(60), dtype=object)
-for i in range(0, 60):
-    Land = Ff.PLandscape(Diagrams_H1[i])
-    PerLand[i] = Land.AllPL
+#%%-------------- Persistence Images (Transfer learning) ------------------
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+import numpy as np
 
-# Perform classification
-result = PD_CL.CL_PL(PerLand, params)
-# %%  -------------- Persistence Images -------------------------------
+# generate persistence diagrams
+DgmsDF_train = testSetManifolds(numDgms=20, numPts=100)
+DgmsDF_test = testSetManifolds(numDgms=20, numPts=100)
 
+labels_col='trainingLabel'
+dgm_col='Dgm1'
 
-# generate two sets of persistence diagrams
-df_1 = testSetManifolds(numDgms=10, numPts=100)
-df_2 = testSetManifolds(numDgms=10, numPts=100)
-Diagrams_H1_1 = df_1['Dgm1'].sort_index().values
-Diagrams_H1_2 = df_2['Dgm1'].sort_index().values
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x_train,x_test = DgmsDF_train[labels_col],DgmsDF_test[labels_col]
+y_train = label_encoder.fit_transform(x_train)
+y_test = label_encoder.fit_transform(x_test)
+DgmsDF_train[labels_col],DgmsDF_test[labels_col] = y_train,y_test
 
-Labels_1 = df_1['trainingLabel'].sort_index().values
-Labels_2 = df_2['trainingLabel'].sort_index().values
-
-TF_Learning = False
-plot = False
-D_Img = []
-
-params = CL_ParameterBucket()
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_Image
+params.k_fold_cv=5
 params.clf_model = SVC
-params.test_size = 0.33
-params.Labels = Labels_1
-params.TF_Learning = False
-print(params)
-
-
-F_Images = Ff.F_Image(Diagrams_H1_1, 0.1, 0.10, plot, TF_Learning, D_Img)
-results = CL_PD.CL_PI(F_Images['F_Matrix'], params)
-
-# classification using transfer learning
-# compute the feature matrix for second set of persistence diagrams
-TF_Learning = True
-F_Images_2 = Ff.F_Image(Diagrams_H1_1, 0.1, 0.10, plot,
-                        TF_Learning, D_Img, Diagrams_H1_2)
-
-params = CL_ParameterBucket()
-params.clf_model = SVC
-params.test_size = 0.33
-params.training_labels = Labels_1
-params.test_labels = Labels_2
 params.TF_Learning = True
-print(params)
+c_report_train,c_report_test=getPercentScore(DgmsDF_train,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None,
+                                            DgmsDF_test = DgmsDF_test)
 
-results = CL_PD.CL_PI(F_Images_2['F_train'], params, F_Images_2['F_test'])
+#%%  if user wants to tune parameters for the selected classifier
+import numpy as np
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+labels_col='trainingLabel'
+dgm_col='Dgm1'
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_Image
+params.k_fold_cv=5
+params.clf_model = SVC
+params.param_tuning = True
+
+# parameters to tune and their ranges
+gamma_range = np.logspace(-3, 3, num=5)
+lambda_range = np.logspace(-3, 3, num=5)
+params.parToTune = [] # the list that contains the paramters to tune for each classifier
+params.parToTune.append({'C': lambda_range,'gamma':gamma_range}) # SVM paramters
+
+# perform classification
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
+
+
 # %%  -------------- Carlsson Coordinates -------------------------------
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
 
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+labels_col='trainingLabel'
+dgm_col='Dgm1'
 
-# generate two sets of persistence diagrams
-df_1 = testSetManifolds(numDgms=10, numPts=100)
-df_2 = testSetManifolds(numDgms=10, numPts=100)
-Diagrams_H1_1 = df_1['Dgm1'].sort_index().values
-Diagrams_H1_2 = df_2['Dgm1'].sort_index().values
-# labels
-Labels_1 = df_1['trainingLabel'].sort_index().values
-Labels_2 = df_2['trainingLabel'].sort_index().values
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
 
-# parameters used in classification without transfer learning
-params = CL_ParameterBucket()
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_CCoordinates
+params.k_fold_cv=5
+params.FN =3
 params.clf_model = SVC
-params.test_size = 0.33
-params.Labels = Labels_1
-params.TF_Learning = False
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
+
+
+#%%  -------------- Carlsson Coordinates (TF_Learning) --------------------------
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+import numpy as np
+
+# generate persistence diagrams
+DgmsDF_train = testSetManifolds(numDgms=20, numPts=100)
+DgmsDF_test = testSetManifolds(numDgms=20, numPts=100)
+
+labels_col='trainingLabel'
+dgm_col='Dgm1'
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x_train,x_test = DgmsDF_train[labels_col],DgmsDF_test[labels_col]
+y_train = label_encoder.fit_transform(x_train)
+y_test = label_encoder.fit_transform(x_test)
+DgmsDF_train[labels_col],DgmsDF_test[labels_col] = y_train,y_test
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_CCoordinates
+params.k_fold_cv=5
+params.TF_Learning=True
 params.FN = 5
-print(params)
-# classification on one persistence diagram set
-results = CL_PD.CL_CC(Diagrams_H1_1, params)
-
-# parameters used in classification with transfer learning
-params = CL_ParameterBucket()
 params.clf_model = SVC
-params.test_size = 0.33
-params.training_labels = Labels_1
-params.test_labels = Labels_2
-params.TF_Learning = True
-params.FN = 5
-print(params)
-
-results = CL_PD.CL_CC(Diagrams_H1_1, params, Diagrams_H1_2)
-
-# %%  -------------- Path Signatures -------------------------------
+c_report_train,c_report_test=getPercentScore(DgmsDF_train,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None,
+                                            DgmsDF_test = DgmsDF_test)
 
 
-# generate two sets of persistence diagrams
-df_1 = testSetManifolds(numDgms=2, numPts=100)
-df_2 = testSetManifolds(numDgms=2, numPts=100)
-Diagrams_H1_1 = df_1['Dgm1'].sort_index().values
-Diagrams_H1_2 = df_2['Dgm1'].sort_index().values
-# labels
-Labels_1 = df_1['trainingLabel'].sort_index().values
-Labels_2 = df_2['trainingLabel'].sort_index().values
 
-# compute persistence landscapes for both sets of persistence diagram
-PerLand1 = np.ndarray(shape=(12), dtype=object)
-PerLand2 = np.ndarray(shape=(12), dtype=object)
+#%% if user wants to tune parameters for the selected classifier
+import numpy as np
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
 
-for i in range(0, 12):
-    Land = Ff.PLandscape(Diagrams_H1_1[i])
-    PerLand1[i] = Land.AllPL
-    Land = Ff.PLandscape(Diagrams_H1_2[i])
-    PerLand2[i] = Land.AllPL
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+labels_col='trainingLabel'
+dgm_col='Dgm1'
 
-# compute features using first landscapes
-features1 = Ff.F_PSignature(PerLand1, L_Number=[1])
-features2 = Ff.F_PSignature(PerLand2, L_Number=[1])
-# traditional classification
-# adjust parameters
-params = CL_ParameterBucket()
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_CCoordinates
+params.k_fold_cv=5
+params.FN =3
 params.clf_model = SVC
-params.test_size = 0.33
-params.Labels = Labels_1
-params.TF_Learning = False
-print(params)
+params.param_tuning = True
 
-results = CL_PD.CL_PS(features1, params)
+# parameters to tune and their range
+gamma_range = np.logspace(-3, 3, num=5)
+lambda_range = np.logspace(-3, 3, num=5)
+params.parToTune = [] # the list that contains the paramters to tune for each classifier
+params.parToTune.append({'C': lambda_range,'gamma':gamma_range}) # SVM paramters
 
-# transfer learning
-params = CL_ParameterBucket()
+#perform classification
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
+
+
+
+#%% Path Signatures
+
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=2, numPts=100)
+labels_col='trainingLabel'
+dgm_col='Dgm1'
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.F_PSignature
+params.k_fold_cv=2
+params.L_number = [1]
 params.clf_model = SVC
-params.test_size = 0.33
-params.training_labels = Labels_1
-params.test_labels = Labels_2
-params.TF_Learning = True
-print(params)
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
 
-results = CL_PD.CL_PS(features1, params, features2)
+
+
 # %%  -------------- Kernel Method  -------------------------------
 
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
 
-# generate two sets of persistence diagrams
-df_1 = testSetManifolds(numDgms=5, numPts=100)
-Diagrams_H1_1 = df_1['Dgm1'].sort_index().values
-Labels_1 = df_1['trainingLabel'].sort_index().values
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=5, numPts=100)
+labels_col='trainingLabel'
+dgm_col=['Dgm1']
 
-# convert string labels into integers ones
-Labels_ = np.zeros((len(Diagrams_H1_1)))
-for i in range(len(Diagrams_H1_1)):
-    if Labels_1[i] == 'Torus':
-        Labels_[i] = 0
-    elif Labels_1[i] == 'Annulus':
-        Labels_[i] = 1
-    elif Labels_1[i] == 'Cube':
-        Labels_[i] = 2
-    elif Labels_1[i] == '3Cluster':
-        Labels_[i] = 3
-    elif Labels_1[i] == '3Clusters of 3Clusters':
-        Labels_[i] = 4
-    elif Labels_1[i] == 'Sphere':
-        Labels_[i] = 5
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
 
-params = CL_ParameterBucket()
-params.test_size = 0.33
-params.Labels = Labels_
-params.sigma = 0.25
-results = CL_KM(Diagrams_H1_1, params)
-
-
-# %%  -------------- Template Functions -------------------------------
-
-# traditional classification
-
+# set classification parameters
 params = ParameterBucket()
-params.setBoundingBox(df_train[dgmColLabel], pad=.05)
-params.jacobi_poly = 'cheb1'  # choose the interpolating polynomial
-params.d = 20
+params.feature_function = fF.KernelMethod
+params.k_fold_cv=5
+params.sigma = 0.25
+params.clf_model = SVC
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
+
+
+
+#%% Template Functions
+
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+labels_col='trainingLabel'
+dgm_col=['Dgm0','Dgm1']
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
+
+# set classification parameters
+params = ParameterBucket()
 params.feature_function = fF.interp_polynomial
+params.k_fold_cv=5
+params.d = 20
+params.jacobi_poly = 'cheb1'  # choose the interpolating polynomial
 params.useAdaptivePart = False
 params.clf_model = SVC
 params.TF_Learning = False
-print(params)
 
-# ----------------------------------
-# Run the experiment
-# ----------------------------------
-num_runs = 10
-accuracy_test_set = np.zeros((num_runs))
-accuracy_train_set = np.zeros((num_runs))
-results = np.zeros((1, 5))
-for i in np.arange(num_runs):
-    xx = getPercentScore(df_train, labels_col='Label', dgm_col=dgmColLabel,
-                         params=params, normalize=False, verbose=False)
-    accuracy_test_set[i] = xx['score']
-    accuracy_train_set[i] = xx['score_training']
-
-results[0, 1] = np.std(accuracy_test_set)
-results[0, 3] = np.std(accuracy_train_set)
-results[0, 0] = np.mean(accuracy_test_set)
-results[0, 2] = np.mean(accuracy_train_set)
-
-print(results)
+# perform classification
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col=dgm_col,
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
 
 
-# transfer learning
+#%% template functions (transfer learning)
 
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+import numpy as np
+
+# generate persistence diagrams
+DgmsDF_train = testSetManifolds(numDgms=20, numPts=100)
+DgmsDF_test = testSetManifolds(numDgms=20, numPts=100)
+
+labels_col='trainingLabel'
+dgm_col=['Dgm0']
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x_train,x_test = DgmsDF_train[labels_col],DgmsDF_test[labels_col]
+y_train = label_encoder.fit_transform(x_train)
+y_test = label_encoder.fit_transform(x_test)
+DgmsDF_train[labels_col],DgmsDF_test[labels_col] = y_train,y_test
+
+
+# set classification parameters
 params = ParameterBucket()
-params.setBoundingBox(df_train[dgmColLabel], pad=.05)
-params.jacobi_poly = 'cheb1'  # choose the interpolating polynomial
-params.d = 20
 params.feature_function = fF.interp_polynomial
+params.k_fold_cv=5
+params.d = 20
+params.jacobi_poly = 'cheb1'  # choose the interpolating polynomial
 params.useAdaptivePart = False
-params.TF_Learning = True
 params.clf_model = SVC
-print(params)
+params.TF_Learning = True
 
-# ----------------------------------
-# Run the experiment
-# ----------------------------------
-num_runs = 10
-accuracy_test_set = np.zeros((num_runs))
-accuracy_train_set = np.zeros((num_runs))
-results = np.zeros((1, 5))
-for i in np.arange(num_runs):
-    xx = getPercentScore(df_train, labels_col='Label', dgm_col=dgmColLabel,
-                         params=params, normalize=False, verbose=False, DgmsDF_test=df_test)
-    accuracy_test_set[i] = xx['score']
-    accuracy_train_set[i] = xx['score_training']
+# perform classification
+c_report_train,c_report_test=getPercentScore(DgmsDF_train,
+                                            labels_col='trainingLabel',
+                                            dgm_col=dgm_col,
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None,
+                                            DgmsDF_test = DgmsDF_test)
 
-results[0, 1] = np.std(accuracy_test_set)
-results[0, 3] = np.std(accuracy_train_set)
-results[0, 0] = np.mean(accuracy_test_set)
-results[0, 2] = np.mean(accuracy_train_set)
 
-print(results)
+#%% parameter tuning using persistence images
+import numpy as np
+from teaspoon.ML.PD_Classification import getPercentScore
+from teaspoon.ML import feature_functions as fF
+from teaspoon.ML.Base import ParameterBucket
+from teaspoon.MakeData.PointCloud import testSetManifolds
+from sklearn.preprocessing import LabelEncoder
+from sklearn.svm import SVC
+
+# generate persistence diagrams
+DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+labels_col='trainingLabel'
+dgm_col=['Dgm1']
+
+# convert categorical labels into integers
+label_encoder = LabelEncoder()
+x = DgmsDF[labels_col]
+y = label_encoder.fit_transform(x)
+DgmsDF[labels_col] = y
+
+# set classification parameters
+params = ParameterBucket()
+params.feature_function = fF.interp_polynomial
+params.k_fold_cv=5
+params.d = 20
+params.jacobi_poly = 'cheb1'  # choose the interpolating polynomial
+params.useAdaptivePart = False
+params.clf_model = SVC
+params.TF_Learning = False
+params.param_tuning = True
+
+# parameters to tune and their ranges
+gamma_range = np.logspace(-3, 3, num=5)
+lambda_range = np.logspace(-3, 3, num=5)
+params.parToTune = [] # the list that contains the paramters to tune for each classifier
+params.parToTune.append({'C': lambda_range,'gamma':gamma_range}) # SVM paramters
+
+# perform classification
+c_report_train,c_report_test=getPercentScore(DgmsDF,
+                                            labels_col='trainingLabel',
+                                            dgm_col='Dgm1',
+                                            params=params,
+                                            precomputed = False,
+                                            saving = False,
+                                            saving_path = None)
+

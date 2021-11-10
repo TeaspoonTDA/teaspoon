@@ -29,6 +29,8 @@ Most of the persistence computation is teaspoon is now done with `Scikit-TDA <ht
 * pip install networkx
 * pip install scipy
 * pip install POT
+* pip install persim
+* pip install --verbose dionysus
 
 Installation
 **************

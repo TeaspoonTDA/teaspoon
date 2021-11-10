@@ -139,3 +139,8 @@ cython_debug/
 
 # teaspoon specific hidden folders
 .teaspoonData
+*.bak
+source/references.bib.bak
+*.sav
+source/references.bib.bak
+*.bak

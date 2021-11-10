@@ -1,11 +1,13 @@
 import os
 import sys
-import sphinx_rtd_theme
+# import sphinx_rtd_theme
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..', 'teaspoon', 'ML'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..', 'teaspoon'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
 
+#%%
 # -- mocking packages -----------------------------------------------------
 
 from unittest import mock
@@ -35,7 +37,8 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.ifconfig',
               'sphinx.ext.viewcode',
               'sphinx.ext.githubpages',
-              'sphinxcontrib.bibtex',]
+              'sphinxcontrib.bibtex',
+              'sphinx-prompt',]
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 exclude_patterns = []
