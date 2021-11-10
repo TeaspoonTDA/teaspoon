@@ -11,7 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.pyplot as plt
-import PersistenceImages.persistence_images as pimg
+from persim import PersistenceImager
 import math
 from math import pi
 from numpy.linalg import norm as lnorm
@@ -32,23 +32,26 @@ from itertools import combinations
 
 
 def tent(Dgm, params, dgm_type='BirthDeath'):
+    
+    
+    
     '''
     Applies the tent function to a diagram.
 
     Parameters:
 
-    :Parameter Dgm:
-        A persistence diagram, given as a :math:`K \times 2` numpy array
-    :Parameter params:
+    :Dgm:
+        A persistence diagram, given as a :math:`K \\times 2` numpy array
+    :params:
         An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.
-    :Parameter type:
+    :dgm_type:
         This code accepts diagrams either
             1. in (birth, death) coordinates, in which case `type = 'BirthDeath'`, or
             2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case `type = 'BirthLifetime'`
 
-    :returns:
+    :Returns:
 
-    :math:`\sum_{x,y \in \text{Dgm}}g_{i,j}(x,y)` where
+    :math:`\sum_{x,y \in \\text{Dgm}}g_{i,j}(x,y)` where
 
     .. math::
 
@@ -56,7 +59,7 @@ def tent(Dgm, params, dgm_type='BirthDeath'):
 
     where :math:`| * |_+` is positive part; equivalently, min of * and 0.
 
-.. note:: This code does not take care of the maxPower polynomial stuff.  The build_G() function does it after all the rows have been calculated.
+.. note:: This code does not take care of the maxPower polynomial stuff.  The tbuild_G() function does it after all the rows have been calculated.
 
     '''
     d = params.d
@@ -324,20 +327,19 @@ def interp_polynomial(Dgm, params, dgm_type='BirthDeath'):
 
     Parameters:
 
-    :Parameter Dgm:
-        A persistence diagram, given as a :math:`K \times 2` numpy array
-    :Parameter params:
+    :Dgm:
+        A persistence diagram, given as a :math:`K \\times 2` numpy array
+    :params:
         An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.
-    :Parameter type:
+    :dgm_type:
         This code accepts diagrams either
         1. in (birth, death) coordinates, in which case `type = 'BirthDeath'`, or
         2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case `dgm_type = 'BirthLifetime'`
 
-    :returns:
-
-    interp_weight-
-        a matrix with each entry representiting the weight of an interpolation
-        function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.
+    :Returns:
+        interp_weight
+            A matrix with each entry representiting the weight of an interpolation
+            function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.
 
     '''
     #	jacobi_func = params.jacobi_func
@@ -637,28 +639,27 @@ class PLandscape():
     # if user wants to see the plot and the points of the specific landscapes, L_number variable should be given as input.
     def __init__(self, PD, L_number=[]):
         """
-
         This class uses landscapes algorithm (:meth:`PD_Featurization.PLandscapes`) to compute persistence landscapes and plot them based on user preference.
-        The algorithm computes the persistence landscapes is written based on Ref. :cite:`1 <Bubenik2017>`.
+        The algorithm computes the persistence landscapes is written based on Ref. :cite:`1 <Bubenik2017>`.        
 
-        :param ndarray (PD):
-            Persistence diagram points--(Nx2) matrix.
-
-        :param list (L_Number):
+        Parameters
+        ----------
+        PD : ndarray
+            Persistence diagram points--(Nx2) matrix..
+        L_number : list
             Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.
 
-        :Returns:
-
-            :PL_number:
-                (int) Total number of landscapes for given persistence diagram
-
-            :DesPL:
-                (ndarray) Includes only selected landscapes functions given in L_number
-
-            :AllPL:
-                (ndarray) Includes all landscape functions of the persistece diagram
+        Returns
+        -------
+        PL_number : int
+            Total number of landscapes for given persistence diagram
+        DesPL : ndarray
+            Includes only selected landscapes functions given in L_number
+        AllPL : ndarray
+            Includes all landscape functions of the persistece diagram
 
         """
+        
 
         # L_number is a Nx1 matrix that includes the desired numbers of landscapes
         out = PLandscapes(PD, L_number)
@@ -681,21 +682,23 @@ class PLandscape():
 
     def PLandscape_plot(self, PL, L_number=[]):
         """
-
         This function plots selected persistence landscapes or it plots all of them if user does not provide desired landscape functions.
+        
 
-        :param ndarray (PD):
+        Parameters
+        ----------
+        PL : ndarray
             Persistence diagram points--(Nx2) matrix.
-
-        :param list (L_Number):
+        L_number : list
             Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.
 
-        :Returns:
-
-            :PL_plot:
-                (fig) The figure that includes chosen or all landsape functions
+        Returns
+        -------
+        PL_plot : figure
+            The figure that includes chosen or all landsape functions.
 
         """
+
         import matplotlib.pyplot as plt
         import numpy as np
         from matplotlib import rc
@@ -718,29 +721,34 @@ class PLandscape():
 
 def F_Landscape(PL, params, max_l_number=None):
     """
-
     This function computes the features for selected persistence landscape numbers.
     There are three inputs to the function.
     These are all landscape functions for each persistence diagram, parameter bucket object and the maximum level of landscape function.
     If user does not specify the third input, algorithm will automatically compute it.
     The second parameter includes the parameters needed to compute features and perform classification.
-    Please see :meth:`PD_ParameterBucket.LandscapesParameterBucket` for more details about parameters.
+    Please see :meth:`PD_ParameterBucket.LandscapesParameterBucket` for more details about parameters.   
 
-    :param ndarray (PL):
-        Object array that includes all landscape functions for each persistence diagram
-
-    :param object (params):
+    Parameters
+    ----------
+    PL : ndarray
+        Object array that includes all landscape functions for each persistence diagram.
+    params : parameterbucket object
         Parameterbucket object. We need landscape numbers defined by user to generate feature matrix.
+    max_l_number : int, optional
+        Maximum number of landscape functions for a given persistence diagram. The default is None.
 
-    :Returns:
-
-        :feature:
-            (Array) NxM matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and M is the numbers of features which is equal to length of sorted mesh of landscapes functions.
-
-        :Sorted_mesh:
-            (list) It includes the sorted mesh for each landscape function chosen by user.
+    Returns
+    -------
+    feature : ndarray
+        NxM matrix that includes the features for each persistence diagram, where N is the number of 
+        persistence diagrams and M is the numbers of features which is equal to length of sorted 
+        mesh of landscapes functions.
+    Sorted_mesh : list
+        It includes the sorted mesh for each landscape function chosen by user..
 
     """
+    
+    
     a = PL
     N = len(a)
 
@@ -800,152 +808,91 @@ def F_Landscape(PL, params, max_l_number=None):
     return feature, Sorted_mesh
 
 
-def F_Image(PD1, PS, var, plot, TF_Learning, D_Img=[], *args):
+def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager = None,training=None):
+    
     """
-
-    This function returns user feature matrix generated using persistence images.
-    We use `PersistenceImages <https://gitlab.com/csu-tda/PersistenceImages>`_ package to compute persistence images.
-    User can also specify a list that includes the persistence diagram number to plot images of them.
-    Algorithms returns plot only if plotting option is True and transfer learning is false.
-
-    :param ndarray (PD):
-        Object array that includes all persistence diagrams
-
-    :param float (PS):
+    This function computes the persistence images of given persistence diagrams
+    using `Persim <https://persim.scikit-tda.org/en/latest/notebooks/Classification%20with%20persistence%20images.html>`_
+    package of Python. Then it provides user with the feature matrix for the diagrams.
+    
+    Parameters
+    ----------
+    PD1 : ndarray
+        Object array that includes all persistence diagrams.
+    PS : float
         Pixel size.
-
-    :param float (var):
+    var : float
         Variance of the Gaussian distribution.
-
-    :param list (D_Img):
+    plot : TYPE
+        DESCRIPTION.
+    D_Img : list, optional
         The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams.
+        . The default is [].
+    pers_imager : persistence image object, optional
+        Persistence image object fit to training set diagrams. This oject is only required when the feature function
+        for test set is computed. The default is None.
+    training : boolean
+        This flag tells function if user wants to compute the feature matrix for training and or test set. The default is None.
 
-    :param (TF_Learning): If it is true, then algorithm will need the second persistence diagram set and it will compute feature matrices for training set and test set.
 
-    :Returns:
-
-        :output:
-            (dict) A dictionary that includes the feature matrix. In the case of transfer learning, output will have training and test feature matrices separately.
+    Returns
+    -------
+    output : dict
+        Includes feature matrix and persistence image object. Output object also includes figures if user selects to plot several persistence images.
 
     """
-    if TF_Learning:  # transfer learning option
 
-        PD2 = args[0]
 
-        # number of diagrams in training set
-        N1 = len(PD1)
-        # number of diagrams in test set
-        N2 = len(PD2)
+    output = {}
+    # number of persistence diagrams
+    N1 = len(PD1)
 
-        persistence_range_train = np.zeros((N1, 1))
-        birth_range_train = np.zeros((N1, 1))
-
-        persistence_range_test = np.zeros((N2, 1))
-        birth_range_test = np.zeros((N2, 1))
-
-        # find the max persistence and birth times for test set persistence diagrams
-
-        for i in range(0, N1):
-            per_diag = PD1[i]
-            birth_range_train[i, 0] = max(per_diag[:, 0])
-            persistence_range_train[i, 0] = max(per_diag[:, 1]-per_diag[:, 0])
-
-        # find the max persistence and birth times for test set persistence diagrams
-
-        for i in range(0, N2):
-            per_diag = PD2[i]
-            birth_range_test[i, 0] = max(per_diag[:, 0])
-            persistence_range_test[i, 0] = max(per_diag[:, 1]-per_diag[:, 0])
-
-        # determine the maximum bound for images of test set diagrams
-        max_per_lim_test = max(persistence_range_test[:, 0])+1
-        max_bth_lim_test = max(birth_range_test[:, 0])+1
-
-        # determine the maximum bound for images of training set diagrams
-        max_per_lim_train = max(persistence_range_train[:, 0])+1
-        max_bth_lim_train = max(birth_range_train[:, 0])+1
-
-        # determine the bounds of the images based on bounds of training set and test set diagrams
+    
+    if training ==True:
         # adjust the image parameters and compute images
         pers_imager = PersistenceImager()
         pers_imager.pixel_size = PS
-        pers_imager.birth_range = (0, max(max_bth_lim_test, max_bth_lim_train))
-        pers_imager.pers_range = (0, max(max_per_lim_test, max_per_lim_train))
         pers_imager.kernel_params = {'sigma': var}
-
-        # compute persistence images of training set
-        pers_img_train = [pers_imager.transform(
-            PD1[i], skew=True) for i in np.arange(0, N1, 1)]
-
-        # compute persistence images of test set
-        pers_img_test = [pers_imager.transform(
-            PD2[i], skew=True) for i in np.arange(0, N2, 1)]
-
-        # generate feature matrices---------------------------------------------
-
-        # training set
-        feature_PI_train = np.zeros(
-            (N1, len(pers_img_train[0][:, 0])*len(pers_img_train[0][0, :])))
-        # test set
-        feature_PI_test = np.zeros(
-            (N2, len(pers_img_test[0][:, 0])*len(pers_img_test[0][0, :])))
-
-        for i in range(N1):
-            feature_PI_train[i, :] = pers_img_train[i].flatten()
-        for i in range(N2):
-            feature_PI_test[i, :] = pers_img_test[i].flatten()
-
-        output = {}
-        output['F_train'] = feature_PI_train
-        output['F_test'] = feature_PI_test
-
+        
+        PDs = PD1.tolist()
+        pers_imager.fit(PDs, skew=True)
+        pers_img = [pers_imager.transform(
+            PD1[i], skew=True) for i in np.arange(0, N1, 1)]    
     else:
-        output = {}
-        # number of persistence diagrams
-        N1 = len(PD1)
-
-        persistence_range = np.zeros((N1, 1))
-        birth_range = np.zeros((N1, 1))
-
-        # find the bounds of the image
-        for i in range(0, N1):
-            per_diag = PD1[i]
-            birth_range[i, 0] = max(per_diag[:, 0])
-            persistence_range[i, 0] = max(per_diag[:, 1]-per_diag[:, 0])
-
-        # adjust the image parameters and compute images
-        pers_imager = PersistenceImager()
-        pers_imager.pixel_size = PS
-        pers_imager.birth_range = (0, max(birth_range[:, 0])+1)
-        pers_imager.pers_range = (0, max(persistence_range[:, 0])+1)
-        pers_imager.kernel_params = {'sigma': var}
         pers_img = [pers_imager.transform(
             PD1[i], skew=True) for i in np.arange(0, N1, 1)]
 
-        # generate feature matrix
-        feature_PI = np.zeros(
-            (N1, len(pers_img[0][:, 0])*len(pers_img[0][0, :])))
-        for i in range(N1):
-            feature_PI[i, :] = pers_img[i].flatten()
+    # generate feature matrix
+    feature_PI = np.zeros(
+        (N1, len(pers_img[0][:, 0])*len(pers_img[0][0, :])))
+    for i in range(N1):
+        feature_PI[i, :] = pers_img[i].flatten()
 
-        # plot all images or images of certain persistence diagrams
-        if plot == True:
-            fig = []
-            if D_Img == []:
-                D_Img = np.arange(1, 2, 1)
-            for i in range(len(D_Img)):
-                plt.figure()
-                pers_imager.plot_image(PD1[D_Img[i]-1], skew=True)
-                fig.append(plt.gcf())
-            output['figures'] = fig
+    # plot all images or images of certain persistence diagrams
+    if plot == True:
+        fig = []
+        if D_Img == []:
+            D_Img = np.arange(1, 2, 1)
+        for i in range(len(D_Img)):
+            plt.figure()
+            ax = plt.gca()
+            pimgr = PersistenceImager()
+            pimgr.pixel_size = PS
+            pimgr.kernel_params = {'sigma': var} 
+            pimgr.fit(PD1[D_Img[i]-1],skew=True)
+            imgs = pimgr.transform(PD1[D_Img[i]-1],skew=True)
+            pers_imager.plot_image(imgs, ax)
+            fig.append(plt.gcf())
+        output['figures'] = fig
 
-        output['F_Matrix'] = feature_PI
+    output['F_Matrix'] = feature_PI
+    output['pers_imager'] = pers_imager
+
     return output
 
 
 def F_CCoordinates(PD, FN):
     """
-
     This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. :eq:`1st_coord` - :eq:`5th_coord`.
     The first four functions are taken from Ref. :cite:`2 <Adcock2016>` and the last one is obtained from Ref. :cite:`3 <Khasawneh2018>`.
     There are two inputs to the function. These are persistence diagrams and number of coordinates that user wants to use in feature matrix.
@@ -964,26 +911,29 @@ def F_CCoordinates(PD, FN):
        :label: 4th_coord
 
     .. math:: f_{5}(PD) = \sum max(d_{i}-b_{i})
-       :label: 5th_coord
+       :label: 5th_coord    
 
-    :param ndarray (PD):
-        Object array that includes all persistence diagrams
+    Parameters
+    ----------
+    PD : ndarray
+         Object array that includes all persistence diagrams.
+    FN : int
+        Number of features. It can take integer values between 1 and 5.
 
-    :param float (FN):
-        Number of features
-
-    :Returns:
-
-        :FeatureMatrix:
-                (Array) NxFN matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and FN is the number of feature chosen.
-
-        :TotalNumComb:
-                (int) Number of combinations.
-
-        :CombList:
-                (list) List of combinations.
+    Returns
+    -------
+    FeatureMatrix : object array
+        Object array that contains the feature matrices of each feature combinations. 
+        Each feature matrix has a size of NxFN, where N is the number of persistence diagrams and FN is the number of feature chosen.
+    TotalNumComb : int
+        Number of combinations.
+    CombList : list
+        List of combinations.
 
     """
+    
+
+
 
     N = len(PD)
 
@@ -1053,18 +1003,19 @@ def F_PSignature(PL, L_Number=[]):
 
     This function takes the persistence landscape set and returns the feature matrix which is computed using path signatures :cite:`4 <Chevyrev2016,Chevyrev2020>`.
     Function takes two inputs and these are persistence landcsape set in an object array and the landscape numbers that user wants to compute their signatures.
+    
 
-    :param ndarray (PL):
-        Object array that includes all landscape functions for each persistence diagram
-
-    :param list (L_Number):
+    Parameters
+    ----------
+    PL : ndarray
+        Object array that includes all landscape functions for each persistence diagram.
+    L_Number : list
         Landscape numbers that user wants to use in feature matrix generation. If this parameter is not specified, algorithm will generate feature matrix using first landscapes.
 
-    :Returns:
-
-        :feature_PS:
-            (Array) Nx6 matrix that includes the features for each persistence diagram, where N is the number of persistence landscape sets.
-
+    Returns
+    -------
+    feature_PS : ndarray
+        Nx6 matrix that includes the features for each persistence diagram, where N is the number of persistence landscape sets.
 
     """
     N = len(PL)
@@ -1143,25 +1094,28 @@ def F_PSignature(PL, L_Number=[]):
 
 def KernelMethod(perDgm1, perDgm2, sigma):
     """
-
+    
     This function computes the kernel for given two persistence diagram based on the formula provided in Ref. :cite:`5 <Reininghaus2015>`.
-    There are three inputs and these are two persistence diagrams and the kernel scale sigma.
+    There are three inputs and these are two persistence diagrams and the kernel scale sigma.    
 
-    :param ndarray (perDgm1):
-        Object array that includes first persistence diagram set
+    Parameters
+    ----------
+    perDgm1 : ndarray
+        Object array that includes first persistence diagram set.
+    perDgm2 : ndarray
+        Object array that includes second persistence diagram set.
+    sigma : float
+        Kernel scale.
 
-    :param ndarray (perDgm2):
-        Object array that includes second persistence diagram set
-
-    :param float (sigma):
-        Kernel scale
-
-    :Returns:
-
-        :Kernel:
-            (float) The kernel value for given two persistence diagrams.
+    Returns
+    -------
+    Kernel : float
+        The kernel value for given two persistence diagrams.
 
     """
+    
+    
+
 
     L1 = len(perDgm1)
     L2 = len(perDgm2)

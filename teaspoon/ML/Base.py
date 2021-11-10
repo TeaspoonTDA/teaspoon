@@ -4,108 +4,137 @@ This is the main code for running ML code in teaspoon.
 Here, we start with an instance of the `ParameterBucket` class. The intention of this
 object is to keep all determined parameters in one easy to use object. A new
 `ParameterBucket` subclass can be defined to inform any featurization method of interest.
-For instance, a simple example of using tent functions as defined in *Approximating
-Continuous Functions on Persistence Diagrams Using Template Functions* (Perea, Munch,
-Khasawneh 2018) is shown below.
-
-import teaspoon.ML.Base as Base
-import teaspoon.MakeData.PointCloud as gPC
-import teaspoon.ML.feature_functions as fF
-from sklearn.linear_model import RidgeClassifierCV
-
-params = Base.TentParameters(clf_model = RidgeClassifierCV,
-                             feature_function = fF.tent,
-                              test_size = .33,
-                              seed = 48824,
-                              d = 10,
-                              delta = 1,
-                              epsilon = 0
-                             )
-
-DgmsDF = gPC.testSetClassification(N = 20,
-                                  numDgms = 50,
-                                  muRed = (1,3),
-                                  muBlue = (2,5),
-                                  sd = 1,
-                                   seed = 48824
-                                  )
-
-out = Base.getPercentScore(DgmsDF,dgm_col = 'Dgm', labels_col = 'trainingLabel', params = params )
-
-
 
 """
+
+
+# For instance, a simple example of using tent functions as defined in *Approximating
+# Continuous Functions on Persistence Diagrams Using Template Functions* (Perea, Munch,
+# Khasawneh 2018) is shown below.
+
+# import teaspoon.ML.Base as Base
+# import teaspoon.MakeData.PointCloud as gPC
+# import teaspoon.ML.feature_functions as fF
+# from sklearn.linear_model import RidgeClassifierCV
+
+# params = Base.TentParameters(clf_model = RidgeClassifierCV,
+#                              feature_function = fF.tent,
+#                               test_size = .33,
+#                               seed = 48824,
+#                               d = 10,
+#                               delta = 1,
+#                               epsilon = 0
+#                              )
+
+# DgmsDF = gPC.testSetClassification(N = 20,
+#                                   numDgms = 50,
+#                                   muRed = (1,3),
+#                                   muBlue = (2,5),
+#                                   sd = 1,
+#                                    seed = 48824
+#                                   )
+
+# out = Base.getPercentScore(DgmsDF,dgm_col = 'Dgm', labels_col = 'trainingLabel', params = params )
+
+
+
 
 """
 .. module: Base
 """
 
 
-# sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-# sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-# sys.path.insert(0, os.path.join(
-#     os.path.dirname(__file__), '..', '..', 'teaspoon'))
-# sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'teaspoon'))
-# sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'teaspoon', 'ML'))
-# sys.path.insert(0, os.path.join(os.path.dirname(
-#     __file__), '..', '..', 'teaspoon', 'ML'))
-# sys.path.insert(0, os.path.join(os.path.dirname(
-#     __file__), '..', '..', 'teaspoon', 'TSP'))
 
 
+import sys,os
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(
+    os.path.dirname(__file__), '..', '..', 'teaspoon'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'teaspoon'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'teaspoon', 'ML'))
+sys.path.insert(0, os.path.join(os.path.dirname(
+    __file__), '..', '..', 'teaspoon', 'ML'))
+sys.path.insert(0, os.path.join(os.path.dirname(
+    __file__), '..', '..', 'teaspoon', 'TSP'))
 
 from sklearn.svm import LinearSVC, NuSVC, SVC
-import itertools
-from scipy.special import comb
-from termcolor import colored
 from sklearn.preprocessing import scale, PolynomialFeatures
-from sklearn import metrics
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import LogisticRegression, Ridge, RidgeCV, RidgeClassifierCV, LassoCV
+from SP.adaptivePart import Partitions
+from TDA import Persistence as pP
+
+import itertools
 import pandas as pd
 import numpy as np
 import time
-from teaspoon.SP.adaptivePart import Partitions
-from teaspoon.TDA import Persistence as pP
-import teaspoon.ML.feature_functions as fF
+import ML.feature_functions as fF
 import os
-import sys
+
+
+
+
 class ParameterBucket(object):
-    def __init__(self, description='',
+    def __init__(self,
                  clf_model=RidgeClassifierCV,
                  feature_function=fF.tent,
-                 test_size=.33,
+                 k_fold_cv = 10,
+                 TF_Learning = False,
+                 param_tuning = False,
                  seed=None,
+                 PL_Number=None,
+                 parToTune = None,
+                 sigma = None,
+                 L_number = None,
+                 pixel_size = 0.01,
+                 var = 0.15,
+                 FN = 5,
                  **kwargs):
-        # d=10,
-        # delta = 1,
-        # epsilon = 0,
-        # maxPower = 1,
-        #
-        # feature_function=None,
-        # boundingBoxMatrix = None):
-        """!@brief Creates a new ParameterBucket object.
+        """
+        Parameters
+        ----------
+        clf_model : classification model, optional
+           Classifier. The default is RidgeClassifierCV.
+        feature_function : function, optional
+            Feature function that is used to extract features from persistence diagrams.
+            This package currenly support template functions, persistence landscapes,
+            persistence images, Carlsson Coordinates, path signatures of landscapes, and 
+            kernel method. The default is fF.tent.
+        k_fold_cv : int, optional
+            The number of folds for k-fold cross validation.The default is 10.
+        TF_Learning : boolean, optional
+            User sets this parameter to True if training and test set diagrams are different but
+            related. The default is False.
+        param_tuning : boolean, optional
+            This enables hyperparameter tuning using GridSearch algorithm for selected classifier, when it is set to True.
+            User also needs to pass a list of a dict that enables includes the parameters to tune and their range. The default is False.
+        seed : int, optional
+            The random state number for stratified k-fold. Pass None if you dont want to fix it.. The default is None.
+        PL_Number : list, optional
+            The list of integers that includes landscape numbers. These landscape numbers are used to extract features. This parameter is only
+            needed when feature function is persistence landscape. If user does not provide this parameter, algoritm will warn user. The default is None.
+        parToTune : list, optional
+            User needs to pass the list of parameters to tune for selected classifier. Otherwise, algorithm will warn the user.
+            This parameter is only required when param_tuning is set to True. The default is None.
+        sigma : int, optional
+            Kernel scale for kernel method. The default is None.
+        L_number : list, optional
+            The list of landscape numbers that will be used to extract features using path signatures. The default is None.
+        pixel_size : float, optional
+            The size of the pixels for persistence images. The default is 0.01.
+        var : float, optional
+            Variance of the Gaussian distribution. The default is 0.15.
+        FN : int, optional
+            The number of coordinates user wants to use for Carlsson Coordinates. Maximum value for this parameter is 5. The default is 5.
+        **kwargs : 
+            Any additional parameters.
 
-        This object is being used to keep track of all the parameters needed
-        for the tents ML featurization.
-
-        Parameters that are included in the ParameterBucket initially:
-
-        @param description
-                A description, has no effect on code. This can be set on initialization.
-        @param clf_model
-                The choice of tool used for classification or regression, passed as the function.  This code has been tested using `sklearn` functions `RidgeClassiferCV` for classification and `RidgeCV` for regression.
-        @param feature_function
-                The function you want to use for featurization.  This should be a function that takes as inputs a diagram and a ParameterBucket, and returns a vector of features. The default is ML.feature_functions.tents()
-        @param test_size
-                A number in \f$[0,1]\f$.  Gives the percentage of data points to be reserved for the testing set if this is being used for a train/test split experiment.  Otherwise, ignored.
-        @param seed
-                The seed for the pseudo-random number generator.  Pass None if you don't want it fixed; otherwise, pass an integer.
-        @param kwargs
-                Any leftover inputs are stored as attributes. Some common attributes used elsewhere are `d`, `delta`, and `epsilon` to describe the mesh. If its set, `boundingbox` keeps track of a box which encloses all points in all diagrams in a particular series; see setBoundingBox().
 
         """
+
+
 
         # Parameters that used to be included. Documentation left here to figure out stuff for later.
         #
@@ -116,13 +145,24 @@ class ParameterBucket(object):
         # @param boundingBoxMatrix
         # 	Not yet implemented.  See self.findBoundingBox()
 
-        self.description = description
         self.clf_model = clf_model
-        self.seed = seed
-        self.test_size = test_size
         self.feature_function = feature_function
+        self.seed = seed
+        self.k_fold_cv = k_fold_cv
+        self.TF_Learning = TF_Learning
+        self.param_tuning = param_tuning
+        self.pixel_size = pixel_size
+        self.var = var
+        self.parToTune = parToTune
+        self.FN = FN
+        self.PL_Number = PL_Number
+        self.L_number = L_number
+        self.sigma= sigma
+        
         self.__dict__.update(kwargs)
-
+        
+      
+        
     def __str__(self):
         """!
         @brief Nicely prints all currently set values in the ParameterBucket.
@@ -533,108 +573,3 @@ def ML_via_featurization(DgmsDF,
 # 		- **clf**
 # 			The fitted model
 #
-
-
-class LandscapesParameterBucket(object):
-    def __init__(self, clf_model=SVC,
-                 feature_function=fF.F_Landscape,
-                 PL_Number=None,
-                 Labels=None,
-                 test_size=.33,
-                 **kwargs):
-        """
-
-        :param (clf_model):
-            Classification algorithm that will be used. Default is SVC.
-
-        :param (feature_function):
-            The function that generates features using landscapes
-
-        :param list (PL_Number):
-            Landscape numbers that user wants to use in feature matrix generation. If this parameter is not given, algorithm will generate feature matrix using first landscapes.
-
-        :param list (Labels):
-            Classification labels. Warning message will appear if user does not provide labels.
-
-        :param float (test_size):
-            The number that defines the size of test set. It should be entered between 0 and 1. Default is 0.33.
-
-        """
-
-        self.clf_model = clf_model
-        self.feature_function = feature_function
-        self.PL_Number = PL_Number
-        self.Labels = Labels
-        self.test_size = test_size
-        self.__dict__.update(kwargs)
-
-    def __str__(self):
-        """
-
-        Nicely prints all currently set values in the ParameterBucket.
-
-        """
-        attrs = vars(self)
-        output = ''
-        output += 'Variables in parameter bucket\n'
-        output += '-----------------------------\n'
-        for key in attrs.keys():
-            if str(key) != 'Labels':
-                output += str(key) + ' : '
-                output += str(attrs[key]) + '\n'
-        output += '-----------------------------\n'
-        if np.all(self.Labels == None):
-            output += colored('Warning:', 'red') + \
-                ' Classification labels are missing.'
-        return output
-
-
-class CL_ParameterBucket(object):
-    def __init__(self, clf_model=SVC,
-                 Labels=None,
-                 test_size=.33,
-                 TF_Learning=False,
-                 **kwargs):
-        """
-
-        :param (clf_model):
-            Classification algorithm that will be used. Default is SVC.
-
-        :param list (Labels):
-            Classification labels. Warning message will appear if user does not provide labels.
-
-        :param float (test_size):
-            The number that defines the size of test set. It should be entered between 0 and 1. Default is 0.33.
-
-        :param (str) TF_Learning:
-            This option will enable performing transfer learning, if it is true.
-
-        :param (\*\*kwargs): Additional parameters
-
-        """
-        self.clf_model = clf_model
-        self.Labels = Labels
-        self.test_size = test_size
-        self.TF_Learning = TF_Learning
-        self.__dict__.update(kwargs)
-
-    def __str__(self):
-        """
-
-        Nicely prints all currently set values in the ParameterBucket.
-
-        """
-        attrs = vars(self)
-        output = ''
-        output += 'Variables in parameter bucket\n'
-        output += '-----------------------------\n'
-        for key in attrs.keys():
-            if (str(key) == 'Labels' or str(key) == 'training_labels' or str(key) == 'test_labels') == False:
-                output += str(key) + ' : '
-                output += str(attrs[key]) + '\n'
-        output += '-----------------------------\n'
-        if self.TF_Learning == False:
-            if np.all(self.Labels == None):
-                output += colored('Warning:', 'red') + \
-                    ' Classification labels are missing.'
-        return output

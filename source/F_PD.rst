@@ -22,6 +22,7 @@ Landscape class
 
 **Example:** In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted. 
     	
+
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
 	>>> from teaspoon.ML import feature_functions as Ff
 	>>> # generate persistence diagrams
@@ -190,6 +191,7 @@ Persistence Images
 	>>> feature_PI = Ff.F_Image(Diagrams_H1, PS, var, plot, D_Img=D_Img, pers_imager = None,training=True)
 	>>> fig = feature_PI['figures']
 
+
 The algorithm will return two images as shown in :numref:`PI_Example`.
 
 .. _PI_Example:
@@ -221,6 +223,7 @@ Carlsson Coordinates
 	>>> # compute feature matrix
 	>>> FN = 3
 	>>> FeatureMatrix, TotalNumComb, CombList = Ff.F_CCoordinates(Diagrams_H1, FN)
+
 
 
 .. _template_functions:
@@ -282,6 +285,7 @@ Path Signatures
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
 	>>> from teaspoon.ML import feature_functions as fF
 	>>> import numpy as np
+
 
 	>>> # generate persistence diagrams
 	>>> df = testSetManifolds(numDgms=1, numPts=100)

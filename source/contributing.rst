@@ -16,9 +16,9 @@ Contributing to Documentation
 
 If contributing to the documentation, the following python packages need to be pip installed:
 
-	- pip install PersistenceImages
-	- pip install TermColor
+	- pip install persim
 	- pip install sphinxcontrib-bibtex
 	- pip install sphinx-rtd-theme
+	- pip install sphinx-prompt
 
 Assuming your sphinx installation is up-to-date, you can run `make` from the teaspoon directory to update the documentation. Note that github pages requires that the documentation is in a folder named `docs`.
