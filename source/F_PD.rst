@@ -67,37 +67,35 @@ Landscape class
     :private-members:
     :special-members: __init__
 
-**Example:** In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted.
+**Example:** In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted. 
+    	
 
-	>>> from teaspoon.ML.feature_functions import PLandscape
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> from teaspoon.ML import feature_functions as Ff
 	>>> # generate persistence diagrams
 	>>> df = testSetManifolds(numDgms = 50, numPts = 100)
 	>>> Diagrams_H1 = df['Dgm1']
 	>>> # Compute the persistence landscapes
 	>>> PLC = PLandscape(Diagrams_H1[0])
 	>>> print(PLC.PL_number)
-	18
+	15
 	>>> print(PLC.AllPL)
-	    Landscape Number                                             Points
-	0                1.0  [[0.3154523968696594, 0.0], [0.320831686258316...
-	1                2.0  [[0.7809883952140808, 0.0], [0.790885269641876...
-	2                3.0  [[0.9872134923934937, 0.0], [1.046982824802398...
-	3                4.0  [[1.0011025667190552, 0.0], [1.053927361965179...
-	4                5.0  [[1.010329246520996, 0.0], [1.05854070186615, ...
-	5                6.0  [[1.0254381895065308, 0.0], [1.066095173358917...
-	6                7.0  [[1.0484610795974731, 0.0], [1.077606618404388...
-	7                8.0  [[1.1333231925964355, 0.0], [1.148026943206787...
-	8                9.0  [[1.153172254562378, 0.0], [1.1579514741897583...
-	9               10.0  [[1.1831640005111694, 0.0], [1.264368951320648...
-	10              11.0  [[1.188441276550293, 0.0], [1.26700758934021, ...
-	11              12.0  [[1.193040132522583, 0.0], [1.269307017326355,...
-	12              13.0  [[1.1967955827713013, 0.0], [1.229873955249786...
-	13              14.0  [[1.2031320333480835, 0.0], [1.233042180538177...
-	14              15.0  [[1.2164264917373657, 0.0], [1.239689409732818...
-	15              16.0  [[1.2490906715393066, 0.0], [1.256021499633789...
-	16              17.0  [[1.2782702445983887, 0.0], [1.304370105266571...
-	17              18.0  [[1.2977339029312134, 0.0], [1.314101934432983...
+		Landscape Number                                             Points
+	0                1.0  [[0.5428633093833923, 0.0], [0.580724596977233...
+	1                2.0  [[0.571907639503479, 0.0], [0.5952467620372772...
+	2                3.0  [[0.9977497458457947, 0.0], [1.132654219865799...
+	3                4.0  [[0.9980520009994507, 0.0], [1.132805347442627...
+	4                5.0  [[1.0069313049316406, 0.0], [1.137244999408722...
+	5                6.0  [[1.01357901096344, 0.0], [1.0538994073867798,...
+	6                7.0  [[1.078373670578003, 0.0], [1.0862967371940613...
+	7                8.0  [[1.1089069843292236, 0.0], [1.188232839107513...
+	8                9.0  [[1.114268183708191, 0.0], [1.1280720233917236...
+	9               10.0  [[1.1168304681777954, 0.0], [1.129353165626525...
+	10              11.0  [[1.1619293689727783, 0.0], [1.214744031429290...
+	11              12.0  [[1.1846998929977417, 0.0], [1.226129293441772...
+	12              13.0  [[1.2282723188400269, 0.0], [1.247915506362915...
+	13              14.0  [[1.2527109384536743, 0.0], [1.260134816169738...
+	14              15.0  [[1.2588499784469604, 0.0], [1.263204336166381...
 	>>> print(PLC.DesPL)
 	Warning: Desired landscape numbers were not specified.
 	>>> fig = PLC.PLandscape_plot(PLC.AllPL['Points'])
@@ -106,7 +104,7 @@ Output of the plotting functions is:
 
 .. figure:: figures/All_Landscapes.png
    :align: center
-   :scale: 10 %
+   :scale: 30 %
 
    All landscape functions for the given persistence diagram
 
@@ -114,27 +112,53 @@ If user specify the desired landscapes, output will be:
 
 	>>> PLC  = PLandscape(Diagrams_H1[0],[2,3])
 	>>> print(PLC.DesPL)
-	[array([[0.7809884 , 0.        ],
-	       [0.79088527, 0.00989687],
-	       [0.80078214, 0.        ],
-	       [0.98659766, 0.        ],
-	       [1.08002311, 0.09342545],
-	       [1.08727556, 0.086173  ],
-	       [1.30410457, 0.303002  ],
-	       [1.30871791, 0.29838866],
-	       [1.39603722, 0.38570797],
-	       [1.7817452 , 0.        ]])
-	 array([[0.98721349, 0.        ],
-	       [1.04698282, 0.05976933],
-	       [1.05392736, 0.0528248 ],
-	       [1.08727556, 0.086173  ],
-	       [1.0918889 , 0.08155966],
-	       [1.30871791, 0.29838866],
-	       [1.32778382, 0.27932274],
-	       [1.38544387, 0.33698279],
-	       [1.43779945, 0.2846272 ],
-	       [1.46482104, 0.31164879],
-	       [1.77646983, 0.        ]])]
+	[array([[0.57190764, 0.        ],
+			[0.59524676, 0.02333912],
+			[0.61858588, 0.        ],
+			[0.69152009, 0.        ],
+			[0.70559016, 0.01407006],
+			[0.71966022, 0.        ],
+			[0.8154344 , 0.        ],
+			[0.83258173, 0.01714733],
+			[0.84972906, 0.        ],
+			[0.96607411, 0.        ],
+			[1.19829136, 0.23221725],
+			[1.21428031, 0.21622831],
+			[1.23277295, 0.23472095],
+			[1.28820044, 0.17929345],
+			[1.31611174, 0.20720476],
+			[1.32007349, 0.20324302],
+			[1.39760172, 0.28077126],
+			[1.50310916, 0.17526382],
+			[1.54805887, 0.22021353],
+			[1.62611502, 0.14215738],
+			[1.65717965, 0.17322201],
+			[1.76435941, 0.06604224],
+			[1.81276023, 0.11444306],
+			[1.9272033 , 0.        ]]) 
+	array([[0.99774975, 0.        ],
+			[1.13265422, 0.13490447],
+			[1.13280535, 0.13475335],
+			[1.21428031, 0.21622831],
+			[1.21871996, 0.21178865],
+			[1.22592431, 0.21899301],
+			[1.27691215, 0.16800517],
+			[1.28820044, 0.17929345],
+			[1.29216218, 0.17533171],
+			[1.32007349, 0.20324302],
+			[1.34069568, 0.18262082],
+			[1.34636515, 0.1882903 ],
+			[1.34829241, 0.18636304],
+			[1.3942554 , 0.23232603],
+			[1.47721338, 0.14936805],
+			[1.50310916, 0.17526382],
+			[1.58116531, 0.09720767],
+			[1.62611502, 0.14215738],
+			[1.66337371, 0.10489869],
+			[1.68506891, 0.12659389],
+			[1.75498998, 0.05667281],
+			[1.76435941, 0.06604224],
+			[1.83040166, 0.        ]])]
 	>>> fig = PLC.PLandscape_plot(PLC.AllPL['Points'],[2,3])
 
 Output of the plotting functions is:
@@ -146,38 +170,9 @@ Output of the plotting functions is:
    Chosen landscape functions for the given persistence diagram
 
 .. _PB_Landscape:
+   
+Feature matrix generation  
 
-Parameter bucket for landscapes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass:: teaspoon.ML.Base.LandscapesParameterBucket
-    :members:
-    :undoc-members:
-    :private-members:
-    :special-members: __init__
-
-**Example:** If user does not provide classification labels, parameter bucket will return a warning as shown below.
-
-	>>> from teaspoon.ML.Base import LandscapesParameterBucket
-	>>> from sklearn.svm import LinearSVC
-	>>> from termcolor import colored
-	>>> params = LandscapesParameterBucket()
-	>>> params.clf_model = LinearSVC
-	>>> params.test_size =0.5
-	>>> params.Labels = None
-	>>> params.PL_Number = [2]
-	>>> print(params)
-	Variables in parameter bucket
-	-----------------------------
-	clf_model : <class 'sklearn.svm._classes.LinearSVC'>
-	feature_function : <function F_Landscape at 0x000001F6AB9F6558>
-	PL_Number : [2]
-	Labels : None
-	test_size : 0.5
-	-----------------------------
-	Warning: Classification labels are missing.
-
-Feature matrix generation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. _F_Matrix:
@@ -225,22 +220,25 @@ Persistence Images
 
 
 **Example**::
+	
+	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> from teaspoon.ML import feature_functions as Ff
 
-	import teaspoon.ML.feature_functions as Ff
-	from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> # generate persistence diagrams
+	>>> df = testSetManifolds(numDgms=50, numPts=100)
+	>>> Diagrams_H1 = df['Dgm1'].sort_index().values
 
-	# generate persistence diagrams
-	df = testSetManifolds(numDgms = 50, numPts = 100)
-	Diagrams_H1= df['Dgm1'].sort_index().values
+	>>> D_Img = []
+	>>> plot = False
+	>>> PS = 0.01
+	>>> var = 0.01
+	>>> feature_PI = Ff.F_Image(Diagrams_H1, PS, var, plot, D_Img=[], pers_imager = None,training=True)['F_Matrix']
+	>>> # if user wants to plot images
+	>>> plot = True
+	>>> D_Img = [1,5]
+	>>> feature_PI = Ff.F_Image(Diagrams_H1, PS, var, plot, D_Img=D_Img, pers_imager = None,training=True)
+	>>> fig = feature_PI['figures']
 
-	TF_Learning = False
-	D_Img=[1,75]
-	plot=False
-	feature_PI = Ff.F_Image(Diagrams_H1,0.01,0.15,plot,TF_Learning, D_Img)
-	# if user wants to plot images
-	plot=True
-	feature_PI = Ff.F_Image(Diagrams_H1,0.01,0.15,plot,TF_Learning, D_Img)
-	fig = feature_PI['figures']
 
 The algorithm will return two images as shown in :numref:`PI_Example`.
 
@@ -260,29 +258,69 @@ Carlsson Coordinates
 .. currentmodule:: teaspoon.ML.feature_functions
 .. autofunction:: F_CCoordinates
 
-**Example:**
+**Example**::
+	
 
-	>>> import teaspoon.ML.feature_functions as Ff
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> from teaspoon.ML import feature_functions as Ff
+
 	>>> # generate persistence diagrams
-	>>> df = testSetManifolds(numDgms = 50, numPts = 100)
-	>>> Diagrams_H1= df['Dgm1'].sort_index().values
-	>>> FN=3
-	>>> FeatureMatrix,TotalNumComb,CombList = Ff.F_CCoordinates(Diagrams_H1,FN)
-	>>> print(TotalNumComb)
-	7
-	>>> print(CombList)
-	[[1. 0. 0. 0. 0.]
-	 [2. 0. 0. 0. 0.]
-	 [3. 0. 0. 0. 0.]
-	 [1. 2. 0. 0. 0.]
-	 [1. 3. 0. 0. 0.]
-	 [2. 3. 0. 0. 0.]
-	 [1. 2. 3. 0. 0.]]
+	>>> df = testSetManifolds(numDgms=50, numPts=100)
+	>>> Diagrams_H1 = df['Dgm1'].sort_index().values
+
+
+	>>> # compute feature matrix
+	>>> FN = 3
+	>>> FeatureMatrix, TotalNumComb, CombList = Ff.F_CCoordinates(Diagrams_H1, FN)
+
+
+.. _template_functions:
+
+Template Functions
+------------------
+
+.. currentmodule:: teaspoon.ML.feature_functions
+.. autofunction:: tent
+
+.. currentmodule:: teaspoon.ML.feature_functions
+.. autofunction:: interp_polynomial
+
+
+**Example**::
+
+	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> from teaspoon.ML import feature_functions as fF
+	>>> from teaspoon.ML import Base
+	>>> import numpy as np
+	>>> import pandas as pd
+
+	>>> # generate persistence diagrams
+	>>> df = testSetManifolds(numDgms=50, numPts=100)
+	>>> listOfG = []
+	>>> dgm_col = ['Dgm0', 'Dgm1']
+	>>> allDgms = pd.concat((df[label] for label in dgm_col))
+
+	>>> # parameter bucket to set template function parameters
+	>>> params = Base.ParameterBucket()
+	>>> params.feature_function = fF.interp_polynomial
+	>>> params.k_fold_cv=5
+	>>> params.d = 20
+	>>> params.makeAdaptivePartition(allDgms, meshingScheme=None)
+	>>> params.jacobi_poly = 'cheb1'  # choose the interpolating polynomial
+
+	>>> # compute features
+	>>> for dgmColLabel in dgm_col:
+	>>> 	feature = Base.build_G(df[dgmColLabel], params)
+	>>> 	listOfG.append(feature)
+	>>> feature = np.concatenate(listOfG, axis=1) 
+
+
+
+
+
 
 
 .. _path_signatures:
-
 
 Path Signatures
 ---------------
@@ -291,40 +329,45 @@ Path Signatures
 .. autofunction:: F_PSignature
 
 **Example**::
+	
+	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> from teaspoon.ML import feature_functions as fF
+	>>> import numpy as np
 
-	import numpy as np
-	import teaspoon.ML.feature_functions as Ff
-	from teaspoon.ML.feature_functions import PLandscape
-	from teaspoon.MakeData.PointCloud import testSetManifolds
-	# generate persistence diagrams
-	df = testSetManifolds(numDgms = 1, numPts = 100)
-	Diagrams_H1= df['Dgm1'].sort_index().values
-	#compute persistence landscapes
-	PerLand=np.ndarray(shape=(6),dtype=object)
-	for i in range(0, 6):
-	    Land=PLandscape(Diagrams_H1[i])
-	    PerLand[i]=Land.AllP
-	#choose landscape number for which feature matrix will be computed
-	L_number = [2]
-	#compute feature matrix
-	feature_PS = Ff.F_PSignature(PerLand,L_number)
 
+	>>> # generate persistence diagrams
+	>>> df = testSetManifolds(numDgms=1, numPts=100)
+	>>> Diagrams_H1 = df['Dgm1'].sort_index().values
+	
+	>>> # compute persistence landscapes
+	>>> PerLand = np.ndarray(shape=(6), dtype=object)
+	>>> for i in range(0, 6):
+	>>> 	Land = fF.PLandscape(Diagrams_H1[i])
+	>>> 	PerLand[i] = Land.AllPL
+	
+	>>> # choose landscape number for which feature matrix will be computed
+	>>> L_number = [2]
+	>>> # compute feature matrix
+	>>> feature_PS = fF.F_PSignature(PerLand, L_number)
+
+.. _Kernel_Method:
 
 Kernel Method
 -------------
 
 .. currentmodule:: teaspoon.ML.feature_functions
 .. autofunction:: KernelMethod
+ 
+**Example**::
 
-**Example:**
 
-	>>> import teaspoon.ML.feature_functions as Ff
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> from teaspoon.ML import feature_functions as fF
 	>>> # generate persistence diagrams
-	>>> df = testSetManifolds(numDgms = 1, numPts = 100)
+	>>> df = testSetManifolds(numDgms=1, numPts=100)
 	>>> Diagrams_H1 = df['Dgm1']
-	>>> #compute kernel between two persistence diagram
-	>>> sigma=0.25
-	>>> kernel = Ff.KernelMethod(Diagrams_H1[0], Diagrams_H1[1], sigma)
+	>>> # compute kernel between two persistence diagram
+	>>> sigma = 0.25
+	>>> kernel = fF.KernelMethod(Diagrams_H1[0], Diagrams_H1[1], sigma)
 	>>> print(kernel)
 	1.6310484200361053
