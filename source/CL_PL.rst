@@ -11,9 +11,9 @@ Number of folds are selected by user. Then, SVM with default hyperparameters is 
 
     >>> # import libraries
     >>> from teaspoon.ML.PD_Classification import getPercentScore
-    >>> from ML import feature_functions as fF
-    >>> from ML.Base import ParameterBucket
-    >>> from MakeData.PointCloud import testSetManifolds
+    >>> from teaspoon.ML import feature_functions as fF
+    >>> from teaspoon.ML.Base import ParameterBucket
+    >>> from teaspoon.MakeData.PointCloud import testSetManifolds
     >>> from sklearn.preprocessing import LabelEncoder
     >>> from sklearn.svm import SVC
 

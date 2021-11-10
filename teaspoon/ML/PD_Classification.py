@@ -180,10 +180,9 @@ def getPercentScore(DgmsDF,
     params : parameterbucket object
         Parameter bucket object. The default is Base.ParameterBucket().
     precomputed : boolean, optional
-        If user already computed the persitence images or persistence landscapes, this should be set to True, otherwise algorithm will 
-        spend time on computing these. This option is only valid when persistence landscapes and persistence images are used as featurization
-        methods. If this parameter is True, algorithm treat 'DgmsDF' as persistence landscapes or persistence images depending on the user choice of
-        feature function. The default is False.
+        If user already computed the persitence landscapes, this should be set to True, otherwise algorithm will 
+        spend time on computing these. This option is only valid when persistence landscapes are used as featurization
+        methods. If this parameter is True, algorithm treat 'DgmsDF' as persistence landscapes. The default is False.
     saving : boolean, optional
         If user wants to save classification results, this should be set to True and saving_path needs to be provided. The default is False.
     saving_path : str, optional

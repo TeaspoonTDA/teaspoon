@@ -7,17 +7,16 @@ Then, we perform classification using SVM.
 
 ::
 
-    >>> from ML.PD_Classification import getPercentScore
-    >>> from ML import feature_functions as fF
-    >>> from ML.Base import ParameterBucket
-    >>> from MakeData.PointCloud import testSetManifolds
+    >>> from teaspoon.ML.PD_Classification import getPercentScore
+    >>> from teaspoon.ML import feature_functions as fF
+    >>> from teaspoon.ML.Base import ParameterBucket
+    >>> from teaspoon.MakeData.PointCloud import testSetManifolds
     >>> from sklearn.preprocessing import LabelEncoder
     >>> from sklearn.svm import SVC
-
     >>> # generate persistence diagrams
     >>> DgmsDF = testSetManifolds(numDgms=2, numPts=100)
     >>> labels_col='trainingLabel'
-    >>> dgm_col=['Dgm1']
+    >>> dgm_col='Dgm1'
 
     >>> # convert categorical labels into integers
     >>> label_encoder = LabelEncoder()
@@ -27,12 +26,10 @@ Then, we perform classification using SVM.
 
     >>> # set classification parameters
     >>> params = ParameterBucket()
-    >>> params.feature_function = fF.KernelMethod
-    >>> params.k_fold_cv=5
-    >>> params.sigma = 0.25
+    >>> params.feature_function = fF.F_PSignature
+    >>> params.k_fold_cv=2
+    >>> params.L_number = [1]
     >>> params.clf_model = SVC
-    
-    >>> # perform classification
     >>> c_report_train,c_report_test=getPercentScore(DgmsDF,
     >>>                                             labels_col='trainingLabel',
     >>>                                             dgm_col='Dgm1',
@@ -44,12 +41,12 @@ Then, we perform classification using SVM.
     Beginning experiments
 
     Run Number: 1
-    Test set acc.: 0.500 
-    Training set acc.: 0.833
+    Test set acc.: 0.333 
+    Training set acc.: 1.000
     ------------------------------
     Run Number: 2
-    Test set acc.: 0.333 
-    Training set acc.: 0.833
+    Test set acc.: 0.500 
+    Training set acc.: 1.000
     ------------------------------
 
     Finished with training/testing experiments
@@ -61,9 +58,11 @@ Then, we perform classification using SVM.
 
     Training Set 
     ---------
-    Average accuracy: 0.833
+    Average accuracy: 1.000
     Standard deviation: 0.000
 
-    For more metrics, see the outputs.   
+    For more metrics, see the outputs.
+
+
 
 .. note:: This approach uses symbolic toolbox of Python. Therefore, its speed is slow compared to other approaches. We will make improvements to speed up the computation soon.  
