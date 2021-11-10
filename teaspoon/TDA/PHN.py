@@ -6,12 +6,21 @@ def point_summaries(diagram, A):
         diagram (list): persistence diagram from ripser from a graph's distance matrix
 
     Returns:
-        [array 1-D]: statistics (R, En M) as (maximum persistence ratio, persistent entropy normalized, homology class ratio)
+        [array 1-D]: statistics (R, En M) as (maximum persistence ratio, persistent entropy normalized, homology class ratio). Returns NaNs if empty diagram.
     """
 
     import numpy as np
 
+    # assertion errors to check data types
+
+    assert (len(A[0]) == len(A.T[0])), "A is not square adjacency matrix."
+    assert (len(diagram) > 1), "Diagram should include atleast 0D and 1D persistene diagrams as a list of numpy.ndarrays."
+    assert (type(diagram) is list), "Diagram should include atleast 0D and 1D persistene diagrams as a list of numpy.ndarrays."
+    assert (type(
+        diagram[0]) is np.ndarray), "Diagram should include atleast 0D and 1D persistene diagrams as a list of numpy.ndarrays."
+
     def persistentEntropy(lt):
+
         if len(lt) > 1:
             L = sum(lt)
             p = lt/L
@@ -24,22 +33,28 @@ def point_summaries(diagram, A):
             E = 1
         return E
 
-    lt = np.array(diagram[1].T[1]-diagram[1].T[0])
-    D1 = np.array([diagram[1].T[0], diagram[1].T[1]])
-    D1 = D1
-    lt = lt[lt < 10**10]
-    num_lifetimes1 = len(lt)
-    num_unique = len(A[0])
-    En = persistentEntropy(lt)
+    if len(diagram[1]) > 0:
 
-    H1 = diagram[1].T
-    delta = 0.1
-    if len(H1[H1 < 10**10]) > 0:
+        # ------------Entropy---------------
+        lt = np.array(diagram[1].T[1]-diagram[1].T[0])
+        D1 = np.array([diagram[1].T[0], diagram[1].T[1]])
+        D1 = D1
+        lt = lt[lt < 10**10]
+        num_lifetimes1 = len(lt)
+        num_unique = len(A[0])
+        En = persistentEntropy(lt)
+
+        # ------------maximum persistence ratio---------------
+        H1 = diagram[1].T
+        delta = 0.1
         R = (1-np.nanmax(H1)/np.floor((num_unique/3)-delta))
+
+        # ------------homology class ratio---------------
+        M = num_lifetimes1/num_unique
+        statistics = [R, En, M]
     else:
-        R = np.nan
-    M = num_lifetimes1/num_unique
-    statistics = [R, En, M]
+        statistics = [np.nan, np.nan, np.nan]
+
     return statistics
 
 
@@ -89,28 +104,6 @@ if __name__ == "__main__":
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-    # ----------------------------Example Simple--------------------------------------
-
-    # import needed packages
-    import numpy as np
-    from teaspoon.SP.network import knn_graph
-    from teaspoon.TDA.PHN import PH_network
-
-    # generate a siple sinusoidal time series
-    t = np.linspace(0, 30, 300)
-    ts = np.sin(t) + np.sin(2*t)
-
-    # create adjacency matrix, this
-    A = knn_graph(ts)
-
-    # create distance matrix and calculate persistence diagram
-    D, diagram = PH_network(A, method='unweighted', distance='shortest_path')
-
-    print('1-D Persistent Homology (loops): ', diagram[1])
-
-    stats = point_summaries(diagram, A)
-    print('Persistent homology of network statistics: ', stats)
-
     # ---------------------------Complex Example---------------------------------------
 
     # import needed packages
@@ -138,6 +131,11 @@ if __name__ == "__main__":
     # create distance matrix and calculate persistence diagram
     D, diagram = PH_network(A, method='unweighted', distance='shortest_path')
 
+    print('1-D Persistent Homology (loops): ', diagram[1])
+
+    stats = point_summaries(diagram, A)
+    print('Persistent homology of network statistics: ', stats)
+
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
     import networkx as nx
@@ -164,7 +162,10 @@ if __name__ == "__main__":
     ax = plt.subplot(gs[2:4, 1])
     plt.title('Persistence Diagram', size=TextSize)
     MS = 3
-    top = max(diagram[1].T[1])
+    if len(diagram[1]) > 0:
+        top = max(diagram[1].T[1])
+    else:
+        top = 1
     plt.plot([0, top*1.25], [0, top*1.25], 'k--')
     plt.yticks(size=TextSize)
     plt.xticks(size=TextSize)

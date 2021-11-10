@@ -36,17 +36,6 @@ The code is a compilation of work done by `Elizabeth Munch <http://www.elizabeth
 - `Sarah Tymochko <https://www.egr.msu.edu/~tymochko/>`_
 
 
-Current Issues and To-do Items
-*********************************************
-
-This is a list of to do items:
-
-	- Validate (or make it so) that teaspoon can be imported as "import teaspoon" and then functions can be called from there (e.g. teaspoon.MakeData.DynSysLib...).
-
-This is a list of the current issues for Sphinx:
-
-	- Finish last few function documentations with examples.
-
 
 
 Contact Information

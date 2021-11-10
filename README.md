@@ -15,12 +15,20 @@ The code is a compilation of work done by [Elizabeth Munch](http://www.elizabeth
 - [Melih Yesilli](https://www.melihcanyesilli.com)
 - [Sarah Tymochko](https://www.egr.msu.edu/~tymochko/)
 
+We gratefully acknowledge the support of the National Science Foundation, which has helped make this work possible.
+
 Installation
 =============
 The teaspoon package is available through pip install with version details found [here](https://pypi.org/project/teaspoon/).
 The package can be installed using the following pip installation::
 
 	``pip install teaspoon``
+
+To install the most up-to-date version of the code, you can clone the repo and then run::
+
+  ``pip install .``
+
+from the main directory.
 
 The current draft of the code may still have dependency issues which will be fixed by version 1.0.0. Please reference the requirements page in the [documentation](https://lizliz.github.io/teaspoon/) for more details on other required installations.
 
