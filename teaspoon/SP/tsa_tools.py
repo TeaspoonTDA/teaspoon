@@ -24,12 +24,12 @@ def permutation_sequence(ts, n=None, tau=None):
     time_series = ts
 
     if n == None:
-        from teaaspoon.parameter_selection import MsPE
+        from teaspoon.parameter_selection import MsPE
         tau = int(MsPE.MsPE_tau(ts))
         n = MsPE.MsPE_n(ts, tau)
 
     if tau == None:
-        from teaaspoon.parameter_selection import MsPE
+        from teaspoon.parameter_selection import MsPE
         tau = int(MsPE.MsPE_tau(ts))
 
     m, delay = n, tau
