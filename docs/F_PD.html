@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.2.1. Featurization &mdash; teaspoon 0.1.0 documentation</title>
@@ -15,6 +15,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -119,153 +120,172 @@
              
   <section id="featurization">
 <span id="id1"></span><h1><span class="section-number">2.2.1. </span>Featurization<a class="headerlink" href="#featurization" title="Permalink to this headline"></a></h1>
-<p>This documentation includes six different persistence diagram featurization methods.
-These are template functions, persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.</p>
-<section id="template-functions">
-<span id="id2"></span><h2><span class="section-number">2.2.1.1. </span>Template Functions<a class="headerlink" href="#template-functions" title="Permalink to this headline"></a></h2>
-<p>A simple example of using tent functions as defined in <em>Approximating
-Continuous Functions on Persistence Diagrams Using Template Functions</em> (Perea, Munch,
-Khasawneh 2018) <a class="reference external" href="https://arxiv.org/abs/1902.07190">https://arxiv.org/abs/1902.07190</a> is shown below.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.Base</span> <span class="k">as</span> <span class="nn">Base</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="k">as</span> <span class="nn">gPC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">fF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeClassifierCV</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a parameter bucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">TentParameters</span><span class="p">(</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">RidgeClassifierCV</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                             <span class="n">feature_function</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">tent</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                             <span class="n">test_size</span> <span class="o">=</span> <span class="o">.</span><span class="mi">33</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                             <span class="n">seed</span> <span class="o">=</span> <span class="mi">48824</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                             <span class="n">d</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                             <span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                             <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="gp">&gt;&gt;&gt; </span>                             <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a test set</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">gPC</span><span class="o">.</span><span class="n">testSetClassification</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                              <span class="n">numDgms</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                              <span class="n">muRed</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
-<span class="gp">&gt;&gt;&gt; </span>                              <span class="n">muBlue</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
-<span class="gp">&gt;&gt;&gt; </span>                              <span class="n">seed</span> <span class="o">=</span> <span class="mi">48824</span>
-<span class="gp">&gt;&gt;&gt; </span>                              <span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                              <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Run train/test experiment</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">getPercentScore</span><span class="p">(</span><span class="n">DgmsDF</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                           <span class="n">dgm_col</span> <span class="o">=</span> <span class="s1">&#39;Dgm&#39;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                           <span class="n">labels_col</span> <span class="o">=</span> <span class="s1">&#39;trainingLabel&#39;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                           <span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="p">)</span>
-</pre></div>
-</div>
-</section>
+<p>This documentation includes five different persistence diagram featurization methods.
+These are persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.</p>
 <section id="persistence-landscapes">
-<span id="id3"></span><h2><span class="section-number">2.2.1.2. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Permalink to this headline"></a></h2>
+<span id="id2"></span><h2><span class="section-number">2.2.1.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Permalink to this headline"></a></h2>
 <section id="landscape-class">
-<h3><span class="section-number">2.2.1.2.1. </span>Landscape class<a class="headerlink" href="#landscape-class" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">2.2.1.1.1. </span>Landscape class<a class="headerlink" href="#landscape-class" title="Permalink to this headline"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.PLandscape">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">PLandscape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#PLandscape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.PLandscape" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.PLandscape.PLandscape_plot">
+<span class="sig-name descname"><span class="pre">PLandscape_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#PLandscape.PLandscape_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.PLandscape.PLandscape_plot" title="Permalink to this definition"></a></dt>
+<dd><p>This function plots selected persistence landscapes or it plots all of them if user does not provide desired landscape functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>PD</strong><strong>)</strong> (<em>ndarray</em>) – Persistence diagram points–(Nx2) matrix.</p></li>
+<li><p><strong>(</strong><strong>L_Number</strong><strong>)</strong> (<em>list</em>) – Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">PL_plot</dt>
+<dd class="field-odd"><p>(fig) The figure that includes chosen or all landsape functions</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.PLandscape.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#PLandscape.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.PLandscape.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>This class uses landscapes algorithm (<code class="xref py py-meth docutils literal notranslate"><span class="pre">PD_Featurization.PLandscapes()</span></code>) to compute persistence landscapes and plot them based on user preference.
+The algorithm computes the persistence landscapes is written based on Ref. <span id="id3">[<a class="reference internal" href="ML.html#id15" title="Peter Bubenik and Paweł Dłotko. A persistence landscapes toolbox for topological statistics. Journal of Symbolic Computation, 78:91–114, jan 2017. doi:10.1016/j.jsc.2016.03.009.">3</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>PD</strong><strong>)</strong> (<em>ndarray</em>) – Persistence diagram points–(Nx2) matrix.</p></li>
+<li><p><strong>(</strong><strong>L_Number</strong><strong>)</strong> (<em>list</em>) – Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">PL_number</dt>
+<dd class="field-odd"><p>(int) Total number of landscapes for given persistence diagram</p>
+</dd>
+<dt class="field-even">DesPL</dt>
+<dd class="field-even"><p>(ndarray) Includes only selected landscapes functions given in L_number</p>
+</dd>
+<dt class="field-odd">AllPL</dt>
+<dd class="field-odd"><p>(ndarray) Includes all landscape functions of the persistece diagram</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <p><strong>Example:</strong> In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">PLandscape</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Compute the persistence landscapes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">PLC</span> <span class="o">=</span> <span class="n">PLandscape</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">PL_number</span><span class="p">)</span>
-<span class="go">18</span>
+<span class="go">15</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">AllPL</span><span class="p">)</span>
-<span class="go">    Landscape Number                                             Points</span>
-<span class="go">0                1.0  [[0.3154523968696594, 0.0], [0.320831686258316...</span>
-<span class="go">1                2.0  [[0.7809883952140808, 0.0], [0.790885269641876...</span>
-<span class="go">2                3.0  [[0.9872134923934937, 0.0], [1.046982824802398...</span>
-<span class="go">3                4.0  [[1.0011025667190552, 0.0], [1.053927361965179...</span>
-<span class="go">4                5.0  [[1.010329246520996, 0.0], [1.05854070186615, ...</span>
-<span class="go">5                6.0  [[1.0254381895065308, 0.0], [1.066095173358917...</span>
-<span class="go">6                7.0  [[1.0484610795974731, 0.0], [1.077606618404388...</span>
-<span class="go">7                8.0  [[1.1333231925964355, 0.0], [1.148026943206787...</span>
-<span class="go">8                9.0  [[1.153172254562378, 0.0], [1.1579514741897583...</span>
-<span class="go">9               10.0  [[1.1831640005111694, 0.0], [1.264368951320648...</span>
-<span class="go">10              11.0  [[1.188441276550293, 0.0], [1.26700758934021, ...</span>
-<span class="go">11              12.0  [[1.193040132522583, 0.0], [1.269307017326355,...</span>
-<span class="go">12              13.0  [[1.1967955827713013, 0.0], [1.229873955249786...</span>
-<span class="go">13              14.0  [[1.2031320333480835, 0.0], [1.233042180538177...</span>
-<span class="go">14              15.0  [[1.2164264917373657, 0.0], [1.239689409732818...</span>
-<span class="go">15              16.0  [[1.2490906715393066, 0.0], [1.256021499633789...</span>
-<span class="go">16              17.0  [[1.2782702445983887, 0.0], [1.304370105266571...</span>
-<span class="go">17              18.0  [[1.2977339029312134, 0.0], [1.314101934432983...</span>
+<span class="go">        Landscape Number                                             Points</span>
+<span class="go">0                1.0  [[0.5428633093833923, 0.0], [0.580724596977233...</span>
+<span class="go">1                2.0  [[0.571907639503479, 0.0], [0.5952467620372772...</span>
+<span class="go">2                3.0  [[0.9977497458457947, 0.0], [1.132654219865799...</span>
+<span class="go">3                4.0  [[0.9980520009994507, 0.0], [1.132805347442627...</span>
+<span class="go">4                5.0  [[1.0069313049316406, 0.0], [1.137244999408722...</span>
+<span class="go">5                6.0  [[1.01357901096344, 0.0], [1.0538994073867798,...</span>
+<span class="go">6                7.0  [[1.078373670578003, 0.0], [1.0862967371940613...</span>
+<span class="go">7                8.0  [[1.1089069843292236, 0.0], [1.188232839107513...</span>
+<span class="go">8                9.0  [[1.114268183708191, 0.0], [1.1280720233917236...</span>
+<span class="go">9               10.0  [[1.1168304681777954, 0.0], [1.129353165626525...</span>
+<span class="go">10              11.0  [[1.1619293689727783, 0.0], [1.214744031429290...</span>
+<span class="go">11              12.0  [[1.1846998929977417, 0.0], [1.226129293441772...</span>
+<span class="go">12              13.0  [[1.2282723188400269, 0.0], [1.247915506362915...</span>
+<span class="go">13              14.0  [[1.2527109384536743, 0.0], [1.260134816169738...</span>
+<span class="go">14              15.0  [[1.2588499784469604, 0.0], [1.263204336166381...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">DesPL</span><span class="p">)</span>
 <span class="go">Warning: Desired landscape numbers were not specified.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">PLC</span><span class="o">.</span><span class="n">PLandscape_plot</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">AllPL</span><span class="p">[</span><span class="s1">&#39;Points&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Output of the plotting functions is:</p>
-<figure class="align-center" id="id7">
-<a class="reference internal image-reference" href="_images/All_Landscapes.png"><img alt="_images/All_Landscapes.png" src="_images/All_Landscapes.png" style="width: 528.2px; height: 235.3px;" /></a>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="_images/All_Landscapes.png"><img alt="_images/All_Landscapes.png" src="_images/All_Landscapes.png" style="width: 1584.6px; height: 705.9px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">All landscape functions for the given persistence diagram</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">All landscape functions for the given persistence diagram</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>If user specify the desired landscapes, output will be:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PLC</span>  <span class="o">=</span> <span class="n">PLandscape</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">DesPL</span><span class="p">)</span>
-<span class="go">[array([[0.7809884 , 0.        ],</span>
-<span class="go">       [0.79088527, 0.00989687],</span>
-<span class="go">       [0.80078214, 0.        ],</span>
-<span class="go">       [0.98659766, 0.        ],</span>
-<span class="go">       [1.08002311, 0.09342545],</span>
-<span class="go">       [1.08727556, 0.086173  ],</span>
-<span class="go">       [1.30410457, 0.303002  ],</span>
-<span class="go">       [1.30871791, 0.29838866],</span>
-<span class="go">       [1.39603722, 0.38570797],</span>
-<span class="go">       [1.7817452 , 0.        ]])</span>
-<span class="go"> array([[0.98721349, 0.        ],</span>
-<span class="go">       [1.04698282, 0.05976933],</span>
-<span class="go">       [1.05392736, 0.0528248 ],</span>
-<span class="go">       [1.08727556, 0.086173  ],</span>
-<span class="go">       [1.0918889 , 0.08155966],</span>
-<span class="go">       [1.30871791, 0.29838866],</span>
-<span class="go">       [1.32778382, 0.27932274],</span>
-<span class="go">       [1.38544387, 0.33698279],</span>
-<span class="go">       [1.43779945, 0.2846272 ],</span>
-<span class="go">       [1.46482104, 0.31164879],</span>
-<span class="go">       [1.77646983, 0.        ]])]</span>
+<span class="go">[array([[0.57190764, 0.        ],</span>
+<span class="go">                [0.59524676, 0.02333912],</span>
+<span class="go">                [0.61858588, 0.        ],</span>
+<span class="go">                [0.69152009, 0.        ],</span>
+<span class="go">                [0.70559016, 0.01407006],</span>
+<span class="go">                [0.71966022, 0.        ],</span>
+<span class="go">                [0.8154344 , 0.        ],</span>
+<span class="go">                [0.83258173, 0.01714733],</span>
+<span class="go">                [0.84972906, 0.        ],</span>
+<span class="go">                [0.96607411, 0.        ],</span>
+<span class="go">                [1.19829136, 0.23221725],</span>
+<span class="go">                [1.21428031, 0.21622831],</span>
+<span class="go">                [1.23277295, 0.23472095],</span>
+<span class="go">                [1.28820044, 0.17929345],</span>
+<span class="go">                [1.31611174, 0.20720476],</span>
+<span class="go">                [1.32007349, 0.20324302],</span>
+<span class="go">                [1.39760172, 0.28077126],</span>
+<span class="go">                [1.50310916, 0.17526382],</span>
+<span class="go">                [1.54805887, 0.22021353],</span>
+<span class="go">                [1.62611502, 0.14215738],</span>
+<span class="go">                [1.65717965, 0.17322201],</span>
+<span class="go">                [1.76435941, 0.06604224],</span>
+<span class="go">                [1.81276023, 0.11444306],</span>
+<span class="go">                [1.9272033 , 0.        ]])</span>
+<span class="go">array([[0.99774975, 0.        ],</span>
+<span class="go">                [1.13265422, 0.13490447],</span>
+<span class="go">                [1.13280535, 0.13475335],</span>
+<span class="go">                [1.21428031, 0.21622831],</span>
+<span class="go">                [1.21871996, 0.21178865],</span>
+<span class="go">                [1.22592431, 0.21899301],</span>
+<span class="go">                [1.27691215, 0.16800517],</span>
+<span class="go">                [1.28820044, 0.17929345],</span>
+<span class="go">                [1.29216218, 0.17533171],</span>
+<span class="go">                [1.32007349, 0.20324302],</span>
+<span class="go">                [1.34069568, 0.18262082],</span>
+<span class="go">                [1.34636515, 0.1882903 ],</span>
+<span class="go">                [1.34829241, 0.18636304],</span>
+<span class="go">                [1.3942554 , 0.23232603],</span>
+<span class="go">                [1.47721338, 0.14936805],</span>
+<span class="go">                [1.50310916, 0.17526382],</span>
+<span class="go">                [1.58116531, 0.09720767],</span>
+<span class="go">                [1.62611502, 0.14215738],</span>
+<span class="go">                [1.66337371, 0.10489869],</span>
+<span class="go">                [1.68506891, 0.12659389],</span>
+<span class="go">                [1.75498998, 0.05667281],</span>
+<span class="go">                [1.76435941, 0.06604224],</span>
+<span class="go">                [1.83040166, 0.        ]])]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">PLC</span><span class="o">.</span><span class="n">PLandscape_plot</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">AllPL</span><span class="p">[</span><span class="s1">&#39;Points&#39;</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Output of the plotting functions is:</p>
-<figure class="align-center" id="id8">
+<figure class="align-center" id="id14">
 <a class="reference internal image-reference" href="_images/Des_Landscapes.png"><img alt="_images/Des_Landscapes.png" src="_images/Des_Landscapes.png" style="width: 491.25px; height: 282.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Chosen landscape functions for the given persistence diagram</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Chosen landscape functions for the given persistence diagram</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </section>
-<section id="parameter-bucket-for-landscapes">
-<span id="pb-landscape"></span><h3><span class="section-number">2.2.1.2.2. </span>Parameter bucket for landscapes<a class="headerlink" href="#parameter-bucket-for-landscapes" title="Permalink to this headline"></a></h3>
-<p><strong>Example:</strong> If user does not provide classification labels, parameter bucket will return a warning as shown below.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">LandscapesParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">LandscapesParameterBucket</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">clf_model</span> <span class="o">=</span> <span class="n">LinearSVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span><span class="mf">0.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">Labels</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">PL_Number</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="go">Variables in parameter bucket</span>
-<span class="go">-----------------------------</span>
-<span class="go">clf_model : &lt;class &#39;sklearn.svm._classes.LinearSVC&#39;&gt;</span>
-<span class="go">feature_function : &lt;function F_Landscape at 0x000001F6AB9F6558&gt;</span>
-<span class="go">PL_Number : [2]</span>
-<span class="go">Labels : None</span>
-<span class="go">test_size : 0.5</span>
-<span class="go">-----------------------------</span>
-<span class="go">Warning: Classification labels are missing.</span>
-</pre></div>
-</div>
-</section>
 <section id="feature-matrix-generation">
-<h3><span class="section-number">2.2.1.2.3. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Permalink to this headline"></a></h3>
-<figure class="align-center" id="id9">
+<span id="pb-landscape"></span><h3><span class="section-number">2.2.1.1.2. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Permalink to this headline"></a></h3>
+<figure class="align-center" id="id15">
 <span id="f-matrix"></span><a class="reference internal image-reference" href="_images/Mesh_Generation_Example.png"><img alt="_images/Mesh_Generation_Example.png" src="_images/Mesh_Generation_Example.png" style="width: 718.5px; height: 394.05px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Feature matrix generation steps explained with an simple example.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Feature matrix generation steps explained with an simple example.</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.3</span></a> explains the steps for generation feature matrix using persistence landscapes. There are three persistence landscape sets for three different persistence diagram.
@@ -280,98 +300,331 @@ Resulting array will be our mesh and it is used to obtain features.
 The mesh points is shown in <a class="reference internal" href="#mesh"><span class="std std-numref">Fig. 2.4</span></a> with red dots.
 There may not be corresponding y value for each mesh points in selected landscape functions so we use linear interpolation to find these values.
 Then, these y values become the feature for each landscape functions, and they can be used in classification.</p>
-<figure class="align-center" id="id10">
+<figure class="align-center" id="id16">
 <span id="mesh"></span><a class="reference internal image-reference" href="_images/Mesh_Points.png"><img alt="_images/Mesh_Points.png" src="_images/Mesh_Points.png" style="width: 421.0px; height: 165.20000000000002px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Mesh obtained using second landscape function for the example provided in <a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.3</span></a>.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Mesh obtained using second landscape function for the example provided in <a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.3</span></a>.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
+<span class="target" id="module-teaspoon.ML.feature_functions"></span><dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_Landscape">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_Landscape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_l_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_Landscape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_Landscape" title="Permalink to this definition"></a></dt>
+<dd><p>This function computes the features for selected persistence landscape numbers.
+There are three inputs to the function.
+These are all landscape functions for each persistence diagram, parameter bucket object and the maximum level of landscape function.
+If user does not specify the third input, algorithm will automatically compute it.
+The second parameter includes the parameters needed to compute features and perform classification.
+Please see <code class="xref py py-meth docutils literal notranslate"><span class="pre">PD_ParameterBucket.LandscapesParameterBucket()</span></code> for more details about parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>PL</strong><strong>)</strong> (<em>ndarray</em>) – Object array that includes all landscape functions for each persistence diagram</p></li>
+<li><p><strong>(</strong><strong>params</strong><strong>)</strong> (<em>object</em>) – Parameterbucket object. We need landscape numbers defined by user to generate feature matrix.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">feature</dt>
+<dd class="field-odd"><p>(Array) NxM matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and M is the numbers of features which is equal to length of sorted mesh of landscapes functions.</p>
+</dd>
+<dt class="field-even">Sorted_mesh</dt>
+<dd class="field-even"><p>(list) It includes the sorted mesh for each landscape function chosen by user.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 <section id="persistence-images">
-<span id="id4"></span><h2><span class="section-number">2.2.1.3. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline"></a></h2>
+<span id="id4"></span><h2><span class="section-number">2.2.1.2. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_Image">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_Image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TF_Learning</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_Img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_Image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_Image" title="Permalink to this definition"></a></dt>
+<dd><p>This function returns user feature matrix generated using persistence images.
+We use <a class="reference external" href="https://gitlab.com/csu-tda/PersistenceImages">PersistenceImages</a> package to compute persistence images.
+User can also specify a list that includes the persistence diagram number to plot images of them.
+Algorithms returns plot only if plotting option is True and transfer learning is false.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>PD</strong><strong>)</strong> (<em>ndarray</em>) – Object array that includes all persistence diagrams</p></li>
+<li><p><strong>(</strong><strong>PS</strong><strong>)</strong> (<em>float</em>) – Pixel size.</p></li>
+<li><p><strong>(</strong><strong>var</strong><strong>)</strong> (<em>float</em>) – Variance of the Gaussian distribution.</p></li>
+<li><p><strong>(</strong><strong>D_Img</strong><strong>)</strong> (<em>list</em>) – The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams.</p></li>
+<li><p><strong>(</strong><strong>TF_Learning</strong><strong>)</strong> – If it is true, then algorithm will need the second persistence diagram set and it will compute feature matrices for training set and test set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">output</dt>
+<dd class="field-odd"><p>(dict) A dictionary that includes the feature matrix. In the case of transfer learning, output will have training and test feature matrices separately.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>Example</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">Ff</span>
-<span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
 
-<span class="c1"># generate persistence diagrams</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">Diagrams_H1</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
 
-<span class="n">TF_Learning</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">D_Img</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">75</span><span class="p">]</span>
-<span class="n">plot</span><span class="o">=</span><span class="kc">False</span>
-<span class="n">feature_PI</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="n">plot</span><span class="p">,</span><span class="n">TF_Learning</span><span class="p">,</span> <span class="n">D_Img</span><span class="p">)</span>
-<span class="c1"># if user wants to plot images</span>
-<span class="n">plot</span><span class="o">=</span><span class="kc">True</span>
-<span class="n">feature_PI</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="n">plot</span><span class="p">,</span><span class="n">TF_Learning</span><span class="p">,</span> <span class="n">D_Img</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">feature_PI</span><span class="p">[</span><span class="s1">&#39;figures&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D_Img</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PS</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">var</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_PI</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">,</span> <span class="n">PS</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">D_Img</span><span class="o">=</span><span class="p">[],</span> <span class="n">pers_imager</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;F_Matrix&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># if user wants to plot images</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D_Img</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_PI</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">,</span> <span class="n">PS</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">D_Img</span><span class="o">=</span><span class="n">D_Img</span><span class="p">,</span> <span class="n">pers_imager</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">feature_PI</span><span class="p">[</span><span class="s1">&#39;figures&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>The algorithm will return two images as shown in <a class="reference internal" href="#pi-example"><span class="std std-numref">Fig. 2.5</span></a>.</p>
-<figure class="align-center" id="id11">
+<figure class="align-center" id="id17">
 <span id="pi-example"></span><a class="reference internal image-reference" href="_images/PI_Example.png"><img alt="_images/PI_Example.png" src="_images/PI_Example.png" style="width: 573.6px; height: 247.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Example persistence images.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Example persistence images.</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </section>
 <section id="carlsson-coordinates">
-<span id="id5"></span><h2><span class="section-number">2.2.1.4. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Permalink to this headline"></a></h2>
-<p><strong>Example:</strong></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">Ff</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span id="id5"></span><h2><span class="section-number">2.2.1.3. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_CCoordinates">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_CCoordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_CCoordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_CCoordinates" title="Permalink to this definition"></a></dt>
+<dd><p>This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. <a class="reference internal" href="#equation-1st-coord">(2.1)</a> - <a class="reference internal" href="#equation-5th-coord">(2.5)</a>.
+The first four functions are taken from Ref. <span id="id6">[<a class="reference internal" href="ML.html#id10" title="Aaron Adcock, Erik Carlsson, and Gunnar Carlsson. The ring of algebraic functions on persistence bar codes. Homology, Homotopy and Applications, 18(1):381–402, 2016. doi:10.4310/hha.2016.v18.n1.a21.">2</a>]</span> and the last one is obtained from Ref. <span id="id7">[<a class="reference internal" href="ML.html#id16" title="Firas A. Khasawneh, Elizabeth Munch, and Jose A. Perea. Chatter Classification in Turning using Machine Learning and Topological Data Analysis. IFAC-PapersOnLine, 51(14):195–200, 2018. doi:10.1016/j.ifacol.2018.07.222.">6</a>]</span>.
+There are two inputs to the function. These are persistence diagrams and number of coordinates that user wants to use in feature matrix.
+Algorithm will return feature matrix object array that includes feature matrices for different combinations, and total number of combinations will be <span class="math notranslate nohighlight">\(\sum_{i=1}^{FN} {FN \choose i}\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-1st-coord">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-1st-coord" title="Permalink to this equation"></a></span>\[f_{1}(PD) = \sum b_{i}(d_{i}-b_{i})\]</div>
+<div class="math notranslate nohighlight" id="equation-2nd-coord">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-2nd-coord" title="Permalink to this equation"></a></span>\[f_{2}(PD) = \sum (d_{max}-d_{i})(d_{i}-b_{i})\]</div>
+<div class="math notranslate nohighlight" id="equation-3rd-coord">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-3rd-coord" title="Permalink to this equation"></a></span>\[f_{3}(PD) = \sum b_{i}^{2}(d_{i}-b_{i})^{4}\]</div>
+<div class="math notranslate nohighlight" id="equation-4th-coord">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-4th-coord" title="Permalink to this equation"></a></span>\[f_{4}(PD) = \sum (d_{max}-d_{i})^{2}(d_{i}-b_{i})^{4}\]</div>
+<div class="math notranslate nohighlight" id="equation-5th-coord">
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-5th-coord" title="Permalink to this equation"></a></span>\[f_{5}(PD) = \sum max(d_{i}-b_{i})\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>PD</strong><strong>)</strong> (<em>ndarray</em>) – Object array that includes all persistence diagrams</p></li>
+<li><p><strong>(</strong><strong>FN</strong><strong>)</strong> (<em>float</em>) – Number of features</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">FeatureMatrix</dt>
+<dd class="field-odd"><p>(Array) NxFN matrix that includes the features for each persistence diagram, where N is the number of persistence diagrams and FN is the number of feature chosen.</p>
+</dd>
+<dt class="field-even">TotalNumComb</dt>
+<dd class="field-even"><p>(int) Number of combinations.</p>
+</dd>
+<dt class="field-odd">CombList</dt>
+<dd class="field-odd"><p>(list) List of combinations.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
+
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">FN</span><span class="o">=</span><span class="mi">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">FeatureMatrix</span><span class="p">,</span><span class="n">TotalNumComb</span><span class="p">,</span><span class="n">CombList</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_CCoordinates</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">,</span><span class="n">FN</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">TotalNumComb</span><span class="p">)</span>
-<span class="go">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">CombList</span><span class="p">)</span>
-<span class="go">[[1. 0. 0. 0. 0.]</span>
-<span class="go"> [2. 0. 0. 0. 0.]</span>
-<span class="go"> [3. 0. 0. 0. 0.]</span>
-<span class="go"> [1. 2. 0. 0. 0.]</span>
-<span class="go"> [1. 3. 0. 0. 0.]</span>
-<span class="go"> [2. 3. 0. 0. 0.]</span>
-<span class="go"> [1. 2. 3. 0. 0.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compute feature matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FN</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FeatureMatrix</span><span class="p">,</span> <span class="n">TotalNumComb</span><span class="p">,</span> <span class="n">CombList</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_CCoordinates</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">,</span> <span class="n">FN</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="template-functions">
+<span id="id8"></span><h2><span class="section-number">2.2.1.4. </span>Template Functions<a class="headerlink" href="#template-functions" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.tent">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">tent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dgm_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BirthDeath'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#tent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.tent" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Applies the tent function to a diagram.</p>
+<p>Parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter Dgm</dt>
+<dd class="field-odd"><p>A persistence diagram, given as a <span class="math notranslate nohighlight">\(K      imes 2\)</span> numpy array</p>
+</dd>
+<dt class="field-even">Parameter params</dt>
+<dd class="field-even"><p>An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</p>
+</dd>
+<dt class="field-odd">Parameter type</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>This code accepts diagrams either</dt><dd><ol class="arabic simple">
+<li><p>in (birth, death) coordinates, in which case <cite>type = ‘BirthDeath’</cite>, or</p></li>
+<li><p>in (birth, lifetime) = (birth, death-birth) coordinates, in which case <cite>type = ‘BirthLifetime’</cite></p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p><span class="math notranslate nohighlight">\(\sum_{x,y \in        ext{Dgm}}g_{i,j}(x,y)\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\bigg| 1- \max\left\{ \left|\frac{x}{\delta} - i\right|, \left|\frac{y-x}{\delta} - j\right|\right\} \bigg|_+]\]</div>
+<p>where <span class="math notranslate nohighlight">\(| * |_+\)</span> is positive part; equivalently, min of * and 0.</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This code does not take care of the maxPower polynomial stuff.  The build_G() function does it after all the rows have been calculated.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.interp_polynomial">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">interp_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dgm_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BirthDeath'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#interp_polynomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.interp_polynomial" title="Permalink to this definition"></a></dt>
+<dd><p>Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.</p>
+<p>Parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter Dgm</dt>
+<dd class="field-odd"><p>A persistence diagram, given as a <span class="math notranslate nohighlight">\(K      imes 2\)</span> numpy array</p>
+</dd>
+<dt class="field-even">Parameter params</dt>
+<dd class="field-even"><p>An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</p>
+</dd>
+<dt class="field-odd">Parameter type</dt>
+<dd class="field-odd"><p>This code accepts diagrams either
+1. in (birth, death) coordinates, in which case <cite>type = ‘BirthDeath’</cite>, or
+2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case <cite>dgm_type = ‘BirthLifetime’</cite></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>interp_weight-</dt><dd><p>a matrix with each entry representiting the weight of an interpolation
+function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">listOfG</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dgm_col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Dgm0&#39;</span><span class="p">,</span> <span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allDgms</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">dgm_col</span><span class="p">))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># parameter bucket to set template function parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">ParameterBucket</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">interp_polynomial</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">k_fold_cv</span><span class="o">=</span><span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">makeAdaptivePartition</span><span class="p">(</span><span class="n">allDgms</span><span class="p">,</span> <span class="n">meshingScheme</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">jacobi_poly</span> <span class="o">=</span> <span class="s1">&#39;cheb1&#39;</span>  <span class="c1"># choose the interpolating polynomial</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compute features</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">dgmColLabel</span> <span class="ow">in</span> <span class="n">dgm_col</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">feature</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">build_G</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">dgmColLabel</span><span class="p">],</span> <span class="n">params</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">listOfG</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">listOfG</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="path-signatures">
-<span id="id6"></span><h2><span class="section-number">2.2.1.5. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Permalink to this headline"></a></h2>
+<span id="id9"></span><h2><span class="section-number">2.2.1.5. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_PSignature">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_PSignature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_Number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_PSignature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_PSignature" title="Permalink to this definition"></a></dt>
+<dd><p>This function takes the persistence landscape set and returns the feature matrix which is computed using path signatures <span id="id10">[<a class="reference internal" href="ML.html#id11" title="Ilya Chevyrev and Andrey Kormilitzin. A primer on the signature method in machine learning. arXiv preprint arXiv:1603.03788, 2016.">4</a>, <a class="reference internal" href="ML.html#id12" title="Ilya Chevyrev, Vidit Nanda, and Harald Oberhauser. Persistence paths and signature features in topological data analysis. IEEE Transactions on Pattern Analysis and Machine Intelligence, 42(1):192–202, jan 2020. doi:10.1109/tpami.2018.2885516.">5</a>]</span>.
+Function takes two inputs and these are persistence landcsape set in an object array and the landscape numbers that user wants to compute their signatures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>PL</strong><strong>)</strong> (<em>ndarray</em>) – Object array that includes all landscape functions for each persistence diagram</p></li>
+<li><p><strong>(</strong><strong>L_Number</strong><strong>)</strong> (<em>list</em>) – Landscape numbers that user wants to use in feature matrix generation. If this parameter is not specified, algorithm will generate feature matrix using first landscapes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">feature_PS</dt>
+<dd class="field-odd"><p>(Array) Nx6 matrix that includes the features for each persistence diagram, where N is the number of persistence landscape sets.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>Example</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">Ff</span>
-<span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">PLandscape</span>
-<span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="c1"># generate persistence diagrams</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">Diagrams_H1</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="c1">#compute persistence landscapes</span>
-<span class="n">PerLand</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
-    <span class="n">Land</span><span class="o">=</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="n">PerLand</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">Land</span><span class="o">.</span><span class="n">AllP</span>
-<span class="c1">#choose landscape number for which feature matrix will be computed</span>
-<span class="n">L_number</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="c1">#compute feature matrix</span>
-<span class="n">feature_PS</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">PerLand</span><span class="p">,</span><span class="n">L_number</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compute persistence landscapes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PerLand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">Land</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">PerLand</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Land</span><span class="o">.</span><span class="n">AllPL</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># choose landscape number for which feature matrix will be computed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L_number</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compute feature matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_PS</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">PerLand</span><span class="p">,</span> <span class="n">L_number</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="kernel-method">
-<h2><span class="section-number">2.2.1.6. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Permalink to this headline"></a></h2>
-<p><strong>Example:</strong></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">Ff</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span id="id11"></span><h2><span class="section-number">2.2.1.6. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.KernelMethod">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">KernelMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perDgm1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perDgm2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#KernelMethod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.KernelMethod" title="Permalink to this definition"></a></dt>
+<dd><p>This function computes the kernel for given two persistence diagram based on the formula provided in Ref. <span id="id12">[<a class="reference internal" href="ML.html#id13" title="Jan Reininghaus, Stefan Huber, Ulrich Bauer, and Roland Kwitt. A stable multi-scale kernel for topological machine learning. In 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR). IEEE, jun 2015. doi:10.1109/cvpr.2015.7299106.">8</a>]</span>.
+There are three inputs and these are two persistence diagrams and the kernel scale sigma.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>perDgm1</strong><strong>)</strong> (<em>ndarray</em>) – Object array that includes first persistence diagram set</p></li>
+<li><p><strong>(</strong><strong>perDgm2</strong><strong>)</strong> (<em>ndarray</em>) – Object array that includes second persistence diagram set</p></li>
+<li><p><strong>(</strong><strong>sigma</strong><strong>)</strong> (<em>float</em>) – Kernel scale</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Kernel</dt>
+<dd class="field-odd"><p>(float) The kernel value for given two persistence diagrams.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#compute kernel between two persistence diagram</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sigma</span><span class="o">=</span><span class="mf">0.25</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">KernelMethod</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Diagrams_H1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compute kernel between two persistence diagram</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">KernelMethod</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Diagrams_H1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sigma</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
 <span class="go">1.6310484200361053</span>
 </pre></div>

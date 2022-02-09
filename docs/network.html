@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.4.2. Network Representation of Time Series &mdash; teaspoon 0.1.0 documentation</title>
@@ -154,7 +154,6 @@
 <li><p><strong>ts</strong> (<em>1-D array</em>) – 1-D time series signal</p></li>
 <li><p><strong>n</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding dimension for state space reconstruction. Default is uses MsPE algorithm from parameter_selection module.</p></li>
 <li><p><strong>tau</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding delay fro state space reconstruction. Default uses MsPE algorithm from parameter_selection module.</p></li>
-<li><p><strong>k</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – number of nearest neighbors for graph formation.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -195,9 +194,9 @@
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
 <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1">#generate a simple time series</span>
 
-<span class="n">A_knn</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#ordinal partition network from time series</span>
+<span class="n">A_knn</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#knn network from time series</span>
 
-<span class="n">A_op</span> <span class="o">=</span> <span class="n">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#knn network from time series</span>
+<span class="n">A_op</span> <span class="o">=</span> <span class="n">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#ordinal partition network from time series</span>
 </pre></div>
 </div>
 <p>Additionally, there is methods to change the data structure to anything available in networkx through changing the adjacency matrix to the networkx data structure (dictionary of dictionaries) with an example as follows:</p>
@@ -220,7 +219,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This coe has the output as follows:</p>
+<p>This code has the output as follows:</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/example_knn_graph.png"><img alt="_images/example_knn_graph.png" src="_images/example_knn_graph.png" style="width: 460.0px; height: 467.0px;" /></a>
 </figure>

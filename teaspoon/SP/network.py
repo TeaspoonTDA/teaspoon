@@ -71,7 +71,6 @@ def ordinal_partition_graph(ts, n=None, tau=None):
     Other Parameters:
         n (Optional[int]): embedding dimension for state space reconstruction. Default is uses MsPE algorithm from parameter_selection module.
         tau (Optional[int]): embedding delay fro state space reconstruction. Default uses MsPE algorithm from parameter_selection module.
-        k (Optional[int]): number of nearest neighbors for graph formation.
 
     Returns:
         [2-D square array]: A (2-D weighted and directed square adjacency matrix)
