@@ -1,3 +1,61 @@
+#import packages
+from teaspoon.SP import network
+from teaspoon.SP import tsa_tools
+from teaspoon.SP import network_tools
+from ripser import ripser
+import numpy as np
+
+# import sub modules
+import os
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+
+def DistanceMatrix(A, method='shortest_unweighted_path'):
+    """This function calculates the distance matrix from a connected graph represented as an adjacency matrix using an available method."
+
+    Args:
+        A (2-D array): 2-D square adjacency matrix
+        method (str): Method for calculating distances between nodes. default is shortest_unweighted_path. Options are shortest_unweighted_path, shortest_weighted_path, weighted_shortest_path, and diffusion_distance.
+
+    Returns:
+        [2-D array]: Distance matrix between all node pairs.
+    """
+
+    methods = ['shortest_unweighted_path', 'shortest_weighted_path',
+               'weighted_shortest_path', 'diffusion_distance']
+
+    if method not in methods:
+        print('Error: method listed for distance matrix not available.')
+        print('Defaulting to unweighted shortest path.')
+        method = 'shortest_unweighted_path'
+
+    A = network_tools.remove_zeros(A)
+    np.fill_diagonal(A, 0)
+    A = A + A.T
+
+    if method == 'shortest_unweighted_path':
+        D = network_tools.shortest_path(A, weighted_path_lengths=False)
+
+    if method == 'shortest_weighted_path':
+        D = network_tools.shortest_path(A, weighted_path_lengths=True)
+
+    if method == 'weighted_shortest_path':
+        D = network_tools.weighted_shortest_path(A)
+
+    if method == 'diffusion_distance':
+        G = nx.from_numpy_matrix(A)
+        diam = nx.algorithms.distance_measures.diameter(G)
+        walk_steps = int(2*diam)
+        # degree vector used later.
+        deg_vec = network_tools.degree_vector(np.copy(A))
+        D = network_tools.diffusion_distance(
+            A, d=deg_vec, t=walk_steps, lazy=True)
+
+    return D
+
+
 def point_summaries(diagram, A):
     """This function calculates the persistent homology statistics for a graph from the paper "Persistent Homology of Complex Networks for Dynamic State Detection."
 
@@ -8,8 +66,6 @@ def point_summaries(diagram, A):
     Returns:
         [array 1-D]: statistics (R, En M) as (maximum persistence ratio, persistent entropy normalized, homology class ratio). Returns NaNs if empty diagram.
     """
-
-    import numpy as np
 
     # assertion errors to check data types
 
@@ -58,41 +114,25 @@ def point_summaries(diagram, A):
     return statistics
 
 
-def PH_network(A, method='unweighted', distance='shortest_path'):
+def PH_network(D, max_homology_dimension=1):
     """This function calculates the persistent homology of the graph represented by the adjacency matrix A using a distance algorithm defined by user.
 
     Args:
-        A (2-D array): 2-D square adjacency matrix
+        D (2-D array): Distance matrix between all node pairs.
 
     Other Parameters:
-        method (Optional[string]): either 'unweighted', 'simple', 'inverse', or 'difference'. Default is 'unweighted'.
-        distance (Optional[string]): either 'shortest_path', 'longest_path' (if using 'simple' distance), or 'resistance'. Default is 'shortest_path'.
+        max_homology_dimension (Optional[int]): maximum dimension of the homology.
 
     Returns:
-        [square matrix (2-D array), list]: D (distance matrix), diagram (persistence diagram -- 0 and 1 dimension)
+        [list]: list of lists where ech list is a persistence diagram (standard ripser format).
     """
-
-    #import packages
-    from ripser import ripser
-    import numpy as np
-
-    # import sub modules
-    import os
-    import sys
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-    from teaspoon.TDA import distance_matrix
-
-    D = distance_matrix.DistanceMatrix(
-        np.array(A), method=method, distance=distance)
-    # get distance matrix. Specify if weighting is desired or shortest path
-
     from scipy import sparse
     D_sparse = sparse.coo_matrix(D).tocsr()
-    result = ripser(D_sparse, distance_matrix=True, maxdim=1)
+    result = ripser(D_sparse, distance_matrix=True,
+                    maxdim=max_homology_dimension)
     diagram = result['dgms']
 
-    return D, diagram
+    return diagram
 
 
 # In[ ]:
@@ -124,12 +164,15 @@ if __name__ == "__main__":
     # create adjacency matrix, this
     A = ordinal_partition_graph(ts, n, tau)
 
+    # get distance matrix
+    D = DistanceMatrix(A, method='shortest_unweighted_path')
+
     # get networkx representation of network for plotting
     G, pos = make_network(A, position_iterations=1000,
                           remove_deg_zero_nodes=True)
 
-    # create distance matrix and calculate persistence diagram
-    D, diagram = PH_network(A, method='unweighted', distance='shortest_path')
+    # calculate persistence diagram
+    diagram = PH_network(D)
 
     print('1-D Persistent Homology (loops): ', diagram[1])
 

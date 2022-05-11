@@ -29,7 +29,7 @@ def mutualPerm(ts, delay, n):
     PA_y = np.array(PA_y)
     PA_x = np.array(PA_x)[0:len(PA_y)]
     types = np.stack((np.tile(np.linspace(1, math.factorial(n), math.factorial(n)),  math.factorial(n)),
-                     np.repeat(np.linspace(1, math.factorial(n), math.factorial(n)), math.factorial(n)))).T
+                      np.repeat(np.linspace(1, math.factorial(n), math.factorial(n)), math.factorial(n)))).T
     PAs = np.stack((PA_x, PA_y)).T
     Bins_xy = np.zeros((math.factorial(n), math.factorial(n)))
     count = 0
