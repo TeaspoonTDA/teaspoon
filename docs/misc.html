@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.4.4. Miscellaneous Functions &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2.5. MakeData Module Documentation" href="MakeData.html" />
+    <link rel="prev" title="2.4.3. Information Module" href="information.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> teaspoon
+          
+
+          
+            
+            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html">2.1.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
+        
+          <li><a href="SP.html"><span class="section-number">2.4. </span>Signal Processing (SP) Module Documentation</a> &raquo;</li>
+        
+      <li><span class="section-number">2.4.4. </span>Miscellaneous Functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/misc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="miscellaneous-functions">
+<h1><span class="section-number">2.4.4. </span>Miscellaneous Functions<a class="headerlink" href="#miscellaneous-functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-teaspoon.SP.adaptivePart">
+<span id="adaptive-partitioning"></span><h2><span class="section-number">2.4.4.1. </span>Adaptive Partitioning<a class="headerlink" href="#module-teaspoon.SP.adaptivePart" title="Permalink to this headline">¶</a></h2>
+<p>Methods of partitioning birth-lifetime plane for persistence diagrams. This is
+used for the adaptive partitioning version of template function featurization.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaspoon.SP.adaptivePart.</span></span><span class="sig-name descname"><span class="pre">Partitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convertToOrd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshingScheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partitionParams</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data structure for storing a partition coming from an adapative meshing scheme.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – A numpy array of type many by 2</p></li>
+<li><p><strong>convertToOrd</strong> (<em>bool</em>) – Boolean variable to decide if you want to use ordinals for
+partitioning. Ordinals make things faster but not as nice partitions.</p></li>
+<li><p><strong>meshingScheme</strong> (<em>str</em>) – <p>The type of meshing scheme you want to use. Options include:</p>
+<blockquote>
+<div><ul>
+<li><p>’DV’ method is based on (mention paper here). For more details see function return_partition_DV.</p></li>
+<li><p>’clustering’ uses a clustering algorithm to find clusters in the data, then takes the bounding box of all points assigned to each cluster. For more details see the function return_partition_clustering.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>partitionParams</strong> (<em>dict</em>) – <p>Dictionary of parameters needed for the particular meshing scheme selected.
+For the explanation of the parameters see the function for the specific meshingScheme
+(i.e. return_partition_DV or return_partition_clustering)</p>
+<blockquote>
+<div><ul>
+<li><p>For ‘DV’ the adjustable parameters are ‘alpha’, ‘c’, ‘nmin’, ‘numParts’, ‘split’.</p></li>
+<li><p>For ‘clustering’ the adjustable parameters are ‘numClusters’, ‘clusterAlg’, ‘weights’, ‘boxOption’, ‘boxWidth’, ‘split’.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>kwargs</strong> – Any leftover inputs are stored as attributes.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions.convertOrdToFloat">
+<span class="sig-name descname"><span class="pre">convertOrdToFloat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partitionEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.convertOrdToFloat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.convertOrdToFloat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to nodes of a partition entry from ordinal back to floats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>partitionEntry</strong> (<em>dict</em>) – The partition that you want to convert.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Partition entry with converted nodes. Also sets dictionary element to the converted version.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions.getOrdinal">
+<span class="sig-name descname"><span class="pre">getOrdinal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.getOrdinal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.getOrdinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overrides the builtin magic method in the case where you had non-ordinal data but still want the ordinal stuff back.
+If the data wasn’t ordinal, this has the exact same effect as self[key].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions.isOrdinal">
+<span class="sig-name descname"><span class="pre">isOrdinal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.isOrdinal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.isOrdinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for error checking. Used to make sure input is in ordinal coordinates.
+It checks that when the two data columns are sorted they are each equal to an ordered vector with the same number of rows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dd</strong> – Data in a manyx2 numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions.iterOrdinal">
+<span class="sig-name descname"><span class="pre">iterOrdinal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.iterOrdinal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.iterOrdinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Functions just like iter magic method without converting each entry back to its float</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the partitions. Can plot in ordinal or float, whichever is in the partition bucket when it’s called.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions.return_partition_DV">
+<span class="sig-name descname"><span class="pre">return_partition_DV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">borders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.return_partition_DV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.return_partition_DV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursive method that partitions the data based on the DV method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – A manyx2 numpy array that contains all the data in ordinal format.</p></li>
+<li><p><strong>borders</strong> (<em>dict</em>) – A dictionary that contains ‘nodes’ with a numpy array of Xmin, Xmax, Ymin, Ymax.</p></li>
+<li><p><strong>r</strong> (<em>int</em>) – The number of partitions to split in each direction
+(i.e. r=2 means each partition is recursively split into a
+2 by 2 grid of partitions)</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – The required significance level for independence to stop partitioning</p></li>
+<li><p><strong>c</strong> (<em>int</em>) – Parameter for an exit criteria. Partitioning stops if min(width of
+partition, height of partition) &lt; max(width of bounding box, height
+of bounding box)/c.</p></li>
+<li><p><strong>nmin</strong> (<em>int</em>) – Minimum average number of points in each partition to keep recursion going.
+The default is 5 because chisquare test breaks down with less than 5 points
+per partition, thus we recommend choosing nmin &gt;= 5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of dictionaries. Each dictionary corresponds to a partition and
+contains ‘nodes’, a numpy array of Xmin, Xmax, Ymin, Ymax of the partition,
+and ‘npts’, the number of points in the partition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions.return_partition_clustering">
+<span class="sig-name descname"><span class="pre">return_partition_clustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clusterAlg=&lt;class</span> <span class="pre">'sklearn.cluster._kmeans.KMeans'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_clusters=5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxOption='boundPoints'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxSize=2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.return_partition_clustering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.return_partition_clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Partitioning method based on clustering algorithms. First cluster the data, then using the cluster centers and labels determine the partitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – A manyx2 numpy array that contains all the original data (not ordinals).</p></li>
+<li><p><strong>cluster_algorithm</strong> (<em>function</em>) – Clustering algorithm you want to use. Only options right now are
+KMeans and MiniBatchKMeans from scikit learn.</p></li>
+<li><p><strong>num_clusters</strong> (<em>int</em>) – The number of clusters you want. This is the number of partitions
+you want to divide your space into.</p></li>
+<li><p><strong>weights</strong> (<em>np.array</em>) – An array of the same length as data containing weights of points to use weighted clustering</p></li>
+<li><p><strong>boxOption</strong> (<em>str</em>) – Specifies how to choose the boxes based on cluster centers. Only option right now is
+“boundPoints” which takes the bounding box of all data points assigned to that cluster center.
+Additional options may be added in the future.</p></li>
+<li><p><strong>boxSize</strong> (<em>int</em>) – This input is not used as of now.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of dictionaries. Each dictionary corresponds to a partition and contains ‘nodes’,
+a numpy array of Xmin, Xmax, Ymin, Ymax of the partition, and ‘center’, the center of the
+cluster for that partition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions.setParameters">
+<span class="sig-name descname"><span class="pre">setParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partitionParams</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.setParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.setParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to set the parameters depending on the meshing scheme.
+If any are not specified, it is set to a default value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>partitionParams</strong> – Dictionary containing parameters needed for the partitioning algorithm.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="MakeData.html" class="btn btn-neutral float-right" title="2.5. MakeData Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="information.html" class="btn btn-neutral float-left" title="2.4.3. Information Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Munch
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

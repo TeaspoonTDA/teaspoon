@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.1.1. Mutual Information (MI) for time delay (tau). &mdash; teaspoon 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2.1.2. Auto-correlation for time delay (tau)." href="AC.html" />
+    <link rel="prev" title="2.1. Parameter selection module documentation" href="parameter_selection.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> teaspoon
+          
+
+          
+            
+            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html">2.1.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">teaspoon</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
+        
+          <li><a href="parameter_selection.html"><span class="section-number">2.1. </span>Parameter selection module documentation</a> &raquo;</li>
+        
+      <li><span class="section-number">2.1.1. </span>Mutual Information (MI) for time delay (tau).</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/MI.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-teaspoon.parameter_selection.MI_delay"></span><div class="section" id="mutual-information-mi-for-time-delay-tau">
+<h1><span class="section-number">2.1.1. </span>Mutual Information (MI) for time delay (tau).<a class="headerlink" href="#mutual-information-mi-for-time-delay-tau" title="Permalink to this headline">¶</a></h1>
+<p>uses mutual information to find a suitable delay via the location
+of the first minima in the mutual information vs delay plot, which is calculated using multiple
+x(t) vs x(t+tau) plots. These plots have their individual mutual information calculated. Various methods
+for partitioning the x(t) vs x(t+tau) plots for calculating the mutual information.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.parameter_selection.MI_delay.MI_DV">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.MI_delay.</span></span><span class="sig-name descname"><span class="pre">MI_DV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_DV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_DV" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)
+using adaptive partitioning of the plots of the time series x(t) and its delayed version x(t+tau).
+This method was developed by Georges Darbellay and Igor Vajda in 1999 and was published as
+Estimation of information by an adaptive partitioning of the observation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em>) – time series x(t)</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – delayed time series x(t + tau)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>I, mutual information between x(t) and x(t+tau).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.parameter_selection.MI_delay.MI_basic">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.MI_delay.</span></span><span class="sig-name descname"><span class="pre">MI_basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sturge'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_basic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_basic" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)
+using equi-spaced partitions. The size of the partition is based on the desired bin size method commonly selected for histograms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em>) – time series x(t)</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – delayed time series x(t + tau)</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>Kwargs:</dt><dd><p>h_method (string): bin size selection method. Methods are struge, sqrt, or rice. Default is sturge.</p>
+<p>ranking (bool): whether the ranked or unranked x and y inputs will be used. Default is ranking = True.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>I, mutual information between x(t) and x(t+tau).</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.parameter_selection.MI_delay.MI_for_delay">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.MI_delay.</span></span><span class="sig-name descname"><span class="pre">MI_for_delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'basic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sturge'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_for_delay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_for_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function calculates the mutual information until a first minima is reached, which is estimated as a sufficient embedding dimension for permutation entropy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ts</strong> (<em>array</em>) – Time series (1d).</p>
+</dd>
+</dl>
+<dl>
+<dt>Kwargs:</dt><dd><p>plotting (bool): Plotting for user interpretation. defaut is False.</p>
+<p>method (string): Method for calculating MI. Options include basic, kraskov 1, kraskov 2, or adaptive partitions. Default is basic.</p>
+<p>h_method (string): Bin size selection method for basic method. Methods are struge, sqrt, or rice. Default is sturge.</p>
+<p>ranking (bool): Whether the ranked or unranked x and y inputs will be used for kraskov and basic methods. Default is ranking = True.</p>
+<p>k (int): Number of nearest neighbors used in MI estimation for Kraskov methods. Default is k = 2.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tau, The embedding delay for permutation formation based on first mutual information minima.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.parameter_selection.MI_delay.MI_kraskov">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.MI_delay.</span></span><span class="sig-name descname"><span class="pre">MI_kraskov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_kraskov"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_kraskov" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function estimates the mutual information between the time series x(t) and its delayed version x(t+tau) in two different ways.
+This method was developed by Alexander Kraskov, Harald Stoegbauer, and Peter Grassberger in 2003 and published as
+Estimating Mutual Information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em>) – time series x(t)</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – delayed time series x(t + tau)</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>Kwargs:</dt><dd><p>k (int): number of nearest neighbors used in MI estimation. Default is k = 2.</p>
+<p>ranking (bool): whether the ranked or unranked x and y inputs will be used. Default is ranking = True.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>I1, first mutual information estimation method between x(t) and x(t+tau).
+(float): I2, second mutual information estimation method between x(t) and x(t+tau).</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<p>The following is an example implementing the MI method for selecting tau:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.parameter_selection.MI_delay</span> <span class="kn">import</span> <span class="n">MI_for_delay</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">tau</span> <span class="o">=</span> <span class="n">MI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">plotting</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;basic&#39;</span><span class="p">,</span> <span class="n">h_method</span> <span class="o">=</span> <span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delay from MI: &#39;</span><span class="p">,</span><span class="n">tau</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the output for this example is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Delay</span> <span class="kn">from</span> <span class="nn">MI</span><span class="p">:</span>  <span class="mi">23</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/MI_fig.png"><img alt="_images/MI_fig.png" src="_images/MI_fig.png" style="width: 336.75px; height: 176.25px;" /></a>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="AC.html" class="btn btn-neutral float-right" title="2.1.2. Auto-correlation for time delay (tau)." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="parameter_selection.html" class="btn btn-neutral float-left" title="2.1. Parameter selection module documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Munch
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>
