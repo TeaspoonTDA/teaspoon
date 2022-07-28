@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="teaspoon", # Replace with your own username
-    version="1.2.4",
+    version="1.3.1",
     author="Elizabeth Munch and Firas Khasawneh",
     author_email="muncheli@msu.edu",
     description="A Topological Signal Processing Package",
