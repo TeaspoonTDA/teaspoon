@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.3.3. Drawing &mdash; teaspoon 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>2.3.3. Drawing &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -27,8 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="index.html" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon<img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -66,7 +64,6 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -117,11 +114,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-teaspoon.TDA.Draw">
+  <div class="section" id="module-teaspoon.TDA.Draw">
 <span id="drawing"></span><h1><span class="section-number">2.3.3. </span>Drawing<a class="headerlink" href="#module-teaspoon.TDA.Draw" title="Permalink to this headline"></a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.TDA.Draw.drawDgm">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Draw.</span></span><span class="sig-name descname"><span class="pre">drawDgm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Draw.html#drawDgm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Draw.drawDgm" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.TDA.Draw.drawDgm">
+<code class="sig-prename descclassname">teaspoon.TDA.Draw.</code><code class="sig-name descname">drawDgm</code><span class="sig-paren">(</span><em class="sig-param">D</em>, <em class="sig-param">boundary=None</em>, <em class="sig-param">epsilon=0.5</em>, <em class="sig-param">color=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Draw.html#drawDgm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Draw.drawDgm" title="Permalink to this definition"></a></dt>
 <dd><p>Draws simple persistence diagram plot</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -139,9 +136,9 @@ max death time from the input diagram plus epsilon.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.TDA.Draw.drawPtCloud">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Draw.</span></span><span class="sig-name descname"><span class="pre">drawPtCloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Draw.html#drawPtCloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Draw.drawPtCloud" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.TDA.Draw.drawPtCloud">
+<code class="sig-prename descclassname">teaspoon.TDA.Draw.</code><code class="sig-name descname">drawPtCloud</code><span class="sig-paren">(</span><em class="sig-param">P</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Draw.html#drawPtCloud"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Draw.drawPtCloud" title="Permalink to this definition"></a></dt>
 <dd><p>Draws simple point cloud plot</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -151,7 +148,7 @@ Even if D&gt;2, only the first two coordinates are plotted.</p>
 </dl>
 </dd></dl>
 
-<section id="examples">
+<div class="section" id="examples">
 <h2><span class="section-number">2.3.3.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
 <p>The following example plots a persistence diagram:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
@@ -172,9 +169,9 @@ Even if D&gt;2, only the first two coordinates are plotted.</p>
 </pre></div>
 </div>
 <p>The output for this example is</p>
-<figure class="align-default">
+<div class="figure align-default">
 <a class="reference internal image-reference" href="_images/persistence_diagram_plot_example.png"><img alt="_images/persistence_diagram_plot_example.png" src="_images/persistence_diagram_plot_example.png" style="width: 301.8px; height: 223.20000000000002px;" /></a>
-</figure>
+</div>
 <p>The following example plots a point cloud:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
 <span class="kn">from</span> <span class="nn">teaspoon.TDA.Draw</span> <span class="kn">import</span> <span class="n">drawPtCloud</span>
@@ -191,11 +188,11 @@ Even if D&gt;2, only the first two coordinates are plotted.</p>
 </pre></div>
 </div>
 <p>The output for this example is</p>
-<figure class="align-default">
+<div class="figure align-default">
 <a class="reference internal image-reference" href="_images/point_cloud_plot_example.png"><img alt="_images/point_cloud_plot_example.png" src="_images/point_cloud_plot_example.png" style="width: 300.2px; height: 224.8px;" /></a>
-</figure>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>

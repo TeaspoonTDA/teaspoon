@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.2.2. Classification &mdash; teaspoon 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>2.2.2. Classification &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -27,8 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="index.html" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon<img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -116,39 +114,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="classification">
+  <div class="section" id="classification">
 <h1><span class="section-number">2.2.2. </span>Classification<a class="headerlink" href="#classification" title="Permalink to this headline"></a></h1>
 <p>In <a class="reference internal" href="F_PD.html#featurization"><span class="std std-ref">Featurization</span></a>, we provide examples on how to generate feature matrices from persistence diagrams.
 Here, we show how to perform classification using supervised machine learning algorithms.</p>
-<span class="target" id="module-teaspoon.ML.PD_Classification"></span><dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.getPercentScore">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">getPercentScore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">DgmsDF</span></em>, <em class="sig-param"><span class="pre">labels_col='trainingLabel'</span></em>, <em class="sig-param"><span class="pre">dgm_col='Dgm1'</span></em>, <em class="sig-param"><span class="pre">params=&lt;teaspoon.ML.Base.ParameterBucket</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">precomputed=False</span></em>, <em class="sig-param"><span class="pre">saving=False</span></em>, <em class="sig-param"><span class="pre">saving_path=None</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#getPercentScore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.getPercentScore" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>DgmsDF</strong> (<em>dataframe</em>) – Data frame that includes persistence diagrams and labels. If user choose to performs transfer learning, DgmsDF_test should be given to algorithm. When transfer learning is performed, first diagram input is assumed as training set.</p></li>
-<li><p><strong>labels_col</strong> (<em>str</em>) – Name of the column that stores the labels for persistence diagrams in a Pandas dataframe. The default is ‘trainingLabel’.</p></li>
-<li><p><strong>dgm_col</strong> (<em>str</em>) – Name of the column that stores the persistence diagrams in a Pandas dataframe. The default is ‘Dgm1’.</p></li>
-<li><p><strong>params</strong> (<em>parameterbucket object</em>) – Parameter bucket object. The default is Base.ParameterBucket().</p></li>
-<li><p><strong>precomputed</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If user already computed the persitence landscapes, this should be set to True, otherwise algorithm will
-spend time on computing these. This option is only valid when persistence landscapes are used as featurization
-methods. If this parameter is True, algorithm treat ‘DgmsDF’ as persistence landscapes. The default is False.</p></li>
-<li><p><strong>saving</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If user wants to save classification results, this should be set to True and saving_path needs to be provided. The default is False.</p></li>
-<li><p><strong>saving_path</strong> (<em>str</em><em>, </em><em>optional</em>) – The path where user wants to save the results. This should be provided when saving is True. The default is None.</p></li>
-<li><p><strong>**kwargs</strong> – Additional parameters. When user wants to apply transfer learning, the second set of persistence diagrams and their labels should be passed in a
-dataframe format.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>c_report_train</strong> (<em>dict</em>) – Classification report for training set results.</p></li>
-<li><p><strong>c_report_test</strong> (<em>dict</em>) – Classification report for test set results.</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
 <p>Please see following subsections for classification examples of each featurization approach.</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -159,9 +128,8 @@ dataframe format.</p></li>
 <li class="toctree-l1"><a class="reference internal" href="CL_PS.html">2.2.2.5. Path Signatures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CL_KM.html">2.2.2.6. Kernel Method</a></li>
 </ul>
-
 </div>
-</section>
+</div>
 
 
            </div>

@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.2.2.1. Persistence Landscapes &mdash; teaspoon 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>2.2.2.1. Persistence Landscapes &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -27,8 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="index.html" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon<img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -117,7 +115,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="persistence-landscapes">
+  <div class="section" id="persistence-landscapes">
 <h1><span class="section-number">2.2.2.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Permalink to this headline"></a></h1>
 <p>The code block below provides an example for classification using persistence landscapes.
 We generate persistence diagrams using <em>testSetManifolds</em> function from <a class="reference internal" href="PointCloud.html#point-cloud"><span class="std std-ref">Point Cloud Data Generation Module Documentation</span></a>.
@@ -196,7 +194,7 @@ Number of folds are selected by user. Then, SVM with default hyperparameters is 
 <span class="go">For more metrics, see the outputs.</span>
 </pre></div>
 </div>
-<section id="precomputed-landscapes">
+<div class="section" id="precomputed-landscapes">
 <h2><span class="section-number">2.2.2.1.1. </span>Precomputed Landscapes<a class="headerlink" href="#precomputed-landscapes" title="Permalink to this headline"></a></h2>
 <p>User can also feed precomputed persistence landscapes to classification algorithm to save computation time.
 In this case, the first input to <em>getPercentScore</em> function will be trated as landscapes, and algorithm will
@@ -293,8 +291,8 @@ To enable this option, <em>precomputed</em> needs to be set to True.</p>
 <span class="go">For more metrics, see the outputs.</span>
 </pre></div>
 </div>
-</section>
-<section id="transfer-learning-between-two-sets-of-persistence-diagrams">
+</div>
+<div class="section" id="transfer-learning-between-two-sets-of-persistence-diagrams">
 <h2><span class="section-number">2.2.2.1.2. </span>Transfer learning between two sets of persistence diagrams<a class="headerlink" href="#transfer-learning-between-two-sets-of-persistence-diagrams" title="Permalink to this headline"></a></h2>
 <p>Machine learning module of teaspoon also provides user with transfer learning option.
 When it is enabled, user can train and test a classifier on two different sets of persistence diagrams
@@ -379,8 +377,8 @@ In the last step, we set classification parameters and perform the classificatio
 <span class="go">For more metrics, see the outputs.</span>
 </pre></div>
 </div>
-</section>
-<section id="hyperparameter-tuning">
+</div>
+<div class="section" id="hyperparameter-tuning">
 <h2><span class="section-number">2.2.2.1.3. </span>Hyperparameter tuning<a class="headerlink" href="#hyperparameter-tuning" title="Permalink to this headline"></a></h2>
 <p>Our package also provides user with hyperparameter tuning.
 When it is enabled, user is expected to provide the parameters and their range in a dictionary to tune parameters.
@@ -464,8 +462,8 @@ Algorithm implements <a class="reference external" href="https://scikit-learn.or
 <span class="go">For more metrics, see the outputs.</span>
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

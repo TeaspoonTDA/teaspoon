@@ -30,9 +30,9 @@ The network output has the data structure of an adjacency matrix. An example is 
     t = np.linspace(0,30,200)
     ts = np.sin(t) + np.sin(2*t) #generate a simple time series
     
-    A_knn = knn_graph(ts) #ordinal partition network from time series
+    A_knn = knn_graph(ts) #knn network from time series 
     
-    A_op = ordinal_partition_graph(ts) #knn network from time series
+    A_op = ordinal_partition_graph(ts) #ordinal partition network from time series
     
 
 
@@ -56,7 +56,7 @@ Additionally, there is methods to change the data structure to anything availabl
             width=1, font_size = 10, node_size = 30)
     plt.show()
 
-This coe has the output as follows:
+This code has the output as follows:
 
 .. figure:: figures/example_knn_graph.png
    :scale: 100 %

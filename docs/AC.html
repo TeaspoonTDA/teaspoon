@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.1.2. Auto-correlation for time delay (tau). &mdash; teaspoon 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>2.1.2. Auto-correlation for time delay (tau). &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -27,8 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="index.html" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon<img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -66,7 +64,6 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -117,14 +114,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="module-teaspoon.parameter_selection.autocorrelation"></span><section id="auto-correlation-for-time-delay-tau">
+  <span class="target" id="module-teaspoon.parameter_selection.autocorrelation"></span><div class="section" id="auto-correlation-for-time-delay-tau">
 <h1><span class="section-number">2.1.2. </span>Auto-correlation for time delay (tau).<a class="headerlink" href="#auto-correlation-for-time-delay-tau" title="Permalink to this headline"></a></h1>
 <p>This function implements Auto-Correlation (AC) for the selection of the delay tau for permutation entropy.
 Additionally, it only requires a single time series and has a fast computation time.
 However, this method is only designed for linear system.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.autocorrelation.</span></span><span class="sig-name descname"><span class="pre">autoCorrelation_tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.36788</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">AC_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spearman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/autocorrelation.html#autoCorrelation_tau"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau">
+<code class="sig-prename descclassname">teaspoon.parameter_selection.autocorrelation.</code><code class="sig-name descname">autoCorrelation_tau</code><span class="sig-paren">(</span><em class="sig-param">ts</em>, <em class="sig-param">cutoff=0.36788</em>, <em class="sig-param">AC_method='spearman'</em>, <em class="sig-param">plotting=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/autocorrelation.html#autoCorrelation_tau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau" title="Permalink to this definition"></a></dt>
 <dd><p>This function takes a time series and uses AC to find the optimum
 delay based on the correlation being less than a specified cutoff (default  is 1/e, which is approximately 0.36788).</p>
 <dl class="field-list simple">
@@ -150,7 +147,7 @@ delay based on the correlation being less than a specified cutoff (default  is 1
 </dl>
 </dd></dl>
 
-</section>
+</div>
 <p>The following is an example implementing autocorrelation for selecting tau:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.parameter_selection.autocorrelation</span> <span class="kn">import</span> <span class="n">autoCorrelation_tau</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -167,9 +164,9 @@ delay based on the correlation being less than a specified cutoff (default  is 1
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Delay</span> <span class="kn">from</span> <span class="nn">AC</span><span class="p">:</span>   <span class="mi">13</span>
 </pre></div>
 </div>
-<figure class="align-default">
+<div class="figure align-default">
 <a class="reference internal image-reference" href="_images/AC_example.png"><img alt="_images/AC_example.png" src="_images/AC_example.png" style="width: 276.6px; height: 189.4px;" /></a>
-</figure>
+</div>
 
 
            </div>

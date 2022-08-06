@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.1.1. Mutual Information (MI) for time delay (tau). &mdash; teaspoon 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>2.1.1. Mutual Information (MI) for time delay (tau). &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -27,8 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="index.html" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon<img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -66,7 +64,6 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -117,15 +114,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="module-teaspoon.parameter_selection.MI_delay"></span><section id="mutual-information-mi-for-time-delay-tau">
+  <span class="target" id="module-teaspoon.parameter_selection.MI_delay"></span><div class="section" id="mutual-information-mi-for-time-delay-tau">
 <h1><span class="section-number">2.1.1. </span>Mutual Information (MI) for time delay (tau).<a class="headerlink" href="#mutual-information-mi-for-time-delay-tau" title="Permalink to this headline"></a></h1>
 <p>uses mutual information to find a suitable delay via the location
 of the first minima in the mutual information vs delay plot, which is calculated using multiple
 x(t) vs x(t+tau) plots. These plots have their individual mutual information calculated. Various methods
 for partitioning the x(t) vs x(t+tau) plots for calculating the mutual information.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.parameter_selection.MI_delay.MI_DV">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.MI_delay.</span></span><span class="sig-name descname"><span class="pre">MI_DV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_DV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_DV" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.parameter_selection.MI_delay.MI_DV">
+<code class="sig-prename descclassname">teaspoon.parameter_selection.MI_delay.</code><code class="sig-name descname">MI_DV</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_DV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_DV" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)
 using adaptive partitioning of the plots of the time series x(t) and its delayed version x(t+tau).
 This method was developed by Georges Darbellay and Igor Vajda in 1999 and was published as
@@ -146,9 +143,9 @@ Estimation of information by an adaptive partitioning of the observation.</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.parameter_selection.MI_delay.MI_basic">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.MI_delay.</span></span><span class="sig-name descname"><span class="pre">MI_basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sturge'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_basic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_basic" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.parameter_selection.MI_delay.MI_basic">
+<code class="sig-prename descclassname">teaspoon.parameter_selection.MI_delay.</code><code class="sig-name descname">MI_basic</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">h_method='sturge'</em>, <em class="sig-param">ranking=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_basic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_basic" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)
 using equi-spaced partitions. The size of the partition is based on the desired bin size method commonly selected for histograms.</p>
 <dl class="field-list simple">
@@ -174,9 +171,9 @@ using equi-spaced partitions. The size of the partition is based on the desired 
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.parameter_selection.MI_delay.MI_for_delay">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.MI_delay.</span></span><span class="sig-name descname"><span class="pre">MI_for_delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'basic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sturge'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_for_delay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_for_delay" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.parameter_selection.MI_delay.MI_for_delay">
+<code class="sig-prename descclassname">teaspoon.parameter_selection.MI_delay.</code><code class="sig-name descname">MI_for_delay</code><span class="sig-paren">(</span><em class="sig-param">ts</em>, <em class="sig-param">plotting=False</em>, <em class="sig-param">method='basic'</em>, <em class="sig-param">h_method='sturge'</em>, <em class="sig-param">k=2</em>, <em class="sig-param">ranking=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_for_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_for_delay" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the mutual information until a first minima is reached, which is estimated as a sufficient embedding dimension for permutation entropy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -201,9 +198,9 @@ using equi-spaced partitions. The size of the partition is based on the desired 
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.parameter_selection.MI_delay.MI_kraskov">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.MI_delay.</span></span><span class="sig-name descname"><span class="pre">MI_kraskov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_kraskov"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_kraskov" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.parameter_selection.MI_delay.MI_kraskov">
+<code class="sig-prename descclassname">teaspoon.parameter_selection.MI_delay.</code><code class="sig-name descname">MI_kraskov</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">k=2</em>, <em class="sig-param">ranking=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/MI_delay.html#MI_kraskov"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.parameter_selection.MI_delay.MI_kraskov" title="Permalink to this definition"></a></dt>
 <dd><p>This function estimates the mutual information between the time series x(t) and its delayed version x(t+tau) in two different ways.
 This method was developed by Alexander Kraskov, Harald Stoegbauer, and Peter Grassberger in 2003 and published as
 Estimating Mutual Information.</p>
@@ -231,7 +228,7 @@ Estimating Mutual Information.</p>
 </dl>
 </dd></dl>
 
-</section>
+</div>
 <p>The following is an example implementing the MI method for selecting tau:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.parameter_selection.MI_delay</span> <span class="kn">import</span> <span class="n">MI_for_delay</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -248,9 +245,9 @@ Estimating Mutual Information.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Delay</span> <span class="kn">from</span> <span class="nn">MI</span><span class="p">:</span>  <span class="mi">23</span>
 </pre></div>
 </div>
-<figure class="align-default">
+<div class="figure align-default">
 <a class="reference internal image-reference" href="_images/MI_fig.png"><img alt="_images/MI_fig.png" src="_images/MI_fig.png" style="width: 336.75px; height: 176.25px;" /></a>
-</figure>
+</div>
 
 
            </div>

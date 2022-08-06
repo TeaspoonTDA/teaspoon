@@ -32,9 +32,6 @@ from itertools import combinations
 
 
 def tent(Dgm, params, dgm_type='BirthDeath'):
-    
-    
-    
     '''
     Applies the tent function to a diagram.
 
@@ -443,7 +440,7 @@ def interp_polynomial(Dgm, params, dgm_type='BirthDeath'):
 # this function returns the points from querSet that are within the baseRecatangle
 def getSubset(querySet, baseRectangle):
     """
-    
+
 
     Parameters
     ----------
@@ -659,7 +656,6 @@ class PLandscape():
             Includes all landscape functions of the persistece diagram
 
         """
-        
 
         # L_number is a Nx1 matrix that includes the desired numbers of landscapes
         out = PLandscapes(PD, L_number)
@@ -683,7 +679,7 @@ class PLandscape():
     def PLandscape_plot(self, PL, L_number=[]):
         """
         This function plots selected persistence landscapes or it plots all of them if user does not provide desired landscape functions.
-        
+
 
         Parameters
         ----------
@@ -747,8 +743,7 @@ def F_Landscape(PL, params, max_l_number=None):
         It includes the sorted mesh for each landscape function chosen by user..
 
     """
-    
-    
+
     a = PL
     N = len(a)
 
@@ -808,13 +803,12 @@ def F_Landscape(PL, params, max_l_number=None):
     return feature, Sorted_mesh
 
 
-def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager = None,training=None):
-    
+def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager=None, training=None):
     """
     This function computes the persistence images of given persistence diagrams
     using `Persim <https://persim.scikit-tda.org/en/latest/notebooks/Classification%20with%20persistence%20images.html>`_
     package of Python. Then it provides user with the feature matrix for the diagrams.
-    
+
     Parameters
     ----------
     PD1 : ndarray
@@ -842,22 +836,20 @@ def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager = None,training=None):
 
     """
 
-
     output = {}
     # number of persistence diagrams
     N1 = len(PD1)
 
-    
-    if training ==True:
+    if training == True:
         # adjust the image parameters and compute images
         pers_imager = PersistenceImager()
         pers_imager.pixel_size = PS
         pers_imager.kernel_params = {'sigma': var}
-        
+
         PDs = PD1.tolist()
         pers_imager.fit(PDs, skew=True)
         pers_img = [pers_imager.transform(
-            PD1[i], skew=True) for i in np.arange(0, N1, 1)]    
+            PD1[i], skew=True) for i in np.arange(0, N1, 1)]
     else:
         pers_img = [pers_imager.transform(
             PD1[i], skew=True) for i in np.arange(0, N1, 1)]
@@ -878,9 +870,9 @@ def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager = None,training=None):
             ax = plt.gca()
             pimgr = PersistenceImager()
             pimgr.pixel_size = PS
-            pimgr.kernel_params = {'sigma': var} 
-            pimgr.fit(PD1[D_Img[i]-1],skew=True)
-            imgs = pimgr.transform(PD1[D_Img[i]-1],skew=True)
+            pimgr.kernel_params = {'sigma': var}
+            pimgr.fit(PD1[D_Img[i]-1], skew=True)
+            imgs = pimgr.transform(PD1[D_Img[i]-1], skew=True)
             pers_imager.plot_image(imgs, ax)
             fig.append(plt.gcf())
         output['figures'] = fig
@@ -931,9 +923,6 @@ def F_CCoordinates(PD, FN):
         List of combinations.
 
     """
-    
-
-
 
     N = len(PD)
 
@@ -1003,7 +992,7 @@ def F_PSignature(PL, L_Number=[]):
 
     This function takes the persistence landscape set and returns the feature matrix which is computed using path signatures :cite:`4 <Chevyrev2016,Chevyrev2020>`.
     Function takes two inputs and these are persistence landcsape set in an object array and the landscape numbers that user wants to compute their signatures.
-    
+
 
     Parameters
     ----------
@@ -1094,7 +1083,7 @@ def F_PSignature(PL, L_Number=[]):
 
 def KernelMethod(perDgm1, perDgm2, sigma):
     """
-    
+
     This function computes the kernel for given two persistence diagram based on the formula provided in Ref. :cite:`5 <Reininghaus2015>`.
     There are three inputs and these are two persistence diagrams and the kernel scale sigma.    
 
@@ -1113,9 +1102,6 @@ def KernelMethod(perDgm1, perDgm2, sigma):
         The kernel value for given two persistence diagrams.
 
     """
-    
-    
-
 
     L1 = len(perDgm1)
     L2 = len(perDgm2)

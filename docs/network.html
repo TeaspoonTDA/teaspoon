@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.4.2. Network Representation of Time Series &mdash; teaspoon 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>2.4.2. Network Representation of Time Series &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -27,8 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="index.html" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon<img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -66,7 +64,6 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul class="current">
@@ -117,70 +114,74 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="network-representation-of-time-series">
+  <div class="section" id="network-representation-of-time-series">
 <h1><span class="section-number">2.4.2. </span>Network Representation of Time Series<a class="headerlink" href="#network-representation-of-time-series" title="Permalink to this headline"></a></h1>
 <p>This module provides algorithms for forming both ordinal partition networks (see example GIF below) and k-NN networks. The formation of the networks is described in detail in “<a class="reference external" href="https://arxiv.org/abs/1904.07403">Persistent Homology of Complex Networks for Dynamic State Detection</a>.”</p>
 <a class="with-shadow float-left reference internal image-reference" href="_images/ordinal_partition_network_video_complex.gif"><img alt="Left floating image" class="with-shadow float-left" src="_images/ordinal_partition_network_video_complex.gif" style="width: 471.15000000000003px; height: 214.38000000000002px;" /></a>
 <p>Figure: Example formation of an ordinal partition network for 6 dimensional permutations. As the ordinal ranking of the 6 spaced points changes, so does the node in the network. This shows how the network captures the periodic structure of the time series through a resulting double loop topology.</p>
-<span class="target" id="module-teaspoon.SP.network"></span><dl class="py function clear-both">
-<dt class="sig sig-object py" id="teaspoon.SP.network.knn_graph">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network.</span></span><span class="sig-name descname"><span class="pre">knn_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#knn_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network.knn_graph" title="Permalink to this definition"></a></dt>
+<span class="target" id="module-teaspoon.SP.network"></span><dl class="clear-both function">
+<dt id="teaspoon.SP.network.knn_graph">
+<code class="sig-prename descclassname">teaspoon.SP.network.</code><code class="sig-name descname">knn_graph</code><span class="sig-paren">(</span><em class="sig-param">ts</em>, <em class="sig-param">n=None</em>, <em class="sig-param">tau=None</em>, <em class="sig-param">k=4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#knn_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.network.knn_graph" title="Permalink to this definition"></a></dt>
 <dd><p>This function creates an k-NN network represented as an adjacency matrix A using a 1-D time series</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ts</strong> (<em>1-D array</em>) – 1-D time series signal</p></li>
-<li><p><strong>n</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding dimension for state space reconstruction. Default is uses FNN algorithm from parameter_selection module.</p></li>
-<li><p><strong>tau</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding delay fro state space reconstruction. Default uses MI algorithm from parameter_selection module.</p></li>
-<li><p><strong>k</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – number of nearest neighbors for graph formation.</p></li>
+<dd class="field-odd"><p><strong>ts</strong> (<em>1-D array</em>) – 1-D time series signal</p>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>n</strong> (<em>Optional[int]</em>) – embedding dimension for state space reconstruction. Default is uses FNN algorithm from parameter_selection module.</p></li>
+<li><p><strong>tau</strong> (<em>Optional[int]</em>) – embedding delay fro state space reconstruction. Default uses MI algorithm from parameter_selection module.</p></li>
+<li><p><strong>k</strong> (<em>Optional[int]</em>) – number of nearest neighbors for graph formation.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A (2-D weighted and directed square adjacency matrix)</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A (2-D weighted and directed square adjacency matrix)</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>[2-D square array]</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[2-D square array]</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.SP.network.ordinal_partition_graph">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network.</span></span><span class="sig-name descname"><span class="pre">ordinal_partition_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#ordinal_partition_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network.ordinal_partition_graph" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.SP.network.ordinal_partition_graph">
+<code class="sig-prename descclassname">teaspoon.SP.network.</code><code class="sig-name descname">ordinal_partition_graph</code><span class="sig-paren">(</span><em class="sig-param">ts</em>, <em class="sig-param">n=None</em>, <em class="sig-param">tau=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#ordinal_partition_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.network.ordinal_partition_graph" title="Permalink to this definition"></a></dt>
 <dd><p>This function creates an ordinal partition network represented as an adjacency matrix A using a 1-D time series</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ts</strong> (<em>1-D array</em>) – 1-D time series signal</p></li>
-<li><p><strong>n</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding dimension for state space reconstruction. Default is uses MsPE algorithm from parameter_selection module.</p></li>
-<li><p><strong>tau</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding delay fro state space reconstruction. Default uses MsPE algorithm from parameter_selection module.</p></li>
+<dd class="field-odd"><p><strong>ts</strong> (<em>1-D array</em>) – 1-D time series signal</p>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>n</strong> (<em>Optional[int]</em>) – embedding dimension for state space reconstruction. Default is uses MsPE algorithm from parameter_selection module.</p></li>
+<li><p><strong>tau</strong> (<em>Optional[int]</em>) – embedding delay fro state space reconstruction. Default uses MsPE algorithm from parameter_selection module.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A (2-D weighted and directed square adjacency matrix)</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A (2-D weighted and directed square adjacency matrix)</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>[2-D square array]</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[2-D square array]</p>
 </dd>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-teaspoon.SP.network_tools"></span><dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.SP.network_tools.make_network">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network_tools.</span></span><span class="sig-name descname"><span class="pre">make_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_deg_zero_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#make_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network_tools.make_network" title="Permalink to this definition"></a></dt>
+<span class="target" id="module-teaspoon.SP.network_tools"></span><dl class="function">
+<dt id="teaspoon.SP.network_tools.make_network">
+<code class="sig-prename descclassname">teaspoon.SP.network_tools.</code><code class="sig-name descname">make_network</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">position_iterations=1000</em>, <em class="sig-param">remove_deg_zero_nodes=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#make_network"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.network_tools.make_network" title="Permalink to this definition"></a></dt>
 <dd><p>This function creates a networkx graph and position of the nodes using the adjacency matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>A</strong> (<em>2-D array</em>) – 2-D square adjacency matrix</p></li>
-<li><p><strong>position_iterations</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of spring layout position iterations. Default is 1000.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>A</strong> (<em>2-D array</em>) – 2-D square adjacency matrix</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>G (networkx graph representation), pos (position of nodes for networkx drawing)</p>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><p><strong>position_iterations</strong> (<em>Optional[int]</em>) – Number of spring layout position iterations. Default is 1000.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>[dictionaries, list]</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>G (networkx graph representation), pos (position of nodes for networkx drawing)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[dictionaries, list]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -220,10 +221,10 @@
 </pre></div>
 </div>
 <p>This code has the output as follows:</p>
-<figure class="align-default">
+<div class="figure align-default">
 <a class="reference internal image-reference" href="_images/example_knn_graph.png"><img alt="_images/example_knn_graph.png" src="_images/example_knn_graph.png" style="width: 460.0px; height: 467.0px;" /></a>
-</figure>
-</section>
+</div>
+</div>
 
 
            </div>

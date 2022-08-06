@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.5.1. Point Cloud Data Generation Module Documentation &mdash; teaspoon 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>2.5.1. Point Cloud Data Generation Module Documentation &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -28,8 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="index.html" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon<img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -67,7 +64,6 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -118,8 +114,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="point-cloud-data-generation-module-documentation">
-<h1><span class="section-number">2.5.1. </span>Point Cloud Data Generation Module Documentation<a class="headerlink" href="#point-cloud-data-generation-module-documentation" title="Permalink to this headline"></a></h1>
+  <div class="section" id="point-cloud-data-generation-module-documentation">
+<span id="point-cloud"></span><h1><span class="section-number">2.5.1. </span>Point Cloud Data Generation Module Documentation<a class="headerlink" href="#point-cloud-data-generation-module-documentation" title="Permalink to this headline"></a></h1>
 <p>This module is used to generate point cloud data sampled from various underlying shapes.
 Specifically, the possible shapes are:</p>
 <ul class="simple">
@@ -131,9 +127,9 @@ Specifically, the possible shapes are:</p>
 <li><p>Torus</p></li>
 </ul>
 <p>Additionally, this module can also generate random persistence diagrams.</p>
-<span class="target" id="module-teaspoon.MakeData.PointCloud"></span><dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Annulus">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Annulus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Annulus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Annulus" title="Permalink to this definition"></a></dt>
+<span class="target" id="module-teaspoon.MakeData.PointCloud"></span><dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Annulus">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">Annulus</code><span class="sig-paren">(</span><em class="sig-param">N=200</em>, <em class="sig-param">r=1</em>, <em class="sig-param">R=2</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Annulus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Annulus" title="Permalink to this definition"></a></dt>
 <dd><p>Returns point cloud sampled from uniform distribution on
 annulus in <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> of inner radius <cite>r</cite> and outer radius <cite>R</cite></p>
 <dl class="field-list simple">
@@ -151,9 +147,9 @@ annulus in <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> of
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Circle">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Circle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Circle" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Circle">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">Circle</code><span class="sig-paren">(</span><em class="sig-param">N=100</em>, <em class="sig-param">r=1</em>, <em class="sig-param">gamma=None</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Circle" title="Permalink to this definition"></a></dt>
 <dd><p>Generate <span class="math notranslate nohighlight">\(N\)</span> points in <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> from the circle centered
 at the origin with radius <span class="math notranslate nohighlight">\(r\)</span>.</p>
 <p>If <cite>gamma</cite> is not <cite>None</cite>, then we add noise
@@ -175,9 +171,9 @@ immediately apply.</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Clusters">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([[0,</span> <span class="pre">0],</span> <span class="pre">[3,</span> <span class="pre">3]])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Clusters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Clusters" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Clusters">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">Clusters</code><span class="sig-paren">(</span><em class="sig-param">N=100, centers=array([[0, 0],        [3, 3]]), sd=1, seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Clusters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Clusters" title="Permalink to this definition"></a></dt>
 <dd><p>Generate <cite>k</cite> clusters of points in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</span>, <cite>N</cite> points in total, approximately evenly divided.
 The centers are given as a <span class="math notranslate nohighlight">\(k \times d\)</span> numpy array, where <cite>centers[i,:]</cite> is the center of the ith cluster in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</span>.
 Points are drawn from a normal distribution all with the same standard deviation <cite>sd</cite>.</p>
@@ -197,9 +193,9 @@ the ith cluster in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Cube">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Cube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Cube" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Cube">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">Cube</code><span class="sig-paren">(</span><em class="sig-param">N=100</em>, <em class="sig-param">diam=1</em>, <em class="sig-param">dim=2</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Cube"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Cube" title="Permalink to this definition"></a></dt>
 <dd><p>Generate <cite>N</cite> points in <span class="math notranslate nohighlight">\(\mathbb{R}^{dim}\)</span> from the box
 <span class="math notranslate nohighlight">\([0,diam]\times[0,diam]\times ...\times [0,diam]\)</span></p>
 <dl class="field-list simple">
@@ -216,9 +212,9 @@ the ith cluster in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Sphere">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Sphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Sphere" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Sphere">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">Sphere</code><span class="sig-paren">(</span><em class="sig-param">N=100</em>, <em class="sig-param">r=1</em>, <em class="sig-param">noise=0</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Sphere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Sphere" title="Permalink to this definition"></a></dt>
 <dd><p>Generate <span class="math notranslate nohighlight">\(N\)</span> points in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> from the sphere centered
 at the origin with radius <span class="math notranslate nohighlight">\(r\)</span>.
 If noise is set to a positive number, the points
@@ -237,9 +233,9 @@ can be at distance <span class="math notranslate nohighlight">\(r \pm\)</span> n
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.Torus">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">Torus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Torus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Torus" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.Torus">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">Torus</code><span class="sig-paren">(</span><em class="sig-param">N=100</em>, <em class="sig-param">r=1</em>, <em class="sig-param">R=2</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#Torus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.Torus" title="Permalink to this definition"></a></dt>
 <dd><p>Sampling method taken from Sampling from a Manifold by Diaconis,
 Holmes and Shahshahani, arXiv:1206.6913.</p>
 <p>Generates torus with points</p>
@@ -268,17 +264,16 @@ Holmes and Shahshahani, arXiv:1206.6913.</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.normalDiagram">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">normalDiagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(2,</span> <span class="pre">4)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#normalDiagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.normalDiagram" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.normalDiagram">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">normalDiagram</code><span class="sig-paren">(</span><em class="sig-param">N=20</em>, <em class="sig-param">mu=(2</em>, <em class="sig-param">4)</em>, <em class="sig-param">sd=1</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#normalDiagram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.normalDiagram" title="Permalink to this definition"></a></dt>
 <dd><p>Generates a diagram with points drawn from a normal distribution in the persistence diagram plane.
 Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite> and standard deviation <cite>sd</cite>, then discards any points that are below the diagonal.  Note, however, that this does not get rid of negative birth times.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>N</strong> – Original number of points drawn for the persistence diagram.</p></li>
-<li><p><strong>mu</strong> – Mean and standard deviation of the normal distribution used to generate the points.</p></li>
-<li><p><strong>sd</strong> – Mean and standard deviation of the normal distribution used to generate the points.</p></li>
+<li><p><strong>sd</strong> (<em>mu</em><em>,</em>) – Mean and standard deviation of the normal distribution used to generate the points.</p></li>
 <li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
 </ul>
 </dd>
@@ -288,17 +283,16 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.testSetClassification">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">testSetClassification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numDgms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">10)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">muRed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1,</span> <span class="pre">3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">muBlue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(2,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetClassification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetClassification" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.testSetClassification">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">testSetClassification</code><span class="sig-paren">(</span><em class="sig-param">N=20</em>, <em class="sig-param">numDgms=(10</em>, <em class="sig-param">10)</em>, <em class="sig-param">muRed=(1</em>, <em class="sig-param">3)</em>, <em class="sig-param">muBlue=(2</em>, <em class="sig-param">5)</em>, <em class="sig-param">sd=1</em>, <em class="sig-param">permute=True</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetClassification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetClassification" title="Permalink to this definition"></a></dt>
 <dd><p>Generate a collection of diagrams using the normalDiagram() function for classification tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>N</strong> – The number of initial diagrams pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</p></li>
 <li><p><strong>numDgms</strong> – The number of diagrams for the collection.  Can either be an integer, in which case <cite>numDgms</cite> is the number of diagrams of <em>each type</em> that are generated, thus returning a data set with <cite>2*numDgms</cite> diagrams.  Alternatively, <cite>numDgms</cite> can be passed as a length two list <cite>(n,m)</cite> where <cite>n</cite> diagrams of the first type and <cite>m</cite> diagrams of the second type are drawn, for a total of <cite>n+m</cite> diagrams.</p></li>
-<li><p><strong>muRed</strong> – The means used for the normal distribution in normalDiagram() for the two different types.</p></li>
-<li><p><strong>muBlue</strong> – The means used for the normal distribution in normalDiagram() for the two different types.</p></li>
+<li><p><strong>muBlue</strong> (<em>muRed</em><em>,</em>) – The means used for the normal distribution in normalDiagram() for the two different types.</p></li>
 <li><p><strong>sd</strong> – The standard deviation for the normal distribution used for normalDiagram().</p></li>
 <li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">permute=True</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be red type followed by blue type.</p></li>
 <li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
@@ -310,9 +304,9 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.testSetManifolds">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">testSetManifolds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numDgms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numPts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetManifolds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetManifolds" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.testSetManifolds">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">testSetManifolds</code><span class="sig-paren">(</span><em class="sig-param">numDgms=50</em>, <em class="sig-param">numPts=300</em>, <em class="sig-param">permute=True</em>, <em class="sig-param">seed=None</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetManifolds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetManifolds" title="Permalink to this definition"></a></dt>
 <dd><p>Generates a collection of diagrams from different underlying topological spaces.  This set is useful for testing classification tasks.</p>
 <dl class="simple">
 <dt>The types of underlying spaces with their entry in the <cite>trainingLabel</cite> column is as follows. Each function uses the default values (except for the number of points) unless otherwise noted.</dt><dd><ul class="simple">
@@ -340,9 +334,9 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.testSetRegressionBall">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">testSetRegressionBall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numDgms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">muCenter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1,</span> <span class="pre">3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetRegressionBall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetRegressionBall" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.testSetRegressionBall">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">testSetRegressionBall</code><span class="sig-paren">(</span><em class="sig-param">N=20</em>, <em class="sig-param">numDgms=40</em>, <em class="sig-param">muCenter=(1</em>, <em class="sig-param">3)</em>, <em class="sig-param">sd=1</em>, <em class="sig-param">permute=True</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetRegressionBall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetRegressionBall" title="Permalink to this definition"></a></dt>
 <dd><p>Generate a collection of diagrams with means distributed normally using the normalDiagram() function; used for regression tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -361,17 +355,16 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.PointCloud.testSetRegressionLine">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.PointCloud.</span></span><span class="sig-name descname"><span class="pre">testSetRegressionLine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numDgms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">muStart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1,</span> <span class="pre">3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">muEnd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(2,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetRegressionLine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetRegressionLine" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="teaspoon.MakeData.PointCloud.testSetRegressionLine">
+<code class="sig-prename descclassname">teaspoon.MakeData.PointCloud.</code><code class="sig-name descname">testSetRegressionLine</code><span class="sig-paren">(</span><em class="sig-param">N=20</em>, <em class="sig-param">numDgms=40</em>, <em class="sig-param">muStart=(1</em>, <em class="sig-param">3)</em>, <em class="sig-param">muEnd=(2</em>, <em class="sig-param">5)</em>, <em class="sig-param">sd=1</em>, <em class="sig-param">permute=True</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/MakeData/PointCloud.html#testSetRegressionLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.MakeData.PointCloud.testSetRegressionLine" title="Permalink to this definition"></a></dt>
 <dd><p>Generate a collection of diagrams with means distributed along a line using the normalDiagram() function for regression tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>N</strong> – The number of initial points pulled to create each diagram.  Diagrams could end up with fewer than <cite>N</cite> pts as the pts drawn below the diagonal will be discarded. See normalDiagram() for more information.</p></li>
 <li><p><strong>numDgms</strong> – The number of diagrams for the collection given as an integer.</p></li>
-<li><p><strong>muStart</strong> – The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by <cite>muStart</cite> and <cite>muEnd</cite>.</p></li>
-<li><p><strong>muEnd</strong> – The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by <cite>muStart</cite> and <cite>muEnd</cite>.</p></li>
+<li><p><strong>muEnd</strong> (<em>muStart</em><em>,</em>) – The means used for the normal distribution in normalDiagram() are evenly spread along the line segment spanned by <cite>muStart</cite> and <cite>muEnd</cite>.</p></li>
 <li><p><strong>sd</strong> – The standard deviation for the normal distribution used for normalDiagram().</p></li>
 <li><p><strong>permute</strong> – If <code class="docutils literal notranslate"><span class="pre">permute=True</span></code>, the data frame returned has its rows randomly permuted.  If <cite>False</cite>, the rows will be be sorted by the location of the means.</p></li>
 <li><p><strong>seed</strong> – Used to fix the seed if passed an integer; otherwise should be <cite>None</cite>.</p></li>
@@ -383,7 +376,7 @@ Pulls <cite>N</cite> points from a normal distribution with mean <cite>mu</cite>
 </dl>
 </dd></dl>
 
-<section id="examples">
+<div class="section" id="examples">
 <h2><span class="section-number">2.5.1.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
 <p>The following is an example generating point clouds sampled from different
 underlying shapes:</p>
@@ -445,9 +438,9 @@ underlying shapes:</p>
 </pre></div>
 </div>
 <p>Where the output for this example is:</p>
-<figure class="align-default">
+<div class="figure align-default">
 <img alt="_images/PCs.png" src="_images/PCs.png" />
-</figure>
+</div>
 <p>The following is an example generating a data set of persistence diagrams
 computed from point clouds sampled from different underlying shapes. In this
 case, the persistence diagrams correspond to the point clouds shown in the above
@@ -470,11 +463,11 @@ example:</p>
 </pre></div>
 </div>
 <p>Where the output for this example is:</p>
-<figure class="align-default">
+<div class="figure align-default">
 <img alt="_images/PointCloudEx.png" src="_images/PointCloudEx.png" />
-</figure>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>

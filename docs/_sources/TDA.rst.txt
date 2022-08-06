@@ -11,4 +11,3 @@ This branch of the documentation covers tool used for topological data analysis.
    Drawing <drawing.rst>
    Persistence <persistence.rst>
    Zero Dimensional Sublevel Set Persistence (SLSP) Module <sublevel_set_persistence.rst>
-   Bifurcations using ZigZag (BuZZ) <buzz.rst>
