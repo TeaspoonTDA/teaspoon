@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaspoon.TDA.PHN &mdash; teaspoon 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <title>teaspoon.TDA.PHN &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -24,8 +24,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="../../../index.html" class="icon icon-home"> teaspoon
-            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="../../../index.html" class="icon icon-home"> teaspoon<img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -63,7 +62,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -121,12 +119,21 @@
 <span class="sd">        diagram (list): persistence diagram from ripser from a graph&#39;s distance matrix</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        [array 1-D]: statistics (R, En M) as (maximum persistence ratio, persistent entropy normalized, homology class ratio)</span>
+<span class="sd">        [array 1-D]: statistics (R, En M) as (maximum persistence ratio, persistent entropy normalized, homology class ratio). Returns NaNs if empty diagram.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+    <span class="c1"># assertion errors to check data types</span>
+
+    <span class="k">assert</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="s2">&quot;A is not square adjacency matrix.&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">diagram</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;Diagram should include atleast 0D and 1D persistene diagrams as a list of numpy.ndarrays.&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">diagram</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">),</span> <span class="s2">&quot;Diagram should include atleast 0D and 1D persistene diagrams as a list of numpy.ndarrays.&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span>
+        <span class="n">diagram</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span> <span class="s2">&quot;Diagram should include atleast 0D and 1D persistene diagrams as a list of numpy.ndarrays.&quot;</span>
+
     <span class="k">def</span> <span class="nf">persistentEntropy</span><span class="p">(</span><span class="n">lt</span><span class="p">):</span>
+
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">L</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">lt</span><span class="o">/</span><span class="n">L</span>
@@ -139,22 +146,28 @@
             <span class="n">E</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">E</span>
 
-    <span class="n">lt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">D1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-    <span class="n">D1</span> <span class="o">=</span> <span class="n">D1</span>
-    <span class="n">lt</span> <span class="o">=</span> <span class="n">lt</span><span class="p">[</span><span class="n">lt</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">10</span><span class="p">]</span>
-    <span class="n">num_lifetimes1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span>
-    <span class="n">num_unique</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">En</span> <span class="o">=</span> <span class="n">persistentEntropy</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 
-    <span class="n">H1</span> <span class="o">=</span> <span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.1</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">H1</span><span class="p">[</span><span class="n">H1</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">10</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># ------------Entropy---------------</span>
+        <span class="n">lt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">D1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">D1</span> <span class="o">=</span> <span class="n">D1</span>
+        <span class="n">lt</span> <span class="o">=</span> <span class="n">lt</span><span class="p">[</span><span class="n">lt</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">10</span><span class="p">]</span>
+        <span class="n">num_lifetimes1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span>
+        <span class="n">num_unique</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">En</span> <span class="o">=</span> <span class="n">persistentEntropy</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span>
+
+        <span class="c1"># ------------maximum persistence ratio---------------</span>
+        <span class="n">H1</span> <span class="o">=</span> <span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.1</span>
         <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">H1</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">num_unique</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">-</span><span class="n">delta</span><span class="p">))</span>
+
+        <span class="c1"># ------------homology class ratio---------------</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">num_lifetimes1</span><span class="o">/</span><span class="n">num_unique</span>
+        <span class="n">statistics</span> <span class="o">=</span> <span class="p">[</span><span class="n">R</span><span class="p">,</span> <span class="n">En</span><span class="p">,</span> <span class="n">M</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="n">num_lifetimes1</span><span class="o">/</span><span class="n">num_unique</span>
-    <span class="n">statistics</span> <span class="o">=</span> <span class="p">[</span><span class="n">R</span><span class="p">,</span> <span class="n">En</span><span class="p">,</span> <span class="n">M</span><span class="p">]</span>
+        <span class="n">statistics</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
+
     <span class="k">return</span> <span class="n">statistics</span></div>
 
 
@@ -204,28 +217,6 @@
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
 
-    <span class="c1"># ----------------------------Example Simple--------------------------------------</span>
-
-    <span class="c1"># import needed packages</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">from</span> <span class="nn">teaspoon.SP.network</span> <span class="kn">import</span> <span class="n">knn_graph</span>
-    <span class="kn">from</span> <span class="nn">teaspoon.TDA.PHN</span> <span class="kn">import</span> <span class="n">PH_network</span>
-
-    <span class="c1"># generate a siple sinusoidal time series</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-
-    <span class="c1"># create adjacency matrix, this</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
-
-    <span class="c1"># create distance matrix and calculate persistence diagram</span>
-    <span class="n">D</span><span class="p">,</span> <span class="n">diagram</span> <span class="o">=</span> <span class="n">PH_network</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;unweighted&#39;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="s1">&#39;shortest_path&#39;</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1-D Persistent Homology (loops): &#39;</span><span class="p">,</span> <span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
-    <span class="n">stats</span> <span class="o">=</span> <span class="n">point_summaries</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Persistent homology of network statistics: &#39;</span><span class="p">,</span> <span class="n">stats</span><span class="p">)</span>
-
     <span class="c1"># ---------------------------Complex Example---------------------------------------</span>
 
     <span class="c1"># import needed packages</span>
@@ -253,6 +244,11 @@
     <span class="c1"># create distance matrix and calculate persistence diagram</span>
     <span class="n">D</span><span class="p">,</span> <span class="n">diagram</span> <span class="o">=</span> <span class="n">PH_network</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;unweighted&#39;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="s1">&#39;shortest_path&#39;</span><span class="p">)</span>
 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1-D Persistent Homology (loops): &#39;</span><span class="p">,</span> <span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">point_summaries</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Persistent homology of network statistics: &#39;</span><span class="p">,</span> <span class="n">stats</span><span class="p">)</span>
+
     <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
     <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
     <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
@@ -279,7 +275,10 @@
     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Persistence Diagram&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
     <span class="n">MS</span> <span class="o">=</span> <span class="mi">3</span>
-    <span class="n">top</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">top</span><span class="o">*</span><span class="mf">1.25</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">top</span><span class="o">*</span><span class="mf">1.25</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TextSize</span><span class="p">)</span>

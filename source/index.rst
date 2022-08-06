@@ -31,9 +31,11 @@ Collaborators
 
 The code is a compilation of work done by `Elizabeth Munch <http://www.elizabethmunch.com>`_ and `Firas Khasawneh <http://www.firaskhasawneh.com/>`__ along with their students and collaborators.  People who have contributed to teaspoon include:
 
-- `Audun Myers <https://github.com/myersau3>`_
-- Melih Yesilli
-- `Sarah Tymochko <https://www.egr.msu.edu/~tymochko/>`_
+- `Audun Myers <https://www.audunmyers.com>`_
+- `Melih Yesilli <https://www.melihcanyesilli.com>`_
+- `Sarah Tymochko <https://www.sarahtymochko.com/home>`_
+- `Danielle Barnes <mailto:barnesd8@msu.edu>`_
+- `Ismail Guzel`
 
 
 

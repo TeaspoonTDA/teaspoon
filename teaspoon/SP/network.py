@@ -1,5 +1,7 @@
 
 # Gets Adjacency Matrix (weighted and direction) using permutation sequence
+
+
 def Adjaceny_OP(perm_seq, n):
     import numpy as np
     N = np.math.factorial(n)  # number of possible nodes

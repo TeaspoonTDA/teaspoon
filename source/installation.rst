@@ -19,17 +19,8 @@ Most of the persistence computation is teaspoon is now done with `Scikit-TDA <ht
 
 **Required Packages:**
 
-* pip install pyentrp
-* pip install numpy
-* pip install matplotlib
-* pip install os
-* pip install sys
-* pip install itertools
-* pip install sci-kit
-* pip install networkx
-* pip install scipy
-* pip install POT
-* pip install persim
+.. include:: ../requirements.md
+
 * pip install --verbose dionysus
 
 Installation
