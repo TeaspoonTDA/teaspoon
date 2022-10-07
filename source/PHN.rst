@@ -27,29 +27,30 @@ The following is an example implementing the method for an ordinal partition net
     from teaspoon.SP.network_tools import remove_zeros
     from teaspoon.SP.network_tools import make_network
     from teaspoon.TDA.PHN import DistanceMatrix, point_summaries, PH_network
-
+    
     # Time series data
     t = np.linspace(0,30,600)
     ts = np.sin(t) + np.sin(2*t) #generate a simple time series
 
     A = ordinal_partition_graph(ts, n = 6) #adjacency matrix
     A = remove_zeros(A) #remove nodes of unused permutation
-    
+    G = nx.from_numpy_matrix(A)
+    G.remove_edges_from(nx.selfloop_edges(G))
     #create distance matrix and calculate persistence diagram
-    D = DistanceMatrix(A, method = 'shortest_unweighted_path')
-    diagram = PH_network(D) 
-    
+    D = DistanceMatrix(A, method = 'diffusion_distance')
+    diagram = PH_network(D)
+
     print('1-D Persistent Homology (loops): ', diagram[1])
-    
+
     stats = point_summaries(diagram, A)
     print('Persistent homology of network statistics: ', stats)
     
     
     
     TextSize = 14
-    plt.figure(2) 
+    plt.figure(2)
     plt.figure(figsize=(8,8))
-    gs = gridspec.GridSpec(4, 2) 
+    gs = gridspec.GridSpec(4, 2)
     
     ax = plt.subplot(gs[0:2, 0:2]) #plot time series
     plt.title('Time Series', size = TextSize)
@@ -60,12 +61,12 @@ The following is an example implementing the method for an ordinal partition net
     plt.ylabel('$x(t)$', size = TextSize)
     plt.xlim(0,len(ts))
     
-    ax = plt.subplot(gs[2:4, 0]) 
+    ax = plt.subplot(gs[2:4, 0])
     plt.title('Network', size = TextSize)
-    nx.draw(G, pos, with_labels=False, font_weight='bold', node_color='blue',
-            width=1, font_size = 10, node_size = 30)
+    nx.draw(G, with_labels=False, font_weight='bold', node_color='blue',
+        width=1, font_size = 10, node_size = 30)
     
-    ax = plt.subplot(gs[2:4, 1]) 
+    ax = plt.subplot(gs[2:4, 1])
     plt.title('Persistence Diagram', size = TextSize)
     MS = 3
     top = max(diagram[1].T[1])
