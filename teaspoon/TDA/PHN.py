@@ -4,6 +4,7 @@ from teaspoon.SP import tsa_tools
 from teaspoon.SP import network_tools
 from ripser import ripser
 import numpy as np
+import networkx as nx
 
 # import sub modules
 import os

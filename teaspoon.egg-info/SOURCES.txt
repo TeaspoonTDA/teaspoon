@@ -37,6 +37,7 @@ teaspoon/TDA/PHN.py
 teaspoon/TDA/Persistence.py
 teaspoon/TDA/SLSP.py
 teaspoon/TDA/SLSP_tools.py
+teaspoon/TDA/TGZZ.py
 teaspoon/TDA/__init__.py
 teaspoon/TDA/c_profile_test.py
 teaspoon/parameter_selection/FNN_n.py
