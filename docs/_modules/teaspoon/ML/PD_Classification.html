@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaspoon.ML.PD_Classification &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="../../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html">2.1.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">5. Citing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">teaspoon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>teaspoon.ML.PD_Classification</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaspoon.ML.PD_Classification</h1><div class="highlight"><pre>
+<span></span>
+
+<span class="kn">import</span> <span class="nn">teaspoon.ML.Base</span> <span class="k">as</span> <span class="nn">Base</span>
+<span class="kn">import</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="k">as</span> <span class="nn">fF</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span><span class="p">,</span> <span class="n">NuSVC</span><span class="p">,</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeClassifierCV</span><span class="p">,</span> <span class="n">RidgeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span><span class="p">,</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">squareform</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="c1"># sys.path.insert(0, os.path.join(os.path.dirname(__file__), &#39;..&#39;, &#39;..&#39;))</span>
+<span class="c1"># sys.path.insert(0, os.path.join(os.path.dirname(__file__), &#39;..&#39;))</span>
+<span class="c1"># sys.path.insert(0, os.path.dirname(__file__))</span>
+<span class="c1"># sys.path.insert(0, os.path.join(os.path.dirname(</span>
+<span class="c1">#     __file__), &#39;..&#39;, &#39;..&#39;, &#39;teaspoon&#39;, &#39;ML&#39;))</span>
+<span class="c1"># sys.path.insert(0, os.path.join(os.path.dirname(__file__), &#39;teaspoon&#39;, &#39;ML&#39;))</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module::PD_Classification</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">train_test_split</span><span class="p">(</span><span class="n">DgmsDF</span><span class="p">,</span> <span class="n">labels_col</span><span class="p">,</span> <span class="n">dgm_col</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function splits given dataframe of diagrams and labels into training and test using</span>
+<span class="sd">    StratifiedK-fold cross validation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    DgmsDF : dataframe</span>
+<span class="sd">        Dataframe that includes diagrams and labels </span>
+<span class="sd">    labels_col : str</span>
+<span class="sd">        Name of the column that stores the labels of the diagrams</span>
+<span class="sd">    dgm_col : str</span>
+<span class="sd">        Name of the columns that stores the persistence diagrams </span>
+<span class="sd">    params : ParameterBucket object</span>
+<span class="sd">        Object that includes featurization and classification parameters</span>
+<span class="sd">    *args : </span>
+<span class="sd">        When transfer learning is applied, user needs to pass test set diagrams in a different </span>
+<span class="sd">        dataframe.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    training_set_dgm : list</span>
+<span class="sd">        The list includes training set diagrams for each fold</span>
+<span class="sd">    test_set_dgm : list</span>
+<span class="sd">        The list includes test set diagrams for each fold</span>
+<span class="sd">    training_set_label : list</span>
+<span class="sd">        The list includes training set labels for each fold</span>
+<span class="sd">    test_set_label : list</span>
+<span class="sd">        The list includes test set labels for each fold</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># generate the lists that store test set and training set diagrams/landscapes</span>
+    <span class="n">test_set_dgm</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">training_set_dgm</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">test_set_label</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">training_set_label</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">TF_Learning</span><span class="p">:</span>
+        <span class="n">DgmsDF_test</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># set a constant random_state number to be able to get same train-test for all classifiers</span>
+        <span class="n">skf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">k_fold_cv</span><span class="p">,</span>
+                    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+
+        <span class="c1"># generate list of indicies of training and test of training and test diagrams for transfer learning</span>
+        <span class="n">indices_train_train</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">indices_train_test</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">indices_test_train</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">indices_test_test</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># find indices of training and test set for training set diagrams</span>
+        <span class="k">for</span> <span class="n">train_ind</span><span class="p">,</span> <span class="n">test_ind</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">DgmsDF</span><span class="p">[</span><span class="n">dgm_col</span><span class="p">],</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">labels_col</span><span class="p">]):</span>
+            <span class="n">indices_train_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_ind</span><span class="p">)</span>
+            <span class="n">indices_train_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_ind</span><span class="p">)</span>
+
+        <span class="c1"># find indices of training and test set for test set diagrams</span>
+        <span class="k">for</span> <span class="n">train_ind</span><span class="p">,</span> <span class="n">test_ind</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">DgmsDF_test</span><span class="p">[</span><span class="n">dgm_col</span><span class="p">],</span> <span class="n">DgmsDF_test</span><span class="p">[</span><span class="n">labels_col</span><span class="p">]):</span>
+            <span class="n">indices_test_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_ind</span><span class="p">)</span>
+            <span class="n">indices_test_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_ind</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">k_fold</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">k_fold_cv</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">dgm_col</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">!=</span> <span class="n">fF</span><span class="o">.</span><span class="n">tent</span> <span class="ow">and</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">!=</span> <span class="n">fF</span><span class="o">.</span><span class="n">interp_polynomial</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                        <span class="s2">&quot;The list format for dgm_col is only valid for template functions.&quot;</span><span class="p">)</span>
+                <span class="c1"># user may enter a list of diagram label</span>
+                <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                <span class="n">D_train_train</span><span class="p">,</span> <span class="n">D_train_test</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices_train_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                                          <span class="p">],</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices_train_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+                <span class="n">L_train_train</span><span class="p">,</span> <span class="n">L_train_test</span> <span class="o">=</span> <span class="n">D_train_train</span><span class="p">[</span><span class="n">labels_col</span><span class="p">],</span> <span class="n">D_train_test</span><span class="p">[</span><span class="n">labels_col</span><span class="p">]</span>
+
+                <span class="n">DgmsDF_test</span> <span class="o">=</span> <span class="n">DgmsDF_test</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                <span class="c1"># training and test set for test set  diagrams/landscapes</span>
+                <span class="n">D_test_train</span><span class="p">,</span> <span class="n">D_test_test</span> <span class="o">=</span> <span class="n">DgmsDF_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices_test_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                                             <span class="p">],</span> <span class="n">DgmsDF_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices_test_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+                <span class="n">L_test_train</span><span class="p">,</span> <span class="n">L_test_test</span> <span class="o">=</span> <span class="n">DgmsDF_test</span><span class="p">[</span><span class="n">labels_col</span><span class="p">][</span><span class="n">indices_test_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                                                    <span class="p">],</span> <span class="n">DgmsDF_test</span><span class="p">[</span><span class="n">labels_col</span><span class="p">][</span><span class="n">indices_test_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                <span class="c1"># training and test set for training set diagrams/landscapes/images</span>
+                <span class="n">D_train_train</span><span class="p">,</span> <span class="n">D_train_test</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">dgm_col</span><span class="p">][</span><span class="n">indices_train_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                                              <span class="p">],</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">dgm_col</span><span class="p">][</span><span class="n">indices_train_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+                <span class="n">L_train_train</span><span class="p">,</span> <span class="n">L_train_test</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">labels_col</span><span class="p">][</span><span class="n">indices_train_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                                                 <span class="p">],</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">labels_col</span><span class="p">][</span><span class="n">indices_train_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+
+                <span class="n">DgmsDF_test</span> <span class="o">=</span> <span class="n">DgmsDF_test</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                <span class="c1"># training and test set for test set  diagrams/landscapes/images</span>
+                <span class="n">D_test_train</span><span class="p">,</span> <span class="n">D_test_test</span> <span class="o">=</span> <span class="n">DgmsDF_test</span><span class="p">[</span><span class="n">dgm_col</span><span class="p">][</span><span class="n">indices_test_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                                                 <span class="p">],</span> <span class="n">DgmsDF_test</span><span class="p">[</span><span class="n">dgm_col</span><span class="p">][</span><span class="n">indices_test_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+                <span class="n">L_test_train</span><span class="p">,</span> <span class="n">L_test_test</span> <span class="o">=</span> <span class="n">DgmsDF_test</span><span class="p">[</span><span class="n">labels_col</span><span class="p">][</span><span class="n">indices_test_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                                                    <span class="p">],</span> <span class="n">DgmsDF_test</span><span class="p">[</span><span class="n">labels_col</span><span class="p">][</span><span class="n">indices_test_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+
+            <span class="n">training_set_dgm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">D_train_train</span><span class="p">)</span>
+            <span class="n">test_set_dgm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">D_test_train</span><span class="p">)</span>
+            <span class="n">training_set_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L_train_train</span><span class="p">)</span>
+            <span class="n">test_set_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L_test_train</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># first step is to obtain training and test sets of the</span>
+        <span class="c1"># set a constant random_state number to be able to get same train-test for all classifiers</span>
+        <span class="n">skf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">k_fold_cv</span><span class="p">,</span>
+                    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+
+        <span class="c1"># generate list of indicies of training and test of training and test diagrams for transfer learning</span>
+        <span class="n">indices_train</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">indices_test</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># find indices of training and test set</span>
+        <span class="k">for</span> <span class="n">train_ind</span><span class="p">,</span> <span class="n">test_ind</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">DgmsDF</span><span class="p">[</span><span class="n">dgm_col</span><span class="p">],</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">labels_col</span><span class="p">]):</span>
+            <span class="n">indices_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_ind</span><span class="p">)</span>
+            <span class="n">indices_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_ind</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">k_fold</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">k_fold_cv</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">dgm_col</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">!=</span> <span class="n">fF</span><span class="o">.</span><span class="n">tent</span> <span class="ow">and</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">!=</span> <span class="n">fF</span><span class="o">.</span><span class="n">interp_polynomial</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                        <span class="s2">&quot;The list format for dgm_col is only valid for template functions.&quot;</span><span class="p">)</span>
+                <span class="c1"># user may enter a list of diagram label</span>
+                <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                <span class="n">D_train</span><span class="p">,</span> <span class="n">D_test</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                              <span class="p">],</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+                <span class="n">L_train</span><span class="p">,</span> <span class="n">L_test</span> <span class="o">=</span> <span class="n">D_train</span><span class="p">[</span><span class="n">labels_col</span><span class="p">],</span> <span class="n">D_test</span><span class="p">[</span><span class="n">labels_col</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                <span class="c1"># training and test set for training set diagrams/landscapes/images</span>
+                <span class="n">D_train</span><span class="p">,</span> <span class="n">D_test</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">dgm_col</span><span class="p">][</span><span class="n">indices_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                                  <span class="p">],</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">dgm_col</span><span class="p">][</span><span class="n">indices_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+                <span class="n">L_train</span><span class="p">,</span> <span class="n">L_test</span> <span class="o">=</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">labels_col</span><span class="p">][</span><span class="n">indices_train</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+                                                     <span class="p">],</span> <span class="n">DgmsDF</span><span class="p">[</span><span class="n">labels_col</span><span class="p">][</span><span class="n">indices_test</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]]</span>
+
+            <span class="n">training_set_dgm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">D_train</span><span class="p">)</span>
+            <span class="n">test_set_dgm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">D_test</span><span class="p">)</span>
+            <span class="n">training_set_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L_train</span><span class="p">)</span>
+            <span class="n">test_set_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L_test</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">training_set_dgm</span><span class="p">,</span> <span class="n">test_set_dgm</span><span class="p">,</span> <span class="n">training_set_label</span><span class="p">,</span> <span class="n">test_set_label</span>
+
+
+<div class="viewcode-block" id="getPercentScore"><a class="viewcode-back" href="../../../CL.html#teaspoon.ML.PD_Classification.getPercentScore">[docs]</a><span class="k">def</span> <span class="nf">getPercentScore</span><span class="p">(</span><span class="n">DgmsDF</span><span class="p">,</span>
+                    <span class="n">labels_col</span><span class="o">=</span><span class="s1">&#39;trainingLabel&#39;</span><span class="p">,</span>
+                    <span class="n">dgm_col</span><span class="o">=</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">,</span>
+                    <span class="n">params</span><span class="o">=</span><span class="n">Base</span><span class="o">.</span><span class="n">ParameterBucket</span><span class="p">(),</span>
+                    <span class="n">precomputed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">saving</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">saving_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    DgmsDF : dataframe</span>
+<span class="sd">        Data frame that includes persistence diagrams and labels. If user choose to performs transfer learning, DgmsDF_test should be given to algorithm. When transfer learning is performed, first diagram input is assumed as training set.</span>
+
+<span class="sd">    labels_col : str</span>
+<span class="sd">        Name of the column that stores the labels for persistence diagrams in a Pandas dataframe. The default is &#39;trainingLabel&#39;.</span>
+<span class="sd">    dgm_col : str</span>
+<span class="sd">        Name of the column that stores the persistence diagrams in a Pandas dataframe. The default is &#39;Dgm1&#39;.</span>
+<span class="sd">    params : parameterbucket object</span>
+<span class="sd">        Parameter bucket object. The default is Base.ParameterBucket().</span>
+<span class="sd">    precomputed : boolean, optional</span>
+<span class="sd">        If user already computed the persitence landscapes, this should be set to True, otherwise algorithm will </span>
+<span class="sd">        spend time on computing these. This option is only valid when persistence landscapes are used as featurization</span>
+<span class="sd">        methods. If this parameter is True, algorithm treat &#39;DgmsDF&#39; as persistence landscapes. The default is False.</span>
+<span class="sd">    saving : boolean, optional</span>
+<span class="sd">        If user wants to save classification results, this should be set to True and saving_path needs to be provided. The default is False.</span>
+<span class="sd">    saving_path : str, optional</span>
+<span class="sd">        The path where user wants to save the results. This should be provided when saving is True. The default is None.</span>
+<span class="sd">    **kwargs : </span>
+<span class="sd">        Additional parameters. When user wants to apply transfer learning, the second set of persistence diagrams and their labels should be passed in a</span>
+<span class="sd">        dataframe format. </span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    c_report_train : dict</span>
+<span class="sd">        Classification report for training set results.</span>
+<span class="sd">    c_report_test : dict</span>
+<span class="sd">        Classification report for test set results.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Note: DgmsDF_test and DgmsDF can represent persistence diagrams, persistence images</span>
+    <span class="c1"># or persistence landscapes depending on the user input for precomputed. If precomputed is</span>
+    <span class="c1"># set to True, algorithm will not spend time for computing landscapes or images. Instead, it will</span>
+    <span class="c1"># expect user to pass them in the same data format as diagrams.</span>
+
+    <span class="c1"># if verbose:</span>
+    <span class="c1">#     print(&#39;---&#39;)</span>
+    <span class="c1">#     print(&#39;Beginning experiment.&#39;)</span>
+    <span class="c1">#     print(params)</span>
+
+    <span class="c1"># generate lists for storing accuracy and reports of classification for training and test sets</span>
+    <span class="n">accuracy_train</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">accuracy_test</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">c_report_train</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">c_report_test</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># obtain training and test sets for diagrams using the stratified k-fold</span>
+    <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">TF_Learning</span><span class="p">:</span>
+        <span class="c1"># assign the test test set diagrams from additional variables</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">DgmsDF_test</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;DgmsDF_test&#39;</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Please provide the second set of persistence diagrams that represent the test set for transfer learning.&quot;</span>
+                            <span class="s2">&quot;If you do not want to proceed with transfer learning, please set TF_Learning flag to False.&quot;</span><span class="p">)</span>
+
+        <span class="n">training_set_dgm</span><span class="p">,</span> <span class="n">test_set_dgm</span><span class="p">,</span> <span class="n">training_set_label</span><span class="p">,</span> <span class="n">test_set_label</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+            <span class="n">DgmsDF</span><span class="p">,</span> <span class="n">labels_col</span><span class="p">,</span> <span class="n">dgm_col</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">DgmsDF_test</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">training_set_dgm</span><span class="p">,</span> <span class="n">test_set_dgm</span><span class="p">,</span> <span class="n">training_set_label</span><span class="p">,</span> <span class="n">test_set_label</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+            <span class="n">DgmsDF</span><span class="p">,</span> <span class="n">labels_col</span><span class="p">,</span> <span class="n">dgm_col</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># check to see if only one column label was passed. If so, turn it into a list.</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">dgm_col</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="ow">and</span> <span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">tent</span> <span class="ow">or</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">interp_polynomial</span><span class="p">):</span>
+        <span class="n">dgm_col</span> <span class="o">=</span> <span class="p">[</span><span class="n">dgm_col</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Beginning experiments</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k_fold</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">k_fold_cv</span><span class="p">):</span>
+
+        <span class="c1"># assign training and test  diagrams/landscapes/images  and labels</span>
+        <span class="n">D_train</span> <span class="o">=</span> <span class="n">training_set_dgm</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+        <span class="n">D_test</span> <span class="o">=</span> <span class="n">test_set_dgm</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+        <span class="n">L_train</span> <span class="o">=</span> <span class="n">training_set_label</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+        <span class="n">L_test</span> <span class="o">=</span> <span class="n">test_set_label</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
+
+        <span class="c1">########-------TEMPLATE FUNCTION PART---------------###############</span>
+        <span class="c1"># Note: Template function featurization part is seperated because</span>
+        <span class="c1">#       its functions&#39; structure is different</span>
+
+        <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">tent</span> <span class="ow">or</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">interp_polynomial</span><span class="p">:</span>
+
+            <span class="n">D_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">D_train</span><span class="p">)</span>
+            <span class="n">D_train</span><span class="p">[</span><span class="n">labels_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">L_train</span>
+            <span class="n">D_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">D_test</span><span class="p">)</span>
+            <span class="n">D_test</span><span class="p">[</span><span class="n">labels_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">L_test</span>
+
+            <span class="c1"># Get the portions of the test data frame with diagrams and concatenate into giant series:</span>
+            <span class="n">allDgms</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">D_train</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">dgm_col</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">useAdaptivePart</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># Hand the series to the makeAdaptivePartition function</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">makeAdaptivePartition</span><span class="p">(</span><span class="n">allDgms</span><span class="p">,</span> <span class="n">meshingScheme</span><span class="o">=</span><span class="s1">&#39;DV&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># TODO this should work for both interp and tents but doesn&#39;t yet</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">makeAdaptivePartition</span><span class="p">(</span><span class="n">allDgms</span><span class="p">,</span> <span class="n">meshingScheme</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+            <span class="c1">#--------Training------------#</span>
+            <span class="c1"># if verbose:</span>
+            <span class="c1">#     print(&#39;Using &#39; + str(len(L_train)) + &#39;/&#39; +</span>
+            <span class="c1">#           str(len(D_train)) + &#39; to train...&#39;)</span>
+
+            <span class="n">clf</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">ML_via_featurization</span><span class="p">(</span>
+                <span class="n">D_train</span><span class="p">,</span> <span class="n">labels_col</span><span class="o">=</span><span class="n">labels_col</span><span class="p">,</span> <span class="n">dgm_col</span><span class="o">=</span><span class="n">dgm_col</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">listOfG_train</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">dgmColLabel</span> <span class="ow">in</span> <span class="n">dgm_col</span><span class="p">:</span>
+                <span class="n">G_train</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">build_G</span><span class="p">(</span><span class="n">D_train</span><span class="p">[</span><span class="n">dgmColLabel</span><span class="p">],</span> <span class="n">params</span><span class="p">)</span>
+                <span class="n">listOfG_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G_train</span><span class="p">)</span>
+
+            <span class="c1"># feature matrix for training set</span>
+            <span class="n">G_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">listOfG_train</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1">#--------Testing-------------#</span>
+            <span class="c1"># if verbose:</span>
+            <span class="c1">#     print(&#39;Using &#39; + str(len(L_test)) + &#39;/&#39; +</span>
+            <span class="c1">#           str(len(D_test)) + &#39; to test...&#39;)</span>
+            <span class="n">listOfG_test</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">dgmColLabel</span> <span class="ow">in</span> <span class="n">dgm_col</span><span class="p">:</span>
+                <span class="n">G_test</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">build_G</span><span class="p">(</span><span class="n">D_test</span><span class="p">[</span><span class="n">dgmColLabel</span><span class="p">],</span> <span class="n">params</span><span class="p">)</span>
+                <span class="n">listOfG_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G_test</span><span class="p">)</span>
+
+            <span class="c1"># feature matrix for test set</span>
+            <span class="n">G_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">listOfG_test</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">G_train</span><span class="p">,</span> <span class="n">G_test</span>
+
+        <span class="c1"># convert diagrams into object array</span>
+        <span class="n">D_train</span> <span class="o">=</span> <span class="n">D_train</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">D_test</span> <span class="o">=</span> <span class="n">D_test</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">L_train</span> <span class="o">=</span> <span class="n">L_train</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">L_test</span> <span class="o">=</span> <span class="n">L_test</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="c1">########------- LANDSCAPES---------------#########</span>
+        <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Landscape</span><span class="p">:</span>
+
+            <span class="c1"># user defines the landscapes number which are used in feature extraction</span>
+            <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">PL_Number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="s2">&quot;Please provide the landscape number that you want to extract features from.&quot;</span><span class="p">)</span>
+            <span class="n">LN</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">PL_Number</span>
+
+            <span class="c1"># in case landscapes are computed in advance</span>
+            <span class="k">if</span> <span class="n">precomputed</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">k_fold</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s1">&#39;User provided precomputed landscapes, we are working on generating feature matrices...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="c1"># feature_matrix for training set</span>
+                <span class="n">X_train</span><span class="p">,</span> <span class="n">mesh</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Landscape</span><span class="p">(</span><span class="n">D_train</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+                <span class="n">PL_test</span> <span class="o">=</span> <span class="n">D_test</span>
+
+                <span class="c1"># feature matrix for test set</span>
+
+                <span class="c1"># This matrix should be computed based on the mesh obtained from training set</span>
+                <span class="n">interp_y</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PL_test</span><span class="p">)</span>
+                <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">LN</span><span class="p">)):</span>
+                    <span class="n">xvals</span> <span class="o">=</span> <span class="n">mesh</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">y_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">),</span> <span class="n">N</span><span class="p">))</span>
+                    <span class="c1"># loop iterates for all test set landscapes</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+                        <span class="c1"># if current landscape number is exist in the current lansdcape set</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">PL_test</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">LN</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                            <span class="n">L</span> <span class="o">=</span> <span class="n">PL_test</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Points&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+                            <span class="c1"># x values of nth landscape for current persistence diagram</span>
+                            <span class="n">x</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">LN</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span>
+                            <span class="c1"># y values of nth landscape</span>
+                            <span class="n">y</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">LN</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">]</span>
+                            <span class="c1"># piecewise linear interpolation</span>
+                            <span class="n">y_interp</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                    <span class="n">interp_y</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">y_interp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">),</span> <span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">LN</span><span class="p">)):</span>
+                    <span class="n">ftr</span> <span class="o">=</span> <span class="n">interp_y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_test</span><span class="p">,</span> <span class="n">ftr</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># in this case user does not provide landscapes, so algorithm will compute them itself</span>
+                <span class="n">PL_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D_train</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+                <span class="n">PL_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D_test</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+
+                <span class="c1"># compute persistence landscape for training set</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D_train</span><span class="p">)):</span>
+                    <span class="n">PL</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">D_train</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">PL_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">PL</span><span class="o">.</span><span class="n">AllPL</span>
+
+                <span class="c1"># compute persistence landscape for test set</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D_test</span><span class="p">)):</span>
+                    <span class="n">PL</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">D_test</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">PL_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">PL</span><span class="o">.</span><span class="n">AllPL</span>
+
+                <span class="n">X_train</span><span class="p">,</span> <span class="n">mesh</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Landscape</span><span class="p">(</span><span class="n">PL_train</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+                <span class="c1"># feature matrix for test set</span>
+
+                <span class="c1"># This matrix should be computed based on the mesh obtained from training set</span>
+                <span class="n">interp_y</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PL_test</span><span class="p">)</span>
+                <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">LN</span><span class="p">)):</span>
+                    <span class="n">xvals</span> <span class="o">=</span> <span class="n">mesh</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">y_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">),</span> <span class="n">N</span><span class="p">))</span>
+                    <span class="c1"># loop iterates for all test set landscapes</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+                        <span class="c1"># if current landscape number is exist in the current lansdcape set</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">PL_test</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">LN</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                            <span class="n">L</span> <span class="o">=</span> <span class="n">PL_test</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Points&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+                            <span class="c1"># x values of nth landscape for current persistence diagram</span>
+                            <span class="n">x</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">LN</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span>
+                            <span class="c1"># y values of nth landscape</span>
+                            <span class="n">y</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">LN</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">]</span>
+                            <span class="c1"># piecewise linear interpolation</span>
+                            <span class="n">y_interp</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                    <span class="n">interp_y</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">y_interp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">),</span> <span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">LN</span><span class="p">)):</span>
+                    <span class="n">ftr</span> <span class="o">=</span> <span class="n">interp_y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_test</span><span class="p">,</span> <span class="n">ftr</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1">########------- PERSISTENCE IMAGES---------------#########</span>
+        <span class="k">elif</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Image</span><span class="p">:</span>
+
+            <span class="c1"># persistence images algorithm has built-in transfer learning option</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">D_train</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">pixel_size</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">var</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[</span>
+            <span class="p">],</span> <span class="n">pers_imager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">X_train</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;F_Matrix&#39;</span><span class="p">]</span>
+            <span class="n">pers_imager</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;pers_imager&#39;</span><span class="p">]</span>
+            <span class="c1"># use these bounds to compute persistence images of test set</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">D_test</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">pixel_size</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">var</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[</span>
+            <span class="p">],</span> <span class="n">pers_imager</span><span class="o">=</span><span class="n">pers_imager</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">X_test</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;F_Matrix&#39;</span><span class="p">]</span>
+
+        <span class="c1">########------- CARLSSON COORDINATES---------------#########</span>
+        <span class="k">elif</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_CCoordinates</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">FN</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="s2">&quot;There are five coordinates available currenly. Please enter a number between 1 and 5.&quot;</span><span class="p">)</span>
+
+            <span class="n">X_train</span><span class="p">,</span> <span class="n">TotalNumComb</span><span class="p">,</span> <span class="n">CombList</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_CCoordinates</span><span class="p">(</span>
+                <span class="n">D_train</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">FN</span><span class="p">)</span>
+            <span class="n">X_test</span><span class="p">,</span> <span class="n">TotalNumComb</span><span class="p">,</span> <span class="n">CombList</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_CCoordinates</span><span class="p">(</span>
+                <span class="n">D_test</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">FN</span><span class="p">)</span>
+
+            <span class="c1"># feature matrix for different combinations of Carlsson Coordinates are generated</span>
+            <span class="c1"># To avoid complexity, we only consider the last feature matrix that includes the all</span>
+            <span class="c1"># coordinates</span>
+            <span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1">########------- PATH SIGNATURES ---------------#########</span>
+        <span class="k">elif</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">:</span>
+            <span class="c1"># check if user provided the landscape number which will be used in feature extraction</span>
+            <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">L_number</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="s2">&quot;Please pass the landscape number that will be used in feature extraction&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">precomputed</span><span class="p">:</span>
+                <span class="n">X_train</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">D_train</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">L_number</span><span class="p">)</span>
+                <span class="n">X_test</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">D_test</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">L_number</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># in this case user does not provide landscapes, so algorithm will compute them itself</span>
+                <span class="n">PL_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D_train</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+                <span class="n">PL_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D_test</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+
+                <span class="c1"># compute persistence landscape for training set</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D_train</span><span class="p">)):</span>
+                    <span class="n">PL</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">D_train</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">PL_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">PL</span><span class="o">.</span><span class="n">AllPL</span>
+
+                <span class="c1"># compute persistence landscape for test set</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D_test</span><span class="p">)):</span>
+                    <span class="n">PL</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">PLandscape</span><span class="p">(</span><span class="n">D_test</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">PL_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">PL</span><span class="o">.</span><span class="n">AllPL</span>
+
+                <span class="n">X_train</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">PL_train</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">L_number</span><span class="p">)</span>
+                <span class="n">X_test</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">PL_test</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">L_number</span><span class="p">)</span>
+
+        <span class="c1">########------- KERNEL METHODS---------------#########</span>
+        <span class="k">elif</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">KernelMethod</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">TF_Learning</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="s2">&quot;Transfer learning for Kernel Method is not available. Please try another featurization approach.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">sigma</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                        <span class="s2">&quot;Please provide the sigma variable for kernel computation.&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">param_tuning</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                        <span class="s2">&quot;Parameter tuning is not available for kernel methods.&quot;</span><span class="p">)</span>
+
+                <span class="n">N1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">D_train</span><span class="p">)</span>
+                <span class="n">N2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">D_test</span><span class="p">)</span>
+
+                <span class="c1"># find the combinations so that we can only compute the upper diagonal and diagonal elements of pairwise kernel matrix</span>
+                <span class="n">poss_comb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N1</span><span class="p">),</span> <span class="mi">2</span><span class="p">)))</span>
+                <span class="c1"># create training kernel matrix</span>
+                <span class="n">KernelTrain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">poss_comb</span><span class="p">)))</span>
+                <span class="c1"># loop computes kernels for training set (except diagonal ones)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">poss_comb</span><span class="p">)):</span>
+                    <span class="n">perDgm1</span> <span class="o">=</span> <span class="n">D_train</span><span class="p">[(</span><span class="n">poss_comb</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
+                    <span class="n">perDgm2</span> <span class="o">=</span> <span class="n">D_train</span><span class="p">[(</span><span class="n">poss_comb</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>
+                    <span class="n">KernelTrain</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">KernelMethod</span><span class="p">(</span>
+                        <span class="n">perDgm2</span><span class="p">,</span> <span class="n">perDgm1</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span>
+                <span class="n">KernelTrain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">KernelTrain</span><span class="p">)</span>
+                <span class="n">KernelTrain</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">KernelTrain</span><span class="p">)</span>
+
+                <span class="c1"># compute diagonal kernels separately and add them to kernel matrix</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N1</span><span class="p">):</span>
+                    <span class="n">perdgm1</span> <span class="o">=</span> <span class="n">D_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">KernelTrain</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">KernelMethod</span><span class="p">(</span>
+                        <span class="n">perdgm1</span><span class="p">,</span> <span class="n">perdgm1</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span>
+
+                <span class="c1"># classifier</span>
+                <span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">)</span>
+                <span class="c1"># train the classifier</span>
+                <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">KernelTrain</span><span class="p">,</span> <span class="n">L_train</span><span class="p">)</span>
+
+                <span class="c1"># test set kernel matrix</span>
+                <span class="n">KernelTest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N2</span><span class="p">,</span> <span class="n">N1</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N2</span><span class="p">):</span>
+                    <span class="n">perDgm1</span> <span class="o">=</span> <span class="n">D_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N1</span><span class="p">):</span>
+                        <span class="n">perDgm2</span> <span class="o">=</span> <span class="n">D_train</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                        <span class="n">KernelTest</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">KernelMethod</span><span class="p">(</span>
+                            <span class="n">perDgm1</span><span class="p">,</span> <span class="n">perDgm2</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span>
+
+                <span class="c1"># predicted labels</span>
+                <span class="n">predicted_labels_test</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">KernelTest</span><span class="p">)</span>
+                <span class="n">predicted_labels_train</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">KernelTrain</span><span class="p">)</span>
+
+                <span class="c1"># classification report</span>
+                <span class="n">cr_test</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span>
+                    <span class="n">L_test</span><span class="p">,</span> <span class="n">predicted_labels_test</span><span class="p">,</span> <span class="n">output_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">cr_train</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span>
+                    <span class="n">L_train</span><span class="p">,</span> <span class="n">predicted_labels_train</span><span class="p">,</span> <span class="n">output_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="n">accuracy_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cr_test</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+                <span class="n">accuracy_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cr_train</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+                <span class="n">c_report_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cr_train</span><span class="p">)</span>
+                <span class="n">c_report_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cr_test</span><span class="p">)</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Run Number: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k_fold</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test set acc.: </span><span class="si">{:.3f}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">Training set acc.: </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">cr_test</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">cr_train</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">!=</span> <span class="n">fF</span><span class="o">.</span><span class="n">KernelMethod</span><span class="p">:</span>
+
+            <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+            <span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+            <span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+            <span class="n">model</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">clf_model</span><span class="p">()</span>
+            <span class="c1"># if user wants to tune classifier parameters, we provide Grid Search approach</span>
+            <span class="c1"># the list of parameters with their range needs to be provided otherwise</span>
+            <span class="c1"># user will have an error.</span>
+            <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">param_tuning</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">parToTune</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                        <span class="s2">&quot;Please pass the parameters to tune using ParameterBucket object.&quot;</span><span class="p">)</span>
+
+                <span class="c1"># number of features</span>
+                <span class="n">n_feat</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="c1"># concantenate the labels and the train set</span>
+                <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_train</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+                    <span class="n">L_train</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L_train</span><span class="p">),</span> <span class="mi">1</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># split training set into two</span>
+                <span class="n">splits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">T1</span><span class="p">,</span> <span class="n">T2</span> <span class="o">=</span> <span class="n">splits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">splits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">T2_train</span> <span class="o">=</span> <span class="n">T2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">n_feat</span><span class="p">]</span>
+                <span class="n">T2_label</span> <span class="o">=</span> <span class="n">T2</span><span class="p">[:,</span> <span class="n">n_feat</span><span class="p">]</span>
+                <span class="c1"># paramter tuning</span>
+                <span class="n">param_tune</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">parToTune</span><span class="p">)</span>
+                <span class="c1"># use one half of the training set to tune the parameters</span>
+                <span class="n">param_tune</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">T2_train</span><span class="p">,</span> <span class="n">T2_label</span><span class="p">)</span>
+                <span class="n">best_params</span> <span class="o">=</span> <span class="n">param_tune</span><span class="o">.</span><span class="n">best_params_</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">best_params</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">best_params</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+            <span class="c1"># retrain/train the model</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">L_train</span><span class="p">)</span>
+
+            <span class="c1"># predicted labels</span>
+            <span class="n">predicted_labels_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+            <span class="n">predicted_labels_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+            <span class="c1"># classification report</span>
+            <span class="n">cr_test</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span>
+                <span class="n">L_test</span><span class="p">,</span> <span class="n">predicted_labels_test</span><span class="p">,</span> <span class="n">output_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">cr_train</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span>
+                <span class="n">L_train</span><span class="p">,</span> <span class="n">predicted_labels_train</span><span class="p">,</span> <span class="n">output_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="n">accuracy_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cr_test</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+            <span class="n">accuracy_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cr_train</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+            <span class="n">c_report_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cr_train</span><span class="p">)</span>
+            <span class="n">c_report_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cr_test</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Run Number: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k_fold</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test set acc.: </span><span class="si">{:.3f}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">Training set acc.: </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">cr_test</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">cr_train</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------&#39;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Finished with training/testing experiments&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test Set </span><span class="se">\n</span><span class="s2">---------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average accuracy: </span><span class="si">{:.3f}</span><span class="se">\n</span><span class="s2">Standard deviation: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Training Set </span><span class="se">\n</span><span class="s2">---------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average accuracy: </span><span class="si">{:.3f}</span><span class="se">\n</span><span class="s2">Standard deviation: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">For more metrics, see the outputs.&quot;</span><span class="p">)</span>
+    <span class="c1"># after all runs are completed, save results depending on user choice</span>
+    <span class="k">if</span> <span class="n">saving</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">saving_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s1">&#39;Please provide saving path to save classification reports.&#39;</span><span class="p">)</span>
+
+        <span class="n">save_name</span> <span class="o">=</span> <span class="n">saving_path</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">test_set_classification_report_run_number.pkl&#39;</span>
+        <span class="n">c_report_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">c_report_train</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_name</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">c_report_train</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="n">save_name</span> <span class="o">=</span> <span class="n">saving_path</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">training_set_classification_report_run_number.pkl&#39;</span>
+        <span class="n">c_report_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">c_report_test</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_name</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">c_report_test</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">c_report_train</span><span class="p">,</span> <span class="n">c_report_test</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Munch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

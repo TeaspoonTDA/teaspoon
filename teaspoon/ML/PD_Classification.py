@@ -445,7 +445,7 @@ def getPercentScore(DgmsDF,
                 X_train = fF.F_PSignature(D_train, params.L_number)
                 X_test = fF.F_PSignature(D_test, params.L_number)
             else:
-                 # in this case user does not provide landscapes, so algorithm will compute them itself
+                # in this case user does not provide landscapes, so algorithm will compute them itself
                 PL_train = np.ndarray(shape=(len(D_train)), dtype=object)
                 PL_test = np.ndarray(shape=(len(D_test)), dtype=object)
 

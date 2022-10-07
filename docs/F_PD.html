@@ -1,74 +1,37 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.2.1. Featurization &mdash; teaspoon 0.1.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="2.2.2. Classification" href="CL.html" />
     <link rel="prev" title="2.2. Persistence Diagram Featurization" href="ML.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-          
-
-          
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> teaspoon
-          
-
-          
-            
+            <a href="index.html" class="icon icon-home"> teaspoon
             <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -76,18 +39,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
@@ -117,6 +69,7 @@
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -141,81 +94,88 @@
 <li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">teaspoon</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
-        
           <li><a href="ML.html"><span class="section-number">2.2. </span>Persistence Diagram Featurization</a> &raquo;</li>
-        
       <li><span class="section-number">2.2.1. </span>Featurization</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/F_PD.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="featurization">
-<span id="id1"></span><h1><span class="section-number">2.2.1. </span>Featurization<a class="headerlink" href="#featurization" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="featurization">
+<span id="id1"></span><h1><span class="section-number">2.2.1. </span>Featurization<a class="headerlink" href="#featurization" title="Permalink to this headline"></a></h1>
 <p>This documentation includes five different persistence diagram featurization methods.
 These are persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.</p>
-<div class="section" id="persistence-landscapes">
-<span id="id2"></span><h2><span class="section-number">2.2.1.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="landscape-class">
-<h3><span class="section-number">2.2.1.1.1. </span>Landscape class<a class="headerlink" href="#landscape-class" title="Permalink to this headline">¶</a></h3>
+<section id="persistence-landscapes">
+<span id="id2"></span><h2><span class="section-number">2.2.1.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Permalink to this headline"></a></h2>
+<section id="landscape-class">
+<h3><span class="section-number">2.2.1.1.1. </span>Landscape class<a class="headerlink" href="#landscape-class" title="Permalink to this headline"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.PLandscape">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">PLandscape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#PLandscape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.PLandscape" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.PLandscape.PLandscape_plot">
+<span class="sig-name descname"><span class="pre">PLandscape_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#PLandscape.PLandscape_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.PLandscape.PLandscape_plot" title="Permalink to this definition"></a></dt>
+<dd><p>This function plots selected persistence landscapes or it plots all of them if user does not provide desired landscape functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PL</strong> (<em>ndarray</em>) – Persistence diagram points–(Nx2) matrix.</p></li>
+<li><p><strong>L_number</strong> (<em>list</em>) – Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>PL_plot</strong> – The figure that includes chosen or all landsape functions.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.PLandscape.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#PLandscape.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.PLandscape.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>This class uses landscapes algorithm (<code class="xref py py-meth docutils literal notranslate"><span class="pre">PD_Featurization.PLandscapes()</span></code>) to compute persistence landscapes and plot them based on user preference.
+The algorithm computes the persistence landscapes is written based on Ref. <span id="id3">[<a class="reference internal" href="ML.html#id16" title="Peter Bubenik and Paweł Dłotko. A persistence landscapes toolbox for topological statistics. Journal of Symbolic Computation, 78:91–114, jan 2017. doi:10.1016/j.jsc.2016.03.009.">3</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PD</strong> (<em>ndarray</em>) – Persistence diagram points–(Nx2) matrix..</p></li>
+<li><p><strong>L_number</strong> (<em>list</em>) – Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>PL_number</strong> (<em>int</em>) – Total number of landscapes for given persistence diagram</p></li>
+<li><p><strong>DesPL</strong> (<em>ndarray</em>) – Includes only selected landscapes functions given in L_number</p></li>
+<li><p><strong>AllPL</strong> (<em>ndarray</em>) – Includes all landscape functions of the persistece diagram</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <p><strong>Example:</strong> In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
@@ -249,10 +209,12 @@ These are persistence landscapes, persistence images, Carlsson Coordinates, kern
 </pre></div>
 </div>
 <p>Output of the plotting functions is:</p>
-<div class="figure align-center" id="id8">
+<figure class="align-center" id="id13">
 <a class="reference internal image-reference" href="_images/All_Landscapes.png"><img alt="_images/All_Landscapes.png" src="_images/All_Landscapes.png" style="width: 708.0px; height: 371.09999999999997px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.1 </span><span class="caption-text">All landscape functions for the given persistence diagram</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">All landscape functions for the given persistence diagram</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <p>If user specify the desired landscapes, output will be:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PLC</span>  <span class="o">=</span> <span class="n">PLandscape</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">PLC</span><span class="o">.</span><span class="n">DesPL</span><span class="p">)</span>
@@ -307,17 +269,21 @@ These are persistence landscapes, persistence images, Carlsson Coordinates, kern
 </pre></div>
 </div>
 <p>Output of the plotting functions is:</p>
-<div class="figure align-center" id="id9">
+<figure class="align-center" id="id14">
 <a class="reference internal image-reference" href="_images/Des_Landscapes.png"><img alt="_images/Des_Landscapes.png" src="_images/Des_Landscapes.png" style="width: 491.25px; height: 282.0px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Chosen landscape functions for the given persistence diagram</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="feature-matrix-generation">
-<span id="pb-landscape"></span><h3><span class="section-number">2.2.1.1.2. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Permalink to this headline">¶</a></h3>
-<div class="figure align-center" id="id10">
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Chosen landscape functions for the given persistence diagram</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="feature-matrix-generation">
+<span id="pb-landscape"></span><h3><span class="section-number">2.2.1.1.2. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Permalink to this headline"></a></h3>
+<figure class="align-center" id="id15">
 <span id="f-matrix"></span><a class="reference internal image-reference" href="_images/Mesh_Generation_Example.png"><img alt="_images/Mesh_Generation_Example.png" src="_images/Mesh_Generation_Example.png" style="width: 718.5px; height: 394.05px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Feature matrix generation steps explained with an simple example.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Feature matrix generation steps explained with an simple example.</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <p><a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.3</span></a> explains the steps for generation feature matrix using persistence landscapes. There are three persistence landscape sets for three different persistence diagram.
 We choose one landscape function among them. In the example above, second landscape function is selected and plotted for each landscape set.
 The plot in the third column includes all selected landscape functions.
@@ -330,14 +296,74 @@ Resulting array will be our mesh and it is used to obtain features.
 The mesh points is shown in <a class="reference internal" href="#mesh"><span class="std std-numref">Fig. 2.4</span></a> with red dots.
 There may not be corresponding y value for each mesh points in selected landscape functions so we use linear interpolation to find these values.
 Then, these y values become the feature for each landscape functions, and they can be used in classification.</p>
-<div class="figure align-center" id="id11">
+<figure class="align-center" id="id16">
 <span id="mesh"></span><a class="reference internal image-reference" href="_images/Mesh_Points.png"><img alt="_images/Mesh_Points.png" src="_images/Mesh_Points.png" style="width: 421.0px; height: 165.20000000000002px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Mesh obtained using second landscape function for the example provided in <a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.3</span></a>.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
-<div class="section" id="persistence-images">
-<span id="id3"></span><h2><span class="section-number">2.2.1.2. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline">¶</a></h2>
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Mesh obtained using second landscape function for the example provided in <a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.3</span></a>.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<span class="target" id="module-teaspoon.ML.feature_functions"></span><dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_Landscape">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_Landscape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_l_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_Landscape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_Landscape" title="Permalink to this definition"></a></dt>
+<dd><p>This function computes the features for selected persistence landscape numbers.
+There are three inputs to the function.
+These are all landscape functions for each persistence diagram, parameter bucket object and the maximum level of landscape function.
+If user does not specify the third input, algorithm will automatically compute it.
+The second parameter includes the parameters needed to compute features and perform classification.
+Please see <code class="xref py py-meth docutils literal notranslate"><span class="pre">PD_ParameterBucket.LandscapesParameterBucket()</span></code> for more details about parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PL</strong> (<em>ndarray</em>) – Object array that includes all landscape functions for each persistence diagram.</p></li>
+<li><p><strong>params</strong> (<em>parameterbucket object</em>) – Parameterbucket object. We need landscape numbers defined by user to generate feature matrix.</p></li>
+<li><p><strong>max_l_number</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum number of landscape functions for a given persistence diagram. The default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>feature</strong> (<em>ndarray</em>) – NxM matrix that includes the features for each persistence diagram, where N is the number of
+persistence diagrams and M is the numbers of features which is equal to length of sorted
+mesh of landscapes functions.</p></li>
+<li><p><strong>Sorted_mesh</strong> (<em>list</em>) – It includes the sorted mesh for each landscape function chosen by user..</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="persistence-images">
+<span id="id4"></span><h2><span class="section-number">2.2.1.2. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_Image">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_Image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_Img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pers_imager</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_Image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_Image" title="Permalink to this definition"></a></dt>
+<dd><p>This function computes the persistence images of given persistence diagrams
+using <a class="reference external" href="https://persim.scikit-tda.org/en/latest/notebooks/Classification%20with%20persistence%20images.html">Persim</a>
+package of Python. Then it provides user with the feature matrix for the diagrams.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PD1</strong> (<em>ndarray</em>) – Object array that includes all persistence diagrams.</p></li>
+<li><p><strong>PS</strong> (<em>float</em>) – Pixel size.</p></li>
+<li><p><strong>var</strong> (<em>float</em>) – Variance of the Gaussian distribution.</p></li>
+<li><p><strong>plot</strong> (<em>TYPE</em>) – DESCRIPTION.</p></li>
+<li><p><strong>D_Img</strong> (<em>list</em><em>, </em><em>optional</em>) – The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams.
+. The default is [].</p></li>
+<li><p><strong>pers_imager</strong> (<em>persistence image object</em><em>, </em><em>optional</em>) – Persistence image object fit to training set diagrams. This oject is only required when the feature function
+for test set is computed. The default is None.</p></li>
+<li><p><strong>training</strong> (<em>boolean</em>) – This flag tells function if user wants to compute the feature matrix for training and or test set. The default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>output</strong> – Includes feature matrix and persistence image object. Output object also includes figures if user selects to plot several persistence images.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
@@ -359,13 +385,51 @@ Then, these y values become the feature for each landscape functions, and they c
 </pre></div>
 </div>
 <p>The algorithm will return two images as shown in <a class="reference internal" href="#pi-example"><span class="std std-numref">Fig. 2.5</span></a>.</p>
-<div class="figure align-center" id="id12">
+<figure class="align-center" id="id17">
 <span id="pi-example"></span><a class="reference internal image-reference" href="_images/PI_Example.png"><img alt="_images/PI_Example.png" src="_images/PI_Example.png" style="width: 506.40000000000003px; height: 248.0px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Example persistence images.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="carlsson-coordinates">
-<span id="id4"></span><h2><span class="section-number">2.2.1.3. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Permalink to this headline">¶</a></h2>
+<figcaption>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Example persistence images.</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="carlsson-coordinates">
+<span id="id5"></span><h2><span class="section-number">2.2.1.3. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_CCoordinates">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_CCoordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_CCoordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_CCoordinates" title="Permalink to this definition"></a></dt>
+<dd><p>This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. <a class="reference internal" href="#equation-1st-coord">(2.1)</a> - <a class="reference internal" href="#equation-5th-coord">(2.5)</a>.
+The first four functions are taken from Ref. <span id="id6">[<a class="reference internal" href="ML.html#id11" title="Aaron Adcock, Erik Carlsson, and Gunnar Carlsson. The ring of algebraic functions on persistence bar codes. Homology, Homotopy and Applications, 18(1):381–402, 2016. doi:10.4310/hha.2016.v18.n1.a21.">2</a>]</span> and the last one is obtained from Ref. <span id="id7">[<a class="reference internal" href="ML.html#id17" title="Firas A. Khasawneh, Elizabeth Munch, and Jose A. Perea. Chatter Classification in Turning using Machine Learning and Topological Data Analysis. IFAC-PapersOnLine, 51(14):195–200, 2018. doi:10.1016/j.ifacol.2018.07.222.">6</a>]</span>.
+There are two inputs to the function. These are persistence diagrams and number of coordinates that user wants to use in feature matrix.
+Algorithm will return feature matrix object array that includes feature matrices for different combinations, and total number of combinations will be <span class="math notranslate nohighlight">\(\sum_{i=1}^{FN} {FN \choose i}\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-1st-coord">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-1st-coord" title="Permalink to this equation"></a></span>\[f_{1}(PD) = \sum b_{i}(d_{i}-b_{i})\]</div>
+<div class="math notranslate nohighlight" id="equation-2nd-coord">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-2nd-coord" title="Permalink to this equation"></a></span>\[f_{2}(PD) = \sum (d_{max}-d_{i})(d_{i}-b_{i})\]</div>
+<div class="math notranslate nohighlight" id="equation-3rd-coord">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-3rd-coord" title="Permalink to this equation"></a></span>\[f_{3}(PD) = \sum b_{i}^{2}(d_{i}-b_{i})^{4}\]</div>
+<div class="math notranslate nohighlight" id="equation-4th-coord">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-4th-coord" title="Permalink to this equation"></a></span>\[f_{4}(PD) = \sum (d_{max}-d_{i})^{2}(d_{i}-b_{i})^{4}\]</div>
+<div class="math notranslate nohighlight" id="equation-5th-coord">
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-5th-coord" title="Permalink to this equation"></a></span>\[f_{5}(PD) = \sum max(d_{i}-b_{i})\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PD</strong> (<em>ndarray</em>) – Object array that includes all persistence diagrams.</p></li>
+<li><p><strong>FN</strong> (<em>int</em>) – Number of features. It can take integer values between 1 and 5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>FeatureMatrix</strong> (<em>object array</em>) – Object array that contains the feature matrices of each feature combinations.
+Each feature matrix has a size of NxFN, where N is the number of persistence diagrams and FN is the number of feature chosen.</p></li>
+<li><p><strong>TotalNumComb</strong> (<em>int</em>) – Number of combinations.</p></li>
+<li><p><strong>CombList</strong> (<em>list</em>) – List of combinations.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
@@ -379,9 +443,72 @@ Then, these y values become the feature for each landscape functions, and they c
 <span class="gp">&gt;&gt;&gt; </span><span class="n">FeatureMatrix</span><span class="p">,</span> <span class="n">TotalNumComb</span><span class="p">,</span> <span class="n">CombList</span> <span class="o">=</span> <span class="n">Ff</span><span class="o">.</span><span class="n">F_CCoordinates</span><span class="p">(</span><span class="n">Diagrams_H1</span><span class="p">,</span> <span class="n">FN</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+<section id="template-functions">
+<span id="id8"></span><h2><span class="section-number">2.2.1.4. </span>Template Functions<a class="headerlink" href="#template-functions" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.tent">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">tent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dgm_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BirthDeath'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#tent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.tent" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Applies the tent function to a diagram.</p>
+<p>Parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Dgm</dt>
+<dd class="field-odd"><p>A persistence diagram, given as a <span class="math notranslate nohighlight">\(K \times 2\)</span> numpy array</p>
+</dd>
+<dt class="field-even">params</dt>
+<dd class="field-even"><p>An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</p>
+</dd>
+<dt class="field-odd">dgm_type</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>This code accepts diagrams either</dt><dd><ol class="arabic simple">
+<li><p>in (birth, death) coordinates, in which case <cite>type = ‘BirthDeath’</cite>, or</p></li>
+<li><p>in (birth, lifetime) = (birth, death-birth) coordinates, in which case <cite>type = ‘BirthLifetime’</cite></p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p><span class="math notranslate nohighlight">\(\sum_{x,y \in \text{Dgm}}g_{i,j}(x,y)\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\bigg| 1- \max\left\{ \left|\frac{x}{\delta} - i\right|, \left|\frac{y-x}{\delta} - j\right|\right\} \bigg|_+]\]</div>
+<p>where <span class="math notranslate nohighlight">\(| * |_+\)</span> is positive part; equivalently, min of * and 0.</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This code does not take care of the maxPower polynomial stuff.  The tbuild_G() function does it after all the rows have been calculated.</p>
 </div>
-<div class="section" id="template-functions">
-<span id="id5"></span><h2><span class="section-number">2.2.1.4. </span>Template Functions<a class="headerlink" href="#template-functions" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.interp_polynomial">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">interp_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dgm_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BirthDeath'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#interp_polynomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.interp_polynomial" title="Permalink to this definition"></a></dt>
+<dd><p>Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.</p>
+<p>Parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Dgm</dt>
+<dd class="field-odd"><p>A persistence diagram, given as a <span class="math notranslate nohighlight">\(K \times 2\)</span> numpy array</p>
+</dd>
+<dt class="field-even">Params</dt>
+<dd class="field-even"><p>An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</p>
+</dd>
+<dt class="field-odd">Dgm_type</dt>
+<dd class="field-odd"><p>This code accepts diagrams either
+1. in (birth, death) coordinates, in which case <cite>type = ‘BirthDeath’</cite>, or
+2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case <cite>dgm_type = ‘BirthLifetime’</cite></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>interp_weight</dt><dd><p>A matrix with each entry representiting the weight of an interpolation
+function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
@@ -410,9 +537,30 @@ Then, these y values become the feature for each landscape functions, and they c
 <span class="gp">&gt;&gt;&gt; </span><span class="n">feature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">listOfG</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="path-signatures">
-<span id="id6"></span><h2><span class="section-number">2.2.1.5. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="path-signatures">
+<span id="id9"></span><h2><span class="section-number">2.2.1.5. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_PSignature">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_PSignature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_Number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#F_PSignature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_PSignature" title="Permalink to this definition"></a></dt>
+<dd><p>This function takes the persistence landscape set and returns the feature matrix which is computed using path signatures <span id="id10">[<a class="reference internal" href="ML.html#id12" title="Ilya Chevyrev and Andrey Kormilitzin. A primer on the signature method in machine learning. arXiv preprint arXiv:1603.03788, 2016.">4</a>, <a class="reference internal" href="ML.html#id13" title="Ilya Chevyrev, Vidit Nanda, and Harald Oberhauser. Persistence paths and signature features in topological data analysis. IEEE Transactions on Pattern Analysis and Machine Intelligence, 42(1):192–202, jan 2020. doi:10.1109/tpami.2018.2885516.">5</a>]</span>.
+Function takes two inputs and these are persistence landcsape set in an object array and the landscape numbers that user wants to compute their signatures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PL</strong> (<em>ndarray</em>) – Object array that includes all landscape functions for each persistence diagram.</p></li>
+<li><p><strong>L_Number</strong> (<em>list</em>) – Landscape numbers that user wants to use in feature matrix generation. If this parameter is not specified, algorithm will generate feature matrix using first landscapes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>feature_PS</strong> – Nx6 matrix that includes the features for each persistence diagram, where N is the number of persistence landscape sets.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
@@ -435,9 +583,31 @@ Then, these y values become the feature for each landscape functions, and they c
 <span class="gp">&gt;&gt;&gt; </span><span class="n">feature_PS</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">PerLand</span><span class="p">,</span> <span class="n">L_number</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="kernel-method">
-<span id="id7"></span><h2><span class="section-number">2.2.1.6. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="kernel-method">
+<span id="id11"></span><h2><span class="section-number">2.2.1.6. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.feature_functions.KernelMethod">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">KernelMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perDgm1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perDgm2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#KernelMethod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.KernelMethod" title="Permalink to this definition"></a></dt>
+<dd><p>This function computes the kernel for given two persistence diagram based on the formula provided in Ref. <span id="id12">[<a class="reference internal" href="ML.html#id14" title="Jan Reininghaus, Stefan Huber, Ulrich Bauer, and Roland Kwitt. A stable multi-scale kernel for topological machine learning. In 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR). IEEE, jun 2015. doi:10.1109/cvpr.2015.7299106.">9</a>]</span>.
+There are three inputs and these are two persistence diagrams and the kernel scale sigma.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>perDgm1</strong> (<em>ndarray</em>) – Object array that includes first persistence diagram set.</p></li>
+<li><p><strong>perDgm2</strong> (<em>ndarray</em>) – Object array that includes second persistence diagram set.</p></li>
+<li><p><strong>sigma</strong> (<em>float</em>) – Kernel scale.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Kernel</strong> – The kernel value for given two persistence diagrams.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
@@ -451,75 +621,49 @@ Then, these y values become the feature for each landscape functions, and they c
 <span class="go">1.6310484200361053</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="CL.html" class="btn btn-neutral float-right" title="2.2.2. Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="ML.html" class="btn btn-neutral float-left" title="2.2. Persistence Diagram Featurization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ML.html" class="btn btn-neutral float-left" title="2.2. Persistence Diagram Featurization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CL.html" class="btn btn-neutral float-right" title="2.2.2. Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2020, Munch
-
-    </p>
+    <p>&#169; Copyright 2020, Munch.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>
