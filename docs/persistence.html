@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.3.4. Persistence &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>2.3.4. Persistence &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -64,6 +66,8 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -116,54 +120,9 @@
              
   <div class="section" id="module-teaspoon.TDA.Persistence">
 <span id="persistence"></span><h1><span class="section-number">2.3.4. </span>Persistence<a class="headerlink" href="#module-teaspoon.TDA.Persistence" title="Permalink to this headline"></a></h1>
-<p>This module includes wrappers for using various fast persistence software inside of python.
-All diagrams are stored as a 2xN numpy matrix.
-When a code returns multiple dimensions, these are returned as a dictionary</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="mi">0</span><span class="p">:</span> <span class="n">DgmDimension0</span><span class="p">,</span>
-    <span class="mi">1</span><span class="p">:</span> <span class="n">DgmDimension1</span><span class="p">,</span>
-    <span class="o">...</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Infinite classes are given an entry of np.inf.
-During computation, all data files are saved in a hidden folder “.teaspoonData”.
-This folder is created if it doesn’t already exist.
-Files are repeatedly emptied out of it, so do not save anything in it that you might want later!</p>
-<dl class="function">
-<dt id="teaspoon.TDA.Persistence.VR_Perseus">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">VR_Perseus</code><span class="sig-paren">(</span><em class="sig-param">P</em>, <em class="sig-param">dim=1</em>, <em class="sig-param">maxRadius=3</em>, <em class="sig-param">numSteps=100</em>, <em class="sig-param">stepSize=None</em>, <em class="sig-param">suppressOutput=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#VR_Perseus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.VR_Perseus" title="Permalink to this definition"></a></dt>
-<dd><p>Does brips version of perseus.
-Computes VR persitsence on points in Euclidean space.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires choice of maxRadius, numSteps, and/or stepSize.
-Bad choices will give junk results.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>P</strong> – An NxD array.  Represents N points in <span class="math notranslate nohighlight">\(\mathbb{R}^{D}\)</span>.</p></li>
-<li><p><strong>maxRadius</strong> – </p></li>
-<li><p><strong>stepSize</strong> – </p></li>
-<li><p><strong>numSteps</strong> – Perseus requires that you decide how many steps, and how wide they are, rather than computing all possible topological changes.  So, persistence will be calculated from parameter 0 until
-maxRadius = stepSize*numSteps.
-Only 2 of the three entries should be passed.
-If numSteps and stepSize are passed (regardless of whether maxRadius is passed), they will be used for the computation.  Otherwise, the two non-none valued entries will be used to calculate the third.</p></li>
-<li><p><strong>suppressOutput</strong> – If true, it gets rid of printed output from perseus.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p>A dictionary with integer keys 0,1,…,N</p>
-<p>The key gives the dimension of the persistence diagram.</p>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="teaspoon.TDA.Persistence.Cubical_Perseus">
-<code class="sig-prename descclassname">teaspoon.TDA.Persistence.</code><code class="sig-name descname">Cubical_Perseus</code><span class="sig-paren">(</span><em class="sig-param">M</em>, <em class="sig-param">numDigits=2</em>, <em class="sig-param">suppressOutput=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#Cubical_Perseus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.Cubical_Perseus" title="Permalink to this definition"></a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.Cubical_Perseus">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">Cubical_Perseus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numDigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suppressOutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#Cubical_Perseus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.Cubical_Perseus" title="Permalink to this definition"></a></dt>
 <dd><p>Computes persistence for a matrix of function values
 using Vidit Nanda’s <a class="reference external" href="http://people.maths.ox.ac.uk/nanda/perseus/index.html">perseus</a>.</p>
 <div class="admonition note">

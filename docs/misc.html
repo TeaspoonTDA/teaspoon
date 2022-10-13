@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.4.4. Miscellaneous Functions &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>2.4.4. Miscellaneous Functions &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -64,6 +66,8 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul class="current">
@@ -120,9 +124,9 @@
 <span id="adaptive-partitioning"></span><h2><span class="section-number">2.4.4.1. </span>Adaptive Partitioning<a class="headerlink" href="#module-teaspoon.SP.adaptivePart" title="Permalink to this headline"></a></h2>
 <p>Methods of partitioning birth-lifetime plane for persistence diagrams. This is
 used for the adaptive partitioning version of template function featurization.</p>
-<dl class="class">
-<dt id="teaspoon.SP.adaptivePart.Partitions">
-<em class="property">class </em><code class="sig-prename descclassname">teaspoon.SP.adaptivePart.</code><code class="sig-name descname">Partitions</code><span class="sig-paren">(</span><em class="sig-param">data=None</em>, <em class="sig-param">convertToOrd=False</em>, <em class="sig-param">meshingScheme=None</em>, <em class="sig-param">partitionParams={}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions" title="Permalink to this definition"></a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaspoon.SP.adaptivePart.</span></span><span class="sig-name descname"><span class="pre">Partitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convertToOrd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshingScheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partitionParams</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions" title="Permalink to this definition"></a></dt>
 <dd><p>A data structure for storing a partition coming from an adapative meshing scheme.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -226,9 +230,9 @@ and ‘npts’, the number of points in the partition.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="teaspoon.SP.adaptivePart.Partitions.return_partition_clustering">
-<code class="sig-name descname">return_partition_clustering</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">clusterAlg=&lt;class 'sklearn.cluster._kmeans.KMeans'&gt;</em>, <em class="sig-param">num_clusters=5</em>, <em class="sig-param">weights=None</em>, <em class="sig-param">boxOption='boundPoints'</em>, <em class="sig-param">boxSize=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.return_partition_clustering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.return_partition_clustering" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaspoon.SP.adaptivePart.Partitions.return_partition_clustering">
+<span class="sig-name descname"><span class="pre">return_partition_clustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clusterAlg=&lt;class</span> <span class="pre">'sklearn.cluster._kmeans.KMeans'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_clusters=5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxOption='boundPoints'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxSize=2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/adaptivePart.html#Partitions.return_partition_clustering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.adaptivePart.Partitions.return_partition_clustering" title="Permalink to this definition"></a></dt>
 <dd><p>Partitioning method based on clustering algorithms. First cluster the data, then using the cluster centers and labels determine the partitions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

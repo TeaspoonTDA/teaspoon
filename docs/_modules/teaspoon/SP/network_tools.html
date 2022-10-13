@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaspoon.SP.network_tools &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <title>teaspoon.SP.network_tools &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -62,6 +64,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -111,7 +115,246 @@
            <div itemprop="articleBody">
              
   <h1>Source code for teaspoon.SP.network_tools</h1><div class="highlight"><pre>
-<span></span>
+<span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">inv</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+
+
+<span class="c1"># In[ ]: distance defining functions for graphs</span>
+
+
+<div class="viewcode-block" id="shortest_path"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network_tools.shortest_path">[docs]</a><span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">weighted_path_lengths</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function calculates the shortest path distance matrix for a signal component graph represented as an adjacency matrix A.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (2-D array): adjacency matrix of single component graph.</span>
+
+<span class="sd">    Other Parameters:</span>
+<span class="sd">        n (Optional[int]): option to calculate the shortest path between nodes using the inverse of the edge weights.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [2-D array]: Distance matrix of shortest path lengths between all node pairs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">A_sp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A_sp</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">weighted_path_lengths</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">A_sp</span><span class="p">[</span><span class="n">A_sp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_matrix</span><span class="p">(</span><span class="n">A_sp</span><span class="p">)</span>
+        <span class="n">lengths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_shortest_path_length</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+                <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lengths</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">D</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># initiate graph</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>  <span class="c1"># ignores divide by zero warning</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A_sp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># set diagonal to zero</span>
+        <span class="n">A_inv</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">A_sp</span>  <span class="c1"># take element-wise inverse</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_matrix</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_dijkstra</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+                <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">D</span></div>
+
+
+<span class="k">def</span> <span class="nf">weighted_path_dist</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+    <span class="n">path_weight</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="n">n</span><span class="p">]][</span><span class="n">path</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">path_weight</span> <span class="o">+=</span> <span class="n">edge_weight</span>
+    <span class="k">return</span> <span class="n">path_weight</span>
+
+
+<div class="viewcode-block" id="weighted_shortest_path"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network_tools.weighted_shortest_path">[docs]</a><span class="k">def</span> <span class="nf">weighted_shortest_path</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function calculates the weighted shortest path distance matrix for a signal component graph represented as an adjacency matrix A. The paths are found tusing the edge weights as the inverse of the adjacency matrix weight and the distance is the sum of the adjacency matrix weights along that path.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (2-D array): adjacency matrix of single component graph.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [2-D array]: Distance matrix of shortest path lengths between all node pairs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># initiate graph</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>  <span class="c1"># ignores divide by zero warning</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># set diagonal to zero</span>
+    <span class="n">A_inv</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">A</span>  <span class="c1"># take element-wise inverse</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_matrix</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_dijkstra</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">weighted_path_dist</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">D</span></div>
+
+
+<div class="viewcode-block" id="degree_matrix"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network_tools.degree_matrix">[docs]</a><span class="k">def</span> <span class="nf">degree_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function calculates the degree matrix from theadjacency matrix. A degree matrix is an empty matrix with diagonal filled with degree vector.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (2-D array): adjacency matrix of single component graph.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [2-D array]: Degree matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>  <span class="c1"># get degree of graph</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># get degree vector from graph</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>  <span class="c1"># initialize degree matrix as zeros</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>  <span class="c1"># fill diagonal with degree vector</span>
+    <span class="k">return</span> <span class="n">D</span></div>
+
+
+<span class="k">def</span> <span class="nf">degree_vector</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">A_unweighted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">A_unweighted</span> <span class="o">=</span> <span class="n">A_unweighted</span> <span class="o">+</span> <span class="n">A_unweighted</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">A_unweighted</span><span class="p">[</span><span class="n">A_unweighted</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># define unweighted adjacency matrix to calculate degree sequence</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A_unweighted</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">deg_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A_unweighted</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># degree sequence</span>
+    <span class="k">return</span> <span class="n">deg_vec</span>
+
+
+<div class="viewcode-block" id="random_walk"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network_tools.random_walk">[docs]</a><span class="k">def</span> <span class="nf">random_walk</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function calculates the 1 step random walk probability matrix using the adjacency matrix.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (matrix): adjacency matrix of graph.</span>
+
+<span class="sd">    Other Parameters:</span>
+<span class="sd">        lazy (Optional[boolean]): optional to use self transition probability (50%).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [2-D square array]: A (2-D weighted and directed square probability transition matrix)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">P</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># notation for W and P might be switched?</span>
+
+    <span class="k">if</span> <span class="n">lazy</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="n">P</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">P</span></div>
+
+
+<div class="viewcode-block" id="diffusion_distance"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network_tools.diffusion_distance">[docs]</a><span class="k">def</span> <span class="nf">diffusion_distance</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function calculates the diffusion distance for t random walk steps.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (matrix): adjacency matrix of graph.</span>
+<span class="sd">        d (array): degree vector</span>
+<span class="sd">        t (int): random walk steps. Should be approximately twice the diameter of graph.</span>
+
+<span class="sd">    Other Parameters:</span>
+<span class="sd">        lazy (Optional[boolean]): optional to use self transition probability (50%).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [2-D square array]: A (2-D weighted and directed square probability transition matrix)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">random_walk</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lazy</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">Pt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>  <span class="c1"># number of vertices</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>  <span class="c1"># initialize distance matrix</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="c1"># see equation on top of page 118 in lecture 21 notes.</span>
+            <span class="n">D</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Pt</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">Pt</span><span class="p">[</span><span class="n">b</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+
+    <span class="k">return</span> <span class="n">D</span></div>
+
+
+<span class="c1"># In[ ]: forming adjacency matrix functions</span>
+
+<div class="viewcode-block" id="remove_zeros"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network_tools.remove_zeros">[docs]</a><span class="k">def</span> <span class="nf">remove_zeros</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function removes unused vertices from adjacency matrix.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (matrix): 2-D weighted and directed square probability transition matrix</span>
+
+<span class="sd">    Returns: [2D matrix]: 2-D weighted and directed square probability transition matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># removes unused rows/columns from adjacency matrix for unused vertices.</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+    <span class="n">degr_seq</span> <span class="o">=</span> <span class="n">degree_vector</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">to_drop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">degr_seq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">A_mod</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">to_drop</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">to_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">A_mod</span></div>
+
+
+<span class="c1"># In[ ]: visualization tools</span>
+
+
+<div class="viewcode-block" id="visualize_network"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network_tools.visualize_network">[docs]</a><span class="k">def</span> <span class="nf">visualize_network</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">position_iterations</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">remove_deg_zero_nodes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function creates a networkx graph and position of the nodes using the adjacency matrix.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (2-D array): 2-D square adjacency matrix</span>
+
+<span class="sd">    Other Parameters:</span>
+<span class="sd">        position_iterations (Optional[int]): Number of spring layout position iterations. Default is 1000.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [dictionaries, list]: G (networkx graph representation), pos (position of nodes for networkx drawing)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># make undirected adjacency matrix</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># get rid of diagonal</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># make unweighted</span>
+
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+
+    <span class="n">edges1</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">edges2</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="n">edges1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edges1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">h</span><span class="p">]))</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">h</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">edges2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edges2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">edges1</span> <span class="o">=</span> <span class="n">edges1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+    <span class="n">edges2</span> <span class="o">=</span> <span class="n">edges2</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">edges1</span><span class="p">,</span> <span class="n">edges2</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+
+    <span class="n">fixed_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">fixed_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">fixed</span><span class="o">=</span><span class="n">fixed_nodes</span><span class="p">,</span>
+                           <span class="n">iterations</span><span class="o">=</span><span class="n">position_iterations</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">remove_deg_zero_nodes</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>  <span class="c1"># removes this node because it shouldn&#39;t be in graph</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">remove_node</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">G</span><span class="o">.</span><span class="n">remove_node</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">pos</span></div>
+
+
 <div class="viewcode-block" id="make_network"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network_tools.make_network">[docs]</a><span class="k">def</span> <span class="nf">make_network</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">position_iterations</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">remove_deg_zero_nodes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function creates a networkx graph and position of the nodes using the adjacency matrix.</span>
 

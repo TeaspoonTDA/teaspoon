@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaspoon: Topological Signal Processing in Python &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>teaspoon: Topological Signal Processing in Python &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -63,6 +65,8 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -161,7 +165,7 @@ All code is open source with up to date documentation, making the code easy to u
 </li>
 <li class="toctree-l2"><a class="reference internal" href="TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="PHN.html#examples">2.3.1.1. Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PHN.html#example">2.3.1.1. Example</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a><ul>
@@ -177,6 +181,16 @@ All code is open source with up to date documentation, making the code easy to u
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="buzz.html#example">2.3.6.1. Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ZZ_TG.html#module-teaspoon.TDA.TGZZ">2.3.7.1. Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ZZ_TG.html#note">2.3.7.2. Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ZZ_TG.html#example">2.3.7.3. Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -184,9 +198,17 @@ All code is open source with up to date documentation, making the code easy to u
 <li class="toctree-l4"><a class="reference internal" href="tsa.html#takens-embedding">2.4.1.1. Takens’ Embedding</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tsa.html#permutation-sequence-generation">2.4.1.2. Permutation Sequence Generation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tsa.html#k-nearest-neighbors">2.4.1.3. k Nearest Neighbors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tsa.html#coarse-grained-state-space-binning">2.4.1.4. Coarse grained state space binning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tsa.html#coarse-grained-state-space-state-sequence">2.4.1.5. Coarse grained state space state sequence</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="network.html#k-nearest-neighbors-graph">2.4.2.1. k Nearest Neighbors Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="network.html#ordinal-partition-graph">2.4.2.2. Ordinal Partition Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="network.html#coarse-grained-state-space-cgss-graph">2.4.2.3. Coarse Grained State Space (CGSS) Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="network.html#module-teaspoon.SP.network_tools">2.4.2.4. Network Tools</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="information.html">2.4.3. Information Module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="information.html#entropy">2.4.3.1. Entropy</a></li>
 </ul>
@@ -224,14 +246,12 @@ All code is open source with up to date documentation, making the code easy to u
 <h2>Collaborators<a class="headerlink" href="#collaborators" title="Permalink to this headline"></a></h2>
 <p>The code is a compilation of work done by <a class="reference external" href="http://www.elizabethmunch.com">Elizabeth Munch</a> and <a class="reference external" href="http://www.firaskhasawneh.com/">Firas Khasawneh</a> along with their students and collaborators.  People who have contributed to teaspoon include:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.audunmyers.com">Audun Myers</a></p></li>
-<li><p><a class="reference external" href="https://www.melihcanyesilli.com">Melih Yesilli</a></p></li>
-<li><p><a class="reference external" href="https://www.sarahtymochko.com/home">Sarah Tymochko</a></p></li>
-<li><p><a class="reference external" href="mailto:barnesd8&#37;&#52;&#48;msu&#46;edu">Danielle Barnes</a></p></li>
-<li><p><cite>Ismail Guzel</cite></p></li>
+<li><p><a class="reference external" href="https://github.com/myersau3">Audun Myers</a></p></li>
+<li><p>Melih Yesilli</p></li>
+<li><p><a class="reference external" href="https://www.egr.msu.edu/~tymochko/">Sarah Tymochko</a></p></li>
 </ul>
-</div>
-<div class="section" id="contact-information">
+</section>
+<section id="contact-information">
 <h2>Contact Information<a class="headerlink" href="#contact-information" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://www.elizabethmunch.com">Liz Munch</a>: <a class="reference external" href="mailto:muncheli&#37;&#52;&#48;msu&#46;edu">muncheli<span>&#64;</span>msu<span>&#46;</span>edu</a></p></li>

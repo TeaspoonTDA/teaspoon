@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaspoon.TDA.PHN &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <title>teaspoon.TDA.PHN &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -62,6 +64,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -111,7 +115,66 @@
            <div itemprop="articleBody">
              
   <h1>Source code for teaspoon.TDA.PHN</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="point_summaries"><a class="viewcode-back" href="../../../PHN.html#teaspoon.TDA.PHN.point_summaries">[docs]</a><span></span><span class="k">def</span> <span class="nf">point_summaries</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+<span></span><span class="c1">#import packages</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP</span> <span class="kn">import</span> <span class="n">network</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP</span> <span class="kn">import</span> <span class="n">tsa_tools</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP</span> <span class="kn">import</span> <span class="n">network_tools</span>
+<span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="c1"># import sub modules</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="DistanceMatrix"><a class="viewcode-back" href="../../../PHN.html#teaspoon.TDA.PHN.DistanceMatrix">[docs]</a><span class="k">def</span> <span class="nf">DistanceMatrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;shortest_unweighted_path&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function calculates the distance matrix from a connected graph represented as an adjacency matrix using an available method.&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (2-D array): 2-D square adjacency matrix</span>
+<span class="sd">        method (str): Method for calculating distances between nodes. default is shortest_unweighted_path. Options are shortest_unweighted_path, shortest_weighted_path, weighted_shortest_path, and diffusion_distance.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [2-D array]: Distance matrix between all node pairs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;shortest_unweighted_path&#39;</span><span class="p">,</span> <span class="s1">&#39;shortest_weighted_path&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;weighted_shortest_path&#39;</span><span class="p">,</span> <span class="s1">&#39;diffusion_distance&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method listed for distance matrix not available.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Defaulting to unweighted shortest path.&#39;</span><span class="p">)</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;shortest_unweighted_path&#39;</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">network_tools</span><span class="o">.</span><span class="n">remove_zeros</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;shortest_unweighted_path&#39;</span><span class="p">:</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">network_tools</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">weighted_path_lengths</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;shortest_weighted_path&#39;</span><span class="p">:</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">network_tools</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">weighted_path_lengths</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;weighted_shortest_path&#39;</span><span class="p">:</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">network_tools</span><span class="o">.</span><span class="n">weighted_shortest_path</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;diffusion_distance&#39;</span><span class="p">:</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">diam</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">distance_measures</span><span class="o">.</span><span class="n">diameter</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+        <span class="n">walk_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">diam</span><span class="p">)</span>
+        <span class="c1"># degree vector used later.</span>
+        <span class="n">deg_vec</span> <span class="o">=</span> <span class="n">network_tools</span><span class="o">.</span><span class="n">degree_vector</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">network_tools</span><span class="o">.</span><span class="n">diffusion_distance</span><span class="p">(</span>
+            <span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">deg_vec</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">walk_steps</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">D</span></div>
+
+
+<div class="viewcode-block" id="point_summaries"><a class="viewcode-back" href="../../../PHN.html#teaspoon.TDA.PHN.point_summaries">[docs]</a><span class="k">def</span> <span class="nf">point_summaries</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function calculates the persistent homology statistics for a graph from the paper &quot;Persistent Homology of Complex Networks for Dynamic State Detection.&quot;</span>
 
 <span class="sd">    Args:</span>
@@ -121,8 +184,6 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        [array 1-D]: statistics (R, En M) as (maximum persistence ratio, persistent entropy normalized, homology class ratio). Returns NaNs if empty diagram.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
     <span class="c1"># assertion errors to check data types</span>
 
@@ -171,41 +232,25 @@
     <span class="k">return</span> <span class="n">statistics</span></div>
 
 
-<div class="viewcode-block" id="PH_network"><a class="viewcode-back" href="../../../PHN.html#teaspoon.TDA.PHN.PH_network">[docs]</a><span class="k">def</span> <span class="nf">PH_network</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;unweighted&#39;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="s1">&#39;shortest_path&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="PH_network"><a class="viewcode-back" href="../../../PHN.html#teaspoon.TDA.PHN.PH_network">[docs]</a><span class="k">def</span> <span class="nf">PH_network</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">max_homology_dimension</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function calculates the persistent homology of the graph represented by the adjacency matrix A using a distance algorithm defined by user.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        A (2-D array): 2-D square adjacency matrix</span>
+<span class="sd">        D (2-D array): Distance matrix between all node pairs.</span>
 
 <span class="sd">    Other Parameters:</span>
-<span class="sd">        method (Optional[string]): either &#39;unweighted&#39;, &#39;simple&#39;, &#39;inverse&#39;, or &#39;difference&#39;. Default is &#39;unweighted&#39;.</span>
-<span class="sd">        distance (Optional[string]): either &#39;shortest_path&#39;, &#39;longest_path&#39; (if using &#39;simple&#39; distance), or &#39;resistance&#39;. Default is &#39;shortest_path&#39;.</span>
+<span class="sd">        max_homology_dimension (Optional[int]): maximum dimension of the homology.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        [square matrix (2-D array), list]: D (distance matrix), diagram (persistence diagram -- 0 and 1 dimension)</span>
+<span class="sd">        [list]: list of lists where ech list is a persistence diagram (standard ripser format).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1">#import packages</span>
-    <span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-    <span class="c1"># import sub modules</span>
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
-    <span class="kn">from</span> <span class="nn">teaspoon.TDA</span> <span class="kn">import</span> <span class="n">distance_matrix</span>
-
-    <span class="n">D</span> <span class="o">=</span> <span class="n">distance_matrix</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">)</span>
-    <span class="c1"># get distance matrix. Specify if weighting is desired or shortest path</span>
-
     <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
     <span class="n">D_sparse</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">D_sparse</span><span class="p">,</span> <span class="n">distance_matrix</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">maxdim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">D_sparse</span><span class="p">,</span> <span class="n">distance_matrix</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">maxdim</span><span class="o">=</span><span class="n">max_homology_dimension</span><span class="p">)</span>
     <span class="n">diagram</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;dgms&#39;</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="n">D</span><span class="p">,</span> <span class="n">diagram</span></div>
+    <span class="k">return</span> <span class="n">diagram</span></div>
 
 
 <span class="c1"># In[ ]:</span>
@@ -237,12 +282,15 @@
     <span class="c1"># create adjacency matrix, this</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 
+    <span class="c1"># get distance matrix</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">DistanceMatrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;shortest_unweighted_path&#39;</span><span class="p">)</span>
+
     <span class="c1"># get networkx representation of network for plotting</span>
     <span class="n">G</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">make_network</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">position_iterations</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
                           <span class="n">remove_deg_zero_nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="c1"># create distance matrix and calculate persistence diagram</span>
-    <span class="n">D</span><span class="p">,</span> <span class="n">diagram</span> <span class="o">=</span> <span class="n">PH_network</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;unweighted&#39;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="s1">&#39;shortest_path&#39;</span><span class="p">)</span>
+    <span class="c1"># calculate persistence diagram</span>
+    <span class="n">diagram</span> <span class="o">=</span> <span class="n">PH_network</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1-D Persistent Homology (loops): &#39;</span><span class="p">,</span> <span class="n">diagram</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 

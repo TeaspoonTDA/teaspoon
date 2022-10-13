@@ -13,7 +13,7 @@ The code is a compilation of work done by [Elizabeth Munch](http://www.elizabeth
 
 - [Audun Myers](https://www.audunmyers.com)
 - [Melih Yesilli](https://www.melihcanyesilli.com)
-- [Sarah Tymochko](https://www.sarahtymochko.com/home)
+- [Sarah Tymochko](https://www.egr.msu.edu/~tymochko/)
 - [Danielle Barnes]
 - [Ismail Guzel]
 

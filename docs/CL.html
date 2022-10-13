@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.2.2. Classification &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>2.2.2. Classification &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -64,6 +67,8 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -118,6 +123,35 @@
 <h1><span class="section-number">2.2.2. </span>Classification<a class="headerlink" href="#classification" title="Permalink to this headline"></a></h1>
 <p>In <a class="reference internal" href="F_PD.html#featurization"><span class="std std-ref">Featurization</span></a>, we provide examples on how to generate feature matrices from persistence diagrams.
 Here, we show how to perform classification using supervised machine learning algorithms.</p>
+<span class="target" id="module-teaspoon.ML.PD_Classification"></span><dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.getPercentScore">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">getPercentScore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsDF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_col='trainingLabel'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dgm_col='Dgm1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params=&lt;teaspoon.ML.Base.ParameterBucket</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precomputed=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saving=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saving_path=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/PD_Classification.html#getPercentScore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.getPercentScore" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DgmsDF</strong> (<em>dataframe</em>) – Data frame that includes persistence diagrams and labels. If user choose to performs transfer learning, DgmsDF_test should be given to algorithm. When transfer learning is performed, first diagram input is assumed as training set.</p></li>
+<li><p><strong>labels_col</strong> (<em>str</em>) – Name of the column that stores the labels for persistence diagrams in a Pandas dataframe. The default is ‘trainingLabel’.</p></li>
+<li><p><strong>dgm_col</strong> (<em>str</em>) – Name of the column that stores the persistence diagrams in a Pandas dataframe. The default is ‘Dgm1’.</p></li>
+<li><p><strong>params</strong> (<em>parameterbucket object</em>) – Parameter bucket object. The default is Base.ParameterBucket().</p></li>
+<li><p><strong>precomputed</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If user already computed the persitence landscapes, this should be set to True, otherwise algorithm will
+spend time on computing these. This option is only valid when persistence landscapes are used as featurization
+methods. If this parameter is True, algorithm treat ‘DgmsDF’ as persistence landscapes. The default is False.</p></li>
+<li><p><strong>saving</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If user wants to save classification results, this should be set to True and saving_path needs to be provided. The default is False.</p></li>
+<li><p><strong>saving_path</strong> (<em>str</em><em>, </em><em>optional</em>) – The path where user wants to save the results. This should be provided when saving is True. The default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Additional parameters. When user wants to apply transfer learning, the second set of persistence diagrams and their labels should be passed in a
+dataframe format.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>c_report_train</strong> (<em>dict</em>) – Classification report for training set results.</p></li>
+<li><p><strong>c_report_test</strong> (<em>dict</em>) – Classification report for test set results.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>Please see following subsections for classification examples of each featurization approach.</p>
 <div class="toctree-wrapper compound">
 <ul>

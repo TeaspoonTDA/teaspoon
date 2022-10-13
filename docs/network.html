@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.4.2. Network Representation of Time Series &mdash; teaspoon 0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>2.4.2. Network Representation of Time Series &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -64,6 +67,8 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul class="current">
@@ -119,9 +124,28 @@
 <p>This module provides algorithms for forming both ordinal partition networks (see example GIF below) and k-NN networks. The formation of the networks is described in detail in “<a class="reference external" href="https://arxiv.org/abs/1904.07403">Persistent Homology of Complex Networks for Dynamic State Detection</a>.”</p>
 <a class="with-shadow float-left reference internal image-reference" href="_images/ordinal_partition_network_video_complex.gif"><img alt="Left floating image" class="with-shadow float-left" src="_images/ordinal_partition_network_video_complex.gif" style="width: 471.15000000000003px; height: 214.38000000000002px;" /></a>
 <p>Figure: Example formation of an ordinal partition network for 6 dimensional permutations. As the ordinal ranking of the 6 spaced points changes, so does the node in the network. This shows how the network captures the periodic structure of the time series through a resulting double loop topology.</p>
-<span class="target" id="module-teaspoon.SP.network"></span><dl class="clear-both function">
-<dt id="teaspoon.SP.network.knn_graph">
-<code class="sig-prename descclassname">teaspoon.SP.network.</code><code class="sig-name descname">knn_graph</code><span class="sig-paren">(</span><em class="sig-param">ts</em>, <em class="sig-param">n=None</em>, <em class="sig-param">tau=None</em>, <em class="sig-param">k=4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#knn_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.network.knn_graph" title="Permalink to this definition"></a></dt>
+<section class="clear-both" id="k-nearest-neighbors-graph">
+<h2><span class="section-number">2.4.2.1. </span>k Nearest Neighbors Graph<a class="headerlink" href="#k-nearest-neighbors-graph" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network.</span></span><span class="sig-name descname"><span class="pre">Adjacency_KNN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#Adjacency_KNN"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>This function takes the indices of nearest neighbors and creates an adjacency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>indices</strong> (<em>array of ints</em>) – array of arrays of indices of n nearest neighbors.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Adjacency matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[A]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network.</span></span><span class="sig-name descname"><span class="pre">knn_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#knn_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>This function creates an k-NN network represented as an adjacency matrix A using a 1-D time series</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -143,9 +167,59 @@
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="teaspoon.SP.network.ordinal_partition_graph">
-<code class="sig-prename descclassname">teaspoon.SP.network.</code><code class="sig-name descname">ordinal_partition_graph</code><span class="sig-paren">(</span><em class="sig-param">ts</em>, <em class="sig-param">n=None</em>, <em class="sig-param">tau=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#ordinal_partition_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.network.ordinal_partition_graph" title="Permalink to this definition"></a></dt>
+<p>The network output has the data structure of an adjacency matrix (or networkx graph for displaying). An example is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#import needed packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP.network</span> <span class="kn">import</span> <span class="n">knn_graph</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP.network_tools</span> <span class="kn">import</span> <span class="n">make_network</span>
+
+<span class="c1"># Time series data</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1">#generate a simple time series</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#adjacency matrix</span>
+
+<span class="n">G</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">make_network</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1">#get networkx representation</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Network&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">font_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">node_size</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This code has the output as follows:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/example_knn_graph.png"><img alt="_images/example_knn_graph.png" src="_images/example_knn_graph.png" style="width: 276.0px; height: 280.2px;" /></a>
+</figure>
+</section>
+<section id="ordinal-partition-graph">
+<h2><span class="section-number">2.4.2.2. </span>Ordinal Partition Graph<a class="headerlink" href="#ordinal-partition-graph" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network.</span></span><span class="sig-name descname"><span class="pre">Adjaceny_OP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perm_seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#Adjaceny_OP"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>This function takes the permutation sequence and creates a weighted and directed adjacency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>perm_seq</strong> (<em>array of ints</em>) – array of the permutations (chronologically ordered) that were visited.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – dimension of permutations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Adjacency matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[A]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network.</span></span><span class="sig-name descname"><span class="pre">ordinal_partition_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#ordinal_partition_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>This function creates an ordinal partition network represented as an adjacency matrix A using a 1-D time series</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -166,65 +240,272 @@
 </dl>
 </dd></dl>
 
-<span class="target" id="module-teaspoon.SP.network_tools"></span><dl class="function">
-<dt id="teaspoon.SP.network_tools.make_network">
-<code class="sig-prename descclassname">teaspoon.SP.network_tools.</code><code class="sig-name descname">make_network</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">position_iterations=1000</em>, <em class="sig-param">remove_deg_zero_nodes=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#make_network"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#teaspoon.SP.network_tools.make_network" title="Permalink to this definition"></a></dt>
-<dd><p>This function creates a networkx graph and position of the nodes using the adjacency matrix.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>A</strong> (<em>2-D array</em>) – 2-D square adjacency matrix</p>
-</dd>
-<dt class="field-even">Other Parameters</dt>
-<dd class="field-even"><p><strong>position_iterations</strong> (<em>Optional[int]</em>) – Number of spring layout position iterations. Default is 1000.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>G (networkx graph representation), pos (position of nodes for networkx drawing)</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>[dictionaries, list]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p>The network output has the data structure of an adjacency matrix. An example is shown below:</p>
+<p>The network output has the data structure of an adjacency matrix (or networkx graph for displaying). An example is shown below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#import needed packages</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">teaspoon.SP.network</span> <span class="kn">import</span> <span class="n">knn_graph</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="c1">#teaspoon functions</span>
 <span class="kn">from</span> <span class="nn">teaspoon.SP.network</span> <span class="kn">import</span> <span class="n">ordinal_partition_graph</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP.network_tools</span> <span class="kn">import</span> <span class="n">remove_zeros</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP.network_tools</span> <span class="kn">import</span> <span class="n">make_network</span>
 
+<span class="c1"># Time series data</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
 <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1">#generate a simple time series</span>
 
-<span class="n">A_knn</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#knn network from time series</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span> <span class="c1">#adjacency matrix</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">remove_zeros</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1">#remove nodes of unused permutation</span>
 
-<span class="n">A_op</span> <span class="o">=</span> <span class="n">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="c1">#ordinal partition network from time series</span>
-</pre></div>
-</div>
-<p>Additionally, there is methods to change the data structure to anything available in networkx through changing the adjacency matrix to the networkx data structure (dictionary of dictionaries) with an example as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1">#generate a simple time series</span>
+<span class="n">G</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">make_network</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1">#get networkx representation</span>
 
-<span class="kn">from</span> <span class="nn">teaspoon.SP.network</span> <span class="kn">import</span> <span class="n">knn_graph</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">teaspoon.SP.network_tools</span> <span class="kn">import</span> <span class="n">make_network</span>
-<span class="n">G</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">make_network</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Network&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Network&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
         <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">font_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">node_size</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>This code has the output as follows:</p>
-<div class="figure align-default">
-<a class="reference internal image-reference" href="_images/example_knn_graph.png"><img alt="_images/example_knn_graph.png" src="_images/example_knn_graph.png" style="width: 460.0px; height: 467.0px;" /></a>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/example_opn_graph.png"><img alt="_images/example_opn_graph.png" src="_images/example_opn_graph.png" style="width: 345.41999999999996px; height: 351.71999999999997px;" /></a>
+</figure>
+</section>
+<section id="coarse-grained-state-space-cgss-graph">
+<h2><span class="section-number">2.4.2.3. </span>Coarse Grained State Space (CGSS) Graph<a class="headerlink" href="#coarse-grained-state-space-cgss-graph" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network.</span></span><span class="sig-name descname"><span class="pre">Adjacency_CGSS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#Adjacency_CGSS"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>This function takes the CGSS state sequence and creates a weighted and directed adjacency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_seq</strong> (<em>array of ints</em>) – array of the states visited in SSR (chronologically ordered).</p></li>
+<li><p><strong>N</strong> (<em>int</em>) – dnumber of total possible states.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Adjacency matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[A]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network.</span></span><span class="sig-name descname"><span class="pre">cgss_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network.html#cgss_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>This function creates a coarse grained state space network (CGSSN) represented as an adjacency matrix A using a 1-D time series and binning array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ts</strong> (<em>1-D array</em>) – 1-D time series signal</p></li>
+<li><p><strong>B_array</strong> (<em>1-D array</em>) – array of bin edges for binning SSR for each dimension.</p></li>
+<li><p><strong>n</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding dimension for state space reconstruction. Default is uses MsPE algorithm from parameter_selection module.</p></li>
+<li><p><strong>tau</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding delay fro state space reconstruction. Default uses MsPE algorithm from parameter_selection module.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A (2-D weighted and directed square adjacency matrix)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[2-D square array]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The network output has the data structure of an adjacency matrix (or networkx graph for displaying). An example is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#import needed packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="c1">#teaspoon functions</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP.network</span> <span class="kn">import</span> <span class="n">cgss_graph</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP.network_tools</span> <span class="kn">import</span> <span class="n">remove_zeros</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP.network_tools</span> <span class="kn">import</span> <span class="n">make_network</span>
+<span class="kn">from</span> <span class="nn">teaspoon.parameter_selection</span> <span class="kn">import</span> <span class="n">MsPE</span>
+
+<span class="c1"># Time series data</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">600</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1">#generate a simple time series</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">#dimension of SSR</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span> <span class="c1">#number of states per dimension</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="n">MsPE</span><span class="o">.</span><span class="n">MsPE_tau</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+
+<span class="n">B_array</span> <span class="o">=</span> <span class="n">tsa_tools</span><span class="o">.</span><span class="n">cgss_binning</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1">#binning array</span>
+<span class="n">SSR</span> <span class="o">=</span> <span class="n">tsa_tools</span><span class="o">.</span><span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>  <span class="c1">#state space reconstruction</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">cgss_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">B_array</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span> <span class="c1">#adjacency matrix</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">remove_zeros</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1">#remove nodes of unused permutation</span>
+
+<span class="n">G</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">make_network</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1">#get networkx representation</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Network&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">font_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">node_size</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 </div>
-</div>
+<p>This code has the output as follows:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/example_cgssn_graph.png"><img alt="_images/example_cgssn_graph.png" src="_images/example_cgssn_graph.png" style="width: 345.41999999999996px; height: 351.71999999999997px;" /></a>
+</figure>
+</section>
+<section id="module-teaspoon.SP.network_tools">
+<span id="network-tools"></span><h2><span class="section-number">2.4.2.4. </span>Network Tools<a class="headerlink" href="#module-teaspoon.SP.network_tools" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.SP.network_tools.degree_matrix">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network_tools.</span></span><span class="sig-name descname"><span class="pre">degree_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#degree_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network_tools.degree_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>This function calculates the degree matrix from theadjacency matrix. A degree matrix is an empty matrix with diagonal filled with degree vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>A</strong> (<em>2-D array</em>) – adjacency matrix of single component graph.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Degree matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[2-D array]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.SP.network_tools.diffusion_distance">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network_tools.</span></span><span class="sig-name descname"><span class="pre">diffusion_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#diffusion_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network_tools.diffusion_distance" title="Permalink to this definition"></a></dt>
+<dd><p>This function calculates the diffusion distance for t random walk steps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>matrix</em>) – adjacency matrix of graph.</p></li>
+<li><p><strong>d</strong> (<em>array</em>) – degree vector</p></li>
+<li><p><strong>t</strong> (<em>int</em>) – random walk steps. Should be approximately twice the diameter of graph.</p></li>
+<li><p><strong>lazy</strong> (<em>Optional</em><em>[</em><em>boolean</em><em>]</em>) – optional to use self transition probability (50%).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A (2-D weighted and directed square probability transition matrix)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[2-D square array]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.SP.network_tools.make_network">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network_tools.</span></span><span class="sig-name descname"><span class="pre">make_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_deg_zero_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#make_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network_tools.make_network" title="Permalink to this definition"></a></dt>
+<dd><p>This function creates a networkx graph and position of the nodes using the adjacency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>2-D array</em>) – 2-D square adjacency matrix</p></li>
+<li><p><strong>position_iterations</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of spring layout position iterations. Default is 1000.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>G (networkx graph representation), pos (position of nodes for networkx drawing)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[dictionaries, list]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.SP.network_tools.random_walk">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network_tools.</span></span><span class="sig-name descname"><span class="pre">random_walk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#random_walk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network_tools.random_walk" title="Permalink to this definition"></a></dt>
+<dd><p>This function calculates the 1 step random walk probability matrix using the adjacency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>matrix</em>) – adjacency matrix of graph.</p></li>
+<li><p><strong>lazy</strong> (<em>Optional</em><em>[</em><em>boolean</em><em>]</em>) – optional to use self transition probability (50%).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A (2-D weighted and directed square probability transition matrix)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[2-D square array]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.SP.network_tools.remove_zeros">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network_tools.</span></span><span class="sig-name descname"><span class="pre">remove_zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#remove_zeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network_tools.remove_zeros" title="Permalink to this definition"></a></dt>
+<dd><p>This function removes unused vertices from adjacency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>A</strong> (<em>matrix</em>) – 2-D weighted and directed square probability transition matrix</p>
+</dd>
+</dl>
+<p>Returns: [2D matrix]: 2-D weighted and directed square probability transition matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.SP.network_tools.shortest_path">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network_tools.</span></span><span class="sig-name descname"><span class="pre">shortest_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighted_path_lengths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#shortest_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network_tools.shortest_path" title="Permalink to this definition"></a></dt>
+<dd><p>This function calculates the shortest path distance matrix for a signal component graph represented as an adjacency matrix A.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>2-D array</em>) – adjacency matrix of single component graph.</p></li>
+<li><p><strong>n</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – option to calculate the shortest path between nodes using the inverse of the edge weights.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance matrix of shortest path lengths between all node pairs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[2-D array]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.SP.network_tools.visualize_network">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network_tools.</span></span><span class="sig-name descname"><span class="pre">visualize_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_deg_zero_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#visualize_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network_tools.visualize_network" title="Permalink to this definition"></a></dt>
+<dd><p>This function creates a networkx graph and position of the nodes using the adjacency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>2-D array</em>) – 2-D square adjacency matrix</p></li>
+<li><p><strong>position_iterations</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of spring layout position iterations. Default is 1000.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>G (networkx graph representation), pos (position of nodes for networkx drawing)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[dictionaries, list]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.SP.network_tools.weighted_shortest_path">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.network_tools.</span></span><span class="sig-name descname"><span class="pre">weighted_shortest_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/network_tools.html#weighted_shortest_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.network_tools.weighted_shortest_path" title="Permalink to this definition"></a></dt>
+<dd><p>This function calculates the weighted shortest path distance matrix for a signal component graph represented as an adjacency matrix A. The paths are found tusing the edge weights as the inverse of the adjacency matrix weight and the distance is the sum of the adjacency matrix weights along that path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>A</strong> (<em>2-D array</em>) – adjacency matrix of single component graph.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance matrix of shortest path lengths between all node pairs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[2-D array]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
 
 
            </div>
