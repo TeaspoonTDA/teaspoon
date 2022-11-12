@@ -1,4 +1,12 @@
 # @package teaspoon.TDA.Persistence
+import re
+import warnings
+import glob
+from scipy.spatial.distance import pdist, squareform
+from subprocess import DEVNULL, STDOUT, call
+import subprocess
+import os
+import numpy as np
 """
 This module includes wrappers for using various fast persistence software inside of python.
 All diagrams are stored as a 2xN numpy matrix.
@@ -32,16 +40,6 @@ Files are repeatedly emptied out of it, so do not save anything in it that you m
 #-----------------------------------------------------#
 
 
-
-
-import numpy as np
-import os
-import subprocess
-from subprocess import DEVNULL, STDOUT, call
-from scipy.spatial.distance import pdist, squareform
-import glob
-import warnings
-import re
 def prepareFolders():
     """
     Generates the ".teaspoonData" folder.

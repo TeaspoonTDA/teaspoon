@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.3.7. Temporal Hypegraph Analysis using Zigzag Persistence &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2.4. Signal Processing (SP) Module Documentation" href="SP.html" />
+    <link rel="prev" title="2.3.6. Bifurcations using ZigZag (BuZZ)" href="buzz.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> teaspoon
+            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html">2.1.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">teaspoon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a> &raquo;</li>
+          <li><a href="TDA.html"><span class="section-number">2.3. </span>Topological Data Analysis (TDA) Module Documentation</a> &raquo;</li>
+      <li><span class="section-number">2.3.7. </span>Temporal Hypegraph Analysis using Zigzag Persistence</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ZZ_TG.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="temporal-hypegraph-analysis-using-zigzag-persistence">
+<h1><span class="section-number">2.3.7. </span>Temporal Hypegraph Analysis using Zigzag Persistence<a class="headerlink" href="#temporal-hypegraph-analysis-using-zigzag-persistence" title="Permalink to this headline"></a></h1>
+<p>This module contains code to run zigzag persistence on temporal hypergraph data. This code is based on the work performed in “Temporal Network Analysis Using Zigzag Persistence.” The general pipeline for this work is shown in the following figure.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/TG_ZZ_pipeline.png"><img alt="_images/TG_ZZ_pipeline.png" src="_images/TG_ZZ_pipeline.png" style="width: 700px;" /></a>
+</div></blockquote>
+<p>Specifically, a temporal graph is a graph whose edges are active during specified intervals. For example, conisder the edge between nodes a and b with a set of intervals associated to it. This set of intervals describes when this edge is active. An example of this is shown on the left side of the pipeline figure. Next, we generate graph snapshots from the temporal graph by using a sliding window technique. These graph snapshots are generated based on adding edges to the graph snapshot if there is an overlap between the edge’s interval and the sliding window interval. Additionally. we include union windows between sliding windows for the zigzag persistence pipeline. These union windows are formed the same except with the sliding window of the union of two temporally adjacent windows. Next, we construct simplicial complex representations for each graph and lastly apply zigzag persistence to the simplicial complex sequence.</p>
+<section id="module-teaspoon.TDA.TGZZ">
+<span id="functions"></span><h2><span class="section-number">2.3.7.1. </span>Functions<a class="headerlink" href="#module-teaspoon.TDA.TGZZ" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.TGZZ.graph_snapshots">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.TGZZ.</span></span><span class="sig-name descname"><span class="pre">graph_snapshots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">windows</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/TGZZ.html#graph_snapshots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.TGZZ.graph_snapshots" title="Permalink to this definition"></a></dt>
+<dd><p>This function gets generates graph snapshots from the temporal graph information and windows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edges</strong> (<em>array of tuples</em>) – edges of graph.</p></li>
+<li><p><strong>I</strong> (<em>list of arrays</em>) – list of all intervals for each edge indexed according to edge list.</p></li>
+<li><p><strong>windows</strong> (<em>2xN array</em>) – array of N intervals for each sliding window and union window interleaved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of networkx graphs for each graph snapshot corresponding to a window.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[list of networkx Graphs]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.TGZZ.plot_persistence_diagram">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.TGZZ.</span></span><span class="sig-name descname"><span class="pre">plot_persistence_diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dgms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">18</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/TGZZ.html#plot_persistence_diagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.TGZZ.plot_persistence_diagram" title="Permalink to this definition"></a></dt>
+<dd><p>This function plots the persistence diagram from the zigzag persistence filtration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dgms</strong> (<em>persistence diagrams</em>) – persistence diagrams from dionysus2 format output.</p></li>
+<li><p><strong>dimensions</strong> (<em>array of integers</em>) – dimensions to be included in persistence diagram.</p></li>
+<li><p><strong>windows</strong> (<em>2xN array</em>) – array of N intervals for each sliding window and union window interleaved.</p></li>
+<li><p><strong>FS</strong> (<em>int</em>) – font size.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Does not return persistence diagram.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[NA]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.TGZZ.simplicial_complex_representation">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.TGZZ.</span></span><span class="sig-name descname"><span class="pre">simplicial_complex_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">TG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_snapshots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/TGZZ.html#simplicial_complex_representation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.TGZZ.simplicial_complex_representation" title="Permalink to this definition"></a></dt>
+<dd><p>This function represents the graph snapshots as vietoris rips simplicial complex based on a
+filtration (short path) distance K. For the simplicial complex representaiton of the graph set K=1.
+For higher order simplices choose $K$ correspondingly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TG</strong> (<em>graph</em>) – Networkx graph</p></li>
+<li><p><strong>G_snapshots</strong> (<em>list of networkx Graphs</em>) – list of networkx graphs for each graph snapshot corresponding to a window.</p></li>
+<li><p><strong>windows</strong> (<em>2xN array</em>) – array of N intervals for each sliding window and union window interleaved.</p></li>
+<li><p><strong>K</strong> (<em>int</em>) – shortest path distance filtration for simplicial complex formation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>S simplices of simplicial complex.
+[list of lists]: T times of simplices according to dionysus format for zigzag persistence.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[list of lists]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.TGZZ.sliding_windows">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.TGZZ.</span></span><span class="sig-name descname"><span class="pre">sliding_windows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_range</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/TGZZ.html#sliding_windows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.TGZZ.sliding_windows" title="Permalink to this definition"></a></dt>
+<dd><p>This function gets a list of sliding windows and their unions between.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window_width</strong> (<em>float</em>) – width of sliding window.</p></li>
+<li><p><strong>overlap_ratio</strong> (<em>float</em>) – ratio of overlap between adjacent sliding windows.</p></li>
+<li><p><strong>time_range</strong> (<em>tuple</em>) – tuple of starting and ending time of sliding windows.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>array of N intervals for each sliding window and union window interleaved.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[2xN array]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="note">
+<h2><span class="section-number">2.3.7.2. </span>Note<a class="headerlink" href="#note" title="Permalink to this headline"></a></h2>
+<p>To run dionysus2 follow the instructions available on the dionysus2 website. If running with windows OS we advise using windows subsystem for linux (WSL) and following dionysus2 installation directions.</p>
+</section>
+<section id="example">
+<h2><span class="section-number">2.3.7.3. </span>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
+<p>To demonstrate the function of zigzag persistence on graphs we will leverage a simple example. Namely, we have a temporal graph constructed that has a loop and several components that break and then recombine. The goal of zigzag persistence in dimension 0 and 1 is to track the components and holes in the graph, respectively.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">dionysus</span> <span class="k">as</span> <span class="nn">dio</span>
+<span class="kn">import</span> <span class="nn">gudhi</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+
+<span class="c1"># list of edges and nodes</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>                <span class="c1">#edge 0</span>
+         <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>                <span class="c1">#edge 1</span>
+         <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>                <span class="c1">#edge 2</span>
+         <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>                <span class="c1">#edge 3</span>
+         <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>                <span class="c1">#edge 4</span>
+
+<span class="c1"># I is a list of intervals for each edge.</span>
+<span class="n">I</span> <span class="o">=</span> <span class="p">[[[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.6</span><span class="p">,</span> <span class="mf">8.7</span><span class="p">]],</span> <span class="c1"># edge 0</span>
+     <span class="p">[[</span><span class="mf">4.4</span><span class="p">,</span> <span class="mf">9.9</span><span class="p">]],</span>             <span class="c1"># edge 1</span>
+     <span class="p">[[</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">3.9</span><span class="p">],</span> <span class="p">[</span><span class="mf">6.1</span><span class="p">,</span> <span class="mf">9.1</span><span class="p">]],</span> <span class="c1"># edge 2</span>
+     <span class="p">[[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">9.3</span><span class="p">]],</span>             <span class="c1"># edge 3</span>
+     <span class="p">[[</span><span class="mf">3.2</span><span class="p">,</span> <span class="mf">7.6</span><span class="p">]]]</span>             <span class="c1"># edge 4</span>
+
+<span class="n">TG</span> <span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span> <span class="c1">#temporal graph as attributed networkx representation</span>
+<span class="c1">#add attribute information to each node and edge and construct as networkx graph</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span> <span class="c1">#add position information to nodes</span>
+    <span class="n">TG</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
+    <span class="n">TG</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1">#define sliding window intervals</span>
+<span class="n">window_width</span><span class="p">,</span> <span class="n">overlap_ratio</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span>
+<span class="n">time_range</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">windows</span> <span class="o">=</span> <span class="n">sliding_windows</span><span class="p">(</span><span class="n">window_width</span><span class="p">,</span> <span class="n">overlap_ratio</span><span class="p">,</span> <span class="n">time_range</span><span class="p">)</span>
+
+<span class="c1">#get graph snapshots</span>
+<span class="n">G_snapshots</span> <span class="o">=</span> <span class="n">graph_snapshots</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">windows</span><span class="p">)</span>
+
+<span class="c1">#get simplices and associated times based on dionysus format needed.</span>
+<span class="n">S</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">simplicial_complex_representation</span><span class="p">(</span><span class="n">TG</span><span class="p">,</span> <span class="n">G_snapshots</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#run dionysus2 zigzag persistence</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">dio</span><span class="o">.</span><span class="n">Filtration</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="n">zz</span><span class="p">,</span> <span class="n">dgms</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="n">dio</span><span class="o">.</span><span class="n">zigzag_homology_persistence</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+<span class="c1">#print and plot persistence</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dgm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dgms</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dimension:&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dgm</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">diag</span> <span class="o">=</span> <span class="n">plot_persistence_diagram</span><span class="p">(</span><span class="n">dgms</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">FS</span> <span class="o">=</span> <span class="mi">22</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the output for this example is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Dimension</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">Dimension</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mf">4.5</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mf">8.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/example_PD_dimension.png"><img alt="_images/example_PD_dimension.png" src="_images/example_PD_dimension.png" style="width: 234.48px; height: 233.88px;" /></a>
+</figure>
+<p>To better understand the resulting persistence diagram, we can visualize the changing structure of the network by looking at the intervals and corresponding graph snapshots. The following figure shows the graph snapshots and the corresponding unions. It is clear that there is a cycle born at graph 3,4 and dissapears at graph 4 correspodning to the persistence pair (4,4.5) and the cycle is born again at graph 5,6 and breaks at graph 8 corresponding to the persistence pair (6,8.5). For more details on this example we direct the user to our publication titled “Temporal Network Analysis Using Zigzag Persistence.”</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/example_graph_sequence_and_intervals.png"><img alt="_images/example_graph_sequence_and_intervals.png" src="_images/example_graph_sequence_and_intervals.png" style="width: 516.24px; height: 277.08px;" /></a>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="buzz.html" class="btn btn-neutral float-left" title="2.3.6. Bifurcations using ZigZag (BuZZ)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SP.html" class="btn btn-neutral float-right" title="2.4. Signal Processing (SP) Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Munch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

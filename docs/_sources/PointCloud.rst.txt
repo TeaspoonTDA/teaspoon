@@ -1,3 +1,5 @@
+.. _Point_Cloud:
+
 Point Cloud Data Generation Module Documentation
 =========================================================
 

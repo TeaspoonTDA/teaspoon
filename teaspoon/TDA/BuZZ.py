@@ -213,7 +213,7 @@ class PtClouds(object):
 
         # Initialize with vertices for X_0
         verts = set([dio.Simplex([j+vertind], 0)
-                    for j, pc in enumerate(lst[0])])
+                     for j, pc in enumerate(lst[0])])
 
         init_end = time.time()
         if verbose:
@@ -236,7 +236,7 @@ class PtClouds(object):
 
             # Set of vertices in R(X_i)
             verts_next = set([dio.Simplex([j+vertind], 0)
-                             for j, pc in enumerate(lst[i])])
+                              for j, pc in enumerate(lst[i])])
 
             # Set of simplices with verts in X_{i}
             B = set(verts_next.intersection(rips_set))
@@ -355,7 +355,7 @@ class PtClouds(object):
         # Initialize with vertices for X_0
         # In the loop, this will store vertices in X_{i-1}
         verts = set([dio.Simplex([j+vertind], 0)
-                    for j, pc in enumerate(lst[0])])
+                     for j, pc in enumerate(lst[0])])
 
         init_end = time.time()
         if verbose:
@@ -379,7 +379,7 @@ class PtClouds(object):
 
             # Set of vertices in X_{i}
             verts_next = set([dio.Simplex([j+vertind], 0)
-                             for j, pc in enumerate(lst[i])])
+                              for j, pc in enumerate(lst[i])])
 
             # Set of simplices with verts in X_{i}
             B = set(verts_next.intersection(rips_set))

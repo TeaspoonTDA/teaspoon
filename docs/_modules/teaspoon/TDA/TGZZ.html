@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaspoon.TDA.TGZZ &mdash; teaspoon 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="../../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html">2.1.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">5. Citing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">teaspoon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>teaspoon.TDA.TGZZ</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaspoon.TDA.TGZZ</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">dionysus</span> <span class="k">as</span> <span class="nn">dio</span>
+<span class="kn">import</span> <span class="nn">gudhi</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+
+
+<div class="viewcode-block" id="sliding_windows"><a class="viewcode-back" href="../../../ZZ_TG.html#teaspoon.TDA.TGZZ.sliding_windows">[docs]</a><span class="k">def</span> <span class="nf">sliding_windows</span><span class="p">(</span><span class="n">window_width</span><span class="p">,</span> <span class="n">overlap_ratio</span><span class="p">,</span> <span class="n">time_range</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function gets a list of sliding windows and their unions between.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        window_width (float): width of sliding window.</span>
+<span class="sd">        overlap_ratio (float): ratio of overlap between adjacent sliding windows.</span>
+<span class="sd">        time_range (tuple): tuple of starting and ending time of sliding windows.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [2xN array]: array of N intervals for each sliding window and union window interleaved.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">window_width</span>  <span class="c1"># sliding window width</span>
+    <span class="c1"># ranges from no overlap with 0 to 1 with complete overlap between adjacent windows.</span>
+    <span class="n">OR</span> <span class="o">=</span> <span class="n">overlap_ratio</span>
+    <span class="n">t_range</span> <span class="o">=</span> <span class="n">time_range</span>  <span class="c1"># range of time to create sliding windows from</span>
+
+    <span class="c1"># normal windows without unions between</span>
+    <span class="n">normal_windows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">w</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">OR</span><span class="p">)),</span>
+                               <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">w</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">OR</span><span class="p">))</span> <span class="o">+</span> <span class="n">w</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+    <span class="c1"># union windows as the union of time adjacent windows</span>
+    <span class="n">union_windows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">normal_windows</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">normal_windows</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
+                              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">normal_windows</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+
+    <span class="c1"># alternate between normal and union windows</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">normal_windows</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">union_windows</span><span class="p">))</span>
+    <span class="n">windows</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">normal_windows</span>
+    <span class="n">windows</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">union_windows</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">windows</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">windows</span></div>
+
+
+<div class="viewcode-block" id="graph_snapshots"><a class="viewcode-back" href="../../../ZZ_TG.html#teaspoon.TDA.TGZZ.graph_snapshots">[docs]</a><span class="k">def</span> <span class="nf">graph_snapshots</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">windows</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function gets generates graph snapshots from the temporal graph information and windows.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        edges (array of tuples): edges of graph.</span>
+<span class="sd">        I (list of arrays): list of all intervals for each edge indexed according to edge list.</span>
+<span class="sd">        windows (2xN array): array of N intervals for each sliding window and union window interleaved.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [list of networkx Graphs]: list of networkx graphs for each graph snapshot corresponding to a window.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">getOverlapStatus</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="c1"># function to check if two intervals a and b overlap based on allen&#39;s algebra</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">overlap_status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">overlap</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">overlap</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># check if there is an overlap</span>
+            <span class="n">overlap_status</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>  <span class="c1"># get if end points overlap</span>
+            <span class="n">overlap_status</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">overlap_status</span>
+
+    <span class="n">G_snapshots</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># initialize list of graph snapshots</span>
+    <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">:</span>  <span class="c1"># go through each window which is representative of a graph snapshot</span>
+        <span class="n">G_snapshot</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>  <span class="c1"># initialize snapshot graph</span>
+        <span class="c1"># go through each edges intervals</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">intervals_edge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">intervals_edge</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">getOverlapStatus</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">window</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="n">G_snapshot</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">G_snapshots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G_snapshot</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">G_snapshots</span></div>
+
+
+<div class="viewcode-block" id="simplicial_complex_representation"><a class="viewcode-back" href="../../../ZZ_TG.html#teaspoon.TDA.TGZZ.simplicial_complex_representation">[docs]</a><span class="k">def</span> <span class="nf">simplicial_complex_representation</span><span class="p">(</span><span class="n">TG</span><span class="p">,</span> <span class="n">G_snapshots</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function represents the graph snapshots as vietoris rips simplicial complex based on a </span>
+<span class="sd">    filtration (short path) distance K. For the simplicial complex representaiton of the graph set K=1. </span>
+<span class="sd">    For higher order simplices choose $K$ correspondingly.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        TG (graph): Networkx graph</span>
+<span class="sd">        G_snapshots (list of networkx Graphs): list of networkx graphs for each graph snapshot corresponding to a window.</span>
+<span class="sd">        windows (2xN array): array of N intervals for each sliding window and union window interleaved.</span>
+<span class="sd">        K (int): shortest path distance filtration for simplicial complex formation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [list of lists]: S simplices of simplicial complex.</span>
+<span class="sd">        [list of lists]: T times of simplices according to dionysus format for zigzag persistence.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t_Gs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">]</span>
+    <span class="n">G_uw</span> <span class="o">=</span> <span class="n">TG</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">floyd_warshall_numpy</span><span class="p">(</span><span class="n">G_uw</span><span class="p">)</span>
+    <span class="n">rips_complex</span> <span class="o">=</span> <span class="n">gudhi</span><span class="o">.</span><span class="n">RipsComplex</span><span class="p">(</span><span class="n">distance_matrix</span><span class="o">=</span><span class="n">D</span><span class="p">,</span>
+                                     <span class="n">max_edge_length</span><span class="o">=</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">simplex_tree</span> <span class="o">=</span> <span class="n">rips_complex</span><span class="o">.</span><span class="n">create_simplex_tree</span><span class="p">(</span><span class="n">max_dimension</span><span class="o">=</span><span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">S_full</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">filtered_value</span> <span class="ow">in</span> <span class="n">simplex_tree</span><span class="o">.</span><span class="n">get_filtration</span><span class="p">():</span>
+        <span class="n">S_full</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">filtered_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="c1"># initialize times when things turn on and off</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">S_full</span><span class="p">:</span>
+        <span class="n">T</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+    <span class="c1"># simplex status vector from previous graph</span>
+    <span class="n">status_vector_prev</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">S_full</span><span class="p">)</span>
+    <span class="n">ell</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G_snapshots</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>  <span class="c1"># go through each graph</span>
+        <span class="n">Gi</span> <span class="o">=</span> <span class="n">G_snapshots</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># distance matrix using unweighted shortest path</span>
+        <span class="n">Di</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">floyd_warshall_numpy</span><span class="p">(</span><span class="n">Gi</span><span class="p">)</span>
+        <span class="n">rips_complex</span> <span class="o">=</span> <span class="n">gudhi</span><span class="o">.</span><span class="n">RipsComplex</span><span class="p">(</span><span class="n">distance_matrix</span><span class="o">=</span><span class="n">Di</span><span class="p">,</span> <span class="n">max_edge_length</span><span class="o">=</span><span class="n">K</span><span class="p">)</span>
+        <span class="n">simplex_tree</span> <span class="o">=</span> <span class="n">rips_complex</span><span class="o">.</span><span class="n">create_simplex_tree</span><span class="p">(</span><span class="n">max_dimension</span><span class="o">=</span><span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">filtered_value</span> <span class="ow">in</span> <span class="n">simplex_tree</span><span class="o">.</span><span class="n">get_filtration</span><span class="p">():</span>
+            <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">filtered_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="c1"># simplex status vector for when simplices are on.</span>
+        <span class="n">status_vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">S_full</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>  <span class="c1"># go through each simplex in simplices of graph</span>
+            <span class="n">s_index</span> <span class="o">=</span> <span class="n">S_full</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># get index in S_full where s is.</span>
+            <span class="c1"># set simplex as on if it is in simplicial complex</span>
+            <span class="n">status_vector</span><span class="p">[</span><span class="n">s_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">s_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">status_vector</span><span class="p">)):</span>
+            <span class="c1"># if the simplex appears</span>
+            <span class="k">if</span> <span class="n">status_vector</span><span class="p">[</span><span class="n">s_index</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">status_vector_prev</span><span class="p">[</span><span class="n">s_index</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">T</span><span class="p">[</span><span class="n">s_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_Gs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="c1"># if the simplex dissapeared.</span>
+            <span class="k">if</span> <span class="n">status_vector</span><span class="p">[</span><span class="n">s_index</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">status_vector_prev</span><span class="p">[</span><span class="n">s_index</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">T</span><span class="p">[</span><span class="n">s_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_Gs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">status_vector_prev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">status_vector</span><span class="p">)</span>
+
+    <span class="c1"># make sure all persistence pairs die at end and dont go to infinity</span>
+    <span class="n">t_final</span> <span class="o">=</span> <span class="n">windows</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">T_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">T_i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_final</span><span class="p">)</span>
+
+    <span class="n">S</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">S_full</span><span class="p">):</span>
+        <span class="n">ell_S</span><span class="p">,</span> <span class="n">simp</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ell_S</span><span class="p">):</span>
+            <span class="n">simp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">simp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">S</span><span class="p">,</span> <span class="n">T</span></div>
+
+
+<div class="viewcode-block" id="plot_persistence_diagram"><a class="viewcode-back" href="../../../ZZ_TG.html#teaspoon.TDA.TGZZ.plot_persistence_diagram">[docs]</a><span class="k">def</span> <span class="nf">plot_persistence_diagram</span><span class="p">(</span><span class="n">dgms</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">FS</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function plots the persistence diagram from the zigzag persistence filtration.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dgms (persistence diagrams): persistence diagrams from dionysus2 format output.</span>
+<span class="sd">        dimensions (array of integers): dimensions to be included in persistence diagram.</span>
+<span class="sd">        windows (2xN array): array of N intervals for each sliding window and union window interleaved.</span>
+<span class="sd">        FS (int): font size.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [NA]: Does not return persistence diagram.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">fontsize</span> <span class="o">=</span> <span class="n">FS</span>
+    <span class="n">MS</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">]</span>
+    <span class="n">max_val</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dgm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dgms</span><span class="p">):</span>
+        <span class="n">plot_markers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gs&#39;</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="s1">&#39;rd&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dgm</span><span class="p">):</span>
+            <span class="c1"># this is really stupid but the dionysus point p is not a subsctiptable object.</span>
+            <span class="n">pair</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="n">pair</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+            <span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+                <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_val</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">plot_markers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                             <span class="n">markersize</span><span class="o">=</span><span class="n">MS</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$H_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;$&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">plot_markers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                             <span class="n">markersize</span><span class="o">=</span><span class="n">MS</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ts_range</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">],</span>
+             <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Birth&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Death&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.05</span><span class="o">*</span><span class="n">ts_range</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.05</span><span class="o">*</span><span class="n">ts_range</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<span class="c1"># In[ ]:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+    <span class="kn">import</span> <span class="nn">dionysus</span> <span class="k">as</span> <span class="nn">dio</span>
+    <span class="kn">import</span> <span class="nn">gudhi</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+
+    <span class="c1"># list of edges and nodes</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># edge 0</span>
+             <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>  <span class="c1"># edge 1</span>
+             <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>  <span class="c1"># edge 2</span>
+             <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>  <span class="c1"># edge 3</span>
+             <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>  <span class="c1"># edge 4</span>
+
+    <span class="c1"># I is a list of intervals for each edge.</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="p">[[[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.6</span><span class="p">,</span> <span class="mf">8.7</span><span class="p">]],</span>  <span class="c1"># edge 0</span>
+         <span class="p">[[</span><span class="mf">4.4</span><span class="p">,</span> <span class="mf">9.9</span><span class="p">]],</span>             <span class="c1"># edge 1</span>
+         <span class="p">[[</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">3.9</span><span class="p">],</span> <span class="p">[</span><span class="mf">6.1</span><span class="p">,</span> <span class="mf">9.1</span><span class="p">]],</span>  <span class="c1"># edge 2</span>
+         <span class="p">[[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">9.3</span><span class="p">]],</span>             <span class="c1"># edge 3</span>
+         <span class="p">[[</span><span class="mf">3.2</span><span class="p">,</span> <span class="mf">7.6</span><span class="p">]]]</span>             <span class="c1"># edge 4</span>
+
+    <span class="c1"># positions of each node (for plotting purposes only)</span>
+    <span class="n">node_positions</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>  <span class="c1"># node 0</span>
+                      <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>  <span class="c1"># node 1</span>
+                      <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>  <span class="c1"># node 2</span>
+                      <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>  <span class="c1"># node 3</span>
+                      <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">]]</span>  <span class="c1"># node 4</span>
+
+    <span class="n">TG</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>  <span class="c1"># temporal graph as attributed networkx representation</span>
+    <span class="c1"># add attribute information to each node and edge and construct as networkx graph</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>  <span class="c1"># add position information to nodes</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">node_positions</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">node_positions</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">TG</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>  <span class="c1"># add time information to edges</span>
+        <span class="n">TG</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">intervals</span><span class="o">=</span><span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># define sliding window intervals</span>
+    <span class="n">window_width</span><span class="p">,</span> <span class="n">overlap_ratio</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span>
+    <span class="n">time_range</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="n">sliding_windows</span><span class="p">(</span><span class="n">window_width</span><span class="p">,</span> <span class="n">overlap_ratio</span><span class="p">,</span> <span class="n">time_range</span><span class="p">)</span>
+
+    <span class="c1"># get graph snapshots</span>
+    <span class="n">G_snapshots</span> <span class="o">=</span> <span class="n">graph_snapshots</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">windows</span><span class="p">)</span>
+
+    <span class="c1"># get simplices and associated times based on dionysus format needed.</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">simplicial_complex_representation</span><span class="p">(</span><span class="n">TG</span><span class="p">,</span> <span class="n">G_snapshots</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># run dionysus2 zigzag persistence</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">dio</span><span class="o">.</span><span class="n">Filtration</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+    <span class="n">zz</span><span class="p">,</span> <span class="n">dgms</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="n">dio</span><span class="o">.</span><span class="n">zigzag_homology_persistence</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+    <span class="c1"># print and plot persistence</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dgm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dgms</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dimension:&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dgm</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">diag</span> <span class="o">=</span> <span class="n">plot_persistence_diagram</span><span class="p">(</span><span class="n">dgms</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">FS</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Munch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

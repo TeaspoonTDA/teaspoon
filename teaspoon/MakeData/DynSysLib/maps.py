@@ -1,4 +1,5 @@
 
+
 def maps(system, dynamic_state=None, L=None, fs=None,
          SampleSize=None, parameters=None, InitialConditions=None):
     import numpy as np

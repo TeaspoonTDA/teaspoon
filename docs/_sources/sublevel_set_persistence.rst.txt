@@ -5,6 +5,7 @@ Zero-Dimensional Sublevel Set Persistence
     :members: Persistence0D
 
 The following is an example implementing the zero-dimensional sublevel set persistence algorithm::
+
     from teaspoon.TDA.SLSP import Persistence0D
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
@@ -65,7 +66,7 @@ Where the output for this example is::
 
 The following is an example implementing the zero-dimensional sublevel set persistence algorithm::
 
-        import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt
     import numpy as np
     import matplotlib.gridspec as gridspec
     from teaspoon.TDA.SLSP import Persistence0D

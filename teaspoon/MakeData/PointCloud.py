@@ -594,7 +594,7 @@ def testSetManifolds(numDgms=50,
         if fixSeed:
             seed += 1
         dgmOut = ripser(Clusters(centers=centers, N=numPts,
-                        seed=seed, sd=.05))['dgms']
+                                 seed=seed, sd=.05))['dgms']
         data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
                 'trainingLabel': '3Cluster'}
         DgmsDF.loc[counter] = data
