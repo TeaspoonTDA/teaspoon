@@ -1,3 +1,16 @@
+import sys
+import os
+import ML.feature_functions as fF
+import time
+import numpy as np
+import pandas as pd
+import itertools
+from TDA import Persistence as pP
+from SP.adaptivePart import Partitions
+from sklearn.linear_model import LogisticRegression, Ridge, RidgeCV, RidgeClassifierCV, LassoCV
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import scale, PolynomialFeatures
+from sklearn.svm import LinearSVC, NuSVC, SVC
 """
 This is the main code for running ML code in teaspoon.
 
@@ -37,16 +50,10 @@ object is to keep all determined parameters in one easy to use object. A new
 # out = Base.getPercentScore(DgmsDF,dgm_col = 'Dgm', labels_col = 'trainingLabel', params = params )
 
 
-
-
 """
 .. module: Base
 """
 
-
-
-
-import sys,os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -59,38 +66,22 @@ sys.path.insert(0, os.path.join(os.path.dirname(
 sys.path.insert(0, os.path.join(os.path.dirname(
     __file__), '..', '..', 'teaspoon', 'TSP'))
 
-from sklearn.svm import LinearSVC, NuSVC, SVC
-from sklearn.preprocessing import scale, PolynomialFeatures
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.linear_model import LogisticRegression, Ridge, RidgeCV, RidgeClassifierCV, LassoCV
-from SP.adaptivePart import Partitions
-from TDA import Persistence as pP
-
-import itertools
-import pandas as pd
-import numpy as np
-import time
-import ML.feature_functions as fF
-import os
-
-
-
 
 class ParameterBucket(object):
     def __init__(self,
                  clf_model=RidgeClassifierCV,
                  feature_function=fF.tent,
-                 k_fold_cv = 10,
-                 TF_Learning = False,
-                 param_tuning = False,
+                 k_fold_cv=10,
+                 TF_Learning=False,
+                 param_tuning=False,
                  seed=None,
                  PL_Number=None,
-                 parToTune = None,
-                 sigma = None,
-                 L_number = None,
-                 pixel_size = 0.01,
-                 var = 0.15,
-                 FN = 5,
+                 parToTune=None,
+                 sigma=None,
+                 L_number=None,
+                 pixel_size=0.01,
+                 var=0.15,
+                 FN=5,
                  **kwargs):
         """
         Parameters
@@ -134,8 +125,6 @@ class ParameterBucket(object):
 
         """
 
-
-
         # Parameters that used to be included. Documentation left here to figure out stuff for later.
         #
         # @param d, delta, epsilon
@@ -157,12 +146,10 @@ class ParameterBucket(object):
         self.FN = FN
         self.PL_Number = PL_Number
         self.L_number = L_number
-        self.sigma= sigma
-        
+        self.sigma = sigma
+
         self.__dict__.update(kwargs)
-        
-      
-        
+
     def __str__(self):
         """!
         @brief Nicely prints all currently set values in the ParameterBucket.

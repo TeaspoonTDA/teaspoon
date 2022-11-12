@@ -1,29 +1,72 @@
-# Minimal makefile for Sphinx documentation
-#
-
 # You can set these variables from the command line, and also
 # from the environment for the first two.
+
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
-BUILDDIR      = docs
+BUILDDIR      = build
+.PHONY: tests, docs
 
-# Put it first so that "make" without argument is like "make help".
-# help:
-	# @$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+help:
+	@Echo       clean: runs autopep to improve formatting of code
+	@Echo		reqs: replace requirements.txt file for use by collaborators to create virtual environments and for use in documentation
+	@Echo       tests: runs unit tests
+	@Echo       docs: clears files from docs folder, rebuilds docs from source folder
+	@Echo       release: runs build to create tar and wheel for distribution
+	@Echo       all: runs clean build and docs folders, creates new html folders in build, moves relevant files to docs, and runs unittests and autopep.
 
-# .PHONY: help Makefile
+reqs:
+	@pip freeze > requirements.txt
 
-# Catch-all target: route all unknown targets to Sphinx using the new
-# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile
-	# @$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-	# Note: old way of passing in -M html results in docs going into the wrong folder.
-	# For github pages to work, the docs have ot be in /docs/
-	@$(SPHINXBUILD)  "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-
+clean:
 	# Running autopep8
 	@autopep8 -r --in-place teaspoon/
 
+tests:
 	# Running unittests
 	@python -m unittest
+
+release:
+	python setup.py sdist bdist_wheel
+
+docs:
+	@mkdir $(shell pwd)/build/temp
+	# Removing all files from build folder.
+	@rm -rf $(shell pwd)/build/
+	@mkdir $(shell pwd)/build/
+	@mkdir $(shell pwd)/docs/temp
+	# Removing all files from docs folder.
+	@rm -rf $(shell pwd)/docs/
+	@mkdir $(shell pwd)/docs/
+	# Running sphinx-build to build html files in build folder.
+	sphinx-build -M html source build
+	@mkdir $(shell pwd)/docs/.doctrees
+	@cp -a $(shell pwd)/build/doctrees/. $(shell pwd)/docs/.doctrees/
+	@cp -a $(shell pwd)/build/html/. $(shell pwd)/docs/
+	
+all:
+	# Cleaning build folder
+	@mkdir $(shell pwd)/build/temp
+	@rm -rf $(shell pwd)/build/
+	@mkdir $(shell pwd)/build/
+	
+	# Cleaning docs folder
+	@mkdir $(shell pwd)/docs/temp
+	@rm -rf $(shell pwd)/docs/
+	@mkdir $(shell pwd)/docs/
+	
+	# Running sphinx-build to build html files.
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	
+	# Copying over contents of build/html to docs
+	@mkdir $(shell pwd)/docs/.doctrees
+	@cp -a $(shell pwd)/build/doctrees/. $(shell pwd)/docs/.doctrees/
+	@cp -a $(shell pwd)/build/html/. $(shell pwd)/docs/
+	
+	# Running autopep8
+	@autopep8 -r --in-place teaspoon/
+	
+	# Running unittests
+	@python -m unittest
+
+	

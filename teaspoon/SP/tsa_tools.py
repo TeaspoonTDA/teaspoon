@@ -1,6 +1,111 @@
+from sklearn.neighbors import NearestNeighbors
+from teaspoon.parameter_selection import MsPE
+import matplotlib.pyplot as plt
+from teaspoon.parameter_selection import FNN_n
+from teaspoon.parameter_selection import MI_delay
+import numpy as np
+import itertools
+import os
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 
 # In[ ]:
+
+def cgss_binning(ts, n=None, tau=None, b=12, binning_method='equal_size', plot_binning=False):
+    """This function generates the binning array applied to each dimension when constructing CGSSN.
+
+    Args:
+        ts (1-D array): 1-D time series signal
+
+    Other Parameters:
+        n (Optional[int]): embedding dimension for state space reconstruction. Default is uses MsPE algorithm from parameter_selection module.
+        tau (Optional[int]): embedding delay from state space reconstruction. Default uses FNN algorithm from parameter_selection module.
+        b (Optional[int]): Number of bins per dimension. Default is 12.
+        plot_binning (Optional[bool]): Option to display plotting of binning over space occupied by SSR. default is False.
+        binning_method (Optional[str]): Either equal_size or equal_probability for creating binning array. Default is equal_size.
+
+    Returns:
+        [1-D array]: One-dimensional array of bin edges.
+    """
+    B = b
+    # ----------------Get embedding parameters if not defined----------------
+    if tau == None:
+        tau = MI_delay.MI_for_delay(
+            ts, method='basic', h_method='sturge', k=2, ranking=True)
+    if n == None:
+        perc_FNN, n = FNN_n.FNN_n(ts, tau)
+
+    def equalObs(x, B):  # define function to calculate equal-frequency bins based on interpolation
+        return np.interp(np.linspace(0, len(x), B), np.arange(len(x)), np.sort(x))
+
+    # get state space reconstruction from signal (SSR)
+    from teaspoon.SP.tsa_tools import takens
+    SSR = takens(ts, n, tau)
+
+    # ----------------Define how to use the embedding----------------
+    embedding = np.array(SSR).T
+
+    # ----------------Define how to partition the embedding----------------
+    if binning_method == 'equal_frequency':
+        # define bins with equal-frequency or probability (approximately)
+        B_array = equalObs(embedding.flatten(), B+1)
+        B_array[-1] = B_array[-1]*(1 + 10**-10)
+    if binning_method == 'equal_size':  # define bins based on equal spacing
+        B_array = np.linspace(np.amin(embedding),
+                              np.amax(embedding)*(1+10**-10), B+1)
+
+    if plot_binning == True:
+        x_max, x_min = np.max(B_array), np.min(B_array)
+        plt.figure(0)
+        plt.figure(figsize=(6, 6))
+
+        TextSize = 17
+        plt.xticks(size=TextSize)
+        plt.yticks(size=TextSize)
+        plt.xlabel('$x(t)$', size=TextSize)
+        plt.ylabel(r'$x(t + \tau)$', size=TextSize)
+        plt.scatter(SSR.T[0], SSR.T[1], c='k', marker='o',
+                    alpha=0.2, label='$v_i$', s=10.)
+        for b in B_array:
+            plt.plot([x_max, x_min], [b, b], 'k--', linewidth=1)
+            plt.plot([b, b], [x_max, x_min], 'k--', linewidth=1)
+        plt.show()
+
+    return B_array
+
+
+def cgss_sequence(SSR, B_array):
+    """This function generates the sequence of coarse-grained state space states from the state space reconstruction.
+
+    Args:
+        SSR (n-D array): n-dimensional state state space reconstruction using takens function from teaspoon.
+        B_array (1-D array): binning array from function cgss_binning or self defined. Array of bin edges applied to each dimension of SSR for CGSS state sequence.
+
+    Returns:
+        [1-D array of integers]: array of coarse grained state space states represented as ints.
+    """
+
+    embedding = SSR.T
+
+    B = len(B_array) - 1
+    n = len(SSR[0])
+    basis = B**(np.arange(n))  # basis for assigning symbolic value
+
+    # ----------------digitize the embedding to a sequence----------------
+    digitized_embedding = []  # prime the digitized version of deltas
+    for e_i in embedding:  # nloop through n-1 delta positions
+        # digitalize column delta_i
+        digitzed_vector = np.digitize(e_i, bins=B_array)
+        # append to digitalized deltas data structure
+        digitized_embedding.append(digitzed_vector)
+    # digitalize and stacked delta vectors
+    digitized_embedding = np.array(digitized_embedding).T - 1
+    # symbolic sequence from basis and digitzed embedding
+    symbol_seq = np.sum(np.array(basis)*digitized_embedding, axis=1)
+
+    return symbol_seq
 
 
 # finds permutation sequency from modified pyentropy package

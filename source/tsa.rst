@@ -8,6 +8,8 @@ The following are the available TSA functions:
 * :ref:`takens`
 * :ref:`permutation_sequence`
 * :ref:`knn`
+* :ref:`cgss_binning`
+* :ref:`cgss_sequence`
 
 Further detailed documentation and examples are provided below for each (or click link).
 
@@ -148,5 +150,25 @@ Output of example:
 
 
 
+.. _cgss_binning:
+
+Coarse grained state space binning
+****************************************
+Please reference publication "Persistent Homology of the Coarse Grained State Space Network" for details.
+
+.. automodule:: teaspoon.SP.tsa_tools
+    :members: cgss_binning
+    :noindex:
+
+
+.. _cgss_sequence:
+
+Coarse grained state space state sequence
+***************************************************
+Please reference publication "Persistent Homology of the Coarse Grained State Space Network" for details.
+
+.. automodule:: teaspoon.SP.tsa_tools
+    :members: cgss_sequence
+    :noindex:
 
 
