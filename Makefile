@@ -1,11 +1,4 @@
-# You can set these variables from the command line, and also
-# from the environment for the first two.
-
-SPHINXOPTS    ?=
-SPHINXBUILD   ?= sphinx-build
-SOURCEDIR     = source
-BUILDDIR      = build
-.PHONY: tests, docs
+.PHONY: tests
 
 help:
 	@Echo       clean: runs autopep to improve formatting of code
@@ -29,20 +22,13 @@ tests:
 release:
 	python setup.py sdist bdist_wheel
 
-docs:
-	@mkdir $(shell pwd)/build/temp
-	# Removing all files from build folder.
-	@rm -rf $(shell pwd)/build/
-	@mkdir $(shell pwd)/build/
-	@mkdir $(shell pwd)/docs/temp
-	# Removing all files from docs folder.
-	@rm -rf $(shell pwd)/docs/
-	@mkdir $(shell pwd)/docs/
+html:
 	# Running sphinx-build to build html files in build folder.
-	sphinx-build -M html source build
-	@mkdir $(shell pwd)/docs/.doctrees
-	@cp -a $(shell pwd)/build/doctrees/. $(shell pwd)/docs/.doctrees/
-	@cp -a $(shell pwd)/build/html/. $(shell pwd)/docs/
+	rm -r docs
+	mkdir docs
+	sphinx-build -M html doc_source docs
+	rsync -a docs/html/ docs/
+	rm -r docs/html
 	
 all:
 	# Cleaning build folder
