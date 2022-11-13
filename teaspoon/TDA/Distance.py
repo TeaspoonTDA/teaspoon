@@ -32,7 +32,7 @@ def wassersteinDist(
     pts0: array of shape (n_top_features, 2)
         The first persistence diagram
     pts1: array of shape (n_top_features, 2)
-        Thew second persistence diagram
+        The second persistence diagram
     y_axis: optional, default="death"
         What the y-axis of the diagram represents. Should be one of
 
