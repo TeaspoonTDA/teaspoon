@@ -1,4 +1,4 @@
-Temporal Hypegraph Analysis using Zigzag Persistence
+Temporal Graph Analysis using Zigzag Persistence
 ======================================================
 
 This module contains code to run zigzag persistence on temporal hypergraph data. This code is based on the work performed in "Temporal Network Analysis Using Zigzag Persistence." The general pipeline for this work is shown in the following figure.
