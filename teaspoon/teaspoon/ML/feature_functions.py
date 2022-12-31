@@ -902,7 +902,7 @@ def F_CCoordinates(PD, FN):
     .. math:: f_{4}(PD) = \sum (d_{max}-d_{i})^{2}(d_{i}-b_{i})^{4}
        :label: 4th_coord
 
-    .. math:: f_{5}(PD) = \sum max(d_{i}-b_{i})
+    .. math:: f_{5}(PD) = max(d_{i}-b_{i})
        :label: 5th_coord    
 
     Parameters

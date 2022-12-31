@@ -4,7 +4,7 @@ Cython==0.29.32
 Deprecated==1.2.13
 fonttools==4.34.4
 hopcroftkarp==1.2.5
-joblib==1.1.0
+joblib==1.2.0
 kiwisolver==1.4.4
 matplotlib==3.5.2
 networkx==2.8.5
@@ -12,7 +12,7 @@ numpy==1.23.1
 packaging==21.3
 pandas==1.4.3
 persim==0.3.1
-Pillow==9.2.0
+Pillow==9.3.0
 POT==0.8.2
 pycodestyle==2.9.1
 pyentrp==0.7.1
