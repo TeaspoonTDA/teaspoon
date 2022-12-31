@@ -3,7 +3,7 @@ import pandas as pd
 import networkx as nx
 from teaspoon.SP.tsa_tools import takens
 from teaspoon.parameter_selection import MI_delay, MsPE, FNN_n
-from teaspoon.SP.tsa_tools import permutation_sequence, cgss_sequence
+from teaspoon.SP.tsa_tools import permutation_sequence, cgss_sequence, k_NN
 import os
 import sys
 # get the coarse grained state space network represented as an adjacency matrix.
@@ -96,7 +96,7 @@ def knn_graph(ts, n=None, tau=None, k=4):
 
     ETS = takens(ts, n, tau)  # get embedded time series
 
-    distances, indices = tsa_tools.k_NN(ETS, k=k)
+    distances, indices = k_NN(ETS, k=k)
     # gets distances between embedded vectors and the indices of the nearest neighbors for every vector
 
     A = Adjacency_KNN(indices)  # get adjacency matrix (weighted, directional)
