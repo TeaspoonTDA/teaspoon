@@ -1,5 +1,5 @@
 import numpy as np
-from teaspoon.TDA.PHN import PH_network, point_summaries
+from teaspoon.TDA.PHN import PH_network, point_summaries, DistanceMatrix
 from teaspoon.parameter_selection.MsPE import MsPE_tau
 from teaspoon.SP.network import ordinal_partition_graph
 import math
@@ -22,7 +22,8 @@ class PHN(unittest.TestCase):
         A = ordinal_partition_graph(ts, n, tau)
         
         #create distance matrix and calculate persistence diagram
-        D, diagram = PH_network(A, method = 'unweighted', distance = 'shortest_path')
+        D = DistanceMatrix(A, method = 'unweighted')
+        diagram = PH_network(D)
         
         stats = point_summaries(diagram, A)
 
@@ -45,7 +46,8 @@ class PHN(unittest.TestCase):
         A = ordinal_partition_graph(ts, n, tau)
         
         #create distance matrix and calculate persistence diagram
-        D, diagram = PH_network(A, method = 'unweighted', distance = 'shortest_path')
+        D = DistanceMatrix(A, method = 'unweighted')
+        diagram = PH_network(D)
         
         stats = point_summaries(diagram, A)
 
