@@ -1,7 +1,5 @@
 """
-This is a script to run very basic functionality tests of the code.
-
-- Liz Munch 7/21
+This tests the ZigZag Persistence from the BuZZ module
 """
 
 import unittest
