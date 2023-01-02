@@ -980,11 +980,9 @@
 
         <span class="n">PDs</span> <span class="o">=</span> <span class="n">PD1</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="n">pers_imager</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">PDs</span><span class="p">,</span> <span class="n">skew</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">pers_img</span> <span class="o">=</span> <span class="p">[</span><span class="n">pers_imager</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
-            <span class="n">PD1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">skew</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">pers_img</span> <span class="o">=</span> <span class="p">[</span><span class="n">pers_imager</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">PD1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">skew</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">pers_img</span> <span class="o">=</span> <span class="p">[</span><span class="n">pers_imager</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
-            <span class="n">PD1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">skew</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">pers_img</span> <span class="o">=</span> <span class="p">[</span><span class="n">pers_imager</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">PD1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">skew</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
 
     <span class="c1"># generate feature matrix</span>
     <span class="n">feature_PI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
@@ -1034,7 +1032,7 @@
 <span class="sd">    .. math:: f_{4}(PD) = \sum (d_{max}-d_{i})^{2}(d_{i}-b_{i})^{4}</span>
 <span class="sd">       :label: 4th_coord</span>
 
-<span class="sd">    .. math:: f_{5}(PD) = \sum max(d_{i}-b_{i})</span>
+<span class="sd">    .. math:: f_{5}(PD) = max(d_{i}-b_{i})</span>
 <span class="sd">       :label: 5th_coord    </span>
 
 <span class="sd">    Parameters</span>

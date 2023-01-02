@@ -1,12 +1,12 @@
 import sys
 import os
-import ML.feature_functions as fF
+import teaspoon.ML.feature_functions as fF
 import time
 import numpy as np
 import pandas as pd
 import itertools
-from TDA import Persistence as pP
-from SP.adaptivePart import Partitions
+from teaspoon.TDA import Persistence as pP
+from teaspoon.SP.adaptivePart import Partitions
 from sklearn.linear_model import LogisticRegression, Ridge, RidgeCV, RidgeClassifierCV, LassoCV
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import scale, PolynomialFeatures

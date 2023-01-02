@@ -9,7 +9,7 @@ Created on Tue Apr 24 10:43:11 2018
 # cd to the teaspoon folder, load the package and import the needed modules
 import numpy as np
 #import teaspoon.MakeData.PointCloud as gpc
-from teaspoon.MakeData import PointCloud as gpc
+import teaspoon.MakeData.PointCloud as gpc
 from teaspoon.ML.PD_Classification import getPercentScore
 from teaspoon.ML.Base import ParameterBucket
 import teaspoon.ML.feature_functions as fF
@@ -98,7 +98,8 @@ class TestManifolds(unittest.TestCase):
                                  normalize=False,
                                  verbose=False
                                  )
-            yy[i] = xx['score']
+            #print(xx[0][0]['Annulus']['f1-score'])
+            yy[i] = xx[0][0]['Annulus']['f1-score']
 
         # print('\navg success rate = {}\nStdev = {}'.format(np.mean(yy), np.std(yy)))
 

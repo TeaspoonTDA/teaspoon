@@ -135,7 +135,7 @@
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">takens</span>
 <span class="kn">from</span> <span class="nn">teaspoon.parameter_selection</span> <span class="kn">import</span> <span class="n">MI_delay</span><span class="p">,</span> <span class="n">MsPE</span><span class="p">,</span> <span class="n">FNN_n</span>
-<span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">permutation_sequence</span><span class="p">,</span> <span class="n">cgss_sequence</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">permutation_sequence</span><span class="p">,</span> <span class="n">cgss_sequence</span><span class="p">,</span> <span class="n">k_NN</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="c1"># get the coarse grained state space network represented as an adjacency matrix.</span>
@@ -228,7 +228,7 @@
 
     <span class="n">ETS</span> <span class="o">=</span> <span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>  <span class="c1"># get embedded time series</span>
 
-    <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">tsa_tools</span><span class="o">.</span><span class="n">k_NN</span><span class="p">(</span><span class="n">ETS</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">k_NN</span><span class="p">(</span><span class="n">ETS</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
     <span class="c1"># gets distances between embedded vectors and the indices of the nearest neighbors for every vector</span>
 
     <span class="n">A</span> <span class="o">=</span> <span class="n">Adjacency_KNN</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>  <span class="c1"># get adjacency matrix (weighted, directional)</span>

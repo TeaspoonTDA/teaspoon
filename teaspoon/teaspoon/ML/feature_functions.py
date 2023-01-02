@@ -848,11 +848,9 @@ def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager=None, training=None):
 
         PDs = PD1.tolist()
         pers_imager.fit(PDs, skew=True)
-        pers_img = [pers_imager.transform(
-            PD1[i], skew=True) for i in np.arange(0, N1, 1)]
+        pers_img = [pers_imager.transform(PD1[i], skew=True) for i in np.arange(0, N1, 1)]
     else:
-        pers_img = [pers_imager.transform(
-            PD1[i], skew=True) for i in np.arange(0, N1, 1)]
+        pers_img = [pers_imager.transform(PD1[i], skew=True) for i in np.arange(0, N1, 1)]
 
     # generate feature matrix
     feature_PI = np.zeros(
@@ -902,7 +900,7 @@ def F_CCoordinates(PD, FN):
     .. math:: f_{4}(PD) = \sum (d_{max}-d_{i})^{2}(d_{i}-b_{i})^{4}
        :label: 4th_coord
 
-    .. math:: f_{5}(PD) = \sum max(d_{i}-b_{i})
+    .. math:: f_{5}(PD) = max(d_{i}-b_{i})
        :label: 5th_coord    
 
     Parameters
