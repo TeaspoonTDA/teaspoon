@@ -14,9 +14,9 @@ import matplotlib.gridspec as gridspec
 import unittest
 
 
-class Rossler(unittest.TestCase):
+class TestRossler(unittest.TestCase):
 
-    def Rossler(self):
+    def test_Rossler(self):
 
 
         system = 'rossler'
@@ -45,13 +45,14 @@ class Rossler(unittest.TestCase):
         # plt.show()
         print('Ran Rossler in MakeData_tests')
 
-    def Rossler2(self):
+    def test_Rossler2(self):
 
 
 
         system = 'rossler'
         UserGuide = True
         L, fs, SampleSize = 1000, 20, 2000
+        dynamic_state = 5
         # the length (in seconds) of the time series, the sample rate, and the sample size of the time series of the simulated system.
         parameters = [0.1, 0.2, 13.0] # these are the a, b, and c parameters from the Rossler system model.
         InitialConditions = [1.0, 0.0, 0.0] # [x_0, y_0, x_0]
