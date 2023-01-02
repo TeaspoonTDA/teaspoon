@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaspoon: Topological Signal Processing in Python &mdash; teaspoon 0.1.0 documentation</title>
+  <title>teaspoon: Topological Signal Processing in Python &mdash; teaspoon 1.3.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -18,6 +18,7 @@
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -131,7 +132,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="teaspoon-topological-signal-processing-in-python">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="teaspoon-topological-signal-processing-in-python">
 <h1>teaspoon: Topological Signal Processing in Python<a class="headerlink" href="#teaspoon-topological-signal-processing-in-python" title="Permalink to this heading"></a></h1>
 <p>The emerging field of topological signal processing brings methods from Topological Data Analysis (TDA) to create new tools for signal processing by incorporating aspects of shape.
 This python package, teaspoon for tsp or topological signal processing, brings together available software for computing persistent homology, the main workhorse of TDA, with modules that expand the functionality of teaspoon as a state-of-the-art topological signal processing tool.
@@ -202,9 +227,8 @@ All code is open source with up to date documentation, making the code easy to u
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="distances.html#teaspoon.TDA.Distance.dgmDist_Hera"><code class="docutils literal notranslate"><span class="pre">dgmDist_Hera()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="distances.html#teaspoon.TDA.Distance.wassersteinDist"><code class="docutils literal notranslate"><span class="pre">wassersteinDist()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="distances.html#example">2.3.2.1. Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/distance.html">2.3.2.1. Computing Wasserstein and Bottleneck Distances</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a><ul>
@@ -214,8 +238,6 @@ All code is open source with up to date documentation, making the code easy to u
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="persistence.html#teaspoon.TDA.Persistence.Cubical_Perseus"><code class="docutils literal notranslate"><span class="pre">Cubical_Perseus()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="persistence.html#teaspoon.TDA.Persistence.VR_Perseus"><code class="docutils literal notranslate"><span class="pre">VR_Perseus()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="persistence.html#teaspoon.TDA.Persistence.maxBirth"><code class="docutils literal notranslate"><span class="pre">maxBirth()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="persistence.html#teaspoon.TDA.Persistence.maxBirthSeries"><code class="docutils literal notranslate"><span class="pre">maxBirthSeries()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="persistence.html#teaspoon.TDA.Persistence.maxPers"><code class="docutils literal notranslate"><span class="pre">maxPers()</span></code></a></li>
@@ -225,7 +247,6 @@ All code is open source with up to date documentation, making the code easy to u
 <li class="toctree-l4"><a class="reference internal" href="persistence.html#teaspoon.TDA.Persistence.minPers"><code class="docutils literal notranslate"><span class="pre">minPers()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="persistence.html#teaspoon.TDA.Persistence.minPersistenceSeries"><code class="docutils literal notranslate"><span class="pre">minPersistenceSeries()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="persistence.html#teaspoon.TDA.Persistence.removeInfiniteClasses"><code class="docutils literal notranslate"><span class="pre">removeInfiniteClasses()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="persistence.html#examples">2.3.4.1. Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a><ul>
