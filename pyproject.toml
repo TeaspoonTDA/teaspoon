@@ -35,7 +35,8 @@ dependencies = ["cycler==0.11.0",
                 "sympy==1.11.1",
                 "sortedcontainers==2.4.0",
                 "dionysus==2.0.8", 
-                "pandas"
+                "pandas",
+                "gudhi"
             ]
 
 [tool.setuptools.packages.find]
