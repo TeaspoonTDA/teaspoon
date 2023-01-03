@@ -848,11 +848,9 @@ def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager=None, training=None):
 
         PDs = PD1.tolist()
         pers_imager.fit(PDs, skew=True)
-        pers_img = [pers_imager.transform(
-            PD1[i], skew=True) for i in np.arange(0, N1, 1)]
+        pers_img = [pers_imager.transform(PD1[i], skew=True) for i in np.arange(0, N1, 1)]
     else:
-        pers_img = [pers_imager.transform(
-            PD1[i], skew=True) for i in np.arange(0, N1, 1)]
+        pers_img = [pers_imager.transform(PD1[i], skew=True) for i in np.arange(0, N1, 1)]
 
     # generate feature matrix
     feature_PI = np.zeros(

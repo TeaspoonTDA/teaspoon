@@ -19,7 +19,7 @@ sys.modules['ripser'] = mock.Mock()
 project = 'teaspoon'
 copyright = '2020, Munch'
 author = 'Elizabeth Munch'
-release = '0.1.0'
+release = '1.3.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -38,7 +38,9 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.githubpages',
               'sphinxcontrib.bibtex',
-              'sphinx-prompt',]
+              'sphinx-prompt',
+              'nbsphinx',
+              'IPython.sphinxext.ipython_console_highlighting']
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 exclude_patterns = []
@@ -67,3 +69,6 @@ html_theme_options = {
 html_static_path = ['_static']
 # enable numbering figures
 numfig = True
+
+# disable from running notebooks
+nbsphinx_execute = 'never'

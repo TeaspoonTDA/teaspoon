@@ -2,37 +2,7 @@ Persistence
 ============
 
 .. automodule:: teaspoon.TDA.Persistence
-   :members: VR_Perseus, Cubical_Perseus, minPers, maxPers, maxBirth, minBirth, minPersistenceSeries, maxPersistenceSeries, minBirthSeries, maxBirthSeries, removeInfiniteClasses
-
-Examples
-########
-
-The following example computes the distance between two persistence diagrams::
-
-  from teaspoon.TDA.Persistence import Cubical_Perseus
-
-  # Load Image
-  img = np.loadtxt('Teaspoon_Img_Example.csv', delimiter=',')
-
-  Cubical_Perseus(img,2)
-
-Where the input image is:
-
-  .. image:: figures/Teaspoon_Img_Example.png
-    :width: 200 px
-
-
-And the output of the code is::
-
-  {1: array([[0.1 , 0.99],
-             [0.1 , 0.99]]),
-   0: array([[0.08, 0.25],
-             [0.  ,  inf]]),
-   2: array([], dtype=float64)}
-
-
-The input csv file can be found :download:`here <example_data/Teaspoon_Img_Example.csv>`
-
+   :members: minPers, maxPers, maxBirth, minBirth, minPersistenceSeries, maxPersistenceSeries, minBirthSeries, maxBirthSeries, removeInfiniteClasses
 
 The following example computes the minimum and maximum birth times, as well as the maximum persistence::
 
