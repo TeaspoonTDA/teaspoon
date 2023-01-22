@@ -22,7 +22,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2.3.2.1. Computing Wasserstein and Bottleneck Distances" href="notebooks/distance.html" />
+    <link rel="next" title="2.3.2.1. Example" href="notebooks/distance.html" />
     <link rel="prev" title="2.3.1. Persistent Homology of Networks (PHN)" href="PHN.html" /> 
 </head>
 
@@ -161,7 +161,27 @@
 </style>
 <section id="module-teaspoon.TDA.Distance">
 <span id="distances"></span><h1><span class="section-number">2.3.2. </span>Distances<a class="headerlink" href="#module-teaspoon.TDA.Distance" title="Permalink to this heading"></a></h1>
-<p>This module provides algorithms to compute pairwise distances between persistence diagrams.</p>
+<p>This module provides algorithms to compute pairwise distances between persistence diagrams.  The bottleneck distance and wasserstein distance are available.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Distance.bottleneckDist">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Distance.</span></span><span class="sig-name descname"><span class="pre">bottleneckDist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pts0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pts1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/teaspoon/TDA/Distance.html#bottleneckDist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Distance.bottleneckDist" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the bottleneck distance between the diagrams pts0, pts1 using the persim package: <a class="reference external" href="https://persim.scikit-tda.org/en/latest/index.html">https://persim.scikit-tda.org/en/latest/index.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pts0</strong> (<em>array</em><em> of </em><em>shape</em><em> (</em><em>n_top_features</em><em>, </em><em>2</em><em>)</em>) – The first persistence diagram</p></li>
+<li><p><strong>pts1</strong> (<em>array</em><em> of </em><em>shape</em><em> (</em><em>n_top_features</em><em>, </em><em>2</em><em>)</em>) – The second persistence diagram</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>distance</strong> – The bottleneck distance between diagrams <code class="docutils literal notranslate"><span class="pre">pts0</span></code> and <code class="docutils literal notranslate"><span class="pre">pts1</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Distance.wassersteinDist">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Distance.</span></span><span class="sig-name descname"><span class="pre">wassersteinDist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pts0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pts1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyStr</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'death'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/teaspoon/TDA/Distance.html#wassersteinDist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Distance.wassersteinDist" title="Permalink to this definition"></a></dt>
@@ -196,7 +216,10 @@ Currently not implemented for other q.</p></li>
 
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/distance.html">2.3.2.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/distance.html">2.3.2.1. Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/distance.html#Computing-Wasserstein-and-Bottleneck-Distances">2.3.2.1.1. Computing Wasserstein and Bottleneck Distances</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -206,7 +229,7 @@ Currently not implemented for other q.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="PHN.html" class="btn btn-neutral float-left" title="2.3.1. Persistent Homology of Networks (PHN)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="notebooks/distance.html" class="btn btn-neutral float-right" title="2.3.2.1. Computing Wasserstein and Bottleneck Distances" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="notebooks/distance.html" class="btn btn-neutral float-right" title="2.3.2.1. Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

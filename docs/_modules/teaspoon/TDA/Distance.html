@@ -132,16 +132,15 @@
              
   <h1>Source code for teaspoon.TDA.Distance</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">This module provides algorithms to compute pairwise distances between persistence diagrams.</span>
+<span class="sd">This module provides algorithms to compute pairwise distances between persistence diagrams.  The bottleneck distance and wasserstein distance are available.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">import</span> <span class="nn">ot</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">AnyStr</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">AnyStr</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">pairwise_distances</span>
+<span class="kn">import</span> <span class="nn">persim</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">.. module: Distance</span>
@@ -253,7 +252,30 @@
     <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="n">n0</span> <span class="o">+</span> <span class="n">n1</span><span class="p">)</span> <span class="o">*</span> <span class="n">otDist</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">out</span></div>
-<span class="c1"># -----------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="bottleneckDist"><a class="viewcode-back" href="../../../distances.html#teaspoon.TDA.Distance.bottleneckDist">[docs]</a><span class="k">def</span> <span class="nf">bottleneckDist</span><span class="p">(</span>
+    <span class="n">pts0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
+    <span class="n">pts1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the bottleneck distance between the diagrams pts0, pts1 using the persim package: https://persim.scikit-tda.org/en/latest/index.html</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pts0: array of shape (n_top_features, 2)</span>
+<span class="sd">        The first persistence diagram</span>
+<span class="sd">    pts1: array of shape (n_top_features, 2)</span>
+<span class="sd">        The second persistence diagram</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    distance: float</span>
+<span class="sd">        The bottleneck distance between diagrams ``pts0`` and ``pts1``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="n">persim</span><span class="o">.</span><span class="n">bottleneck</span><span class="p">(</span><span class="n">pts0</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="n">matching</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span></div>
 </pre></div>
 
            </div>
