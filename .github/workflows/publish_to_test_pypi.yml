@@ -30,10 +30,10 @@ jobs:
           pip install
           build
           --user
-      - name: Install package for testing
-        run: >-
-          sudo apt-get install libboost-all-dev
-          pip install .
+      - name: Install boost package for testing
+        run: sudo apt-get install libboost-all-dev
+      - name: Install teaspoon for testing
+        run: pip install .
       - name: Run tests
         run: make tests
       - name: Build a binary wheel and a source tarball
