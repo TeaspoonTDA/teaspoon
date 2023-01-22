@@ -31,7 +31,8 @@ jobs:
           build
           --user
       - name: Install package for testing
-        run: sudo apt-get install libboost-all-dev
+        run: >-
+          sudo apt-get install libboost-all-dev
           pip install .
       - name: Run tests
         run: make tests
