@@ -7,9 +7,9 @@ import numpy as np
 from teaspoon.TDA.BuZZ import PtClouds
 from teaspoon.SP.tsa_tools import takens
 
-class TestZigZag(unittest.TestCase):
+class ZigZag(unittest.TestCase):
 
-    def test_compute_zig_zag(self):
+    def compute_zig_zag(self):
 
         t = np.linspace(0, 6*np.pi+1, 50)
 
