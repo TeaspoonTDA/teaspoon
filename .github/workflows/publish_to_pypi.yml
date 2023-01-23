@@ -1,10 +1,10 @@
-name: Publish Python Distributions to TestPyPI
+name: Publish Python Distributions to PyPI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "test_release" branch
+  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "test_release" ]
+    branches: [ "master" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -12,14 +12,14 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-n-publish:
-    name: Build and publish python distributions to TestPyPI
+    name: Build and publish python distributions to PyPI
     runs-on: ubuntu-latest
     concurrency: release
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@master
         with:
-          ref: 'test_release'
+          ref: 'master'
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
@@ -32,7 +32,7 @@ jobs:
           --user
       - name: Install boost package for testing
         run: sudo apt-get install libboost-all-dev
-      - name: Install teaspoon for testing
+      - name: Install package for testing
         run: pip install .
       - name: Run tests
         run: make tests
@@ -43,8 +43,7 @@ jobs:
           --sdist
           --wheel
           --outdir dist/
-      - name: Publish distribution 📦 to Test PyPI
+      - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          password: ${{ secrets.PYPI_TEST }}
-          repository_url: https://test.pypi.org/legacy/
+          password: ${{ secrets.PYPI }}

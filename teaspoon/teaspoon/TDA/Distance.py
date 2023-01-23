@@ -1,14 +1,13 @@
 """
-This module provides algorithms to compute pairwise distances between persistence diagrams.
+This module provides algorithms to compute pairwise distances between persistence diagrams.  The bottleneck distance and wasserstein distance are available.
 
 """
 
 import numpy as np
-import os
-import subprocess
 import ot
-from typing import Union, Sequence, AnyStr
+from typing import AnyStr
 from sklearn.metrics import pairwise_distances
+import persim
 
 """
 .. module: Distance
@@ -120,4 +119,27 @@ def wassersteinDist(
     out = np.power((n0 + n1) * otDist, 1.0 / p)
 
     return out
-# -----------------------------------------------------------------------
+
+def bottleneckDist(
+    pts0: np.ndarray, 
+    pts1: np.ndarray,
+    ) -> float:
+
+    """
+    Compute the bottleneck distance between the diagrams pts0, pts1 using the persim package: https://persim.scikit-tda.org/en/latest/index.html
+
+    Parameters
+    ----------
+    pts0: array of shape (n_top_features, 2)
+        The first persistence diagram
+    pts1: array of shape (n_top_features, 2)
+        The second persistence diagram
+
+    Returns
+    -------
+    distance: float
+        The bottleneck distance between diagrams ``pts0`` and ``pts1``
+    """
+
+    d = persim.bottleneck(pts0, pts1, matching=False)
+    return d
