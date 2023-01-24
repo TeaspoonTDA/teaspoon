@@ -4,8 +4,8 @@ This module provides algorithms to compute pairwise distances between persistenc
 """
 
 import numpy as np
-import ot
 from typing import AnyStr
+import ot
 from sklearn.metrics import pairwise_distances
 import persim
 
