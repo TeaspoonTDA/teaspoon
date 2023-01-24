@@ -21,7 +21,7 @@ We gratefully acknowledge the support of the National Science Foundation, which 
 
 Installation
 =============
-To install this package, both boost and CMake must be installed as system dependencies.  For boost see for [unix](https://www.boost.org/doc/libs/1_66_0/more/getting_started/unix-variants.html) and [windows](https://www.boost.org/doc/libs/1_62_0/more/getting_started/windows.html).  For mac, you can run ``brew install boost`` if using homebrew as a package manager.
+To install this package, both boost and CMake must be installed as system dependencies.  For boost see for [unix](https://www.boost.org/doc/libs/1_66_0/more/getting_started/unix-variants.html) and [windows](https://www.boost.org/doc/libs/1_62_0/more/getting_started/windows.html).  For mac, you can run ``brew install boost`` if using homebrew as a package manager.  For CMake see [here](https://cmake.org/install/).
 
 The teaspoon package is available through pip install with version details found [here](https://pypi.org/project/teaspoon/).
 The package can be installed using the following pip installation:
