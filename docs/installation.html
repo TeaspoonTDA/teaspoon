@@ -161,54 +161,24 @@
 <h1><span class="section-number">1. </span>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
 <section id="requirements">
 <h2><span class="section-number">1.1. </span>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
-<p>Please note that this code is an early version, so many things are not fully up and running yet.</p>
-<p>Bugs reports and feature reqests can be posted on the <a class="reference external" href="https://github.com/lizliz/teaspoon/issues">github issues page</a>.</p>
+<p>Bugs reports and feature reqests can be posted on the <a class="reference external" href="https://github.com/TeaspoonTDA/teaspoon/issues">github issues page</a>.</p>
 <p>Most of the persistence computation is teaspoon is now done with <a class="reference external" href="https://scikit-tda.org/">Scikit-TDA</a>, which is python based TDA computation. In a few legacy cases, the code still utilizes these other non-Python packages.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/Ripser/ripser">Ripser</a>. Code by Ulrich Bauer for computing persistent homology of a point cloud or distance matrix.</p></li>
 <li><p><a class="reference external" href="http://people.maths.ox.ac.uk/nanda/perseus/index.html">Perseus</a>. Code by Vidit Nanda for computing persistent homology of point clouds, cubical complexes, and distance matrices.</p></li>
-<li><p><a class="reference external" href="https://bitbucket.org/grey_narn/hera">Hera</a>. Code by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov for computing bottleneck and Wasserstein distances.</p></li>
 </ul>
-<p><strong>Warning:</strong> The teaspoon installation will not install nor check for the install of these packages. In particular, perseus should be installed so that typing <cite>perseus</cite> in a terminal runs it, even though the default perseus installation for some operating systems ends up with an executable with a different name.</p>
-<p><strong>Required Packages:</strong></p>
-<ul class="simple">
-<li><p>autopep8==1.6.0</p></li>
-<li><p>cycler==0.11.0</p></li>
-<li><p>Cython==0.29.32</p></li>
-<li><p>Deprecated==1.2.13</p></li>
-<li><p>fonttools==4.34.4</p></li>
-<li><p>hopcroftkarp==1.2.5</p></li>
-<li><p>joblib==1.1.0</p></li>
-<li><p>kiwisolver==1.4.4</p></li>
-<li><p>matplotlib==3.5.2</p></li>
-<li><p>networkx==2.8.5</p></li>
-<li><p>numpy==1.23.1</p></li>
-<li><p>packaging==21.3</p></li>
-<li><p>pandas==1.4.3</p></li>
-<li><p>persim==0.3.1</p></li>
-<li><p>Pillow==9.2.0</p></li>
-<li><p>POT==0.8.2</p></li>
-<li><p>pycodestyle==2.9.1</p></li>
-<li><p>pyentrp==0.7.1</p></li>
-<li><p>pyparsing==3.0.9</p></li>
-<li><p>python-dateutil==2.8.2</p></li>
-<li><p>pytz==2022.1</p></li>
-<li><p>ripser==0.6.1</p></li>
-<li><p>scikit-learn==1.1.1</p></li>
-<li><p>scipy==1.8.1</p></li>
-<li><p>six==1.16.0</p></li>
-<li><p>sklearn==0.0</p></li>
-<li><p>teaspoon==1.3.1</p></li>
-<li><p>threadpoolctl==3.1.0</p></li>
-<li><p>toml==0.10.2</p></li>
-<li><p>wrapt==1.14.1</p></li>
-<li><p>pip install –verbose dionysus</p></li>
-</ul>
+<p><strong>Required Dependencies:</strong></p>
+<p>To install this package, both boost and CMake must be installed as system dependencies.  For boost see for <a class="reference external" href="https://www.boost.org/doc/libs/1_66_0/more/getting_started/unix-variants.html">unix</a> and <a class="reference external" href="https://www.boost.org/doc/libs/1_62_0/more/getting_started/windows.html">windows</a>.  For mac, you can run <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">boost</span></code> if using homebrew as a package manager. For CMake see <a class="reference external" href="https://cmake.org/install/">install CMake</a>.</p>
 </section>
 <section id="installation">
 <h2><span class="section-number">1.2. </span>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
-<p>This package is available through a pip install:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">teaspoon</span>
+<p>The teaspoon package is available through pip install with version details found <a class="reference external" href="https://pypi.org/project/teaspoon/">here</a>.
+The package can be installed using the following pip installation:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">teaspoon</span></code></p>
+</div></blockquote>
+<p>To install the most up-to-date version of the code, you can clone the repo and then run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>``pip install .``
 </pre></div>
 </div>
 </section>
