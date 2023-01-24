@@ -14,7 +14,7 @@ Most of the persistence computation is teaspoon is now done with `Scikit-TDA <ht
 
 **Required Dependencies:**
 
-To install this package, both boost and CMake must be installed as system dependencies.  For boost see for `unix <https://www.boost.org/doc/libs/1_66_0/more/getting_started/unix-variants.html>`_ and `windows <https://www.boost.org/doc/libs/1_62_0/more/getting_started/windows.html>`_.  For mac, you can run ``brew install boost`` if using homebrew as a package manager.
+To install this package, both boost and CMake must be installed as system dependencies.  For boost see for `unix <https://www.boost.org/doc/libs/1_66_0/more/getting_started/unix-variants.html>`_ and `windows <https://www.boost.org/doc/libs/1_62_0/more/getting_started/windows.html>`_.  For mac, you can run ``brew install boost`` if using homebrew as a package manager. For CMake see `install CMake <https://cmake.org/install/>`_.
 
 Installation
 **************
