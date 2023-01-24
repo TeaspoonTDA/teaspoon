@@ -32,6 +32,8 @@ jobs:
           --user
       - name: Install boost package for testing
         run: sudo apt-get install libboost-all-dev
+      - name: Install cmake
+        run: sudo apt-get install cmake
       - name: Install package for testing
         run: pip install .
       - name: Run tests
