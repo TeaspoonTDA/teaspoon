@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -147,7 +148,7 @@
 <span class="c1"># Gets Adjacency Matrix (weighted and direction) using permutation sequence</span>
 
 <div class="viewcode-block" id="Adjaceny_OP"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.Adjaceny_OP">[docs]</a><span class="k">def</span> <span class="nf">Adjaceny_OP</span><span class="p">(</span><span class="n">perm_seq</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>  <span class="c1"># adjacency matrix for ordinal partitions</span>
-    <span class="sd">&quot;&quot;&quot;This function takes the permutation sequence and creates a weighted and directed adjacency matrix.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes the permutation sequence and creates a weighted and directed adjacency matrix.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        perm_seq (array of ints): array of the permutations (chronologically ordered) that were visited.</span>
@@ -166,7 +167,7 @@
 
 
 <div class="viewcode-block" id="Adjacency_KNN"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.Adjacency_KNN">[docs]</a><span class="k">def</span> <span class="nf">Adjacency_KNN</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>  <span class="c1"># adjacency matrix from k nearest neighbors</span>
-    <span class="sd">&quot;&quot;&quot;This function takes the indices of nearest neighbors and creates an adjacency matrix.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes the indices of nearest neighbors and creates an adjacency matrix.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        indices (array of ints): array of arrays of indices of n nearest neighbors.</span>
@@ -185,7 +186,7 @@
 
 <span class="c1"># Coarse Grained State Space adjacency matrix</span>
 <div class="viewcode-block" id="Adjacency_CGSS"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.Adjacency_CGSS">[docs]</a><span class="k">def</span> <span class="nf">Adjacency_CGSS</span><span class="p">(</span><span class="n">state_seq</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function takes the CGSS state sequence and creates a weighted and directed adjacency matrix.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes the CGSS state sequence and creates a weighted and directed adjacency matrix.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        state_seq (array of ints): array of the states visited in SSR (chronologically ordered).</span>
@@ -207,7 +208,7 @@
 
 
 <div class="viewcode-block" id="knn_graph"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.knn_graph">[docs]</a><span class="k">def</span> <span class="nf">knn_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function creates an k-NN network represented as an adjacency matrix A using a 1-D time series</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function creates an k-NN network represented as an adjacency matrix A using a 1-D time series</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
@@ -238,7 +239,7 @@
 
 
 <div class="viewcode-block" id="ordinal_partition_graph"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.ordinal_partition_graph">[docs]</a><span class="k">def</span> <span class="nf">ordinal_partition_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function creates an ordinal partition network represented as an adjacency matrix A using a 1-D time series</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function creates an ordinal partition network represented as an adjacency matrix A using a 1-D time series</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
@@ -267,7 +268,7 @@
 
 
 <div class="viewcode-block" id="cgss_graph"><a class="viewcode-back" href="../../../network.html#teaspoon.SP.network.cgss_graph">[docs]</a><span class="k">def</span> <span class="nf">cgss_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">B_array</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function creates a coarse grained state space network (CGSSN) represented as an adjacency matrix A using a 1-D time series and binning array.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function creates a coarse grained state space network (CGSSN) represented as an adjacency matrix A using a 1-D time series and binning array.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>

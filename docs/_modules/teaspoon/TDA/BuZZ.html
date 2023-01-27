@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -144,7 +145,7 @@
 
 
 <div class="viewcode-block" id="PtClouds"><a class="viewcode-back" href="../../../buzz.html#teaspoon.TDA.BuZZ.PtClouds">[docs]</a><span class="k">class</span> <span class="nc">PtClouds</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class to hold collection of point clouds.</span>
 
 <span class="sd">    Parameters</span>
@@ -161,7 +162,7 @@
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptclouds</span><span class="p">,</span> <span class="n">cplx_type</span><span class="o">=</span><span class="s1">&#39;rips&#39;</span><span class="p">,</span> <span class="n">num_landmarks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Initialize.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -186,7 +187,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Nicely prints.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -201,7 +202,7 @@
         <span class="k">return</span> <span class="n">output</span>
 
 <div class="viewcode-block" id="PtClouds.use_Landmarks"><a class="viewcode-back" href="../../../buzz.html#teaspoon.TDA.BuZZ.PtClouds.use_Landmarks">[docs]</a>    <span class="k">def</span> <span class="nf">use_Landmarks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_landmarks</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Uses landmark complex by subsampling each point cloud using a max min approach.</span>
 
 <span class="sd">        Parameters</span>
@@ -223,7 +224,7 @@
                 <span class="n">pc</span><span class="p">,</span> <span class="n">num_landmarks</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PtClouds.run_Zigzag"><a class="viewcode-back" href="../../../buzz.html#teaspoon.TDA.BuZZ.PtClouds.run_Zigzag">[docs]</a>    <span class="k">def</span> <span class="nf">run_Zigzag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Runs zigzag persistence on collections of point clouds, taking unions between each adjacent pair of point clouds.</span>
 <span class="sd">        Adds attributes to class ``zz``, ``zz_dgms``, ``zz_cells`` which are the outputs of dionysus&#39; zigzag persistence function.</span>
 <span class="sd">        Also adds attributes ``setup_time`` and ``zigzag_time`` with timing data.</span>
@@ -296,7 +297,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">zigzag_time</span> <span class="o">=</span> <span class="n">zz_end</span> <span class="o">-</span> <span class="n">zz_st</span></div>
 
 <div class="viewcode-block" id="PtClouds.setup_Zigzag_fixed"><a class="viewcode-back" href="../../../buzz.html#teaspoon.TDA.BuZZ.PtClouds.setup_Zigzag_fixed">[docs]</a>    <span class="k">def</span> <span class="nf">setup_Zigzag_fixed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Helper function for ``run_Zigzag`` that sets up inputs needed for Dionysus&#39; zigzag persistence function.</span>
 <span class="sd">        This only works for a fixed radius r.</span>
 
@@ -423,7 +424,7 @@
         <span class="k">return</span> <span class="n">filtration</span><span class="p">,</span> <span class="n">times_list</span></div>
 
 <div class="viewcode-block" id="PtClouds.setup_Zigzag_changing"><a class="viewcode-back" href="../../../buzz.html#teaspoon.TDA.BuZZ.PtClouds.setup_Zigzag_changing">[docs]</a>    <span class="k">def</span> <span class="nf">setup_Zigzag_changing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Helper function for ``run_Zigzag`` that sets up inputs needed for Dionysus&#39; zigzag persistence function.</span>
 <span class="sd">        This one allows r to be a list of radii, rather than one fixed value</span>
 
@@ -596,7 +597,7 @@
         <span class="k">return</span> <span class="n">filtration</span><span class="p">,</span> <span class="n">times_list</span></div>
 
 <div class="viewcode-block" id="PtClouds.plot_ZZ_PtClouds"><a class="viewcode-back" href="../../../buzz.html#teaspoon.TDA.BuZZ.PtClouds.plot_ZZ_PtClouds">[docs]</a>    <span class="k">def</span> <span class="nf">plot_ZZ_PtClouds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">savename</span><span class="o">=</span><span class="s1">&#39;PC.png&#39;</span><span class="p">,</span> <span class="n">v_plts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h_plts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Plot the zigzag of point clouds.</span>
 
 <span class="sd">        Parameters</span>
@@ -684,7 +685,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">savename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PtClouds.plot_ZZ_Full_PtClouds"><a class="viewcode-back" href="../../../buzz.html#teaspoon.TDA.BuZZ.PtClouds.plot_ZZ_Full_PtClouds">[docs]</a>    <span class="k">def</span> <span class="nf">plot_ZZ_Full_PtClouds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">savename</span><span class="o">=</span><span class="s1">&#39;PC_Full.png&#39;</span><span class="p">,</span> <span class="n">v_plts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h_plts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Plot the zigzag of full point clouds.</span>
 <span class="sd">        Only needed if using landmark complex and want to plot the full point clouds before subsampling.</span>
 
@@ -772,7 +773,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">savename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PtClouds.plot_ZZ_Cplx"><a class="viewcode-back" href="../../../buzz.html#teaspoon.TDA.BuZZ.PtClouds.plot_ZZ_Cplx">[docs]</a>    <span class="k">def</span> <span class="nf">plot_ZZ_Cplx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">savename</span><span class="o">=</span><span class="s1">&#39;Cplx.png&#39;</span><span class="p">,</span> <span class="n">v_plts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h_plts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Plot the zigzag of rips complexes.</span>
 
 <span class="sd">        Parameters</span>
@@ -889,7 +890,7 @@
 
 
 <span class="k">def</span> <span class="nf">edit_Simp_Times</span><span class="p">(</span><span class="n">simp</span><span class="p">,</span> <span class="n">new_bd_times</span><span class="p">,</span> <span class="n">simps_list</span><span class="p">,</span> <span class="n">times_list</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Helper function to adjust appearance/disappearance times of a particular simplex.</span>
 
 <span class="sd">    Parameters</span>
@@ -927,7 +928,7 @@
 
 
 <span class="k">def</span> <span class="nf">fix_dio_vert_nums</span><span class="p">(</span><span class="n">Cplx</span><span class="p">,</span> <span class="n">vertind</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Helper function to adjust indexing of vertices in Dionysus from ``fill_rips`` function.</span>
 
 <span class="sd">    Cplx: List of dio.Simplex&#39;s or a dio.Filtration</span>
@@ -954,7 +955,7 @@
 
 
 <span class="k">def</span> <span class="nf">get_verts</span><span class="p">(</span><span class="n">simp</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Helper function to get all vertices of the input simplex</span>
 
 <span class="sd">    Parameters</span>
@@ -976,7 +977,7 @@
 <span class="c1"># Utilities</span>
 
 <span class="k">def</span> <span class="nf">minmax_subsample</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Subsample points using greedy permutation algorithm.</span>
 
 <span class="sd">    Parameters</span>

@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -251,7 +252,7 @@
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;!</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;!</span>
 <span class="sd">        @brief Nicely prints all currently set values in the bucket.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">attrs</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -415,7 +416,7 @@
 
 
 <div class="viewcode-block" id="MI_DV"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_DV">[docs]</a><span class="k">def</span> <span class="nf">MI_DV</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
 <span class="sd">    using adaptive partitioning of the plots of the time series x(t) and its delayed version x(t+tau). </span>
 <span class="sd">    This method was developed by Georges Darbellay and Igor Vajda in 1999 and was published as</span>
 <span class="sd">    Estimation of information by an adaptive partitioning of the observation.</span>
@@ -481,7 +482,7 @@
 
 
 <div class="viewcode-block" id="MI_kraskov"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov">[docs]</a><span class="k">def</span> <span class="nf">MI_kraskov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function estimates the mutual information between the time series x(t) and its delayed version x(t+tau) in two different ways. </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function estimates the mutual information between the time series x(t) and its delayed version x(t+tau) in two different ways. </span>
 <span class="sd">    This method was developed by Alexander Kraskov, Harald Stoegbauer, and Peter Grassberger in 2003 and published as </span>
 <span class="sd">    Estimating Mutual Information.</span>
 
@@ -569,7 +570,7 @@
 <span class="c1"># equal sized bins for x and y arrays (seperately)</span>
 
 <div class="viewcode-block" id="MI_basic"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_basic">[docs]</a><span class="k">def</span> <span class="nf">MI_basic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">h_method</span><span class="o">=</span><span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
 <span class="sd">    using equi-spaced partitions. The size of the partition is based on the desired bin size method commonly selected for histograms.</span>
 
 <span class="sd">    Args:</span>
@@ -641,7 +642,7 @@
 
 
 <div class="viewcode-block" id="MI_for_delay"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay">[docs]</a><span class="k">def</span> <span class="nf">MI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;basic&#39;</span><span class="p">,</span> <span class="n">h_method</span><span class="o">=</span><span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function calculates the mutual information until a first minima is reached, which is estimated as a sufficient embedding dimension for permutation entropy.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the mutual information until a first minima is reached, which is estimated as a sufficient embedding dimension for permutation entropy.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>

@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -147,7 +148,7 @@
 <span class="c1"># In[ ]:</span>
 
 <div class="viewcode-block" id="cgss_binning"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.cgss_binning">[docs]</a><span class="k">def</span> <span class="nf">cgss_binning</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">binning_method</span><span class="o">=</span><span class="s1">&#39;equal_size&#39;</span><span class="p">,</span> <span class="n">plot_binning</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function generates the binning array applied to each dimension when constructing CGSSN.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the binning array applied to each dimension when constructing CGSSN.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
@@ -210,7 +211,7 @@
 
 
 <div class="viewcode-block" id="cgss_sequence"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.cgss_sequence">[docs]</a><span class="k">def</span> <span class="nf">cgss_sequence</span><span class="p">(</span><span class="n">SSR</span><span class="p">,</span> <span class="n">B_array</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function generates the sequence of coarse-grained state space states from the state space reconstruction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the sequence of coarse-grained state space states from the state space reconstruction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        SSR (n-D array): n-dimensional state state space reconstruction using takens function from teaspoon.</span>
@@ -243,7 +244,7 @@
 
 <span class="c1"># finds permutation sequency from modified pyentropy package</span>
 <div class="viewcode-block" id="permutation_sequence"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.permutation_sequence">[docs]</a><span class="k">def</span> <span class="nf">permutation_sequence</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function generates the sequence of permutations from a 1-D time series.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the sequence of permutations from a 1-D time series.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
@@ -303,7 +304,7 @@
 
 
 <div class="viewcode-block" id="takens"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.takens">[docs]</a><span class="k">def</span> <span class="nf">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function generates an array of n-dimensional arrays from a time-delay state-space reconstruction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates an array of n-dimensional arrays from a time-delay state-space reconstruction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
@@ -343,7 +344,7 @@
 
 
 <div class="viewcode-block" id="k_NN"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.k_NN">[docs]</a><span class="k">def</span> <span class="nf">k_NN</span><span class="p">(</span><span class="n">embedded_time_series</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function gets the k nearest neighbors from an array of the state space reconstruction vectors</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function gets the k nearest neighbors from an array of the state space reconstruction vectors</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        embedded_time_series (array of n-dimensional arrays): state space reconstructions vectors of dimension n. Can use takens function.</span>

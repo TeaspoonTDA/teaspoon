@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../network.html">2.4.2. Network Representation of Time Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -132,7 +133,7 @@
              
   <h1>Source code for teaspoon.SP.information.entropy</h1><div class="highlight"><pre>
 <div class="viewcode-block" id="MsPE"><a class="viewcode-back" href="../../../../information.html#teaspoon.SP.information.entropy.MsPE">[docs]</a><span></span><span class="k">def</span> <span class="nf">MsPE</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">delay_end</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Multi-scale Permutation Entropy (MsPE) </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Multi-scale Permutation Entropy (MsPE) </span>
 <span class="sd">        over multiple time scales</span>
 
 <span class="sd">    Args:</span>
@@ -179,7 +180,7 @@
 
 
 <div class="viewcode-block" id="PE"><a class="viewcode-back" href="../../../../information.html#teaspoon.SP.information.entropy.PE">[docs]</a><span class="k">def</span> <span class="nf">PE</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Permutation Entropy (PE).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Permutation Entropy (PE).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>
@@ -207,7 +208,7 @@
 
 
 <div class="viewcode-block" id="PersistentEntropy"><a class="viewcode-back" href="../../../../information.html#teaspoon.SP.information.entropy.PersistentEntropy">[docs]</a><span class="k">def</span> <span class="nf">PersistentEntropy</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Permutation Entropy (PE).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Permutation Entropy (PE).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">       lifetimes (array):  Lifetimes from persistence diagram (1d).</span>

@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -140,7 +141,7 @@
 
 
 <div class="viewcode-block" id="sliding_windows"><a class="viewcode-back" href="../../../ZZ_TG.html#teaspoon.TDA.TGZZ.sliding_windows">[docs]</a><span class="k">def</span> <span class="nf">sliding_windows</span><span class="p">(</span><span class="n">window_width</span><span class="p">,</span> <span class="n">overlap_ratio</span><span class="p">,</span> <span class="n">time_range</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function gets a list of sliding windows and their unions between.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function gets a list of sliding windows and their unions between.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        window_width (float): width of sliding window.</span>
@@ -172,7 +173,7 @@
 
 
 <div class="viewcode-block" id="graph_snapshots"><a class="viewcode-back" href="../../../ZZ_TG.html#teaspoon.TDA.TGZZ.graph_snapshots">[docs]</a><span class="k">def</span> <span class="nf">graph_snapshots</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">windows</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function gets generates graph snapshots from the temporal graph information and windows.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function gets generates graph snapshots from the temporal graph information and windows.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        edges (array of tuples): edges of graph.</span>
@@ -206,7 +207,7 @@
 
 
 <div class="viewcode-block" id="simplicial_complex_representation"><a class="viewcode-back" href="../../../ZZ_TG.html#teaspoon.TDA.TGZZ.simplicial_complex_representation">[docs]</a><span class="k">def</span> <span class="nf">simplicial_complex_representation</span><span class="p">(</span><span class="n">TG</span><span class="p">,</span> <span class="n">G_snapshots</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function represents the graph snapshots as vietoris rips simplicial complex based on a </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function represents the graph snapshots as vietoris rips simplicial complex based on a </span>
 <span class="sd">    filtration (short path) distance K. For the simplicial complex representaiton of the graph set K=1. </span>
 <span class="sd">    For higher order simplices choose $K$ correspondingly.</span>
 
@@ -278,7 +279,7 @@
 
 
 <div class="viewcode-block" id="plot_persistence_diagram"><a class="viewcode-back" href="../../../ZZ_TG.html#teaspoon.TDA.TGZZ.plot_persistence_diagram">[docs]</a><span class="k">def</span> <span class="nf">plot_persistence_diagram</span><span class="p">(</span><span class="n">dgms</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">FS</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function plots the persistence diagram from the zigzag persistence filtration.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function plots the persistence diagram from the zigzag persistence filtration.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        dgms (persistence diagrams): persistence diagrams from dionysus2 format output.</span>
