@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -144,7 +145,7 @@
 
 
 <div class="viewcode-block" id="LMSforDelay"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay">[docs]</a><span class="k">def</span> <span class="nf">LMSforDelay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>  <span class="c1"># 1-D lms function</span>
-    <span class="sd">&quot;&quot;&quot;This function takes a time series (ts) and the sampling frequency (fs) and uses </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a time series (ts) and the sampling frequency (fs) and uses </span>
 <span class="sd">    the fast fourier transform and gaussian noise statistics in the fourier spectrum </span>
 <span class="sd">    (using least median of squares (LMS) in statistical analysis) to determine a suitable</span>
 <span class="sd">    embedding delay for permutation entropy using the theory developed in </span>
@@ -219,7 +220,7 @@
 
 
 <div class="viewcode-block" id="MaximumFrequency"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency">[docs]</a><span class="k">def</span> <span class="nf">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">       xf (array): frequency array from FFT.</span>
@@ -243,7 +244,7 @@
 
 
 <div class="viewcode-block" id="AbsFFT"><a class="viewcode-back" href="../../../FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT">[docs]</a><span class="k">def</span> <span class="nf">AbsFFT</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
 
 <span class="sd">   Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>
