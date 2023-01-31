@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../network.html">2.4.2. Network Representation of Time Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -141,7 +142,7 @@
 
 
 <div class="viewcode-block" id="MsPE_tau"><a class="viewcode-back" href="../../../MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau">[docs]</a><span class="k">def</span> <span class="nf">MsPE_tau</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">delay_end</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function takes a time series and uses Multi-scale Permutation Entropy (MsPE) to find the optimum</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a time series and uses Multi-scale Permutation Entropy (MsPE) to find the optimum</span>
 <span class="sd">    delay based on the first maxima in the MsPE plot</span>
 
 <span class="sd">    Args:</span>
@@ -205,7 +206,7 @@
 
 
 <div class="viewcode-block" id="MsPE_n"><a class="viewcode-back" href="../../../MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n">[docs]</a><span class="k">def</span> <span class="nf">MsPE_n</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">m_start</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">m_end</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function returns a suitable embedding dimension, given a time series and embedding delay, based on the </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function returns a suitable embedding dimension, given a time series and embedding delay, based on the </span>
 <span class="sd">    dimension normalized MsPE at the optimum delay for a range of dimensions n.</span>
 
 <span class="sd">    Args:</span>
