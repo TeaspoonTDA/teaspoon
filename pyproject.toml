@@ -2,7 +2,7 @@
 
 [project]
 name = "teaspoon"
-version = "1.3.6"
+version = "1.3.7"
 authors = [
   { name="Elizabeth Munch", email="muncheli@msu.edu" },
 ]
@@ -39,7 +39,8 @@ dependencies = ["wheel",
                 "dionysus==2.0.8", 
                 "pandas",
                 "gudhi", 
-                "pandoc"
+                "pandoc",
+                "cripser @ git+https://github.com/shizuo-kaji/CubicalRipser_3dim"
             ]
 
 [tool.setuptools.packages.find]
