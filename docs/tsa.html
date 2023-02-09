@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.4.1. Time Series Analysis (TSA) Tools &mdash; teaspoon 1.3.3 documentation</title>
+  <title>2.4.1. Time Series Analysis (TSA) Tools &mdash; teaspoon 1.3.7 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -12,10 +12,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -31,12 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="index.html" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            teaspoon
+              <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -123,7 +125,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a></li>
           <li class="breadcrumb-item"><a href="SP.html"><span class="section-number">2.4. </span>Signal Processing (SP) Module Documentation</a></li>
       <li class="breadcrumb-item active"><span class="section-number">2.4.1. </span>Time Series Analysis (TSA) Tools</li>
@@ -181,17 +183,17 @@
 <span class="sig-prename descclassname"><span class="pre">teaspoon.SP.tsa_tools.</span></span><span class="sig-name descname"><span class="pre">takens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/tsa_tools.html#takens"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>This function generates an array of n-dimensional arrays from a time-delay state-space reconstruction.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ts</strong> (<em>1-D array</em>) – 1-D time series signal</p></li>
 <li><p><strong>n</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding dimension for state space reconstruction. Default is uses FNN algorithm from parameter_selection module.</p></li>
 <li><p><strong>tau</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding delay fro state space reconstruction. Default uses MI algorithm from parameter_selection module.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>array of delyed embedded vectors of dimension n for state space reconstruction.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>[arraay of n-dimensional arrays]</p>
 </dd>
 </dl>
@@ -226,17 +228,17 @@
 <span class="sig-prename descclassname"><span class="pre">teaspoon.SP.tsa_tools.</span></span><span class="sig-name descname"><span class="pre">permutation_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/tsa_tools.html#permutation_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>This function generates the sequence of permutations from a 1-D time series.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ts</strong> (<em>1-D array</em>) – 1-D time series signal</p></li>
 <li><p><strong>n</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding dimension for state space reconstruction. Default is uses MsPE algorithm from parameter_selection module.</p></li>
 <li><p><strong>tau</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding delay fro state space reconstruction. Default uses MsPE algorithm from parameter_selection module.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>array of permutations represented as int from [0, n!-1] from the time series.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>[1-D array of intsegers]</p>
 </dd>
 </dl>
@@ -268,16 +270,16 @@
 <span class="sig-prename descclassname"><span class="pre">teaspoon.SP.tsa_tools.</span></span><span class="sig-name descname"><span class="pre">k_NN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embedded_time_series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/tsa_tools.html#k_NN"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>This function gets the k nearest neighbors from an array of the state space reconstruction vectors</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>embedded_time_series</strong> (<em>array</em><em> of </em><em>n-dimensional arrays</em>) – state space reconstructions vectors of dimension n. Can use takens function.</p></li>
 <li><p><strong>k</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – number of nearest neighbors for graph formation. Default is 4.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>distances and indices of the k nearest neighbors for each vector.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>[distances, indices]</p>
 </dd>
 </dl>
@@ -317,7 +319,7 @@
 <span class="sig-prename descclassname"><span class="pre">teaspoon.SP.tsa_tools.</span></span><span class="sig-name descname"><span class="pre">cgss_binning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binning_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'equal_size'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_binning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/tsa_tools.html#cgss_binning"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>This function generates the binning array applied to each dimension when constructing CGSSN.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ts</strong> (<em>1-D array</em>) – 1-D time series signal</p></li>
 <li><p><strong>n</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – embedding dimension for state space reconstruction. Default is uses MsPE algorithm from parameter_selection module.</p></li>
@@ -327,10 +329,10 @@
 <li><p><strong>binning_method</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Either equal_size or equal_probability for creating binning array. Default is equal_size.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>One-dimensional array of bin edges.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>[1-D array]</p>
 </dd>
 </dl>
@@ -345,16 +347,16 @@
 <span class="sig-prename descclassname"><span class="pre">teaspoon.SP.tsa_tools.</span></span><span class="sig-name descname"><span class="pre">cgss_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">SSR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B_array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/tsa_tools.html#cgss_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>This function generates the sequence of coarse-grained state space states from the state space reconstruction.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>SSR</strong> (<em>n-D array</em>) – n-dimensional state state space reconstruction using takens function from teaspoon.</p></li>
 <li><p><strong>B_array</strong> (<em>1-D array</em>) – binning array from function cgss_binning or self defined. Array of bin edges applied to each dimension of SSR for CGSS state sequence.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>array of coarse grained state space states represented as ints.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>[1-D array of integers]</p>
 </dd>
 </dl>

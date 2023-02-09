@@ -7,4 +7,5 @@ with open("README.md", "r") as fh:
 
 if __name__ == "__main__":
     setup(packages = find_packages(),
-    long_description = ld)
+    long_description = ld,
+    dependency_links = ["git+https://github.com/shizuo-kaji/CubicalRipser_3dim.git"])
