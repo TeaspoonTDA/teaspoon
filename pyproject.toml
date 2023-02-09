@@ -39,8 +39,7 @@ dependencies = ["wheel",
                 "dionysus==2.0.8", 
                 "pandas",
                 "gudhi", 
-                "pandoc",
-                "cripser @ git+https://github.com/shizuo-kaji/CubicalRipser_3dim"
+                "pandoc"
             ]
 
 [tool.setuptools.packages.find]
