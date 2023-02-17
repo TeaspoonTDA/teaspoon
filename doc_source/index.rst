@@ -36,6 +36,7 @@ The code is a compilation of work done by `Elizabeth Munch <http://www.elizabeth
 - `Sarah Tymochko <https://www.sarahtymochko.com/home>`_
 - `Danielle Barnes <mailto:barnesd8@msu.edu>`_
 - `Ismail Guzel`
+- `Max Chumley <https://www.maxchumley.com>`_
 
 
 
