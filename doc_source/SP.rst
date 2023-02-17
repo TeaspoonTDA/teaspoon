@@ -12,3 +12,4 @@ The signal processing module include various methods of analyzing a time series.
    Network Representation of Time Series <network.rst>
    Information Module <information.rst>
    Miscellaneous <misc.rst>
+   Texture Analysis <texture_analysis.rst>
