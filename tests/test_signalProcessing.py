@@ -6,6 +6,7 @@ import unittest
 from teaspoon.SP.tsa_tools import takens
 from teaspoon.SP.tsa_tools import permutation_sequence
 from teaspoon.SP.tsa_tools import k_NN
+from teaspoon.SP.tsa_tools import ZeDA
 import matplotlib.pyplot as plt
 from teaspoon.SP.network import knn_graph
 from teaspoon.SP.network import ordinal_partition_graph
@@ -182,6 +183,16 @@ class signalProcessing(unittest.TestCase):
 
         print('Persistent entropy: ', h)
 
+    # In[ ]: ZeDA
+    def test_ZeDA(self):
+
+        t1 = 0
+        tn = 1.2
+
+        t = np.linspace(t1,tn,200,endpoint=True)
+        sig = (-3*t + 1.4)*np.sin(18*t) + 0.1
+
+        brackets, ZC, flag = ZeDA(sig, t1, tn)
 
 if __name__ == '__main__':
     unittest.main()
