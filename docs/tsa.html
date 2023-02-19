@@ -363,6 +363,47 @@
 </dd></dl>
 
 </section>
+<section id="zero-detection-algorithm-zeda">
+<span id="zeda"></span><h2><span class="section-number">2.4.1.6. </span>Zero Detection Algorithm (ZeDA)<a class="headerlink" href="#zero-detection-algorithm-zeda" title="Permalink to this heading"></a></h2>
+<p>This section provides a summary of the zero-crossing detection algorithm devised and analysed in “<a class="reference external" href="https://arxiv.org/abs/2301.07703">Robust Zero-crossings Detection in Noisy Signals using Topological Signal Processing</a>” for discrete time series. Additionally, a basic example is provided showing the functionality of the method for a simple time series. Below, a simple overview of the method is provided.</p>
+<p>Outline of method: a time series is converted to two point clouds (P) and (Q) based on the sign value. A sorted persistence diagram is generated for both point clouds with x-axis having the index of the data point and y-axis having the death values. Then, a persistence threshold or an outlier detection method is used to select the outlying points in the persistence diagram such that ‘n+1’ points correspond to ‘n’ brackets.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/ZeDA_Algorithm.png"><img alt="_images/ZeDA_Algorithm.png" src="_images/ZeDA_Algorithm.png" style="width: 768.0px; height: 432.0px;" /></a>
+</figure>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.tsa_tools.</span></span><span class="sig-name descname"><span class="pre">ZeDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'std'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/tsa_tools.html#ZeDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>This function takes a uniformly sampled time series and finds the number of crossings</p>
+<p>Args:
+sig (numpy array):   Time series (1d) in format of npy.
+t1 (float):          Initial time of recording signal.
+tn (float):          Final time of recording signal.</p>
+<p>Other Parameters:
+level (Optional[float]):  Level at which crossings are to be found; default: 0.0 for zero-crossings
+plotting (Optional[bool]): Plots the function with returned brackets; defaut is False.
+method (Optional[str]): Method to use for setting persistence threshold; ‘std’ for standard deviation, ‘iso’ for isolation forest, ‘dt’ for smallest time interval in case of a clean signal; default is std (3*standard deviation)
+score (Optional[float]): z-score to use if method == ‘std’; default is 3.0</p>
+<p>Returns:
+[brackets, crossings, flags]: brackets gives intervals in the form of tuples where a crossing is expected; crossings gives the estimated crossings in each interval obtained by averaging both ends; flags marks, for each interval, whether both ends belong to the same sgn(function) category (0, unflagged; 1, flagged)</p>
+</dd></dl>
+
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="mi">0</span>                                          <span class="c1"># Initial time value</span>
+<span class="n">tn</span> <span class="o">=</span> <span class="mf">1.2</span>                                        <span class="c1"># Final time value</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>     <span class="c1"># Generate a time array</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mf">1.4</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">18</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span>           <span class="c1"># Generate a time series</span>
+
+<span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">ZeDA</span>
+
+<span class="n">brackets</span><span class="p">,</span> <span class="n">ZC</span><span class="p">,</span> <span class="n">flag</span> <span class="o">=</span> <span class="n">ZeDA</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output of example:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/ZeDA_ExampleOutput.png"><img alt="_images/ZeDA_ExampleOutput.png" src="_images/ZeDA_ExampleOutput.png" style="width: 640.0px; height: 320.0px;" /></a>
+</figure>
+</section>
 </section>
 
 
