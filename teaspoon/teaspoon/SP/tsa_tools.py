@@ -357,8 +357,8 @@ def ZeDA(sig, t1, tn, level=0.0,  plotting=False, method='std', score=3.0):
 
             if i >= len(p_per):
                 if predictions[i] == 1:
-                q_mu.append(q[i - len(p_per)])
-                q_mu.append(q[i - len(p_per) + 1])
+                    q_mu.append(q[i - len(p_per)])
+                    q_mu.append(q[i - len(p_per) + 1])
 
         return p_mu, q_mu
 
