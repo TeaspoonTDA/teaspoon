@@ -14,8 +14,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-dependencies = ["wheel",
-                "cycler==0.11.0",
+dependencies = ["cycler==0.11.0",
                 "fonttools==4.34.4",
                 "joblib==1.2.0",
                 "kiwisolver==1.4.4",
@@ -36,10 +35,9 @@ dependencies = ["wheel",
                 "ripser==0.6.4", 
                 "sympy==1.11.1",
                 "sortedcontainers==2.4.0",
-                "dionysus==2.0.8", 
+                "dionysus==2.0.9", 
                 "pandas",
-                "gudhi", 
-                "pandoc"
+                "gudhi"
             ]
 
 [tool.setuptools.packages.find]
