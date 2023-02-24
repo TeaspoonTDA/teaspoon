@@ -10,6 +10,7 @@ The following are the available TSA functions:
 * :ref:`knn`
 * :ref:`cgss_binning`
 * :ref:`cgss_sequence`
+* :ref:`ZeDA`
 
 Further detailed documentation and examples are provided below for each (or click link).
 
