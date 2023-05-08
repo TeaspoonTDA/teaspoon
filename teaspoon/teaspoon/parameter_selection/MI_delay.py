@@ -7,6 +7,8 @@ x(t) vs x(t+tau) plots. These plots have their individual mutual information cal
 for partitioning the x(t) vs x(t+tau) plots for calculating the mutual information.
 """
 
+import scipy
+import numpy as np
 
 class Partitions:
     def __init__(self, data=None,
