@@ -14,6 +14,7 @@ class Partitions:
                  numParts=3,
                  alpha=0.05):
         import scipy
+        import numpy as np
 
         if data is not None:
             # check that the data is in ordinal coordinates
