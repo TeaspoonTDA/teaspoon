@@ -7,6 +7,8 @@ x(t) vs x(t+tau) plots. These plots have their individual mutual information cal
 for partitioning the x(t) vs x(t+tau) plots for calculating the mutual information.
 """
 
+import scipy
+import numpy as np
 
 class Partitions:
     def __init__(self, data=None,
@@ -14,7 +16,6 @@ class Partitions:
                  numParts=3,
                  alpha=0.05):
         import scipy
-        import numpy as np
 
         if data is not None:
             # check that the data is in ordinal coordinates
