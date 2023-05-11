@@ -154,7 +154,7 @@ def cgss_graph(ts, B_array, n=None, tau=None):
     if n == None:
         perc_FNN, n = FNN_n.FNN_n(ts, tau)
 
-    SSR = tsa_tools.takens(ts, n, tau)
+    SSR = takens(ts, n, tau)
 
     symbol_seq = cgss_sequence(SSR, B_array)
 
