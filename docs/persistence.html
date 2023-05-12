@@ -12,10 +12,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -29,16 +30,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="index.html" class="icon icon-home">
-            teaspoon
-              <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon
+            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -52,25 +49,12 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="MI.html">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="AC.html">2.1.2. Auto-correlation for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FSA.html">2.1.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="PAMI.html">2.1.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MsPE.html">2.1.5. MsPE for time delay (tau) and dimension (n).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MI.html">2.1.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AC.html">2.1.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html">2.1.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PAMI.html">2.1.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MsPE.html">2.1.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html">2.1.6. False Nearest Neighbors</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
@@ -85,8 +69,6 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -125,7 +107,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a></li>
           <li class="breadcrumb-item"><a href="TDA.html"><span class="section-number">2.3. </span>Topological Data Analysis (TDA) Module Documentation</a></li>
       <li class="breadcrumb-item active"><span class="section-number">2.3.4. </span>Persistence</li>
@@ -164,6 +146,43 @@
 </style>
 <section id="module-teaspoon.TDA.Persistence">
 <span id="persistence"></span><h1><span class="section-number">2.3.4. </span>Persistence<a class="headerlink" href="#module-teaspoon.TDA.Persistence" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.BettiCurve">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">BettiCurve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#BettiCurve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.BettiCurve" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the Betti Curve for a persistence diagram for thresholds 0 to maxEps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>array</strong><strong>)</strong> (<em>Dgm</em>) – 2D numpy array of persistence diagram of a specific homology class</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>float</strong><strong>]</strong><strong>)</strong> (<em>maxEps</em>) – Maximum value of threshold; default: 3</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>int</strong><strong>]</strong><strong>)</strong> (<em>numStops</em>) – Number of points between 0 and maxEps; default: 10</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>array of threshold values, Betti curve</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.CROCKER">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">CROCKER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DGMS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#CROCKER"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.CROCKER" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the CROCKER plot for a list of persistence diagrams for thresholds 0 to maxEps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>list</strong><strong>)</strong> (<em>DGMS</em>) – A python list of 2D numpy arrays of persistence diagrams of a specific homology class</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>float</strong><strong>]</strong><strong>)</strong> (<em>maxEps</em>) – Maximum value of threshold; default: 3</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>int</strong><strong>]</strong><strong>)</strong> (<em>numStops</em>) – Number of points between 0 and maxEps; default: 10</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>bool</strong><strong>]</strong><strong>)</strong> (<em>plotting</em>) – Plots the CROCKER for the given diagrams; default: True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D CROCKER plot</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.maxBirth">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxBirth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxBirth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirth" title="Permalink to this definition"></a></dt>
@@ -337,6 +356,37 @@ the DataFrame:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Maximum</span> <span class="n">Birth</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">diagrams</span><span class="p">:</span>  <span class="mf">1.2070081233978271</span>
 <span class="n">Minimum</span> <span class="n">Birth</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">diagrams</span><span class="p">:</span>  <span class="mf">0.028233738616108894</span>
 <span class="n">Max</span> <span class="n">Persistence</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">diagrams</span><span class="p">:</span>  <span class="mf">1.6290252953767776</span>
+</pre></div>
+</div>
+<p>The following example computes the Betti Curve for a persistence diagram:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">BettiCurve</span>
+<span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">48823</span><span class="p">)</span>
+<span class="n">Dgm</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;dgms&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">BettiCurve</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Betti Curve:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output of this code is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Betti</span> <span class="n">Curve</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.</span> <span class="mf">36.</span>  <span class="mf">2.</span>  <span class="mf">0.</span>  <span class="mf">0.</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The following example computes the CROCKER plot for a set of persistence diagrams:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">CROCKER</span>
+<span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+
+<span class="n">DGMS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+
+    <span class="n">T</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">48823</span><span class="p">)</span>
+    <span class="n">Dgm</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;dgms&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">DGMS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Dgm</span><span class="p">)</span>
+
+<span class="n">Crocker</span> <span class="o">=</span> <span class="n">CROCKER</span><span class="p">(</span><span class="n">DGMS</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
