@@ -281,5 +281,5 @@ def CROCKER(DGMS, maxEps=3, numStops=10, plotting=True):
         ax.set_xticklabels([])
         ax.set_yticklabels(t)
         ax.set_ylabel(r'$\epsilon$')
-
+        plt.show()
     return M
