@@ -290,7 +290,7 @@
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">perc_FNN</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">FNN_n</span><span class="o">.</span><span class="n">FNN_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 
-    <span class="n">SSR</span> <span class="o">=</span> <span class="n">tsa_tools</span><span class="o">.</span><span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+    <span class="n">SSR</span> <span class="o">=</span> <span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 
     <span class="n">symbol_seq</span> <span class="o">=</span> <span class="n">cgss_sequence</span><span class="p">(</span><span class="n">SSR</span><span class="p">,</span> <span class="n">B_array</span><span class="p">)</span>
 
