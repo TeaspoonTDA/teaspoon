@@ -146,7 +146,7 @@ def bottleneckDist(
     """
     if matching==True and plot==True:
         d, matching = persim.bottleneck(pts0, pts1, matching=matching)
-        persim.bottleneck_matching(PD1, PD2, matching)
+        persim.bottleneck_matching(pts0, pts1, matching)
         return d, matching
     if matching==True and plot==False:
         d, matching = persim.bottleneck(pts0, pts1, matching=matching)
