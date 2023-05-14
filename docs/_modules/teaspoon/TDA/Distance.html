@@ -259,7 +259,9 @@
 <div class="viewcode-block" id="bottleneckDist"><a class="viewcode-back" href="../../../distances.html#teaspoon.TDA.Distance.bottleneckDist">[docs]</a><span class="k">def</span> <span class="nf">bottleneckDist</span><span class="p">(</span>
     <span class="n">pts0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
     <span class="n">pts1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">matching</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">plot</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">):</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the bottleneck distance between the diagrams pts0, pts1 using the persim package: https://persim.scikit-tda.org/en/latest/index.html</span>
@@ -270,15 +272,26 @@
 <span class="sd">        The first persistence diagram</span>
 <span class="sd">    pts1: array of shape (n_top_features, 2)</span>
 <span class="sd">        The second persistence diagram</span>
+<span class="sd">    matching: boolean, True returns matched array</span>
+<span class="sd">    plot: boolean, True provides plot of matching points.  Matching must be true for plot to return.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    distance: float</span>
 <span class="sd">        The bottleneck distance between diagrams ``pts0`` and ``pts1``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">d</span> <span class="o">=</span> <span class="n">persim</span><span class="o">.</span><span class="n">bottleneck</span><span class="p">(</span><span class="n">pts0</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="n">matching</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">d</span></div>
+    <span class="k">if</span> <span class="n">matching</span><span class="o">==</span><span class="kc">True</span> <span class="ow">and</span> <span class="n">plot</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+        <span class="n">d</span><span class="p">,</span> <span class="n">matching</span> <span class="o">=</span> <span class="n">persim</span><span class="o">.</span><span class="n">bottleneck</span><span class="p">(</span><span class="n">pts0</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="n">matching</span><span class="o">=</span><span class="n">matching</span><span class="p">)</span>
+        <span class="n">persim</span><span class="o">.</span><span class="n">bottleneck_matching</span><span class="p">(</span><span class="n">pts0</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="n">matching</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span><span class="p">,</span> <span class="n">matching</span>
+    <span class="k">if</span> <span class="n">matching</span><span class="o">==</span><span class="kc">True</span> <span class="ow">and</span> <span class="n">plot</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
+        <span class="n">d</span><span class="p">,</span> <span class="n">matching</span> <span class="o">=</span> <span class="n">persim</span><span class="o">.</span><span class="n">bottleneck</span><span class="p">(</span><span class="n">pts0</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="n">matching</span><span class="o">=</span><span class="n">matching</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span><span class="p">,</span> <span class="n">matching</span>
+    <span class="k">if</span> <span class="n">matching</span><span class="o">==</span><span class="kc">False</span> <span class="ow">and</span> <span class="n">plot</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Matching must be &#39;True&#39; to enable plotting&#39;&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">persim</span><span class="o">.</span><span class="n">bottleneck</span><span class="p">(</span><span class="n">pts0</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="n">matching</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div>
 </pre></div>
 
            </div>
