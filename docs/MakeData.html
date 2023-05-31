@@ -12,7 +12,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -137,31 +138,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="makedata-module-documentation">
+  <section id="makedata-module-documentation">
 <span id="makedata"></span><h1><span class="section-number">2.5. </span>MakeData Module Documentation<a class="headerlink" href="#makedata-module-documentation" title="Permalink to this heading"></a></h1>
 <p>This module provides two methods for generating data for analysis. The first is through point cloud data generation for various shapes (e.g. sphere, annulus, etc.). The second module is the dynamic systems library. This library has approximately 60 dynamical systems available for simulation where the output is the time series of each variable of the dynamical system. These systems include flows, maps, and collected data.</p>
 <div class="toctree-wrapper compound">

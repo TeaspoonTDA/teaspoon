@@ -12,7 +12,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -138,31 +139,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="texture-analysis">
+  <section id="texture-analysis">
 <h1><span class="section-number">2.4.5. </span>Texture Analysis<a class="headerlink" href="#texture-analysis" title="Permalink to this heading"></a></h1>
 <p>This page provides a summary of the functions available in the texture analysis module. Persistent homology from topological data analysis is leveraged to compare experimental and nominal textures and provide similarity scores for specific features that make up the texture of interest. Three texture features were targeted for this module: lattice shape, feature depth, and roundness. More information on the details of texture shape quantification can be found in,  “<a class="reference external" href="https://arxiv.org/abs/2209.05531">Topological Measures for Pattern quantification of Impact Centers in Piezo Vibration Striking Treatment (PVST)</a>.” The methods for feature depth and roundness are described in “<a class="reference external" href="https://arxiv.org/abs/2210.06333">Pattern Characterization Using Topological Data Analysis: Application to Piezo Vibration Striking Treatment</a>.”</p>
 <p>Currently, the following functions are available:</p>
@@ -171,7 +148,6 @@
 <li><p><a class="reference internal" href="#feature-depth"><span class="std std-ref">Feature Depth</span></a></p></li>
 <li><p><a class="reference internal" href="#feature-roundness"><span class="std std-ref">Feature Roundness</span></a></p></li>
 </ul>
-<p><strong>Note:</strong> The <cite>feature_depth</cite> and <cite>feature_roundness</cite> functions require the “<a class="reference external" href="https://arxiv.org/abs/2005.12692">Cubical Ripser</a>”` package. Installation instructions can be found “<a class="reference external" href="https://github.com/shizuo-kaji/CubicalRipser_3dim">here</a>.”</p>
 <section id="texture-analaysis-overview">
 <h2><span class="section-number">2.4.5.1. </span>Texture Analaysis Overview<a class="headerlink" href="#texture-analaysis-overview" title="Permalink to this heading"></a></h2>
 <p>The process for analyzing these texture features is captured in the overview flow chart below.</p>
@@ -311,7 +287,7 @@
 </pre></div>
 </div>
 <p>Output of example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">depth_score</span> <span class="o">=</span> <span class="mf">93.12</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">depth_score</span> <span class="o">=</span> <span class="mf">92.13</span>
 </pre></div>
 </div>
 </section>
@@ -400,7 +376,7 @@
 </pre></div>
 </div>
 <p>Output of example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roundness_score</span> <span class="o">=</span> <span class="mf">0.11744985</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roundness_score</span> <span class="o">=</span> <span class="mf">0.11883556</span>
 </pre></div>
 </div>
 <figure class="align-center">
