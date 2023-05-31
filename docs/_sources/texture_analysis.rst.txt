@@ -9,7 +9,6 @@ Currently, the following functions are available:
 * :ref:`feature_depth` 
 * :ref:`feature_roundness` 
 
-**Note:** The `feature_depth` and `feature_roundness` functions require the "`Cubical Ripser <https://arxiv.org/abs/2005.12692>`_"` package. Installation instructions can be found "`here <https://github.com/shizuo-kaji/CubicalRipser_3dim>`_."
 
 
 Texture Analaysis Overview
@@ -136,7 +135,7 @@ An example use of this function is provided below. The example generates synthet
 
 Output of example::
 
-    depth_score = 93.12
+    depth_score = 92.13
 
 
 
@@ -213,7 +212,7 @@ An example use of this function is provided below. The example generates synthet
 
 Output of example::
 
-   roundness_score = 0.11744985
+   roundness_score = 0.11883556
 
 .. figure:: figures/emd_plot.png
     :scale: 60 %
