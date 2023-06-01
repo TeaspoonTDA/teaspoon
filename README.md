@@ -16,7 +16,7 @@ The code is a compilation of work done by [Elizabeth Munch](http://www.elizabeth
 - [Sarah Tymochko](https://www.egr.msu.edu/~tymochko/)
 - [Danielle Barnes](https://github.com/barnesd8)
 - [Sunia Tanweer](https://stanweer1.github.io/)
-- [Max Chumley](https://github.com/maxchumley/)
+- [Max Chumley](https://www.maxchumley.com/)
 - [Ismail Guzel](https://ismailguzel.github.io/)
 
 We gratefully acknowledge the support of the National Science Foundation, which has helped make this work possible.
