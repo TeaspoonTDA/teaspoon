@@ -144,7 +144,7 @@
 </section>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.parameter_selection.FNN_n.FNN_n">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.FNN_n.</span></span><span class="sig-name descname"><span class="pre">FNN_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxDim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/FNN_n.html#FNN_n"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.FNN_n.FNN_n" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.FNN_n.</span></span><span class="sig-name descname"><span class="pre">FNN_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxDim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Stol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strand</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/FNN_n.html#FNN_n"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.FNN_n.FNN_n" title="Permalink to this definition"></a></dt>
 <dd><p>This function implements the False Nearest Neighbors (FNN) algorithm described by Kennel et al.
 to select the minimum embedding dimension.</p>
 <dl class="field-list simple">
@@ -157,10 +157,12 @@ to select the minimum embedding dimension.</p>
 </dl>
 <dl>
 <dt>Kwargs:</dt><dd><p>maxDim (int):  maximum dimension in dimension search. Default is 10.</p>
-<p>plotting (bool): Plotting for user interpretation. Defaut is False.</p>
-<p>Rtol (float): Ratio tolerance. Defaut is 15.</p>
-<p>Atol (float): A tolerance. Defaut is 2.</p>
-<p>threshold (float): Tolerance threshold for percent of nearest neighbors. Defaut is 10.</p>
+<p>plotting (bool): Plotting for user interpretation. Default is False.</p>
+<p>Rtol (float): Ratio tolerance. Default is 15. (10 recommended for false nearest strands)</p>
+<p>Atol (float): A tolerance. Default is 2.</p>
+<p>Stol (float): S tolerance. Default is 0.9.</p>
+<p>threshold (float): Tolerance threshold for percent of nearest neighbors. Default is 10%.</p>
+<p>strand (bool): Use the composite false nearest strands algorithm (David Chelidze 2017)</p>
 </dd>
 </dl>
 <dl class="field-list simple">
