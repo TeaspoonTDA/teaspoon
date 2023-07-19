@@ -35,7 +35,7 @@ def find_neighbors(dist_array, ind_array, wind):
     return np.array(dist), np.array(neighbors)
 
 
-def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, threshold=10, strand=False):
+def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, threshold=10, method=None):
     """This function implements the False Nearest Neighbors (FNN) algorithm described by Kennel et al.
     to select the minimum embedding dimension.
 
@@ -49,7 +49,7 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
 
        plotting (bool): Plotting for user interpretation. Default is False.
 
-       Rtol (float): Ratio tolerance. Default is 15. (10 recommended for false nearest strands)
+       Rtol (float): Ratio tolerance. Default is 15. (10 recommended for false strands)
 
        Atol (float): A tolerance. Default is 2.
 
@@ -57,7 +57,7 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
 
        threshold (float): Tolerance threshold for percent of nearest neighbors. Default is 10%.
 
-       strand (bool): Use the composite false nearest strands algorithm (David Chelidze 2017)
+       method (string): 'strand' Use the composite false nearest strands algorithm (David Chelidze 2017), 'cao' Use the Cao method (Cao 1996). Default is None.
 
     Returns:
        (int): n, The embedding dimension.
@@ -76,9 +76,16 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
 
 
     # Set theiler window for false nearest strands. (4 times delay)
-    if strand:
+    if method=='strand':
         strands = []
         w = 4 * tau
+    elif method=='cao':
+        a = []
+        e = [0]
+        e1 = []
+        e_star = [0]
+        e2 = []
+        w = 1
     else:
         w = 1
     
@@ -92,12 +99,12 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
         tree = KDTree(tsrecon)
         D, IDX = tree.query(tsrecon, k=w+1)
 
-        if strand:
+        if method=='strand':
             D, IDX = find_neighbors(D, IDX, w)
 
         # Calculate the false nearest neighbor ratio for each dimension
         if i > 1:
-            if strand:
+            if method=='strand':
                 starting_index = 0
                 epsilon_k = 0
                 delta_k = 0
@@ -117,25 +124,61 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
 
                 den = len(strand_ind)
                 num = sum(np.logical_or(num1, num2))
-
+                Xfnn.append((num / den) * 100)
+                dim_array.append(dim-1)
+                print(dim-1, (num / den) * 100)
+                if (num/den)*100 <= threshold or i == maxDim:
+                    flag = True
+                    minDim = dim-1
+            elif method=='cao':
+                a.append(np.divide(np.linalg.norm(tsrecon[ind_m, :]-tsrecon[ind, :], ord=np.inf, axis=1), 
+                              np.linalg.norm(tsrecon[ind_m, :-1]-tsrecon[ind, :-1], ord=np.inf, axis=1)))
+                e.append(np.multiply(np.divide(1,len(ts)-dim*tau), np.sum(a[dim-2])))
+                e_star.append(np.multiply(np.divide(1,len(ts)-dim*tau), np.sum(np.abs(tsrecon[ind_m, -1]-tsrecon[ind, -1]))))
+                num1 = np.array(e)[1:][dim-2]
+                den1 = np.array(e)[:-1][dim-2]
+                num2 = np.array(e_star)[1:][dim-2]
+                den2 = np.array(e_star)[:-1][dim-2] 
+                if den1 != 0:
+                    e1.append(num1/den1)
+                    e2.append(num2/den2)
+                    dim_array.append(dim-2)
+                    Xfnn.append(e1[-1])
+                    print(dim-2, num1/den1, np.abs(num1-den1))
+                    if np.abs(1-num1/den1) < threshold/100 or i == maxDim:
+                        import warnings
+                        flag = True
+                        minDim = dim-3
+                        if not any((np.abs(1 - np.array(e2))) > threshold/100):
+                            warnings.warn("This data may be random.", category=Warning)
             else:
+                # D_mp1 = np.sqrt(
+                #     np.sum((np.square(tsrecon[ind_m, :]-tsrecon[ind, :])), axis=1))
+                # # Criteria 1 : increase in distance between neighbors is large
+                # num1 = np.heaviside(
+                #     np.divide(abs(tsrecon[ind_m, -1]-tsrecon[ind, -1]), Dm)-Rtol, 0.5)
+                # # Criteria 2 : nearest neighbor not necessarily close to y(n)
+                # num2 = np.heaviside(Atol-D_mp1/st_dev, 0.5)
+                # num = sum(np.multiply(num1, num2))
+                # den = sum(num2)
                 D_mp1 = np.sqrt(
                     np.sum((np.square(tsrecon[ind_m, :]-tsrecon[ind, :])), axis=1))
                 # Criteria 1 : increase in distance between neighbors is large
                 num1 = np.heaviside(
                     np.divide(abs(tsrecon[ind_m, -1]-tsrecon[ind, -1]), Dm)-Rtol, 0.5)
                 # Criteria 2 : nearest neighbor not necessarily close to y(n)
-                num2 = np.heaviside(Atol-D_mp1/st_dev, 0.5)
-                num = sum(np.multiply(num1, num2))
-                den = sum(num2)
+                num2 = np.heaviside(D_mp1-Atol*st_dev, 0.5)
+                # Fraction of points that have a "large" increase in distance, or get stretched further than A_tol*st_dev
+                num = sum(np.logical_or(num1, num2))
+                den = len(D_mp1)
+                Xfnn.append((num / den) * 100)
+                dim_array.append(dim-1)
+                print(dim-1, (num / den) * 100)
+                if (num/den)*100 <= threshold or i == maxDim:
+                    flag = True
+                    minDim = dim-1
 
-            Xfnn.append((num / den) * 100)
-            dim_array.append(dim-1)
-
-            if (num/den)*100 <= threshold or i == maxDim:
-                flag = True
-
-            print(dim-1, (num / den) * 100)
+            
 
         # Save the index to D and k(n) in dimension m for comparison with the
         # same distance in m+1 dimension
@@ -147,7 +190,7 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
         Dm = Dm[ind]
 
         # Get strands from index of nearest neighbors
-        if strand:
+        if method=='strand':
             strand_ind = []
             s_ind = []
             s_ind_m = []
@@ -158,7 +201,7 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
                 sort_status = 0
                 # Loop through all strands
                 for k in range(len(strand_ind)):
-                    # Loop through all points on each strand
+                    # Test if point fits in any current strands, otherwise continue searching
                     if row[1] in k + np.array(strand_ind[k])[:,1]:
                         strand_ind[k].append(row)
                         sort_status = 1
@@ -181,19 +224,37 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
 
     Xfnn = np.array(Xfnn)
 
-    if plotting == True:
-        import matplotlib.pyplot as plt
-        TextSize = 14
+    
+    import matplotlib.pyplot as plt
+    from matplotlib import rc
+    rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+    rc('text', usetex=True)
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+    if method == 'cao' and plotting == True:    
+        TextSize = 20
+        plt.figure(1)
+        plt.plot(dim_array, e1, marker='x', linestyle='-', color='blue', label=r'$E_1$')
+        plt.plot(dim_array, e2, marker='o', linestyle='-', color='red', label=r'$E_2$')
+        plt.xlabel(r'Dimension $n$', size=TextSize)
+        plt.ylabel(r'E1, E2', size=TextSize)
+        plt.xticks(size=TextSize)
+        plt.yticks(size=TextSize)
+        plt.ylim([-0.1, 1.2])
+        plt.legend()
+        plt.show()
+    elif plotting == True:
+        TextSize = 20
         plt.figure(1)
         plt.plot(dim_array, Xfnn, marker='x', linestyle='-', color='blue')
         plt.xlabel(r'Dimension $n$', size=TextSize)
         plt.ylabel('Percent FNN', size=TextSize)
         plt.xticks(size=TextSize)
         plt.yticks(size=TextSize)
-        plt.ylim([-1, 101])
+        plt.ylim([-0.1, 101])
         plt.show()
 
-    return Xfnn, dim-1
+    return Xfnn, minDim
 
 
 # In[ ]:
