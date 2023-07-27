@@ -20,6 +20,7 @@ def ts_recon(ts, dim, tau):
     tsrecon = tsrecon[:, :, 0]
     return tsrecon
 
+
 def find_neighbors(dist_array, ind_array, wind):
     import numpy as np
     neighbors = []
@@ -33,6 +34,85 @@ def find_neighbors(dist_array, ind_array, wind):
         neighbors.append([pt[0], j])
         dist.append([dist_array[0][0], dist_array[i][np.where(pt==j)[0][0]]])
     return np.array(dist), np.array(neighbors)
+
+
+def FNS_fraction(i, strand_ind, tsrecon, s_ind_m, s_dm, ind, Rtol, Stol, st_dev):
+    """
+    Compute the false nearest strands fraction using the composite fraction false nearest strands algorithm by David Chelidze 2017.
+    """
+    import numpy as np
+    starting_index = 0
+    epsilon_k = 0
+    delta_k = 0
+    num1 = []
+    num2 = []
+    for k in range(0, len(strand_ind)):
+        strand_norm = np.linalg.norm(s_dm[k])
+        if strand_norm > 0 and starting_index < len(tsrecon):
+            epsilon_k = np.linalg.norm(tsrecon[s_ind_m[k], :] - tsrecon[ind, :][starting_index:starting_index+len(s_ind_m[k])])/strand_norm
+            delta_k = np.sum(abs(tsrecon[s_ind_m[k], :][:,i-1] - tsrecon[ind, :][starting_index:starting_index+len(s_ind_m[k])][:,i-1]))/strand_norm
+        # Criteria 1
+        num1.append(np.heaviside(delta_k - epsilon_k*Rtol, 0.5))
+        # Criteria 2
+        num2.append(np.heaviside(delta_k - Stol*st_dev, 0.5))
+
+        starting_index += len(s_ind_m[k])
+
+    den = len(strand_ind)
+    num = sum(np.logical_or(num1, num2))
+    fns_frac = (num/den)*100
+    return fns_frac 
+
+def compute_strands(xlen2, D, IDX):
+    """
+    Function to allocate the points onto nearest neighbor strands using the strand algorithm (Chelidze 2017).
+    """
+    import numpy as np
+    strand_ind = []
+    s_ind = []
+    s_ind_m = []
+    s_dm = []
+    #############################################################################
+    # Loop through all points
+    for rnum, row in enumerate(IDX[0:xlen2]):
+        sort_status = 0
+        # Loop through all strands
+        for k in range(len(strand_ind)):
+            # Test if point fits in any current strands, otherwise continue searching
+            if row[1] in k + np.array(strand_ind[k])[:,1]:
+                strand_ind[k].append(row)
+                sort_status = 1
+                break
+        # If item is not allocated to strand, make new strand
+        if not sort_status:
+            strand_ind.append([])
+            strand_ind[-1].append(row)
+    #############################################################################
+
+    # Assign distances to strands
+    for k in range(len(strand_ind)):
+        s_ind.append(np.array(strand_ind[k])[:,-1]<=xlen2-1)
+        s_ind_m.append(np.array(strand_ind[k])[:,-1][s_ind[k]])
+        s_dm.append(D[s_ind_m[k]][:, -1])
+    
+    return strand_ind, s_ind, s_ind_m, s_dm
+
+def cao_method(a, e, e_star, dim, tsrecon, ind_m, ind, ts, tau):
+    import numpy as np
+    a.append(np.divide(np.linalg.norm(tsrecon[ind_m, :]-tsrecon[ind, :], ord=np.inf, axis=1), 
+                              np.linalg.norm(tsrecon[ind_m, :-1]-tsrecon[ind, :-1], ord=np.inf, axis=1)))
+    e.append(np.multiply(np.divide(1,len(ts)-dim*tau), np.sum(a[dim-2])))
+    e_star.append(np.multiply(np.divide(1,len(ts)-dim*tau), np.sum(np.abs(tsrecon[ind_m, -1]-tsrecon[ind, -1]))))
+    num1 = np.array(e)[1:][dim-2]
+    den1 = np.array(e)[:-1][dim-2]
+    num2 = np.array(e_star)[1:][dim-2]
+    den2 = np.array(e_star)[:-1][dim-2] 
+    if den1 != 0:
+        e1 = num1/den1
+        e2 = num2/den2
+        return e1, e2
+    else:
+        return 0, 0
 
 
 def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, threshold=10, method=None):
@@ -74,10 +154,8 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
     Xfnn = []
     dim_array = []
 
-
-    # Set theiler window for false nearest strands. (4 times delay)
     if method=='strand':
-        strands = []
+        # Set theiler window for false nearest strands. (4 times delay)
         w = 4 * tau
     elif method=='cao':
         a = []
@@ -105,80 +183,39 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
         # Calculate the false nearest neighbor ratio for each dimension
         if i > 1:
             if method=='strand':
-                starting_index = 0
-                epsilon_k = 0
-                delta_k = 0
-                num1 = []
-                num2 = []
-                for k in range(0, len(strand_ind)):
-                    strand_norm = np.linalg.norm(s_dm[k])
-                    if strand_norm > 0 and starting_index < len(tsrecon):
-                        epsilon_k = np.linalg.norm(tsrecon[s_ind_m[k], :] - tsrecon[ind, :][starting_index:starting_index+len(s_ind_m[k])])/strand_norm
-                        delta_k = np.sum(abs(tsrecon[s_ind_m[k], :][:,i-1] - tsrecon[ind, :][starting_index:starting_index+len(s_ind_m[k])][:,i-1]))/strand_norm
-                    # Criteria 1
-                    num1.append(np.heaviside(delta_k - epsilon_k*Rtol, 0.5))
-                    # Criteria 2
-                    num2.append(np.heaviside(delta_k - Stol*st_dev, 0.5))
-
-                    starting_index += len(s_ind_m[k])
-
-                den = len(strand_ind)
-                num = sum(np.logical_or(num1, num2))
-                Xfnn.append((num / den) * 100)
+                fns_frac = FNS_fraction(dim, strand_ind, tsrecon, s_ind_m, s_dm, ind, Rtol, Stol, st_dev)
+                Xfnn.append(fns_frac)
                 dim_array.append(dim-1)
-                print(dim-1, (num / den) * 100)
-                if (num/den)*100 <= threshold or i == maxDim:
+                if fns_frac <= threshold or i == maxDim:
                     flag = True
                     minDim = dim-1
             elif method=='cao':
-                a.append(np.divide(np.linalg.norm(tsrecon[ind_m, :]-tsrecon[ind, :], ord=np.inf, axis=1), 
-                              np.linalg.norm(tsrecon[ind_m, :-1]-tsrecon[ind, :-1], ord=np.inf, axis=1)))
-                e.append(np.multiply(np.divide(1,len(ts)-dim*tau), np.sum(a[dim-2])))
-                e_star.append(np.multiply(np.divide(1,len(ts)-dim*tau), np.sum(np.abs(tsrecon[ind_m, -1]-tsrecon[ind, -1]))))
-                num1 = np.array(e)[1:][dim-2]
-                den1 = np.array(e)[:-1][dim-2]
-                num2 = np.array(e_star)[1:][dim-2]
-                den2 = np.array(e_star)[:-1][dim-2] 
-                if den1 != 0:
-                    e1.append(num1/den1)
-                    e2.append(num2/den2)
-                    dim_array.append(dim-2)
-                    Xfnn.append(e1[-1])
-                    print(dim-2, num1/den1, np.abs(num1-den1))
-                    if np.abs(1-num1/den1) < threshold/100 or i == maxDim:
-                        import warnings
-                        flag = True
-                        minDim = dim-3
-                        if not any((np.abs(1 - np.array(e2))) > threshold/100):
-                            warnings.warn("This data may be random.", category=Warning)
+                e1_new, e2_new = cao_method(a, e, e_star, dim, tsrecon, ind_m, ind, ts, tau)
+                e1.append(e1_new)
+                e2.append(e2_new)
+                Xfnn.append(e1[-1])
+                dim_array.append(dim-2)
+                if np.abs(1-e1_new) < threshold/100 or i == maxDim:
+                    import warnings
+                    flag = True
+                    minDim = dim-3
+                    if not any((np.abs(1 - np.array(e2))) > threshold/100):
+                        warnings.warn("This data may be random.", category=Warning)
             else:
-                # D_mp1 = np.sqrt(
-                #     np.sum((np.square(tsrecon[ind_m, :]-tsrecon[ind, :])), axis=1))
-                # # Criteria 1 : increase in distance between neighbors is large
-                # num1 = np.heaviside(
-                #     np.divide(abs(tsrecon[ind_m, -1]-tsrecon[ind, -1]), Dm)-Rtol, 0.5)
-                # # Criteria 2 : nearest neighbor not necessarily close to y(n)
-                # num2 = np.heaviside(Atol-D_mp1/st_dev, 0.5)
-                # num = sum(np.multiply(num1, num2))
-                # den = sum(num2)
                 D_mp1 = np.sqrt(
                     np.sum((np.square(tsrecon[ind_m, :]-tsrecon[ind, :])), axis=1))
                 # Criteria 1 : increase in distance between neighbors is large
                 num1 = np.heaviside(
                     np.divide(abs(tsrecon[ind_m, -1]-tsrecon[ind, -1]), Dm)-Rtol, 0.5)
                 # Criteria 2 : nearest neighbor not necessarily close to y(n)
-                num2 = np.heaviside(D_mp1-Atol*st_dev, 0.5)
-                # Fraction of points that have a "large" increase in distance, or get stretched further than A_tol*st_dev
-                num = sum(np.logical_or(num1, num2))
-                den = len(D_mp1)
+                num2 = np.heaviside(Atol-D_mp1/st_dev, 0.5)
+                num = sum(np.multiply(num1, num2))
+                den = sum(num2)
                 Xfnn.append((num / den) * 100)
                 dim_array.append(dim-1)
-                print(dim-1, (num / den) * 100)
                 if (num/den)*100 <= threshold or i == maxDim:
                     flag = True
-                    minDim = dim-1
-
-            
+                    minDim = dim-1  
 
         # Save the index to D and k(n) in dimension m for comparison with the
         # same distance in m+1 dimension
@@ -191,36 +228,9 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
 
         # Get strands from index of nearest neighbors
         if method=='strand':
-            strand_ind = []
-            s_ind = []
-            s_ind_m = []
-            s_dm = []
-            #############################################################################
-            # Loop through all points
-            for rnum, row in enumerate(IDX[0:xlen2]):
-                sort_status = 0
-                # Loop through all strands
-                for k in range(len(strand_ind)):
-                    # Test if point fits in any current strands, otherwise continue searching
-                    if row[1] in k + np.array(strand_ind[k])[:,1]:
-                        strand_ind[k].append(row)
-                        sort_status = 1
-                        break
-                # If item is not allocated to strand, make new strand
-                if not sort_status:
-                    strand_ind.append([])
-                    strand_ind[-1].append(row)
-            #############################################################################
-
-            # Assign distances to strands
-            for k in range(len(strand_ind)):
-                s_ind.append(np.array(strand_ind[k])[:,-1]<=xlen2-1)
-                s_ind_m.append(np.array(strand_ind[k])[:,-1][s_ind[k]])
-                s_dm.append(D[s_ind_m[k]][:, -1])
+            strand_ind, s_ind, s_ind_m, s_dm = compute_strands(xlen2, D, IDX)  
         else:
             pass
-
-        
 
     Xfnn = np.array(Xfnn)
 
@@ -234,8 +244,8 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
     if method == 'cao' and plotting == True:    
         TextSize = 20
         plt.figure(1)
-        plt.plot(dim_array, e1, marker='x', linestyle='-', color='blue', label=r'$E_1$')
-        plt.plot(dim_array, e2, marker='o', linestyle='-', color='red', label=r'$E_2$')
+        plt.plot(dim_array[1:], e1[1:], marker='x', linestyle='-', color='blue', label=r'$E_1$')
+        plt.plot(dim_array[1:], e2[1:], marker='o', linestyle='-', color='red', label=r'$E_2$')
         plt.xlabel(r'Dimension $n$', size=TextSize)
         plt.ylabel(r'E1, E2', size=TextSize)
         plt.xticks(size=TextSize)
