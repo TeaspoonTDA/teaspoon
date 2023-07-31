@@ -199,7 +199,7 @@ def FNN_n(ts, tau, maxDim=10, plotting=False, Rtol=15, Atol=2, Stol=0.9, thresho
                     import warnings
                     flag = True
                     minDim = dim-3
-                    if not any((np.abs(1 - np.array(e2))) > threshold/100):
+                    if not any(np.abs(1 - np.array(e2[1:])) > threshold/100):
                         warnings.warn("This data may be random.", category=Warning)
             else:
                 D_mp1 = np.sqrt(
