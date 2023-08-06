@@ -11,9 +11,10 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -27,16 +28,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="../../../index.html" class="icon icon-home">
-            teaspoon
-              <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="../../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,8 +80,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -123,7 +118,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.TDA.Draw</li>
       <li class="wy-breadcrumbs-aside">
@@ -144,7 +139,7 @@
 
 
 <div class="viewcode-block" id="drawDgm"><a class="viewcode-back" href="../../../drawing.html#teaspoon.TDA.Draw.drawDgm">[docs]</a><span class="k">def</span> <span class="nf">drawDgm</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Draws simple persistence diagram plot</span>
 
 <span class="sd">    :param D:</span>
@@ -189,7 +184,7 @@
 
 
 <div class="viewcode-block" id="drawPtCloud"><a class="viewcode-back" href="../../../drawing.html#teaspoon.TDA.Draw.drawPtCloud">[docs]</a><span class="k">def</span> <span class="nf">drawPtCloud</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Draws simple point cloud plot</span>
 
 <span class="sd">    :param P:</span>

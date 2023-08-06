@@ -35,7 +35,6 @@ dependencies = ["cycler>=0.11.0",
                 "ripser>=0.6.4", 
                 "sympy>=1.11.1",
                 "sortedcontainers>=2.4.0",
-                "dionysus>=2.0.9", 
                 "giotto-tda>=0.6.0",
                 "pandas",
                 "gudhi"

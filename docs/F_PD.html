@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.2.1. Featurization &mdash; teaspoon 1.3.7 documentation</title>
@@ -12,9 +12,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -32,16 +33,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="index.html" class="icon icon-home">
-            teaspoon
-              <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon
+            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -88,8 +85,6 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -128,7 +123,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a></li>
           <li class="breadcrumb-item"><a href="ML.html"><span class="section-number">2.2. </span>Persistence Diagram Featurization</a></li>
       <li class="breadcrumb-item active"><span class="section-number">2.2.1. </span>Featurization</li>
@@ -141,7 +136,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="featurization">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="featurization">
 <span id="id1"></span><h1><span class="section-number">2.2.1. </span>Featurization<a class="headerlink" href="#featurization" title="Permalink to this heading"></a></h1>
 <p>This documentation includes five different persistence diagram featurization methods.
 These are persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.</p>
@@ -157,16 +176,16 @@ These are persistence landscapes, persistence images, Carlsson Coordinates, kern
 <span class="sig-name descname"><span class="pre">PLandscape_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/ML/feature_functions.html#PLandscape.PLandscape_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.PLandscape.PLandscape_plot" title="Permalink to this definition"></a></dt>
 <dd><p>This function plots selected persistence landscapes or it plots all of them if user does not provide desired landscape functions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>PL</strong> (<em>ndarray</em>) – Persistence diagram points–(Nx2) matrix.</p></li>
 <li><p><strong>L_number</strong> (<em>list</em>) – Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>PL_plot</strong> – The figure that includes chosen or all landsape functions.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>figure</p>
 </dd>
 </dl>
@@ -178,13 +197,13 @@ These are persistence landscapes, persistence images, Carlsson Coordinates, kern
 <dd><p>This class uses landscapes algorithm (<code class="xref py py-meth docutils literal notranslate"><span class="pre">PD_Featurization.PLandscapes()</span></code>) to compute persistence landscapes and plot them based on user preference.
 The algorithm computes the persistence landscapes is written based on Ref. <span id="id3">[<a class="reference internal" href="ML.html#id16" title="Peter Bubenik and Paweł Dłotko. A persistence landscapes toolbox for topological statistics. Journal of Symbolic Computation, 78:91–114, jan 2017. doi:10.1016/j.jsc.2016.03.009.">3</a>]</span>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>PD</strong> (<em>ndarray</em>) – Persistence diagram points–(Nx2) matrix..</p></li>
 <li><p><strong>L_number</strong> (<em>list</em>) – Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>PL_number</strong> (<em>int</em>) – Total number of landscapes for given persistence diagram</p></li>
 <li><p><strong>DesPL</strong> (<em>ndarray</em>) – Includes only selected landscapes functions given in L_number</p></li>
@@ -333,14 +352,14 @@ If user does not specify the third input, algorithm will automatically compute i
 The second parameter includes the parameters needed to compute features and perform classification.
 Please see <code class="xref py py-meth docutils literal notranslate"><span class="pre">PD_ParameterBucket.LandscapesParameterBucket()</span></code> for more details about parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>PL</strong> (<em>ndarray</em>) – Object array that includes all landscape functions for each persistence diagram.</p></li>
 <li><p><strong>params</strong> (<em>parameterbucket object</em>) – Parameterbucket object. We need landscape numbers defined by user to generate feature matrix.</p></li>
 <li><p><strong>max_l_number</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum number of landscape functions for a given persistence diagram. The default is None.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>feature</strong> (<em>ndarray</em>) – NxM matrix that includes the features for each persistence diagram, where N is the number of
 persistence diagrams and M is the numbers of features which is equal to length of sorted
@@ -363,7 +382,7 @@ mesh of landscapes functions.</p></li>
 using <a class="reference external" href="https://persim.scikit-tda.org/en/latest/notebooks/Classification%20with%20persistence%20images.html">Persim</a>
 package of Python. Then it provides user with the feature matrix for the diagrams.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>PD1</strong> (<em>ndarray</em>) – Object array that includes all persistence diagrams.</p></li>
 <li><p><strong>PS</strong> (<em>float</em>) – Pixel size.</p></li>
@@ -376,10 +395,10 @@ for test set is computed. The default is None.</p></li>
 <li><p><strong>training</strong> (<em>boolean</em>) – This flag tells function if user wants to compute the feature matrix for training and or test set. The default is None.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>output</strong> – Includes feature matrix and persistence image object. Output object also includes figures if user selects to plot several persistence images.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
@@ -433,13 +452,13 @@ Algorithm will return feature matrix object array that includes feature matrices
 <div class="math notranslate nohighlight" id="equation-5th-coord">
 <span class="eqno">(2.5)<a class="headerlink" href="#equation-5th-coord" title="Permalink to this equation"></a></span>\[f_{5}(PD) = max(d_{i}-b_{i})\]</div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>PD</strong> (<em>ndarray</em>) – Object array that includes all persistence diagrams.</p></li>
 <li><p><strong>FN</strong> (<em>int</em>) – Number of features. It can take integer values between 1 and 5.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>FeatureMatrix</strong> (<em>object array</em>) – Object array that contains the feature matrices of each feature combinations.
 Each feature matrix has a size of NxFN, where N is the number of persistence diagrams and FN is the number of feature chosen.</p></li>
@@ -474,13 +493,13 @@ Each feature matrix has a size of NxFN, where N is the number of persistence dia
 <div><p>Applies the tent function to a diagram.</p>
 <p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Dgm<span class="colon">:</span></dt>
+<dt class="field-odd">Dgm</dt>
 <dd class="field-odd"><p>A persistence diagram, given as a <span class="math notranslate nohighlight">\(K \times 2\)</span> numpy array</p>
 </dd>
-<dt class="field-even">params<span class="colon">:</span></dt>
+<dt class="field-even">params</dt>
 <dd class="field-even"><p>An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</p>
 </dd>
-<dt class="field-odd">dgm_type<span class="colon">:</span></dt>
+<dt class="field-odd">dgm_type</dt>
 <dd class="field-odd"><dl class="simple">
 <dt>This code accepts diagrams either</dt><dd><ol class="arabic simple">
 <li><p>in (birth, death) coordinates, in which case <cite>type = ‘BirthDeath’</cite>, or</p></li>
@@ -489,7 +508,7 @@ Each feature matrix has a size of NxFN, where N is the number of persistence dia
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p></p></dd>
 </dl>
 <p><span class="math notranslate nohighlight">\(\sum_{x,y \in \text{Dgm}}g_{i,j}(x,y)\)</span> where</p>
@@ -509,18 +528,18 @@ Each feature matrix has a size of NxFN, where N is the number of persistence dia
 <dd><p>Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.</p>
 <p>Parameters:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Dgm<span class="colon">:</span></dt>
+<dt class="field-odd">Dgm</dt>
 <dd class="field-odd"><p>A persistence diagram, given as a <span class="math notranslate nohighlight">\(K \times 2\)</span> numpy array</p>
 </dd>
-<dt class="field-even">Params<span class="colon">:</span></dt>
+<dt class="field-even">Params</dt>
 <dd class="field-even"><p>An tents.ParameterBucket object.  Really, we need d, delta, and epsilon from that.</p>
 </dd>
-<dt class="field-odd">Dgm_type<span class="colon">:</span></dt>
+<dt class="field-odd">Dgm_type</dt>
 <dd class="field-odd"><p>This code accepts diagrams either
 1. in (birth, death) coordinates, in which case <cite>type = ‘BirthDeath’</cite>, or
 2. in (birth, lifetime) = (birth, death-birth) coordinates, in which case <cite>dgm_type = ‘BirthLifetime’</cite></p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
 <dt>interp_weight</dt><dd><p>A matrix with each entry representiting the weight of an interpolation
 function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.</p>
@@ -567,16 +586,16 @@ function on the base mesh. This matrix assumes that on a 2D mesh the functions a
 <dd><p>This function takes the persistence landscape set and returns the feature matrix which is computed using path signatures <span id="id10">[<a class="reference internal" href="ML.html#id12" title="Ilya Chevyrev and Andrey Kormilitzin. A primer on the signature method in machine learning. arXiv preprint arXiv:1603.03788, 2016.">4</a>, <a class="reference internal" href="ML.html#id13" title="Ilya Chevyrev, Vidit Nanda, and Harald Oberhauser. Persistence paths and signature features in topological data analysis. IEEE Transactions on Pattern Analysis and Machine Intelligence, 42(1):192–202, jan 2020. doi:10.1109/tpami.2018.2885516.">5</a>]</span>.
 Function takes two inputs and these are persistence landcsape set in an object array and the landscape numbers that user wants to compute their signatures.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>PL</strong> (<em>ndarray</em>) – Object array that includes all landscape functions for each persistence diagram.</p></li>
 <li><p><strong>L_Number</strong> (<em>list</em>) – Landscape numbers that user wants to use in feature matrix generation. If this parameter is not specified, algorithm will generate feature matrix using first landscapes.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>feature_PS</strong> – Nx6 matrix that includes the features for each persistence diagram, where N is the number of persistence landscape sets.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
@@ -613,17 +632,17 @@ Function takes two inputs and these are persistence landcsape set in an object a
 <dd><p>This function computes the kernel for given two persistence diagram based on the formula provided in Ref. <span id="id12">[<a class="reference internal" href="ML.html#id14" title="Jan Reininghaus, Stefan Huber, Ulrich Bauer, and Roland Kwitt. A stable multi-scale kernel for topological machine learning. In 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR). IEEE, jun 2015. doi:10.1109/cvpr.2015.7299106.">9</a>]</span>.
 There are three inputs and these are two persistence diagrams and the kernel scale sigma.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>perDgm1</strong> (<em>ndarray</em>) – Object array that includes first persistence diagram set.</p></li>
 <li><p><strong>perDgm2</strong> (<em>ndarray</em>) – Object array that includes second persistence diagram set.</p></li>
 <li><p><strong>sigma</strong> (<em>float</em>) – Kernel scale.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>Kernel</strong> – The kernel value for given two persistence diagrams.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
