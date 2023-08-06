@@ -69,6 +69,8 @@
 <li class="toctree-l3"><a class="reference internal" href="MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#teaspoon.parameter_selection.FNN_n.FNS_fraction"><code class="docutils literal notranslate"><span class="pre">FNS_fraction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#teaspoon.parameter_selection.FNN_n.compute_strands"><code class="docutils literal notranslate"><span class="pre">compute_strands()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
@@ -192,6 +194,18 @@ to select the minimum embedding dimension.</p>
 <dd class="field-even"><p>(int)</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.parameter_selection.FNN_n.FNS_fraction">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.FNN_n.</span></span><span class="sig-name descname"><span class="pre">FNS_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strand_ind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsrecon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_ind_m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rtol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Stol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st_dev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/FNN_n.html#FNS_fraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.FNN_n.FNS_fraction" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the false nearest strands fraction using the composite fraction false nearest strands algorithm by David Chelidze 2017.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.parameter_selection.FNN_n.compute_strands">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.parameter_selection.FNN_n.</span></span><span class="sig-name descname"><span class="pre">compute_strands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xlen2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IDX</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/parameter_selection/FNN_n.html#compute_strands"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.parameter_selection.FNN_n.compute_strands" title="Permalink to this definition"></a></dt>
+<dd><p>Function to allocate the points onto nearest neighbor strands using the strand algorithm (Chelidze 2017).</p>
 </dd></dl>
 
 <p>The following is an example implementing the False Nearest Neighbors (FNN) algorithm for the dimension:</p>
