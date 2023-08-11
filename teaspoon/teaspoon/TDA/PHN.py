@@ -46,7 +46,7 @@ def DistanceMatrix(A, method='shortest_unweighted_path'):
         D = network_tools.weighted_shortest_path(A)
 
     if method == 'diffusion_distance':
-        G = nx.from_numpy_matrix(A)
+        G = nx.from_numpy_array(A)
         diam = nx.algorithms.distance_measures.diameter(G)
         walk_steps = int(2*diam)
         # degree vector used later.

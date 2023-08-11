@@ -34,8 +34,8 @@ The code is a compilation of work done by `Elizabeth Munch <http://www.elizabeth
 - `Audun Myers <https://www.audunmyers.com>`_
 - `Melih Yesilli <https://www.melihcanyesilli.com>`_
 - `Sarah Tymochko <https://www.sarahtymochko.com/home>`_
-- `Danielle Barnes <mailto:barnesd8@msu.edu>`_
-- `Ismail Guzel`
+- `Danielle Barnes <https://github.com/barnesd8>`_
+- `Ismail Guzel <https://ismailguzel.github.io>`_
 - `Max Chumley <https://www.maxchumley.com>`_
 
 

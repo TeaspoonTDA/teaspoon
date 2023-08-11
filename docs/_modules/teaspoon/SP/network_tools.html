@@ -11,7 +11,8 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
@@ -45,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#spork">1.3. Spork!</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
@@ -68,6 +70,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNS_fraction"><code class="docutils literal notranslate"><span class="pre">FNS_fraction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.compute_strands"><code class="docutils literal notranslate"><span class="pre">compute_strands()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
@@ -82,8 +86,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -167,7 +169,7 @@
 
     <span class="k">if</span> <span class="n">weighted_path_lengths</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
         <span class="n">A_sp</span><span class="p">[</span><span class="n">A_sp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_matrix</span><span class="p">(</span><span class="n">A_sp</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_array</span><span class="p">(</span><span class="n">A_sp</span><span class="p">)</span>
         <span class="n">lengths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_shortest_path_length</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
@@ -179,7 +181,7 @@
         <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>  <span class="c1"># ignores divide by zero warning</span>
         <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A_sp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># set diagonal to zero</span>
         <span class="n">A_inv</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">A_sp</span>  <span class="c1"># take element-wise inverse</span>
-        <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_matrix</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_array</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
         <span class="n">paths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_dijkstra</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
@@ -211,7 +213,7 @@
     <span class="n">A_inv</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">A</span>  <span class="c1"># take element-wise inverse</span>
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
     <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_matrix</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_array</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
     <span class="n">paths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_dijkstra</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
