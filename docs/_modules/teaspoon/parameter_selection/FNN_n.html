@@ -70,8 +70,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNS_fraction"><code class="docutils literal notranslate"><span class="pre">FNS_fraction()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.compute_strands"><code class="docutils literal notranslate"><span class="pre">compute_strands()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
@@ -174,10 +172,9 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dist</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="FNS_fraction"><a class="viewcode-back" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNS_fraction">[docs]</a><span class="k">def</span> <span class="nf">FNS_fraction</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">strand_ind</span><span class="p">,</span> <span class="n">tsrecon</span><span class="p">,</span> <span class="n">s_ind_m</span><span class="p">,</span> <span class="n">s_dm</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">Rtol</span><span class="p">,</span> <span class="n">Stol</span><span class="p">,</span> <span class="n">st_dev</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute the false nearest strands fraction using the composite fraction false nearest strands algorithm by David Chelidze 2017.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">FNS_fraction</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">strand_ind</span><span class="p">,</span> <span class="n">tsrecon</span><span class="p">,</span> <span class="n">s_ind_m</span><span class="p">,</span> <span class="n">s_dm</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">Rtol</span><span class="p">,</span> <span class="n">Stol</span><span class="p">,</span> <span class="n">st_dev</span><span class="p">):</span>
+    <span class="c1"># Compute the false nearest strands fraction using the composite fraction false nearest strands algorithm by David Chelidze 2017.</span>
+
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="n">starting_index</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">epsilon_k</span> <span class="o">=</span> <span class="mi">0</span>
@@ -199,12 +196,11 @@
     <span class="n">den</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">strand_ind</span><span class="p">)</span>
     <span class="n">num</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">))</span>
     <span class="n">fns_frac</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="n">den</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-    <span class="k">return</span> <span class="n">fns_frac</span> </div>
+    <span class="k">return</span> <span class="n">fns_frac</span> 
 
-<div class="viewcode-block" id="compute_strands"><a class="viewcode-back" href="../../../FNN.html#teaspoon.parameter_selection.FNN_n.compute_strands">[docs]</a><span class="k">def</span> <span class="nf">compute_strands</span><span class="p">(</span><span class="n">xlen2</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">IDX</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to allocate the points onto nearest neighbor strands using the strand algorithm (Chelidze 2017).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">compute_strands</span><span class="p">(</span><span class="n">xlen2</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">IDX</span><span class="p">):</span>
+    <span class="c1"># Function to allocate the points onto nearest neighbor strands using the strand algorithm (Chelidze 2017).</span>
+
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="n">strand_ind</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">s_ind</span> <span class="o">=</span> <span class="p">[]</span>
@@ -233,9 +229,10 @@
         <span class="n">s_ind_m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">strand_ind</span><span class="p">[</span><span class="n">k</span><span class="p">])[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">s_ind</span><span class="p">[</span><span class="n">k</span><span class="p">]])</span>
         <span class="n">s_dm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">s_ind_m</span><span class="p">[</span><span class="n">k</span><span class="p">]][:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     
-    <span class="k">return</span> <span class="n">strand_ind</span><span class="p">,</span> <span class="n">s_ind</span><span class="p">,</span> <span class="n">s_ind_m</span><span class="p">,</span> <span class="n">s_dm</span></div>
+    <span class="k">return</span> <span class="n">strand_ind</span><span class="p">,</span> <span class="n">s_ind</span><span class="p">,</span> <span class="n">s_ind_m</span><span class="p">,</span> <span class="n">s_dm</span>
 
 <span class="k">def</span> <span class="nf">cao_method</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">e_star</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">tsrecon</span><span class="p">,</span> <span class="n">ind_m</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+    <span class="c1"># Function to compute the Cao method criteria for embedding dimension. (Cao 1996)</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind_m</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="p">:],</span> <span class="nb">ord</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> 
                               <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind_m</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">tsrecon</span><span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">ord</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
