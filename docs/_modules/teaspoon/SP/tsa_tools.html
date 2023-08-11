@@ -11,10 +11,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -28,12 +27,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="../../../index.html" class="icon icon-home"> teaspoon
-            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -43,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#spork">1.3. Spork!</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
@@ -120,7 +124,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.SP.tsa_tools</li>
       <li class="wy-breadcrumbs-aside">
@@ -148,7 +152,7 @@
 <span class="c1"># In[ ]:</span>
 
 <div class="viewcode-block" id="cgss_binning"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.cgss_binning">[docs]</a><span class="k">def</span> <span class="nf">cgss_binning</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">binning_method</span><span class="o">=</span><span class="s1">&#39;equal_size&#39;</span><span class="p">,</span> <span class="n">plot_binning</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function generates the binning array applied to each dimension when constructing CGSSN.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the binning array applied to each dimension when constructing CGSSN.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
@@ -211,7 +215,7 @@
 
 
 <div class="viewcode-block" id="cgss_sequence"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.cgss_sequence">[docs]</a><span class="k">def</span> <span class="nf">cgss_sequence</span><span class="p">(</span><span class="n">SSR</span><span class="p">,</span> <span class="n">B_array</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function generates the sequence of coarse-grained state space states from the state space reconstruction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the sequence of coarse-grained state space states from the state space reconstruction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        SSR (n-D array): n-dimensional state state space reconstruction using takens function from teaspoon.</span>
@@ -244,7 +248,7 @@
 
 <span class="c1"># finds permutation sequency from modified pyentropy package</span>
 <div class="viewcode-block" id="permutation_sequence"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.permutation_sequence">[docs]</a><span class="k">def</span> <span class="nf">permutation_sequence</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function generates the sequence of permutations from a 1-D time series.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the sequence of permutations from a 1-D time series.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
@@ -304,7 +308,7 @@
 
 
 <div class="viewcode-block" id="takens"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.takens">[docs]</a><span class="k">def</span> <span class="nf">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function generates an array of n-dimensional arrays from a time-delay state-space reconstruction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates an array of n-dimensional arrays from a time-delay state-space reconstruction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ts (1-D array): 1-D time series signal</span>
@@ -344,7 +348,7 @@
 
 
 <div class="viewcode-block" id="k_NN"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.k_NN">[docs]</a><span class="k">def</span> <span class="nf">k_NN</span><span class="p">(</span><span class="n">embedded_time_series</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function gets the k nearest neighbors from an array of the state space reconstruction vectors</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function gets the k nearest neighbors from an array of the state space reconstruction vectors</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        embedded_time_series (array of n-dimensional arrays): state space reconstructions vectors of dimension n. Can use takens function.</span>
@@ -368,7 +372,7 @@
 <span class="c1"># In[ ]:</span>
 
 <div class="viewcode-block" id="ZeDA"><a class="viewcode-back" href="../../../tsa.html#teaspoon.SP.tsa_tools.ZeDA">[docs]</a><span class="k">def</span> <span class="nf">ZeDA</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>  <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">3.0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function takes a uniformly sampled time series and finds the number of crossings</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a uniformly sampled time series and finds the number of crossings</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">    sig (numpy array):   Time series (1d) in format of npy.</span>
