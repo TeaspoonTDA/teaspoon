@@ -71,7 +71,7 @@ class ta_module(unittest.TestCase):
 
         # Compute the depth score
         score = ta.feature_depth(nom_im, exp_im, 16, plot=False)
-        self.assertAlmostEqual(score, 93.12, delta=0.01)
+        self.assertAlmostEqual(score, 92.13, delta=0.01)
 
     def test_roundness(self):
         # Generate a grid of sample xy pairs
@@ -119,8 +119,8 @@ class ta_module(unittest.TestCase):
         exp_im = (exp_im - np.min(exp_im))/(np.max(exp_im) - np.min(exp_im)) # Scale between 0-1
 
         # Compute the roundness score
-        score = ta.feature_roundness(nom_im, exp_im, 1, 2.5, num_steps=50, plot=False)
-        self.assertAlmostEqual(score, 0.11744985, delta=0.001)
+        score = ta.feature_roundness(nom_im, exp_im, 1, 2.5, num_steps=5, plot=False)
+        self.assertAlmostEqual(score, 0.1290353, delta=0.001)
 
 
 

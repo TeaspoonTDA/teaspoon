@@ -85,6 +85,12 @@ class parameterSelection(unittest.TestCase):
         perc_FNN, n = FNN_n(ts, tau, plotting = False)
         self.assertAlmostEqual(n, 5, delta=3) 
 
+        perc_FNN, n = FNN_n(ts, tau, plotting = False, method='cao')
+        self.assertAlmostEqual(n, 1, delta=3) 
+
+        perc_FNN, n = FNN_n(ts, tau, plotting = False, method='strand')
+        self.assertAlmostEqual(n, 9, delta=3)
+
 
 if __name__ == '__main__':
     unittest.main()

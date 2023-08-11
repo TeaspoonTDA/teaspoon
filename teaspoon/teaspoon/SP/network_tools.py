@@ -31,7 +31,7 @@ def shortest_path(A, weighted_path_lengths=False):
 
     if weighted_path_lengths == False:
         A_sp[A_sp > 0] = 1
-        G = nx.from_numpy_matrix(A_sp)
+        G = nx.from_numpy_array(A_sp)
         lengths = dict(nx.all_pairs_shortest_path_length(G))
         for i in range(N):
             for j in range(N):
@@ -43,7 +43,7 @@ def shortest_path(A, weighted_path_lengths=False):
         np.seterr(divide='ignore')  # ignores divide by zero warning
         np.fill_diagonal(A_sp, 0)  # set diagonal to zero
         A_inv = 1/A_sp  # take element-wise inverse
-        G = nx.from_numpy_matrix(A_inv)
+        G = nx.from_numpy_array(A_inv)
         paths = dict(nx.all_pairs_dijkstra(G))
         for i in range(N):
             for j in range(N):
@@ -75,7 +75,7 @@ def weighted_shortest_path(A):
     A_inv = 1/A  # take element-wise inverse
     N = len(A_inv)
     D = np.zeros((N, N))
-    G = nx.from_numpy_matrix(A_inv)
+    G = nx.from_numpy_array(A_inv)
     paths = dict(nx.all_pairs_dijkstra(G))
     for i in range(N):
         for j in range(N):

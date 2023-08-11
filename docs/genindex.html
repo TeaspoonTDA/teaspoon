@@ -11,7 +11,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -45,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.2. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#spork">1.3. Spork!</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">2. Modules</a><ul>
@@ -68,6 +70,8 @@
 <li class="toctree-l3"><a class="reference internal" href="MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html#teaspoon.parameter_selection.FNN_n.FNS_fraction"><code class="docutils literal notranslate"><span class="pre">FNS_fraction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html#teaspoon.parameter_selection.FNN_n.compute_strands"><code class="docutils literal notranslate"><span class="pre">compute_strands()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
@@ -82,8 +86,6 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -152,7 +154,6 @@
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
- | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
@@ -198,10 +199,12 @@
 </li>
       <li><a href="PointCloud.html#teaspoon.MakeData.PointCloud.Clusters">Clusters() (in module teaspoon.MakeData.PointCloud)</a>
 </li>
-      <li><a href="misc.html#teaspoon.SP.adaptivePart.Partitions.convertOrdToFloat">convertOrdToFloat() (teaspoon.SP.adaptivePart.Partitions method)</a>
+      <li><a href="FNN.html#teaspoon.parameter_selection.FNN_n.compute_strands">compute_strands() (in module teaspoon.parameter_selection.FNN_n)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="misc.html#teaspoon.SP.adaptivePart.Partitions.convertOrdToFloat">convertOrdToFloat() (teaspoon.SP.adaptivePart.Partitions method)</a>
+</li>
       <li><a href="persistence.html#teaspoon.TDA.Persistence.CROCKER">CROCKER() (in module teaspoon.TDA.Persistence)</a>
 </li>
       <li><a href="PointCloud.html#teaspoon.MakeData.PointCloud.Cube">Cube() (in module teaspoon.MakeData.PointCloud)</a>
@@ -238,13 +241,15 @@
 </li>
       <li><a href="F_PD.html#teaspoon.ML.feature_functions.F_Image">F_Image() (in module teaspoon.ML.feature_functions)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="F_PD.html#teaspoon.ML.feature_functions.F_Landscape">F_Landscape() (in module teaspoon.ML.feature_functions)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="F_PD.html#teaspoon.ML.feature_functions.F_PSignature">F_PSignature() (in module teaspoon.ML.feature_functions)</a>
 </li>
       <li><a href="FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n">FNN_n() (in module teaspoon.parameter_selection.FNN_n)</a>
+</li>
+      <li><a href="FNN.html#teaspoon.parameter_selection.FNN_n.FNS_fraction">FNS_fraction() (in module teaspoon.parameter_selection.FNN_n)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -257,8 +262,6 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="CL.html#teaspoon.ML.PD_Classification.getPercentScore">getPercentScore() (in module teaspoon.ML.PD_Classification)</a>
-</li>
-      <li><a href="ZZ_TG.html#teaspoon.TDA.TGZZ.graph_snapshots">graph_snapshots() (in module teaspoon.TDA.TGZZ)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -360,8 +363,6 @@
 </li>
         <li><a href="texture_analysis.html#module-teaspoon.SP.texture_analysis">teaspoon.SP.texture_analysis</a>
 </li>
-        <li><a href="buzz.html#module-teaspoon.TDA.BuZZ">teaspoon.TDA.BuZZ</a>
-</li>
         <li><a href="distances.html#module-teaspoon.TDA.Distance">teaspoon.TDA.Distance</a>
 </li>
         <li><a href="drawing.html#module-teaspoon.TDA.Draw">teaspoon.TDA.Draw</a>
@@ -373,8 +374,6 @@
         <li><a href="sublevel_set_persistence.html#module-teaspoon.TDA.SLSP">teaspoon.TDA.SLSP</a>
 </li>
         <li><a href="sublevel_set_persistence.html#module-teaspoon.TDA.SLSP_tools">teaspoon.TDA.SLSP_tools</a>
-</li>
-        <li><a href="ZZ_TG.html#module-teaspoon.TDA.TGZZ">teaspoon.TDA.TGZZ</a>
 </li>
       </ul></li>
   </ul></td>
@@ -407,27 +406,17 @@
 </li>
       <li><a href="sublevel_set_persistence.html#teaspoon.TDA.SLSP.Persistence0D">Persistence0D() (in module teaspoon.TDA.SLSP)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="PHN.html#teaspoon.TDA.PHN.PH_network">PH_network() (in module teaspoon.TDA.PHN)</a>
 </li>
       <li><a href="F_PD.html#teaspoon.ML.feature_functions.PLandscape">PLandscape (class in teaspoon.ML.feature_functions)</a>
 </li>
       <li><a href="F_PD.html#teaspoon.ML.feature_functions.PLandscape.PLandscape_plot">PLandscape_plot() (teaspoon.ML.feature_functions.PLandscape method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="misc.html#teaspoon.SP.adaptivePart.Partitions.plot">plot() (teaspoon.SP.adaptivePart.Partitions method)</a>
 </li>
-      <li><a href="ZZ_TG.html#teaspoon.TDA.TGZZ.plot_persistence_diagram">plot_persistence_diagram() (in module teaspoon.TDA.TGZZ)</a>
-</li>
-      <li><a href="buzz.html#teaspoon.TDA.BuZZ.PtClouds.plot_ZZ_Cplx">plot_ZZ_Cplx() (teaspoon.TDA.BuZZ.PtClouds method)</a>
-</li>
-      <li><a href="buzz.html#teaspoon.TDA.BuZZ.PtClouds.plot_ZZ_Full_PtClouds">plot_ZZ_Full_PtClouds() (teaspoon.TDA.BuZZ.PtClouds method)</a>
-</li>
-      <li><a href="buzz.html#teaspoon.TDA.BuZZ.PtClouds.plot_ZZ_PtClouds">plot_ZZ_PtClouds() (teaspoon.TDA.BuZZ.PtClouds method)</a>
-</li>
       <li><a href="PHN.html#teaspoon.TDA.PHN.point_summaries">point_summaries() (in module teaspoon.TDA.PHN)</a>
-</li>
-      <li><a href="buzz.html#teaspoon.TDA.BuZZ.PtClouds">PtClouds (class in teaspoon.TDA.BuZZ)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -439,15 +428,13 @@
 </li>
       <li><a href="network.html#teaspoon.SP.network_tools.remove_zeros">remove_zeros() (in module teaspoon.SP.network_tools)</a>
 </li>
-      <li><a href="persistence.html#teaspoon.TDA.Persistence.removeInfiniteClasses">removeInfiniteClasses() (in module teaspoon.TDA.Persistence)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="persistence.html#teaspoon.TDA.Persistence.removeInfiniteClasses">removeInfiniteClasses() (in module teaspoon.TDA.Persistence)</a>
+</li>
       <li><a href="misc.html#teaspoon.SP.adaptivePart.Partitions.return_partition_clustering">return_partition_clustering() (teaspoon.SP.adaptivePart.Partitions method)</a>
 </li>
       <li><a href="misc.html#teaspoon.SP.adaptivePart.Partitions.return_partition_DV">return_partition_DV() (teaspoon.SP.adaptivePart.Partitions method)</a>
-</li>
-      <li><a href="buzz.html#teaspoon.TDA.BuZZ.PtClouds.run_Zigzag">run_Zigzag() (teaspoon.TDA.BuZZ.PtClouds method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -457,17 +444,9 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="misc.html#teaspoon.SP.adaptivePart.Partitions.setParameters">setParameters() (teaspoon.SP.adaptivePart.Partitions method)</a>
 </li>
-      <li><a href="buzz.html#teaspoon.TDA.BuZZ.PtClouds.setup_Zigzag_changing">setup_Zigzag_changing() (teaspoon.TDA.BuZZ.PtClouds method)</a>
-</li>
-      <li><a href="buzz.html#teaspoon.TDA.BuZZ.PtClouds.setup_Zigzag_fixed">setup_Zigzag_fixed() (teaspoon.TDA.BuZZ.PtClouds method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="network.html#teaspoon.SP.network_tools.shortest_path">shortest_path() (in module teaspoon.SP.network_tools)</a>
-</li>
-      <li><a href="ZZ_TG.html#teaspoon.TDA.TGZZ.simplicial_complex_representation">simplicial_complex_representation() (in module teaspoon.TDA.TGZZ)</a>
-</li>
-      <li><a href="ZZ_TG.html#teaspoon.TDA.TGZZ.sliding_windows">sliding_windows() (in module teaspoon.TDA.TGZZ)</a>
 </li>
       <li><a href="PointCloud.html#teaspoon.MakeData.PointCloud.Sphere">Sphere() (in module teaspoon.MakeData.PointCloud)</a>
 </li>
@@ -561,6 +540,8 @@
         <li><a href="information.html#module-teaspoon.SP.information.entropy">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     teaspoon.SP.network_tools
 
@@ -568,20 +549,11 @@
         <li><a href="network.html#module-teaspoon.SP.network_tools">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     teaspoon.SP.texture_analysis
 
       <ul>
         <li><a href="texture_analysis.html#module-teaspoon.SP.texture_analysis">module</a>
-</li>
-      </ul></li>
-      <li>
-    teaspoon.TDA.BuZZ
-
-      <ul>
-        <li><a href="buzz.html#module-teaspoon.TDA.BuZZ">module</a>
 </li>
       </ul></li>
       <li>
@@ -626,13 +598,6 @@
         <li><a href="sublevel_set_persistence.html#module-teaspoon.TDA.SLSP_tools">module</a>
 </li>
       </ul></li>
-      <li>
-    teaspoon.TDA.TGZZ
-
-      <ul>
-        <li><a href="ZZ_TG.html#module-teaspoon.TDA.TGZZ">module</a>
-</li>
-      </ul></li>
       <li><a href="F_PD.html#teaspoon.ML.feature_functions.tent">tent() (in module teaspoon.ML.feature_functions)</a>
 </li>
       <li><a href="PointCloud.html#teaspoon.MakeData.PointCloud.testSetClassification">testSetClassification() (in module teaspoon.MakeData.PointCloud)</a>
@@ -644,14 +609,6 @@
       <li><a href="PointCloud.html#teaspoon.MakeData.PointCloud.testSetRegressionLine">testSetRegressionLine() (in module teaspoon.MakeData.PointCloud)</a>
 </li>
       <li><a href="PointCloud.html#teaspoon.MakeData.PointCloud.Torus">Torus() (in module teaspoon.MakeData.PointCloud)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="U">U</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="buzz.html#teaspoon.TDA.BuZZ.PtClouds.use_Landmarks">use_Landmarks() (teaspoon.TDA.BuZZ.PtClouds method)</a>
 </li>
   </ul></td>
 </tr></table>

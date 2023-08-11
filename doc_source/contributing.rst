@@ -16,9 +16,9 @@ Contributing to Documentation
 
 If contributing to the documentation, the following python packages need to be pip installed:
 
-	- pip install persim
+	- pip install Sphinx==6.2.1
 	- pip install sphinxcontrib-bibtex
 	- pip install sphinx-rtd-theme
-	- pip install sphinx-prompt
+	- pip install nbsphinx
 
-Assuming your sphinx installation is up-to-date, you can run `make` from the teaspoon directory to update the documentation. Note that github pages requires that the documentation is in a folder named `docs`.
+Assuming your sphinx installation is up-to-date, you can run `make html` from the teaspoon directory to update the documentation. Note that github pages requires that the documentation is in a folder named `docs`.
