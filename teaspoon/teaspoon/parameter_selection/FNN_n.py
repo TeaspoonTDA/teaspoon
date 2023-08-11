@@ -37,9 +37,8 @@ def find_neighbors(dist_array, ind_array, wind):
 
 
 def FNS_fraction(i, strand_ind, tsrecon, s_ind_m, s_dm, ind, Rtol, Stol, st_dev):
-    """
-    Compute the false nearest strands fraction using the composite fraction false nearest strands algorithm by David Chelidze 2017.
-    """
+    # Compute the false nearest strands fraction using the composite fraction false nearest strands algorithm by David Chelidze 2017.
+
     import numpy as np
     starting_index = 0
     epsilon_k = 0
@@ -64,9 +63,8 @@ def FNS_fraction(i, strand_ind, tsrecon, s_ind_m, s_dm, ind, Rtol, Stol, st_dev)
     return fns_frac 
 
 def compute_strands(xlen2, D, IDX):
-    """
-    Function to allocate the points onto nearest neighbor strands using the strand algorithm (Chelidze 2017).
-    """
+    # Function to allocate the points onto nearest neighbor strands using the strand algorithm (Chelidze 2017).
+
     import numpy as np
     strand_ind = []
     s_ind = []
@@ -98,6 +96,7 @@ def compute_strands(xlen2, D, IDX):
     return strand_ind, s_ind, s_ind_m, s_dm
 
 def cao_method(a, e, e_star, dim, tsrecon, ind_m, ind, ts, tau):
+    # Function to compute the Cao method criteria for embedding dimension. (Cao 1996)
     import numpy as np
     a.append(np.divide(np.linalg.norm(tsrecon[ind_m, :]-tsrecon[ind, :], ord=np.inf, axis=1), 
                               np.linalg.norm(tsrecon[ind_m, :-1]-tsrecon[ind, :-1], ord=np.inf, axis=1)))
