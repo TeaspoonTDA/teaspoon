@@ -22,3 +22,9 @@ The package can be installed using the following pip installation:
 To install the most up-to-date version of the code, you can clone the repo and then run::
 
   ``pip install .``
+
+Spork!
+**************
+
+For our long time teaspoon users, you might notice the install for teaspoon has been simplified.  Based on user feedback, we've separated out modules which require boost and CMake as system dependencies.  
+To use the modules including ZigZag persistence, please visit the teaspoon companion package, `spork <https://teaspoontda.github.io/spork/index.html>`_.

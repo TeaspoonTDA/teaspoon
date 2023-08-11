@@ -3,4 +3,5 @@ Citing
 
 To cite teaspoon please use the following publication:
 
-Teaspoon paper that will be published
+`Teaspoon: A comprehensive python package for topological signal processing <https://openreview.net/pdf?id=qUoVqrIcy2P>`_
+
