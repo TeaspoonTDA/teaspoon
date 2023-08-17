@@ -129,6 +129,7 @@ The network output has the data structure of an adjacency matrix (or networkx gr
     from teaspoon.SP.network_tools import remove_zeros
     from teaspoon.SP.network_tools import make_network
     from teaspoon.parameter_selection import MsPE
+    import teaspoon.SP.tsa_tools as tsa_tools
 
     # Time series data
     t = np.linspace(0,30,600)
