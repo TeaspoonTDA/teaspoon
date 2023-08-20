@@ -192,7 +192,7 @@ Persistence Images
 	>>> fig = feature_PI['figures']
 
 
-The algorithm will return two images as shown in :numref:`PI_Example`.
+The algorithm will return two images as shown in :numref:`PI_Example`.  An example notebook is also available.
 
 .. _PI_Example:
 
@@ -201,6 +201,11 @@ The algorithm will return two images as shown in :numref:`PI_Example`.
    :scale: 20 %
    
    Example persistence images.    
+
+.. toctree::
+   :maxdepth: 4
+
+   notebooks/persistence_images
 
 .. _carlsson_coordinates:
 
