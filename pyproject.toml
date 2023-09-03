@@ -43,6 +43,9 @@ dependencies = ["cycler>=0.11.0",
 [tool.setuptools.packages.find]
 where = ["teaspoon"]
 
+[tool.setuptools.package-data]
+teaspoon = ["ML/datasets/*.pickle"]
+
 [project.urls]
 repository = "https://github.com/TeaspoonTDA/teaspoon"
 homepage = "https://github.com/TeaspoonTDA/teaspoon"
