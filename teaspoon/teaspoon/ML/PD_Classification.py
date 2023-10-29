@@ -172,6 +172,10 @@ def train_test_split(DgmsDF, labels_col, dgm_col, params, *args):
 
     return training_set_dgm, test_set_dgm, training_set_label, test_set_label
 
+def train_test_split_basic(DgmsFD, labels_col, train_size=.8, seed=12):
+    from sklearn.model_selection import train_test_split
+    labels = DgmsFD[labels_col]
+    training_dgms, testing_dgms, training_labels, testing_labels = train_test_split(DgmsFD, train_size=train_size, random_state=seed, stratify=labels)
 
 def getPercentScore(DgmsDF,
                     labels_col='trainingLabel',
