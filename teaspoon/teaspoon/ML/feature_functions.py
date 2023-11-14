@@ -803,7 +803,7 @@ def F_Landscape(PL, params, max_l_number=None):
     return feature, Sorted_mesh
 
 
-def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager=None, training=None):
+def F_Image(PD1, PS, var, plot=False, D_Img=[], pers_imager=None, training=True, parallel=False):
     """
     This function computes the persistence images of given persistence diagrams
     using `Persim <https://persim.scikit-tda.org/en/latest/notebooks/Classification%20with%20persistence%20images.html>`_
@@ -817,8 +817,8 @@ def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager=None, training=None):
         Pixel size.
     var : float
         Variance of the Gaussian distribution.
-    plot : TYPE
-        DESCRIPTION.
+    plot : boolean
+        This flag tells the function if you want to plot the persistence images
     D_Img : list, optional
         The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams.
         . The default is [].
@@ -827,7 +827,8 @@ def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager=None, training=None):
         for test set is computed. The default is None.
     training : boolean
         This flag tells function if user wants to compute the feature matrix for training and or test set. The default is None.
-
+    parallel : boolean
+        This flag tells function if user wants to run the computation in parallel.  Default is false.
 
     Returns
     -------
@@ -848,9 +849,15 @@ def F_Image(PD1, PS, var, plot, D_Img=[], pers_imager=None, training=None):
 
         PDs = PD1.tolist()
         pers_imager.fit(PDs, skew=True)
-        pers_img = [pers_imager.transform(PD1[i], skew=True) for i in np.arange(0, N1, 1)]
+        if parallel==True:
+            pers_img = pers_imager.transform(PD1, skew=True, n_jobs=-1)
+        else:
+            pers_img = pers_imager.transform(PD1, skew=True)
     else:
-        pers_img = [pers_imager.transform(PD1[i], skew=True) for i in np.arange(0, N1, 1)]
+        if parallel==True:
+            pers_img = pers_imager.transform(PD1, skew=True, n_jobs=-1)
+        else:
+            pers_img = pers_imager.transform(PD1, skew=True)
 
     # generate feature matrix
     feature_PI = np.zeros(
