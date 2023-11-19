@@ -803,7 +803,7 @@ def F_Landscape(PL, params, max_l_number=None):
     return feature, Sorted_mesh
 
 
-def F_Image(PD1, PS, var, plot=False, D_Img=[], pers_imager=None, training=True, parallel=False):
+def F_Image(PD1, PS, var, pers_imager=None, training=True, parallel=False):
     """
     This function computes the persistence images of given persistence diagrams
     using `Persim <https://persim.scikit-tda.org/en/latest/notebooks/Classification%20with%20persistence%20images.html>`_
@@ -817,11 +817,6 @@ def F_Image(PD1, PS, var, plot=False, D_Img=[], pers_imager=None, training=True,
         Pixel size.
     var : float
         Variance of the Gaussian distribution.
-    plot : boolean
-        This flag tells the function if you want to plot the persistence images
-    D_Img : list, optional
-        The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams.
-        . The default is [].
     pers_imager : persistence image object, optional
         Persistence image object fit to training set diagrams. This oject is only required when the feature function
         for test set is computed. The default is None.
@@ -860,30 +855,13 @@ def F_Image(PD1, PS, var, plot=False, D_Img=[], pers_imager=None, training=True,
             pers_img = pers_imager.transform(PD1, skew=True)
 
     # generate feature matrix
-    feature_PI = np.zeros(
-        (N1, len(pers_img[0][:, 0])*len(pers_img[0][0, :])))
+    feature_PI = np.zeros((N1, len(pers_img[0][:, 0])*len(pers_img[0][0, :])))
     for i in range(N1):
         feature_PI[i, :] = pers_img[i].flatten()
 
-    # plot all images or images of certain persistence diagrams
-    if plot == True:
-        fig = []
-        if D_Img == []:
-            D_Img = np.arange(1, 2, 1)
-        for i in range(len(D_Img)):
-            plt.figure()
-            ax = plt.gca()
-            pimgr = PersistenceImager()
-            pimgr.pixel_size = PS
-            pimgr.kernel_params = {'sigma': var}
-            pimgr.fit(PD1[D_Img[i]-1], skew=True)
-            imgs = pimgr.transform(PD1[D_Img[i]-1], skew=True)
-            pers_imager.plot_image(imgs, ax)
-            fig.append(plt.gcf())
-        output['figures'] = fig
-
     output['F_Matrix'] = feature_PI
     output['pers_imager'] = pers_imager
+    output['pers_img'] = pers_img
 
     return output
 
@@ -1131,3 +1109,17 @@ def KernelMethod(perDgm1, perDgm2, sigma):
     Kernel = Kernel*(1/(8*pi*sigma))
 
     return Kernel
+
+def plot_F_Images(PI_features, num_plots=6, rows=2, cols=3):
+    import scipy.ndimage as ndimage
+    pers_img = PI_features['pers_img']
+    pers_img=pers_img[0:num_plots]
+    fig, axs = plt.subplots(rows, cols)
+    i = 0
+    for r in range(0,rows):
+        for c in range(0,cols):
+            img = ndimage.rotate(pers_img[i], 90, reshape=True)
+            axs[r,c].imshow(img)
+            axs[r,c].set(xlabel='birth',ylabel='persistence',xticks=([]),yticks=([]))
+            i += 1
+    fig.show()
