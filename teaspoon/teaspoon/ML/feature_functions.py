@@ -10,7 +10,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import matplotlib.pyplot as plt
 from persim import PersistenceImager
 import math
 from math import pi
@@ -828,7 +827,7 @@ def F_Image(PD1, PS, var, pers_imager=None, training=True, parallel=False):
     Returns
     -------
     output : dict
-        Includes feature matrix and persistence image object. Output object also includes figures if user selects to plot several persistence images.
+        Includes feature matrix, persistence image object and persistence images created (for plotting)
 
     """
 
@@ -861,7 +860,7 @@ def F_Image(PD1, PS, var, pers_imager=None, training=True, parallel=False):
 
     output['F_Matrix'] = feature_PI
     output['pers_imager'] = pers_imager
-    output['pers_img'] = pers_img
+    output['pers_images'] = pers_img
 
     return output
 
@@ -1110,16 +1109,48 @@ def KernelMethod(perDgm1, perDgm2, sigma):
 
     return Kernel
 
-def plot_F_Images(PI_features, num_plots=6, rows=2, cols=3):
+def plot_F_Images(PI_features, num_plots=6, rows=2, cols=3, index=[], labels=[]):
+    """
+    This function plots the persistence images given a number of plots or index
+
+    Parameters
+    ----------
+    PI_features : ndarray
+        Object array that includes all persistence images from F_Image (output['pers_images'])
+    num_plots : int
+        Number of plots
+    rows : int
+        Number of rows in plot object
+    cols : int
+        Number of columns in plot objects
+    index :
+        Optional index for observations to plot
+
+    Returns
+    -------
+    Plot of selected images
+
+    """
     import scipy.ndimage as ndimage
+    import matplotlib.pyplot as plt
+    
+    if num_plots!=rows*cols:
+        raise Exception("Rows * Columns must be equal to the Number of Plots")
+    if index!=[] and labels==[]:
+        raise Exception("Labels for plots must be set")
     pers_img = PI_features['pers_img']
-    pers_img=pers_img[0:num_plots]
-    fig, axs = plt.subplots(rows, cols)
+    fig, axs = plt.subplots(rows, cols, constrained_layout = True)
     i = 0
+    if index == [] and labels == []:
+        id = np.arange(0,num_plots)
+        tid = ['Plot' + str(i) for i in range(num_plots)]
+    else:
+        id = index
+        tid = labels
     for r in range(0,rows):
         for c in range(0,cols):
-            img = ndimage.rotate(pers_img[i], 90, reshape=True)
+            img = ndimage.rotate(pers_img[id[i]], 90, reshape=True)
             axs[r,c].imshow(img)
-            axs[r,c].set(xlabel='birth',ylabel='persistence',xticks=([]),yticks=([]))
+            axs[r,c].set(xlabel='birth',ylabel='persistence',xticks=([]),yticks=([]), title=tid[i])
             i += 1
     fig.show()
