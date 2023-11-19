@@ -11,12 +11,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -28,12 +27,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="../../../index.html" class="icon icon-home"> teaspoon
-            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -120,7 +123,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.parameter_selection.MI_delay</li>
       <li class="wy-breadcrumbs-aside">
@@ -254,7 +257,7 @@
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;!</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;!</span>
 <span class="sd">        @brief Nicely prints all currently set values in the bucket.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">attrs</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -417,8 +420,10 @@
 <span class="c1"># In[ ]:</span>
 
 
-<div class="viewcode-block" id="MI_DV"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_DV">[docs]</a><span class="k">def</span> <span class="nf">MI_DV</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
+<div class="viewcode-block" id="MI_DV">
+<a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_DV">[docs]</a>
+<span class="k">def</span> <span class="nf">MI_DV</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
 <span class="sd">    using adaptive partitioning of the plots of the time series x(t) and its delayed version x(t+tau). </span>
 <span class="sd">    This method was developed by Georges Darbellay and Igor Vajda in 1999 and was published as</span>
 <span class="sd">    Estimation of information by an adaptive partitioning of the observation.</span>
@@ -478,13 +483,16 @@
     <span class="n">Iapprox</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Pn_AB</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">Pn_AB</span><span class="o">/</span><span class="p">(</span><span class="n">Pn_AR</span><span class="o">*</span><span class="n">Pn_RB</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">Iapprox</span></div>
 
+
 <span class="c1"># This function computes the mutual information function based on the</span>
 <span class="c1"># algorithm described in:</span>
 <span class="c1"># &quot;Estimating Mutual Information,&quot; Alexander Kraskov, Harald Stoegbauer, Peter Grassberger, 2003.</span>
 
 
-<div class="viewcode-block" id="MI_kraskov"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov">[docs]</a><span class="k">def</span> <span class="nf">MI_kraskov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function estimates the mutual information between the time series x(t) and its delayed version x(t+tau) in two different ways. </span>
+<div class="viewcode-block" id="MI_kraskov">
+<a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov">[docs]</a>
+<span class="k">def</span> <span class="nf">MI_kraskov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function estimates the mutual information between the time series x(t) and its delayed version x(t+tau) in two different ways. </span>
 <span class="sd">    This method was developed by Alexander Kraskov, Harald Stoegbauer, and Peter Grassberger in 2003 and published as </span>
 <span class="sd">    Estimating Mutual Information.</span>
 
@@ -568,11 +576,14 @@
     <span class="k">return</span> <span class="n">I1</span><span class="p">,</span> <span class="n">I2</span></div>
 
 
+
 <span class="c1"># This function computes the mutual information function based on</span>
 <span class="c1"># equal sized bins for x and y arrays (seperately)</span>
 
-<div class="viewcode-block" id="MI_basic"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_basic">[docs]</a><span class="k">def</span> <span class="nf">MI_basic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">h_method</span><span class="o">=</span><span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
+<div class="viewcode-block" id="MI_basic">
+<a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_basic">[docs]</a>
+<span class="k">def</span> <span class="nf">MI_basic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">h_method</span><span class="o">=</span><span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the mutual information between the time series x(t) and its delayed version x(t+tau)</span>
 <span class="sd">    using equi-spaced partitions. The size of the partition is based on the desired bin size method commonly selected for histograms.</span>
 
 <span class="sd">    Args:</span>
@@ -645,8 +656,11 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">I</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="MI_for_delay"><a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay">[docs]</a><span class="k">def</span> <span class="nf">MI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;basic&#39;</span><span class="p">,</span> <span class="n">h_method</span><span class="o">=</span><span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This function calculates the mutual information until a first minima is reached, which is estimated as a sufficient embedding dimension for permutation entropy.</span>
+
+<div class="viewcode-block" id="MI_for_delay">
+<a class="viewcode-back" href="../../../MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay">[docs]</a>
+<span class="k">def</span> <span class="nf">MI_for_delay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;basic&#39;</span><span class="p">,</span> <span class="n">h_method</span><span class="o">=</span><span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the mutual information until a first minima is reached, which is estimated as a sufficient embedding dimension for permutation entropy.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>
@@ -733,6 +747,7 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">delay_at_min</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span></div>
+
 
 
 <span class="c1"># In[ ]:</span>

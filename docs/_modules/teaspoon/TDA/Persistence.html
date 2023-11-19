@@ -11,12 +11,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -28,12 +27,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="../../../index.html" class="icon icon-home"> teaspoon
-            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -120,7 +123,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.TDA.Persistence</li>
       <li class="wy-breadcrumbs-aside">
@@ -175,7 +178,7 @@
 
 
 <span class="k">def</span> <span class="nf">prepareFolders</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates the &quot;.teaspoonData&quot; folder.</span>
 <span class="sd">    Checks that necessary folder structure system exists.</span>
 <span class="sd">    Empties out all previously saved files to avoid confusion.</span>
@@ -195,8 +198,10 @@
 <span class="c1"># ----------------------------------------------</span>
 <span class="c1"># ----------------------------------------------</span>
 
-<div class="viewcode-block" id="minPers"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minPers">[docs]</a><span class="k">def</span> <span class="nf">minPers</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="minPers">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minPers">[docs]</a>
+<span class="k">def</span> <span class="nf">minPers</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds minimum persistence for a given diagram</span>
 
 <span class="sd">    :param Dgm:</span>
@@ -213,8 +218,11 @@
         <span class="k">return</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="maxPers"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxPers">[docs]</a><span class="k">def</span> <span class="nf">maxPers</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="maxPers">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxPers">[docs]</a>
+<span class="k">def</span> <span class="nf">maxPers</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds maximum persistence for a given diagram</span>
 
 <span class="sd">    :param Dgm:</span>
@@ -237,8 +245,11 @@
         <span class="k">return</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="maxBirth"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxBirth">[docs]</a><span class="k">def</span> <span class="nf">maxBirth</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="maxBirth">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxBirth">[docs]</a>
+<span class="k">def</span> <span class="nf">maxBirth</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds maximum birth for a given diagram</span>
 
 <span class="sd">    :param Dgm:</span>
@@ -260,8 +271,11 @@
         <span class="k">return</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="minBirth"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minBirth">[docs]</a><span class="k">def</span> <span class="nf">minBirth</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="minBirth">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minBirth">[docs]</a>
+<span class="k">def</span> <span class="nf">minBirth</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds minimum birth  for a given diagram</span>
 
 <span class="sd">    :param Dgm:</span>
@@ -277,6 +291,7 @@
     <span class="k">except</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span></div>
 
+
 <span class="c1"># \brief Gets minimum persistence for a pandas.Series with diagrams as entries</span>
 <span class="c1">#</span>
 <span class="c1"># @param DgmSeries</span>
@@ -285,8 +300,10 @@
 <span class="c1"># @return float</span>
 
 
-<div class="viewcode-block" id="minPersistenceSeries"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minPersistenceSeries">[docs]</a><span class="k">def</span> <span class="nf">minPersistenceSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="minPersistenceSeries">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minPersistenceSeries">[docs]</a>
+<span class="k">def</span> <span class="nf">minPersistenceSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Takes data frame DgmsDF.</span>
 <span class="sd">    Finds minimum persistence over all diagrams in</span>
 <span class="sd">    column with label dgm_col.</span>
@@ -302,8 +319,11 @@
     <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minPers</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="maxPersistenceSeries"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxPersistenceSeries">[docs]</a><span class="k">def</span> <span class="nf">maxPersistenceSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="maxPersistenceSeries">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxPersistenceSeries">[docs]</a>
+<span class="k">def</span> <span class="nf">maxPersistenceSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Takes data frame DgmsDF.</span>
 <span class="sd">    Finds maximum persistence over all diagrams in</span>
 <span class="sd">    column with label dgm_col.</span>
@@ -319,8 +339,11 @@
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">maxPers</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="minBirthSeries"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minBirthSeries">[docs]</a><span class="k">def</span> <span class="nf">minBirthSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="minBirthSeries">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.minBirthSeries">[docs]</a>
+<span class="k">def</span> <span class="nf">minBirthSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Takes data frame DgmsDF.</span>
 <span class="sd">    Finds minimum persistence over all diagrams in</span>
 <span class="sd">    column with label dgm_col.</span>
@@ -336,8 +359,11 @@
     <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minBirth</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="maxBirthSeries"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxBirthSeries">[docs]</a><span class="k">def</span> <span class="nf">maxBirthSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="maxBirthSeries">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.maxBirthSeries">[docs]</a>
+<span class="k">def</span> <span class="nf">maxBirthSeries</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Takes data frame DgmsDF.</span>
 <span class="sd">    Finds maximum persistence over all diagrams in</span>
 <span class="sd">    column with label dgm_col.</span>
@@ -353,8 +379,11 @@
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">DgmsSeries</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">maxBirth</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="removeInfiniteClasses"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.removeInfiniteClasses">[docs]</a><span class="k">def</span> <span class="nf">removeInfiniteClasses</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="removeInfiniteClasses">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.removeInfiniteClasses">[docs]</a>
+<span class="k">def</span> <span class="nf">removeInfiniteClasses</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Simply deletes classes that have infinite lifetimes.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -362,8 +391,11 @@
     <span class="k">return</span> <span class="n">Dgm</span><span class="p">[</span><span class="n">keepRows</span><span class="p">,</span> <span class="p">:]</span></div>
 
 
-<div class="viewcode-block" id="BettiCurve"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.BettiCurve">[docs]</a><span class="k">def</span> <span class="nf">BettiCurve</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="BettiCurve">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.BettiCurve">[docs]</a>
+<span class="k">def</span> <span class="nf">BettiCurve</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Computes the Betti Curve for a persistence diagram for thresholds 0 to maxEps</span>
 
 <span class="sd">    :param Dgm (array):   2D numpy array of persistence diagram of a specific homology class</span>
@@ -382,8 +414,11 @@
 
     <span class="k">return</span> <span class="n">vecOfThresholds</span><span class="p">,</span> <span class="n">Betti</span></div>
 
-<div class="viewcode-block" id="CROCKER"><a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.CROCKER">[docs]</a><span class="k">def</span> <span class="nf">CROCKER</span><span class="p">(</span><span class="n">DGMS</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="CROCKER">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.CROCKER">[docs]</a>
+<span class="k">def</span> <span class="nf">CROCKER</span><span class="p">(</span><span class="n">DGMS</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Computes the CROCKER plot for a list of persistence diagrams for thresholds 0 to maxEps</span>
 
 <span class="sd">    :param DGMS (list):  A python list of 2D numpy arrays of persistence diagrams of a specific homology class</span>
@@ -417,6 +452,7 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\epsilon$&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">M</span></div>
+
 </pre></div>
 
            </div>

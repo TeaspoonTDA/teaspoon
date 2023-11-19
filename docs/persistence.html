@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.3.4. Persistence &mdash; teaspoon 1.3.7 documentation</title>
@@ -12,12 +12,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="index.html" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            teaspoon
+              <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -123,7 +126,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a></li>
           <li class="breadcrumb-item"><a href="TDA.html"><span class="section-number">2.3. </span>Topological Data Analysis (TDA) Module Documentation</a></li>
       <li class="breadcrumb-item active"><span class="section-number">2.3.4. </span>Persistence</li>
@@ -136,45 +139,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="module-teaspoon.TDA.Persistence">
-<span id="persistence"></span><h1><span class="section-number">2.3.4. </span>Persistence<a class="headerlink" href="#module-teaspoon.TDA.Persistence" title="Permalink to this heading"></a></h1>
+  <section id="module-teaspoon.TDA.Persistence">
+<span id="persistence"></span><h1><span class="section-number">2.3.4. </span>Persistence<a class="headerlink" href="#module-teaspoon.TDA.Persistence" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.BettiCurve">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">BettiCurve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#BettiCurve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.BettiCurve" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">BettiCurve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#BettiCurve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.BettiCurve" title="Link to this definition"></a></dt>
 <dd><p>Computes the Betti Curve for a persistence diagram for thresholds 0 to maxEps</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>(</strong><strong>array</strong><strong>)</strong> (<em>Dgm</em>) – 2D numpy array of persistence diagram of a specific homology class</p></li>
 <li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>float</strong><strong>]</strong><strong>)</strong> (<em>maxEps</em>) – Maximum value of threshold; default: 3</p></li>
 <li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>int</strong><strong>]</strong><strong>)</strong> (<em>numStops</em>) – Number of points between 0 and maxEps; default: 10</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>array of threshold values, Betti curve</p>
 </dd>
 </dl>
@@ -182,10 +161,10 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.CROCKER">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">CROCKER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DGMS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#CROCKER"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.CROCKER" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">CROCKER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DGMS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#CROCKER"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.CROCKER" title="Link to this definition"></a></dt>
 <dd><p>Computes the CROCKER plot for a list of persistence diagrams for thresholds 0 to maxEps</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>(</strong><strong>list</strong><strong>)</strong> (<em>DGMS</em>) – A python list of 2D numpy arrays of persistence diagrams of a specific homology class</p></li>
 <li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>float</strong><strong>]</strong><strong>)</strong> (<em>maxEps</em>) – Maximum value of threshold; default: 3</p></li>
@@ -193,7 +172,7 @@
 <li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>bool</strong><strong>]</strong><strong>)</strong> (<em>plotting</em>) – Plots the CROCKER for the given diagrams; default: True</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2D CROCKER plot</p>
 </dd>
 </dl>
@@ -201,13 +180,13 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.maxBirth">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxBirth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxBirth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirth" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxBirth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxBirth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirth" title="Link to this definition"></a></dt>
 <dd><p>Finds maximum birth for a given diagram</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>Dgm</strong> – A 2D numpy array</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>(float) Maximum birth time for the given diagram</p>
 </dd>
 </dl>
@@ -215,16 +194,16 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.maxBirthSeries">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxBirthSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxBirthSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirthSeries" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxBirthSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxBirthSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirthSeries" title="Link to this definition"></a></dt>
 <dd><p>Takes data frame DgmsDF.
 Finds maximum persistence over all diagrams in
 column with label dgm_col.
 It gets maximum persistence for a pandas.Series with diagrams as entries.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>DgmSeries</strong> – A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>(float) Maximum persistence over all diagrams</p>
 </dd>
 </dl>
@@ -232,13 +211,13 @@ It gets maximum persistence for a pandas.Series with diagrams as entries.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.maxPers">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxPers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxPers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPers" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxPers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxPers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPers" title="Link to this definition"></a></dt>
 <dd><p>Finds maximum persistence for a given diagram</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>Dgm</strong> – A 2D numpy array</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>(float) Maximum persistence for the given diagram</p>
 </dd>
 </dl>
@@ -246,16 +225,16 @@ It gets maximum persistence for a pandas.Series with diagrams as entries.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.maxPersistenceSeries">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxPersistenceSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxPersistenceSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPersistenceSeries" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxPersistenceSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#maxPersistenceSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPersistenceSeries" title="Link to this definition"></a></dt>
 <dd><p>Takes data frame DgmsDF.
 Finds maximum persistence over all diagrams in
 column with label dgm_col.
 Gets maximum persistence for a pandas.Series with diagrams as entries</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>DgmsSeries</strong> – A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>(float) Maximum persistence over all diagrams</p>
 </dd>
 </dl>
@@ -263,13 +242,13 @@ Gets maximum persistence for a pandas.Series with diagrams as entries</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.minBirth">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minBirth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minBirth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirth" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minBirth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minBirth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirth" title="Link to this definition"></a></dt>
 <dd><p>Finds minimum birth  for a given diagram</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>Dgm</strong> – A 2D numpy array</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>(float) Minimum birth time for the given diagram</p>
 </dd>
 </dl>
@@ -277,16 +256,16 @@ Gets maximum persistence for a pandas.Series with diagrams as entries</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.minBirthSeries">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minBirthSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minBirthSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirthSeries" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minBirthSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minBirthSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirthSeries" title="Link to this definition"></a></dt>
 <dd><p>Takes data frame DgmsDF.
 Finds minimum persistence over all diagrams in
 column with label dgm_col.
 Gets minimum persistence for a pandas.Series with diagrams as entries</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>DgmSeries</strong> – A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>(float) Minimum birth time over all diagrams</p>
 </dd>
 </dl>
@@ -294,13 +273,13 @@ Gets minimum persistence for a pandas.Series with diagrams as entries</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.minPers">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minPers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minPers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minPers" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minPers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minPers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minPers" title="Link to this definition"></a></dt>
 <dd><p>Finds minimum persistence for a given diagram</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>Dgm</strong> – A 2D numpy array</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>(float) Minimum persistence for the given diagram</p>
 </dd>
 </dl>
@@ -308,16 +287,16 @@ Gets minimum persistence for a pandas.Series with diagrams as entries</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.minPersistenceSeries">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minPersistenceSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minPersistenceSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minPersistenceSeries" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minPersistenceSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#minPersistenceSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minPersistenceSeries" title="Link to this definition"></a></dt>
 <dd><p>Takes data frame DgmsDF.
 Finds minimum persistence over all diagrams in
 column with label dgm_col.
 Gets minimum persistence for a pandas.Series with diagrams as entries</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>DgmSeries</strong> – A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>(float) Minimum persistence over all diagrams</p>
 </dd>
 </dl>
@@ -325,7 +304,7 @@ Gets minimum persistence for a pandas.Series with diagrams as entries</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.TDA.Persistence.removeInfiniteClasses">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">removeInfiniteClasses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#removeInfiniteClasses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.removeInfiniteClasses" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">removeInfiniteClasses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/Persistence.html#removeInfiniteClasses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.removeInfiniteClasses" title="Link to this definition"></a></dt>
 <dd><p>Simply deletes classes that have infinite lifetimes.</p>
 </dd></dl>
 

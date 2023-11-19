@@ -1138,12 +1138,12 @@ def plot_F_Images(PI_features, num_plots=6, rows=2, cols=3, index=[], labels=[])
         raise Exception("Rows * Columns must be equal to the Number of Plots")
     if index!=[] and labels==[]:
         raise Exception("Labels for plots must be set")
-    pers_img = PI_features['pers_img']
+    pers_img = PI_features['pers_images']
     fig, axs = plt.subplots(rows, cols, constrained_layout = True)
     i = 0
     if index == [] and labels == []:
         id = np.arange(0,num_plots)
-        tid = ['Plot' + str(i) for i in range(num_plots)]
+        tid = ['Image ' + str(i) for i in range(num_plots)]
     else:
         id = index
         tid = labels
@@ -1153,4 +1153,3 @@ def plot_F_Images(PI_features, num_plots=6, rows=2, cols=3, index=[], labels=[])
             axs[r,c].imshow(img)
             axs[r,c].set(xlabel='birth',ylabel='persistence',xticks=([]),yticks=([]), title=tid[i])
             i += 1
-    fig.show()
