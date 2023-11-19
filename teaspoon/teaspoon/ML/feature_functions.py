@@ -10,7 +10,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import matplotlib.pyplot as plt
 from persim import PersistenceImager
 import math
 from math import pi
@@ -803,7 +802,7 @@ def F_Landscape(PL, params, max_l_number=None):
     return feature, Sorted_mesh
 
 
-def F_Image(PD1, PS, var, plot=False, D_Img=[], pers_imager=None, training=True, parallel=False):
+def F_Image(PD1, PS, var, pers_imager=None, training=True, parallel=False):
     """
     This function computes the persistence images of given persistence diagrams
     using `Persim <https://persim.scikit-tda.org/en/latest/notebooks/Classification%20with%20persistence%20images.html>`_
@@ -817,11 +816,6 @@ def F_Image(PD1, PS, var, plot=False, D_Img=[], pers_imager=None, training=True,
         Pixel size.
     var : float
         Variance of the Gaussian distribution.
-    plot : boolean
-        This flag tells the function if you want to plot the persistence images
-    D_Img : list, optional
-        The number of persistence diagrams in a list. If this parameter is provided, algorithm will only plot the persistence images of these persistence diagrams.
-        . The default is [].
     pers_imager : persistence image object, optional
         Persistence image object fit to training set diagrams. This oject is only required when the feature function
         for test set is computed. The default is None.
@@ -833,7 +827,7 @@ def F_Image(PD1, PS, var, plot=False, D_Img=[], pers_imager=None, training=True,
     Returns
     -------
     output : dict
-        Includes feature matrix and persistence image object. Output object also includes figures if user selects to plot several persistence images.
+        Includes feature matrix, persistence image object and persistence images created (for plotting)
 
     """
 
@@ -860,30 +854,13 @@ def F_Image(PD1, PS, var, plot=False, D_Img=[], pers_imager=None, training=True,
             pers_img = pers_imager.transform(PD1, skew=True)
 
     # generate feature matrix
-    feature_PI = np.zeros(
-        (N1, len(pers_img[0][:, 0])*len(pers_img[0][0, :])))
+    feature_PI = np.zeros((N1, len(pers_img[0][:, 0])*len(pers_img[0][0, :])))
     for i in range(N1):
         feature_PI[i, :] = pers_img[i].flatten()
 
-    # plot all images or images of certain persistence diagrams
-    if plot == True:
-        fig = []
-        if D_Img == []:
-            D_Img = np.arange(1, 2, 1)
-        for i in range(len(D_Img)):
-            plt.figure()
-            ax = plt.gca()
-            pimgr = PersistenceImager()
-            pimgr.pixel_size = PS
-            pimgr.kernel_params = {'sigma': var}
-            pimgr.fit(PD1[D_Img[i]-1], skew=True)
-            imgs = pimgr.transform(PD1[D_Img[i]-1], skew=True)
-            pers_imager.plot_image(imgs, ax)
-            fig.append(plt.gcf())
-        output['figures'] = fig
-
     output['F_Matrix'] = feature_PI
     output['pers_imager'] = pers_imager
+    output['pers_images'] = pers_img
 
     return output
 
@@ -1131,3 +1108,48 @@ def KernelMethod(perDgm1, perDgm2, sigma):
     Kernel = Kernel*(1/(8*pi*sigma))
 
     return Kernel
+
+def plot_F_Images(PI_features, num_plots=6, rows=2, cols=3, index=[], labels=[]):
+    """
+    This function plots the persistence images given a number of plots or index
+
+    Parameters
+    ----------
+    PI_features : ndarray
+        Object array that includes all persistence images from F_Image (output['pers_images'])
+    num_plots : int
+        Number of plots
+    rows : int
+        Number of rows in plot object
+    cols : int
+        Number of columns in plot objects
+    index :
+        Optional index for observations to plot
+
+    Returns
+    -------
+    Plot of selected images
+
+    """
+    import scipy.ndimage as ndimage
+    import matplotlib.pyplot as plt
+    
+    if num_plots!=rows*cols:
+        raise Exception("Rows * Columns must be equal to the Number of Plots")
+    if index!=[] and labels==[]:
+        raise Exception("Labels for plots must be set")
+    pers_img = PI_features['pers_images']
+    fig, axs = plt.subplots(rows, cols, constrained_layout = True)
+    i = 0
+    if index == [] and labels == []:
+        id = np.arange(0,num_plots)
+        tid = ['Image ' + str(i) for i in range(num_plots)]
+    else:
+        id = index
+        tid = labels
+    for r in range(0,rows):
+        for c in range(0,cols):
+            img = ndimage.rotate(pers_img[id[i]], 90, reshape=True)
+            axs[r,c].imshow(img)
+            axs[r,c].set(xlabel='birth',ylabel='persistence',xticks=([]),yticks=([]), title=tid[i])
+            i += 1
