@@ -8,7 +8,8 @@ def mpeg7():
     """
     
     stream = pkg_resources.resource_stream(__name__, 'datasets/mpeg7.pickle')
-    return pd.read_pickle(stream)
+    data = pd.read_pickle(stream)
+    return data
 
 def shrec14():
     """
