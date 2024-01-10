@@ -234,21 +234,21 @@ def k_NN(embedded_time_series, k=4):
 # In[ ]:
 
 def ZeDA(sig, t1, tn, level=0.0,  plotting=False, method='std', score=3.0):
-    """This function takes a uniformly sampled time series and finds the number of crossings
+    """This function takes a uniformly sampled time series and finds level-crossings.
 
     Args:
-    sig (numpy array):   Time series (1d) in format of npy.
-    t1 (float):          Initial time of recording signal.
-    tn (float):          Final time of recording signal.
+        sig (numpy array):   Time series (1d) in format of npy.
+        t1 (float):          Initial time of recording signal.
+        tn (float):          Final time of recording signal.
 
     Other Parameters:
-    level (Optional[float]):  Level at which crossings are to be found; default: 0.0 for zero-crossings
-    plotting (Optional[bool]): Plots the function with returned brackets; defaut is False.
-    method (Optional[str]): Method to use for setting persistence threshold; 'std' for standard deviation, 'iso' for isolation forest, 'dt' for smallest time interval in case of a clean signal; default is std (3*standard deviation)
-    score (Optional[float]): z-score to use if method == 'std'; default is 3.0
+        level (Optional[float]):  Level at which crossings are to be found; default: 0.0 for zero-crossings
+        plotting (Optional[bool]): Plots the function with returned brackets; defaut is False.
+        method (Optional[str]): Method to use for setting persistence threshold; 'std' for standard deviation, 'iso' for isolation forest, 'dt' for smallest time interval in case of a clean signal; default is std (3*standard deviation)
+        score (Optional[float]): z-score to use if method == 'std'; default is 3.0
 
     Returns:
-    [brackets, crossings, flags]: brackets gives intervals in the form of tuples where a crossing is expected; crossings gives the estimated crossings in each interval obtained by averaging both ends; flags marks, for each interval, whether both ends belong to the same sgn(function) category (0, unflagged; 1, flagged)
+        [tuples, list, list]: brackets gives intervals in the form of tuples where a crossing is expected; crossings gives the estimated crossings in each interval obtained by averaging both ends; flags marks, for each interval, whether both ends belong to the same sgn(function) category (0, unflagged; 1, flagged)
 
     """
 
@@ -521,7 +521,205 @@ def ZeDA(sig, t1, tn, level=0.0,  plotting=False, method='std', score=3.0):
 
 ##########################################################################
 
+# In[ ]:
 
+def first_zero(sig, t1, tn, level=0.0, r=1.2, plotting=False):
+    """This function takes a discrete time series and finds the first zero-crossing or the global minimum (if no crossing).
+
+    Args:
+        sig (numpy array):   Time series (1d) in format of npy.
+        t1 (float):          Initial time of recording signal.
+        tn (float):          Final time of recording signal.
+
+    Other Parameters:
+        level (Optional[float]):  Level at which crossings are to be found; default: 0.0 for zero-crossings
+        r (Optional[float]):  Reliability (>0)--increasing r increases reliability of the method but may result in a higher convergence time; default: 1.2
+        plotting (Optional[bool]): Plots the function with returned brackets; defaut is False.
+
+    Returns:
+        float: the estimated first crossing in the interval or the global minimum.
+
+    """
+
+    if r < 0:
+        print('Reliability must be > 0.')
+        return
+
+    epsilon = (tn - t1)/(len(sig)-1)  # Convergence Criterion
+
+    ##############################################################
+    # Finding t after t^(a) and t^(b)
+
+    x = [t[0], t[len(t) - 1]]
+    y = [sig[0], sig[len(sig) - 1]]
+    s1 = abs(y[1] - y[0])/(x[1] - x[0])
+    lambda1 = s1
+    lambda_max2 = s1
+    del_t_max2 = x[1] - x[0]
+    lambda2 = lambda_max2*(x[1] - x[0]) / del_t_max2
+    m1 = r*max(lambda1, lambda2, epsilon)
+    R1 = 0.5*(y[0]+y[1]) - 0.5*m1*(x[1] - x[0])
+    t_hat1 = 0.5*(x[1] + x[0] - (y[1] - y[0])/m1)
+
+    if R1 <= 0:
+        t_star = t[0] + sig[0]/m1
+        t_new = t[np.argmin(abs(t - t_star))]
+        if sig[np.argmin(abs(t - t_star))] <= 0:
+            x.remove(t[len(t) - 1])
+            y.remove(sig[len(sig) - 1])
+            x.append(t_new)
+            y.append(sig[np.argmin(abs(t - t_star))])
+            zipped_pairs = zip(x, y)
+            sorted_pairs = sorted(zipped_pairs)
+            x = [item[0] for item in sorted_pairs]
+            y = [item[1] for item in sorted_pairs]
+        else:
+            x.append(t_new)
+            y.append(sig[np.argmin(abs(t - t_star))])
+            zipped_pairs = zip(x, y)
+            sorted_pairs = sorted(zipped_pairs)
+            x = [item[0] for item in sorted_pairs]
+            y = [item[1] for item in sorted_pairs]
+    else:
+        t_new = t[np.argmin(abs(t - t_hat1))]
+        if sig[np.argmin(abs(t - t_hat1))] <= 0:
+            x.remove(t[len(t) - 1])
+            y.remove(sig[len(sig) - 1])
+            x.append(t_new)
+            y.append(sig[np.argmin(abs(t - t_hat1))])
+            zipped_pairs = zip(x, y)
+            sorted_pairs = sorted(zipped_pairs)
+            x = [item[0] for item in sorted_pairs]
+            y = [item[1] for item in sorted_pairs]
+        else:
+            x.append(t_new)
+            y.append(sig[np.argmin(abs(t - t_hat1))])
+            zipped_pairs = zip(x, y)
+            sorted_pairs = sorted(zipped_pairs)
+            x = [item[0] for item in sorted_pairs]
+            y = [item[1] for item in sorted_pairs]
+
+
+    ######################################################################
+    # nth iteration
+
+    n = 3
+    dt = abs(t1 - t_new)
+
+    while dt > epsilon:
+
+        x1 = []
+        y1 = []
+        s = []
+        lambda1 = []
+        lambda2 = []
+        lambda_max = 0
+        del_t_max = 0
+        m = []
+        R = []
+        t_hat = []
+        t_new_past = t_new
+        t_new = 0
+
+        # Find intervals
+        for i in range(0, len(x)-1):
+            x1.append([x[i], x[i+1]])
+            y1.append([y[i], y[i+1]])
+
+        # Find S for each interval
+        for i in range(0, len(x1)):
+            s.append(abs(y1[i][1] - y1[i][0])/(x1[i][1] - x1[i][0]))
+
+        # Find lambda' for each interval
+        for i in range(0, len(s)):
+            if i == 0 and len(s) < 2:
+                lambda1.append(s[i])
+            elif i == 0:
+                lambda1.append(max(s[i], s[i+1]))
+            elif i == 1 and len(s) == 1:
+                lambda1.append(max(s[i-1], s[i]))
+            elif i == len(s) - 1 and len(s) > 0:
+                lambda1.append(max(s[i-1], s[i]))
+            else:
+                lambda1.append(max(s[i-1], s[i], s[i+1]))
+
+        # Find lambda_max and delta_t max for this trial
+        lambda_max = max(s[:])
+        if len(x1) < 2:
+            del_t_max = x1[0][1] - x1[0][0]
+        else:
+            t_2 = np.array(x1[:][1])
+            t_1 = np.array(x1[:][0])
+            del_t_max = max(np.subtract(t_2, t_1))
+
+        # Find lambda'', m, R and t_hat for each interval
+        for i in range(0, len(x1)):
+            lambda2.append(lambda_max*(x1[i][1] - x1[i][0]) / del_t_max)
+            m.append(r*max(lambda1[i], lambda2[i], epsilon))
+            R.append(0.5*(y1[i][1] + y1[i][0] - m[i]*(x1[i][1] - x1[i][0])))
+            t_hat.append(0.5*(x1[i][1] + x1[i][0] - (y1[i][1] - y1[i][0])/m[i]))
+
+        cond = [i for i in range(len(R)) if R[i] <= 0]
+
+        if cond:
+            t_star = x1[cond[0]][0] + y1[cond[0]][0] / m[cond[0]]
+            t_TauMinOne = x1[cond[0]][0]
+            t_new = t[np.argmin(abs(t - t_star))]
+        else:
+            i = np.argmin(np.array(R))
+            t_TauMinOne = x1[i][0]
+            t_new = t[np.argmin(abs(t - t_hat[i]))]
+
+        if sig[np.where(t == t_new)[0][0]] <= 0:
+            x.remove(x[len(x) - 1])
+            y.remove(y[len(y) - 1])
+            if t_new not in x:
+                x.append(t_new)
+                y.append(sig[np.where(t == t_new)[0][0]])
+        else:
+            if t_new not in x:
+                x.append(t_new)
+                y.append(sig[np.where(t == t_new)[0][0]])
+
+        zipped_pairs = zip(x, y)
+        sorted_pairs = sorted(zipped_pairs)
+        x = [item[0] for item in sorted_pairs]
+        y = [item[1] for item in sorted_pairs]
+
+        n = n + 1
+        dt = abs(t_new - t_TauMinOne)
+
+        if t_new == t_new_past:
+            break
+
+    print(f"Final root is {t_new} with a convergence criterion of {epsilon}.")
+
+    if plotting == True:
+
+        import matplotlib.pyplot as plt
+        from matplotlib import rc
+        rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+        rc('text', usetex=True)
+        plt.rc('text', usetex=True)
+        plt.rc('font', family='serif')
+
+        plt.figure(figsize=(8, 4), dpi=200)
+
+        plt.plot(t, sig, linewidth=1.5, alpha=1)
+        plt.axhline(y=0, linewidth=0.75, linestyle=':', color='grey', label='_nolegend_')
+        plt.xlim([t1, tn])
+        plt.xticks(fontsize=20)
+        plt.yticks(fontsize=20)
+        plt.xlabel("Time", fontsize=25)
+        plt.ylabel("Amplitude", fontsize=25)
+
+        plt.scatter(t_new, 0, s=150, color='black', marker='x', zorder=2)
+        plt.legend(['Signal', 'First Root'])
+
+        plt.tight_layout()
+        plt.show()
+
+    return t_new
 
 
 # In[ ]:
