@@ -97,8 +97,8 @@ def PersistentEntropy(lifetimes, normalize=False):
     if len(lt) == 0:
         E = np.nan
     Emax = 1
-    if normalize == True:
-        Emax = np.log2(sum(lt))
+    if normalize == True and len(lt) > 1:
+        Emax = np.log2(len(lt))
     PerEn = E/Emax
 
     return PerEn

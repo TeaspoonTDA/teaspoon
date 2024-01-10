@@ -11,8 +11,10 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -26,16 +28,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="../../../index.html" class="icon icon-home">
-            teaspoon
-              <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="../../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#spork">1.3. Spork!</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
@@ -71,9 +70,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DS.html">2.2.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.4. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
@@ -82,8 +82,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -122,7 +120,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.ML.feature_functions</li>
       <li class="wy-breadcrumbs-aside">
@@ -168,7 +166,7 @@
 
 
 <div class="viewcode-block" id="tent"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.tent">[docs]</a><span class="k">def</span> <span class="nf">tent</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Applies the tent function to a diagram.</span>
 
 <span class="sd">    Parameters:</span>
@@ -259,7 +257,7 @@
 
 
 <span class="k">def</span> <span class="nf">sub2ind</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Converts subscripts to indices</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">ind</span> <span class="o">=</span> <span class="n">rows</span> <span class="o">*</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">cols</span>
@@ -270,7 +268,7 @@
 
 <span class="c1"># convert indices to subscripts</span>
 <span class="k">def</span> <span class="nf">ind2sub</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Converts indices to subscripts</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">ind</span><span class="p">[</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
@@ -284,7 +282,7 @@
 <span class="c1"># define the function blocks</span>
 <span class="c1"># Chebyshev-Gauss points of the first kind</span>
 <span class="k">def</span> <span class="nf">quad_cheb1</span><span class="p">(</span><span class="n">npts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Find the quadrature/interpolation weights for common orthognal functions</span>
 
 <span class="sd">    Define the function blocks</span>
@@ -304,7 +302,7 @@
 <span class="c1"># The LGL nodes are the zeros of (1-x**2)*P&#39;_N(x), wher P_N is the nth Legendre</span>
 <span class="c1"># polynomial</span>
 <span class="k">def</span> <span class="nf">quad_legendre</span><span class="p">(</span><span class="n">npts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Computes the Legendre-Gauss-Lobatto nodes, and their quadrate weights.</span>
 
 <span class="sd">    The LGL nodes are the zeros of (1-x**2)*P&#39;_N(x), wher P_N is the nth Legendre polynomial</span>
@@ -361,7 +359,7 @@
 
 <span class="c1"># find the barycentric interplation weights</span>
 <span class="k">def</span> <span class="nf">bary_weights</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Find the barycentric interplation weights</span>
 
 <span class="sd">    Calculate Barycentric weights for the base points x.</span>
@@ -389,7 +387,7 @@
 
 
 <span class="k">def</span> <span class="nf">bary_diff_matrix</span><span class="p">(</span><span class="n">xnew</span><span class="p">,</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculate both the derivative and plain Lagrange interpolation matrix</span>
 <span class="sd">    using Barycentric formulae from Berrut and Trefethen, SIAM Review, 2004.</span>
 
@@ -455,7 +453,7 @@
 
 
 <div class="viewcode-block" id="interp_polynomial"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.interp_polynomial">[docs]</a><span class="k">def</span> <span class="nf">interp_polynomial</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.</span>
 
 <span class="sd">    Parameters:</span>
@@ -575,7 +573,7 @@
 
 <span class="c1"># this function returns the points from querSet that are within the baseRecatangle</span>
 <span class="k">def</span> <span class="nf">getSubset</span><span class="p">(</span><span class="n">querySet</span><span class="p">,</span> <span class="n">baseRectangle</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
 
 <span class="sd">    Parameters</span>
@@ -605,7 +603,7 @@
 
 
 <span class="k">def</span> <span class="nf">PLandscapes</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes persistence landscapes for given persistence diagrams.</span>
 <span class="sd">    Function has two inputs which are persistence diagrams and chosen landscapes function.</span>
 <span class="sd">    Algorithm computes all persistence landscapes for the persistence diagram.</span>
@@ -771,7 +769,7 @@
 
     <span class="c1"># if user wants to see the plot and the points of the specific landscapes, L_number variable should be given as input.</span>
 <div class="viewcode-block" id="PLandscape.__init__"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.PLandscape.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">PD</span><span class="p">,</span> <span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This class uses landscapes algorithm (:meth:`PD_Featurization.PLandscapes`) to compute persistence landscapes and plot them based on user preference.</span>
 <span class="sd">        The algorithm computes the persistence landscapes is written based on Ref. :cite:`1 &lt;Bubenik2017&gt;`.        </span>
 
@@ -813,7 +811,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">AllPL</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="PLandscape.PLandscape_plot"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.PLandscape.PLandscape_plot">[docs]</a>    <span class="k">def</span> <span class="nf">PLandscape_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">PL</span><span class="p">,</span> <span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function plots selected persistence landscapes or it plots all of them if user does not provide desired landscape functions.</span>
 
 
@@ -852,7 +850,7 @@
 
 
 <div class="viewcode-block" id="F_Landscape"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.F_Landscape">[docs]</a><span class="k">def</span> <span class="nf">F_Landscape</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">max_l_number</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes the features for selected persistence landscape numbers.</span>
 <span class="sd">    There are three inputs to the function.</span>
 <span class="sd">    These are all landscape functions for each persistence diagram, parameter bucket object and the maximum level of landscape function.</span>
@@ -940,7 +938,7 @@
 
 
 <div class="viewcode-block" id="F_Image"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.F_Image">[docs]</a><span class="k">def</span> <span class="nf">F_Image</span><span class="p">(</span><span class="n">PD1</span><span class="p">,</span> <span class="n">PS</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">D_Img</span><span class="o">=</span><span class="p">[],</span> <span class="n">pers_imager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes the persistence images of given persistence diagrams</span>
 <span class="sd">    using `Persim &lt;https://persim.scikit-tda.org/en/latest/notebooks/Classification%20with%20persistence%20images.html&gt;`_</span>
 <span class="sd">    package of Python. Then it provides user with the feature matrix for the diagrams.</span>
@@ -1018,7 +1016,7 @@
 
 
 <div class="viewcode-block" id="F_CCoordinates"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.F_CCoordinates">[docs]</a><span class="k">def</span> <span class="nf">F_CCoordinates</span><span class="p">(</span><span class="n">PD</span><span class="p">,</span> <span class="n">FN</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. :eq:`1st_coord` - :eq:`5th_coord`.</span>
 <span class="sd">    The first four functions are taken from Ref. :cite:`2 &lt;Adcock2016&gt;` and the last one is obtained from Ref. :cite:`3 &lt;Khasawneh2018&gt;`.</span>
 <span class="sd">    There are two inputs to the function. These are persistence diagrams and number of coordinates that user wants to use in feature matrix.</span>
@@ -1122,7 +1120,7 @@
 
 
 <div class="viewcode-block" id="F_PSignature"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.F_PSignature">[docs]</a><span class="k">def</span> <span class="nf">F_PSignature</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span> <span class="n">L_Number</span><span class="o">=</span><span class="p">[]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    This function takes the persistence landscape set and returns the feature matrix which is computed using path signatures :cite:`4 &lt;Chevyrev2016,Chevyrev2020&gt;`.</span>
 <span class="sd">    Function takes two inputs and these are persistence landcsape set in an object array and the landscape numbers that user wants to compute their signatures.</span>
@@ -1216,7 +1214,7 @@
 
 
 <div class="viewcode-block" id="KernelMethod"><a class="viewcode-back" href="../../../F_PD.html#teaspoon.ML.feature_functions.KernelMethod">[docs]</a><span class="k">def</span> <span class="nf">KernelMethod</span><span class="p">(</span><span class="n">perDgm1</span><span class="p">,</span> <span class="n">perDgm2</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    This function computes the kernel for given two persistence diagram based on the formula provided in Ref. :cite:`5 &lt;Reininghaus2015&gt;`.</span>
 <span class="sd">    There are three inputs and these are two persistence diagrams and the kernel scale sigma.    </span>

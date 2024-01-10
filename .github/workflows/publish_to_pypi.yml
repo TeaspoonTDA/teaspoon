@@ -30,12 +30,6 @@ jobs:
           pip install
           build
           --user
-      - name: Install boost package for testing
-        run: sudo apt-get install libboost-all-dev
-      - name: Install cmake
-        run: sudo apt-get install cmake
-      - name: Install cubical ripser
-        run: pip install -U git+https://github.com/shizuo-kaji/CubicalRipser_3dim
       - name: Install package for testing
         run: pip install .
       - name: Run tests

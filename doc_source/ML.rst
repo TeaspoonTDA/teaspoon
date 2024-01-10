@@ -12,6 +12,7 @@ One can refer to :cite:`6 <Yesilli2019>` for more details.
 .. toctree::
    :maxdepth: 4
 
+   Datasets <DS.rst>
    Featurization <F_PD.rst>
    Classification <CL.rst>
 

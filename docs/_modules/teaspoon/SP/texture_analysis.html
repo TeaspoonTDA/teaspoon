@@ -11,8 +11,10 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -26,16 +28,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="../../../index.html" class="icon icon-home">
-            teaspoon
-              <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="../../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#spork">1.3. Spork!</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
@@ -71,9 +70,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DS.html">2.2.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.4. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
@@ -82,8 +82,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -122,7 +120,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.SP.texture_analysis</li>
       <li class="wy-breadcrumbs-aside">
@@ -140,7 +138,7 @@
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
 <span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
 <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
-<span class="kn">import</span> <span class="nn">cripser</span>
+<span class="kn">from</span> <span class="nn">gtda.homology</span> <span class="kn">import</span> <span class="n">CubicalPersistence</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span> <span class="k">as</span> <span class="n">sp</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
@@ -153,7 +151,7 @@
 
 
 <div class="viewcode-block" id="lattice_shape"><a class="viewcode-back" href="../../../texture_analysis.html#teaspoon.SP.texture_analysis.lattice_shape">[docs]</a><span class="k">def</span> <span class="nf">lattice_shape</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Quantify the lattice shape of a given point cloud of center points.</span>
 
 <span class="sd">        Args:</span>
@@ -241,7 +239,7 @@
 
 
 <div class="viewcode-block" id="feature_depth"><a class="viewcode-back" href="../../../texture_analysis.html#teaspoon.SP.texture_analysis.feature_depth">[docs]</a><span class="k">def</span> <span class="nf">feature_depth</span><span class="p">(</span><span class="n">nom_image</span><span class="p">,</span> <span class="n">exp_image</span><span class="p">,</span> <span class="n">nfeat</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Quantify the striking depths of a given texture scan.</span>
 
 <span class="sd">        Args:</span>
@@ -259,13 +257,15 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Experimental image needs to be a numpy array.&#39;</span><span class="p">)</span>
     <span class="n">nom_image</span> <span class="o">=</span> <span class="n">nom_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">exp_image</span> <span class="o">=</span> <span class="n">exp_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="c1"># Compute experimental and nominal 0D persistence diagrams</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing Nominal Persistence Distribution&#39;</span><span class="p">)</span>
     <span class="n">pd</span> <span class="o">=</span> <span class="n">generate_ph</span><span class="p">(</span><span class="n">nom_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">pd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nominal Persistence Computed&#39;</span><span class="p">)</span>
 
-    <span class="n">bi0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">de0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="n">bi0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">de0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
     <span class="n">li0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">de0</span> <span class="o">-</span> <span class="n">bi0</span><span class="p">)</span>
     <span class="n">nom_li0</span> <span class="o">=</span> <span class="n">li0</span>
 
@@ -274,8 +274,8 @@
     <span class="n">pd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Experimental Persistence Computed&#39;</span><span class="p">)</span>
 
-    <span class="n">bi0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">de0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="n">bi0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">de0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
     <span class="n">li0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">de0</span> <span class="o">-</span> <span class="n">bi0</span><span class="p">)</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">bi0</span><span class="p">,</span> <span class="n">li0</span><span class="p">]))</span>
     <span class="n">pts</span> <span class="o">=</span> <span class="n">filter_outliers</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nfeat</span><span class="p">)</span>
@@ -339,7 +339,7 @@
 
 
 <div class="viewcode-block" id="feature_roundness"><a class="viewcode-back" href="../../../texture_analysis.html#teaspoon.SP.texture_analysis.feature_roundness">[docs]</a><span class="k">def</span> <span class="nf">feature_roundness</span><span class="p">(</span><span class="n">nom_image</span><span class="p">,</span> <span class="n">exp_image</span><span class="p">,</span> <span class="n">nfeat</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">num_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Quantify the strike roundness of a given PVST texture scan.</span>
 
 <span class="sd">        Args:</span>
@@ -362,68 +362,75 @@
     <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">width</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;width should be a number in millimeters.&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">exp_image</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">:</span>
-        <span class="n">exp_image</span> <span class="o">=</span> <span class="n">exp_image</span><span class="p">[::</span><span class="mi">10</span><span class="p">,</span> <span class="p">::</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nom_image</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4000</span><span class="p">:</span>
-        <span class="n">nom_image</span> <span class="o">=</span> <span class="n">nom_image</span><span class="p">[::</span><span class="mi">5</span><span class="p">,</span> <span class="p">::</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-
+    <span class="c1"># Convert images to correct types</span>
     <span class="n">nom_image</span> <span class="o">=</span> <span class="n">nom_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">exp_image</span> <span class="o">=</span> <span class="n">exp_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
     <span class="c1"># Find experimental image reference height</span>
     <span class="n">pd0</span> <span class="o">=</span> <span class="n">generate_ph</span><span class="p">(</span><span class="n">exp_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">ref</span> <span class="o">=</span> <span class="n">find_ref_height</span><span class="p">(</span><span class="n">nfeat</span><span class="p">,</span> <span class="n">pd0</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Reference Height: </span><span class="si">{</span><span class="n">ref</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Reference Height: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
+    <span class="c1"># Loop over feature height (0-1) in specified number of steps</span>
     <span class="n">emd</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
 
+        <span class="c1"># Binarize image at threshold T</span>
         <span class="n">binary</span> <span class="o">=</span> <span class="n">nom_image</span> <span class="o">&lt;</span> <span class="n">T</span>
         <span class="n">im_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nom_image</span><span class="p">)</span>
+
+        <span class="c1"># Compute distance transform of binarized image at T</span>
+        <span class="c1"># Convert distances to physical units</span>
         <span class="n">dt_im</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
         <span class="n">dt_im</span> <span class="o">=</span> <span class="n">dt_im</span> <span class="o">*</span> <span class="n">width</span> <span class="o">/</span> <span class="n">im_size</span>
         <span class="k">del</span> <span class="n">binary</span>
+
+        <span class="c1"># Compute nominal image 1D persistence</span>
         <span class="n">nom_dgm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">generate_ph</span><span class="p">(</span><span class="n">dt_im</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">nom_dgm</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nom_dgm</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">num_steps</span><span class="si">}</span><span class="s1">: Nominal persistence failed for T=</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s1">, emd=0&#39;</span><span class="p">)</span>
-            <span class="n">nom_li</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">nom_dgm</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">nom_dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-            <span class="n">nom_li</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)</span>
+        <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">nom_dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">nom_dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">nom_li</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)</span>
 
+        <span class="c1"># Shift experimental image by reference, binarize and distance transform</span>
         <span class="n">binary</span> <span class="o">=</span> <span class="n">exp_image</span> <span class="o">&lt;</span> <span class="n">T</span> <span class="o">+</span> <span class="n">ref</span>
         <span class="n">im_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">exp_image</span><span class="p">)</span>
         <span class="n">dt_im</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
         <span class="n">dt_im</span> <span class="o">=</span> <span class="n">dt_im</span> <span class="o">*</span> <span class="n">width</span> <span class="o">/</span> <span class="n">im_size</span>
         <span class="k">del</span> <span class="n">binary</span>
+
+        <span class="c1"># Compute experimental 1D persistence</span>
         <span class="n">exp_dgm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">generate_ph</span><span class="p">(</span><span class="n">dt_im</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">exp_dgm</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">exp_dgm</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">num_steps</span><span class="si">}</span><span class="s1">: Experimental persistence failed for T=</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s1">, emd=0&#39;</span><span class="p">)</span>
-            <span class="n">exp_li</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">exp_dgm</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">exp_dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-            <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)</span>
+        <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">exp_dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">exp_dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">nfeat</span><span class="p">:</span>
-                <span class="n">hist_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;rice&#39;</span><span class="p">)</span>
+        <span class="c1"># Filter noise features from experimental persistence diagram</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">nfeat</span><span class="p">:</span>
+            <span class="n">hist_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;rice&#39;</span><span class="p">)</span>
 
-                <span class="n">cutoffmin1</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hist_noise</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nfeat</span><span class="p">:</span>
-                        <span class="n">cutoffmin1</span> <span class="o">=</span> <span class="n">hist_noise</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">cutoffmin1</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hist_noise</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nfeat</span><span class="p">:</span>
+                    <span class="n">cutoffmin1</span> <span class="o">=</span> <span class="n">hist_noise</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
 
-                <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">lifetimes</span> <span class="o">*</span> <span class="p">(</span><span class="n">lifetimes</span> <span class="o">&gt;</span> <span class="n">cutoffmin1</span><span class="p">)</span>
-            <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">lifetimes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)]</span>
-            <span class="n">exp_li</span> <span class="o">=</span> <span class="n">lifetimes</span>
+            <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">lifetimes</span> <span class="o">*</span> <span class="p">(</span><span class="n">lifetimes</span> <span class="o">&gt;</span> <span class="n">cutoffmin1</span><span class="p">)</span>
+        <span class="n">lifetimes</span> <span class="o">=</span> <span class="n">lifetimes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">)]</span>
+        <span class="n">exp_li</span> <span class="o">=</span> <span class="n">lifetimes</span>
 
+        <span class="c1"># Compute earth movers distance</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nom_li</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">exp_li</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">emd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">T</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">wasserstein_distance</span><span class="p">(</span><span class="n">nom_li</span><span class="p">,</span> <span class="n">exp_li</span><span class="p">)]))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">num_steps</span><span class="si">}</span><span class="s1">: (T, EMD) = (</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">stats</span><span class="o">.</span><span class="n">wasserstein_distance</span><span class="p">(</span><span class="n">nom_li</span><span class="p">,</span><span class="w"> </span><span class="n">exp_li</span><span class="p">)])</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">wasserstein_distance</span><span class="p">(</span><span class="n">nom_li</span><span class="p">,</span> <span class="n">exp_li</span><span class="p">),</span><span class="mi">4</span><span class="p">)])</span>
+            <span class="n">emd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">num_steps</span><span class="si">}</span><span class="s1">: (T, EMD) = (</span><span class="si">{</span><span class="n">dist</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">emd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">T</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">emd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">num_steps</span><span class="si">}</span><span class="s1">: (T, EMD) = (</span><span class="si">{</span><span class="n">dist</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+        
         <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="c1"># Compute roundness score and plot roundness curve</span>
     <span class="n">emd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">emd</span><span class="p">)</span>
     <span class="n">roundness_score</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">simps</span><span class="p">(</span><span class="n">emd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">emd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ref</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
@@ -440,12 +447,11 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Roundness Plot&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
     <span class="k">return</span> <span class="n">roundness_score</span></div>
 
 
 <span class="k">def</span> <span class="nf">filter_outliers</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">num_features</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Function to filter outliers from a persistence diagrams by removing bars from the lifetime histogram</span>
 <span class="sd">        with a quantity larger than the expected total number of features.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -466,43 +472,53 @@
 
 
 <span class="k">def</span> <span class="nf">find_ref_height</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span> <span class="n">per_diag</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Function to filter a persistence diagram down to the specified number of features by removing noise,</span>
 <span class="sd">        and filtering the birth time back until the specified number of features remain. The average birth time</span>
 <span class="sd">        is returned to give a reference height for the image.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Set birth-death bounds</span>
     <span class="n">cutoff_bmax</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">cutoff_bmin</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">cutoff_dmin</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">pd</span> <span class="o">=</span> <span class="n">per_diag</span>
+
+    <span class="c1"># Check if persistence diagram can be filtered</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">feat</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Filter persistence diagram</span>
         <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">feat</span><span class="p">:</span>
             <span class="n">pd</span> <span class="o">=</span> <span class="n">per_diag</span>
-            <span class="n">lifetime1</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">lifetime1</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">lifetime1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">histogram</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">lifetime1</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">histogram</span><span class="p">):</span>
+                    <span class="c1"># Filter noise based on histogram bars (death min)</span>
                     <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">feat</span><span class="p">:</span>
                         <span class="n">cutoff_dmin</span> <span class="o">=</span> <span class="n">histogram</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-                <span class="n">pd</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[</span><span class="n">cutoff_bmax</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]]</span>
-                <span class="n">pd</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">cutoff_bmin</span><span class="p">]</span>
-                <span class="n">pd</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">cutoff_dmin</span><span class="p">]</span>
+                <span class="c1"># Filter by bounds</span>
+                <span class="n">pd</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[</span><span class="n">cutoff_bmax</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]]</span>
+                <span class="n">pd</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">cutoff_bmin</span><span class="p">]</span>
+                <span class="n">pd</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[(</span><span class="n">pd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">cutoff_dmin</span><span class="p">]</span>
+
+                <span class="c1"># Pull maximum birth back and iterate</span>
                 <span class="n">cutoff_bmax</span> <span class="o">-=</span> <span class="mf">0.001</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="n">pd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
                 <span class="k">break</span>
+    <span class="c1"># No features? return minimum birth</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">per_diag</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="c1"># Return average feature birth height</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">generate_ph</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Description: This function computes sub-level persistent homology on an image</span>
 <span class="sd">        using cubical ripser.</span>
 
@@ -518,31 +534,18 @@
 <span class="sd">    Persistence pairs of desired dimension on the input image.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pdgm</span> <span class="o">=</span> <span class="n">cripser</span><span class="o">.</span><span class="n">computePH</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">maxdim</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span>
-    <span class="n">pdgm</span> <span class="o">=</span> <span class="n">pdgm</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">cubical_persistence</span> <span class="o">=</span> <span class="n">CubicalPersistence</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">reduced_homology</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">pdgm</span> <span class="o">=</span> <span class="n">cubical_persistence</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">img</span><span class="p">]))</span>
+    <span class="n">pdgm</span> <span class="o">=</span> <span class="n">pdgm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">dgms</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Filter persistence diagram to return desired dimension</span>
     <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pdgm</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">dim</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">dim</span><span class="p">:</span>
             <span class="n">dgms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pdgm</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="p">:]))</span>
-    <span class="k">if</span> <span class="n">dim</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">dgms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">dgms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
     <span class="n">dgms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dgms</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">dgms</span>
-
-
-
-
-
-
-
-
-
-
-
-<span class="c1">#</span>
-
-
-
 </pre></div>
 
            </div>

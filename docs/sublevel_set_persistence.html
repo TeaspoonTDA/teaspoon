@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.3.5. Zero-Dimensional Sublevel Set Persistence &mdash; teaspoon 1.3.7 documentation</title>
@@ -12,15 +12,17 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2.3.6. Bifurcations using ZigZag (BuZZ)" href="buzz.html" />
+    <link rel="next" title="2.4. Signal Processing (SP) Module Documentation" href="SP.html" />
     <link rel="prev" title="2.3.4. Persistence" href="persistence.html" /> 
 </head>
 
@@ -29,16 +31,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="index.html" class="icon icon-home">
-            teaspoon
-              <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> teaspoon
+            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -48,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">1.1. Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.2. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#spork">1.3. Spork!</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
@@ -74,9 +73,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.1. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.2. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.2.3. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DS.html">2.2.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.2.4. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul class="current">
@@ -85,8 +85,6 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="buzz.html">2.3.6. Bifurcations using ZigZag (BuZZ)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ZZ_TG.html">2.3.7. Temporal Network Analysis Using Zigzag Persistence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -125,7 +123,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a></li>
           <li class="breadcrumb-item"><a href="TDA.html"><span class="section-number">2.3. </span>Topological Data Analysis (TDA) Module Documentation</a></li>
       <li class="breadcrumb-item active"><span class="section-number">2.3.5. </span>Zero-Dimensional Sublevel Set Persistence</li>
@@ -172,13 +170,13 @@
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>ts</strong> (<em>1-D array</em>) – time series.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>peristence diagram with p persistence pairs.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>[px2 array]</p>
 </dd>
 </dl>
@@ -236,7 +234,7 @@
 <span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.SLSP_tools.</span></span><span class="sig-name descname"><span class="pre">cutoff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_compensation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/TDA/SLSP_tools.html#cutoff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.SLSP_tools.cutoff" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the zero-dimensional sublevel set persistence over a closed time domain.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>L</strong> (<em>1-D array</em>) – Zero-dimensional sublevel set persistence lifetimes.</p></li>
 <li><p><strong>n</strong> (<em>int</em>) – Length of time series.</p></li>
@@ -246,11 +244,11 @@
 <li><p><strong>noise_param</strong> (<em>optional</em><em>[</em><em>float</em><em>]</em>) – If the additive noise distribution parameter is known or estimated, it can be provided directly.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Cutoff for the peristence diagram.
 [float]: Estimated noise distribution parameter.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>[float]</p>
 </dd>
 </dl>
@@ -346,7 +344,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="persistence.html" class="btn btn-neutral float-left" title="2.3.4. Persistence" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="buzz.html" class="btn btn-neutral float-right" title="2.3.6. Bifurcations using ZigZag (BuZZ)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="SP.html" class="btn btn-neutral float-right" title="2.4. Signal Processing (SP) Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -502,7 +502,9 @@ def MI_basic(x, y, h_method='sturge', ranking=True):
     Py = Hy/N
     Pxy = Hxy/N
 
-    I_matrix = Pxy*np.log(Pxy/(Px*Py))
+    # Ignore divide by zero warnings (NaN set to zero in next line)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        I_matrix = Pxy*np.log(Pxy/(Px*Py))
     where_are_NaNs = np.isnan(I_matrix)
     I_matrix[where_are_NaNs] = 0
     I = sum(sum(I_matrix))

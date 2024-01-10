@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 from ripser import ripser
 import matplotlib.gridspec as gridspec
-import cripser
+from gtda.homology import CubicalPersistence
 from scipy import stats
 from scipy import ndimage as sp
 from scipy import integrate
@@ -123,13 +123,15 @@ def feature_depth(nom_image, exp_image, nfeat, plot=False):
         raise ValueError('Experimental image needs to be a numpy array.')
     nom_image = nom_image.astype(np.float64)
     exp_image = exp_image.astype(np.float64)
+
+    # Compute experimental and nominal 0D persistence diagrams
     print('Computing Nominal Persistence Distribution')
     pd = generate_ph(nom_image, 0)
     pd = pd.astype(np.float64)
     print('Nominal Persistence Computed')
 
-    bi0 = np.array(pd[:, 1])
-    de0 = np.array(pd[:, 2])
+    bi0 = np.array(pd[:, 0])
+    de0 = np.array(pd[:, 1])
     li0 = np.array(de0 - bi0)
     nom_li0 = li0
 
@@ -138,8 +140,8 @@ def feature_depth(nom_image, exp_image, nfeat, plot=False):
     pd = pd.astype(np.float64)
     print('Experimental Persistence Computed')
 
-    bi0 = np.array(pd[:, 1])
-    de0 = np.array(pd[:, 2])
+    bi0 = np.array(pd[:, 0])
+    de0 = np.array(pd[:, 1])
     li0 = np.array(de0 - bi0)
     coords = np.transpose(np.array([bi0, li0]))
     pts = filter_outliers(coords, nfeat)
@@ -226,68 +228,75 @@ def feature_roundness(nom_image, exp_image, nfeat, width, num_steps=50, plot=Fal
     if (type(width) != float) and (type(width != int)):
         raise TypeError('width should be a number in millimeters.')
 
-    if len(exp_image) > 5000:
-        exp_image = exp_image[::10, ::10].astype(np.float64)
-    if len(nom_image) > 4000:
-        nom_image = nom_image[::5, ::5].astype(np.float64)
-
+    # Convert images to correct types
     nom_image = nom_image.astype(np.float64)
     exp_image = exp_image.astype(np.float64)
+
     # Find experimental image reference height
     pd0 = generate_ph(exp_image, 0)
     ref = find_ref_height(nfeat, pd0)
-    print(f'Reference Height: {ref}')
+    print(f'Reference Height: {np.round(ref, 5)}')
 
+    # Loop over feature height (0-1) in specified number of steps
     emd = []
     step = 1
     for T in np.linspace(0, 1, num_steps):
 
+        # Binarize image at threshold T
         binary = nom_image < T
         im_size = len(nom_image)
+
+        # Compute distance transform of binarized image at T
+        # Convert distances to physical units
         dt_im = sp.distance_transform_edt(binary)
         dt_im = dt_im * width / im_size
         del binary
+
+        # Compute nominal image 1D persistence
         nom_dgm = np.array(generate_ph(dt_im, 1))
         nom_dgm.astype(np.float64)
-        if len(nom_dgm) == 0:
-            print(f'Step {step}/{num_steps}: Nominal persistence failed for T={T}, emd=0')
-            nom_li = []
-        else:
-            lifetimes = nom_dgm[:, 2] - nom_dgm[:, 1]
-            nom_li = np.array(lifetimes)
+        lifetimes = nom_dgm[:, 1] - nom_dgm[:, 0]
+        nom_li = np.array(lifetimes)
 
+        # Shift experimental image by reference, binarize and distance transform
         binary = exp_image < T + ref
         im_size = len(exp_image)
         dt_im = sp.distance_transform_edt(binary)
         dt_im = dt_im * width / im_size
         del binary
+
+        # Compute experimental 1D persistence
         exp_dgm = np.array(generate_ph(dt_im, 1))
         exp_dgm.astype(np.float64)
-        if len(exp_dgm) == 0:
-            print(f'Step {step}/{num_steps}: Experimental persistence failed for T={T}, emd=0')
-            exp_li = []
-        else:
-            lifetimes = exp_dgm[:, 2] - exp_dgm[:, 1]
-            lifetimes = np.array(lifetimes)
+        lifetimes = exp_dgm[:, 1] - exp_dgm[:, 0]
+        lifetimes = np.array(lifetimes)
 
-            if len(lifetimes) > nfeat:
-                hist_noise = np.histogram(lifetimes, bins='rice')
+        # Filter noise features from experimental persistence diagram
+        if len(lifetimes) > nfeat:
+            hist_noise = np.histogram(lifetimes, bins='rice')
 
-                cutoffmin1 = 0
-                for n, item in enumerate(hist_noise):
-                    if item[0] > nfeat:
-                        cutoffmin1 = hist_noise[1][n + 1]
+            cutoffmin1 = 0
+            for n, item in enumerate(hist_noise):
+                if item[0] > nfeat:
+                    cutoffmin1 = hist_noise[1][n + 1]
 
-                lifetimes = lifetimes * (lifetimes > cutoffmin1)
-            lifetimes = lifetimes[np.nonzero(lifetimes)]
-            exp_li = lifetimes
+            lifetimes = lifetimes * (lifetimes > cutoffmin1)
+        lifetimes = lifetimes[np.nonzero(lifetimes)]
+        exp_li = lifetimes
 
+        # Compute earth movers distance
         if len(nom_li) > 0 and len(exp_li) > 0:
-            emd.append(np.array([T, stats.wasserstein_distance(nom_li, exp_li)]))
-            print(f'Step {step}/{num_steps}: (T, EMD) = ({np.array([T, stats.wasserstein_distance(nom_li, exp_li)])})')
+            dist = np.array([np.round(T,2), np.round(stats.wasserstein_distance(nom_li, exp_li),4)])
+            emd.append(dist)
+            print(f'Step {step}/{num_steps}: (T, EMD) = ({dist})')
         else:
-            emd.append(np.array([T, 0]))
+            dist = np.array([np.round(T,2), 0])
+            emd.append(dist)
+            print(f'Step {step}/{num_steps}: (T, EMD) = ({dist})')
+        
         step += 1
+    
+    # Compute roundness score and plot roundness curve
     emd = np.array(emd)
     roundness_score = integrate.simps(emd[:, 1], emd[:, 0]) / (1 - ref)
     if plot:
@@ -304,7 +313,6 @@ def feature_roundness(nom_image, exp_image, nfeat, width, num_steps=50, plot=Fal
         plt.title(f'Roundness Plot', fontsize=35)
         plt.tight_layout()
         plt.show()
-
     return roundness_score
 
 
@@ -335,33 +343,43 @@ def find_ref_height(feat, per_diag):
         and filtering the birth time back until the specified number of features remain. The average birth time
         is returned to give a reference height for the image.
     '''
+    # Set birth-death bounds
     cutoff_bmax = 1
     cutoff_bmin = 0
     cutoff_dmin = 0
     pd = per_diag
+
+    # Check if persistence diagram can be filtered
     if len(pd) <= feat and len(pd) > 0:
-        z = pd[:,1]
+        z = pd[:, 0]
     elif len(pd) == 0:
         z = 0
     else:
+        # Filter persistence diagram
         while len(pd) > feat:
             pd = per_diag
-            lifetime1 = pd[:, 2] - pd[:, 1]
+            lifetime1 = pd[:, 1] - pd[:, 0]
             if np.std(lifetime1) > 0:
                 histogram = np.histogram(lifetime1)
                 for n, c in enumerate(histogram):
+                    # Filter noise based on histogram bars (death min)
                     if c[0] > feat:
                         cutoff_dmin = histogram[1][n + 1]
-                pd = pd[cutoff_bmax > pd[:, 1]]
-                pd = pd[pd[:, 1] > cutoff_bmin]
-                pd = pd[(pd[:, 2] - pd[:, 1]) > cutoff_dmin]
+                # Filter by bounds
+                pd = pd[cutoff_bmax > pd[:, 0]]
+                pd = pd[pd[:, 0] > cutoff_bmin]
+                pd = pd[(pd[:, 1] - pd[:, 0]) > cutoff_dmin]
+
+                # Pull maximum birth back and iterate
                 cutoff_bmax -= 0.001
-                z = pd[:,1]
+                z = pd[:, 0]
             else:
-                z = pd[:,1]
+                z = pd[:, 0]
                 break
+    # No features? return minimum birth
     if len(z) == 0:
-        z = np.min(per_diag[:,1])
+        z = np.min(per_diag[:,0])
+    # Return average feature birth height
     return np.mean(z)
 
 
@@ -382,28 +400,15 @@ def generate_ph(img, dim):
     Persistence pairs of desired dimension on the input image.
 
     """
-    pdgm = cripser.computePH(img, maxdim=dim)
-    pdgm = pdgm.astype(np.float64)
+    cubical_persistence = CubicalPersistence(n_jobs=-1, reduced_homology=True)
+    pdgm = cubical_persistence.fit_transform(np.array([img]))
+    pdgm = pdgm[0].astype(np.float64)
     dgms = []
+
+    # Filter persistence diagram to return desired dimension
     for n, item in enumerate(pdgm):
-        if item[0] == dim:
+        if item[2] == dim:
             dgms.append(np.array(pdgm[n, :]))
-    if dim == 0 and dgms[-1][2] > 1:
-        dgms[-1][2] = 1
+
     dgms = np.array(dgms)
     return dgms
-
-
-
-
-
-
-
-
-
-
-
-#
-
-
-
