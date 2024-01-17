@@ -172,6 +172,33 @@ def train_test_split(DgmsDF, labels_col, dgm_col, params, *args):
 
     return training_set_dgm, test_set_dgm, training_set_label, test_set_label
 
+def train_test_split_sklearn(DgmsFD, labels_col, train_size=.5, seed=12):
+    """
+    This function splits given dataframe of diagrams with labels into a training and testing set using the sklearn train_test_split function
+
+    Parameters
+    ----------
+    DgmsDF : dataframe
+        Dataframe that includes diagrams and labels 
+    labels_col : str
+        Name of the column that stores the labels of the diagrams
+    train_size : float
+        Integer representing number of samples of float between 0 and 1 representing a sampling percentage
+    seed : int
+        Seed to replicate sampling
+
+    Returns
+    -------
+    training_dgms : pd DataFrame
+        The dataframe includes training set diagrams for each fold
+    testing_dgms : pd DataFrame
+        The dataframe includes training set diagrams for each fold
+
+    """
+    from sklearn.model_selection import train_test_split
+    labels = DgmsFD[labels_col]
+    training_dgms, testing_dgms = train_test_split(DgmsFD, train_size=train_size, random_state=seed, stratify=labels)
+    return training_dgms.reset_index(), testing_dgms.reset_index()
 
 def getPercentScore(DgmsDF,
                     labels_col='trainingLabel',

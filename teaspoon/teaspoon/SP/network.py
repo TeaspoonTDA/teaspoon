@@ -6,6 +6,7 @@ from teaspoon.parameter_selection import MI_delay, MsPE, FNN_n
 from teaspoon.SP.tsa_tools import permutation_sequence, cgss_sequence, k_NN
 import os
 import sys
+import math
 # get the coarse grained state space network represented as an adjacency matrix.
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -23,7 +24,7 @@ def Adjaceny_OP(perm_seq, n):  # adjacency matrix for ordinal partitions
     Returns:
         [A]: Adjacency matrix
     """
-    N = np.math.factorial(n)  # number of possible nodes
+    N = math.factorial(n)  # number of possible nodes
     A = np.zeros((N, N))  # prepares A
     # go through all permutation transitions (This could be faster wiuthout for loop)
     for i in range(len(perm_seq)-1):

@@ -2,7 +2,7 @@
 
 [project]
 name = "teaspoon"
-version = "1.4.3"
+version = "1.4.8"
 authors = [
   { name="Elizabeth Munch", email="muncheli@msu.edu" },
 ]
@@ -42,6 +42,9 @@ dependencies = ["cycler>=0.11.0",
 
 [tool.setuptools.packages.find]
 where = ["teaspoon"]
+
+[tool.setuptools.package-data]
+teaspoon = ["ML/datasets/*.pickle"]
 
 [project.urls]
 repository = "https://github.com/TeaspoonTDA/teaspoon"

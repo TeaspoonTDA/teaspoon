@@ -11,9 +11,10 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -27,16 +28,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="../../../../index.html" class="icon icon-home">
-            teaspoon
-              <img src="../../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="../../../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -70,14 +67,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../FNN.html#teaspoon.parameter_selection.FNN_n.FNS_fraction"><code class="docutils literal notranslate"><span class="pre">FNS_fraction()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../FNN.html#teaspoon.parameter_selection.FNN_n.compute_strands"><code class="docutils literal notranslate"><span class="pre">compute_strands()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../F_PD.html">2.2.1. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../CL.html">2.2.2. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../ML.html#references">2.2.3. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../DS.html">2.2.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../F_PD.html">2.2.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CL.html">2.2.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../ML.html#references">2.2.4. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
@@ -124,7 +120,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.SP.information.entropy</li>
       <li class="wy-breadcrumbs-aside">
@@ -137,7 +133,7 @@
              
   <h1>Source code for teaspoon.SP.information.entropy</h1><div class="highlight"><pre>
 <div class="viewcode-block" id="MsPE"><a class="viewcode-back" href="../../../../information.html#teaspoon.SP.information.entropy.MsPE">[docs]</a><span></span><span class="k">def</span> <span class="nf">MsPE</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">delay_end</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Multi-scale Permutation Entropy (MsPE) </span>
+    <span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Multi-scale Permutation Entropy (MsPE) </span>
 <span class="sd">        over multiple time scales</span>
 
 <span class="sd">    Args:</span>
@@ -184,7 +180,7 @@
 
 
 <div class="viewcode-block" id="PE"><a class="viewcode-back" href="../../../../information.html#teaspoon.SP.information.entropy.PE">[docs]</a><span class="k">def</span> <span class="nf">PE</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Permutation Entropy (PE).</span>
+    <span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Permutation Entropy (PE).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">       ts (array):  Time series (1d).</span>
@@ -212,7 +208,7 @@
 
 
 <div class="viewcode-block" id="PersistentEntropy"><a class="viewcode-back" href="../../../../information.html#teaspoon.SP.information.entropy.PersistentEntropy">[docs]</a><span class="k">def</span> <span class="nf">PersistentEntropy</span><span class="p">(</span><span class="n">lifetimes</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Permutation Entropy (PE).</span>
+    <span class="sd">&quot;&quot;&quot;This function takes a time series and calculates Permutation Entropy (PE).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">       lifetimes (array):  Lifetimes from persistence diagram (1d).</span>

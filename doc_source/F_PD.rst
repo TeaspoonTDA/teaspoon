@@ -179,20 +179,14 @@ Persistence Images
 	>>> # generate persistence diagrams
 	>>> df = testSetManifolds(numDgms=50, numPts=100)
 	>>> Diagrams_H1 = df['Dgm1'].sort_index().values
-
-	>>> D_Img = []
-	>>> plot = False
 	>>> PS = 0.01
 	>>> var = 0.01
-	>>> feature_PI = Ff.F_Image(Diagrams_H1, PS, var, plot, D_Img=[], pers_imager = None,training=True)['F_Matrix']
-	>>> # if user wants to plot images
-	>>> plot = True
-	>>> D_Img = [1,5]
-	>>> feature_PI = Ff.F_Image(Diagrams_H1, PS, var, plot, D_Img=D_Img, pers_imager = None,training=True)
-	>>> fig = feature_PI['figures']
+	>>> feature_PI = Ff.F_Image(Diagrams_H1, PS, var, pers_imager = None,training=True, parallel=True)
 
+	>>> # plot example images
+	>>> Ff.plot_F_Images(feature_PI, num_plots=4, rows=2, cols=2)
 
-The algorithm will return two images as shown in :numref:`PI_Example`.
+The algorithm will return four images as shown in :numref:`PI_Example`.  An example notebook is also available.
 
 .. _PI_Example:
 
@@ -201,6 +195,11 @@ The algorithm will return two images as shown in :numref:`PI_Example`.
    :scale: 20 %
    
    Example persistence images.    
+
+.. toctree::
+   :maxdepth: 4
+
+   notebooks/persistence_images
 
 .. _carlsson_coordinates:
 

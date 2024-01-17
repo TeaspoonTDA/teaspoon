@@ -11,6 +11,7 @@ The following are the available TSA functions:
 * :ref:`cgss_binning`
 * :ref:`cgss_sequence`
 * :ref:`ZeDA`
+* :ref:`Molinaro`
 
 Further detailed documentation and examples are provided below for each (or click link).
 
@@ -206,4 +207,33 @@ Output of example:
 .. figure:: figures/ZeDA_ExampleOutput.png
     :scale: 40 %
 
+
+
+.. _Molinaro:
+
+First Zero Detection Algorithm
+*******************************
+
+This section provides an implementation of a zero-crossing detection algorithm for the first zero (or the global minimum) in the interval given a discrete time series. This was proposed in "`An efficient algorithm for the zero crossing detection in digitized measurement signal <https://doi.org/10.1016/S0263-2241(01)00002-1>`_", and was used for benchmarking the algorithm ZeDA above.
+
+.. automodule:: teaspoon.SP.tsa_tools
+    :members: first_zero
+    :noindex:
+
+**Example**::
+
+    import numpy as np
+    t1 = 2.7                                          # Initial time value
+    tn = 7.5                                        # Final time value
+    t = np.linspace(t1, tn, 200, endpoint=True)     # Generate a time array
+    sig = (-3*t + 1.4)*np.sin(18*t) + 0.1           # Generate a time series
+
+    from teaspoon.SP.tsa_tools import first_zero
+    
+    ZC = first_zero(sig, t1, tn, plotting=True)    
+
+Output of example:
+
+.. figure:: figures/FirstZero_ExampleOutput.png
+    :scale: 40 %
 
