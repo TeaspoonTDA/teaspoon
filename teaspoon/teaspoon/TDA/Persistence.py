@@ -228,13 +228,14 @@ def removeInfiniteClasses(Dgm):
     return Dgm[keepRows, :]
 
 
-def BettiCurve(Dgm, maxEps=3, numStops=10):
+def BettiCurve(Dgm, maxEps=3, numStops=10, alpha=0):
     '''
     Computes the Betti Curve for a persistence diagram for thresholds 0 to maxEps
 
     :param Dgm (array):   2D numpy array of persistence diagram of a specific homology class
     :param maxEps (Optional[float]): Maximum value of threshold; default: 3
     :param numStops (Optional[int]): Number of points between 0 and maxEps; default: 10
+    :param alpha (Optional[float]): alpha smoothing to diagonal, points below this line are ignored, used for Crocker Stacks; default: 0
 
     :return: array of threshold values, Betti curve
 
@@ -244,7 +245,11 @@ def BettiCurve(Dgm, maxEps=3, numStops=10):
     Betti = np.zeros(np.shape(vecOfThresholds))
 
     for i, v in enumerate(vecOfThresholds):
-        Betti[i] = sum(np.logical_and((Dgm[:,0]<v), (Dgm[:,1] >v) ))
+        start = v - alpha
+        start = 0.0 if start < 0.0 else start
+        end = v + alpha
+
+        Betti[i] = sum(np.logical_and((Dgm[:,0]< start), (Dgm[:,1] > end) ))
 
     return vecOfThresholds, Betti
 
