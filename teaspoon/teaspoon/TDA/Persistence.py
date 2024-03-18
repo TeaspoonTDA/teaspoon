@@ -275,16 +275,56 @@ def CROCKER(DGMS, maxEps=3, numStops=10, plotting=True):
     M = np.array(AllBettis).T
 
     if plotting:
-        import matplotlib.pyplot as plt
+        _plot_crocker(M, t)
 
-        fig = plt.figure(figsize=(6, 6), dpi=300)
-        ax = fig.add_subplot(111)
-        cax = ax.matshow(M, origin='lower')
-        fig.colorbar(cax)
-        ax.set_xticks([])
-        ax.set_yticks(np.arange(len(t)))
-        ax.set_xticklabels([])
-        ax.set_yticklabels(t)
-        ax.set_ylabel(r'$\epsilon$')
-        plt.show()
     return M
+
+
+def CROCKER_Stack(DGMS, maxEps=3, numStops=10, alpha=None, plotting=True):
+    '''
+    Computes the CROCKER stack for a list of persistence diagrams for
+    thresholds 0 to maxEps with given alpha smoothing. Implemented according to
+    the paper "Capturing Dynamics of Time-Varying Data via Topology" by Xian
+    L. et al.
+
+    :param DGMS (list):  A python list of 2D numpy arrays of persistence diagrams of a specific homology class
+    :param maxEps (Optional[float]): Maximum value of threshold; default: 3
+    :param numStops (Optional[int]): Number of points between 0 and maxEps; default: 10
+    :param alpha (Optional[list]): list of alpha values for smoothing, in default case it is behaving like CROCKER; default: None
+    :param plotting (Optional[bool]): Plots the CROCKER for the given diagrams; default: True
+
+    :returns:
+        (np.array) the 3D CROCKER stack with dimensions [alpha][row][time]
+    '''
+
+    if alpha is None:
+        alpha = [0]
+
+    AllBettis = np.zeros((len(alpha), numStops, len(DGMS)))
+
+    for aps_idx, alpha_ in enumerate(alpha):
+        for idx, Dgm in enumerate(DGMS):
+            thresholds_, betti_vals_ = BettiCurve(Dgm, maxEps, numStops, alpha_)
+            AllBettis[aps_idx, :, idx] = betti_vals_
+
+        if plotting:
+            _plot_crocker(AllBettis[aps_idx], thresholds_,
+                          title_=f"Crocker Stack with alpha={alpha[aps_idx]}")
+
+    return AllBettis
+
+
+def _plot_crocker(M, t, title_=""):
+    import matplotlib.pyplot as plt
+
+    fig = plt.figure(figsize=(6, 6), dpi=300)
+    ax = fig.add_subplot(111)
+    cax = ax.matshow(M, origin='lower')
+    fig.colorbar(cax)
+    ax.set_xticks([])
+    ax.set_yticks(np.arange(len(t)))
+    ax.set_xticklabels([])
+    ax.set_yticklabels(t)
+    ax.set_ylabel(r'$\epsilon$')
+    ax.set_title(title_)
+    plt.show()
