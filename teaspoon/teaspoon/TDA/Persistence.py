@@ -280,7 +280,7 @@ def CROCKER(DGMS, maxEps=3, numStops=10, plotting=True):
     return M
 
 
-def CROCKER_Stack(DGMS, maxEps=3, numStops=10, alpha=None, plotting=True):
+def CROCKER_Stack(DGMS, maxEps=3, numStops=10, alpha=[0], plotting=True):
     '''
     Computes the CROCKER stack for a list of persistence diagrams for
     thresholds 0 to maxEps with given alpha smoothing. Implemented according to
@@ -290,15 +290,12 @@ def CROCKER_Stack(DGMS, maxEps=3, numStops=10, alpha=None, plotting=True):
     :param DGMS (list):  A python list of 2D numpy arrays of persistence diagrams of a specific homology class
     :param maxEps (Optional[float]): Maximum value of threshold; default: 3
     :param numStops (Optional[int]): Number of points between 0 and maxEps; default: 10
-    :param alpha (Optional[list]): list of alpha values for smoothing, in default case it is behaving like CROCKER; default: None
+    :param alpha (Optional[list]): list of alpha values for smoothing, in default case it is behaving like CROCKER; default: [0]
     :param plotting (Optional[bool]): Plots the CROCKER for the given diagrams; default: True
 
     :returns:
         (np.array) the 3D CROCKER stack with dimensions [alpha][row][time]
     '''
-
-    if alpha is None:
-        alpha = [0]
 
     AllBettis = np.zeros((len(alpha), numStops, len(DGMS)))
 
