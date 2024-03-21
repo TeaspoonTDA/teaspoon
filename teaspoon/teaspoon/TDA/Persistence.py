@@ -297,18 +297,19 @@ def CROCKER_Stack(DGMS, maxEps=3, numStops=10, alpha=[0], plotting=True):
         (np.array) the 3D CROCKER stack with dimensions [alpha][row][time]
     '''
 
-    AllBettis = np.zeros((len(alpha), numStops, len(DGMS)))
+    all_betti_numbers_ = np.zeros((len(alpha), numStops, len(DGMS)))
+    thresholds_ = []
 
     for aps_idx, alpha_ in enumerate(alpha):
         for idx, Dgm in enumerate(DGMS):
             thresholds_, betti_vals_ = BettiCurve(Dgm, maxEps, numStops, alpha_)
-            AllBettis[aps_idx, :, idx] = betti_vals_
+            all_betti_numbers_[aps_idx, :, idx] = betti_vals_
 
         if plotting:
-            _plot_crocker(AllBettis[aps_idx], thresholds_,
+            _plot_crocker(all_betti_numbers_[aps_idx], thresholds_,
                           title_=f"Crocker Stack with alpha={alpha[aps_idx]}")
 
-    return AllBettis
+    return all_betti_numbers_
 
 
 def _plot_crocker(M, t, title_=""):
