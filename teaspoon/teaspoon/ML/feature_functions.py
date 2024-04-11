@@ -362,6 +362,15 @@ def interp_polynomial(Dgm, params, dgm_type='BirthDeath'):
         print('Exiting...')
         return
 
+    if params.partitions == None:
+        xmin = A[:, 0].min()
+        xmax = A[:, 0].max()
+        ymin = A[:, 1].min()
+        ymax = A[:, 1].max()
+
+        box = {'nodes': np.array([xmin, xmax, ymin, ymax]), 'npts': A.shape[0]}
+        params.partitions = [box]
+
     # first, get the entries in Dgm that are within each partition
     for partition in params.partitions:
         query_Dgm_pts = getSubset(A, partition)
