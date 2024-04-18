@@ -34,11 +34,11 @@ dependencies = ["cycler>=0.11.0",
                 "ripser>=0.6.4", 
                 "sympy>=1.11.1",
                 "sortedcontainers>=2.4.0",
-                "giotto-tda>=0.5.0",
                 "persim",
                 "pandas>=1.4.1",
                 "gudhi",
-                "numba"
+                "numba",
+                "importlib_resources"
             ]
 
 [tool.setuptools.packages.find]

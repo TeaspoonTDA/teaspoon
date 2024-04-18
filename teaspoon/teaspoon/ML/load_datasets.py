@@ -1,5 +1,5 @@
-import importlib_resources
 import pandas as pd
+import importlib_resources
 
 def mpeg7():
     """
