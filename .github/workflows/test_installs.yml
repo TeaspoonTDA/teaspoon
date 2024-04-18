@@ -8,20 +8,19 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+concurrency: release
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-39:
     name: Build on Python 3.9
     runs-on: ubuntu-latest
-    concurrency: release
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@master
         with:
           ref: 'test_release'
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.9"
       - name: Install pypa/build
@@ -37,14 +36,13 @@ jobs:
   build-310:
     name: Build on Python 3.10
     runs-on: ubuntu-latest
-    concurrency: release
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@master
         with:
           ref: 'test_release'
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
       - name: Install pypa/build
@@ -60,14 +58,13 @@ jobs:
   build-311:
     name: Build on Python 3.11
     runs-on: ubuntu-latest
-    concurrency: release
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@master
         with:
           ref: 'test_release'
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
       - name: Install pypa/build
@@ -83,14 +80,13 @@ jobs:
   build-312:
     name: Build on Python 3.12
     runs-on: ubuntu-latest
-    concurrency: release
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@master
         with:
           ref: 'test_release'
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install pypa/build
