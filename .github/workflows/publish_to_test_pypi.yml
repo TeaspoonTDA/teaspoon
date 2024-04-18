@@ -4,7 +4,7 @@ name: Publish Python Distributions to TestPyPI
 on:
   # Triggers the workflow on push or pull request events but only for the "test_release" branch
   workflow_run:
-    workflows: ["Test install on Python 3.9","Test install on Python 3.10","Test install on Python 3.11"]
+    workflows: ["Test Installs"]
     branches: [test_release]
 
   # Allows you to run this workflow manually from the Actions tab
