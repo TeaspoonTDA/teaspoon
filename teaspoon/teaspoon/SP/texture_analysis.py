@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 from ripser import ripser
 import matplotlib.gridspec as gridspec
-from gtda.homology import CubicalPersistence
+from gudhi.sklearn.cubical_persistence import CubicalPersistence
+from gudhi.representations import DiagramSelector
+from sklearn.pipeline import Pipeline
 from scipy import stats
 from scipy import ndimage as sp
 from scipy import integrate
@@ -400,15 +402,14 @@ def generate_ph(img, dim):
     Persistence pairs of desired dimension on the input image.
 
     """
-    cubical_persistence = CubicalPersistence(n_jobs=-1, reduced_homology=True)
-    pdgm = cubical_persistence.fit_transform(np.array([img]))
+
+    pipe = Pipeline(
+    [
+        ("cub_pers", CubicalPersistence(homology_dimensions=dim, n_jobs=-2)),
+        ("finite_diags", DiagramSelector(use=True, point_type="finite")),
+    ]
+)
+    pdgm = pipe.fit_transform(np.array([img]))
     pdgm = pdgm[0].astype(np.float64)
-    dgms = []
 
-    # Filter persistence diagram to return desired dimension
-    for n, item in enumerate(pdgm):
-        if item[2] == dim:
-            dgms.append(np.array(pdgm[n, :]))
-
-    dgms = np.array(dgms)
-    return dgms
+    return pdgm
