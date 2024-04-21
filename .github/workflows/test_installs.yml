@@ -144,7 +144,7 @@ jobs:
       - name: Run tests
         run: make tests
   build-312-ubuntu:
-    name: Build on Python 3.12
+    name: Build on Python 3.12 ubuntu
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -166,7 +166,7 @@ jobs:
       - name: Run tests
         run: make tests
   build-312-mac:
-    name: Build on Python 3.12
+    name: Build on Python 3.12 mac
     runs-on: mac-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
