@@ -229,7 +229,7 @@ def removeInfiniteClasses(Dgm):
 
 
 def BettiCurve(Dgm, maxEps=3, numStops=10, alpha=0):
-    '''
+    """
     Computes the Betti Curve for a persistence diagram for thresholds 0 to maxEps
 
     :param Dgm (array):   2D numpy array of persistence diagram of a specific homology class
@@ -238,10 +238,9 @@ def BettiCurve(Dgm, maxEps=3, numStops=10, alpha=0):
     :param alpha (Optional[float]): alpha smoothing to diagonal, points below this line are ignored, used for Crocker Stacks; default: 0
 
     :return: array of threshold values, Betti curve
+    """
 
-    '''
-
-    vecOfThresholds = np.linspace(0,maxEps,numStops)
+    vecOfThresholds = np.linspace(0, maxEps, numStops)
     Betti = np.zeros(np.shape(vecOfThresholds))
 
     for i, v in enumerate(vecOfThresholds):
@@ -249,9 +248,10 @@ def BettiCurve(Dgm, maxEps=3, numStops=10, alpha=0):
         start = 0.0 if start < 0.0 else start
         end = v + alpha
 
-        Betti[i] = sum(np.logical_and((Dgm[:,0]< start), (Dgm[:,1] > end) ))
+        Betti[i] = sum(np.logical_and((Dgm[:, 0] < start), (Dgm[:, 1] > end)))
 
     return vecOfThresholds, Betti
+
 
 def CROCKER(DGMS, maxEps=3, numStops=10, plotting=True):
     '''
@@ -280,22 +280,31 @@ def CROCKER(DGMS, maxEps=3, numStops=10, plotting=True):
     return M
 
 
-def CROCKER_Stack(DGMS, maxEps=3, numStops=10, alpha=[0], plotting=True):
-    '''
-    Computes the CROCKER stack for a list of persistence diagrams for
+def CROCKER_Stack(DGMS, maxEps=3, numStops=10, alpha=None, plotting=True):
+    """ Computes the CROCKER stack for a list of persistence diagrams for
     thresholds 0 to maxEps with given alpha smoothing. Implemented according to
     the paper "Capturing Dynamics of Time-Varying Data via Topology" by Xian
     L. et al.
 
-    :param DGMS (list):  A python list of 2D numpy arrays of persistence diagrams of a specific homology class
-    :param maxEps (Optional[float]): Maximum value of threshold; default: 3
-    :param numStops (Optional[int]): Number of points between 0 and maxEps; default: 10
-    :param alpha (Optional[list]): list of alpha values for smoothing, in default case it is behaving like CROCKER; default: [0]
-    :param plotting (Optional[bool]): Plots the CROCKER for the given diagrams; default: True
+    :param DGMS: A python list of 2D numpy arrays of persistence diagrams of
+        a specific homology class
+    :type DGMS: list
+    :param maxEps: Maximum value of threshold, defaults to 3
+    :type maxEps: float, optional
+    :param numStops: Number of points between 0 and maxEps, defaults to 10
+    :type numStops: int, optional
+    :param alpha: A list of alpha values for smoothing, in default case it is
+        behaving like CROCKER, defaults to [0]
+    :type alpha: list, optional
+    :param plotting: Plots the CROCKER for the given diagrams, defaults to True
+    :type plotting: bool, optional
 
-    :returns:
-        (np.array) the 3D CROCKER stack with dimensions [alpha][row][time]
-    '''
+    :return: the 3D CROCKER stack with dimensions [alpha][row][time]
+    :rtype: np.darray
+    """
+
+    if alpha is None:
+        alpha = [0]
 
     all_betti_numbers_ = np.zeros((len(alpha), numStops, len(DGMS)))
     thresholds_ = []
@@ -305,7 +314,8 @@ def CROCKER_Stack(DGMS, maxEps=3, numStops=10, alpha=[0], plotting=True):
             thresholds_, betti_vals_ = BettiCurve(Dgm, maxEps, numStops, alpha_)
             all_betti_numbers_[aps_idx, :, idx] = betti_vals_
 
-        if plotting:
+    if plotting:
+        for aps_idx, alpha_ in enumerate(alpha):
             _plot_crocker(all_betti_numbers_[aps_idx], thresholds_,
                           title_=f"Crocker Stack with alpha={alpha[aps_idx]}")
 
