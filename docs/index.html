@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon: Topological Signal Processing in Python &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -30,12 +31,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="#" class="icon icon-home"> teaspoon
-            <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="#" class="icon icon-home">
+            teaspoon
+              <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -84,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnitude.html">2.3.6. Magnitude</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -122,7 +128,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a></li>
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">teaspoon: Topological Signal Processing in Python</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
@@ -133,39 +139,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="teaspoon-topological-signal-processing-in-python">
-<h1>teaspoon: Topological Signal Processing in Python<a class="headerlink" href="#teaspoon-topological-signal-processing-in-python" title="Permalink to this heading"></a></h1>
+  <section id="teaspoon-topological-signal-processing-in-python">
+<h1>teaspoon: Topological Signal Processing in Python<a class="headerlink" href="#teaspoon-topological-signal-processing-in-python" title="Link to this heading"></a></h1>
 <p>The emerging field of topological signal processing brings methods from Topological Data Analysis (TDA) to create new tools for signal processing by incorporating aspects of shape.
 This python package, teaspoon for tsp or topological signal processing, brings together available software for computing persistent homology, the main workhorse of TDA, with modules that expand the functionality of teaspoon as a state-of-the-art topological signal processing tool.
 These modules include methods for incorporating tools from machine learning, complex networks, information, and parameter selection along with a dynamical systems library to streamline the creation and benchmarking of new methods.
 All code is open source with up to date documentation, making the code easy to use, in particular for signal processing experts with limited experience in topological methods.</p>
 <a class="reference internal image-reference" href="_images/takens_embedding_gif_v2.gif"><img alt="_images/takens_embedding_gif_v2.gif" src="_images/takens_embedding_gif_v2.gif" style="width: 600px;" /></a>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
@@ -265,6 +247,10 @@ All code is open source with up to date documentation, making the code easy to u
 <li class="toctree-l4"><a class="reference internal" href="sublevel_set_persistence.html#teaspoon.TDA.SLSP_tools.cutoff"><code class="docutils literal notranslate"><span class="pre">cutoff()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="magnitude.html">2.3.6. Magnitude</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnitude.html#magnitude-function">2.3.6.1. Magnitude function</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -275,6 +261,7 @@ All code is open source with up to date documentation, making the code easy to u
 <li class="toctree-l4"><a class="reference internal" href="tsa.html#coarse-grained-state-space-binning">2.4.1.4. Coarse grained state space binning</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tsa.html#coarse-grained-state-space-state-sequence">2.4.1.5. Coarse grained state space state sequence</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tsa.html#zero-detection-algorithm-zeda">2.4.1.6. Zero Detection Algorithm (ZeDA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tsa.html#first-zero-detection-algorithm">2.4.1.7. First Zero Detection Algorithm</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a><ul>
@@ -334,7 +321,7 @@ All code is open source with up to date documentation, making the code easy to u
 </div>
 </section>
 <section id="collaborators">
-<h2>Collaborators<a class="headerlink" href="#collaborators" title="Permalink to this heading"></a></h2>
+<h2>Collaborators<a class="headerlink" href="#collaborators" title="Link to this heading"></a></h2>
 <p>The code is a compilation of work done by <a class="reference external" href="http://www.elizabethmunch.com">Elizabeth Munch</a> and <a class="reference external" href="http://www.firaskhasawneh.com/">Firas Khasawneh</a> along with their students and collaborators.  People who have contributed to teaspoon include:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.audunmyers.com">Audun Myers</a></p></li>
@@ -346,7 +333,7 @@ All code is open source with up to date documentation, making the code easy to u
 </ul>
 </section>
 <section id="contact-information">
-<h2>Contact Information<a class="headerlink" href="#contact-information" title="Permalink to this heading"></a></h2>
+<h2>Contact Information<a class="headerlink" href="#contact-information" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://www.elizabethmunch.com">Liz Munch</a>: <a class="reference external" href="mailto:muncheli&#37;&#52;&#48;msu&#46;edu">muncheli<span>&#64;</span>msu<span>&#46;</span>edu</a></p></li>
 <li><p><a class="reference external" href="https://www.firaskhasawneh.com">Firas Khasawneh</a>: <a class="reference external" href="mailto:khasawn3&#37;&#52;&#48;egr&#46;msu&#46;edu">khasawn3<span>&#64;</span>egr<span>&#46;</span>msu<span>&#46;</span>edu</a></p></li>

@@ -18,6 +18,9 @@ from sympy.abc import t
 from sympy import Piecewise
 from sympy import diff, integrate
 from itertools import combinations
+from numba import guvectorize
+from sklearn import mixture
+import copy
 
 # -------------------------------------------- #
 # -------------------------------------------- #
@@ -361,6 +364,15 @@ def interp_polynomial(Dgm, params, dgm_type='BirthDeath'):
         print('Your choices for type are "BirthDeath" or "BirthLifetime".')
         print('Exiting...')
         return
+
+    if params.partitions == None:
+        xmin = A[:, 0].min()
+        xmax = A[:, 0].max()
+        ymin = A[:, 1].min()
+        ymax = A[:, 1].max()
+    
+        box = {'nodes': np.array([xmin, xmax, ymin, ymax]), 'npts': A.shape[0]}
+        params.partitions = [box]
 
     # first, get the entries in Dgm that are within each partition
     for partition in params.partitions:
@@ -1153,3 +1165,278 @@ def plot_F_Images(PI_features, num_plots=6, rows=2, cols=3, index=[], labels=[])
             axs[r,c].imshow(img)
             axs[r,c].set(xlabel='birth',ylabel='persistence',xticks=([]),yticks=([]), title=tid[i])
             i += 1
+
+@guvectorize(["void(float64[:,:,:], float64[:,:], float64, float64[:])",],"(p,m,n), (m,n), ()->(p)", target='parallel', nopython=True)
+def kernel_distance_parallel(dgms0, dgms1, sigma, result):
+    """
+
+    This function computes (in parallel) the multiscale heat kernel distance for an array of persistence diagrams based on the formula provided in Ref. :cite:`5 <Reininghaus2015>`.
+    There are three inputs and these are two persistence diagram arrays and the kernel scale sigma.  This function should be used for medium size datasets.    
+
+    Parameters
+    ----------
+    dgms0 : ndarray
+        Object array that includes first persistence diagram set.
+    dgms1 : ndarray
+        Object array that includes second persistence diagram set.
+    sigma : float
+        Kernel scale.
+
+    Returns
+    -------
+    result : np array
+        The kernel matrix
+
+    """
+    n_train = len(dgms0)
+    for i in range(n_train):
+        dgm0=dgms0[i]
+        dgm1 = dgms1
+        kSigma0 = 0
+        kSigma1 = 0
+        kSigma2 = 0
+        for k in range(dgm0.shape[0]):
+            p = dgm0[k,0:2]
+            if np.sum(p)==-2:
+                continue
+            for l in range(dgm0.shape[0]):
+                q = dgm0[l,0:2]
+                if np.sum(q)==-2:
+                    continue
+                qc = dgm0[l, 1::-1]
+                pq = (p[0] - q[0])**2 + (p[1] - q[1])**2
+                pqc = (p[0] - qc[0])**2 + (p[1] - qc[1])**2
+                kSigma0 += math.exp(-( pq) / (8 * sigma)) - math.exp(-(pqc) / (8 * sigma))
+        for k in range(dgm1.shape[0]):
+            p = dgm1[k,0:2]
+            if np.sum(p)==-2:
+                continue
+            for l in range(dgm1.shape[0]):
+                q = dgm1[l,0:2]
+                if np.sum(q)==-2:
+                    continue
+                qc = dgm1[l, 1::-1]
+                pq = (p[0] - q[0])**2 + (p[1] - q[1])**2
+                pqc = (p[0] - qc[0])**2 + (p[1] - qc[1])**2
+                kSigma1 += math.exp(-( pq) / (8 * sigma)) - math.exp(-(pqc) / (8 * sigma))
+        for k in range(dgm0.shape[0]):
+            p = dgm0[k,0:2]
+            if np.sum(p)==-2:
+                continue
+            for l in range(dgm1.shape[0]):
+                q = dgm1[l,0:2]
+                if np.sum(q)==-2:
+                    continue
+                qc = dgm1[l, 1::-1]
+                pq = (p[0] - q[0])**2 + (p[1] - q[1])**2
+                pqc = (p[0] - qc[0])**2 + (p[1] - qc[1])**2
+                kSigma2 += math.exp(-( pq) / (8 * sigma)) - math.exp(-(pqc) / (8 * sigma))
+
+        kSigma0 = kSigma0/(8 * np.pi * sigma)
+        kSigma1 = kSigma1/(8 * np.pi * sigma)
+        kSigma2 = kSigma2/(8 * np.pi * sigma)
+        result[i] = math.sqrt(kSigma1 + kSigma0-2*kSigma2)
+
+@guvectorize(["void(float64[:,:,:], float64[:,:], float64, float64[:])",],"(p,m,n), (m,n), ()->(p)", target='cpu', nopython=True)
+def kernel_distance(dgms0, dgms1, s, result):
+    """
+
+    This function computes the multiscale heat kernel distance for an array of persistence diagrams based on the formula provided in Ref. :cite:`5 <Reininghaus2015>`.
+    There are three inputs and these are two persistence diagram arrays and the kernel scale sigma.  This function should be used for small size datasets.  
+
+    Parameters
+    ----------
+    dgms0 : ndarray
+        Object array that includes first persistence diagram set.
+    dgms1 : ndarray
+        Object array that includes second persistence diagram set.
+    sigma : float
+        Kernel scale.
+
+    Returns
+    -------
+    result : np array
+        The kernel matrix
+
+    """
+    n_train = len(dgms0)
+    for i in range(n_train):
+        dgm0=dgms0[i]
+        dgm1 = dgms1
+        kSigma0 = 0
+        kSigma1 = 0
+        kSigma2 = 0
+        sigma = s
+        for k in range(dgm0.shape[0]):
+            p = dgm0[k,0:2]
+            if np.sum(p)==-2:
+                continue
+            for l in range(dgm0.shape[0]):
+                q = dgm0[l,0:2]
+                if np.sum(q)==-2:
+                    continue
+                qc = dgm0[l, 1::-1]
+                pq = (p[0] - q[0])**2 + (p[1] - q[1])**2
+                pqc = (p[0] - qc[0])**2 + (p[1] - qc[1])**2
+                kSigma0 += math.exp(-( pq) / (8 * sigma)) - math.exp(-(pqc) / (8 * sigma))
+        for k in range(dgm1.shape[0]):
+            p = dgm1[k,0:2]
+            if np.sum(p)==-2:
+                continue
+            for l in range(dgm1.shape[0]):
+                q = dgm1[l,0:2]
+                if np.sum(q)==-2:
+                    continue
+                qc = dgm1[l, 1::-1]
+                pq = (p[0] - q[0])**2 + (p[1] - q[1])**2
+                pqc = (p[0] - qc[0])**2 + (p[1] - qc[1])**2
+                kSigma1 += math.exp(-( pq) / (8 * sigma)) - math.exp(-(pqc) / (8 * sigma))
+        for k in range(dgm0.shape[0]):
+            p = dgm0[k,0:2]
+            if np.sum(p)==-2:
+                continue
+            for l in range(dgm1.shape[0]):
+                q = dgm1[l,0:2]
+                if np.sum(q)==-2:
+                    continue
+                qc = dgm1[l, 1::-1]
+                pq = (p[0] - q[0])**2 + (p[1] - q[1])**2
+                pqc = (p[0] - qc[0])**2 + (p[1] - qc[1])**2
+                kSigma2 += math.exp(-( pq) / (8 * sigma)) - math.exp(-(pqc) / (8 * sigma))
+
+        kSigma0 = kSigma0/(8 * np.pi * sigma)
+        kSigma1 = kSigma1/(8 * np.pi * sigma)
+        kSigma2 = kSigma2/(8 * np.pi * sigma)
+        result[i] = math.sqrt(kSigma1 + kSigma0-2*kSigma2)
+
+def f_dgm(dgm, function, **keyargs):
+	'''
+	Given a persistence diagram :math:`D = (S,\mu)` and a compactly supported function in :math:`\mathbb{R}^2`, this function computes
+	.. math::
+		\\nu_{D}(f) = \sum_{x\in S} f(x)\mu(x)
+	:param dgm: persistent diagram, array of points in :math:`\mathbb{R}^2`.
+	:type dgm: Numpy array
+	:param function: Compactly supported function in :math:`\mathbb{R}^2`.
+	:type function: function
+	:param keyargs: Additional arguments required by `funciton`
+	:type keyargs: Dicctionary
+	:return: float -- value of :math:`\\nu_{D}(f)`.
+	'''
+
+	temp = function(dgm, **keyargs)
+
+	return sum(temp)
+
+def f_ellipse (x, center=np.array([0,0]), axis=np.array([1,1]), rotation=np.array([[1,0],[0,1]])):
+	'''
+	Computes a bump function centered with an ellipsoidal domain centered ac `c`, rotaded by 'rotation' and with axis given by 'axis'. The bump function is computed using the gollowing formula 
+	.. math::
+		f_{A,c} (x) = \max \\left\{ 0, 1 - (x - c)^T A (x - c)\\right\}
+	:param x: point to avelatuate the function :math:`f_{A,c}`
+	:type z: Numpy array
+	:param center: center of the ellipse
+	:type center: Numpy array
+	:param axis: Size f themjor an minor axis of the ellipse
+	:type axis: Numpy array
+	:param rotation: Rotation matrix for the ellipse
+	:type rotation: Numpy array
+	:return: float -- value of :math:`f_{A,c} (x)`.
+	'''
+	sigma = np.diag(np.power(axis, -2))
+	x_centered = np.subtract(x, center)
+	temp = x_centered@rotation@sigma@np.transpose(rotation)@np.transpose(x_centered)
+	temp = np.diag(temp)
+
+	return np.maximum(0, 1-temp)
+def adaptive_feature(list_dgms, function, **keyargs):
+	'''
+	Given a collection of persistent diagrams and a compactly supported function in :math:`\mathbb{R}^2`, computes :math:`\\nu_{D}(f)` for each diagram :math:`D` in the collection.
+	:param list_dgms: list of persistent diagrams
+	:type list_dgms: list
+	:param function: Compactly supported function in :math:`\mathbb{R}^2`.
+	:type function: function
+	:param keyargs: Additional arguments required by `funciton`
+	:type keyargs: Dicctionary
+	:return: Numpy array -- Array of values :math:`\\nu_{D}(f)` for each diagram :math:`D` in the collection `list_dgms`.
+	'''
+	num_diagrams = len(list_dgms)
+
+	feat = np.zeros(num_diagrams)
+	for i in range(num_diagrams):
+		feat[i] = f_dgm(list_dgms[i], function, **keyargs)
+
+	return feat
+
+def adaptive_template_functions(train_dgms, d=25, threshold=.05):
+    """
+
+    This function computes adaptive template functions as in the paper :cite:`6 <polanco2019adaptive>` from a training set and returns the ellipses needed to fit features to a training and testing dataset.
+
+    Parameters
+    ----------
+    train_dgms : ndarray
+        Object array that includes training diagrams
+    d : integer
+        maximum number of functions.
+    threshold: float
+        cutoff for inclusion as
+
+    Returns
+    -------
+    ellipses : list
+        list of ellipses that are the adaptive template functions
+
+    """
+	#### Combine all diagrams
+    X_train_temp = np.vstack(train_dgms)
+	### return means for scoring
+    gmm = mixture.BayesianGaussianMixture(n_components=d, covariance_type='full', max_iter=int(10e4)).fit(X_train_temp)
+    ellipses = []
+    for i in range(len(gmm.means_)):
+        L, v = np.linalg.eig(gmm.covariances_[i])
+        temp = {'mean':gmm.means_[i], 'std':np.sqrt(L), 'rotation':v.transpose(), 'radius':max(np.sqrt(L)), 'entropy':gmm.weights_[i]}
+        temp['std'] = 3*temp['std']
+        ellipses.append(temp)
+
+    return ellipses
+
+def adaptive_template_features(list_dgms, list_ellipses, function=f_ellipse):
+	'''
+	This function computes all the features for a collection of persistent diagrams given a list ot ellipses.
+	:param list_dgms: list of persistent diagrams
+	:type list_dgms: list
+	:param list_ellipses: List of dicctionaries. Each dicctionary represents a ellipse. It must have the following keys: `mean`, `std` and `rotation`.
+	:type list_ellipses: list
+	:param function: Compactly supported function in :math:`\mathbb{R}^2`.
+	:type function: function
+	:return: Numpy array -- 
+	'''
+	features = np.zeros((len(list_dgms), len(list_ellipses)))
+	for i in range(len(list_ellipses)):
+		args = {key:list_ellipses[i][key] for key in ['mean', 'std', 'rotation']}
+		args['center'] = args.pop('mean')
+		args['axis'] = args.pop('std')
+
+		features[:,i] = adaptive_feature(list_dgms, function, **args)
+
+	return features
+
+def reshape_to_array(diagrams):
+    ndgms = copy.deepcopy(diagrams)
+    d0 = len(ndgms)
+    d1 = 0
+    d2 = 2
+    for i in range(0, d0):
+        d1 = max(d1, len(ndgms[i]))
+    for i in range(0,d0):
+        d = len(ndgms[i])
+        if d==d1:
+            continue
+        ndgms[i] = list(ndgms[i])
+        for k in range(0, d1-d):
+            ndgms[i].append([-1,-1])
+    dgms_array = []
+    for i in range(0, d0):
+        dgms_array.append(np.array(ndgms[i]))
+    return np.reshape(dgms_array, (d0, d1, d2))
+
