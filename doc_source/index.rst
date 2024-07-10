@@ -37,7 +37,7 @@ The code is a compilation of work done by `Elizabeth Munch <http://www.elizabeth
 - `Danielle Barnes <https://github.com/barnesd8>`_
 - `Ismail Guzel <https://ismailguzel.github.io>`_
 - `Max Chumley <https://www.maxchumley.com>`_
-
+- `Sunia Tanweer <https://www.suniatanweer.com>`_
 
 
 
