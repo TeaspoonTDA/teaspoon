@@ -11,10 +11,12 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -26,6 +28,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
             <a href="../../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -66,9 +69,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ML.html">2.2. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.1. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.2. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.3. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../DS.html">2.2.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../F_PD.html">2.2.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../CL.html">2.2.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ML.html#references">2.2.4. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
@@ -77,7 +81,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../drawing.html">2.3.3. Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../sample_md.html">2.3.6. Drawing Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnitude.html">2.3.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../fast_zigzag.html">2.3.7. Fast Zigzag</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -86,7 +91,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../stochastic_bifurcation.html">2.4.6. Stochastic P-Bifurcation Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../stoch_bif.html">2.4.6. Stochastic P-Bifurcation Detection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -166,9 +171,7 @@
 
     <span class="k">return</span> <span class="n">array_to_dict</span><span class="p">(</span><span class="n">sup_pers</span><span class="p">)</span>
 
-<div class="viewcode-block" id="analytical_homological_bifurcation_plot">
-<a class="viewcode-back" href="../../../stochastic_bifurcation.html#teaspoon.SP.StochasticP.analytical_homological_bifurcation_plot">[docs]</a>
-<span class="k">def</span> <span class="nf">analytical_homological_bifurcation_plot</span><span class="p">(</span><span class="n">PDFs</span><span class="p">,</span> <span class="n">bifurcation_parameters</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="nb">filter</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="analytical_homological_bifurcation_plot"><a class="viewcode-back" href="../../../stoch_bif.html#teaspoon.SP.StochasticP.analytical_homological_bifurcation_plot">[docs]</a><span class="k">def</span> <span class="nf">analytical_homological_bifurcation_plot</span><span class="p">(</span><span class="n">PDFs</span><span class="p">,</span> <span class="n">bifurcation_parameters</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="nb">filter</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Computes the homological bifurcation plot given a list of analytically generated PDFs</span>
 
@@ -235,7 +238,6 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">plots</span></div>
-
 
 
 </pre></div>

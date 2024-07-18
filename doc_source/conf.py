@@ -13,17 +13,19 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__),'..','..'))
 from unittest import mock
 sys.modules['ripser'] = mock.Mock()
 
+
 # -- Project information -----------------------------------------------------
 
 project = 'teaspoon'
 copyright = '2020, Munch'
 author = 'Elizabeth Munch'
-release = '1.5.3'
+release = '1.3.7'
 
 source_suffix = {
     '.rst': 'restructuredtext',
     '.md': 'markdown',
 }
+
 
 # -- General configuration ---------------------------------------------------
 extensions = ['sphinx.ext.autodoc',
@@ -42,8 +44,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.githubpages',
               'sphinxcontrib.bibtex',
               'sphinx-prompt',
-              'nbsphinx',
-              'IPython.sphinxext.ipython_console_highlighting',
+	           'IPython.sphinxext.ipython_console_highlighting',
               'myst_parser']
 
 # Add any paths that contain templates here, relative to this directory.
