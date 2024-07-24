@@ -5,6 +5,9 @@ on:
   # Triggers the workflow on push or pull request events but only for the "test_release" branch
   push:
     branches: [ "test_release" ]
+  pull_request:
+    branches: [ "master" ]
+
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
