@@ -12,3 +12,4 @@ This branch of the documentation covers tool used for topological data analysis.
    Persistence <persistence.rst>
    Zero Dimensional Sublevel Set Persistence (SLSP) Module <sublevel_set_persistence.rst>
    Magnitude <magnitude.rst>
+   Fast Zigzag <fast_zigzag.md>
