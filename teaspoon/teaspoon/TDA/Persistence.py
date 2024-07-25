@@ -232,12 +232,16 @@ def BettiCurve(Dgm, maxEps=3, numStops=10, alpha=0):
     """
     Computes the Betti Curve for a persistence diagram for thresholds 0 to maxEps
 
-    :param Dgm (array):   2D numpy array of persistence diagram of a specific homology class
-    :param maxEps (Optional[float]): Maximum value of threshold; default: 3
-    :param numStops (Optional[int]): Number of points between 0 and maxEps; default: 10
-    :param alpha (Optional[float]): alpha smoothing to diagonal, points below this line are ignored, used for Crocker Stacks; default: 0
+    :param Dgm:  
+        (array) 2D numpy array of persistence diagram of a specific homology class
+    :param maxEps: 
+        (Optional[float]) Maximum value of threshold; default: 3
+    :param numStops: 
+         (Optional[int]) Number of points between 0 and maxEps; default: 10
+    :param alpha: 
+        (Optional[float]) alpha smoothing to diagonal, points below this line are ignored, used for Crocker Stacks; default: 0
 
-    :return: array of threshold values, Betti curve
+    :return: array of threshold values representing the Betti curve
     """
 
     vecOfThresholds = np.linspace(0, maxEps, numStops)
@@ -257,10 +261,14 @@ def CROCKER(DGMS, maxEps=3, numStops=10, plotting=True):
     '''
     Computes the CROCKER plot for a list of persistence diagrams for thresholds 0 to maxEps
 
-    :param DGMS (list):  A python list of 2D numpy arrays of persistence diagrams of a specific homology class
-    :param maxEps (Optional[float]): Maximum value of threshold; default: 3
-    :param numStops (Optional[int]): Number of points between 0 and maxEps; default: 10
-    :param plotting (Optional[bool]): Plots the CROCKER for the given diagrams; default: True
+    :param DGMS:  
+        (list) A python list of 2D numpy arrays of persistence diagrams of a specific homology class
+    :param maxEps: 
+        (Optional[float]) Maximum value of threshold; default: 3
+    :param numStops: 
+        (Optional[int]) Number of points between 0 and maxEps; default: 10
+    :param plotting: 
+        (Optional[bool]) Plots the CROCKER for the given diagrams; default: True
 
     :returns: 2D CROCKER plot
 
