@@ -21,6 +21,11 @@ copyright = '2020, Munch'
 author = 'Elizabeth Munch'
 release = '1.3.7'
 
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+
 
 # -- General configuration ---------------------------------------------------
 extensions = ['sphinx.ext.autodoc',
@@ -39,9 +44,11 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.githubpages',
               'sphinxcontrib.bibtex',
               'sphinx-prompt',
-              'nbsphinx',
-              'IPython.sphinxext.ipython_console_highlighting']
+	           'IPython.sphinxext.ipython_console_highlighting',
+              'myst_parser']
+
 # Add any paths that contain templates here, relative to this directory.
+myst_heading_anchors = 5
 templates_path = ['_templates']
 exclude_patterns = []
 bibtex_bibfiles = ['references.bib']

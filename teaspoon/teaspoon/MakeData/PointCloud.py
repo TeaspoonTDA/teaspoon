@@ -279,6 +279,192 @@ def Clusters(N=100,
 
 
 #----------------------------------------------------------------------#
+def GaussianField(m, n, a=0.8, b=100):
+
+    '''
+    Returns matrix representing the 2D gaussian field made on an m x n grid
+
+    Parameters:
+
+        m
+            Integer for length of grid in x
+        n
+            Integer for length of grid in y
+        a
+            Smoothness of the gaussian field: Positive real number less than 1.0
+        b
+            Spatial scaling parameter: Positive real number
+
+    :returns:
+        Z
+            A 2D numpy array
+
+    '''
+
+    import numpy as np
+
+    if a <= 0:
+        print("Smoothness must be greater than 0 and <= 1.")
+        exit()
+    elif a > 1:
+        print("Smoothness must be greater than 0 and <= 1.")
+        exit()
+
+    if b <= 0:
+        print("Scaling must be positive.")
+        exit()
+
+    cov_fun = lambda x: np.exp((np.sqrt(x[0]**2 + x[1]**2)**(2 * a))/(-b))
+
+    tx = np.arange(0, m, 1)
+    ty = np.arange(0, n, 1)
+
+    rows = np.zeros((m,n))
+    cols = rows
+
+    for i in range(0, n):
+        for j in range(0, m):
+            rows[j,i] = cov_fun([tx[j]-tx[0], ty[i]-ty[0]])
+            cols[j,i] = cov_fun([tx[j]-tx[0], ty[i]-ty[0]])
+
+    """diff_tx = tx[:, np.newaxis] - tx[0]
+    diff_ty = ty[:, np.newaxis] - ty[0]
+    cov_values = cov_fun([diff_tx, diff_ty])
+    rows.T[:, :] = cov_values
+    cols.T[:, :] = cov_values"""
+
+    second = cols[:,::-1]
+    second = second[:, :-1]
+    third = cols[::-1, :]
+    third = third[:-1, :]
+    fourth = rows[::-1, ::-1]
+    fourth = fourth[:-1, :-1]
+
+    top = np.concatenate((rows, second), axis=1)
+    bottom = np.concatenate((third, fourth), axis=1)
+    BlkCirc_row = np.concatenate((top, bottom), axis=0)
+
+    lam = np.fft.fft2(BlkCirc_row, axes=(0,0)).real / ((2*m - 1)*(2*n - 1))
+
+    if len(lam[np.where(lam < 0)]) != 0:
+        if abs(np.min(lam[np.where(lam < 0)])) > 10**(-15):
+            print('Could not find positive definite embedding!')
+            exit()
+        else:
+            lam[np.where(lam < 0)] = 0
+    lam = np.sqrt(lam)
+
+    comp = 0.00000001*np.multiply(np.random.randn(2*m-1, 2*n-1), complex(np.random.randn(1), np.random.randn(1)))
+
+    F = np.fft.fft2(np.multiply(lam, comp))
+    F = F[0:m-1, 0:n-1]
+    field1 = F.real
+    field2 = F.imag
+
+    return field1
+
+
+#----------------------------------------------------------------------#
+def Gaussians(centers, variances, amplitudes=None, resolution=200):
+
+    '''
+    Returns matrix representing the 2D gaussians made with given centers, variances and amplitudes
+
+    Parameters:
+
+        centers
+            Numpy array of lists as [center x, center y] for each required peak
+        variances
+            Numpy array of variances for each required peak
+        amplitudes
+            Numpy array of amplitudes for each peak. If length is less than provided centers/variances, amplitude will be considered 1.0
+        resolution
+            Number of points used to generate meshgrid in both x and y
+
+    :returns:
+        Z
+            A 2D numpy array
+
+    '''
+
+    import numpy as np
+
+    if len(centers) != len(variances):
+        if len(centers) > len(variances):
+            print("Please specify all centers or reduce the supplied variances.")
+            exit()
+        if len(centers) < len(variances):
+            print("Please specify all variances or reduce the supplied centers.")
+            exit()
+
+    x = np.linspace(min(centers[:,0]) - 5 * max(variances), max(centers[:,0]) + 5 * max(variances), resolution, endpoint=True)
+    y = np.linspace(min(centers[:,1]) - 5 * max(variances), max(centers[:,1]) + 5 * max(variances), resolution, endpoint=True)
+    X, Y = np.meshgrid(x, y)
+    Z = np.zeros_like(X)
+
+    if amplitudes is None:
+        amplitudes = np.ones(len(variances))
+    elif len(amplitudes) > len(centers):
+        print("Please specify all centers/variances or reduce the supplied amplitudes.")
+        exit()
+    elif len(amplitudes) < len(centers):
+        amplitudes = np.concatenate((amplitudes, np.ones(len(centers) - len(amplitudes))), axis=0)
+
+    for center, variance, amplitude in zip(centers, variances, amplitudes):
+        Z += amplitude*np.exp(-((X - center[0]) ** 2 + (Y - center[1]) ** 2) / (2 * variance ** 2))
+
+    return Z
+
+
+
+#----------------------------------------------------------------------#
+def Sinc(x1=-10, x2=10, y1=-10, y2=10, N1=1000, N2=1000, mu=0, sigma=0.01, seed=None):
+
+    '''
+    Returns matrix representing the 2D sinc function on grid made on x1, x2, y1, y2 of N1 and N2 length
+
+    Parameters:
+
+        x1
+            Left x boundary
+        x2
+            Right x boundary
+        y1
+            Left y boundary
+        y2
+            Right y boundary
+        N1
+            Discretization of x
+        N2
+            Discretization of y
+        mu 
+            Mean of normal noise added
+        sigma
+            Variance of normal noise added
+
+
+    :returns:
+        f
+            A numpy array with shape (N1, N2)
+
+    '''
+
+    import numpy as np
+
+    np.random.seed(seed)
+
+    x, y = np.linspace(x1, x2, N1, endpoint=True), np.linspace(y1, y2, N2, endpoint=True)
+    X, Y = np.meshgrid(x, y)
+
+    f = np.sinc(np.hypot(X, Y)) + np.random.normal(mu, sigma, size = X.shape)
+
+    return f
+
+#----------------------------------------------------------------------#
+
+
+
+#----------------------------------------------------------------------#
 
 
 #----------------------------------------------------------------------#

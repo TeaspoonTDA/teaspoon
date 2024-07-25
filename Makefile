@@ -4,7 +4,7 @@ help:
 	@Echo       clean: runs autopep to improve formatting of code
 	@Echo		reqs: replace requirements.txt file for use by collaborators to create virtual environments and for use in documentation
 	@Echo       tests: runs unit tests
-	@Echo       docs: clears files from docs folder, rebuilds docs from source folder
+	@Echo       html: clears files from docs folder, rebuilds docs from source folder
 	@Echo       release: runs build to create tar and wheel for distribution
 	@Echo       all: runs clean build and docs folders, creates new html folders in build, moves relevant files to docs, and runs unittests and autopep.
 

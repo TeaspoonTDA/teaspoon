@@ -16,9 +16,8 @@
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -46,9 +45,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">1. Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">1.1. Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.2. Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#spork">1.3. Spork!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation">1.1. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#optional-dependencies">1.2. Optional Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#issues">1.3. Issues</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">2. Modules</a><ul>
@@ -88,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../persistence.html">2.3.4. Persistence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../magnitude.html">2.3.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../fast_zigzag.html">2.3.7. Fast Zigzag</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../SP.html">2.4. Signal Processing (SP) Module</a><ul>
@@ -96,6 +96,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../information.html">2.4.3. Information Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc.html">2.4.4. Miscellaneous</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../texture_analysis.html">2.4.5. Texture Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../stoch_bif.html">2.4.6. Stochastic P-Bifurcation Detection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
@@ -158,6 +159,9 @@
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Piecewise</span>
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">diff</span><span class="p">,</span> <span class="n">integrate</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">guvectorize</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">mixture</span>
+<span class="kn">import</span> <span class="nn">copy</span>
 
 <span class="c1"># -------------------------------------------- #</span>
 <span class="c1"># -------------------------------------------- #</span>
@@ -506,6 +510,15 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your choices for type are &quot;BirthDeath&quot; or &quot;BirthLifetime&quot;.&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exiting...&#39;</span><span class="p">)</span>
         <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">partitions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">xmin</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">xmax</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">ymin</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">ymax</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    
+        <span class="n">box</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;nodes&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">]),</span> <span class="s1">&#39;npts&#39;</span><span class="p">:</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">partitions</span> <span class="o">=</span> <span class="p">[</span><span class="n">box</span><span class="p">]</span>
 
     <span class="c1"># first, get the entries in Dgm that are within each partition</span>
     <span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">partitions</span><span class="p">:</span>
@@ -1323,6 +1336,281 @@
             <span class="n">axs</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
             <span class="n">axs</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;birth&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;persistence&#39;</span><span class="p">,</span><span class="n">xticks</span><span class="o">=</span><span class="p">([]),</span><span class="n">yticks</span><span class="o">=</span><span class="p">([]),</span> <span class="n">title</span><span class="o">=</span><span class="n">tid</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nd">@guvectorize</span><span class="p">([</span><span class="s2">&quot;void(float64[:,:,:], float64[:,:], float64, float64[:])&quot;</span><span class="p">,],</span><span class="s2">&quot;(p,m,n), (m,n), ()-&gt;(p)&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;parallel&#39;</span><span class="p">,</span> <span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_distance_parallel</span><span class="p">(</span><span class="n">dgms0</span><span class="p">,</span> <span class="n">dgms1</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    This function computes (in parallel) the multiscale heat kernel distance for an array of persistence diagrams based on the formula provided in Ref. :cite:`5 &lt;Reininghaus2015&gt;`.</span>
+<span class="sd">    There are three inputs and these are two persistence diagram arrays and the kernel scale sigma.  This function should be used for medium size datasets.    </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dgms0 : ndarray</span>
+<span class="sd">        Object array that includes first persistence diagram set.</span>
+<span class="sd">    dgms1 : ndarray</span>
+<span class="sd">        Object array that includes second persistence diagram set.</span>
+<span class="sd">    sigma : float</span>
+<span class="sd">        Kernel scale.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : np array</span>
+<span class="sd">        The kernel matrix</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_train</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dgms0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_train</span><span class="p">):</span>
+        <span class="n">dgm0</span><span class="o">=</span><span class="n">dgms0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">dgm1</span> <span class="o">=</span> <span class="n">dgms1</span>
+        <span class="n">kSigma0</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">kSigma1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">kSigma2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">dgm0</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">dgm0</span><span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">qc</span> <span class="o">=</span> <span class="n">dgm0</span><span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pq</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">pqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">kSigma0</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span> <span class="n">pq</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">pqc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">qc</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pq</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">pqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">kSigma1</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span> <span class="n">pq</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">pqc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">dgm0</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">qc</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pq</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">pqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">kSigma2</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span> <span class="n">pq</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">pqc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span>
+
+        <span class="n">kSigma0</span> <span class="o">=</span> <span class="n">kSigma0</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="n">kSigma1</span> <span class="o">=</span> <span class="n">kSigma1</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="n">kSigma2</span> <span class="o">=</span> <span class="n">kSigma2</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">kSigma1</span> <span class="o">+</span> <span class="n">kSigma0</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">kSigma2</span><span class="p">)</span>
+
+<span class="nd">@guvectorize</span><span class="p">([</span><span class="s2">&quot;void(float64[:,:,:], float64[:,:], float64, float64[:])&quot;</span><span class="p">,],</span><span class="s2">&quot;(p,m,n), (m,n), ()-&gt;(p)&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">,</span> <span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_distance</span><span class="p">(</span><span class="n">dgms0</span><span class="p">,</span> <span class="n">dgms1</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    This function computes the multiscale heat kernel distance for an array of persistence diagrams based on the formula provided in Ref. :cite:`5 &lt;Reininghaus2015&gt;`.</span>
+<span class="sd">    There are three inputs and these are two persistence diagram arrays and the kernel scale sigma.  This function should be used for small size datasets.  </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dgms0 : ndarray</span>
+<span class="sd">        Object array that includes first persistence diagram set.</span>
+<span class="sd">    dgms1 : ndarray</span>
+<span class="sd">        Object array that includes second persistence diagram set.</span>
+<span class="sd">    sigma : float</span>
+<span class="sd">        Kernel scale.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : np array</span>
+<span class="sd">        The kernel matrix</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_train</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dgms0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_train</span><span class="p">):</span>
+        <span class="n">dgm0</span><span class="o">=</span><span class="n">dgms0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">dgm1</span> <span class="o">=</span> <span class="n">dgms1</span>
+        <span class="n">kSigma0</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">kSigma1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">kSigma2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="n">s</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">dgm0</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">dgm0</span><span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">qc</span> <span class="o">=</span> <span class="n">dgm0</span><span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pq</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">pqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">kSigma0</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span> <span class="n">pq</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">pqc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">qc</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pq</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">pqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">kSigma1</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span> <span class="n">pq</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">pqc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">dgm0</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dgm1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">==-</span><span class="mi">2</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">qc</span> <span class="o">=</span> <span class="n">dgm1</span><span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pq</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">pqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">qc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">kSigma2</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span> <span class="n">pq</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">pqc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span>
+
+        <span class="n">kSigma0</span> <span class="o">=</span> <span class="n">kSigma0</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="n">kSigma1</span> <span class="o">=</span> <span class="n">kSigma1</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="n">kSigma2</span> <span class="o">=</span> <span class="n">kSigma2</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">kSigma1</span> <span class="o">+</span> <span class="n">kSigma0</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">kSigma2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f_dgm</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">keyargs</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">	Given a persistence diagram :math:`D = (S,\mu)` and a compactly supported function in :math:`\mathbb{R}^2`, this function computes</span>
+<span class="sd">	.. math::</span>
+<span class="sd">		\\nu_{D}(f) = \sum_{x\in S} f(x)\mu(x)</span>
+<span class="sd">	:param dgm: persistent diagram, array of points in :math:`\mathbb{R}^2`.</span>
+<span class="sd">	:type dgm: Numpy array</span>
+<span class="sd">	:param function: Compactly supported function in :math:`\mathbb{R}^2`.</span>
+<span class="sd">	:type function: function</span>
+<span class="sd">	:param keyargs: Additional arguments required by `funciton`</span>
+<span class="sd">	:type keyargs: Dicctionary</span>
+<span class="sd">	:return: float -- value of :math:`\\nu_{D}(f)`.</span>
+<span class="sd">	&#39;&#39;&#39;</span>
+
+	<span class="n">temp</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="o">**</span><span class="n">keyargs</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f_ellipse</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">rotation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])):</span>
+<span class="w">	</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">	Computes a bump function centered with an ellipsoidal domain centered ac `c`, rotaded by &#39;rotation&#39; and with axis given by &#39;axis&#39;. The bump function is computed using the gollowing formula </span>
+<span class="sd">	.. math::</span>
+<span class="sd">		f_{A,c} (x) = \max \\left\{ 0, 1 - (x - c)^T A (x - c)\\right\}</span>
+<span class="sd">	:param x: point to avelatuate the function :math:`f_{A,c}`</span>
+<span class="sd">	:type z: Numpy array</span>
+<span class="sd">	:param center: center of the ellipse</span>
+<span class="sd">	:type center: Numpy array</span>
+<span class="sd">	:param axis: Size f themjor an minor axis of the ellipse</span>
+<span class="sd">	:type axis: Numpy array</span>
+<span class="sd">	:param rotation: Rotation matrix for the ellipse</span>
+<span class="sd">	:type rotation: Numpy array</span>
+<span class="sd">	:return: float -- value of :math:`f_{A,c} (x)`.</span>
+<span class="sd">	&#39;&#39;&#39;</span>
+	<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+	<span class="n">x_centered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+	<span class="n">temp</span> <span class="o">=</span> <span class="n">x_centered</span><span class="nd">@rotation@sigma@np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x_centered</span><span class="p">)</span>
+	<span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">temp</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">adaptive_feature</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">keyargs</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">	Given a collection of persistent diagrams and a compactly supported function in :math:`\mathbb{R}^2`, computes :math:`\\nu_{D}(f)` for each diagram :math:`D` in the collection.</span>
+<span class="sd">	:param list_dgms: list of persistent diagrams</span>
+<span class="sd">	:type list_dgms: list</span>
+<span class="sd">	:param function: Compactly supported function in :math:`\mathbb{R}^2`.</span>
+<span class="sd">	:type function: function</span>
+<span class="sd">	:param keyargs: Additional arguments required by `funciton`</span>
+<span class="sd">	:type keyargs: Dicctionary</span>
+<span class="sd">	:return: Numpy array -- Array of values :math:`\\nu_{D}(f)` for each diagram :math:`D` in the collection `list_dgms`.</span>
+<span class="sd">	&#39;&#39;&#39;</span>
+	<span class="n">num_diagrams</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">)</span>
+
+	<span class="n">feat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_diagrams</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_diagrams</span><span class="p">):</span>
+		<span class="n">feat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_dgm</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">keyargs</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="n">feat</span>
+
+<span class="k">def</span> <span class="nf">adaptive_template_functions</span><span class="p">(</span><span class="n">train_dgms</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    This function computes adaptive template functions as in the paper :cite:`6 &lt;polanco2019adaptive&gt;` from a training set and returns the ellipses needed to fit features to a training and testing dataset.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    train_dgms : ndarray</span>
+<span class="sd">        Object array that includes training diagrams</span>
+<span class="sd">    d : integer</span>
+<span class="sd">        maximum number of functions.</span>
+<span class="sd">    threshold: float</span>
+<span class="sd">        cutoff for inclusion as</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ellipses : list</span>
+<span class="sd">        list of ellipses that are the adaptive template functions</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+	<span class="c1">#### Combine all diagrams</span>
+    <span class="n">X_train_temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">train_dgms</span><span class="p">)</span>
+	<span class="c1">### return means for scoring</span>
+    <span class="n">gmm</span> <span class="o">=</span> <span class="n">mixture</span><span class="o">.</span><span class="n">BayesianGaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">10e4</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_temp</span><span class="p">)</span>
+    <span class="n">ellipses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">)):</span>
+        <span class="n">L</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">covariances_</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mean&#39;</span><span class="p">:</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s1">&#39;std&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span><span class="p">),</span> <span class="s1">&#39;rotation&#39;</span><span class="p">:</span><span class="n">v</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span><span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span><span class="p">)),</span> <span class="s1">&#39;entropy&#39;</span><span class="p">:</span><span class="n">gmm</span><span class="o">.</span><span class="n">weights_</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span>
+        <span class="n">temp</span><span class="p">[</span><span class="s1">&#39;std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">temp</span><span class="p">[</span><span class="s1">&#39;std&#39;</span><span class="p">]</span>
+        <span class="n">ellipses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ellipses</span>
+
+<span class="k">def</span> <span class="nf">adaptive_template_features</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">,</span> <span class="n">list_ellipses</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="n">f_ellipse</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">	This function computes all the features for a collection of persistent diagrams given a list ot ellipses.</span>
+<span class="sd">	:param list_dgms: list of persistent diagrams</span>
+<span class="sd">	:type list_dgms: list</span>
+<span class="sd">	:param list_ellipses: List of dicctionaries. Each dicctionary represents a ellipse. It must have the following keys: `mean`, `std` and `rotation`.</span>
+<span class="sd">	:type list_ellipses: list</span>
+<span class="sd">	:param function: Compactly supported function in :math:`\mathbb{R}^2`.</span>
+<span class="sd">	:type function: function</span>
+<span class="sd">	:return: Numpy array -- </span>
+<span class="sd">	&#39;&#39;&#39;</span>
+	<span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_ellipses</span><span class="p">)))</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_ellipses</span><span class="p">)):</span>
+		<span class="n">args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span><span class="n">list_ellipses</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;rotation&#39;</span><span class="p">]}</span>
+		<span class="n">args</span><span class="p">[</span><span class="s1">&#39;center&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+		<span class="n">args</span><span class="p">[</span><span class="s1">&#39;axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;std&#39;</span><span class="p">)</span>
+
+		<span class="n">features</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">adaptive_feature</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="n">features</span>
+
+<span class="k">def</span> <span class="nf">reshape_to_array</span><span class="p">(</span><span class="n">diagrams</span><span class="p">):</span>
+    <span class="n">ndgms</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">diagrams</span><span class="p">)</span>
+    <span class="n">d0</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ndgms</span><span class="p">)</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d0</span><span class="p">):</span>
+        <span class="n">d1</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ndgms</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">d0</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ndgms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">d</span><span class="o">==</span><span class="n">d1</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">ndgms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ndgms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d1</span><span class="o">-</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">ndgms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">dgms_array</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d0</span><span class="p">):</span>
+        <span class="n">dgms_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ndgms</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dgms_array</span><span class="p">,</span> <span class="p">(</span><span class="n">d0</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">))</span>
+
 </pre></div>
 
            </div>
