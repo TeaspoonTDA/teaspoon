@@ -12,6 +12,9 @@ Specifically, the possible shapes are:
 - Cube
 - Sphere
 - Torus
+- Gaussians
+- Sinc
+- 2D Gaussian Field
 
 Additionally, this module can also generate random persistence diagrams.
 
@@ -109,3 +112,46 @@ example::
 Where the output for this example is:
 
 .. figure:: figures/PointCloudEx.png
+
+Finally, the following is an example of generating a sinc, gaussians, or a 2D gaussian field::
+
+  from teaspoon.MakeData.PointCloud import Sinc, Gaussians, GaussianField
+  import matplotlib.pyplot as plt
+
+  x1, x2, y1, y2 = -5, 5, -5, 5
+  N1, N2 = 1000, 500
+
+  f = Sinc(x1=x1, x2=x2, y1=y1, y2=y2, N1=N1, N2=N2, mu=0, sigma=0.01)
+
+  x, y = np.linspace(x1,x2,N1), np.linspace(y1,y2,N2)
+  X, Y = np.meshgrid(x, y)
+
+  fig = plt.figure(figsize=(20,20))
+  ax = fig.add_subplot(111, projection='3d')
+  ax.plot_surface(X, Y, f, rstride=5, cstride=5, cmap='viridis')
+  plt.show()
+
+  ##
+  centers = np.array([[0, 0], [1, 1], [-1, 0], [4,2]])
+  variances = np.array([0.1, 0.5, 0.3, 0.2])
+  amplitudes= np.array([1, 2, 1.5, 2])
+
+  f = Gaussians(centers, variances, amplitudes)
+
+  plt.imshow(f)
+  plt.show()
+
+  ##
+  field1 = GaussianField(256, 256, a=0.8, b=100)
+  tx = np.arange(0,256,1)
+  ty = np.arange(0,256,1)
+  x, y = np.meshgrid(tx[:-1],ty[:-1])
+  fig = plt.figure(figsize=(20,20))
+  ax = fig.add_subplot(111, projection='3d')
+  ax.plot_surface(x, y, field1, rstride=5, cstride=5, cmap='viridis')
+  plt.show()
+
+
+Where the output for this example is:
+
+.. figure:: figures/PointCloud_Example2.png

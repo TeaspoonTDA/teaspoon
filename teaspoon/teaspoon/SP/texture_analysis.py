@@ -300,7 +300,7 @@ def feature_roundness(nom_image, exp_image, nfeat, width, num_steps=50, plot=Fal
     
     # Compute roundness score and plot roundness curve
     emd = np.array(emd)
-    roundness_score = integrate.simps(emd[:, 1], emd[:, 0]) / (1 - ref)
+    roundness_score = integrate.simpson(emd[:, 1], x=emd[:, 0]) / (1 - ref)
     if plot:
         plt.figure(figsize=(6, 6))
         plt.plot(emd[:, 0], emd[:, 1], 'r')

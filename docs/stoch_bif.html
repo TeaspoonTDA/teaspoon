@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.4.6. Stochastic P-Bifurcation Detection &mdash; teaspoon 1.3.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2.5. MakeData Module Documentation" href="MakeData.html" />
+    <link rel="prev" title="2.4.5. Texture Analysis" href="texture_analysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            teaspoon
+              <img src="_static/teaspoon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">1.1. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#optional-dependencies">1.2. Optional Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#issues">1.3. Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="parameter_selection.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MI.html">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AC.html">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html">2.1.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PAMI.html">2.1.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MsPE.html">2.1.5. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ML.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DS.html">2.2.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="F_PD.html">2.2.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ML.html#references">2.2.4. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TDA.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnitude.html">2.3.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_zigzag.html">2.3.7. Fast Zigzag</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="SP.html">2.4. Signal Processing (SP) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="texture_analysis.html">2.4.5. Texture Analysis</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.4.6. Stochastic P-Bifurcation Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MakeData.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DynSysLib.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">3. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-to-documentation">3.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">4. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">5. Citing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">teaspoon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html"><span class="section-number">2. </span>Table of Contents</a></li>
+          <li class="breadcrumb-item"><a href="SP.html"><span class="section-number">2.4. </span>Signal Processing (SP) Module Documentation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.4.6. </span>Stochastic P-Bifurcation Detection</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/stoch_bif.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="stochastic-p-bifurcation-detection">
+<h1><span class="section-number">2.4.6. </span>Stochastic P-Bifurcation Detection<a class="headerlink" href="#stochastic-p-bifurcation-detection" title="Link to this heading"></a></h1>
+<p>Stochastic P-bifurcations are points of topological changes in the joint probability density function (PDF) of a stochastic system. Please cite the papers <a class="reference external" href="https://doi.org/10.1007/s11071-024-09289-1">“A topological framework for identifying phenomenological bifurcations in stochastic dynamical systems”</a> and <a class="reference external" href="https://doi.org/10.48550/arXiv.2401.16563">“Topological Detection of Phenomenological Bifurcations with Unreliable Kernel Densities”</a> when using these functions. These modules can be used to detect P-bifurcation given</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#analytical-density">Analytical Densities</a></p></li>
+</ul>
+<section id="analytical-density">
+<h2><span class="section-number">2.4.6.1. </span>Analytical Density<a class="headerlink" href="#analytical-density" title="Link to this heading"></a></h2>
+<p>Given the analytical PDFs, the homological bifurcation plot can be generated with the module below</p>
+<dl class="py function" id="module-teaspoon.SP.StochasticP">
+<dt class="sig sig-object py" id="teaspoon.SP.StochasticP.analytical_homological_bifurcation_plot">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.StochasticP.</span></span><span class="sig-name descname"><span class="pre">analytical_homological_bifurcation_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PDFs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bifurcation_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaspoon/SP/StochasticP.html#analytical_homological_bifurcation_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.StochasticP.analytical_homological_bifurcation_plot" title="Link to this definition"></a></dt>
+<dd><p>Computes the homological bifurcation plot given a list of analytically generated PDFs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>list</strong><strong>)</strong> (<em>PDFs</em>) – A python list of numpy arrays of PDFs</p></li>
+<li><p><strong>(</strong><strong>array</strong><strong>)</strong> (<em>bifurcation_parameters</em>) – Array of bifurcation parameters against the PDFs</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>list</strong><strong>]</strong><strong>)</strong> (<em>dimensions</em>) – List of homology dimensions to make plots for</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>float</strong><strong>]</strong><strong>)</strong> (<em>maxEps</em>) – Persistence values above which classes are kept; default: 0.02</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>float</strong><strong>]</strong><strong>)</strong> – Maximum value of threshold; default: 1</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>int</strong><strong>]</strong><strong>)</strong> (<em>numStops</em>) – Number of points between 0 and maxEps; default: 10</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>bool</strong><strong>]</strong><strong>)</strong> (<em>plotting</em>) – Plots the homological plot for the given diagrams; default: True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D homological bifurcation plot(s)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example">
+<h3><span class="section-number">2.4.6.1.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<p>The following example plots an analytical bifurcation plot for a set of PDFs where the system shifts from a monostability to a limit cycle:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">teaspoon.SP.StochasticP</span> <span class="kn">import</span> <span class="n">analytical_homological_bifurcation_plot</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">PDFs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">PDFs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">analytical_homological_bifurcation_plot</span><span class="p">(</span><span class="n">PDFs</span><span class="p">,</span> <span class="n">bifurcation_parameters</span><span class="o">=</span><span class="n">factors</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">filter</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output for this example is</p>
+<a class="reference internal image-reference" href="_images/analytical_homological_plot.png"><img alt="Analytical Homological Plot" class="align-left" src="_images/analytical_homological_plot.png" style="width: 300px;" /></a>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="texture_analysis.html" class="btn btn-neutral float-left" title="2.4.5. Texture Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MakeData.html" class="btn btn-neutral float-right" title="2.5. MakeData Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Munch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>
