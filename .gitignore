@@ -143,4 +143,4 @@ cython_debug/
 .teaspoonData
 
 # DS_Store
-.DS_Store
+*/.DS_Store
