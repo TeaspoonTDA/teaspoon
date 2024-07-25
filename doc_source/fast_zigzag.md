@@ -1,6 +1,13 @@
 # Fast Zigzag
 
-These modules help generate the input file and read the output file for [fast-zigzag software](https://github.com/TDA-Jyamiti/fzz). These functions should be used in combination with the fast-zigzag software (installed either through C++ or the offered python bindings). 
+These modules help generate the input file and read the output file for [fast-zigzag software (fzz)](https://github.com/TDA-Jyamiti/fzz). 
+
+```{eval-rst}
+.. warning:: 
+   Because `fzz` is not pip-installable, it is not automatically included when you install teaspoon.  In order to use this submodule, you need to manually install `fzz` first. 
+
+   Note also that currently the way this system works is to write a file that is read into `fzz`, and the output file is then read back into python. This is not ideal, so in the future we hope to find a more efficient pipeline.  
+```
 
 ## Generate Input File & Read Output 
 
