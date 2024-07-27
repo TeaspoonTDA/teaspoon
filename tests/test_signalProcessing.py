@@ -7,6 +7,7 @@ from teaspoon.SP.tsa_tools import takens
 from teaspoon.SP.tsa_tools import permutation_sequence
 from teaspoon.SP.tsa_tools import k_NN
 from teaspoon.SP.tsa_tools import ZeDA
+from teaspoon.SP.StochasticP import analytical_homological_bifurcation_plot
 import matplotlib.pyplot as plt
 from teaspoon.SP.network import knn_graph
 from teaspoon.SP.network import ordinal_partition_graph
@@ -193,6 +194,20 @@ class signalProcessing(unittest.TestCase):
         sig = (-3*t + 1.4)*np.sin(18*t) + 0.1
 
         brackets, ZC, flag = ZeDA(sig, t1, tn)
+
+    # In[ ]: ZeDA
+    def test_stochBif(self):
+
+        X, Y = np.meshgrid(np.linspace(-3,3,100), np.linspace(-3,3,100))
+        factors = np.linspace(-1,1,5)
+
+        PDFs = []
+        for h in factors:
+
+            p = np.exp(-0.5*((X**2+Y**2)**2 + h*(X**2 + Y**2)))
+            PDFs.append(p)
+
+        M = analytical_homological_bifurcation_plot(PDFs, bifurcation_parameters=factors, dimensions=[1], filter=0.02, maxEps=1, numStops=100, plotting=False)
 
 if __name__ == '__main__':
     unittest.main()
