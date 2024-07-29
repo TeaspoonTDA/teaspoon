@@ -15,6 +15,12 @@ class FZZ(unittest.TestCase):
 
         inserts, deletes = generate_input_file(point_clouds, filename='output', radius=19, n_perm=25, plotting=False)
 
+        ins = [62, 77]
+        dels = [140, 154]
+
+        self.assertEqual(inserts, ins, 'Assert equal failed') 
+        self.assertEqual(deletes, dels, 'Assert equal failed') 
+
 
 if __name__ == '__main__':
     unittest.main()
