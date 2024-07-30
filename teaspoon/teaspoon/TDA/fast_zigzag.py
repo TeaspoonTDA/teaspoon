@@ -84,9 +84,9 @@ def remove_inner(classes, lines):
         for n in range(len(lines)):
 
             if n == 0:
-                mask &= ~((x_coords <= lines[n]) & (y_coords <= lines[n]))
+                mask &= ~((x_coords < lines[n]) & (y_coords < lines[n]))
             else:
-                mask &= ~((x_coords <= lines[n]) & (y_coords <= lines[n]) & (x_coords >= lines[n-1]))
+                mask &= ~((x_coords < lines[n]) & (y_coords < lines[n]) & (x_coords > lines[n-1]))
 
         x_filtered = classes[cl]['x'][mask]
         y_filtered = classes[cl]['y'][mask]
@@ -164,7 +164,7 @@ def update_coordinates(classes, lines_i, lines_d):
             
             if y_interval == len(lines_d)-2 & lines_i[y_interval] <= y <= lines_d[y_interval]:
                 y_new[i] = y_interval + 1.0
-            elif lines_d[-2] <= y <= lines_d[-1]:
+            elif lines_d[-2] < y < lines_d[-1]:
                 y_new[i] = y_interval #+ 1.0
             elif lines_i[y_interval] <= y <= lines_d[y_interval]:
                 y_new[i] = y_interval + 1.0
@@ -316,8 +316,8 @@ def generate_input_file(point_clouds, filename='output', radius=10, n_perm=25, p
     return inserts, deletes
 
 # Plots the output zigzag PD from the output file of fast-zigzag
-def plot_output_zigzag(filename, inserts, deletes, plotH2=False):
-    """This function takes the output file from fast-zigzag software by TDA-Jyamiti group and number of insertions/deletions output by the above function and plots the zigzag persistence diagram.
+def plot_output_zigzag(filename, inserts, deletes, plotH2=False, plot=True, filter=True):
+    """This function takes the output file from fast-zigzag software by TDA-Jyamiti group and number of insertions/deletions output by the above function and plots the zigzag persistence diagram. Note that fast-zigzag produces closed [b,d] intervals.
 
     Args:
         filename (str): Name of file generated.
@@ -325,17 +325,21 @@ def plot_output_zigzag(filename, inserts, deletes, plotH2=False):
         deletes (list): Number of lines of filtrations deleted for a point cloud.
 
     Other Parameters:
-        plotH2 (bool): if True, plots the H2 components in the zigzag persistence diagram
+        plotH2 (bool): if True, plots the H2 components in the zigzag persistence diagram which may sometimes appear in 2D point clouds
+        plot (bool)L if True, plots the persistence diagram
+        filter (bool): if False, returns the full persistence diagram from fast-zigzag software with no additional filtering
 
     Returns:
         [dict]: Dictionary of persistence points for each homology class
     """
 
     data = read_data(filename)
-    data = remove_axial(data, inserts, deletes)
-    data = clean_data(data, inserts, deletes)
-    data = remove_inner(data, inserts)
-    data = update_coordinates(data, inserts, deletes)
-    plot_data(data, plotH2)
+    if filter:
+        data = remove_axial(data, inserts, deletes)
+        data = clean_data(data, inserts, deletes)
+        data = remove_inner(data, inserts)
+        data = update_coordinates(data, inserts, deletes)
+    if plot:
+        plot_data(data, plotH2)
 
     return data

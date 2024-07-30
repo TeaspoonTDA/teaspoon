@@ -1,8 +1,6 @@
 Persistence
 ============
 
-.. automodule:: teaspoon.TDA.Persistence
-   :members: minPers, maxPers, maxBirth, minBirth, minPersistenceSeries, maxPersistenceSeries, minBirthSeries, maxBirthSeries, removeInfiniteClasses, BettiCurve, CROCKER
 
 The following example computes the minimum and maximum birth times, as well as the maximum persistence::
 
@@ -83,3 +81,8 @@ The following example computes the CROCKER plot for a set of persistence diagram
 
   Crocker = CROCKER(DGMS, 3, 5, plotting=False)
 
+Functions
+---------
+
+.. automodule:: teaspoon.TDA.Persistence
+   :members: minPers, maxPers, maxBirth, minBirth, minPersistenceSeries, maxPersistenceSeries, minBirthSeries, maxBirthSeries, removeInfiniteClasses, BettiCurve, CROCKER, CROCKER_Stack

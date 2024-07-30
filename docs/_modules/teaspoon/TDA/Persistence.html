@@ -398,25 +398,34 @@
 
 <div class="viewcode-block" id="BettiCurve">
 <a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.BettiCurve">[docs]</a>
-<span class="k">def</span> <span class="nf">BettiCurve</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">BettiCurve</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the Betti Curve for a persistence diagram for thresholds 0 to maxEps</span>
 
-<span class="sd">    :param Dgm (array):   2D numpy array of persistence diagram of a specific homology class</span>
-<span class="sd">    :param maxEps (Optional[float]): Maximum value of threshold; default: 3</span>
-<span class="sd">    :param numStops (Optional[int]): Number of points between 0 and maxEps; default: 10</span>
+<span class="sd">    :param Dgm:  </span>
+<span class="sd">        (array) 2D numpy array of persistence diagram of a specific homology class</span>
+<span class="sd">    :param maxEps: </span>
+<span class="sd">        (Optional[float]) Maximum value of threshold; default: 3</span>
+<span class="sd">    :param numStops: </span>
+<span class="sd">         (Optional[int]) Number of points between 0 and maxEps; default: 10</span>
+<span class="sd">    :param alpha: </span>
+<span class="sd">        (Optional[float]) alpha smoothing to diagonal, points below this line are ignored, used for Crocker Stacks; default: 0</span>
 
-<span class="sd">    :return: array of threshold values, Betti curve</span>
+<span class="sd">    :return: array of threshold values representing the Betti curve</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="n">vecOfThresholds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">maxEps</span><span class="p">,</span><span class="n">numStops</span><span class="p">)</span>
+    <span class="n">vecOfThresholds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxEps</span><span class="p">,</span> <span class="n">numStops</span><span class="p">)</span>
     <span class="n">Betti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">vecOfThresholds</span><span class="p">))</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vecOfThresholds</span><span class="p">):</span>
-        <span class="n">Betti</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">((</span><span class="n">Dgm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">v</span><span class="p">),</span> <span class="p">(</span><span class="n">Dgm</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span><span class="n">v</span><span class="p">)</span> <span class="p">))</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">v</span> <span class="o">-</span> <span class="n">alpha</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="mf">0.0</span> <span class="k">else</span> <span class="n">start</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="n">alpha</span>
+
+        <span class="n">Betti</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">((</span><span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">start</span><span class="p">),</span> <span class="p">(</span><span class="n">Dgm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">)))</span>
 
     <span class="k">return</span> <span class="n">vecOfThresholds</span><span class="p">,</span> <span class="n">Betti</span></div>
+
 
 
 <div class="viewcode-block" id="CROCKER">
@@ -425,10 +434,14 @@
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Computes the CROCKER plot for a list of persistence diagrams for thresholds 0 to maxEps</span>
 
-<span class="sd">    :param DGMS (list):  A python list of 2D numpy arrays of persistence diagrams of a specific homology class</span>
-<span class="sd">    :param maxEps (Optional[float]): Maximum value of threshold; default: 3</span>
-<span class="sd">    :param numStops (Optional[int]): Number of points between 0 and maxEps; default: 10</span>
-<span class="sd">    :param plotting (Optional[bool]): Plots the CROCKER for the given diagrams; default: True</span>
+<span class="sd">    :param DGMS:  </span>
+<span class="sd">        (list) A python list of 2D numpy arrays of persistence diagrams of a specific homology class</span>
+<span class="sd">    :param maxEps: </span>
+<span class="sd">        (Optional[float]) Maximum value of threshold; default: 3</span>
+<span class="sd">    :param numStops: </span>
+<span class="sd">        (Optional[int]) Number of points between 0 and maxEps; default: 10</span>
+<span class="sd">    :param plotting: </span>
+<span class="sd">        (Optional[bool]) Plots the CROCKER for the given diagrams; default: True</span>
 
 <span class="sd">    :returns: 2D CROCKER plot</span>
 
@@ -443,20 +456,71 @@
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">AllBettis</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 
     <span class="k">if</span> <span class="n">plotting</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="n">_plot_crocker</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-        <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\epsilon$&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">M</span></div>
 
+
+
+<div class="viewcode-block" id="CROCKER_Stack">
+<a class="viewcode-back" href="../../../persistence.html#teaspoon.TDA.Persistence.CROCKER_Stack">[docs]</a>
+<span class="k">def</span> <span class="nf">CROCKER_Stack</span><span class="p">(</span><span class="n">DGMS</span><span class="p">,</span> <span class="n">maxEps</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">numStops</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the CROCKER stack for a list of persistence diagrams for</span>
+<span class="sd">    thresholds 0 to maxEps with given alpha smoothing. Implemented according to</span>
+<span class="sd">    the paper &quot;Capturing Dynamics of Time-Varying Data via Topology&quot; by Xian</span>
+<span class="sd">    L. et al.</span>
+
+<span class="sd">    :param DGMS: A python list of 2D numpy arrays of persistence diagrams of</span>
+<span class="sd">        a specific homology class</span>
+<span class="sd">    :type DGMS: list</span>
+<span class="sd">    :param maxEps: Maximum value of threshold, defaults to 3</span>
+<span class="sd">    :type maxEps: float, optional</span>
+<span class="sd">    :param numStops: Number of points between 0 and maxEps, defaults to 10</span>
+<span class="sd">    :type numStops: int, optional</span>
+<span class="sd">    :param alpha: A list of alpha values for smoothing, in default case it is</span>
+<span class="sd">        behaving like CROCKER, defaults to [0]</span>
+<span class="sd">    :type alpha: list, optional</span>
+<span class="sd">    :param plotting: Plots the CROCKER for the given diagrams, defaults to True</span>
+<span class="sd">    :type plotting: bool, optional</span>
+
+<span class="sd">    :return: the 3D CROCKER stack with dimensions [alpha][row][time]</span>
+<span class="sd">    :rtype: np.darray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">alpha</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">all_betti_numbers_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha</span><span class="p">),</span> <span class="n">numStops</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">DGMS</span><span class="p">)))</span>
+    <span class="n">thresholds_</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">aps_idx</span><span class="p">,</span> <span class="n">alpha_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">Dgm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">DGMS</span><span class="p">):</span>
+            <span class="n">thresholds_</span><span class="p">,</span> <span class="n">betti_vals_</span> <span class="o">=</span> <span class="n">BettiCurve</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">maxEps</span><span class="p">,</span> <span class="n">numStops</span><span class="p">,</span> <span class="n">alpha_</span><span class="p">)</span>
+            <span class="n">all_betti_numbers_</span><span class="p">[</span><span class="n">aps_idx</span><span class="p">,</span> <span class="p">:,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">betti_vals_</span>
+
+    <span class="k">if</span> <span class="n">plotting</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">aps_idx</span><span class="p">,</span> <span class="n">alpha_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
+            <span class="n">_plot_crocker</span><span class="p">(</span><span class="n">all_betti_numbers_</span><span class="p">[</span><span class="n">aps_idx</span><span class="p">],</span> <span class="n">thresholds_</span><span class="p">,</span>
+                          <span class="n">title_</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Crocker Stack with alpha=</span><span class="si">{</span><span class="n">alpha</span><span class="p">[</span><span class="n">aps_idx</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">all_betti_numbers_</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_plot_crocker</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">title_</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\epsilon$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title_</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
            </div>
