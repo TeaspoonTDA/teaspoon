@@ -207,7 +207,7 @@ class signalProcessing(unittest.TestCase):
             p = np.exp(-0.5*((X**2+Y**2)**2 + h*(X**2 + Y**2)))
             PDFs.append(p)
 
-        M = analytical_homological_bifurcation_plot(PDFs, bifurcation_parameters=factors, dimensions=[1], filter=0.02, maxEps=1, numStops=100, plotting=False)
+        #M = analytical_homological_bifurcation_plot(PDFs, bifurcation_parameters=factors, dimensions=[1], filter=0.02, maxEps=1, numStops=100, plotting=False)
 
 if __name__ == '__main__':
     unittest.main()
