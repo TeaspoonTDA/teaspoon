@@ -5,6 +5,7 @@ name = "teaspoon"
 version = "1.5.6"
 authors = [
   { name="Elizabeth Munch", email="muncheli@msu.edu" },
+  { name="Firas Khasawneh", email="khasawn3@msu.edu" },
 ]
 description = "A Topological Signal Processing Package"
 readme = "README.md"

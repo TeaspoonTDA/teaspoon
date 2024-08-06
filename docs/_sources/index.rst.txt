@@ -18,8 +18,9 @@ Table of Contents
    :maxdepth: 4
    :numbered:
 
-   Getting Started <installation.rst>
-   Modules <modules.rst>
+   Getting Started <installation/index.rst>
+   Modules <modules/index.rst>
+   Example Notebooks <notebooks/index.rst>
    Contributing <contributing.rst>
    License <license.rst>
    Citing <citing.rst>
