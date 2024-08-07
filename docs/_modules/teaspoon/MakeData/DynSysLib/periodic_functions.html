@@ -142,64 +142,126 @@
            <div itemprop="articleBody">
              
   <h1>Source code for teaspoon.MakeData.DynSysLib.periodic_functions</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
 <div class="viewcode-block" id="periodic_functions">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/periodic_functions.html#teaspoon.MakeData.DynSysLib.periodic_functions.periodic_functions">[docs]</a>
-<span></span><span class="k">def</span> <span class="nf">periodic_functions</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">periodic_functions</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="n">run</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="n">run</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;sine&#39;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    TODO Add docstring. Do we even want to keep this function? </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;sine&#39;</span><span class="p">:</span>
 
-            <span class="c1"># setting simulation time series parameters</span>
-            <span class="k">if</span> <span class="n">fs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">fs</span> <span class="o">=</span> <span class="mi">50</span>
-            <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">2000</span>
-            <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">L</span> <span class="o">=</span> <span class="mi">40</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+        <span class="c1"># setting simulation time series parameters</span>
+        <span class="k">if</span> <span class="n">fs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fs</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">2000</span>
+        <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="mi">40</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
-            <span class="c1"># setting system parameters</span>
-            <span class="k">if</span> <span class="n">parameters</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span>
-                        <span class="s1">&#39;Warning: needed 1 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-                    <span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="c1"># setting system parameters</span>
+        <span class="k">if</span> <span class="n">parameters</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s1">&#39;Warning: needed 1 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+                <span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 
-            <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">))[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">sine</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">SampleSize</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
 
-    <span class="c1"># In[ ]: Complete</span>
 
-        <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;incommensurate_sine&#39;</span><span class="p">:</span>
-            <span class="c1"># setting simulation time series parameters</span>
-            <span class="k">if</span> <span class="n">fs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">fs</span> <span class="o">=</span> <span class="mi">50</span>
-            <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span>
-            <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">L</span> <span class="o">=</span> <span class="mi">100</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;incommensurate_sine&#39;</span><span class="p">:</span>
+        <span class="c1"># setting simulation time series parameters</span>
+        <span class="k">if</span> <span class="n">fs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fs</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span>
+        <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
-            <span class="c1"># setting system parameters</span>
-            <span class="k">if</span> <span class="n">parameters</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span>
-                        <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-                    <span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">omega1</span><span class="p">,</span> <span class="n">omega2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">omega1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-                <span class="n">omega2</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># setting system parameters</span>
+        <span class="k">if</span> <span class="n">parameters</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+                <span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">omega1</span><span class="p">,</span> <span class="n">omega2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">omega1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+            <span class="n">omega2</span> <span class="o">=</span> <span class="mi">1</span>
 
-            <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega2</span><span class="o">*</span><span class="n">t</span><span class="p">))[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">incommensurate_sine</span><span class="p">(</span><span class="n">omega1</span><span class="p">,</span> <span class="n">omega2</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">SampleSize</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+
+
+<div class="viewcode-block" id="sine">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/periodic_functions.html#teaspoon.MakeData.DynSysLib.periodic_functions.sine">[docs]</a>
+<span class="k">def</span> <span class="nf">sine</span><span class="p">(</span><span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> 
+         <span class="n">L</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The sinusoidal function is defined as</span>
+<span class="sd">    </span>
+<span class="sd">    .. math::</span>
+<span class="sd">        x(t) = \sin(2\pi t) </span>
+
+<span class="sd">    This was solved for 40 seconds with a sampling rate of 50 Hz.</span>
+
+<span class="sd">    TODO: Add fig from `Audun&#39;s pdf &lt;https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf&gt;`_</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        omega (Optional[float]): frequency of the sine wave.</span>
+<span class="sd">        L (Optional[int]): amount of time to solve simulation for.</span>
+<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
+<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># setting simulation time series parameters</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">))[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+    
+<div class="viewcode-block" id="incommensurate_sine">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/periodic_functions.html#teaspoon.MakeData.DynSysLib.periodic_functions.incommensurate_sine">[docs]</a>
+<span class="k">def</span> <span class="nf">incommensurate_sine</span><span class="p">(</span><span class="n">omega1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">omega2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> 
+                        <span class="n">L</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add description from `Audun&#39;s pdf &lt;https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf&gt;`_</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        omega1 (Optional[float]): frequency of the first sine wave.</span>
+<span class="sd">        omega2 (Optional[float]): frequency of the second sine wave.</span>
+<span class="sd">        L (Optional[int]): amount of time to solve simulation for.</span>
+<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
+<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega2</span><span class="o">*</span><span class="n">t</span><span class="p">))[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 </pre></div>
