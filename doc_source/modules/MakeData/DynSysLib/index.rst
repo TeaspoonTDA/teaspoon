@@ -9,7 +9,7 @@ This page provides a summary of the Python Dynamical Systems Library (DynSysLib)
    :class: with-shadow float-left
    :scale: 35
 
-Figure: x-solution to simulated rossler system for a chaotic response.
+Figure: $x$-solution to simulated rossler system for a chaotic response.
 
 .. rst-class::  clear-both
 
@@ -34,6 +34,18 @@ Available Dynamical Systems
 ####################################
 
 The following table provides a list of all the available dynamical systems as called by the **system** keyword:
+
+.. toctree::
+   :maxdepth: 1
+
+   maps
+   autonomous_dissipative_flows
+   driven_dissipative_flows
+   conservative_flows
+   periodic_functions
+   noise_models
+   human_data
+   delayed_flows
 
 .. list-table:: Available Dynmical Systems
    :widths: 10 10 10 10 10 10 10 10

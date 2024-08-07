@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaspoon.MakeData.DynSysLib.delayed_flows &mdash; teaspoon 1.3.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation/index.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/index.html#installation">1.1. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/index.html#optional-dependencies">1.2. Optional Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/index.html#issues">1.3. Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/index.html">2. Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/ParamSelection/index.html">2.1. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/MI.html">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/AC.html">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/FSA.html">2.1.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/PAMI.html">2.1.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/MsPE.html">2.1.5. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ParamSelection/FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/ML/index.html">2.2. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ML/DS.html">2.2.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ML/F_PD.html">2.2.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ML/CL.html">2.2.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/ML/index.html#references">2.2.4. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/TDA/index.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/TDA/PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/TDA/distances.html">2.3.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/TDA/drawing.html">2.3.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/TDA/persistence.html">2.3.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/TDA/sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/TDA/magnitude.html">2.3.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/TDA/fast_zigzag.html">2.3.7. Fast Zigzag</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/SP/index.html">2.4. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/SP/tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/SP/network.html">2.4.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/SP/information.html">2.4.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/SP/misc.html">2.4.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/SP/texture_analysis.html">2.4.5. Texture Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/SP/stoch_bif.html">2.4.6. Stochastic P-Bifurcation Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/MakeData/index.html">2.5. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/MakeData/PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/MakeData/DynSysLib/index.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">4. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#contributing-to-documentation">4.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">5. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../citing.html">6. Citing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">teaspoon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaspoon.MakeData.DynSysLib.delayed_flows</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaspoon.MakeData.DynSysLib.delayed_flows</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="delayed_flows">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/delayed_flows.html#teaspoon.MakeData.DynSysLib.delayed_flows.delayed_flows">[docs]</a>
+<span></span><span class="k">def</span> <span class="nf">delayed_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="n">run</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">run</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;mackey_glass&#39;</span><span class="p">:</span>
+            <span class="c1"># This requires installation of ddeint (pip install ddeint)</span>
+            <span class="kn">from</span> <span class="nn">ddeint</span> <span class="kn">import</span> <span class="n">ddeint</span>
+            <span class="c1"># setting simulation time series parameters</span>
+            <span class="k">if</span> <span class="n">fs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fs</span> <span class="o">=</span> <span class="mi">5</span>
+            <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">1000</span>
+            <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">L</span> <span class="o">=</span> <span class="mi">400</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+
+            <span class="c1"># setting system parameters</span>
+            <span class="k">if</span> <span class="n">parameters</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s1">&#39;Warning: needed 4 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+                    <span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">gamma</span><span class="p">,</span> <span class="n">τ</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
+                    <span class="n">n</span> <span class="o">=</span> <span class="mf">7.75</span>
+                <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+                    <span class="n">n</span> <span class="o">=</span> <span class="mf">9.65</span>
+                <span class="n">τ</span> <span class="o">=</span> <span class="mf">2.0</span>
+                <span class="n">B</span> <span class="o">=</span> <span class="mf">2.0</span>
+                <span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.0001</span>
+
+            <span class="k">def</span> <span class="nf">mackey_glass</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="n">xd</span> <span class="o">=</span> <span class="n">X</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">B</span><span class="o">*</span><span class="p">(</span><span class="n">xd</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xd</span><span class="o">**</span><span class="n">n</span><span class="p">))</span> <span class="o">-</span> <span class="n">gamma</span><span class="o">*</span><span class="n">x</span>
+
+            <span class="n">fsolve</span> <span class="o">=</span> <span class="mi">50</span>
+            <span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fsolve</span><span class="p">))</span>
+            <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">t</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">τ</span>
+            <span class="n">states</span> <span class="o">=</span> <span class="n">ddeint</span><span class="p">(</span><span class="n">mackey_glass</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">tt</span><span class="p">,</span> <span class="n">fargs</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,))</span><span class="o">.</span><span class="n">T</span>
+
+            <span class="n">ts</span> <span class="o">=</span> <span class="p">[((</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])[::</span><span class="nb">int</span><span class="p">(</span><span class="n">fsolve</span><span class="o">/</span><span class="n">fs</span><span class="p">)])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">tt</span><span class="p">[::</span><span class="nb">int</span><span class="p">(</span><span class="n">fsolve</span><span class="o">/</span><span class="n">fs</span><span class="p">)][</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Munch and Khasawneh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>
