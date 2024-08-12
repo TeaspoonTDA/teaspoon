@@ -204,7 +204,7 @@ Outline of method: a time series is converted to two point clouds :math:`(P)` an
 
 Output of example:
 
-.. figure::ZeDA_ExampleOutput.png
+.. figure:: ../../figures/ZeDA_ExampleOutput.png
     :scale: 40 %
 
 

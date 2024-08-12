@@ -47,9 +47,9 @@ plot_output_zigzag(filename, inserts, deletes, plotH2=False)
 
 ```
 
-The point clouds with the peristence diagram 
+The point clouds with the persistence diagram 
 
-```{image}fast_zigzag.png
+```{image} ../../figures/fast_zigzag.png
 :alt: Point Clouds with zigzag persistence diagram
 :width: 100%
 :align: center

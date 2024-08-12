@@ -30,10 +30,10 @@ Where the output for this example is::
     Embedding Delay:       21
     Embedding Dimension:   3
 
-.. figure::MsPE_tau_example.png
+.. figure:: ../../figures/MsPE_tau_example.png
    :scale: 20 %
 
-.. figure::MsPE_n_example.png
+.. figure:: ../../figures/MsPE_n_example.png
    :scale: 20 %
 
 

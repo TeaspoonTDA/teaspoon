@@ -4,7 +4,7 @@ Network Representation of Time Series
 This module provides algorithms for forming both ordinal partition networks (see example GIF below) and k-NN networks. The formation of the networks is described in detail in "`Persistent Homology of Complex Networks for Dynamic State Detection <https://arxiv.org/abs/1904.07403>`_."
 
 
-.. image::ordinal_partition_network_video_complex.gif
+.. image:: ../../figures/ordinal_partition_network_video_complex.gif
    :alt: Left floating image
    :class: with-shadow float-left
    :scale: 27
@@ -54,7 +54,7 @@ The network output has the data structure of an adjacency matrix (or networkx gr
 
 This code has the output as follows:
 
-.. figure::example_knn_graph.png
+.. figure:: ../../figures/example_knn_graph.png
    :scale: 60 %
 
 
@@ -100,7 +100,7 @@ The network output has the data structure of an adjacency matrix (or networkx gr
 
 This code has the output as follows:
 
-.. figure::example_opn_graph.png
+.. figure:: ../../figures/example_opn_graph.png
    :scale: 18 %
 
 
@@ -155,7 +155,7 @@ The network output has the data structure of an adjacency matrix (or networkx gr
 
 This code has the output as follows:
 
-.. figure::example_cgssn_graph.png
+.. figure:: ../../figures/example_cgssn_graph.png
    :scale: 18 %
 
 
