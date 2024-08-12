@@ -27,7 +27,7 @@ Takens' Embedding
 
 The Takens' embedding algorhtm reconstructs the state space from a single time series with delay-coordinate embedding as shown in the animation below.
 
-.. image::takens_embedding_gif_v2.gif
+.. image:: ../../figures/takens_embedding_gif_v2.gif
    :class: with-shadow float-center
    :scale: 35
 
@@ -58,7 +58,7 @@ The two parameters needed for state space reconstruction (Takens' embedding) are
 
 Output of example:
 
-.. figure::takens_example.png
+.. figure:: ../../figures/takens_example.png
    :scale: 70 %
 
 
@@ -73,7 +73,7 @@ Permutation Sequence Generation
 
 The function provides an array of the permutations found throughout the time series as shown in the 
 
-.. image::permutation_sequence_animation.gif
+.. image:: ../../figures/permutation_sequence_animation.gif
    :class: with-shadow float-center
    :scale: 45
 
@@ -103,7 +103,7 @@ The two parameters needed for permutations are the delay parameter and dimension
 
 Output of example:
 
-.. figure::PS_example.png
+.. figure:: ../../figures/PS_example.png
    :scale: 70 %
 
 
@@ -146,7 +146,7 @@ k Nearest Neighbors
 
 Output of example:
 
-.. figure::knn_example.png
+.. figure:: ../../figures/knn_example.png
    :scale: 70 %
 
 
@@ -181,9 +181,9 @@ Zero Detection Algorithm (ZeDA)
 
 This section provides a summary of the zero-crossing detection algorithm devised and analysed in "`Robust Zero-crossings Detection in Noisy Signals using Topological Signal Processing <https://arxiv.org/abs/2301.07703>`_" for discrete time series. Additionally, a basic example is provided showing the functionality of the method for a simple time series. Below, a simple overview of the method is provided.
 
-Outline of method: a time series is converted to two point clouds (P) and (Q) based on the sign value. A sorted persistence diagram is generated for both point clouds with x-axis having the index of the data point and y-axis having the death values. Then, a persistence threshold or an outlier detection method is used to select the outlying points in the persistence diagram such that 'n+1' points correspond to 'n' brackets.
+Outline of method: a time series is converted to two point clouds :math:`(P)` and :math:`(Q)` based on the sign value. A sorted persistence diagram is generated for both point clouds with :math:`x`-axis having the index of the data point and :math:`y`-axis having the death values. Then, a persistence threshold or an outlier detection method is used to select the outlying points in the persistence diagram such that :math:`n+1` points correspond to :math:`n` brackets.
 
-.. figure::ZeDA_Algorithm.png
+.. figure:: ../../figures/ZeDA_Algorithm.png
     :scale: 60 %
 
 .. automodule:: teaspoon.SP.tsa_tools
@@ -234,6 +234,6 @@ This section provides an implementation of a zero-crossing detection algorithm f
 
 Output of example:
 
-.. figure::FirstZero_ExampleOutput.png
+.. figure:: ../../figures/FirstZero_ExampleOutput.png
     :scale: 40 %
 
