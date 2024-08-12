@@ -23,7 +23,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="3. Notebooks Index" href="../../../notebooks/index.html" />
+    <link rel="next" title="2.5.2.1.1. DynSysLib: Maps" href="maps.html" />
     <link rel="prev" title="2.5.1. Point Cloud Data Generation Module Documentation" href="../PointCloud.html" /> 
 </head>
 
@@ -188,240 +188,297 @@
 </ul>
 <section id="available-dynamical-systems">
 <h2><span class="section-number">2.5.2.1. </span>Available Dynamical Systems<a class="headerlink" href="#available-dynamical-systems" title="Link to this heading"></a></h2>
-<p>The following table provides a list of all the available dynamical systems as called by the <strong>system</strong> keyword:</p>
-<table class="docutils align-default" id="id1">
-<caption><span class="caption-number">Table 2.1 </span><span class="caption-text">Available Dynamical Systems</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
-<colgroup>
-<col style="width: 12.5%" />
-<col style="width: 12.5%" />
-<col style="width: 12.5%" />
-<col style="width: 12.5%" />
-<col style="width: 12.5%" />
-<col style="width: 12.5%" />
-<col style="width: 12.5%" />
-<col style="width: 12.5%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Maps</p></th>
-<th class="head"><p>Autonomous Dissipative Flows</p></th>
-<th class="head"><p>Driven Dissipative Flows</p></th>
-<th class="head"><p>Conservative Flows</p></th>
-<th class="head"><p>Periodic Functions</p></th>
-<th class="head"><p>Noise Models</p></th>
-<th class="head"><p>Human Data</p></th>
-<th class="head"><p>Delayed Flows</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>logistic_map</p></td>
-<td><p>chua</p></td>
-<td><p>driven_pendulum</p></td>
-<td><p>driven_van_der_pol_oscillator</p></td>
-<td><p>sine</p></td>
-<td><p>gaussian_noise</p></td>
-<td><p>ECG</p></td>
-<td><p>mackey_glass</p></td>
-</tr>
-<tr class="row-odd"><td><p>henon_map</p></td>
-<td><p>lorenz</p></td>
-<td><p>shaw_van_der_pol_oscillator</p></td>
-<td><p>simplest_driven_chaotic_flow</p></td>
-<td><p>incommensurate_sine</p></td>
-<td><p>uniform_noise</p></td>
-<td><p>EEG</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>logistic_map</p></td>
-<td><p>rossler</p></td>
-<td><p>forced_brusselator</p></td>
-<td><p>nose_hoover_oscillator</p></td>
-<td></td>
-<td><p>rayleigh_noise</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>sine_map</p></td>
-<td><p>coupled_lorenz_rossler</p></td>
-<td><p>ueda_oscillator</p></td>
-<td><p>labyrinth_chaos</p></td>
-<td></td>
-<td><p>exponential_noise</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>tent_map</p></td>
-<td><p>coupled_rossler_rossler</p></td>
-<td><p>duffings_two_well_oscillator</p></td>
-<td><p>henon_heiles_system</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>linear_congruential_generator_map</p></td>
-<td><p>double_pendulum</p></td>
-<td><p>duffing_van_der_pol_oscillator</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>rickers_population_map</p></td>
-<td><p>diffusionless_lorenz_attractor</p></td>
-<td><p>rayleigh_duffing_oscillator</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>gauss_map</p></td>
-<td><p>complex_butterfly</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>cusp_map</p></td>
-<td><p>chens_system</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>pinchers_map</p></td>
-<td><p>hadley_circulation</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>sine_circle_map</p></td>
-<td><p>ACT_attractor</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>lozi_map</p></td>
-<td><p>rabinovich_frabrikant_attractor</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>delayed_logstic_map</p></td>
-<td><p>linear_feedback_rigid_body_motion_system</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>tinkerbell_map</p></td>
-<td><p>moore_spiegel_oscillator</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>burgers_map</p></td>
-<td><p>thomas_cyclically_symmetric_attractor</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>holmes_cubic_map</p></td>
-<td><p>halvorsens_cyclically_symmetric_attractor</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>kaplan_yorke_map</p></td>
-<td><p>burke_shaw_attractor</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td></td>
-<td><p>rucklidge_attractor</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td></td>
-<td><p>WINDMI</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td></td>
-<td><p>simplest_quadratic_chaotic_flow</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td></td>
-<td><p>simplest_cubic_chaotic_flow</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td></td>
-<td><p>simplest_piecewise_linear_chaotic_flow</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td></td>
-<td><p>double_scroll</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="maps.html">2.5.2.1.1. DynSysLib: Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autonomous_dissipative_flows.html">2.5.2.1.2. Autonomous Dissipative Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driven_dissipative_flows.html">2.5.2.1.3. Driven Dissipative Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conservative_flows.html">2.5.2.1.4. Conservative Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="periodic_functions.html">2.5.2.1.5. Periodic Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="noise_models.html">2.5.2.1.6. Noise Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="medical_data.html">2.5.2.1.7. Medical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delayed_flows.html">2.5.2.1.8. Delayed Flows</a></li>
+</ul>
+</div>
+<p>TO BE REMOVED:
+The following table provides a list of all the available dynamical systems as called by the <strong>system</strong> keyword:
+.. list-table:: Available Dynamical Systems</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">widths<span class="colon">:</span></dt>
+<dd class="field-odd"><p>10 10 10 10 10 10 10 10</p>
+</dd>
+<dt class="field-even">header-rows<span class="colon">:</span></dt>
+<dd class="field-even"><p>1</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><ul>
+<li><p>Maps</p></li>
+<li><p>Autonomous Dissipative Flows</p></li>
+<li><p>Driven Dissipative Flows</p></li>
+<li><p>Conservative Flows</p></li>
+<li><p>Periodic Functions</p></li>
+<li><p>Noise Models</p></li>
+<li><p>Human Data</p></li>
+<li><p>Delayed Flows</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>logistic_map</p></li>
+<li><p>chua</p></li>
+<li><p>driven_pendulum</p></li>
+<li><p>driven_van_der_pol_oscillator</p></li>
+<li><p>sine</p></li>
+<li><p>gaussian_noise</p></li>
+<li><p>ECG</p></li>
+<li><p>mackey_glass</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>henon_map</p></li>
+<li><p>lorenz</p></li>
+<li><p>shaw_van_der_pol_oscillator</p></li>
+<li><p>simplest_driven_chaotic_flow</p></li>
+<li><p>incommensurate_sine</p></li>
+<li><p>uniform_noise</p></li>
+<li><p>EEG</p></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>logistic_map</p></li>
+<li><p>rossler</p></li>
+<li><p>forced_brusselator</p></li>
+<li><p>nose_hoover_oscillator</p></li>
+<li></li>
+<li><p>rayleigh_noise</p></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>sine_map</p></li>
+<li><p>coupled_lorenz_rossler</p></li>
+<li><p>ueda_oscillator</p></li>
+<li><p>labyrinth_chaos</p></li>
+<li></li>
+<li><p>exponential_noise</p></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>tent_map</p></li>
+<li><p>coupled_rossler_rossler</p></li>
+<li><p>duffings_two_well_oscillator</p></li>
+<li><p>henon_heiles_system</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>linear_congruential_generator_map</p></li>
+<li><p>double_pendulum</p></li>
+<li><p>duffing_van_der_pol_oscillator</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>rickers_population_map</p></li>
+<li><p>diffusionless_lorenz_attractor</p></li>
+<li><p>rayleigh_duffing_oscillator</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>gauss_map</p></li>
+<li><p>complex_butterfly</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>cusp_map</p></li>
+<li><p>chens_system</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>pinchers_map</p></li>
+<li><p>hadley_circulation</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>sine_circle_map</p></li>
+<li><p>ACT_attractor</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>lozi_map</p></li>
+<li><p>rabinovich_frabrikant_attractor</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>delayed_logstic_map</p></li>
+<li><p>linear_feedback_rigid_body_motion_system</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>tinkerbell_map</p></li>
+<li><p>moore_spiegel_oscillator</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>burgers_map</p></li>
+<li><p>thomas_cyclically_symmetric_attractor</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>holmes_cubic_map</p></li>
+<li><p>halvorsens_cyclically_symmetric_attractor</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li><p>kaplan_yorke_map</p></li>
+<li><p>burke_shaw_attractor</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+<li><p>rucklidge_attractor</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+<li><p>WINDMI</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+<li><p>simplest_quadratic_chaotic_flow</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+<li><p>simplest_cubic_chaotic_flow</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+<li><p>simplest_piecewise_linear_chaotic_flow</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+<li><p>double_scroll</p></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
 </section>
 <section id="examples">
 <h2><span class="section-number">2.5.2.2. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
@@ -633,7 +690,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../PointCloud.html" class="btn btn-neutral float-left" title="2.5.1. Point Cloud Data Generation Module Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../../notebooks/index.html" class="btn btn-neutral float-right" title="3. Notebooks Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="maps.html" class="btn btn-neutral float-right" title="2.5.2.1.1. DynSysLib: Maps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

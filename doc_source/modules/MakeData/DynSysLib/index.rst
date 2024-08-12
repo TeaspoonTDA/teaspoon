@@ -33,20 +33,21 @@ This function requires the following packages:
 Available Dynamical Systems
 ####################################
 
+
+.. toctree::
+   :maxdepth: 1
+
+   maps
+   autonomous_dissipative_flows
+   driven_dissipative_flows
+   conservative_flows
+   periodic_functions
+   noise_models
+   medical_data
+   delayed_flows
+
+TO BE REMOVED: 
 The following table provides a list of all the available dynamical systems as called by the **system** keyword:
-
-.. .. toctree::
-..    :maxdepth: 1
-
-..    maps
-..    autonomous_dissipative_flows
-..    driven_dissipative_flows
-..    conservative_flows
-..    periodic_functions
-..    noise_models
-..    medical_data
-..    delayed_flows
-
 .. list-table:: Available Dynamical Systems
    :widths: 10 10 10 10 10 10 10 10
    :header-rows: 1
