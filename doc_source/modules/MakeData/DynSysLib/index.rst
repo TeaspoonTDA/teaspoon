@@ -9,7 +9,7 @@ This page provides a summary of the Python Dynamical Systems Library (DynSysLib)
    :class: with-shadow float-left
    :scale: 35
 
-Figure: $x$-solution to simulated rossler system for a chaotic response.
+Figure: :math:`x`-solution to simulated Rössler system for a chaotic response.
 
 .. rst-class::  clear-both
 
@@ -35,19 +35,19 @@ Available Dynamical Systems
 
 The following table provides a list of all the available dynamical systems as called by the **system** keyword:
 
-.. toctree::
-   :maxdepth: 1
+.. .. toctree::
+..    :maxdepth: 1
 
-   maps
-   autonomous_dissipative_flows
-   driven_dissipative_flows
-   conservative_flows
-   periodic_functions
-   noise_models
-   human_data
-   delayed_flows
+..    maps
+..    autonomous_dissipative_flows
+..    driven_dissipative_flows
+..    conservative_flows
+..    periodic_functions
+..    noise_models
+..    medical_data
+..    delayed_flows
 
-.. list-table:: Available Dynmical Systems
+.. list-table:: Available Dynamical Systems
    :widths: 10 10 10 10 10 10 10 10
    :header-rows: 1
 
@@ -80,16 +80,16 @@ The following table provides a list of all the available dynamical systems as ca
      - rossler
      - forced_brusselator
      - nose_hoover_oscillator 
-     - rayleigh_noise
      - 
+     - rayleigh_noise
      - 
      - 
    * - sine_map
      - coupled_lorenz_rossler
      - ueda_oscillator
      - labyrinth_chaos 
-     - exponential_noise
      - 
+     - exponential_noise
      - 
      - 
    * - tent_map
@@ -251,7 +251,7 @@ The following table provides a list of all the available dynamical systems as ca
 
 Examples
 #########
-The following is an example implementing the minimum amount of needed::
+The following is a minimal working example::
 
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
