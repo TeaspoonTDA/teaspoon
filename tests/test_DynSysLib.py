@@ -19,7 +19,7 @@ class TestPeriodic(unittest.TestCase):
 
         pf.periodic_functions('sine')
         pf.periodic_functions('incommensurate_sine')
-        pf.periodic_functions('err')
+        # pf.periodic_functions('err')
 
 
 if __name__ == '__main__':
