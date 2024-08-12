@@ -120,13 +120,13 @@ def wassersteinDist(
 
     return out
 
+
 def bottleneckDist(
-    pts0: np.ndarray, 
+    pts0: np.ndarray,
     pts1: np.ndarray,
     matching=True,
     plot=True
-    ):
-
+):
     """
     Compute the bottleneck distance between the diagrams pts0, pts1 using the persim package: https://persim.scikit-tda.org/en/latest/index.html
 
@@ -144,14 +144,14 @@ def bottleneckDist(
     distance: float
         The bottleneck distance between diagrams ``pts0`` and ``pts1``
     """
-    if matching==True and plot==True:
+    if matching == True and plot == True:
         d, matching = persim.bottleneck(pts0, pts1, matching=matching)
         persim.bottleneck_matching(pts0, pts1, matching)
         return d, matching
-    if matching==True and plot==False:
+    if matching == True and plot == False:
         d, matching = persim.bottleneck(pts0, pts1, matching=matching)
         return d, matching
-    if matching==False and plot==True:
+    if matching == False and plot == True:
         raise Exception("Matching must be 'True' to enable plotting'")
     else:
         d = persim.bottleneck(pts0, pts1, matching=False)

@@ -205,6 +205,7 @@
 <span class="c1"># ----------------------------------------------</span>
 <span class="c1"># ----------------------------------------------</span>
 
+
 <div class="viewcode-block" id="minPers">
 <a class="viewcode-back" href="../../../modules/TDA/persistence.html#teaspoon.TDA.Persistence.minPers">[docs]</a>
 <span class="k">def</span> <span class="nf">minPers</span><span class="p">(</span><span class="n">Dgm</span><span class="p">):</span>
@@ -498,7 +499,8 @@
 
     <span class="k">for</span> <span class="n">aps_idx</span><span class="p">,</span> <span class="n">alpha_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">Dgm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">DGMS</span><span class="p">):</span>
-            <span class="n">thresholds_</span><span class="p">,</span> <span class="n">betti_vals_</span> <span class="o">=</span> <span class="n">BettiCurve</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">maxEps</span><span class="p">,</span> <span class="n">numStops</span><span class="p">,</span> <span class="n">alpha_</span><span class="p">)</span>
+            <span class="n">thresholds_</span><span class="p">,</span> <span class="n">betti_vals_</span> <span class="o">=</span> <span class="n">BettiCurve</span><span class="p">(</span>
+                <span class="n">Dgm</span><span class="p">,</span> <span class="n">maxEps</span><span class="p">,</span> <span class="n">numStops</span><span class="p">,</span> <span class="n">alpha_</span><span class="p">)</span>
             <span class="n">all_betti_numbers_</span><span class="p">[</span><span class="n">aps_idx</span><span class="p">,</span> <span class="p">:,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">betti_vals_</span>
 
     <span class="k">if</span> <span class="n">plotting</span><span class="p">:</span>

@@ -145,6 +145,7 @@
 <span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">importlib_resources</span>
 
+
 <div class="viewcode-block" id="mpeg7">
 <a class="viewcode-back" href="../../../modules/ML/DS.html#teaspoon.ML.load_datasets.mpeg7">[docs]</a>
 <span class="k">def</span> <span class="nf">mpeg7</span><span class="p">():</span>
@@ -158,6 +159,7 @@
     <span class="k">return</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 
+
 <div class="viewcode-block" id="shrec14">
 <a class="viewcode-back" href="../../../modules/ML/DS.html#teaspoon.ML.load_datasets.shrec14">[docs]</a>
 <span class="k">def</span> <span class="nf">shrec14</span><span class="p">():</span>
@@ -168,6 +170,7 @@
     <span class="n">stream</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;datasets&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;shrec14.pickle&#39;</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
     <span class="k">return</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="mnist">
@@ -187,7 +190,7 @@
 <span class="sd">    one_dim_ttb: 1-dimensional persistence diagrams computed using top to bottom euler transform</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="n">stream</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;datasets&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;mnist.pickle&#39;</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
     <span class="k">return</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>

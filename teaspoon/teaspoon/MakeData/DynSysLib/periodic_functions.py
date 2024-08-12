@@ -30,7 +30,6 @@ def periodic_functions(system, dynamic_state=None, L=None, fs=None,
 
         t, ts = sine(omega, L, fs, SampleSize, parameters)
 
-
     if system == 'incommensurate_sine':
         # setting simulation time series parameters
         if fs == None:
@@ -58,11 +57,11 @@ def periodic_functions(system, dynamic_state=None, L=None, fs=None,
     return t, ts
 
 
-def sine(omega = 2*np.pi, 
+def sine(omega=2*np.pi,
          L=40, fs=50, SampleSize=2000):
     """
     The sinusoidal function is defined as
-    
+
     .. math::
         x(t) = \sin(2\pi t) 
 
@@ -87,8 +86,9 @@ def sine(omega = 2*np.pi,
     t = t[-SampleSize:]
 
     return t, ts
-    
-def incommensurate_sine(omega1 = np.pi, omega2 = 1, 
+
+
+def incommensurate_sine(omega1=np.pi, omega2=1,
                         L=100, fs=50, SampleSize=5000):
     """
     Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
