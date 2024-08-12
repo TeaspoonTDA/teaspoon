@@ -147,13 +147,110 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-teaspoon.MakeData.DynSysLib.noise_models">
-<span id="noise-models"></span><h1><span class="section-number">2.5.2.1.6. </span>Noise Models<a class="headerlink" href="#module-teaspoon.MakeData.DynSysLib.noise_models" title="Link to this heading"></a></h1>
+  <section id="noise-models">
+<h1><span class="section-number">2.5.2.1.6. </span>Noise Models<a class="headerlink" href="#noise-models" title="Link to this heading"></a></h1>
+<section id="module-teaspoon.MakeData.DynSysLib.noise_models">
+<span id="main-functions"></span><h2><span class="section-number">2.5.2.1.6.1. </span>Main Functions<a class="headerlink" href="#module-teaspoon.MakeData.DynSysLib.noise_models" title="Link to this heading"></a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.noise_models.exponential_noise">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.noise_models.</span></span><span class="sig-name descname"><span class="pre">exponential_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/noise_models.html#exponential_noise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.noise_models.exponential_noise" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigma</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Exponential distribution scale.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – amount of time to solve simulation for.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.noise_models.gaussian_noise">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.noise_models.</span></span><span class="sig-name descname"><span class="pre">gaussian_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/noise_models.html#gaussian_noise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.noise_models.gaussian_noise" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigma</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Standard deviation of the normal distribution.</p></li>
+<li><p><strong>mu</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Mean of the normal distribution.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – amount of time to solve simulation for.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.noise_models.rayleigh_noise">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.noise_models.</span></span><span class="sig-name descname"><span class="pre">rayleigh_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/noise_models.html#rayleigh_noise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.noise_models.rayleigh_noise" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigma</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Rayleigh distribution mode.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – amount of time to solve simulation for.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.noise_models.uniform_noise">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.noise_models.</span></span><span class="sig-name descname"><span class="pre">uniform_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/noise_models.html#uniform_noise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.noise_models.uniform_noise" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Uniform distribution lower bound.</p></li>
+<li><p><strong>b</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Uniform distribution upper bound.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – amount of time to solve simulation for.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="meta-function">
+<h2><span class="section-number">2.5.2.1.6.2. </span>Meta Function<a class="headerlink" href="#meta-function" title="Link to this heading"></a></h2>
+<p>This function is for being able to input into the original <code class="docutils literal notranslate"><span class="pre">teaspoon.MakeData.DynSysLib.DynamicSystems</span></code> function with default parameters.</p>
+<dl class="py function" id="module-0">
 <dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.noise_models.noise_models">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.noise_models.</span></span><span class="sig-name descname"><span class="pre">noise_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/noise_models.html#noise_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.noise_models.noise_models" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+</section>
 </section>
 
 
