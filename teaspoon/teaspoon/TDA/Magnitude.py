@@ -12,7 +12,7 @@ from numpy.linalg import inv
 """
 
 
-def MagnitudeFunction(D,t_range = [.1,10], t_n = 100):
+def MagnitudeFunction(D, t_range=[.1, 10], t_n=100):
     """
     This function calculates the magnitude function,  ``t -> |tX|``,  of an input distance matrix assumed to be calculated from a finite metric space ``X``, on the interval defined by t_range at t_n locations.
 
@@ -31,15 +31,15 @@ def MagnitudeFunction(D,t_range = [.1,10], t_n = 100):
         T,M [1-D arrays]: T is the list of ``t`` values, ``M`` is the list of associated values ``|tX|``.
     """
 
-    # Get the list of locations for which we'll calculate the magintude. 
-    T = np.linspace(t_range[0],t_range[1],t_n)
+    # Get the list of locations for which we'll calculate the magintude.
+    T = np.linspace(t_range[0], t_range[1], t_n)
     M = []
     for t in T:
         tZ = np.exp(-t*D)
         tZinv = inv(tZ)
         m = np.sum(tZinv)
         M.append(m)
-    return T,M
+    return T, M
 
 
 # Only runs if running from this file (This will show basic example)
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     from scipy.spatial import distance_matrix
     import matplotlib.pyplot as plt
     P = Annulus()
-    D = distance_matrix(P,P)
-    T,M = MagnitudeFunction(D)
-    plt.plot(T,M)
+    D = distance_matrix(P, P)
+    T, M = MagnitudeFunction(D)
+    plt.plot(T, M)
     plt.show()

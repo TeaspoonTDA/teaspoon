@@ -2,6 +2,7 @@ import numpy as np
 from gudhi import CubicalComplex
 import matplotlib.pyplot as plt
 
+
 def array_to_dict(result):
 
     result_dict = {}
@@ -12,30 +13,33 @@ def array_to_dict(result):
 
     return result_dict
 
+
 def BettiCurve(Dgm, maxEps=1, numStops=10):
 
-    vecOfThresholds = np.linspace(0.001,maxEps,numStops)
+    vecOfThresholds = np.linspace(0.001, maxEps, numStops)
     Betti = np.zeros(np.shape(vecOfThresholds))
 
     for i, v in enumerate(vecOfThresholds):
         if len(Dgm) > 0:
-            Betti[i] = sum(np.logical_and((Dgm[:, 0] >= v), (Dgm[:, 1] < v) ))
+            Betti[i] = sum(np.logical_and((Dgm[:, 0] >= v), (Dgm[:, 1] < v)))
         else:
             Betti[i] = 0
 
     return vecOfThresholds, Betti
 
+
 def compute_cubical_persistence(p, filter=0.02):
 
     p = -p / np.max(p)
 
-    sup_pers = CubicalComplex(top_dimensional_cells = p)
+    sup_pers = CubicalComplex(top_dimensional_cells=p)
     sup_pers = sup_pers.persistence(min_persistence=filter)
     sup_pers = np.array(sup_pers)
 
     return array_to_dict(sup_pers)
 
-def analytical_homological_bifurcation_plot(PDFs, bifurcation_parameters, dimensions=[0,1], filter=0.02, maxEps=1, numStops=10, plotting=True):
+
+def analytical_homological_bifurcation_plot(PDFs, bifurcation_parameters, dimensions=[0, 1], filter=0.02, maxEps=1, numStops=10, plotting=True):
     '''
     Computes the homological bifurcation plot given a list of analytically generated PDFs
 
@@ -53,7 +57,7 @@ def analytical_homological_bifurcation_plot(PDFs, bifurcation_parameters, dimens
 
     if len(bifurcation_parameters) != len(PDFs):
         print('Bifurcation Parameters should be the same length as number of PDFs')
-        return 
+        return
 
     All_DGMS = []
     for PDF in PDFs:
@@ -92,9 +96,11 @@ def analytical_homological_bifurcation_plot(PDFs, bifurcation_parameters, dimens
 
             fig = plt.figure(figsize=(3, 3), dpi=300)
             ax = fig.add_subplot(111)
-            cax = ax.matshow(M, origin='lower', extent=(-1,1,0,1), aspect=2, cmap='Set1')
+            cax = ax.matshow(M, origin='lower', extent=(-1,
+                             1, 0, 1), aspect=2, cmap='Set1')
             fig.colorbar(cax)
-            ax.set_xticks(np.round([bifurcation_parameters[0], bifurcation_parameters[int(len(bifurcation_parameters)/2)], bifurcation_parameters[-1]], 1))
+            ax.set_xticks(np.round([bifurcation_parameters[0], bifurcation_parameters[int(
+                len(bifurcation_parameters)/2)], bifurcation_parameters[-1]], 1))
             ax.set_yticks([0, 0.5, 1])
             ax.set_ylabel(r'$\epsilon$')
             ax.set_xlabel('Bifurcation Parameter')
@@ -102,5 +108,3 @@ def analytical_homological_bifurcation_plot(PDFs, bifurcation_parameters, dimens
             plt.show()
 
     return plots
-
-

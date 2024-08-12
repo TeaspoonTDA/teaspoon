@@ -1,6 +1,7 @@
 import pandas as pd
 import importlib_resources
 
+
 def mpeg7():
     """
     Load the persistence diagrams from the MPEG7 dataset
@@ -11,6 +12,7 @@ def mpeg7():
     data = pd.read_pickle(stream)
     return(data)
 
+
 def shrec14():
     """
     Load the persistence diagrams from the shrec14 dataset
@@ -19,6 +21,7 @@ def shrec14():
     stream = importlib_resources.files('datasets').joinpath('shrec14.pickle')
     data = pd.read_pickle(stream)
     return(data)
+
 
 def mnist():
     """
@@ -35,7 +38,7 @@ def mnist():
     one_dim_ttb: 1-dimensional persistence diagrams computed using top to bottom euler transform
 
     """
-    
+
     stream = importlib_resources.files('datasets').joinpath('mnist.pickle')
     data = pd.read_pickle(stream)
     return(data)
