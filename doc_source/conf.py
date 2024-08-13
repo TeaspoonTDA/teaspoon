@@ -45,7 +45,8 @@ extensions = ['sphinx.ext.autodoc',
               'sphinxcontrib.bibtex',
               'sphinx-prompt',
 	           'IPython.sphinxext.ipython_console_highlighting',
-              'myst_parser']
+              'myst_parser',
+              'nbsphinx']
 
 # Add any paths that contain templates here, relative to this directory.
 myst_heading_anchors = 5

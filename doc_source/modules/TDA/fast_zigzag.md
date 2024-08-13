@@ -23,6 +23,7 @@ and the output can be read and plotted by the following module
 ```{eval-rst}
 .. automodule:: teaspoon.TDA.fast_zigzag
    :members: plot_output_zigzag
+   :no-index:
 ```
 
 ### Example

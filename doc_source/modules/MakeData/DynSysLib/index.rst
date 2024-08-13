@@ -2,14 +2,14 @@ Dynamic Systems Library (DynSysLib)
 =======================================================
 
 
-This page provides a summary of the Python Dynamical Systems Library (DynSysLib) for simulating a wide variety of dynamical systems. Full documentation of all of the currently available dynamical systems can be downloaded :download:`here <../../../figures/dynamic_systems_library.pdf>`.
+This page provides a summary of the Python Dynamical Systems Library (DynSysLib) for simulating a wide variety of dynamical systems. Full documentation of the currently available dynamical systems can be downloaded :download:`here <../../../figures/dynamic_systems_library.pdf>`.
 
-.. image:: ../../../figures/time_series_chaotic_animation.gif
-   :alt: Left floating image
-   :class: with-shadow float-left
-   :scale: 35
+.. figure:: ../../../figures/time_series_chaotic_animation.gif
+  :alt: Time series of a chaotic response.
+  :class: with-shadow float-left
+  :scale: 35
 
-Figure: :math:`x`-solution to simulated Rössler system for a chaotic response.
+  :math:`x`-solution to simulated Rössler system for a chaotic response.
 
 .. rst-class::  clear-both
 
@@ -48,6 +48,7 @@ Available Dynamical Systems
 
 TO BE REMOVED: 
 The following table provides a list of all the available dynamical systems as called by the **system** keyword:
+
 .. list-table:: Available Dynamical Systems
    :widths: 10 10 10 10 10 10 10 10
    :header-rows: 1
@@ -251,7 +252,8 @@ The following table provides a list of all the available dynamical systems as ca
 
 
 Examples
-#########
+########
+
 The following is a minimal working example::
 
     import matplotlib.pyplot as plt

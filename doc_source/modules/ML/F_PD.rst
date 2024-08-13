@@ -3,6 +3,7 @@
 =============
 Featurization
 =============
+
 This documentation includes five different persistence diagram featurization methods.
 These are persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.
 
@@ -20,7 +21,7 @@ Landscape class
     :private-members:
     :special-members: __init__
 
-**Example:** In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted. 
+**Example:** In this example, we do not specify which landscape function we want. Therefore, the code returns a warning to user if desired landscape points is wanted. 
     	
 
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
@@ -186,20 +187,17 @@ Persistence Images
 	>>> # plot example images
 	>>> Ff.plot_F_Images(feature_PI, num_plots=4, rows=2, cols=2)
 
-The algorithm will return four images as shown in :numref:`PI_Example`.  An example notebook is also available.
+The algorithm will return four images as shown in :numref:`pi_Example`.  An example notebook is also available: `Lanscape Notebook <../../notebooks/persistence_images.ipynb>`_.
 
-.. _PI_Example:
+
+.. _pi_Example:
 
 .. figure:: ../../figures/PI_Example.png
    :align: center
    :scale: 20 %
    
-   Example persistence images.    
-
-.. toctree::
-   :maxdepth: 4
-
-   notebooks/persistence_images.ipynb
+   Example of persistence images.
+   
 
 .. _carlsson_coordinates:
 
