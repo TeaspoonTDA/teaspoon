@@ -156,51 +156,9 @@
 <span class="sd">    TODO Add docstring. Do we even want to keep this function? </span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;sine&#39;</span><span class="p">:</span>
-
-        <span class="c1"># # setting simulation time series parameters</span>
-        <span class="c1"># if fs == None:</span>
-        <span class="c1">#     fs = 50</span>
-        <span class="c1"># if SampleSize == None:</span>
-        <span class="c1">#     SampleSize = 2000</span>
-        <span class="c1"># if L == None:</span>
-        <span class="c1">#     L = 40</span>
-        <span class="c1"># t = np.linspace(0, L, int(L*fs))</span>
-
-        <span class="c1"># # setting system parameters</span>
-        <span class="c1"># if parameters != None:</span>
-        <span class="c1">#     if len(parameters) != 1:</span>
-        <span class="c1">#         print(</span>
-        <span class="c1">#             &#39;Warning: needed 1 parameters. Defaulting to periodic solution parameters.&#39;)</span>
-        <span class="c1">#         parameters = None</span>
-        <span class="c1">#     else:</span>
-        <span class="c1">#         omega = parameters[0]</span>
-        <span class="c1"># if parameters == None:</span>
-        <span class="c1">#     omega = 2*np.pi</span>
-
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">sine</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;incommensurate_sine&#39;</span><span class="p">:</span>
-        <span class="c1"># setting simulation time series parameters</span>
-        <span class="c1"># if fs == None:</span>
-        <span class="c1">#     fs = 50</span>
-        <span class="c1"># if SampleSize == None:</span>
-        <span class="c1">#     SampleSize = 5000</span>
-        <span class="c1"># if L == None:</span>
-        <span class="c1">#     L = 100</span>
-        <span class="c1"># t = np.linspace(0, L, int(L*fs))</span>
-
-        <span class="c1"># # setting system parameters</span>
-        <span class="c1"># if parameters != None:</span>
-        <span class="c1">#     if len(parameters) != 2:</span>
-        <span class="c1">#         print(</span>
-        <span class="c1">#             &#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;)</span>
-        <span class="c1">#         parameters = None</span>
-        <span class="c1">#     else:</span>
-        <span class="c1">#         omega1, omega2 = parameters[0], parameters[1]</span>
-        <span class="c1"># if parameters == None:</span>
-        <span class="c1">#     omega1 = np.pi</span>
-        <span class="c1">#     omega2 = 1</span>
-
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">incommensurate_sine</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
