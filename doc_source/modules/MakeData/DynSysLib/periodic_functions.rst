@@ -8,6 +8,7 @@ Main Functions
     :members: sine, incommensurate_sine
     :undoc-members:
     :show-inheritance:
+    :member-order: bysource
 
 
 Meta Function 

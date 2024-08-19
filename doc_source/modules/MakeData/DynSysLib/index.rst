@@ -78,7 +78,7 @@ The following table provides a list of all the available dynamical systems as ca
      - uniform_noise
      - EEG
      - 
-   * - logistic_map
+   * - sine_map
      - rossler
      - forced_brusselator
      - nose_hoover_oscillator 
@@ -86,7 +86,7 @@ The following table provides a list of all the available dynamical systems as ca
      - rayleigh_noise
      - 
      - 
-   * - sine_map
+   * - tent_map
      - coupled_lorenz_rossler
      - ueda_oscillator
      - labyrinth_chaos 
@@ -94,7 +94,7 @@ The following table provides a list of all the available dynamical systems as ca
      - exponential_noise
      - 
      - 
-   * - tent_map
+   * - linear_congruential_generator_map
      - coupled_rossler_rossler
      - duffings_two_well_oscillator
      - henon_heiles_system
@@ -102,7 +102,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - linear_congruential_generator_map
+   * - rickers_population_map
      - double_pendulum
      - duffing_van_der_pol_oscillator
      - 
@@ -110,7 +110,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - rickers_population_map
+   * - gauss_map
      - diffusionless_lorenz_attractor
      - rayleigh_duffing_oscillator
      - 
@@ -118,7 +118,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - gauss_map
+   * - cusp_map
      - complex_butterfly
      - 
      - 
@@ -126,7 +126,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - cusp_map
+   * - pinchers_map
      - chens_system
      - 
      - 
@@ -134,7 +134,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - pinchers_map
+   * - sine_circle_map
      - hadley_circulation
      - 
      - 
@@ -142,7 +142,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - sine_circle_map
+   * - lozi_map
      - ACT_attractor
      - 
      - 
@@ -150,7 +150,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - lozi_map
+   * - delayed_logstic_map
      - rabinovich_frabrikant_attractor
      - 
      - 
@@ -158,7 +158,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - delayed_logstic_map
+   * - tinkerbell_map
      - linear_feedback_rigid_body_motion_system
      - 
      - 
@@ -166,7 +166,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - tinkerbell_map
+   * - burgers_map
      - moore_spiegel_oscillator
      - 
      - 
@@ -174,7 +174,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - burgers_map
+   * - holmes_cubic_map
      - thomas_cyclically_symmetric_attractor
      - 
      - 
@@ -182,7 +182,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - holmes_cubic_map
+   * - kaplan_yorke_map
      - halvorsens_cyclically_symmetric_attractor
      - 
      - 
@@ -190,7 +190,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - kaplan_yorke_map
+   * - ginger_bread_man_map
      - burke_shaw_attractor
      - 
      - 

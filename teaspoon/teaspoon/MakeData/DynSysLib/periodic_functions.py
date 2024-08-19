@@ -3,9 +3,6 @@ import numpy as np
 
 def periodic_functions(system, dynamic_state=None, L=None, fs=None,
                        SampleSize=None, parameters=None, InitialConditions=None):
-    '''
-    TODO Add docstring. Do we even want to keep this function? 
-    '''
     if system == 'sine':
         t, ts = sine()
 
@@ -49,7 +46,12 @@ def sine(omega=2*np.pi,
 def incommensurate_sine(omega1=np.pi, omega2=1,
                         L=100, fs=50, SampleSize=5000):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    This function is generated using two incommensurate periodic functions as
+
+    .. math::
+        x(t) = \sin(\\omega_1 t) + \sin(\\omega_2 t)
+
+    This was sampled such that :math:`t \in [0, 100]` at a rate of 50 Hz.
 
     Parameters:
         omega1 (Optional[float]): frequency of the first sine wave.

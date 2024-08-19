@@ -152,9 +152,6 @@
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/periodic_functions.html#teaspoon.MakeData.DynSysLib.periodic_functions.periodic_functions">[docs]</a>
 <span class="k">def</span> <span class="nf">periodic_functions</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    TODO Add docstring. Do we even want to keep this function? </span>
-<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;sine&#39;</span><span class="p">:</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">sine</span><span class="p">()</span>
 
@@ -204,7 +201,12 @@
 <span class="k">def</span> <span class="nf">incommensurate_sine</span><span class="p">(</span><span class="n">omega1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">omega2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                         <span class="n">L</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Add description from `Audun&#39;s pdf &lt;https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf&gt;`_</span>
+<span class="sd">    This function is generated using two incommensurate periodic functions as</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        x(t) = \sin(\\omega_1 t) + \sin(\\omega_2 t)</span>
+
+<span class="sd">    This was sampled such that :math:`t \in [0, 100]` at a rate of 50 Hz.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        omega1 (Optional[float]): frequency of the first sine wave.</span>
