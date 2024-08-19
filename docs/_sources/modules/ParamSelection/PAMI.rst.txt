@@ -19,7 +19,7 @@ Where the output for this example is::
 
     Permutation Embedding Delay: 8
 
-.. figure::PAMI.png
+.. figure:: ../../figures/PAMI.png
    :scale: 13 %
 
 

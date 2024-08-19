@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.5.2.1.5. Periodic Functions &mdash; teaspoon 1.3.7 documentation</title>
+  <title>2.1.2.1.5. Periodic Functions &mdash; teaspoon 1.3.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
@@ -19,12 +19,14 @@
         <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="2.5.2.1.6. Noise Models" href="noise_models.html" />
-    <link rel="prev" title="2.5.2.1.4. Conservative Flows" href="conservative_flows.html" /> 
+    <link rel="next" title="2.1.2.1.6. Noise Models" href="noise_models.html" />
+    <link rel="prev" title="2.1.2.1.4. Conservative Flows" href="conservative_flows.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,62 +57,64 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">2. Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../ParamSelection/index.html">2.1. Parameter Selection Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">2.1. Make Data (MakeData) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../PointCloud.html">2.1.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">2.1.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html">2.2.1. Mutual Information (MI) for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/AC.html">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/AC.html">2.2.2. Auto-correlation for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html">2.1.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html">2.2.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html">2.1.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html">2.1.5. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html">2.2.5. MsPE for time delay (tau) and dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FNN.html">2.2.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../ML/index.html">2.2. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../ML/DS.html">2.2.1. Datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ML/F_PD.html">2.2.2. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ML/CL.html">2.2.3. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ML/index.html#references">2.2.4. References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../SP/index.html">2.3. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/tsa.html">2.3.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/network.html">2.3.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/information.html">2.3.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/misc.html">2.3.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/texture_analysis.html">2.3.5. Texture Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../TDA/index.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../TDA/PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../TDA/distances.html">2.3.2. Distances</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../TDA/drawing.html">2.3.3. Drawing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../TDA/persistence.html">2.3.4. Persistence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../TDA/sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../TDA/magnitude.html">2.3.6. Magnitude</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../TDA/fast_zigzag.html">2.3.7. Fast Zigzag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../TDA/index.html">2.4. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/PHN.html">2.4.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/distances.html">2.4.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/drawing.html">2.4.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/persistence.html">2.4.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/sublevel_set_persistence.html">2.4.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/magnitude.html">2.4.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/fast_zigzag.html">2.4.7. Fast Zigzag</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../SP/index.html">2.4. Signal Processing (SP) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../SP/tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../SP/network.html">2.4.2. Network Representation of Time Series</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../SP/information.html">2.4.3. Information Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../SP/misc.html">2.4.4. Miscellaneous</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../SP/texture_analysis.html">2.4.5. Texture Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../SP/stoch_bif.html">2.4.6. Stochastic P-Bifurcation Detection</a></li>
-</ul>
-</li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">2.5. Make Data (MakeData) Module</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="index.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ML/index.html">2.5. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ML/DS.html">2.5.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ML/F_PD.html">2.5.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ML/CL.html">2.5.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ML/index.html#references">2.5.4. References</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
@@ -135,10 +139,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../index.html"><span class="section-number">2. </span>Table of Contents</a></li>
-          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2.5. </span>MakeData Module Documentation</a></li>
-          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.5.2. </span>Dynamic Systems Library (DynSysLib)</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">2.5.2.1.5. </span>Periodic Functions</li>
+          <li class="breadcrumb-item"><a href="../../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2.1. </span>MakeData Module Documentation</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.1.2. </span>Dynamic Systems Library (DynSysLib)</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.1.2.1.5. </span>Periodic Functions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/modules/MakeData/DynSysLib/periodic_functions.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -149,9 +153,9 @@
            <div itemprop="articleBody">
              
   <section id="periodic-functions">
-<h1><span class="section-number">2.5.2.1.5. </span>Periodic Functions<a class="headerlink" href="#periodic-functions" title="Link to this heading"></a></h1>
+<h1><span class="section-number">2.1.2.1.5. </span>Periodic Functions<a class="headerlink" href="#periodic-functions" title="Link to this heading"></a></h1>
 <section id="module-teaspoon.MakeData.DynSysLib.periodic_functions">
-<span id="main-functions"></span><h2><span class="section-number">2.5.2.1.5.1. </span>Main Functions<a class="headerlink" href="#module-teaspoon.MakeData.DynSysLib.periodic_functions" title="Link to this heading"></a></h2>
+<span id="main-functions"></span><h2><span class="section-number">2.1.2.1.5.1. </span>Main Functions<a class="headerlink" href="#module-teaspoon.MakeData.DynSysLib.periodic_functions" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.periodic_functions.incommensurate_sine">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.periodic_functions.</span></span><span class="sig-name descname"><span class="pre">incommensurate_sine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.141592653589793</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/periodic_functions.html#incommensurate_sine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.periodic_functions.incommensurate_sine" title="Link to this definition"></a></dt>
@@ -203,11 +207,11 @@
 
 </section>
 <section id="meta-function">
-<h2><span class="section-number">2.5.2.1.5.2. </span>Meta Function<a class="headerlink" href="#meta-function" title="Link to this heading"></a></h2>
+<h2><span class="section-number">2.1.2.1.5.2. </span>Meta Function<a class="headerlink" href="#meta-function" title="Link to this heading"></a></h2>
 <p>This function is for being able to input into the original <code class="docutils literal notranslate"><span class="pre">teaspoon.MakeData.DynSysLib.DynamicSystems</span></code> function with default parameters.</p>
-<dl class="py function" id="module-0">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.periodic_functions.periodic_functions">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.periodic_functions.</span></span><span class="sig-name descname"><span class="pre">periodic_functions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/periodic_functions.html#periodic_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.periodic_functions.periodic_functions" title="Link to this definition"></a></dt>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.periodic_functions.</span></span><span class="sig-name descname"><span class="pre">periodic_functions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/periodic_functions.html#periodic_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>TODO Add docstring. Do we even want to keep this function?</p>
 </dd></dl>
 
@@ -218,8 +222,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="conservative_flows.html" class="btn btn-neutral float-left" title="2.5.2.1.4. Conservative Flows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="noise_models.html" class="btn btn-neutral float-right" title="2.5.2.1.6. Noise Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="conservative_flows.html" class="btn btn-neutral float-left" title="2.1.2.1.4. Conservative Flows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="noise_models.html" class="btn btn-neutral float-right" title="2.1.2.1.6. Noise Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

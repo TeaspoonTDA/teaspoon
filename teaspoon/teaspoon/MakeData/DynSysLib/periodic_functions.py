@@ -7,52 +7,10 @@ def periodic_functions(system, dynamic_state=None, L=None, fs=None,
     TODO Add docstring. Do we even want to keep this function? 
     '''
     if system == 'sine':
-
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 50
-        if SampleSize == None:
-            SampleSize = 2000
-        if L == None:
-            L = 40
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 1:
-                print(
-                    'Warning: needed 1 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                omega = parameters[0]
-        if parameters == None:
-            omega = 2*np.pi
-
-        t, ts = sine(omega, L, fs, SampleSize, parameters)
+        t, ts = sine()
 
     if system == 'incommensurate_sine':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 50
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 100
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 2:
-                print(
-                    'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                omega1, omega2 = parameters[0], parameters[1]
-        if parameters == None:
-            omega1 = np.pi
-            omega2 = 1
-
-        t, ts = incommensurate_sine(omega1, omega2, L, fs, SampleSize)
+        t, ts = incommensurate_sine()
 
     return t, ts
 

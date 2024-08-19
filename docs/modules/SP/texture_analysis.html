@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.4.5. Texture Analysis &mdash; teaspoon 1.3.7 documentation</title>
+  <title>2.3.5. Texture Analysis &mdash; teaspoon 1.3.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
@@ -19,11 +19,12 @@
         <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.4.6. Stochastic P-Bifurcation Detection" href="stoch_bif.html" />
-    <link rel="prev" title="2.4.4. Miscellaneous Functions" href="misc.html" /> 
+    <link rel="next" title="2.3.6. Stochastic P-Bifurcation Detection" href="stoch_bif.html" />
+    <link rel="prev" title="2.3.4. Miscellaneous Functions" href="misc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,62 +55,64 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">2. Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../ParamSelection/index.html">2.1. Parameter Selection Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MakeData/index.html">2.1. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/PointCloud.html">2.1.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/DynSysLib/index.html">2.1.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html">2.2.1. Mutual Information (MI) for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html">2.2.2. Auto-correlation for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html">2.1.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html">2.2.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html">2.1.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html">2.1.5. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html">2.2.5. MsPE for time delay (tau) and dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html">2.2.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../ML/index.html">2.2. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ML/DS.html">2.2.1. Datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ML/F_PD.html">2.2.2. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ML/CL.html">2.2.3. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ML/index.html#references">2.2.4. References</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">2.3. Signal Processing (SP) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.3.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">2.3.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="information.html">2.3.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc.html">2.3.4. Miscellaneous</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.3.5. Texture Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../TDA/index.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/distances.html">2.3.2. Distances</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/drawing.html">2.3.3. Drawing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/persistence.html">2.3.4. Persistence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/magnitude.html">2.3.6. Magnitude</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/fast_zigzag.html">2.3.7. Fast Zigzag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TDA/index.html">2.4. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/PHN.html">2.4.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/distances.html">2.4.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/drawing.html">2.4.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/persistence.html">2.4.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/sublevel_set_persistence.html">2.4.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/magnitude.html">2.4.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/fast_zigzag.html">2.4.7. Fast Zigzag</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">2.4. Signal Processing (SP) Module</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="network.html">2.4.2. Network Representation of Time Series</a></li>
-<li class="toctree-l3"><a class="reference internal" href="information.html">2.4.3. Information Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="misc.html">2.4.4. Miscellaneous</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2.4.5. Texture Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="stoch_bif.html">2.4.6. Stochastic P-Bifurcation Detection</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../MakeData/index.html">2.5. Make Data (MakeData) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../MakeData/PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../MakeData/DynSysLib/index.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ML/index.html">2.5. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ML/DS.html">2.5.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/F_PD.html">2.5.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/CL.html">2.5.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/index.html#references">2.5.4. References</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">4. Contributing</a><ul>
@@ -134,9 +137,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Table of Contents</a></li>
-          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.4. </span>Signal Processing (SP) Module Documentation</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">2.4.5. </span>Texture Analysis</li>
+          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.3. </span>Signal Processing (SP) Module Documentation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.3.5. </span>Texture Analysis</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/modules/SP/texture_analysis.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -147,7 +150,7 @@
            <div itemprop="articleBody">
              
   <section id="texture-analysis">
-<h1><span class="section-number">2.4.5. </span>Texture Analysis<a class="headerlink" href="#texture-analysis" title="Link to this heading"></a></h1>
+<h1><span class="section-number">2.3.5. </span>Texture Analysis<a class="headerlink" href="#texture-analysis" title="Link to this heading"></a></h1>
 <p>This page provides a summary of the functions available in the texture analysis module. Persistent homology from topological data analysis is leveraged to compare experimental and nominal textures and provide similarity scores for specific features that make up the texture of interest. Three texture features were targeted for this module: lattice shape, feature depth, and roundness. More information on the details of texture shape quantification can be found in,  “<a class="reference external" href="https://arxiv.org/abs/2209.05531">Topological Measures for Pattern quantification of Impact Centers in Piezo Vibration Striking Treatment (PVST)</a>.” The methods for feature depth and roundness are described in “<a class="reference external" href="https://arxiv.org/abs/2210.06333">Pattern Characterization Using Topological Data Analysis: Application to Piezo Vibration Striking Treatment</a>.”</p>
 <p>Currently, the following functions are available:</p>
 <ul class="simple">
@@ -156,10 +159,13 @@
 <li><p><a class="reference internal" href="#feature-roundness"><span class="std std-ref">Feature Roundness</span></a></p></li>
 </ul>
 <section id="texture-analaysis-overview">
-<h2><span class="section-number">2.4.5.1. </span>Texture Analaysis Overview<a class="headerlink" href="#texture-analaysis-overview" title="Link to this heading"></a></h2>
+<h2><span class="section-number">2.3.5.1. </span>Texture Analaysis Overview<a class="headerlink" href="#texture-analaysis-overview" title="Link to this heading"></a></h2>
 <p>The process for analyzing these texture features is captured in the overview flow chart below.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/_overview_full.png"><img alt="../../_images/_overview_full.png" src="../../_images/_overview_full.png" style="width: 723.2px; height: 428.40000000000003px;" /></a>
+</figure>
 <section id="lattice-shape">
-<span id="id1"></span><h3><span class="section-number">2.4.5.1.1. </span>Lattice Shape<a class="headerlink" href="#lattice-shape" title="Link to this heading"></a></h3>
+<span id="id1"></span><h3><span class="section-number">2.3.5.1.1. </span>Lattice Shape<a class="headerlink" href="#lattice-shape" title="Link to this heading"></a></h3>
 <p>Point cloud persistent homology is computed on the coordinates of the feature centers and the corresponding lattice shape scores are computed to extract lattice shape information from a texture.</p>
 <dl class="py function" id="module-teaspoon.SP.texture_analysis">
 <dt class="sig sig-object py" id="teaspoon.SP.texture_analysis.lattice_shape">
@@ -179,6 +185,9 @@
 </dd></dl>
 
 <p>An example usage of this function is provided below where synthetic grids are generated to simulate the <cite>nominal</cite> and <cite>experimental</cite> feature center coordinates. The experimental grid has been perturbed by adding uniform noise to the x and y coordinates. The two input grids are shown in the figure below.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/synthetic_grid.png"><img alt="../../_images/synthetic_grid.png" src="../../_images/synthetic_grid.png" style="width: 700.0px; height: 350.0px;" /></a>
+</figure>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">teaspoon.SP.texture_analysis</span> <span class="kn">import</span> <span class="n">lattice_shape</span>
@@ -203,7 +212,7 @@
 </div>
 </section>
 <section id="feature-depth">
-<span id="id2"></span><h3><span class="section-number">2.4.5.1.2. </span>Feature Depth<a class="headerlink" href="#feature-depth" title="Link to this heading"></a></h3>
+<span id="id2"></span><h3><span class="section-number">2.3.5.1.2. </span>Feature Depth<a class="headerlink" href="#feature-depth" title="Link to this heading"></a></h3>
 <p>0D Sub level persistent homology is computed on <cite>nominal</cite> and <cite>experimental</cite> texture images, and the lifetime histograms are compared to provide a score based on the earth movers distance indicating the uniformity of the feature depths across the  <cite>experimental</cite> image.</p>
 <dl class="py function">
 <dt class="sig sig-object py">
@@ -228,6 +237,9 @@
 </dd></dl>
 
 <p>An example use of this function is provided below. The example generates synthetic surfaces representing the <cite>nominal</cite> and <cite>experimental</cite> textures. These generated surfaces are shown below where there are 16 features in each image generated using 2D Gaussian distributions. One of the features in the experimental image is shallower than the others representing a non uniform depth distribution. Further, samples from a Gaussian distribution are added to the experimental surface to introduce noise in the image and further alter the depth distribution.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/synthetic_textures_depth.png"><img alt="../../_images/synthetic_textures_depth.png" src="../../_images/synthetic_textures_depth.png" style="width: 700.0px; height: 244.99999999999997px;" /></a>
+</figure>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
@@ -290,7 +302,7 @@
 </div>
 </section>
 <section id="feature-roundness">
-<span id="id3"></span><h3><span class="section-number">2.4.5.1.3. </span>Feature Roundness<a class="headerlink" href="#feature-roundness" title="Link to this heading"></a></h3>
+<span id="id3"></span><h3><span class="section-number">2.3.5.1.3. </span>Feature Roundness<a class="headerlink" href="#feature-roundness" title="Link to this heading"></a></h3>
 <p>1D Sub level persistent homology is computed on <cite>nominal</cite> and <cite>experimental</cite> texture images. The images are thresholded at many heights and at each height the thresholded image is distance transformed to encode information about the roundness of the feature as the height function of the transormed image. 1D sub level persistence is then used to compare the histograms of the loop lifetimes at each height. An overall score is computed as the area under the earth movers distance curve normalized to the reference height of the experimental image.</p>
 <dl class="py function">
 <dt class="sig sig-object py">
@@ -317,6 +329,9 @@
 </dd></dl>
 
 <p>An example use of this function is provided below. The example generates synthetic surfaces representing the <cite>nominal</cite> and <cite>experimental</cite> textures. These generated surfaces are shown below where there are 16 features in each image generated using 2D Gaussian distributions similarily to the depth example above. However, for the experimental image in this case, all of the features are elliptical and the additive noise was increased to alter the roundness of the features.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/synthetic_textures_roundness.png"><img alt="../../_images/synthetic_textures_roundness.png" src="../../_images/synthetic_textures_roundness.png" style="width: 700.0px; height: 244.99999999999997px;" /></a>
+</figure>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -374,6 +389,9 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roundness_score</span> <span class="o">=</span> <span class="mf">0.11883556</span>
 </pre></div>
 </div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/emd_plot.png"><img alt="../../_images/emd_plot.png" src="../../_images/emd_plot.png" style="width: 360.0px; height: 360.0px;" /></a>
+</figure>
 </section>
 </section>
 </section>
@@ -382,8 +400,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="misc.html" class="btn btn-neutral float-left" title="2.4.4. Miscellaneous Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="stoch_bif.html" class="btn btn-neutral float-right" title="2.4.6. Stochastic P-Bifurcation Detection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="misc.html" class="btn btn-neutral float-left" title="2.3.4. Miscellaneous Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stoch_bif.html" class="btn btn-neutral float-right" title="2.3.6. Stochastic P-Bifurcation Detection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

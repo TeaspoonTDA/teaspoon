@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.3.7. Fast Zigzag &mdash; teaspoon 1.3.7 documentation</title>
+  <title>2.4.7. Fast Zigzag &mdash; teaspoon 1.3.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
@@ -19,11 +19,12 @@
         <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.4. Signal Processing (SP) Module Documentation" href="../SP/index.html" />
-    <link rel="prev" title="2.3.6. Magnitude" href="magnitude.html" /> 
+    <link rel="next" title="2.5. Persistence Diagram Featurization" href="../ML/index.html" />
+    <link rel="prev" title="2.4.6. Magnitude" href="magnitude.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,62 +55,64 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">2. Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../ParamSelection/index.html">2.1. Parameter Selection Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MakeData/index.html">2.1. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/PointCloud.html">2.1.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/DynSysLib/index.html">2.1.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html">2.2.1. Mutual Information (MI) for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html">2.2.2. Auto-correlation for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html">2.1.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html">2.2.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html">2.1.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html">2.1.5. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html">2.2.5. MsPE for time delay (tau) and dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html">2.2.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../ML/index.html">2.2. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ML/DS.html">2.2.1. Datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ML/F_PD.html">2.2.2. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ML/CL.html">2.2.3. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ML/index.html#references">2.2.4. References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SP/index.html">2.3. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../SP/tsa.html">2.3.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/network.html">2.3.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/information.html">2.3.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/misc.html">2.3.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/texture_analysis.html">2.3.5. Texture Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">2.3. Topological Data Analaysis (TDA) Module</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="distances.html">2.3.2. Distances</a></li>
-<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.3.3. Drawing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.3.4. Persistence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="magnitude.html">2.3.6. Magnitude</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2.3.7. Fast Zigzag</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">2.4. Topological Data Analaysis (TDA) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.4.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.4.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.4.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persistence.html">2.4.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.4.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnitude.html">2.4.6. Magnitude</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.4.7. Fast Zigzag</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../SP/index.html">2.4. Signal Processing (SP) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../SP/tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/network.html">2.4.2. Network Representation of Time Series</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/information.html">2.4.3. Information Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/misc.html">2.4.4. Miscellaneous</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/texture_analysis.html">2.4.5. Texture Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/stoch_bif.html">2.4.6. Stochastic P-Bifurcation Detection</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../MakeData/index.html">2.5. Make Data (MakeData) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../MakeData/PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../MakeData/DynSysLib/index.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ML/index.html">2.5. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ML/DS.html">2.5.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/F_PD.html">2.5.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/CL.html">2.5.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/index.html#references">2.5.4. References</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">4. Contributing</a><ul>
@@ -134,9 +137,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Table of Contents</a></li>
-          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.3. </span>Topological Data Analysis (TDA) Module Documentation</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">2.3.7. </span>Fast Zigzag</li>
+          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.4. </span>Topological Data Analysis (TDA) Module Documentation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.4.7. </span>Fast Zigzag</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/modules/TDA/fast_zigzag.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -147,7 +150,7 @@
            <div itemprop="articleBody">
              
   <section id="fast-zigzag">
-<h1><span class="section-number">2.3.7. </span>Fast Zigzag<a class="headerlink" href="#fast-zigzag" title="Link to this heading"></a></h1>
+<h1><span class="section-number">2.4.7. </span>Fast Zigzag<a class="headerlink" href="#fast-zigzag" title="Link to this heading"></a></h1>
 <p>These modules help generate the input file and read the output file for <a class="reference external" href="https://github.com/TDA-Jyamiti/fzz">fast-zigzag software (fzz)</a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -155,7 +158,7 @@
 <p>Note also that currently the way this system works is to write a file that is read into <cite>fzz</cite>, and the output file is then read back into python. This is not ideal, so in the future we hope to find a more efficient pipeline.</p>
 </div>
 <section id="generate-input-file-read-output">
-<h2><span class="section-number">2.3.7.1. </span>Generate Input File &amp; Read Output<a class="headerlink" href="#generate-input-file-read-output" title="Link to this heading"></a></h2>
+<h2><span class="section-number">2.4.7.1. </span>Generate Input File &amp; Read Output<a class="headerlink" href="#generate-input-file-read-output" title="Link to this heading"></a></h2>
 <p>Given a list of point clouds, the input file can be generated using the following module</p>
 <dl class="py function" id="module-teaspoon.TDA.fast_zigzag">
 <dt class="sig sig-object py" id="teaspoon.TDA.fast_zigzag.generate_input_file">
@@ -182,9 +185,9 @@
 </dd></dl>
 
 <p>and the output can be read and plotted by the following module</p>
-<dl class="py function" id="module-teaspoon.TDA.fast_zigzag">
-<dt class="sig sig-object py" id="teaspoon.TDA.fast_zigzag.plot_output_zigzag">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.fast_zigzag.</span></span><span class="sig-name descname"><span class="pre">plot_output_zigzag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inserts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deletes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotH2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/fast_zigzag.html#plot_output_zigzag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.fast_zigzag.plot_output_zigzag" title="Link to this definition"></a></dt>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.fast_zigzag.</span></span><span class="sig-name descname"><span class="pre">plot_output_zigzag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inserts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deletes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotH2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/fast_zigzag.html#plot_output_zigzag"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>This function takes the output file from fast-zigzag software by TDA-Jyamiti group and number of insertions/deletions output by the above function and plots the zigzag persistence diagram. Note that fast-zigzag produces closed [b,d] intervals.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -207,7 +210,7 @@
 </dd></dl>
 
 <section id="example">
-<h3><span class="section-number">2.3.7.1.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<h3><span class="section-number">2.4.7.1.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
 <p>The following example plots the zigzag persistence for point clouds such that the rips complex turns from a blob to a circle:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">teaspoon.TDA.fast_zigzag</span> <span class="kn">import</span> <span class="n">generate_input_file</span><span class="p">,</span> <span class="n">plot_output_zigzag</span>
@@ -226,12 +229,8 @@
 
 </pre></div>
 </div>
-<p>The point clouds with the peristence diagram</p>
-<div class="highlight-{image}fast_zigzag.png notranslate"><div class="highlight"><pre><span></span>:alt: Point Clouds with zigzag persistence diagram
-:width: 100%
-:align: center
-</pre></div>
-</div>
+<p>The point clouds with the persistence diagram</p>
+<a class="reference internal image-reference" href="../../_images/fast_zigzag.png"><img alt="Point Clouds with zigzag persistence diagram" class="align-center" src="../../_images/fast_zigzag.png" style="width: 100%;" /></a>
 <p><br></br></p>
 </section>
 </section>
@@ -241,8 +240,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="magnitude.html" class="btn btn-neutral float-left" title="2.3.6. Magnitude" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../SP/index.html" class="btn btn-neutral float-right" title="2.4. Signal Processing (SP) Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="magnitude.html" class="btn btn-neutral float-left" title="2.4.6. Magnitude" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ML/index.html" class="btn btn-neutral float-right" title="2.5. Persistence Diagram Featurization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
