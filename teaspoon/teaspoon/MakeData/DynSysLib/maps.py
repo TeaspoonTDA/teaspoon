@@ -67,9 +67,7 @@ def logistic_map(r=None, dynamic_state=None, InitialConditions=None,
     .. math::
         x_{n+1} = rx_n(1-x_n)
     
-    where we chose the parameters :math:`x_0 = 0.5` and :math:`r = 3.6` for a chaotic state. You can set :math:`r = 3.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_.
-
-
+    where we chose the parameters :math:`x_0 = 0.5` and :math:`r = 3.6` for a chaotic state. You can set :math:`r = 3.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         r (Optional[float]): System parameter.
@@ -124,7 +122,7 @@ def henon_map(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None
 
         y_{n+1}&=bx_n
 
-    where we chose the parameters :math:`a = 1.20`, :math:`b = 0.30`, and :math:`c = 1.00` for a chaotic state with initial conditions :math:`x_0 = 0.1` and :math:`y_0 = 0.3`. You can set :math:`a = 1.25` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_.
+    where we chose the parameters :math:`a = 1.20`, :math:`b = 0.30`, and :math:`c = 1.00` for a chaotic state with initial conditions :math:`x_0 = 0.1` and :math:`y_0 = 0.3`. You can set :math:`a = 1.25` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -139,7 +137,7 @@ def henon_map(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None
     
     References
     ----------
-    .. [2] Hénon Michel. "A two-dimensional mapping with a strange attractor". Communications in Mathematical Physics, 1976.
+    .. [2] Hénon, Michel. "A two-dimensional mapping with a strange attractor". Communications in Mathematical Physics, 1976.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -187,7 +185,7 @@ def sine_map(A=None, dynamic_state=None, InitialConditions=None,
     .. math::
         x_{n+1} = A\sin{(\pi x_n)}
 
-    where we chose the parameter :math:`A = 1.0` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can also change :math:`A = 0.8` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_.
+    where we chose the parameter :math:`A = 1.0` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can also change :math:`A = 0.8` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. 
 
     Parameters:
         A (Optional[float]): System parameter.
@@ -227,79 +225,15 @@ def sine_map(A=None, dynamic_state=None, InitialConditions=None,
     return t, ts
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def gingerbread_man_map(a=1.0, b=1.0, dynamic_state=None, InitialConditions=None,  
-         L=2000, fs=1, SampleSize=500):
-    """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
-    https://www.mathworks.com/matlabcentral/fileexchange/34820-gingerbread_man-iterated-chaotic-map-with-parameters-attractor-explorer
-
-    Parameters:
-        a (Optional[float]): System parameter.
-        b (Optional[float]): System parameter. 
-        L (Optional[int]): Number of map iterations.
-        fs (Optional[int]): sampling rate for simulation.
-        SampleSize (Optional[int]): length of sample at end of entire time series
-
-    Returns:
-        array: Array of the time indices as `t` and the simulation time series `ts`
-    """
-
-    t = np.linspace(0, L, int(L*fs))
-
-    # defining simulation functions
-
-    def gingerbread_man(a, b, x, y):
-        return 1 - a*y + b*np.abs(x), x
-
-    if InitialConditions == None:
-        if dynamic_state == None:
-            print('Either dynamic_state or InitialConditions need to be specified. Defaulting to periodic response.')
-            dynamic_state='periodic'
-        if dynamic_state == 'periodic':
-            InitialConditions = [0.5, 1.5]
-        if dynamic_state == 'chaotic':
-            InitialConditions = [0.5, 1.8]
-
-    xtemp = InitialConditions[0]
-    ytemp = InitialConditions[1]
-    x, y = [], []
-    for n in range(0, int(L)):
-        xtemp, ytemp = gingerbread_man(a, b, xtemp, ytemp)
-        x.append(xtemp)
-        y.append(ytemp)
-
-    ts = [x[-SampleSize:], y[-SampleSize:]]
-    t = t[-SampleSize:]
-
-    return t, ts
-
-
-
-
-
 def tent_map(A=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Tent map [3]_ was solved as
+
+    .. math::
+        x_{n+1} = A\min{([x_n, 1-x_n])}
+    
+    where we chose the parameter :math:`A = 1.50` for a chaotic state with initial condition :math:`x_0 = 1/\sqrt{2}`. You can also change :math:`A = 1.05` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         A (Optional[float]): System parameter.
@@ -309,6 +243,10 @@ def tent_map(A=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [3] Crampin, Michael. "On the chaotic behaviour of the tent map". Teaching Mathematics and its Applications, 1994.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -343,7 +281,12 @@ def tent_map(A=None, dynamic_state=None, InitialConditions=None,
 def linear_congruential_generator_map(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Linear Congruential Generator map is defined as
+
+    .. math::
+        x_{n+1}=(ax_n+b)\mod c
+    
+    where we chose the parameter :math:`a = 1.1` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can also change :math:`a = 0.9` for a periodic response. :math:`b` and :math:`c` are set to 54,773 and 259,200 respectively for both dynamic states. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -389,7 +332,12 @@ def linear_congruential_generator_map(a=None, b=None, c=None, dynamic_state=None
 def rickers_population_map(a=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Ricker's Population map is defined [4]_ as
+
+    .. math::
+        x_{n+1}=ax_n e^{-x_n}
+    
+    where we chose the parameter :math:`a = 20` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can set :math:`a = 13` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -399,6 +347,10 @@ def rickers_population_map(a=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [4] Ricker, William Edwin. "Stock and recruitment". Journal of the Fisheries Research Board of Canada, 1954.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -434,7 +386,12 @@ def rickers_population_map(a=None, dynamic_state=None, InitialConditions=None,
 def gauss_map(alpha=None, beta=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Gauss map is defined [5]_ as
+
+    .. math::
+        x_{n+1}=e^{-\\alpha x_n^2}+\\beta
+    
+    where we chose the parameters :math:`\\alpha = 6.20` and :math:`\\beta = -0.35` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can set :math:`\\beta = -0.20` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. 
 
     taken from https://en.wikipedia.org/wiki/Gauss_iterated_map
 
@@ -447,6 +404,10 @@ def gauss_map(alpha=None, beta=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [5] Hilborn, Robert C. "Chaos and nonlinear dynamics: an introduction for scientists and engineers". Oxford, Univ. Press, 2004.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -482,6 +443,13 @@ def gauss_map(alpha=None, beta=None, dynamic_state=None, InitialConditions=None,
 def cusp_map(a=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
+    The Cusp map is defined [6]_ as
+
+    .. math::
+        x_{n+1} = 1 - a\sqrt{|x_n|}
+
+    where we chose the parameter :math:`a = 1.2` for a chaotic state with initial condition :math:`x_0 = 0.5`. You can set :math:`a = 1.1` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
+
     Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
 
     Parameters:
@@ -492,6 +460,11 @@ def cusp_map(a=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+
+    
+    References
+    ----------
+    .. [6] Beck, Christian. "Thermodynamics of Chaotic Systems". Cambridge University Press, 2009.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -525,7 +498,12 @@ def cusp_map(a=None, dynamic_state=None, InitialConditions=None,
 def pinchers_map(s=None, c=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Pincher's map is defined [7]_ as
+
+    .. math::
+        x_{n+1} = |\\tanh{(s(x_n-c))}|
+
+    where we chose the parameters :math:`s = 1.6` and :math:`c = 0.5` for a chaotic state with initial condition :math:`x_0 = 0.0`. You can set :math:`s = 1.3` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         s (Optional[float]): System parameter.
@@ -536,6 +514,10 @@ def pinchers_map(s=None, c=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [7] Akgul, Akif. "Text Encryption by Using One-Dimensional Chaos Generators and Nonlinear Equations". International Conference on Electrical and Electronics Engineering, ELECO, 2013.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -570,7 +552,12 @@ def pinchers_map(s=None, c=None, dynamic_state=None, InitialConditions=None,
 def sine_circle_map(omega=None, k=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Sine Circle map is defined [8]_ as
+
+    .. math::
+        x_{n+1} = x_n + \\omega -\\left[\\frac{k}{2\\pi}\sin{(2\\pi x_n)}\\right]
+
+    where we chose the parameters :math:`\\omega = 0.5` and :math:`k = 2.0` for a chaotic state with initial condition :math:`x_0 = 0.0`. You can set :math:`k = 1.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         omega (Optional[float]): System parameter.
@@ -581,6 +568,10 @@ def sine_circle_map(omega=None, k=None, dynamic_state=None, InitialConditions=No
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [8] Arnold, V.I. "Small denominators. i. mapping the circle onto itself". Izv. Akad. Nauk SSSR Ser. Mat., 1961.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -612,11 +603,17 @@ def sine_circle_map(omega=None, k=None, dynamic_state=None, InitialConditions=No
     return t, ts
 
 
-
 def lozi_map(a=None, b=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Lozi map is defined [9]_ as
+
+    .. math::
+        x_{n+1} &= 1 - a|x_n| +by_n,
+
+        y_{n+1} &= x_n
+
+    where we chose the parameters :math:`a = 1.7` and :math:`b = 0.5` for a chaotic state with initial conditions :math:`x_0 = -0.1` and :math:`y_0 = 0.1`. You can set :math:`a = 1.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -627,6 +624,10 @@ def lozi_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [9] Peitgen, Heinz-Otto. "Chaos and Fractals New Frontiers of Science". Springer-Verlag, 1992.
     """
     
     t = np.linspace(0, L, int(L*fs))
@@ -667,7 +668,14 @@ def lozi_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
 def delayed_logstic_map(a=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Delayed Logistic map is defined [10]_ as
+
+    .. math::
+        x_{n+1} &= ax_n(1-y_n)
+
+        y_{n+1} &= x_n
+
+    where we chose the parameter :math:`a = 2.27` for a chaotic state with initial conditions :math:`x_0 = 0.001` and :math:`y_0 = 0.001`. You can set :math:`a = 2.20` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -677,6 +685,10 @@ def delayed_logstic_map(a=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [10] Ismail, Samar M. "Generalized Delayed Logistic Map Suitable For Pseudo-random Number Generation". International Conference on Science and Technology, 2015.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -715,7 +727,14 @@ def delayed_logstic_map(a=None, dynamic_state=None, InitialConditions=None,
 def tinkerbell_map(a=None, b=None, c=None, d=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Tinkerbell map is defined [11]_ as
+
+    .. math::
+        x_{n+1} &= x_n^2 - y_n^2 + ax_n + by_n,
+
+        y_{n+1} &= 2x_ny_n + cx_n + dy_n
+
+    where we chose the parameters :math:`a = 0.9`, :math:`b = -0.6`, :math:`c = 2.0`, and :math:`d = 0.5` for a chaotic state with initial conditions :math:`x_0 = 0.0` and :math:`y_0 = 0.5`. You can set :math:`a = 0.7` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -728,6 +747,10 @@ def tinkerbell_map(a=None, b=None, c=None, d=None, dynamic_state=None, InitialCo
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [11] Goldsztejn, Alexandre M. "Tinkerbell is chaotic". SIAM Journal on Applied Dynamical Systems, 2011.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -767,7 +790,14 @@ def tinkerbell_map(a=None, b=None, c=None, d=None, dynamic_state=None, InitialCo
 def burgers_map(a=None, b=None, dynamic_state=None, InitialConditions=None,  
     L=3000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Burger's map is defined [12]_ as
+
+    .. math::
+        x_{n+1} &= ax_n - y_n^2,
+
+        y_{n+1} &= by_n + x_ny_n
+
+    where we chose the parameters :math:`a = 0.75` and :math:`b = 1.75` for a chaotic state with initial conditions :math:`x_0 = -0.1` and :math:`y_0 = 0.5`. You can set :math:`b = 1.60` for a periodic response. We solve this system for 3000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -778,6 +808,10 @@ def burgers_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [12] Burgers, J. M. "Mathematical examples illustrating relations occurring in the theory of turbulent fluid motion". Trans. Roy. Neth. Acad. Sci. Amsterdam., 1995.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -818,7 +852,14 @@ def burgers_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
 def holmes_cubic_map(b=None, d=None, dynamic_state=None, InitialConditions=None,  
     L=3000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Holme's Cubic map is defined [13]_ as
+
+    .. math::
+        x_{n+1} &= y_n,
+
+        y_{n+1} &= -bx_n + dy_n - y_n^3
+
+    where we chose the parameters :math:`b = 0.20` and :math:`d = 2.77` for a chaotic state with initial conditions :math:`x_0 = -0.1` and :math:`y_0 = 0.5`. You can set :math:`b = 0.27` for a periodic response. We solve this system for 3000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         b (Optional[float]): System parameter.
@@ -829,6 +870,10 @@ def holmes_cubic_map(b=None, d=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [13] Chavoya-Aceves, O. "Symbolic dynamics of the cubic map". Physica D: Nonlinear Phenomena., 1985.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -869,7 +914,14 @@ def holmes_cubic_map(b=None, d=None, dynamic_state=None, InitialConditions=None,
 def kaplan_yorke_map(a=None, b=None, dynamic_state=None, InitialConditions=None,  
     L=1000.0, fs=1, SampleSize=500):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    The Kaplan Yorke map is defined [14]_ as
+
+    .. math:: 
+        x_{n+1} &= [ax_n](\mod 1),
+
+        y_{n+1} &= by_n + \cos{(4\\pi x_n)}
+
+    where we chose the parameters :math:`a = -2.0` and :math:`b = 0.2` for a chaotic state with initial conditions :math:`x_0 = -0.1` and :math:`y_0 = 0.5`. You can set :math:`a = -1.0` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -880,6 +932,10 @@ def kaplan_yorke_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [14] Peitgen, Heinz-Otto. "Functional Differential Equations and Approximation of Fixed Points". Springer., 1979.
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -915,3 +971,89 @@ def kaplan_yorke_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
     t = t[-SampleSize:]
 
     return t, ts
+
+
+def gingerbread_man_map(a=1.0, b=1.0, dynamic_state=None, InitialConditions=None,  
+         L=2000, fs=1, SampleSize=500):
+    """
+    The Gingerbread Man Map is defined [15]_ [16]_ as
+
+    .. math::
+        x_{n+1} &= 1 - ay_n + n|x_n|,
+
+        y_{n+1} &= x_n
+
+    where we chose the parameters :math:`a = 1.0` and :math:`b = 1.0`. For a chaotic state, initial conditions :math:`x_0 = 0.5` and :math:`y_0 = 1.8`, and for a periodic response :math:`x_0 = 0.5` and :math:`y_0 = 1.5`. We solve this system for 2000 data points and keep the last 500 to avoid transients.
+
+    Parameters:
+        a (Optional[float]): System parameter.
+        b (Optional[float]): System parameter. 
+        L (Optional[int]): Number of map iterations.
+        fs (Optional[int]): sampling rate for simulation.
+        SampleSize (Optional[int]): length of sample at end of entire time series
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [15] Devaney, Robert. "The gingerbreadman". Algorithms, 1992.
+    .. [16] Devaney, Robert. "A piecewise linear model for the zones of instability of an area-preserving map". Physica D: Nonlinear Phenomena, 1984.
+    """
+
+    t = np.linspace(0, L, int(L*fs))
+
+    # defining simulation functions
+
+    def gingerbread_man(a, b, x, y):
+        return 1 - a*y + b*np.abs(x), x
+
+    if InitialConditions == None:
+        if dynamic_state == None:
+            print('Either dynamic_state or InitialConditions need to be specified. Defaulting to periodic response.')
+            dynamic_state='periodic'
+        if dynamic_state == 'periodic':
+            InitialConditions = [0.5, 1.5]
+        if dynamic_state == 'chaotic':
+            InitialConditions = [0.5, 1.8]
+
+    xtemp = InitialConditions[0]
+    ytemp = InitialConditions[1]
+    x, y = [], []
+    for n in range(0, int(L)):
+        xtemp, ytemp = gingerbread_man(a, b, xtemp, ytemp)
+        x.append(xtemp)
+        y.append(ytemp)
+
+    ts = [x[-SampleSize:], y[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
