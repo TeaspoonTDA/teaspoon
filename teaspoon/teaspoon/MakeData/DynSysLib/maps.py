@@ -59,6 +59,192 @@ def maps(system, dynamic_state=None, L=None, fs=None,
     return t, ts
 
 
+def logistic_map(r=None, dynamic_state=None, InitialConditions=None,  
+    L=1000.0, fs=1, SampleSize=500):
+    """
+    The logistic map [1]_ was generated as
+
+    .. math::
+        x_{n+1} = rx_n(1-x_n)
+    
+    where we chose the parameters :math:`x_0 = 0.5` and :math:`r = 3.6` for a chaotic state. You can set :math:`r = 3.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_.
+
+
+
+    Parameters:
+        r (Optional[float]): System parameter.
+        L (Optional[int]): Number of map iterations.
+        fs (Optional[int]): sampling rate for simulation.
+        SampleSize (Optional[int]): length of sample at end of entire time series
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [1] May, Robert. "Simple mathematical models with very complicated dynamics". Nature, 1976.
+    """
+
+    t = np.linspace(0, L, int(L*fs))
+
+    if r == None:
+        if dynamic_state == None:
+            dynamic_state = 'periodic'
+            print(
+                'Warning: needed 1 parameter. Defaulting to periodic solution parameters.')
+        if dynamic_state == 'periodic':
+            r = 3.5
+        if dynamic_state == 'chaotic':
+            r = 3.6
+
+    if InitialConditions == None:
+        InitialConditions = [0.5]
+    xn = InitialConditions[0]
+
+    t, ts = [], []
+    for n in range(0, int(L)):
+        xn = r*xn*(1-xn)
+        ts = np.append(ts, xn)
+        t = np.append(t, n)
+
+    ts = [ts[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+def henon_map(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None,  
+    L=1000.0, fs=1, SampleSize=500):
+    """
+    The Hénon map [2]_ was solved as
+
+    .. math::
+
+        x_{n+1} &= 1 -ax_n^2+y_n,
+
+        y_{n+1}&=bx_n
+
+    where we chose the parameters :math:`a = 1.20`, :math:`b = 0.30`, and :math:`c = 1.00` for a chaotic state with initial conditions :math:`x_0 = 0.1` and :math:`y_0 = 0.3`. You can set :math:`a = 1.25` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_.
+
+    Parameters:
+        a (Optional[float]): System parameter.
+        b (Optional[float]): System parameter.
+        c (Optional[float]): System parameter.
+        L (Optional[int]): Number of map iterations.
+        fs (Optional[int]): sampling rate for simulation.
+        SampleSize (Optional[int]): length of sample at end of entire time series
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    References
+    ----------
+    .. [2] Hénon Michel. "A two-dimensional mapping with a strange attractor". Communications in Mathematical Physics, 1976.
+    """
+
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    if a == None or b == None or c == None:
+        if dynamic_state == None:
+            dynamic_state = 'periodic'
+            print(
+                'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
+        if dynamic_state == 'periodic':
+            a = 1.25
+        if dynamic_state == 'chaotic':
+            a = 1.20
+        b = 0.3
+        c = 1.0
+
+    # defining simulation functions
+    def henon(a, b, c, x, y):
+        return y + c - a*x*x, b*x
+
+    if InitialConditions == None:
+        InitialConditions = [0.1, 0.3]
+
+    xtemp = InitialConditions[0]
+    ytemp = InitialConditions[1]
+    x, y = [], []
+    for n in range(0, int(L)):
+        xtemp, ytemp = henon(a, b, c, xtemp, ytemp)
+        x.append(xtemp)
+        y.append(ytemp)
+
+    ts = [x[-SampleSize:], y[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+def sine_map(A=None, dynamic_state=None, InitialConditions=None,  
+    L=1000.0, fs=1, SampleSize=500):
+
+    """
+    The Sine map is defined as
+
+    .. math::
+        x_{n+1} = A\sin{(\pi x_n)}
+
+    where we chose the parameter :math:`A = 1.0` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can also change :math:`A = 0.8` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_.
+
+    Parameters:
+        A (Optional[float]): System parameter.
+        L (Optional[int]): Number of map iterations.
+        fs (Optional[int]): sampling rate for simulation.
+        SampleSize (Optional[int]): length of sample at end of entire time series
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+    """
+
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    if A == None:
+        if dynamic_state == None:
+            print('A parameter not specified. Defaulting to periodic response (A=0.8).')
+            dynamic_state = 'periodic'
+        if dynamic_state == 'periodic':
+            A = 0.8
+        if dynamic_state == 'chaotic':
+            A = 1.0
+
+    if InitialConditions == None:
+        InitialConditions = [0.1]
+    xn = InitialConditions[0]
+
+    t, ts = [], []
+    for n in range(0, int(L)):
+        xn = A*np.sin(np.pi*xn)
+        ts = np.append(ts, xn)
+        t = np.append(t, n)
+
+    ts = [ts[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def gingerbread_man_map(a=1.0, b=1.0, dynamic_state=None, InitialConditions=None,  
          L=2000, fs=1, SampleSize=500):
@@ -107,48 +293,7 @@ def gingerbread_man_map(a=1.0, b=1.0, dynamic_state=None, InitialConditions=None
     return t, ts
 
 
-def sine_map(A=None, dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
 
-    """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
-
-    Parameters:
-        A (Optional[float]): System parameter.
-        L (Optional[int]): Number of map iterations.
-        fs (Optional[int]): sampling rate for simulation.
-        SampleSize (Optional[int]): length of sample at end of entire time series
-
-    Returns:
-        array: Array of the time indices as `t` and the simulation time series `ts`
-    """
-
-    t = np.linspace(0, L, int(L*fs))
-
-    # setting system parameters
-    if A == None:
-        if dynamic_state == None:
-            print('A parameter not specified. Defaulting to periodic response (A=0.8).')
-            dynamic_state = 'periodic'
-        if dynamic_state == 'periodic':
-            A = 0.8
-        if dynamic_state == 'chaotic':
-            A = 1.0
-
-    if InitialConditions == None:
-        InitialConditions = [0.1]
-    xn = InitialConditions[0]
-
-    t, ts = [], []
-    for n in range(0, int(L)):
-        xn = A*np.sin(np.pi*xn)
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
-
-    ts = [ts[-SampleSize:]]
-    t = t[-SampleSize:]
-
-    return t, ts
 
 
 def tent_map(A=None, dynamic_state=None, InitialConditions=None,  
@@ -466,112 +611,6 @@ def sine_circle_map(omega=None, k=None, dynamic_state=None, InitialConditions=No
 
     return t, ts
 
-
-def logistic_map(r=None, dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
-    """
-    The logistic map [1]_ was generated as
-
-    .. math::
-        x_{n+1} = rx_n(1-x_n)
-    
-    where we chose the parameters :math:`x_0 = 0.5` and :math:`r = 3.6` for a chaotic state. You can set :math:`r = 3.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_.
-
-
-
-    Parameters:
-        r (Optional[float]): System parameter.
-        L (Optional[int]): Number of map iterations.
-        fs (Optional[int]): sampling rate for simulation.
-        SampleSize (Optional[int]): length of sample at end of entire time series
-
-    Returns:
-        array: Array of the time indices as `t` and the simulation time series `ts`
-    
-    References
-    ----------
-    .. [1] May, Robert. "Simple mathematical models with very complicated dynamics". Nature, 1976.
-    """
-
-    t = np.linspace(0, L, int(L*fs))
-
-    if r == None:
-        if dynamic_state == None:
-            dynamic_state = 'periodic'
-            print(
-                'Warning: needed 1 parameter. Defaulting to periodic solution parameters.')
-        if dynamic_state == 'periodic':
-            r = 3.5
-        if dynamic_state == 'chaotic':
-            r = 3.6
-
-    if InitialConditions == None:
-        InitialConditions = [0.5]
-    xn = InitialConditions[0]
-
-    t, ts = [], []
-    for n in range(0, int(L)):
-        xn = r*xn*(1-xn)
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
-
-    ts = [ts[-SampleSize:]]
-    t = t[-SampleSize:]
-
-    return t, ts
-
-
-def henon_map(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
-    """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
-
-    Parameters:
-        a (Optional[float]): System parameter.
-        b (Optional[float]): System parameter.
-        c (Optional[float]): System parameter.
-        L (Optional[int]): Number of map iterations.
-        fs (Optional[int]): sampling rate for simulation.
-        SampleSize (Optional[int]): length of sample at end of entire time series
-
-    Returns:
-        array: Array of the time indices as `t` and the simulation time series `ts`
-    """
-
-    t = np.linspace(0, L, int(L*fs))
-
-    # setting system parameters
-    if a == None or b == None or c == None:
-        if dynamic_state == None:
-            dynamic_state = 'periodic'
-            print(
-                'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-        if dynamic_state == 'periodic':
-            a = 1.25
-        if dynamic_state == 'chaotic':
-            a = 1.20
-        b = 0.3
-        c = 1.0
-
-    # defining simulation functions
-    def henon(a, b, c, x, y):
-        return y + c - a*x*x, b*x
-
-    if InitialConditions == None:
-        InitialConditions = [0.1, 0.3]
-
-    xtemp = InitialConditions[0]
-    ytemp = InitialConditions[1]
-    x, y = [], []
-    for n in range(0, int(L)):
-        xtemp, ytemp = henon(a, b, c, xtemp, ytemp)
-        x.append(xtemp)
-        y.append(ytemp)
-
-    ts = [x[-SampleSize:], y[-SampleSize:]]
-    t = t[-SampleSize:]
-
-    return t, ts
 
 
 def lozi_map(a=None, b=None, dynamic_state=None, InitialConditions=None,  

@@ -157,9 +157,101 @@
 <section id="module-teaspoon.MakeData.DynSysLib.maps">
 <span id="main-functions"></span><h2><span class="section-number">2.1.2.1.1.1. </span>Main Functions<a class="headerlink" href="#module-teaspoon.MakeData.DynSysLib.maps" title="Link to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.burgers_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">burgers_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#burgers_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.burgers_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.logistic_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">logistic_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#logistic_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.logistic_map" title="Link to this definition"></a></dt>
+<dd><p>The logistic map <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> was generated as</p>
+<div class="math notranslate nohighlight">
+\[x_{n+1} = rx_n(1-x_n)\]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\(x_0 = 0.5\)</span> and <span class="math notranslate nohighlight">\(r = 3.6\)</span> for a chaotic state. You can set <span class="math notranslate nohighlight">\(r = 3.5\)</span> for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">here</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>May, Robert. “Simple mathematical models with very complicated dynamics”. Nature, 1976.</p>
+</aside>
+</aside>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.henon_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">henon_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#henon_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.henon_map" title="Link to this definition"></a></dt>
+<dd><p>The Hénon map <a class="footnote-reference brackets" href="#id5" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> was solved as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}x_{n+1} &amp;= 1 -ax_n^2+y_n,\\y_{n+1}&amp;=bx_n\end{aligned}\end{align} \]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\(a = 1.20\)</span>, <span class="math notranslate nohighlight">\(b = 0.30\)</span>, and <span class="math notranslate nohighlight">\(c = 1.00\)</span> for a chaotic state with initial conditions <span class="math notranslate nohighlight">\(x_0 = 0.1\)</span> and <span class="math notranslate nohighlight">\(y_0 = 0.3\)</span>. You can set <span class="math notranslate nohighlight">\(a = 1.25\)</span> for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">here</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>b</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>c</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<p>Hénon Michel. “A two-dimensional mapping with a strange attractor”. Communications in Mathematical Physics, 1976.</p>
+</aside>
+</aside>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.sine_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">sine_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#sine_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.sine_map" title="Link to this definition"></a></dt>
+<dd><p>The Sine map is defined as</p>
+<div class="math notranslate nohighlight">
+\[x_{n+1} = A\sin{(\pi x_n)}\]</div>
+<p>where we chose the parameter <span class="math notranslate nohighlight">\(A = 1.0\)</span> for a chaotic state with initial condition <span class="math notranslate nohighlight">\(x_0 = 0.1\)</span>. You can also change <span class="math notranslate nohighlight">\(A = 0.8\)</span> for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">here</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.gingerbread_man_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">gingerbread_man_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#gingerbread_man_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.gingerbread_man_map" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a>
+<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/34820-gingerbread_man-iterated-chaotic-map-with-parameters-attractor-explorer">https://www.mathworks.com/matlabcentral/fileexchange/34820-gingerbread_man-iterated-chaotic-map-with-parameters-attractor-explorer</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -180,13 +272,13 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.cusp_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">cusp_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#cusp_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.cusp_map" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.tent_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">tent_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#tent_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.tent_map" title="Link to this definition"></a></dt>
 <dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>A</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
 <li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
 <li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
 <li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
@@ -202,8 +294,32 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.delayed_logstic_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">delayed_logstic_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#delayed_logstic_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.delayed_logstic_map" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.linear_congruential_generator_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">linear_congruential_generator_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#linear_congruential_generator_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.linear_congruential_generator_map" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>b</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>c</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.rickers_population_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">rickers_population_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#rickers_population_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.rickers_population_map" title="Link to this definition"></a></dt>
 <dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -248,10 +364,77 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.gingerbread_man_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">gingerbread_man_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#gingerbread_man_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.gingerbread_man_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a>
-<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/34820-gingerbread_man-iterated-chaotic-map-with-parameters-attractor-explorer">https://www.mathworks.com/matlabcentral/fileexchange/34820-gingerbread_man-iterated-chaotic-map-with-parameters-attractor-explorer</a></p>
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.cusp_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">cusp_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#cusp_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.cusp_map" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.pinchers_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">pinchers_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#pinchers_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.pinchers_map" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>c</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.sine_circle_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">sine_circle_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#sine_circle_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.sine_circle_map" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>k</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.lozi_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">lozi_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#lozi_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.lozi_map" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -272,8 +455,30 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.henon_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">henon_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#henon_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.henon_map" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.delayed_logstic_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">delayed_logstic_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#delayed_logstic_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.delayed_logstic_map" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.tinkerbell_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">tinkerbell_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#tinkerbell_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.tinkerbell_map" title="Link to this definition"></a></dt>
 <dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -281,6 +486,30 @@
 <li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
 <li><p><strong>b</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
 <li><p><strong>c</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>d</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.burgers_map">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">burgers_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#burgers_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.burgers_map" title="Link to this definition"></a></dt>
+<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
+<li><p><strong>b</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
 <li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
 <li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
 <li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
@@ -327,222 +556,6 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
 <li><p><strong>b</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
-<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
-<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.linear_congruential_generator_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">linear_congruential_generator_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#linear_congruential_generator_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.linear_congruential_generator_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>b</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>c</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
-<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
-<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.logistic_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">logistic_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#logistic_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.logistic_map" title="Link to this definition"></a></dt>
-<dd><p>The logistic map <a class="footnote-reference brackets" href="#id10" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> was generated as</p>
-<div class="math notranslate nohighlight">
-\[x_{n+1} = rx_n(1-x_n)\]</div>
-<p>where we chose the parameters <span class="math notranslate nohighlight">\(x_0 = 0.5\)</span> and <span class="math notranslate nohighlight">\(r = 3.6\)</span> for a chaotic state. You can set <span class="math notranslate nohighlight">\(r = 3.5\)</span> for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">here</a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>r</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
-<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
-<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id10" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">1</a><span class="fn-bracket">]</span></span>
-<p>May, Robert. “Simple mathematical models with very complicated dynamics”. Nature, 1976.</p>
-</aside>
-</aside>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.lozi_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">lozi_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#lozi_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.lozi_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>b</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
-<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
-<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.pinchers_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">pinchers_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#pinchers_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.pinchers_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>s</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>c</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
-<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
-<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.rickers_population_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">rickers_population_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#rickers_population_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.rickers_population_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
-<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
-<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.sine_circle_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">sine_circle_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#sine_circle_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.sine_circle_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>omega</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>k</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
-<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
-<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.sine_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">sine_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#sine_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.sine_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>A</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
-<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
-<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.tent_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">tent_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#tent_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.tent_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>A</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
-<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
-<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.maps.tinkerbell_map">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">tinkerbell_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#tinkerbell_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.maps.tinkerbell_map" title="Link to this definition"></a></dt>
-<dd><p>Add description from <a class="reference external" href="https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf">Audun’s pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>b</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>c</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
-<li><p><strong>d</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – System parameter.</p></li>
 <li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of map iterations.</p></li>
 <li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
 <li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>

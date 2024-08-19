@@ -209,6 +209,201 @@
 
 
 
+<div class="viewcode-block" id="logistic_map">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.logistic_map">[docs]</a>
+<span class="k">def</span> <span class="nf">logistic_map</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+    <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The logistic map [1]_ was generated as</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        x_{n+1} = rx_n(1-x_n)</span>
+<span class="sd">    </span>
+<span class="sd">    where we chose the parameters :math:`x_0 = 0.5` and :math:`r = 3.6` for a chaotic state. You can set :math:`r = 3.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here &lt;https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf&gt;`_.</span>
+
+
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        r (Optional[float]): System parameter.</span>
+<span class="sd">        L (Optional[int]): Number of map iterations.</span>
+<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
+<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+<span class="sd">    </span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] May, Robert. &quot;Simple mathematical models with very complicated dynamics&quot;. Nature, 1976.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s1">&#39;Warning: needed 1 parameter. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="mf">3.5</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="mf">3.6</span>
+
+    <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span>
+    <span class="n">xn</span> <span class="o">=</span> <span class="n">InitialConditions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+        <span class="n">xn</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">xn</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">xn</span><span class="p">)</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">xn</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">ts</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+
+
+<div class="viewcode-block" id="henon_map">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.henon_map">[docs]</a>
+<span class="k">def</span> <span class="nf">henon_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+    <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Hénon map [2]_ was solved as</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        x_{n+1} &amp;= 1 -ax_n^2+y_n,</span>
+
+<span class="sd">        y_{n+1}&amp;=bx_n</span>
+
+<span class="sd">    where we chose the parameters :math:`a = 1.20`, :math:`b = 0.30`, and :math:`c = 1.00` for a chaotic state with initial conditions :math:`x_0 = 0.1` and :math:`y_0 = 0.3`. You can set :math:`a = 1.25` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here &lt;https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf&gt;`_.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        a (Optional[float]): System parameter.</span>
+<span class="sd">        b (Optional[float]): System parameter.</span>
+<span class="sd">        c (Optional[float]): System parameter.</span>
+<span class="sd">        L (Optional[int]): Number of map iterations.</span>
+<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
+<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+<span class="sd">    </span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [2] Hénon Michel. &quot;A two-dimensional mapping with a strange attractor&quot;. Communications in Mathematical Physics, 1976.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+
+    <span class="c1"># setting system parameters</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s1">&#39;Warning: needed 3 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="mf">1.25</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="mf">1.20</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mf">0.3</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1"># defining simulation functions</span>
+    <span class="k">def</span> <span class="nf">henon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">c</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>
+
+    <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+
+    <span class="n">xtemp</span> <span class="o">=</span> <span class="n">InitialConditions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ytemp</span> <span class="o">=</span> <span class="n">InitialConditions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+        <span class="n">xtemp</span><span class="p">,</span> <span class="n">ytemp</span> <span class="o">=</span> <span class="n">henon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">xtemp</span><span class="p">,</span> <span class="n">ytemp</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xtemp</span><span class="p">)</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ytemp</span><span class="p">)</span>
+
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+
+
+<div class="viewcode-block" id="sine_map">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.sine_map">[docs]</a>
+<span class="k">def</span> <span class="nf">sine_map</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+    <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Sine map is defined as</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        x_{n+1} = A\sin{(\pi x_n)}</span>
+
+<span class="sd">    where we chose the parameter :math:`A = 1.0` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can also change :math:`A = 0.8` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here &lt;https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf&gt;`_.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        A (Optional[float]): System parameter.</span>
+<span class="sd">        L (Optional[int]): Number of map iterations.</span>
+<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
+<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+
+    <span class="c1"># setting system parameters</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A parameter not specified. Defaulting to periodic response (A=0.8).&#39;</span><span class="p">)</span>
+            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="mf">0.8</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
+    <span class="n">xn</span> <span class="o">=</span> <span class="n">InitialConditions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+        <span class="n">xn</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">xn</span><span class="p">)</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">xn</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">ts</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="viewcode-block" id="gingerbread_man_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.gingerbread_man_map">[docs]</a>
@@ -260,50 +455,6 @@
 
 
 
-<div class="viewcode-block" id="sine_map">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.sine_map">[docs]</a>
-<span class="k">def</span> <span class="nf">sine_map</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
-    <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Add description from `Audun&#39;s pdf &lt;https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf&gt;`_</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">        A (Optional[float]): System parameter.</span>
-<span class="sd">        L (Optional[int]): Number of map iterations.</span>
-<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
-<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-
-    <span class="c1"># setting system parameters</span>
-    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A parameter not specified. Defaulting to periodic response (A=0.8).&#39;</span><span class="p">)</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
-            <span class="n">A</span> <span class="o">=</span> <span class="mf">0.8</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
-            <span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span>
-
-    <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
-    <span class="n">xn</span> <span class="o">=</span> <span class="n">InitialConditions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
-        <span class="n">xn</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">xn</span><span class="p">)</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">xn</span><span class="p">)</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-
-    <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">ts</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
-
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
 
@@ -642,118 +793,6 @@
 
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
-
-
-<div class="viewcode-block" id="logistic_map">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.logistic_map">[docs]</a>
-<span class="k">def</span> <span class="nf">logistic_map</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
-    <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The logistic map [1]_ was generated as</span>
-
-<span class="sd">    .. math::</span>
-<span class="sd">        x_{n+1} = rx_n(1-x_n)</span>
-<span class="sd">    </span>
-<span class="sd">    where we chose the parameters :math:`x_0 = 0.5` and :math:`r = 3.6` for a chaotic state. You can set :math:`r = 3.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. A figure of the resulting time series can be found `here &lt;https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf&gt;`_.</span>
-
-
-
-<span class="sd">    Parameters:</span>
-<span class="sd">        r (Optional[float]): System parameter.</span>
-<span class="sd">        L (Optional[int]): Number of map iterations.</span>
-<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
-<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
-<span class="sd">    </span>
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    .. [1] May, Robert. &quot;Simple mathematical models with very complicated dynamics&quot;. Nature, 1976.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 1 parameter. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="mf">3.5</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="mf">3.6</span>
-
-    <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span>
-    <span class="n">xn</span> <span class="o">=</span> <span class="n">InitialConditions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
-        <span class="n">xn</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">xn</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">xn</span><span class="p">)</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">xn</span><span class="p">)</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-
-    <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">ts</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
-
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
-
-
-<div class="viewcode-block" id="henon_map">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.henon_map">[docs]</a>
-<span class="k">def</span> <span class="nf">henon_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
-    <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Add description from `Audun&#39;s pdf &lt;https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf&gt;`_</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
-<span class="sd">        b (Optional[float]): System parameter.</span>
-<span class="sd">        c (Optional[float]): System parameter.</span>
-<span class="sd">        L (Optional[int]): Number of map iterations.</span>
-<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
-<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-
-    <span class="c1"># setting system parameters</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 3 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="mf">1.25</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="mf">1.20</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="mf">0.3</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="mf">1.0</span>
-
-    <span class="c1"># defining simulation functions</span>
-    <span class="k">def</span> <span class="nf">henon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">c</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>
-
-    <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
-
-    <span class="n">xtemp</span> <span class="o">=</span> <span class="n">InitialConditions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">ytemp</span> <span class="o">=</span> <span class="n">InitialConditions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
-        <span class="n">xtemp</span><span class="p">,</span> <span class="n">ytemp</span> <span class="o">=</span> <span class="n">henon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">xtemp</span><span class="p">,</span> <span class="n">ytemp</span><span class="p">)</span>
-        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xtemp</span><span class="p">)</span>
-        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ytemp</span><span class="p">)</span>
-
-    <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
-
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
 
