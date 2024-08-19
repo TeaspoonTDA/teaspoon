@@ -71,6 +71,7 @@ def logistic_map(r=None, dynamic_state=None, InitialConditions=None,
 
     Parameters:
         r (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -128,6 +129,7 @@ def henon_map(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
         c (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -189,6 +191,7 @@ def sine_map(A=None, dynamic_state=None, InitialConditions=None,
 
     Parameters:
         A (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -237,6 +240,7 @@ def tent_map(A=None, dynamic_state=None, InitialConditions=None,
 
     Parameters:
         A (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -292,6 +296,7 @@ def linear_congruential_generator_map(a=None, b=None, c=None, dynamic_state=None
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
         c (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -341,6 +346,7 @@ def rickers_population_map(a=None, dynamic_state=None, InitialConditions=None,
 
     Parameters:
         a (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -398,6 +404,7 @@ def gauss_map(alpha=None, beta=None, dynamic_state=None, InitialConditions=None,
     Parameters:
         alpha (Optional[float]): System parameter.
         beta (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -454,6 +461,7 @@ def cusp_map(a=None, dynamic_state=None, InitialConditions=None,
 
     Parameters:
         a (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -508,6 +516,7 @@ def pinchers_map(s=None, c=None, dynamic_state=None, InitialConditions=None,
     Parameters:
         s (Optional[float]): System parameter.
         c (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -562,6 +571,7 @@ def sine_circle_map(omega=None, k=None, dynamic_state=None, InitialConditions=No
     Parameters:
         omega (Optional[float]): System parameter.
         k (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -618,6 +628,7 @@ def lozi_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -679,6 +690,7 @@ def delayed_logstic_map(a=None, dynamic_state=None, InitialConditions=None,
 
     Parameters:
         a (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -741,6 +753,7 @@ def tinkerbell_map(a=None, b=None, c=None, d=None, dynamic_state=None, InitialCo
         b (Optional[float]): System parameter.
         c (Optional[float]): System parameter.
         d (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -802,6 +815,7 @@ def burgers_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -864,6 +878,7 @@ def holmes_cubic_map(b=None, d=None, dynamic_state=None, InitialConditions=None,
     Parameters:
         b (Optional[float]): System parameter.
         d (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -926,6 +941,7 @@ def kaplan_yorke_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
@@ -988,6 +1004,7 @@ def gingerbread_man_map(a=1.0, b=1.0, dynamic_state=None, InitialConditions=None
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter. 
+        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of map iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
