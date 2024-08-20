@@ -142,7 +142,7 @@
   <h1>Source code for teaspoon.MakeData.DynSysLib.medical_data</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<div class="viewcode-block" id="medical_data"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/medical_data.html#teaspoon.MakeData.DynSysLib.medical_data.medical_data">[docs]</a><span class="k">def</span> <span class="nf">medical_data</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">medical_data</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;ECG&#39;</span><span class="p">:</span>
@@ -151,7 +151,7 @@
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;EEG&#39;</span><span class="p">:</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">EEG</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span>
 
 <div class="viewcode-block" id="EEG"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/medical_data.html#teaspoon.MakeData.DynSysLib.medical_data.EEG">[docs]</a><span class="k">def</span> <span class="nf">EEG</span><span class="p">(</span><span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">):</span>
 

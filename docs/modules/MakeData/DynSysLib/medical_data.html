@@ -169,35 +169,10 @@
     text-align: unset;
 }
 </style>
+<section id="medical-data">
+<h1><span class="section-number">2.1.2.1.7. </span>Medical Data<a class="headerlink" href="#medical-data" title="Permalink to this heading"></a></h1>
 <section id="module-teaspoon.MakeData.DynSysLib.medical_data">
-<span id="medical-data"></span><h1><span class="section-number">2.1.2.1.7. </span>Medical Data<a class="headerlink" href="#module-teaspoon.MakeData.DynSysLib.medical_data" title="Permalink to this heading"></a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.medical_data.ECG">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.medical_data.</span></span><span class="sig-name descname"><span class="pre">ECG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'normal'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/medical_data.html#ECG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.medical_data.ECG" title="Permalink to this definition"></a></dt>
-<dd><p>The Electrocardoagram (ECG) data was taken from SciPys misc.electrocardiogram data set. This ECG data was originally provided by the MIT-BIH Arrhythmia Database [1]. We used data points 3000 to 5500  during normal sinus rhythm and 8500 to 11000 during arrhythmia (arrhythmia case shown below in figure).</p>
-<figure class="align-default">
-<img alt="../../../_images/ECG_Data.png" src="../../../_images/ECG_Data.png" />
-</figure>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘normal’ or ‘seizure’.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id1" role="note">
-<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<p>George B Moody and Roger G Mark. Theimpact of the mit-bih arrhythmia database. IEEE Engineering in Medicine and Biology Magazine, 20(3):4550, 2001.</p>
-</aside>
-</aside>
-</dd></dl>
-
+<span id="main-functions"></span><h2><span class="section-number">2.1.2.1.7.1. </span>Main Functions<a class="headerlink" href="#module-teaspoon.MakeData.DynSysLib.medical_data" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.medical_data.EEG">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.medical_data.</span></span><span class="sig-name descname"><span class="pre">EEG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'normal'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/medical_data.html#EEG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.medical_data.EEG" title="Permalink to this definition"></a></dt>
@@ -221,7 +196,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="note">
+<aside class="footnote brackets" id="id1" role="note">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>Ralph G Andrzejak, Klaus Lehnertz, Florian Mormann, Christoph Rieke, Peter David, and Christian E Elger. Indications of nonlinear deterministic and nite-dimensional structures in time series of brain electrical activity: Dependence on recording region and brain state. Physical Review E, 64(6):061907, 2001.</p>
 </aside>
@@ -229,10 +204,37 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.medical_data.medical_data">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.medical_data.</span></span><span class="sig-name descname"><span class="pre">medical_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/medical_data.html#medical_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.medical_data.medical_data" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.medical_data.ECG">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.medical_data.</span></span><span class="sig-name descname"><span class="pre">ECG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'normal'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/medical_data.html#ECG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.medical_data.ECG" title="Permalink to this definition"></a></dt>
+<dd><p>The Electrocardoagram (ECG) data was taken from SciPys misc.electrocardiogram data set. This ECG data was originally provided by the MIT-BIH Arrhythmia Database [1]. We used data points 3000 to 5500  during normal sinus rhythm and 8500 to 11000 during arrhythmia (arrhythmia case shown below in figure).</p>
+<figure class="align-default">
+<img alt="../../../_images/ECG_Data.png" src="../../../_images/ECG_Data.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘normal’ or ‘seizure’.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>George B Moody and Roger G Mark. Theimpact of the mit-bih arrhythmia database. IEEE Engineering in Medicine and Biology Magazine, 20(3):4550, 2001.</p>
+</aside>
+</aside>
+</dd></dl>
 
+</section>
+<section id="meta-function">
+<h2><span class="section-number">2.1.2.1.7.2. </span>Meta Function<a class="headerlink" href="#meta-function" title="Permalink to this heading"></a></h2>
+<p>This function is for being able to input into the original <code class="docutils literal notranslate"><span class="pre">teaspoon.MakeData.DynSysLib.DynamicSystems</span></code> function with default parameters.</p>
+</section>
 </section>
 
 

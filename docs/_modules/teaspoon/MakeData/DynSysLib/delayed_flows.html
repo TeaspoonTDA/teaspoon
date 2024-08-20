@@ -142,13 +142,13 @@
   <h1>Source code for teaspoon.MakeData.DynSysLib.delayed_flows</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<div class="viewcode-block" id="delayed_flows"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/delayed_flows.html#teaspoon.MakeData.DynSysLib.delayed_flows.delayed_flows">[docs]</a><span class="k">def</span> <span class="nf">delayed_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">delayed_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;mackey_glass&#39;</span><span class="p">:</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">mackey_glass</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span>
 
 <div class="viewcode-block" id="mackey_glass"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/delayed_flows.html#teaspoon.MakeData.DynSysLib.delayed_flows.mackey_glass">[docs]</a><span class="k">def</span> <span class="nf">mackey_glass</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="s1">&#39;periodic&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
