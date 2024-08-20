@@ -10,7 +10,7 @@ from teaspoon.MakeData.PointCloud import Annulus
 from teaspoon.MakeData.DynSysLib import periodic_functions as pf
 from teaspoon.MakeData.DynSysLib import noise_models as nm
 from teaspoon.MakeData.DynSysLib import maps as maps
-
+from teaspoon.MakeData.DynSysLib import autonomous_dissipative_flows as adf
 
 class TestPeriodic(unittest.TestCase):
 
@@ -58,5 +58,18 @@ class TestMaps(unittest.TestCase):
         t, ts = maps.maps('burgers_map')
         t, ts = maps.maps('holmes_cubic_map')
 
+class TestAutoDisFlows(unittest.TestCase):
+
+    def test_run_all(self):
+        """
+        Checking that you can run all the commands with the original inputs 
+        """
+
+        t, ts = adf.autonomous_dissipative_flows('lorenz')
+        t, ts = adf.autonomous_dissipative_flows('rossler')
+        t, ts = adf.autonomous_dissipative_flows('coupled_lorenz_rossler')
+        t, ts = adf.autonomous_dissipative_flows('coupled_rossler_rossler')
+        t, ts = adf.autonomous_dissipative_flows('chua')
+        t, ts = adf.autonomous_dissipative_flows('double_pendulum')
 if __name__ == '__main__':
     unittest.main()

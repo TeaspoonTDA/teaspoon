@@ -6,7 +6,7 @@ Main Functions
 --------------
 
 .. automodule:: teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows
-    :members: lorenz
+    :members: lorenz, rossler, coupled_lorenz_rossler, coupled_rossler_rossler, chua, double_pendulum
     :undoc-members:
     :show-inheritance:
     :member-order: bysource
