@@ -69,6 +69,8 @@ def logistic_map(r=None, dynamic_state=None, InitialConditions=None,
     
     where we chose the parameters :math:`x_0 = 0.5` and :math:`r = 3.6` for a chaotic state. You can set :math:`r = 3.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Logistic_map.png
+    
     Parameters:
         r (Optional[float]): System parameter.
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -125,6 +127,8 @@ def henon_map(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None
 
     where we chose the parameters :math:`a = 1.20`, :math:`b = 0.30`, and :math:`c = 1.00` for a chaotic state with initial conditions :math:`x_0 = 0.1` and :math:`y_0 = 0.3`. You can set :math:`a = 1.25` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Henon_map.png
+    
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
@@ -189,6 +193,8 @@ def sine_map(A=None, dynamic_state=None, InitialConditions=None,
 
     where we chose the parameter :math:`A = 1.0` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can also change :math:`A = 0.8` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. 
 
+    .. figure:: ../../../figures/Maps/Sine_map.png
+
     Parameters:
         A (Optional[float]): System parameter.
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -237,6 +243,8 @@ def tent_map(A=None, dynamic_state=None, InitialConditions=None,
         x_{n+1} = A\min{([x_n, 1-x_n])}
     
     where we chose the parameter :math:`A = 1.50` for a chaotic state with initial condition :math:`x_0 = 1/\sqrt{2}`. You can also change :math:`A = 1.05` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
+
+    .. figure:: ../../../figures/Maps/Tent_map.png
 
     Parameters:
         A (Optional[float]): System parameter.
@@ -292,6 +300,8 @@ def linear_congruential_generator_map(a=None, b=None, c=None, dynamic_state=None
     
     where we chose the parameter :math:`a = 1.1` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can also change :math:`a = 0.9` for a periodic response. :math:`b` and :math:`c` are set to 54,773 and 259,200 respectively for both dynamic states. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Linear_Congruential_Generator_map.png
+    
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
@@ -344,6 +354,8 @@ def rickers_population_map(a=None, dynamic_state=None, InitialConditions=None,
     
     where we chose the parameter :math:`a = 20` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can set :math:`a = 13` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Rickers_Popoulation_map.png
+    
     Parameters:
         a (Optional[float]): System parameter.
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -397,10 +409,10 @@ def gauss_map(alpha=None, beta=None, dynamic_state=None, InitialConditions=None,
     .. math::
         x_{n+1}=e^{-\\alpha x_n^2}+\\beta
     
-    where we chose the parameters :math:`\\alpha = 6.20` and :math:`\\beta = -0.35` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can set :math:`\\beta = -0.20` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. 
+    where we chose the parameters :math:`\\alpha = 6.20` and :math:`\\beta = -0.35` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can set :math:`\\beta = -0.20` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. Taken from https://en.wikipedia.org/wiki/Gauss_iterated_map
 
-    taken from https://en.wikipedia.org/wiki/Gauss_iterated_map
-
+    .. figure:: ../../../figures/Maps/Gauss_map.png
+    
     Parameters:
         alpha (Optional[float]): System parameter.
         beta (Optional[float]): System parameter.
@@ -457,7 +469,7 @@ def cusp_map(a=None, dynamic_state=None, InitialConditions=None,
 
     where we chose the parameter :math:`a = 1.2` for a chaotic state with initial condition :math:`x_0 = 0.5`. You can set :math:`a = 1.1` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    .. figure:: ../../../figures/Maps/Cusp_map.png
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -513,6 +525,8 @@ def pinchers_map(s=None, c=None, dynamic_state=None, InitialConditions=None,
 
     where we chose the parameters :math:`s = 1.6` and :math:`c = 0.5` for a chaotic state with initial condition :math:`x_0 = 0.0`. You can set :math:`s = 1.3` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Pinchers_map.png
+
     Parameters:
         s (Optional[float]): System parameter.
         c (Optional[float]): System parameter.
@@ -567,6 +581,8 @@ def sine_circle_map(omega=None, k=None, dynamic_state=None, InitialConditions=No
         x_{n+1} = x_n + \\omega -\\left[\\frac{k}{2\\pi}\sin{(2\\pi x_n)}\\right]
 
     where we chose the parameters :math:`\\omega = 0.5` and :math:`k = 2.0` for a chaotic state with initial condition :math:`x_0 = 0.0`. You can set :math:`k = 1.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
+
+    .. figure:: ../../../figures/Maps/Sine_Circle_map.png
 
     Parameters:
         omega (Optional[float]): System parameter.
@@ -624,6 +640,8 @@ def lozi_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
         y_{n+1} &= x_n
 
     where we chose the parameters :math:`a = 1.7` and :math:`b = 0.5` for a chaotic state with initial conditions :math:`x_0 = -0.1` and :math:`y_0 = 0.1`. You can set :math:`a = 1.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
+
+    .. figure:: ../../../figures/Maps/Lozi_map.png
 
     Parameters:
         a (Optional[float]): System parameter.
@@ -688,6 +706,8 @@ def delayed_logstic_map(a=None, dynamic_state=None, InitialConditions=None,
 
     where we chose the parameter :math:`a = 2.27` for a chaotic state with initial conditions :math:`x_0 = 0.001` and :math:`y_0 = 0.001`. You can set :math:`a = 2.20` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Delayed_Logistic_map.png
+    
     Parameters:
         a (Optional[float]): System parameter.
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -748,6 +768,8 @@ def tinkerbell_map(a=None, b=None, c=None, d=None, dynamic_state=None, InitialCo
 
     where we chose the parameters :math:`a = 0.9`, :math:`b = -0.6`, :math:`c = 2.0`, and :math:`d = 0.5` for a chaotic state with initial conditions :math:`x_0 = 0.0` and :math:`y_0 = 0.5`. You can set :math:`a = 0.7` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Tinkerbell_map.png
+    
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
@@ -812,6 +834,8 @@ def burgers_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
 
     where we chose the parameters :math:`a = 0.75` and :math:`b = 1.75` for a chaotic state with initial conditions :math:`x_0 = -0.1` and :math:`y_0 = 0.5`. You can set :math:`b = 1.60` for a periodic response. We solve this system for 3000 data points and keep the second 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Burgers_map.png
+
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
@@ -874,6 +898,8 @@ def holmes_cubic_map(b=None, d=None, dynamic_state=None, InitialConditions=None,
         y_{n+1} &= -bx_n + dy_n - y_n^3
 
     where we chose the parameters :math:`b = 0.20` and :math:`d = 2.77` for a chaotic state with initial conditions :math:`x_0 = -0.1` and :math:`y_0 = 0.5`. You can set :math:`b = 0.27` for a periodic response. We solve this system for 3000 data points and keep the second 500 to avoid transients.
+
+    .. figure:: ../../../figures/Maps/Holmes_Cubic_map.png
 
     Parameters:
         b (Optional[float]): System parameter.
@@ -938,6 +964,8 @@ def kaplan_yorke_map(a=None, b=None, dynamic_state=None, InitialConditions=None,
 
     where we chose the parameters :math:`a = -2.0` and :math:`b = 0.2` for a chaotic state with initial conditions :math:`x_0 = -0.1` and :math:`y_0 = 0.5`. You can set :math:`a = -1.0` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Kaplan_Yorke_map.png
+        
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter.
@@ -1001,6 +1029,8 @@ def gingerbread_man_map(a=1.0, b=1.0, dynamic_state=None, InitialConditions=None
 
     where we chose the parameters :math:`a = 1.0` and :math:`b = 1.0`. For a chaotic state, initial conditions :math:`x_0 = 0.5` and :math:`y_0 = 1.8`, and for a periodic response :math:`x_0 = 0.5` and :math:`y_0 = 1.5`. We solve this system for 2000 data points and keep the last 500 to avoid transients.
 
+    .. figure:: ../../../figures/Maps/Gingerbread_Man_map.png
+    
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter. 

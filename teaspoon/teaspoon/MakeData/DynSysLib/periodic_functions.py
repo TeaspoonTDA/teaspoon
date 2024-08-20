@@ -22,7 +22,7 @@ def sine(omega=2*np.pi,
 
     This was solved for 40 seconds with a sampling rate of 50 Hz.
 
-    TODO: Add fig from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    .. figure:: ../../../figures/Periodic_Quasiperiodic_Functions/Periodic_Sinosoidal_Function.png
 
     Parameters:
         omega (Optional[float]): frequency of the sine wave.
@@ -52,6 +52,8 @@ def incommensurate_sine(omega1=np.pi, omega2=1,
         x(t) = \sin(\\omega_1 t) + \sin(\\omega_2 t)
 
     This was sampled such that :math:`t \in [0, 100]` at a rate of 50 Hz.
+
+    .. figure:: ../../../figures/Periodic_Quasiperiodic_Functions/Quasiperiodic_Function.png
 
     Parameters:
         omega1 (Optional[float]): frequency of the first sine wave.

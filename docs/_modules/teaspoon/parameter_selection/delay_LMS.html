@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../../">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon.parameter_selection.delay_LMS &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
-
-  
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -29,16 +28,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="../../../index.html" class="icon icon-home">
-            teaspoon
-              <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="../../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -133,7 +128,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.parameter_selection.delay_LMS</li>
       <li class="wy-breadcrumbs-aside">
@@ -157,9 +152,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="LMSforDelay">
-<a class="viewcode-back" href="../../../modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay">[docs]</a>
-<span class="k">def</span> <span class="nf">LMSforDelay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>  <span class="c1"># 1-D lms function</span>
+<div class="viewcode-block" id="LMSforDelay"><a class="viewcode-back" href="../../../modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay">[docs]</a><span class="k">def</span> <span class="nf">LMSforDelay</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>  <span class="c1"># 1-D lms function</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a time series (ts) and the sampling frequency (fs) and uses </span>
 <span class="sd">    the fast fourier transform and gaussian noise statistics in the fourier spectrum </span>
 <span class="sd">    (using least median of squares (LMS) in statistical analysis) to determine a suitable</span>
@@ -234,10 +227,7 @@
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="MaximumFrequency">
-<a class="viewcode-back" href="../../../modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency">[docs]</a>
-<span class="k">def</span> <span class="nf">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
+<div class="viewcode-block" id="MaximumFrequency"><a class="viewcode-back" href="../../../modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency">[docs]</a><span class="k">def</span> <span class="nf">MaximumFrequency</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
 
 <span class="sd">    Args:</span>
@@ -261,10 +251,7 @@
     <span class="k">return</span> <span class="n">maxfreq</span></div>
 
 
-
-<div class="viewcode-block" id="AbsFFT">
-<a class="viewcode-back" href="../../../modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT">[docs]</a>
-<span class="k">def</span> <span class="nf">AbsFFT</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span>
+<div class="viewcode-block" id="AbsFFT"><a class="viewcode-back" href="../../../modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT">[docs]</a><span class="k">def</span> <span class="nf">AbsFFT</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function returns the maximum frequency in fourier spectrum given a cutoff threshold.</span>
 
 <span class="sd">   Args:</span>
@@ -294,7 +281,6 @@
     <span class="n">yf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">yf</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">yf</span> <span class="o">=</span> <span class="n">yf</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>  <span class="c1"># Normalizes fourier transform based on maximum density</span>
     <span class="k">return</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">)</span></div>
-
 
 
 <span class="c1"># In[ ]:</span>
