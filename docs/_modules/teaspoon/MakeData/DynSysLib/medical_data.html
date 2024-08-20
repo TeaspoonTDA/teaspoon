@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../../../">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon.MakeData.DynSysLib.medical_data &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
-
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -29,16 +28,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="../../../../index.html" class="icon icon-home">
-            teaspoon
-              <img src="../../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="../../../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -133,7 +128,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.MakeData.DynSysLib.medical_data</li>
       <li class="wy-breadcrumbs-aside">
@@ -145,48 +140,86 @@
            <div itemprop="articleBody">
              
   <h1>Source code for teaspoon.MakeData.DynSysLib.medical_data</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="medical_data">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/medical_data.html#teaspoon.MakeData.DynSysLib.medical_data.medical_data">[docs]</a>
-<span></span><span class="k">def</span> <span class="nf">medical_data</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="medical_data"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/medical_data.html#teaspoon.MakeData.DynSysLib.medical_data.medical_data">[docs]</a><span class="k">def</span> <span class="nf">medical_data</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="n">run</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="n">run</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;ECG&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">electrocardiogram</span>
 
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>  <span class="c1"># healthy</span>
-                <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">electrocardiogram</span><span class="p">()[</span><span class="mi">3000</span><span class="p">:</span><span class="mi">5500</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;ECG&#39;</span><span class="p">:</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">ECG</span><span class="p">()</span>
 
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>  <span class="c1"># heart arrythmia</span>
-                <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">electrocardiogram</span><span class="p">()[</span><span class="mi">8500</span><span class="p">:</span><span class="mi">11000</span><span class="p">]]</span>
-
-            <span class="n">fs</span> <span class="o">=</span> <span class="mi">360</span>
-            <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span><span class="n">fs</span>
-
-    <span class="c1"># In[ ]: Complete</span>
-
-        <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;EEG&#39;</span><span class="p">:</span>
-
-            <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span>
-
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>  <span class="c1"># healthy</span>
-                <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;Data</span><span class="se">\\</span><span class="s1">EEG</span><span class="se">\\</span><span class="s1">Z093.txt&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span>
-                    <span class="mi">0</span><span class="p">:</span><span class="n">SampleSize</span><span class="p">]]</span>
-
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>  <span class="c1"># seizure</span>
-                <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;Data</span><span class="se">\\</span><span class="s1">EEG</span><span class="se">\\</span><span class="s1">S056.txt&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span>
-                    <span class="mi">0</span><span class="p">:</span><span class="n">SampleSize</span><span class="p">]]</span>
-
-            <span class="n">fs</span> <span class="o">=</span> <span class="mf">173.61</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span><span class="n">fs</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
-            <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;EEG&#39;</span><span class="p">:</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">EEG</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
+<div class="viewcode-block" id="EEG"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/medical_data.html#teaspoon.MakeData.DynSysLib.medical_data.EEG">[docs]</a><span class="k">def</span> <span class="nf">EEG</span><span class="p">(</span><span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The EEG signal was taken from andrzejak et al. [1]. Speci cally, the first 5000 data points from the EEG data of a healthy patient from set A (file Z-093) was used and the first 5000 data points of a patient experiencing a seizure from set E (file S-056) was used (see figure below for case during seizure).</span>
+
+<span class="sd">    .. figure:: ../../../figures/Human_Medical_Data/EEG_Data.png</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+<span class="sd">        dynamic_state (Optional[str]): Set dynamic state as either &#39;normal&#39; or &#39;seizure&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Ralph G Andrzejak, Klaus Lehnertz, Florian Mormann, Christoph Rieke, Peter David, and Christian E Elger. Indications of nonlinear deterministic and nite-dimensional structures in time series of brain electrical activity: Dependence on recording region and brain state. Physical Review E, 64(6):061907, 2001.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span>  <span class="c1"># healthy</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;Data</span><span class="se">\\</span><span class="s1">EEG</span><span class="se">\\</span><span class="s1">Z093.txt&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span>
+            <span class="mi">0</span><span class="p">:</span><span class="n">SampleSize</span><span class="p">]]</span>
+
+    <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;seizure&#39;</span><span class="p">:</span>  <span class="c1"># seizure</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;Data</span><span class="se">\\</span><span class="s1">EEG</span><span class="se">\\</span><span class="s1">S056.txt&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span>
+            <span class="mi">0</span><span class="p">:</span><span class="n">SampleSize</span><span class="p">]]</span>
+
+    <span class="n">fs</span> <span class="o">=</span> <span class="mf">173.61</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span><span class="n">fs</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+<div class="viewcode-block" id="ECG"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/medical_data.html#teaspoon.MakeData.DynSysLib.medical_data.ECG">[docs]</a><span class="k">def</span> <span class="nf">ECG</span><span class="p">(</span><span class="n">dynamic_state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Electrocardoagram (ECG) data was taken from SciPys misc.electrocardiogram data set. This ECG data was originally provided by the MIT-BIH Arrhythmia Database [1]. We used data points 3000 to 5500  during normal sinus rhythm and 8500 to 11000 during arrhythmia (arrhythmia case shown below in figure).</span>
+
+<span class="sd">    .. figure:: ../../../figures/Human_Medical_Data/ECG_Data.png</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        dynamic_state (Optional[str]): Set dynamic state as either &#39;normal&#39; or &#39;seizure&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] George B Moody and Roger G Mark. Theimpact of the mit-bih arrhythmia database. IEEE Engineering in Medicine and Biology Magazine, 20(3):4550, 2001.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">electrocardiogram</span>
+
+    <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span>  <span class="c1"># healthy</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">electrocardiogram</span><span class="p">()[</span><span class="mi">3000</span><span class="p">:</span><span class="mi">5500</span><span class="p">]]</span>
+
+    <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;seizure&#39;</span><span class="p">:</span>  <span class="c1"># heart arrythmia</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">electrocardiogram</span><span class="p">()[</span><span class="mi">8500</span><span class="p">:</span><span class="mi">11000</span><span class="p">]]</span>
+
+    <span class="n">fs</span> <span class="o">=</span> <span class="mi">360</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span><span class="n">fs</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 </pre></div>
 
            </div>
