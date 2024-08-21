@@ -704,8 +704,7 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
     return t, ts
 
 
-def lorenz(rho=None, sigma=None, beta=None, dynamic_state=None, InitialConditions=None,  
-    L=100.0, fs=100, SampleSize=2000):
+def lorenz(parameters=[100, 10, 8.0/3.0], dynamic_state=None, InitialConditions=[10.0**-10.0, 0.0, 1.0], L=100.0, fs=100, SampleSize=2000):
     """
     The Lorenz system used is defined as
 
@@ -720,13 +719,12 @@ def lorenz(rho=None, sigma=None, beta=None, dynamic_state=None, InitialCondition
 
 
     Parameters:
-        rho (Optional[float]): System parameter.
-        sigma (Optional[float]): System parameter.
-        beta (Optional[float]): System parameter.
-        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
-        L (Optional[int]): Number of map iterations.
-        fs (Optional[int]): sampling rate for simulation.
+        parameters (Optional[floats]): Array of three floats [:math:`\\rho`, :math:`\\sigma`, :math:`\\beta`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_{0}`, :math:`y_{0}`, :math:`z_{0}`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
@@ -735,18 +733,23 @@ def lorenz(rho=None, sigma=None, beta=None, dynamic_state=None, InitialCondition
 
     t = np.linspace(0, L, int(L*fs))
 
+    num_param = 3
 
-    if rho == None or sigma == None or beta == None:
-        if dynamic_state == None:
-            dynamic_state = 'periodic'
-            print(
-                'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
         if dynamic_state == 'periodic':
             rho = 100.0
-        if dynamic_state == 'chaotic':
+            sigma = 10.0
+            beta = 8.0 / 3.0
+        elif dynamic_state == 'chaotic':
             rho = 105.0
-        sigma = 10.0
-        beta = 8.0 / 3.0
+            sigma = 10.0
+            beta = 8.0 / 3.0
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        rho, sigma, beta = parameters[0], parameters[1], parameters[2]
 
     # defining simulation functions
 
@@ -754,9 +757,6 @@ def lorenz(rho=None, sigma=None, beta=None, dynamic_state=None, InitialCondition
         x, y, z = state  # unpack the state vector
         # derivatives
         return sigma*(y - x), x*(rho - z) - y, x*y - beta*z
-
-    if InitialConditions == None:
-        InitialConditions = [10.0**-10.0, 0.0, 1.0]
 
     states = odeint(lorenz_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
@@ -766,8 +766,7 @@ def lorenz(rho=None, sigma=None, beta=None, dynamic_state=None, InitialCondition
     return t, ts
 
 
-def rossler(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=15, SampleSize=2500):
+def rossler(parameters=[0.1, 0.2, 14], dynamic_state=None, InitialConditions=[-0.4, 0.6, 1], L=1000.0, fs=15, SampleSize=2500):
     """
     The Rössler system used was defined as
 
@@ -781,13 +780,12 @@ def rossler(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None,
     The Rössler system was solved with a sampling rate of 15 Hz for 1000 seconds with only the last 166 seconds used to avoid transients. For a chaotic response, parameters of :math:`a = 0.15`, :math:`b = 0.2`, and :math:`c = 14` and initial conditions :math:`[x_0,y_0,z_0] = [-0.4,0.6,1.0]` are used. For a periodic response set :math:`a = 0.10`.
 
     Parameters:
-        a (Optional[float]): System parameter.
-        b (Optional[float]): System parameter.
-        c (Optional[float]): System parameter.
-        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
-        L (Optional[int]): Number of map iterations.
-        fs (Optional[int]): sampling rate for simulation.
+        parameters (Optional[floats]): Array of three floats [a, b, c] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_{0}`, :math:`y_{0}`, :math:`z_{0}`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
@@ -795,26 +793,29 @@ def rossler(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None,
     """
     t = np.linspace(0, L, int(L*fs))
 
-    if a == None or b == None or c == None:
-        if dynamic_state == None:
-            dynamic_state = 'periodic'
-            print(
-                'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
+    num_param = 3
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 0.10
-        if dynamic_state == 'chaotic':
+            b = 0.20
+            c = 14
+        elif dynamic_state == 'chaotic':
             a = 0.15
-        b = 0.20
-        c = 14
+            b = 0.20
+            c = 14
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        a, b, c = parameters[0], parameters[1], parameters[2]
 
     # defining simulation functions
 
     def rossler_sys(state, t):
         x, y, z = state  # unpack the state vector
         return -y - z, x + a*y, b + z*(x-c)
-
-    if InitialConditions == None:
-        InitialConditions = [-0.4, 0.6, 1]
 
     states = odeint(rossler_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
@@ -823,8 +824,7 @@ def rossler(a=None, b=None, c=None, dynamic_state=None, InitialConditions=None,
 
     return t, ts
 
-def coupled_lorenz_rossler(a=None, b1=None, b2=None, c2=None, k1=None, k2=None, k3=None, lam=None, sigma=None, dynamic_state=None, InitialConditions=None,  
-    L=500.0, fs=50, SampleSize=15000):
+def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 10], dynamic_state=None, InitialConditions=[0.1, 0.1, 0.1, 0, 0, 0], L=500.0, fs=50, SampleSize=15000):
     """
     The coupled Lorenz-Rössler system is defined as
 
@@ -844,40 +844,32 @@ def coupled_lorenz_rossler(a=None, b1=None, b2=None, c2=None, k1=None, k2=None, 
     where :math:`b_1 =8/3`, :math:`b_2 =0.2`, :math:`c_2 =5.7`, :math:`k_1 =0.1`, :math:`k_2 =0.1`, :math:`k_3 =0.1`, :math:`\\lambda =28`, :math:`\\sigma =10`,and :math:`a=0.25` for a periodic response and :math:`a = 0.51` for a chaotic response. This system was simulated at a frequency of 50 Hz for 500 seconds with the last 300 seconds used. The default initial condition is :math:`[x_1, y_1, z_1, x_2, y_2, z_2]=[0.1,0.1,0.1,0,0,0]`.
 
     Parameters:
-        a (Optional[float]): System parameter.
-        b1 (Optional[float]): System parameter.
-        b2 (Optional[float]): System parameter.
-        c2 (Optional[float]): System parameter.
-        k1 (Optional[float]): System parameter.
-        k2 (Optional[float]): System parameter.
-        k3 (Optional[float]): System parameter.
-        lam (Optional[float]): System parameter.
-        sigma (Optional[float]): System parameter.
-        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
-        L (Optional[int]): Number of map iterations.
-        fs (Optional[int]): sampling rate for simulation.
+        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b_1`, :math:`b_2`, :math:`c_2`, :math:`k_1`, :math:`k_2`, :math:`k_3`, :math:`\\lambda`, :math:`\\sigma`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_{1, 0}`, :math:`y_{1, 0}`, :math:`z_{1, 0}`, :math:`x_{2, 0}`, :math:`y_{2, 0}`, :math:`z_{2, 0}`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
     
     """
-
     t = np.linspace(0, L, int(L*fs))
 
-    if a==None or b1==None or b2==None or c2==None or k1==None or k2==None or k3==None or lam==None or sigma==None:
-        if dynamic_state == None:
-            dynamic_state = 'periodic'
-            print(
-                    'Warning: needed 9 parameters. Defaulting to periodic solution parameters.')
+    num_param = 9
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
         if dynamic_state == 'periodic':
-            a = 0.25
-        if dynamic_state == 'chaotic':
-            a = 0.51
-        b1, b2 = 8/3, 0.2
-        c2 = 5.7
-        k1, k2, k3 = 0.1, 0.1, 0.1
-        lam, sigma = 28, 10
+            a, b1, b2, c2, k1, k2, k3, lam, sigma = 0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 10
+        elif dynamic_state == 'chaotic':
+            a, b1, b2, c2, k1, k2, k3, lam, sigma = 0.51, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 10
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        a, b1, b2, c2, k1, k2, k3, lam, sigma = parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5], parameters[6], parameters[7], parameters[8]
 
     # defining simulation functions
 
@@ -892,8 +884,7 @@ def coupled_lorenz_rossler(a=None, b1=None, b2=None, c2=None, k1=None, k2=None, 
         return D[0], D[1], D[2], D[3], D[4], D[5]
 
     if InitialConditions == None:
-        InitialConditions = [0.1, 0.1, 0.1,
-                                0, 0, 0]  # inital conditions
+        InitialConditions =   # inital conditions
 
     states = odeint(coupled_lorenz_rossler_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:],
@@ -906,8 +897,7 @@ def coupled_lorenz_rossler(a=None, b1=None, b2=None, c2=None, k1=None, k2=None, 
 
     return t, ts
 
-def coupled_rossler_rossler(k=None, w1=None, w2=None, dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=10, SampleSize=1500):
+def coupled_rossler_rossler(parameters=[0.25, 0.99, 0.95], dynamic_state=None, InitialConditions=[-0.4, 0.6, 5.8, 0.8, -2, -4], L=1000.0, fs=10, SampleSize=1500):
     """
     The coupled Lorenz-Rössler system is defined as
 
@@ -927,32 +917,32 @@ def coupled_rossler_rossler(k=None, w1=None, w2=None, dynamic_state=None, Initia
     with :math:`w_1 = 0.99`, :math:`w_2 = 0.95`, and :math:`k = 0.05`. This was solved for 1000 seconds with a sampling rate of 10 Hz. Only the last 150 seconds of the solution are used and the default initial condition is :math:`[x_1, y_1, z_1, x_2, y_2, z_2]=[-0.4,0.6,5.8,0.8,-2,-4]`.
 
     Parameters:
-        k (Optional[float]): System parameter.
-        w1 (Optional[float]): System parameter.
-        w2 (Optional[float]): System parameter.
-        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
-        L (Optional[int]): Number of map iterations.
-        fs (Optional[int]): sampling rate for simulation.
+        parameters (Optional[floats]): Array of three floats [:math:`k`, :math:`w_1`, :math:`w_2`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_{1, 0}`, :math:`y_{1, 0}`, :math:`z_{1, 0}`, :math:`x_{2, 0}`, :math:`y_{2, 0}`, :math:`z_{2, 0}`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
     
     """
-
     t = np.linspace(0, L, int(L*fs))
 
-    if k == None or w1 == None or w2 == None:
-        if dynamic_state == None:
-            dynamic_state = 'periodic'
-            print(
-                'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
+    num_param = 9
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
         if dynamic_state == 'periodic':
-            k = 0.25
-        if dynamic_state == 'chaotic':
-            k = 0.30
-        w1 = 0.99
-        w2 = 0.95
+            k, w1, w2 = 0.25, 0.99, 0.95
+        elif dynamic_state == 'chaotic':
+            k, w1, w2 = 0.30, 0.99, 0.95
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        k, w1, w2 = parameters[0], parameters[1], parameters[2]
 
     # defining simulation functions
 
@@ -966,10 +956,6 @@ def coupled_rossler_rossler(k=None, w1=None, w2=None, dynamic_state=None, Initia
                 0.2 + z2*(x2-10)]
         return D[0], D[1], D[2], D[3], D[4], D[5]
 
-    if InitialConditions == None:
-        InitialConditions = [-0.4, 0.6, 5.8,
-                                0.8, -2, -4]  # inital conditions
-
     states = odeint(coupled_rossler_rossler_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:],
             (states[:, 1])[-SampleSize:],
@@ -981,7 +967,7 @@ def coupled_rossler_rossler(k=None, w1=None, w2=None, dynamic_state=None, Initia
 
     return t, ts
 
-def chua(a=None, g=None, B=None, m0=None, m1=None, dynamic_state=None, InitialConditions=None,  
+def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialConditions=[1.0, 0.0, 0.0],  
     L=200.0, fs=50, SampleSize=4000):
     """
     Chua's circuit is based on a non-linear circuit and is described as
@@ -1000,24 +986,34 @@ def chua(a=None, g=None, B=None, m0=None, m1=None, dynamic_state=None, InitialCo
     
     The system parameters are set to :math:`\\beta=27`, :math:`\\gamma=1`, :math:`m_0 =-3/7`, :math:`m_1 =3/7`, and :math:`\\alpha=10.8` for a periodic response and :math:`\\alpha = 12.8` for a chaotic response. The system was simulated for 200 seconds at a rate of 50 Hz and the last 80 seconds are used.
 
+    Parameters:
+        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`B`, :math:`g`, :math:`m_0`, :math:`m_1`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+    
     """
     t = np.linspace(0, L, int(L*fs))
 
-    
-    if a==None or g==None or B==None or m0==None or m1==None:
-        if dynamic_state == None:
-            dynamic_state = 'periodic'
-            print(
-                'Warning: needed 5 parameters. Defaulting to periodic solution parameters.')
-        if dynamic_state == 'periodic':
-            a = 10.8  # alpha
-        if dynamic_state == 'chaotic':
-            a = 12.8
-        B = 27  # betta
-        g = 1.0  # gamma
-        m0 = -3/7
-        m1 = 3/7
+    num_param = 5
 
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            a, B, g, m0, m1 = 10.8, 27, 1.0, -3/7, 3/7
+        elif dynamic_state == 'chaotic':
+            a, B, g, m0, m1 = 12.8, 27, 1.0, -3/7, 3/7
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        a, B, g, m0, m1 = parameters[0], parameters[1], parameters[2], parameters[3], parameters[4]
+    
     # defining simulation functions
 
     def f(x):
@@ -1029,8 +1025,6 @@ def chua(a=None, g=None, B=None, m0=None, m1=None, dynamic_state=None, InitialCo
                             g*(H[0]-H[1]+H[2]),
                             -B*H[1]])
 
-    if InitialConditions == None:
-        InitialConditions = [1.0, 0.0, 0.0]
 
     states, infodict = integrate.odeint(
         chua_sys, InitialConditions, t, full_output=True)
@@ -1040,8 +1034,7 @@ def chua(a=None, g=None, B=None, m0=None, m1=None, dynamic_state=None, InitialCo
 
     return t, ts
 
-def double_pendulum(m1=None, m2=None, l1=None, l2=None, g=None, dynamic_state=None, InitialConditions=None,  
-    L=100.0, fs=100, SampleSize=5000):
+def double_pendulum(parameters=[1, 1, 1, 1, 9.81], dynamic_state=None, InitialConditions=[0.4, 0.6, 1, 1], L=100.0, fs=100, SampleSize=5000):
     """
     The double pendulum is a staple bench top experiment for investigated chaos in a mechanical system. A point-mass double pendulum's equations of motion are defined as 
 
@@ -1056,14 +1049,38 @@ def double_pendulum(m1=None, m2=None, l1=None, l2=None, g=None, dynamic_state=No
     
     where the system parameters are :math:`g=9.81 m/s^2`, :math:`m_1 =1 kg`, :math:`m_2 =1 kg`, :math:`l_1 = 1 m`, and :math:`l_2 =1 m`. The system was solved for 200 seconds at a rate of 100 Hz and only the last 30 seconds were used as shown in the figure below for the chaotic response with initial conditions :math:`[\\theta_1, \\theta_2, \\omega_1, \\omega_2] = [0, 3 rad, 0, 0]`. This system will have different dynamic states based on the initial conditions, which can vary from periodic, quasiperiodic, and chaotic.
 
-    """
+    Parameters:
+        parameters (Optional[floats]): Array of three floats [:math:`m_1`, :math:`m_2`, :math:`l_1`, :math:`l_2`, :math:`g`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`\\theta_{1, 0}`, :math:`\\theta_{2, 0}`, :math:`\\omega_{1, 0}`, :math:`\\omega_{2, 0}`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
 
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    """
     t = np.linspace(0, L, int(L*fs))
 
-    if m1==None or m2==None or l1==None or l2==None or g==None:
-        print('Warning: needed 5 parameters. Using default parameters.')
-        print('Parameters needed are [m1, m2, l1 ,l2, g].')
-        m1, m2, l1, l2, g = 1, 1, 1, 1, 9.81
+    num_param = 5
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            m1, m2, l1, l2, g = 1, 1, 1, 1, 9.81
+            InitialConditions = [0.4, 0.6, 1, 1]
+        elif dynamic_state == 'chaotic':
+            m1, m2, l1, l2, g = 1, 1, 1, 1, 9.81
+            InitialConditions = [0.0, 3, 0, 0]
+        elif dynamic_state == 'quasiperiodic':
+            m1, m2, l1, l2, g = 1, 1, 1, 1, 9.81
+            InitialConditions = [1, 0, 0, 0]            
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic", "quasiperiodic" or "chaotic", or provide an array of length {num_param} in parameters.')
+    else:
+        m1, m2, l1, l2, g = parameters[0], parameters[1], parameters[2], parameters[3], parameters[4]
 
     # defining simulation functions
     def double_pendulum_sys(state, t):
@@ -1081,16 +1098,6 @@ def double_pendulum(m1=None, m2=None, l1=None, l2=None, g=None, dynamic_state=No
                 numerator2/denomenator2]
         return D[0], D[1], D[2], D[3]
 
-    if InitialConditions == None:
-        if dynamic_state == None:
-            dynamic_state = 'periodic'
-            print('Warning: Dynamic state not specified. Using periodic initial condition.')
-        if dynamic_state == 'periodic':
-            InitialConditions = [0.4, 0.6, 1, 1]
-        if dynamic_state == 'quasiperiodic':
-            InitialConditions = [1, 0, 0, 0]
-        if dynamic_state == 'chaotic':
-            InitialConditions = [0.0, 3, 0, 0]
 
     states = odeint(double_pendulum_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])[-SampleSize:],
