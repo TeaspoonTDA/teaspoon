@@ -927,7 +927,7 @@ def coupled_rossler_rossler(parameters=[0.25, 0.99, 0.95], dynamic_state=None, I
     """
     t = np.linspace(0, L, int(L*fs))
 
-    num_param = 9
+    num_param = 3
 
     if len(parameters) != num_param:
         raise ValueError(f'Need {num_param} parameters as specified in documentation.')

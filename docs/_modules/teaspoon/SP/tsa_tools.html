@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon.SP.tsa_tools &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -28,12 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="../../../index.html" class="icon icon-home"> teaspoon
-            <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -49,7 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../modules/index.html">2. Modules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../modules/MakeData/index.html">2.1. Make Data (MakeData) Module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../modules/MakeData/PointCloud.html">2.1.1. Point Cloud Data Generation (PointCloud) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules/MakeData/DynSysLib/index.html">2.1.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../modules/MakeData/DynSysLib/index.html">2.1.2. Dynamical Systems Library (DynSysLib) Module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../modules/ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
@@ -128,7 +133,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">teaspoon.SP.tsa_tools</li>
       <li class="wy-breadcrumbs-aside">
@@ -155,7 +160,9 @@
 
 <span class="c1"># In[ ]:</span>
 
-<div class="viewcode-block" id="cgss_binning"><a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.cgss_binning">[docs]</a><span class="k">def</span> <span class="nf">cgss_binning</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">binning_method</span><span class="o">=</span><span class="s1">&#39;equal_size&#39;</span><span class="p">,</span> <span class="n">plot_binning</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="cgss_binning">
+<a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.cgss_binning">[docs]</a>
+<span class="k">def</span> <span class="nf">cgss_binning</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">binning_method</span><span class="o">=</span><span class="s1">&#39;equal_size&#39;</span><span class="p">,</span> <span class="n">plot_binning</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the binning array applied to each dimension when constructing CGSSN.</span>
 
 <span class="sd">    Args:</span>
@@ -218,7 +225,10 @@
     <span class="k">return</span> <span class="n">B_array</span></div>
 
 
-<div class="viewcode-block" id="cgss_sequence"><a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.cgss_sequence">[docs]</a><span class="k">def</span> <span class="nf">cgss_sequence</span><span class="p">(</span><span class="n">SSR</span><span class="p">,</span> <span class="n">B_array</span><span class="p">):</span>
+
+<div class="viewcode-block" id="cgss_sequence">
+<a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.cgss_sequence">[docs]</a>
+<span class="k">def</span> <span class="nf">cgss_sequence</span><span class="p">(</span><span class="n">SSR</span><span class="p">,</span> <span class="n">B_array</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the sequence of coarse-grained state space states from the state space reconstruction.</span>
 
 <span class="sd">    Args:</span>
@@ -250,8 +260,11 @@
     <span class="k">return</span> <span class="n">symbol_seq</span></div>
 
 
+
 <span class="c1"># finds permutation sequency from modified pyentropy package</span>
-<div class="viewcode-block" id="permutation_sequence"><a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.permutation_sequence">[docs]</a><span class="k">def</span> <span class="nf">permutation_sequence</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="permutation_sequence">
+<a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.permutation_sequence">[docs]</a>
+<span class="k">def</span> <span class="nf">permutation_sequence</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the sequence of permutations from a 1-D time series.</span>
 
 <span class="sd">    Args:</span>
@@ -308,10 +321,13 @@
     <span class="k">return</span> <span class="n">perm_seq</span>  <span class="c1"># returns sequence of permutations</span></div>
 
 
+
 <span class="c1"># In[ ]:</span>
 
 
-<div class="viewcode-block" id="takens"><a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.takens">[docs]</a><span class="k">def</span> <span class="nf">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="takens">
+<a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.takens">[docs]</a>
+<span class="k">def</span> <span class="nf">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates an array of n-dimensional arrays from a time-delay state-space reconstruction.</span>
 
 <span class="sd">    Args:</span>
@@ -348,10 +364,13 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">SSR</span><span class="p">)</span></div>
 
 
+
 <span class="c1"># In[ ]:</span>
 
 
-<div class="viewcode-block" id="k_NN"><a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.k_NN">[docs]</a><span class="k">def</span> <span class="nf">k_NN</span><span class="p">(</span><span class="n">embedded_time_series</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<div class="viewcode-block" id="k_NN">
+<a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.k_NN">[docs]</a>
+<span class="k">def</span> <span class="nf">k_NN</span><span class="p">(</span><span class="n">embedded_time_series</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function gets the k nearest neighbors from an array of the state space reconstruction vectors</span>
 
 <span class="sd">    Args:</span>
@@ -373,9 +392,12 @@
     <span class="k">return</span> <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span></div>
 
 
+
 <span class="c1"># In[ ]:</span>
 
-<div class="viewcode-block" id="ZeDA"><a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.ZeDA">[docs]</a><span class="k">def</span> <span class="nf">ZeDA</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>  <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">3.0</span><span class="p">):</span>
+<div class="viewcode-block" id="ZeDA">
+<a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.ZeDA">[docs]</a>
+<span class="k">def</span> <span class="nf">ZeDA</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>  <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">3.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a uniformly sampled time series and finds level-crossings.</span>
 
 <span class="sd">    Args:</span>
@@ -666,12 +688,15 @@
 
     <span class="k">return</span> <span class="n">brackets</span><span class="p">,</span> <span class="n">ZC</span><span class="p">,</span> <span class="n">Flag</span></div>
 
+
 <span class="c1">##########################################################################</span>
 
 <span class="c1"># In[ ]:</span>
 
 
-<div class="viewcode-block" id="first_zero"><a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.first_zero">[docs]</a><span class="k">def</span> <span class="nf">first_zero</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="first_zero">
+<a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.first_zero">[docs]</a>
+<span class="k">def</span> <span class="nf">first_zero</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a discrete time series and finds the first zero-crossing or the global minimum (if no crossing).</span>
 
 <span class="sd">    Args:</span>
@@ -869,6 +894,7 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">t_new</span></div>
+
 
 
 <span class="c1"># In[ ]:</span>

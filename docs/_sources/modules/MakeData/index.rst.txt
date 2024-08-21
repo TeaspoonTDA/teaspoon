@@ -9,4 +9,4 @@ This module provides two methods for generating data for analysis. The first is 
    :maxdepth: 1
 
    Point Cloud Data Generation (PointCloud) Module <PointCloud.rst>
-   Dynamic Systems Library (DynSysLib) Module <DynSysLib/index.rst>
+   Dynamical Systems Library (DynSysLib) Module <DynSysLib/index.rst>

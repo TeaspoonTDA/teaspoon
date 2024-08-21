@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 def medical_data(system, dynamic_state=None, L=None, fs=None,
                  SampleSize=None, parameters=None, InitialConditions=None):
@@ -30,13 +31,17 @@ def EEG(SampleSize=5000, dynamic_state='normal'):
     .. [1] Ralph G Andrzejak, Klaus Lehnertz, Florian Mormann, Christoph Rieke, Peter David, and Christian E Elger. Indications of nonlinear deterministic and nite-dimensional structures in time series of brain electrical activity: Dependence on recording region and brain state. Physical Review E, 64(6):061907, 2001.
     
     """
+    path = os.path.join(os.path.join(os.path.join(os.path.join(os.path.join(os.getcwd(),'teaspoon'),'teaspoon'),'MakeData'), 'DynSysLib'), 'Data')
 
     if dynamic_state == 'normal':  # healthy
-        ts = [np.loadtxt('Data\\EEG\\Z093.txt', skiprows=1)[
+        path = os.path.join(os.path.join(path, 'EEG'), 'Z093.txt')
+        ts = [np.loadtxt(path, skiprows=1)[
             0:SampleSize]]
+        
 
     if dynamic_state == 'seizure':  # seizure
-        ts = [np.loadtxt('Data\\EEG\\S056.txt', skiprows=1)[
+        path = os.path.join(os.path.join(path, 'EEG'), 'S056.txt')
+        ts = [np.loadtxt(path, skiprows=1)[
             0:SampleSize]]
 
     fs = 173.61
@@ -65,7 +70,7 @@ def ECG(dynamic_state='normal'):
     
     """
 
-    from scipy.misc import electrocardiogram
+    from scipy.datasets import electrocardiogram
 
     if dynamic_state == 'normal':  # healthy
         ts = [electrocardiogram()[3000:5500]]

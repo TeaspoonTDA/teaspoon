@@ -1,4 +1,4 @@
-Dynamic Systems Library (DynSysLib)
+Dynamical Systems Library (DynSysLib)
 =======================================================
 
 

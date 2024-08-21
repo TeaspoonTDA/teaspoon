@@ -1090,8 +1090,10 @@ def gingerbread_man_map(parameters=[1.0,1.0], dynamic_state=None, InitialConditi
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a, b = parameters[0], parameters[1]
+            InitialConditions = [0.5, 1.5]
         elif dynamic_state == 'chaotic':
             a, b = parameters[0], parameters[1]
+            InitialConditions = [0.5, 1.8]
         else:
             raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
@@ -1101,13 +1103,7 @@ def gingerbread_man_map(parameters=[1.0,1.0], dynamic_state=None, InitialConditi
         return 1 - a*y + b*np.abs(x), x
 
     if InitialConditions == None:
-        if dynamic_state == None:
-            print('Either dynamic_state or InitialConditions need to be specified. Defaulting to periodic response.')
-            dynamic_state='periodic'
-        if dynamic_state == 'periodic':
-            InitialConditions = [0.5, 1.5]
-        if dynamic_state == 'chaotic':
-            InitialConditions = [0.5, 1.8]
+        InitialConditions = [0.5, 1.5]
 
     xtemp = InitialConditions[0]
     ytemp = InitialConditions[1]

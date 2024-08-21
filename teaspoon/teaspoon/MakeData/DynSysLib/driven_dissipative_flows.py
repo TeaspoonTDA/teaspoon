@@ -106,7 +106,7 @@ def base_excited_magnetic_pendulum(parameters=[0.1038, 0.208, 9.81, 0.18775, 0.0
 
     # setting system parameters
 
-    num_param = 13
+    num_param = 11
 
     if len(parameters) != num_param:
         raise ValueError(f'Need {num_param} parameters as specified in documentation.')
