@@ -201,7 +201,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span>
 
 
-<div class="viewcode-block" id="logistic_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.logistic_map">[docs]</a><span class="k">def</span> <span class="nf">logistic_map</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="logistic_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.logistic_map">[docs]</a><span class="k">def</span> <span class="nf">logistic_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">3.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The logistic map [1]_ was generated as</span>
@@ -214,7 +214,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Logistic_map.png</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">        r (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of 1 float [r]</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -230,15 +230,19 @@
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 1 parameter. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">r</span> <span class="o">=</span> <span class="mf">3.5</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">r</span> <span class="o">=</span> <span class="mf">3.6</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span>
@@ -256,7 +260,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="henon_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.henon_map">[docs]</a><span class="k">def</span> <span class="nf">henon_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="henon_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.henon_map">[docs]</a><span class="k">def</span> <span class="nf">henon_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Hénon map [2]_ was solved as</span>
@@ -272,9 +276,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Henon_map.png</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
-<span class="sd">        b (Optional[float]): System parameter.</span>
-<span class="sd">        c (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[floats]): Array of 3 floats [a,b,c].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -290,18 +292,20 @@
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
-    <span class="c1"># setting system parameters</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 3 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">1.25</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">1.20</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="mf">0.3</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
     <span class="k">def</span> <span class="nf">henon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -324,7 +328,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="sine_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.sine_map">[docs]</a><span class="k">def</span> <span class="nf">sine_map</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="sine_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.sine_map">[docs]</a><span class="k">def</span> <span class="nf">sine_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.8</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -338,7 +342,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Sine_map.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        A (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[floats]): Array of 1 float [A].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -350,15 +354,19 @@
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
-    <span class="c1"># setting system parameters</span>
-    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A parameter not specified. Defaulting to periodic response (A=0.8).&#39;</span><span class="p">)</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">A</span> <span class="o">=</span> <span class="mf">0.8</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
@@ -376,7 +384,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="tent_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.tent_map">[docs]</a><span class="k">def</span> <span class="nf">tent_map</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="tent_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.tent_map">[docs]</a><span class="k">def</span> <span class="nf">tent_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.05</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Tent map [3]_ was solved as</span>
@@ -389,7 +397,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Tent_map.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        A (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of 1 float [A].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -404,17 +412,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
 
-    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 1 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-            
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">A</span> <span class="o">=</span> <span class="mf">1.05</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">A</span> <span class="o">=</span> <span class="mf">1.5</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
@@ -432,7 +443,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="linear_congruential_generator_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.linear_congruential_generator_map">[docs]</a><span class="k">def</span> <span class="nf">linear_congruential_generator_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="linear_congruential_generator_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.linear_congruential_generator_map">[docs]</a><span class="k">def</span> <span class="nf">linear_congruential_generator_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">,</span><span class="mi">54773</span><span class="p">,</span><span class="mi">259200</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Linear Congruential Generator map is defined as</span>
@@ -445,9 +456,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Linear_Congruential_Generator_map.png</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
-<span class="sd">        b (Optional[float]): System parameter.</span>
-<span class="sd">        c (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of 3 floats [a,b,c].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -457,18 +466,19 @@
 <span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">3</span>
 
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 3 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-            
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">0.9</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">1.1</span>
-        <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">54773</span><span class="p">,</span> <span class="mi">259200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
@@ -486,7 +496,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="rickers_population_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.rickers_population_map">[docs]</a><span class="k">def</span> <span class="nf">rickers_population_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="rickers_population_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.rickers_population_map">[docs]</a><span class="k">def</span> <span class="nf">rickers_population_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Ricker&#39;s Population map is defined [4]_ as</span>
@@ -499,7 +509,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Rickers_Popoulation_map.png</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of 1 parameter [a].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -515,17 +525,19 @@
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
-    <span class="c1"># setting system parameters</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 1 parameter. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-            
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mi">13</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
@@ -543,7 +555,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="gauss_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.gauss_map">[docs]</a><span class="k">def</span> <span class="nf">gauss_map</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="gauss_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.gauss_map">[docs]</a><span class="k">def</span> <span class="nf">gauss_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">6.20</span><span class="p">,</span><span class="o">-</span><span class="mf">0.20</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Gauss map is defined [5]_ as</span>
@@ -556,7 +568,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Gauss_map.png</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">        alpha (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[floats]): Array of parameters [alpha, beta].</span>
 <span class="sd">        beta (Optional[float]): System parameter.</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
@@ -572,18 +584,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">2</span>
 
-    <span class="k">if</span> <span class="n">alpha</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">beta</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-            
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">beta</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.20</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">beta</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.35</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="mf">6.20</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
@@ -601,7 +615,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="cusp_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.cusp_map">[docs]</a><span class="k">def</span> <span class="nf">cusp_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="cusp_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.cusp_map">[docs]</a><span class="k">def</span> <span class="nf">cusp_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.1</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Cusp map is defined [6]_ as</span>
@@ -614,7 +628,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Cusp_map.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of system parameters [a].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -630,16 +644,19 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
 
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 1 parameter. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">1.1</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">1.2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span>
@@ -657,7 +674,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="pinchers_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.pinchers_map">[docs]</a><span class="k">def</span> <span class="nf">pinchers_map</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="pinchers_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.pinchers_map">[docs]</a><span class="k">def</span> <span class="nf">pinchers_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.3</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Pincher&#39;s map is defined [7]_ as</span>
@@ -670,8 +687,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Pinchers_map.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        s (Optional[float]): System parameter.</span>
-<span class="sd">        c (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of system parameters [s,c].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -686,17 +702,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">2</span>
 
-    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">=</span> <span class="mf">1.3</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">=</span> <span class="mf">1.6</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
         <span class="n">c</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
@@ -714,7 +733,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="sine_circle_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.sine_circle_map">[docs]</a><span class="k">def</span> <span class="nf">sine_circle_map</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="sine_circle_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.sine_circle_map">[docs]</a><span class="k">def</span> <span class="nf">sine_circle_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Sine Circle map is defined [8]_ as</span>
@@ -727,8 +746,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Sine_Circle_map.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        omega (Optional[float]): System parameter.</span>
-<span class="sd">        k (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of system parameters [omega, k].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -743,17 +761,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">2</span>
 
-    <span class="k">if</span> <span class="n">omega</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">k</span> <span class="o">=</span> <span class="mf">1.5</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">k</span> <span class="o">=</span> <span class="mf">2.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
         <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">omega</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
@@ -771,7 +792,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="lozi_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.lozi_map">[docs]</a><span class="k">def</span> <span class="nf">lozi_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="lozi_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.lozi_map">[docs]</a><span class="k">def</span> <span class="nf">lozi_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Lozi map is defined [9]_ as</span>
@@ -786,8 +807,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Lozi_map.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
-<span class="sd">        b (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of system parameters [a,b].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -803,17 +823,20 @@
     
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
-    
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">1.5</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">1.7</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
     <span class="k">def</span> <span class="nf">lozi</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -836,7 +859,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="delayed_logstic_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.delayed_logstic_map">[docs]</a><span class="k">def</span> <span class="nf">delayed_logstic_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="delayed_logstic_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.delayed_logstic_map">[docs]</a><span class="k">def</span> <span class="nf">delayed_logstic_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">2.20</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Delayed Logistic map is defined [10]_ as</span>
@@ -851,7 +874,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Delayed_Logistic_map.png</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of system parameters [a].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -866,16 +889,19 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
 
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 1 parameter. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">2.20</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">2.27</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
     <span class="k">def</span> <span class="nf">delay_log</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -898,7 +924,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="tinkerbell_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.tinkerbell_map">[docs]</a><span class="k">def</span> <span class="nf">tinkerbell_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="tinkerbell_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.tinkerbell_map">[docs]</a><span class="k">def</span> <span class="nf">tinkerbell_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.7</span><span class="p">,</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Tinkerbell map is defined [11]_ as</span>
@@ -913,10 +939,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Tinkerbell_map.png</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
-<span class="sd">        b (Optional[float]): System parameter.</span>
-<span class="sd">        c (Optional[float]): System parameter.</span>
-<span class="sd">        d (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of system parameters [a,b,c,d].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -931,17 +954,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">4</span>
 
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">d</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 4 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">0.7</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mf">0.9</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
         <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
     <span class="k">def</span> <span class="nf">tinkerbell</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -964,7 +990,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="burgers_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.burgers_map">[docs]</a><span class="k">def</span> <span class="nf">burgers_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="burgers_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.burgers_map">[docs]</a><span class="k">def</span> <span class="nf">burgers_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">1.6</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">3000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Burger&#39;s map is defined [12]_ as</span>
@@ -979,8 +1005,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Burgers_map.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
-<span class="sd">        b (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of system parameters [a,b].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -995,17 +1020,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">2</span>
 
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">b</span> <span class="o">=</span> <span class="mf">1.6</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">b</span> <span class="o">=</span> <span class="mf">1.75</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
         <span class="n">a</span> <span class="o">=</span> <span class="mf">0.75</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
 
@@ -1029,7 +1057,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="holmes_cubic_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.holmes_cubic_map">[docs]</a><span class="k">def</span> <span class="nf">holmes_cubic_map</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="holmes_cubic_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.holmes_cubic_map">[docs]</a><span class="k">def</span> <span class="nf">holmes_cubic_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.27</span><span class="p">,</span><span class="mf">2.77</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">3000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Holme&#39;s Cubic map is defined [13]_ as</span>
@@ -1044,8 +1072,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Holmes_Cubic_map.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        b (Optional[float]): System parameter.</span>
-<span class="sd">        d (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of system parameters [b,d].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -1060,17 +1087,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">2</span>
 
-    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">d</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">b</span> <span class="o">=</span> <span class="mf">0.27</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">b</span> <span class="o">=</span> <span class="mf">0.20</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
         <span class="n">d</span> <span class="o">=</span> <span class="mf">2.77</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
 
@@ -1094,7 +1124,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="kaplan_yorke_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.kaplan_yorke_map">[docs]</a><span class="k">def</span> <span class="nf">kaplan_yorke_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="kaplan_yorke_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.kaplan_yorke_map">[docs]</a><span class="k">def</span> <span class="nf">kaplan_yorke_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Kaplan Yorke map is defined [14]_ as</span>
@@ -1109,8 +1139,7 @@
 <span class="sd">    .. figure:: ../../../figures/Maps/Kaplan_Yorke_map.png</span>
 <span class="sd">        </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): System parameter.</span>
-<span class="sd">        b (Optional[float]): System parameter.</span>
+<span class="sd">        parameters (Optional[float]): Array of system parameters [a,b].</span>
 <span class="sd">        dynamic_state (Optional[string]): Dynamic state (&#39;periodic&#39; or &#39;chaotic&#39;)</span>
 <span class="sd">        L (Optional[int]): Number of map iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -1125,17 +1154,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">2</span>
 
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dynamic_state</span> <span class="o">=</span> <span class="s1">&#39;periodic&#39;</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
-        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="mf">0.2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
 
@@ -1159,7 +1191,7 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
-<div class="viewcode-block" id="gingerbread_man_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.gingerbread_man_map">[docs]</a><span class="k">def</span> <span class="nf">gingerbread_man_map</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
+<div class="viewcode-block" id="gingerbread_man_map"><a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.gingerbread_man_map">[docs]</a><span class="k">def</span> <span class="nf">gingerbread_man_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  
          <span class="n">L</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Gingerbread Man Map is defined [15]_ [16]_ as</span>
@@ -1193,6 +1225,19 @@
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
     <span class="c1"># defining simulation functions</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">gingerbread_man</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span>

@@ -883,9 +883,6 @@ def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 1
                 x2*y2 - b1*z2]
         return D[0], D[1], D[2], D[3], D[4], D[5]
 
-    if InitialConditions == None:
-        InitialConditions =   # inital conditions
-
     states = odeint(coupled_lorenz_rossler_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:],
             (states[:, 1])[-SampleSize:],
