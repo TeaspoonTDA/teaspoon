@@ -23,6 +23,8 @@ def gaussian_noise(sigma=1.0, mu=0.0,
     """
     Generate a noise signal sampled from a Gaussian distribution. 
 
+    .. figure:: ../../../figures/Noise_Models/gaussian_noise.png
+
     Parameters:
         sigma (Optional[float]): Standard deviation of the normal distribution.
         mu (Optional[float]): Mean of the normal distribution. 
@@ -44,6 +46,8 @@ def uniform_noise(a=-1.0, b=1.0,
          L=1000, fs=1, SampleSize=1000):
     """
     Generate a noise signal sampled from a uniform distribution.
+
+    .. figure:: ../../../figures/Noise_Models/uniform_noise.png
 
     Parameters:
         a (Optional[float]): Uniform distribution lower bound.
@@ -67,6 +71,8 @@ def rayleigh_noise(sigma=1.0,
     """
     Generate a noise signal sampled from a Rayleigh distribution. 
 
+    .. figure:: ../../../figures/Noise_Models/rayleigh_noise.png
+
     Parameters:
         sigma (Optional[float]): Rayleigh distribution mode.
         L (Optional[int]): amount of time to solve simulation for.
@@ -87,6 +93,8 @@ def exponential_noise(sigma=1.0,
          L=1000, fs=1, SampleSize=1000):
     """
     Generate a noise signal sampled from an exponential distribution.
+
+    .. figure:: ../../../figures/Noise_Models/exponential_noise.png
 
     Parameters:
         sigma (Optional[float]): Exponential distribution scale.
