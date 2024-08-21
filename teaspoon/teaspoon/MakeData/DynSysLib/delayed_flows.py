@@ -34,8 +34,10 @@ def mackey_glass(parameters=[1.0001, 2.0, 2.0, 7.75], fs=5, SampleSize=1000, L=4
 
     t = np.linspace(0, L, int(L*fs))
 
-    if len(parameters) != 3:
-        raise ValueError('Need 3 parameters as specified in documentation.')
+    num_param = 4
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             n = 7.75
@@ -48,7 +50,7 @@ def mackey_glass(parameters=[1.0001, 2.0, 2.0, 7.75], fs=5, SampleSize=1000, L=4
             B = 2.0
             gamma = 1.0001
         else:
-            raise ValueError('dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length 3 in parameters.')
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         gamma, τ, B, n = parameters[0], parameters[1], parameters[2], parameters[3]
 
