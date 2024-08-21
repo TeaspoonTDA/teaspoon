@@ -34,22 +34,23 @@ def driven_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
 
     return t, ts
 
-def base_excited_magnetic_pendulum(parameters=[0.1038, 0.208, 9.81, 0.18775, 0.00001919, 0.022, 3*np.pi, 0.003, 1.2, 0.032, 1.257E-6], fs = 200, SampleSize = 5000, L = 100.0, dynamic_state = 'periodic', InitialConditions = [0.0, 0.0]):
+def base_excited_magnetic_pendulum(parameters=[0.1038, 0.208, 9.81, 0.18775, 0.00001919, 0.022, 3*np.pi, 0.003, 1.2, 0.032, 1.257E-6], fs = 200, SampleSize = 5000, L = 100.0, dynamic_state = None, InitialConditions = [0.0, 0.0]):
 
     """
-    This is a simple pendulum with a magnet at its base. See Myers & Khasawneh [1] for details. The system was simulated for 100 seconds at a rate of 200 Hz and the last 25 seconds were used for the chaotic response as shown in the figure below.
+    This is a simple pendulum with a magnet at its base. See Myers & Khasawneh [1]_. The system was simulated for 100 seconds at a rate of 200 Hz and the last 25 seconds were used for the chaotic response as shown in the figure below.
 
     .. figure:: ../../../figures/Driven_Dissipative_Flows/Base_Excited_Magnetic_Pendulum_Setup.png
     .. figure:: ../../../figures/Driven_Dissipative_Flows/Base_Excited_Magnetic_Pendulum.png
     
     Parameters:
-        dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
         L (Optional[int]): Number of iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
-        parameters (Optional[floats]): list of values for [m, l, g, r_cm, I_o, A, w, c, q, d, mu].
+        parameters (Optional[floats]): list of values for [m, l, g, r_cm, I_o, A, w, c, q, d, mu] or None if using the dynamic_state variable
         InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]
-    Returns:
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+    
+        Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
     References
@@ -105,21 +106,22 @@ def base_excited_magnetic_pendulum(parameters=[0.1038, 0.208, 9.81, 0.18775, 0.0
 
     # setting system parameters
 
-    if len(parameters) != 13:
-        print(
-            'Warning: needed 13 parameters. Defaulting to periodic solution parameters.')
-        print(
-            'Parameters needed are [m, l, g, r_cm, I_o, A, w, c, q, d, mu].')
-        parameters = None
+    num_param = 13
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            m, l, g, r_cm, I_o, A, w, c, q, d, mu = 0.1038, 0.208, 9.81, 0.18775, 0.00001919, 0.022, 3*np.pi, 0.003, 1.2, 0.032, 1.257E-6
+        elif dynamic_state == 'chaotic':
+            m, l, g, r_cm, I_o, A, w, c, q, d, mu = 0.1038, 0.208, 9.81, 0.18775, 0.00001919, 0.021, 3*np.pi, 0.003, 1.2, 0.032, 1.257E-6
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         m, l, g, r_cm, I_o = parameters[0], parameters[1], parameters[2], parameters[3], parameters[4]
         A, w, c, q, d, mu = parameters[5], parameters[6], parameters[
             7], parameters[8], parameters[9], parameters[10]
 
-    if dynamic_state == 'periodic':
-        A = 0.022
-    if dynamic_state == 'chaotic':
-        A = 0.021
 
     def vectorfield(state, t):
         ph, phi_dot = state
@@ -131,7 +133,7 @@ def base_excited_magnetic_pendulum(parameters=[0.1038, 0.208, 9.81, 0.18775, 0.0
 
     return t, ts
 
-def driven_pendulum(fs = 50, SampleSize = 5000, L = 300, parameters=[1, 9.81, 1, 0.1, 5, 1], InitialConditions = [0, 0]):
+def driven_pendulum(fs = 50, SampleSize = 5000, L = 300, parameters=[1, 9.81, 1, 0.1, 5, 1], InitialConditions = [0, 0], dynamic_state=None):
 
     """
     The point mass, driven simple pendulum with viscous damping is described as
@@ -149,8 +151,10 @@ def driven_pendulum(fs = 50, SampleSize = 5000, L = 300, parameters=[1, 9.81, 1,
         L (Optional[int]): Number of iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
-        parameters (Optional[floats]): list of values for [m, g, l, c, A, w]
+        parameters (Optional[floats]): list of values for [m, g, l, c, A, w] or None if using the dynamic_state variable
         InitialConditions (Optional[floats]): list of values for [:math:`\\theta_0`, :math:`\\omega_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
@@ -158,11 +162,17 @@ def driven_pendulum(fs = 50, SampleSize = 5000, L = 300, parameters=[1, 9.81, 1,
 
     t = np.linspace(0, L, int(L*fs))
 
-    if len(parameters) != 6:
-        print(
-            'Warning: needed 6 parameters. Defaulting to periodic solution parameters.')
-        print('Parameters needed are [m, g, l, c, A, w].')
-        parameters = None
+    num_param = 6
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            m, g, l, c, A, w = 1, 9.81, 1, 0.1, 5, 1
+        elif dynamic_state == 'chaotic':
+            m, g, l, c, A, w = 1, 9.81, 1, 0.1, 5, 2
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         m, g, l, c, A, w = parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5]
 
@@ -177,7 +187,7 @@ def driven_pendulum(fs = 50, SampleSize = 5000, L = 300, parameters=[1, 9.81, 1,
 
     return t, ts
 
-def driven_van_der_pol_oscillator(fs = 40, SampleSize = 5000, L = 300, parameters=[2.9, 5, 1.788], InitialConditions = [-1.9, 0]):
+def driven_van_der_pol_oscillator(fs = 40, SampleSize = 5000, L = 300, parameters=[2.9, 5, 1.788], InitialConditions = [-1.9, 0], dynamic_state=None):
         
     """
     The Driven Van der Pol Oscillator is defined as
@@ -195,8 +205,10 @@ def driven_van_der_pol_oscillator(fs = 40, SampleSize = 5000, L = 300, parameter
         L (Optional[int]): Number of iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
-        parameters (Optional[floats]): list of values for [b, A, :math:`\\omega`].
-        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]    
+        parameters (Optional[floats]): list of values for [b, A, :math:`\\omega`] or None if using the dynamic_state variable
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
@@ -204,13 +216,20 @@ def driven_van_der_pol_oscillator(fs = 40, SampleSize = 5000, L = 300, parameter
 
     t = np.linspace(0, L, int(L*fs))
 
-    if len(parameters) != 3:
-        print(
-            'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-        print(r'Parameters needed are [b, A, $\Omega$].')
-        parameters = None
+    num_param = 3
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            b, A, omega = 2.9, 5, 1.788
+        elif dynamic_state == 'chaotic':
+            b, A, omega = 3.0, 5, 1.788
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         b, A, omega = parameters[0], parameters[1], parameters[2]
+
 
     # defining simulation functions
     def driven_van_der_pol(state, t):
@@ -223,7 +242,7 @@ def driven_van_der_pol_oscillator(fs = 40, SampleSize = 5000, L = 300, parameter
 
     return t, ts
 
-def shaw_van_der_pol_oscillator(fs=25, SampleSize = 5000, L = 500.0, parameters=[5, 1, 1.4], InitialConditions = [1.3, 0]):
+def shaw_van_der_pol_oscillator(fs=25, SampleSize = 5000, L = 500.0, parameters=[1, 5, 1.4], InitialConditions = [1.3, 0], dynamic_state=None):
 
     """
     The Shaw Van der Pol Oscillator is defined as
@@ -241,8 +260,10 @@ def shaw_van_der_pol_oscillator(fs=25, SampleSize = 5000, L = 500.0, parameters=
         L (Optional[int]): Number of iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
-        parameters (Optional[floats]): list of values for [b, A, :math:`\\omega`].
+        parameters (Optional[floats]): list of values for [b, A, :math:`\\omega`] or None if using the dynamic_state variable
         InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]    
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
@@ -250,11 +271,17 @@ def shaw_van_der_pol_oscillator(fs=25, SampleSize = 5000, L = 500.0, parameters=
 
     t = np.linspace(0, L, int(L*fs))
 
-    if len(parameters) != 3:
-        print(
-            'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-        print(r'Parameters needed are [b, A, $\Omega$].')
-        parameters = None
+    num_param = 3
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            b, A, omega = 1, 5, 1.4
+        elif dynamic_state == 'chaotic':
+            b, A, omega = 1, 5, 1.8
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         b, A, omega = parameters[0], parameters[1], parameters[2]
 
@@ -269,7 +296,7 @@ def shaw_van_der_pol_oscillator(fs=25, SampleSize = 5000, L = 500.0, parameters=
 
     return t, ts
 
-def forced_brusselator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.4, 1.2, 0.05, 1.1], InitialConditions = [0.3, 2]):
+def forced_brusselator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.4, 1.2, 0.05, 1.1], InitialConditions = [0.3, 2], dynamic_state=None):
 
     """
     The Forced Brusselator is defined as
@@ -287,8 +314,10 @@ def forced_brusselator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.4, 1
         L (Optional[int]): Number of iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
-        parameters (Optional[floats]): list of values for [a, b, A, :math:`\\omega`].
+        parameters (Optional[floats]): list of values for [a, b, A, :math:`\\omega`] or None if using the dynamic_state variable
         InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]    
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
@@ -296,12 +325,17 @@ def forced_brusselator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.4, 1
 
     t = np.linspace(0, L, int(L*fs))
 
+    num_param = 4
 
-    if len(parameters) != 4:
-        print(
-            'Warning: needed 4 parameters. Defaulting to periodic solution parameters.')
-        print(r'Parameters needed are [a, b, A, $\Omega$].')
-        parameters = None
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            a, b, A, omega = 0.4, 1.2, 0.05, 1.1
+        elif dynamic_state == 'chaotic':
+            a, b, A, omega = 0.4, 1.2, 0.05, 1.0
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a, b, A, omega = parameters[0], parameters[1], parameters[2], parameters[3]
 
@@ -316,7 +350,7 @@ def forced_brusselator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.4, 1
 
     return t, ts
 
-def ueda_oscillator(fs = 50, SampleSize = 5000, L = 500.0, parameters=[0.05, 7.5, 1.2], InitialConditions = [2.5, 0.0]):
+def ueda_oscillator(fs = 50, SampleSize = 5000, L = 500.0, parameters=[0.05, 7.5, 1.2], InitialConditions = [2.5, 0.0], dynamic_state=None):
         
     """
     The Ueda Oscillator is defined as
@@ -334,8 +368,10 @@ def ueda_oscillator(fs = 50, SampleSize = 5000, L = 500.0, parameters=[0.05, 7.5
         L (Optional[int]): Number of iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
-        parameters (Optional[floats]): list of values for [b, A, :math:`\\omega`].
+        parameters (Optional[floats]): list of values for [b, A, :math:`\\omega`] or None if using the dynamic_state variable
         InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]    
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
@@ -343,11 +379,17 @@ def ueda_oscillator(fs = 50, SampleSize = 5000, L = 500.0, parameters=[0.05, 7.5
 
     t = np.linspace(0, L, int(L*fs))
 
-    if len(parameters) != 3:
-        print(
-            'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-        print(r'Parameters needed are [b, A, $\Omega$].')
-        parameters = None
+    num_param = 3
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            b, A, omega = 0.05, 7.5, 1.2
+        elif dynamic_state == 'chaotic':
+            b, A, omega = 0.05, 7.5, 1.0
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         b, A, omega = parameters[0], parameters[1], parameters[2]
 
@@ -363,7 +405,7 @@ def ueda_oscillator(fs = 50, SampleSize = 5000, L = 500.0, parameters=[0.05, 7.5
 
     return t, ts
 
-def duffings_two_well_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.25, 0.4, 1.1], InitialConditions = [0.2, 0.0]):
+def duffings_two_well_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.25, 0.4, 1.1], InitialConditions = [0.2, 0.0], dynamic_state=None):
         
     """
     The Duffings Two-Well Oscillator is defined as
@@ -381,8 +423,10 @@ def duffings_two_well_oscillator(fs = 20, SampleSize = 5000, L = 500.0, paramete
         L (Optional[int]): Number of iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
-        parameters (Optional[floats]): list of values for [b, A, :math:`\\omega`].
-        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]    
+        parameters (Optional[floats]): list of values for [b, A, :math:`\\omega`] or None if using the dynamic_state variable
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]  
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
@@ -390,14 +434,20 @@ def duffings_two_well_oscillator(fs = 20, SampleSize = 5000, L = 500.0, paramete
             
     t = np.linspace(0, L, int(L*fs))
 
-    if len(parameters) != 3:
-        print(
-            'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-        print(r'Parameters needed are [b, A, $\Omega$].')
-        parameters = None
+    num_param = 3
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            b, A, omega = 0.25, 0.4, 1.1
+        elif dynamic_state == 'chaotic':
+            b, A, omega = 0.25, 0.4, 1.0
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         b, A, omega = parameters[0], parameters[1], parameters[2]
-
+        
     # defining simulation functions
     def duffings_two_well_oscillator(state, t):
         x, y = state  # unpack the state vector
@@ -409,7 +459,7 @@ def duffings_two_well_oscillator(fs = 20, SampleSize = 5000, L = 500.0, paramete
 
     return t, ts
 
-def duffing_van_der_pol_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.2, 8, 0.35, 1.3], InitialConditions = [0.2, -0.2]):
+def duffing_van_der_pol_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.2, 8, 0.35, 1.3], InitialConditions = [0.2, -0.2], dynamic_state=None):
         
     """
     The Duffings Two-Well Oscillator is defined as
@@ -427,8 +477,10 @@ def duffing_van_der_pol_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parame
         L (Optional[int]): Number of iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
-        parameters (Optional[floats]): list of values for [:math:`\\mu`, :math:`\\gamma` A, :math:`\\omega`].
+        parameters (Optional[floats]): list of values for [:math:`\\mu`, :math:`\\gamma` A, :math:`\\omega`] or None if using the dynamic_state variable
         InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
@@ -436,14 +488,19 @@ def duffing_van_der_pol_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parame
 
     t = np.linspace(0, L, int(L*fs))
 
-    if len(parameters) != 4:
-        print(
-            'Warning: needed 4 parameters. Defaulting to periodic solution parameters.')
-        print(r'Parameters needed are [mu, gamma, A, omega].')
-        parameters = None
+    num_param = 4
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            mu, gamma, A, omega = 0.2, 8, 0.35, 1.3
+        elif dynamic_state == 'chaotic':
+            mu, gamma, A, omega = 0.2, 8, 0.35, 1.2
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         mu, gamma, A, omega = parameters[0], parameters[1], parameters[2], parameters[3]
-
 
     # defining simulation functions
     def duffing_van_der_pol_oscillator(state, t):
@@ -457,7 +514,7 @@ def duffing_van_der_pol_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parame
 
     return t, ts
 
-def rayleigh_duffing_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.2, 4, 0.3, 1.4], InitialConditions = [0.3, 0.0]):
+def rayleigh_duffing_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parameters=[0.2, 4, 0.3, 1.4], InitialConditions = [0.3, 0.0], dynamic_state=None):
         
     """
     The Rayleigh Duffing Oscillator is defined as
@@ -475,8 +532,10 @@ def rayleigh_duffing_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parameter
         L (Optional[int]): Number of iterations.
         fs (Optional[int]): sampling rate for simulation.
         SampleSize (Optional[int]): length of sample at end of entire time series
-        parameters (Optional[floats]): list of values for [:math:`\\mu`, :math:`\\gamma` A, :math:`\\omega`].
+        parameters (Optional[floats]): list of values for [:math:`\\mu`, :math:`\\gamma` A, :math:`\\omega`] or None if using the dynamic_state variable
         InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
@@ -484,14 +543,20 @@ def rayleigh_duffing_oscillator(fs = 20, SampleSize = 5000, L = 500.0, parameter
            
     t = np.linspace(0, L, int(L*fs))
 
-    if len(parameters) != 4:
-        print(
-            'Warning: needed 4 parameters. Defaulting to periodic solution parameters.')
-        print(r'Parameters needed are [mu, gamma, A, omega].')
-        parameters = None
+    num_param = 4
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            mu, gamma, A, omega = 0.2, 4, 0.3, 1.4
+        elif dynamic_state == 'chaotic':
+            mu, gamma, A, omega = 0.2, 4, 0.3, 1.2
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         mu, gamma, A, omega = parameters[0], parameters[1], parameters[2], parameters[3]
-
+        
     # defining simulation functions
     def rayleigh_duffing_oscillator(state, t):
         x, y = state  # unpack the state vector
