@@ -1,4 +1,5 @@
 import numpy as np
+from ddeint import ddeint
 
 def delayed_flows(system, dynamic_state=None, L=None, fs=None,
                   SampleSize=None, parameters=None, InitialConditions=None):
@@ -8,7 +9,7 @@ def delayed_flows(system, dynamic_state=None, L=None, fs=None,
 
     return t, ts
 
-def mackey_glass(parameters=None, fs=5, SampleSize=1000, L=400, dynamic_state='periodic'):
+def mackey_glass(parameters=[1.0001, 2.0, 2.0, 7.75], fs=5, SampleSize=1000, L=400, dynamic_state=None):
     """
     The Mackey-Glass Delayed Differential Equation is
 
@@ -20,38 +21,37 @@ def mackey_glass(parameters=None, fs=5, SampleSize=1000, L=400, dynamic_state='p
     .. figure:: ../../../figures/Delayed_Flows/Mackey_Glass_Delayed_Differential_Equation.png
     
     Parameters:
-        parameters (Optional[floats]): Array of four floats [gamma, tau, beta, n]
+        parameters (Optional[floats]): Array of four floats [gamma, tau, beta, n] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
-        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' is not supplying parameters.
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
         
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
     
     """
 
-    # This requires installation of ddeint (pip install ddeint)
-    from ddeint import ddeint
-
     t = np.linspace(0, L, int(L*fs))
 
-    # setting system parameters
-    if len(parameters) != 4:
-        print(
-            'Warning: needed 4 parameters. Defaulting to periodic solution parameters.')
-        parameters = None
+    if len(parameters) != 3:
+        raise ValueError('Need 3 parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            n = 7.75
+            τ = 2.0
+            B = 2.0
+            gamma = 1.0001
+        elif dynamic_state == 'chaotic':
+            n = 9.65
+            τ = 2.0
+            B = 2.0
+            gamma = 1.0001
+        else:
+            raise ValueError('dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length 3 in parameters.')
     else:
         gamma, τ, B, n = parameters[0], parameters[1], parameters[2], parameters[3]
 
-    if parameters == None:
-        if dynamic_state == 'periodic':
-            n = 7.75
-        if dynamic_state == 'chaotic':
-            n = 9.65
-        τ = 2.0
-        B = 2.0
-        gamma = 1.0001
 
     def mackey_glass(X, t, d):
         x = X(t)
