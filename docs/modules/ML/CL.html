@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.5.3. Classification &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -31,12 +32,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="../../index.html" class="icon icon-home"> teaspoon
-            <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -131,7 +136,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
           <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.5. </span>Persistence Diagram Featurization</a></li>
       <li class="breadcrumb-item active"><span class="section-number">2.5.3. </span>Classification</li>
@@ -144,34 +149,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="classification">
-<h1><span class="section-number">2.5.3. </span>Classification<a class="headerlink" href="#classification" title="Permalink to this heading"></a></h1>
+  <section id="classification">
+<h1><span class="section-number">2.5.3. </span>Classification<a class="headerlink" href="#classification" title="Link to this heading"></a></h1>
 <p>In <a class="reference internal" href="F_PD.html#featurization"><span class="std std-ref">Featurization</span></a>, we provide examples on how to generate feature matrices from persistence diagrams.
 Here, we show how to perform classification using supervised machine learning algorithms.</p>
+<dl class="py function" id="module-teaspoon.ML.PD_Classification">
+<dt class="sig sig-object py" id="teaspoon.ML.PD_Classification.getPercentScore">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.ML.PD_Classification.</span></span><span class="sig-name descname"><span class="pre">getPercentScore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsDF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_col='trainingLabel'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dgm_col='Dgm1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params=&lt;teaspoon.ML.Base.ParameterBucket</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precomputed=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saving=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saving_path=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/ML/PD_Classification.html#getPercentScore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.PD_Classification.getPercentScore" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DgmsDF</strong> (<em>dataframe</em>) – Data frame that includes persistence diagrams and labels. If user choose to performs transfer learning, DgmsDF_test should be given to algorithm. When transfer learning is performed, first diagram input is assumed as training set.</p></li>
+<li><p><strong>labels_col</strong> (<em>str</em>) – Name of the column that stores the labels for persistence diagrams in a Pandas dataframe. The default is ‘trainingLabel’.</p></li>
+<li><p><strong>dgm_col</strong> (<em>str</em>) – Name of the column that stores the persistence diagrams in a Pandas dataframe. The default is ‘Dgm1’.</p></li>
+<li><p><strong>params</strong> (<em>parameterbucket object</em>) – Parameter bucket object. The default is Base.ParameterBucket().</p></li>
+<li><p><strong>precomputed</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If user already computed the persitence landscapes, this should be set to True, otherwise algorithm will
+spend time on computing these. This option is only valid when persistence landscapes are used as featurization
+methods. If this parameter is True, algorithm treat ‘DgmsDF’ as persistence landscapes. The default is False.</p></li>
+<li><p><strong>saving</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If user wants to save classification results, this should be set to True and saving_path needs to be provided. The default is False.</p></li>
+<li><p><strong>saving_path</strong> (<em>str</em><em>, </em><em>optional</em>) – The path where user wants to save the results. This should be provided when saving is True. The default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Additional parameters. When user wants to apply transfer learning, the second set of persistence diagrams and their labels should be passed in a
+dataframe format.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>c_report_train</strong> (<em>dict</em>) – Classification report for training set results.</p></li>
+<li><p><strong>c_report_test</strong> (<em>dict</em>) – Classification report for test set results.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>Please see following subsections for classification examples of each featurization approach.</p>
 <div class="toctree-wrapper compound">
 <ul>
