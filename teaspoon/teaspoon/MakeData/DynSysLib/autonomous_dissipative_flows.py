@@ -30,43 +30,7 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
 
 
     if system == 'diffusionless_lorenz_attractor':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 40
-        if SampleSize == None:
-            SampleSize = 10000
-        if L == None:
-            L = 1000.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 1:
-                print(
-                    'Warning: needed 1 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                R = parameters[0]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                R = 0.25
-            if dynamic_state == 'chaotic':
-                R = 0.40
-
-        # defining simulation functions
-
-        def diffusionless_lorenz_attractor(state, t):
-            x, y, z = state  # unpack the state vector
-            return -y - x, -x*z, x*y + R
-
-        if InitialConditions == None:
-            InitialConditions = [1, -1, 0.01]
-
-        states = odeint(diffusionless_lorenz_attractor,
-                        InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
+        t, ts = diffusionless_lorenz_attractor()
 
 
     if system == 'complex_butterfly':
@@ -704,6 +668,21 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
     return t, ts
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def lorenz(parameters=[100, 10, 8.0/3.0], dynamic_state=None, InitialConditions=[10.0**-10.0, 0.0, 1.0], L=100.0, fs=100, SampleSize=2000):
     """
     The Lorenz system used is defined as
@@ -717,6 +696,7 @@ def lorenz(parameters=[100, 10, 8.0/3.0], dynamic_state=None, InitialConditions=
     
     The Lorenz system was solved with a sampling rate of 100 Hz for 100 seconds with only the last 20 seconds used to avoid transients. For a chaotic response, parameters of :math:`\\sigma = 10.0`, :math:`\\beta = 8.0/3.0`, and :math:`\\rho = 105` and initial conditions :math:`[x_0,y_0,z_0] = [10^{-10},0,1]` are used. For a periodic response set :math:`\\rho = 100`.
 
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Lorenz_System.png
 
     Parameters:
         parameters (Optional[floats]): Array of three floats [:math:`\\rho`, :math:`\\sigma`, :math:`\\beta`] or None if using the dynamic_state variable
@@ -779,6 +759,8 @@ def rossler(parameters=[0.1, 0.2, 14], dynamic_state=None, InitialConditions=[-0
     
     The Rössler system was solved with a sampling rate of 15 Hz for 1000 seconds with only the last 166 seconds used to avoid transients. For a chaotic response, parameters of :math:`a = 0.15`, :math:`b = 0.2`, and :math:`c = 14` and initial conditions :math:`[x_0,y_0,z_0] = [-0.4,0.6,1.0]` are used. For a periodic response set :math:`a = 0.10`.
 
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Rossler_System.png
+
     Parameters:
         parameters (Optional[floats]): Array of three floats [a, b, c] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
@@ -824,6 +806,7 @@ def rossler(parameters=[0.1, 0.2, 14], dynamic_state=None, InitialConditions=[-0
 
     return t, ts
 
+
 def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 10], dynamic_state=None, InitialConditions=[0.1, 0.1, 0.1, 0, 0, 0], L=500.0, fs=50, SampleSize=15000):
     """
     The coupled Lorenz-Rössler system is defined as
@@ -842,6 +825,8 @@ def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 1
         \dot{z}_2 &= x_2y_2 - b_1z_2
     
     where :math:`b_1 =8/3`, :math:`b_2 =0.2`, :math:`c_2 =5.7`, :math:`k_1 =0.1`, :math:`k_2 =0.1`, :math:`k_3 =0.1`, :math:`\\lambda =28`, :math:`\\sigma =10`,and :math:`a=0.25` for a periodic response and :math:`a = 0.51` for a chaotic response. This system was simulated at a frequency of 50 Hz for 500 seconds with the last 300 seconds used. The default initial condition is :math:`[x_1, y_1, z_1, x_2, y_2, z_2]=[0.1,0.1,0.1,0,0,0]`.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Coupled_Rossler_Lorenz_System.png
 
     Parameters:
         parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b_1`, :math:`b_2`, :math:`c_2`, :math:`k_1`, :math:`k_2`, :math:`k_3`, :math:`\\lambda`, :math:`\\sigma`] or None if using the dynamic_state variable
@@ -894,6 +879,7 @@ def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 1
 
     return t, ts
 
+
 def coupled_rossler_rossler(parameters=[0.25, 0.99, 0.95], dynamic_state=None, InitialConditions=[-0.4, 0.6, 5.8, 0.8, -2, -4], L=1000.0, fs=10, SampleSize=1500):
     """
     The coupled Lorenz-Rössler system is defined as
@@ -912,6 +898,8 @@ def coupled_rossler_rossler(parameters=[0.25, 0.99, 0.95], dynamic_state=None, I
         \dot{z}_2 &= 0.2 + z_2(x_2-10)
     
     with :math:`w_1 = 0.99`, :math:`w_2 = 0.95`, and :math:`k = 0.05`. This was solved for 1000 seconds with a sampling rate of 10 Hz. Only the last 150 seconds of the solution are used and the default initial condition is :math:`[x_1, y_1, z_1, x_2, y_2, z_2]=[-0.4,0.6,5.8,0.8,-2,-4]`.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/BiDirectional_Coupled_Rossler_System.png
 
     Parameters:
         parameters (Optional[floats]): Array of three floats [:math:`k`, :math:`w_1`, :math:`w_2`] or None if using the dynamic_state variable
@@ -964,6 +952,7 @@ def coupled_rossler_rossler(parameters=[0.25, 0.99, 0.95], dynamic_state=None, I
 
     return t, ts
 
+
 def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialConditions=[1.0, 0.0, 0.0],  
     L=200.0, fs=50, SampleSize=4000):
     """
@@ -982,6 +971,8 @@ def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialCondi
         f(x) = m_1x + \\frac{1}{2}(m_0+m_1)[|x+1| - |x-1|]
     
     The system parameters are set to :math:`\\beta=27`, :math:`\\gamma=1`, :math:`m_0 =-3/7`, :math:`m_1 =3/7`, and :math:`\\alpha=10.8` for a periodic response and :math:`\\alpha = 12.8` for a chaotic response. The system was simulated for 200 seconds at a rate of 50 Hz and the last 80 seconds are used.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Chua_Circuit.png
 
     Parameters:
         parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`B`, :math:`g`, :math:`m_0`, :math:`m_1`] or None if using the dynamic_state variable
@@ -1031,6 +1022,7 @@ def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialCondi
 
     return t, ts
 
+
 def double_pendulum(parameters=[1, 1, 1, 1, 9.81], dynamic_state=None, InitialConditions=[0.4, 0.6, 1, 1], L=100.0, fs=100, SampleSize=5000):
     """
     The double pendulum is a staple bench top experiment for investigated chaos in a mechanical system. A point-mass double pendulum's equations of motion are defined as 
@@ -1045,6 +1037,8 @@ def double_pendulum(parameters=[1, 1, 1, 1, 9.81], dynamic_state=None, InitialCo
         \dot{\\omega}_2 &= \\frac{2\sin(\\theta_1-\\theta_2)(\\omega_1^2 l_1(m_1+m_2)+g(m_1+m_2)\cos(\\theta_1)+\\omega_2^2 l_2m_2\cos(\\theta_1-\\theta_2))}{l_2(2m_1+m_2-m_2\cos(2\\theta_1-2\\theta_2))}
     
     where the system parameters are :math:`g=9.81 m/s^2`, :math:`m_1 =1 kg`, :math:`m_2 =1 kg`, :math:`l_1 = 1 m`, and :math:`l_2 =1 m`. The system was solved for 200 seconds at a rate of 100 Hz and only the last 30 seconds were used as shown in the figure below for the chaotic response with initial conditions :math:`[\\theta_1, \\theta_2, \\omega_1, \\omega_2] = [0, 3 rad, 0, 0]`. This system will have different dynamic states based on the initial conditions, which can vary from periodic, quasiperiodic, and chaotic.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Double_Pendulum.png
 
     Parameters:
         parameters (Optional[floats]): Array of three floats [:math:`m_1`, :math:`m_2`, :math:`l_1`, :math:`l_2`, :math:`g`] or None if using the dynamic_state variable
@@ -1099,6 +1093,68 @@ def double_pendulum(parameters=[1, 1, 1, 1, 9.81], dynamic_state=None, InitialCo
     states = odeint(double_pendulum_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])[-SampleSize:],
             (states[:, 2])[-SampleSize:], (states[:, 3])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+def diffusionless_lorenz_attractor(parameters=[0.25], dynamic_state=None, InitialConditions=[1, -1, 0.01], L=1000.0, fs=40, SampleSize=10000):
+    """
+    The Diffusionless Lorenz attractor is defined as
+
+    .. math::
+        \dot{x} &= -y-x,
+
+        \dot{y} &= -xz,
+
+        \dot{z} &= xy + R
+    
+    The system parameter is set to :math:`R = 0.40` for a chaotic response and :math:`R = 0.25` for a periodic response. The initial conditions were set to :math:`[x, y, z] = [1.0, -1.0, 0.01]`. The system was simulated for 1000 seconds at a rate of 40 Hz and the last 250 seconds were used for the chaotic response.
+    
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Diffusionless_Lorenz.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`R`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`\\theta_{1, 0}`, :math:`\\theta_{2, 0}`, :math:`\\omega_{1, 0}`, :math:`\\omega_{2, 0}`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+    
+    """
+
+    t = np.linspace(0, L, int(L*fs))
+    
+    num_param = 1
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            R = 0.25
+        elif dynamic_state == 'chaotic':
+            R = 0.40
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        R = parameters[0]
+
+    # defining simulation functions
+
+    def diffusionless_lorenz_attractor(state, t):
+        x, y, z = state  # unpack the state vector
+        return -y - x, -x*z, x*y + R
+
+    if InitialConditions == None:
+        InitialConditions = [1, -1, 0.01]
+
+    states = odeint(diffusionless_lorenz_attractor,
+                    InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts

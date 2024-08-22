@@ -75,6 +75,7 @@ class TestAutoDisFlows(unittest.TestCase):
         t, ts = adf.autonomous_dissipative_flows('coupled_rossler_rossler')
         t, ts = adf.autonomous_dissipative_flows('chua')
         t, ts = adf.autonomous_dissipative_flows('double_pendulum')
+        t, ts = adf.autonomous_dissipative_flows('diffusionless_lorenz_attractor')
 
 class TestConsFlows(unittest.TestCase):
 
