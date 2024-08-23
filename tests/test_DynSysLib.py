@@ -78,6 +78,7 @@ class TestAutoDisFlows(unittest.TestCase):
         t, ts = adf.autonomous_dissipative_flows('diffusionless_lorenz_attractor')
         t, ts = adf.autonomous_dissipative_flows('complex_butterfly')
         t, ts = adf.autonomous_dissipative_flows('chens_system')
+        t, ts = adf.autonomous_dissipative_flows('burke_shaw_attractor')
 
 class TestConsFlows(unittest.TestCase):
 
