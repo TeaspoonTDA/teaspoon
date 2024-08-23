@@ -76,46 +76,7 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
 
 
     if system == 'simplest_quadratic_chaotic_flow':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 20
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 1000.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 2:
-                print(
-                    'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                a, b = parameters[0], parameters[1]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                print('We could not find a periodic response near $a = 2.017$.')
-                print('Any contributions would be appreciated!')
-                print('Defaulting to chaotic state.')
-                a = 2.017
-            if dynamic_state == 'chaotic':
-                a = 2.017
-            b = 1
-        # defining simulation functions
-
-        def simplest_quadratic_chaotic_flow(state, t):
-            x, y, z = state  # unpack the state vector
-            return y, z, -a*z + b*y**2 - x
-
-        if InitialConditions == None:
-            InitialConditions = [-0.9, 0, 0.5]
-
-        states = odeint(simplest_quadratic_chaotic_flow,
-                        InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
+        t, ts = simplest_quadratic_chaotic_flow()
 
 
     if system == 'simplest_cubic_chaotic_flow':
@@ -1505,6 +1466,82 @@ def WINDMI(parameters=[0.9, 2.5], dynamic_state=None, InitialConditions=[1.0,0.0
         InitialConditions = [1, 0, 4.5]
 
     states = odeint(WINDMI, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None, InitialConditions=[-0.9,0.0,0.5], L=1000.0, fs=20, SampleSize=5000):
+    """
+    The Simplest Quadratic Chaotic Flow is defined [11]_ as
+
+    .. math::
+        \dot{x} &= y,
+
+        \dot{y} &= z,
+
+        \dot{z} &= -az - by^2 - x
+
+    The system parameters are set to :math:`a = 2.017`, :math:`b = 1.0` for a chaotic response we could not find any periodic response near this value. The initial conditions were set to :math:`[x, y, z] = [-0.9,0.0,0.5]`. The system was simulated for 1000 seconds at a rate of 20 Hz and the last 250 seconds were used for the chaotic response.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Simplest_Quadratic_Chaotic_Flow.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [11] Sprott, J.C. "Simplest dissipative chaotic flow". Physics Letters A, 1997.
+    """
+
+    # setting simulation time series parameters
+    if fs == None:
+        fs = 20
+    if SampleSize == None:
+        SampleSize = 5000
+    if L == None:
+        L = 1000.0
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 2
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            print('We could not find a periodic response near $a = 2.017$.')
+            print('Any contributions would be appreciated!')
+            print('Defaulting to chaotic state.')
+            a = 2.017
+        elif dynamic_state == 'chaotic':
+            a = 2.017
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+        b = 1.0
+    else:
+        a, b = parameters[0], parameters[1]
+
+    # defining simulation functions
+
+    def simplest_quadratic_chaotic_flow(state, t):
+        x, y, z = state  # unpack the state vector
+        return y, z, -a*z + b*y**2 - x
+
+    if InitialConditions == None:
+        InitialConditions = [-0.9, 0, 0.5]
+
+    states = odeint(simplest_quadratic_chaotic_flow,
+                    InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
             [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]

@@ -88,6 +88,7 @@ class TestAutoDisFlows(unittest.TestCase):
         t, ts = adf.autonomous_dissipative_flows('burke_shaw_attractor')
         t, ts = adf.autonomous_dissipative_flows('rucklidge_attractor')
         t, ts = adf.autonomous_dissipative_flows('WINDMI')
+        t, ts = adf.autonomous_dissipative_flows('simplest_quadratic_chaotic_flow')
 
 class TestConsFlows(unittest.TestCase):
 
