@@ -1165,32 +1165,61 @@ def rabinovich_frabrikant_attractor(parameters=[1.16, 0.87], dynamic_state=None,
     return t, ts
 
 
-def linear_feedback_rigid_body_motion_system(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[0.2, 0.2, 0.2], L=500.0, fs=100, SampleSize=3000):
+def linear_feedback_rigid_body_motion_system(parameters=[5.3, -10, -3.8], dynamic_state=None, InitialConditions=[0.2, 0.2, 0.2], L=500.0, fs=100, SampleSize=3000):
 
+    """
+    Linear Feedback Rigid Body Motion System is defined [5]_ as
+
+    .. math::
+        \dot{x} &= yx, 
+
+        \dot{y} &= xz + by,
+
+        \dot{z} &= \\frac{1}{3}xy + cz
+    
+    The system parameters are set to :math:`a = 5.3`, :math:`b = -10`, :math:`c = -3.8` for a periodic response and :math:`a = 5` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.2, 0.2, 0.2]`.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/linear_feedback_rigid_body_motion_system.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [5]  Hsien-Keng Chen and Ching-I Lee. Anti-control of chaos in rigid body motion. Chaos, Solitons \& Fractals, 21(4):957-965, aug 2004.
+
+    """
+
+    # setting simulation time series parameters
     t = np.linspace(0, L, int(L*fs))
 
     # setting system parameters
-    if parameters != None:
-        if len(parameters) != 3:
-            print(
-                'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-            parameters = None
-        else:
-            a, b, c = parameters[0], parameters[1], parameters[2]
-    if parameters == None:
+    num_param = 3
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 5.3
-        if dynamic_state == 'chaotic':
+        elif dynamic_state == 'chaotic':
             a = 5.0
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b, c = -10, -3.8
-    # defining simulation functions
+    else:
+        a, b, c = parameters[0], parameters[1], parameters[2]
 
     def linear_feedback_rigid_body_motion_system(state, t):
         x, y, z = state  # unpack the state vector
         return -y*z + a*x, x*z + b*y, (1/3)*x*y + c*z
-
-    if InitialConditions == None:
-        InitialConditions = 
 
     states = odeint(
         linear_feedback_rigid_body_motion_system, InitialConditions, t)
@@ -1198,86 +1227,131 @@ def linear_feedback_rigid_body_motion_system(parameters=[30.0,3.0,28.0], dynamic
             [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
-
-
     return t, ts
 
-def moore_spiegel_oscillator(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=200, SampleSize=3000):
+def moore_spiegel_oscillator(parameters=[7.8, 20], dynamic_state=None, InitialConditions=[0.2, 0.2, 0.2], L=500.0, fs=100, SampleSize=5000):
+
+    """
+    The Moore-Spiegel Oscillator is defined [6]_ as
+
+    .. math::
+        \dot{x} &= y, 
+
+        \dot{y} &= z,
+
+        \dot{z} &= -z - (T - R + Rx^2)y - Tx
+    
+    The system parameters are set to :math:`T = 7.8`, :math:`R = 20` for a periodic response and :math:`T = 7` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.2, 0.2, 0.2]`.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/moore_spiegel_oscillator.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`T`, :math:`R`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [6]  N. J. Balmforth and R. V. Craster. Synchronizing moore and spiegel. Chaos: An Interdisciplinary Journal of Nonlinear Science, 7(4):738-752, dec 1997.
+
+    """
 
     # setting simulation time series parameters
-    if fs == None:
-        fs = 100
-    if SampleSize == None:
-        SampleSize = 5000
-    if L == None:
-        L = 500.0
     t = np.linspace(0, L, int(L*fs))
 
     # setting system parameters
-    if parameters != None:
-        if len(parameters) != 2:
-            print(
-                'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-            parameters = None
-        else:
-            T, R = parameters[0], parameters[1]
-    if parameters == None:
+    num_param = 2
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
         if dynamic_state == 'periodic':
             T = 7.8
-        if dynamic_state == 'chaotic':
+        elif dynamic_state == 'chaotic':
             T = 7.0
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         R = 20
-    # defining simulation functions
+    else:
+        T, R = parameters[0], parameters[1]
 
     def moore_spiegel_oscillator(state, t):
         x, y, z = state  # unpack the state vector
         return y, z, -z - (T-R + R*x**2)*y - T*x
 
     if InitialConditions == None:
-        InitialConditions = [0.2, 0.2, 0.2]
+        InitialConditions = 
 
     states = odeint(moore_spiegel_oscillator, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
             [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
-
-
     return t, ts
 
 
-def thomas_cyclically_symmetric_attractor(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=200, SampleSize=3000):
+def thomas_cyclically_symmetric_attractor(parameters=[0.17], dynamic_state=None, InitialConditions=[0.1, 0, 0], L=1000.0, fs=10, SampleSize=5000):
+
+    """
+    The Thomas Cyclically Symmetric Attractor is defined [7]_ as
+
+    .. math::
+        \dot{x} &= -bx + \sin{y}, 
+
+        \dot{y} &= -by + \sin{z},
+
+        \dot{z} &= -bz + \sin{x}
+    
+    The system parameters are set to :math:`b = 0.17` for a periodic response and :math:`b = 0.18` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.1, 0, 0]`.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/thomas_cyclically_symmetric_attractor.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`b`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [7]  R. Thomas. Deterministic chaos seen in terms of feedback circuits: Analysis, synthesis, ”labyrinth chaos”. International Journal of Bifurcation and Chaos, 9:1889-1905, 1999.
+
+
+    """
 
     # setting simulation time series parameters
-    if fs == None:
-        fs = 10
-    if SampleSize == None:
-        SampleSize = 5000
-    if L == None:
-        L = 1000.0
     t = np.linspace(0, L, int(L*fs))
 
     # setting system parameters
-    if parameters != None:
-        if len(parameters) != 1:
-            print(
-                'Warning: needed 1 parameters. Defaulting to periodic solution parameters.')
-            parameters = None
-        else:
-            b = parameters[0]
-    if parameters == None:
+    num_param = 1
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
         if dynamic_state == 'periodic':
             b = 0.17
-        if dynamic_state == 'chaotic':
+        elif dynamic_state == 'chaotic':
             b = 0.18
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        b = parameters[0]
 
     # defining simulation functions
     def thomas_cyclically_symmetric_attractor(state, t):
         x, y, z = state  # unpack the state vector
         return -b*x + np.sin(y), -b*y + np.sin(z), -b*z + np.sin(x)
-
-    if InitialConditions == None:
-        InitialConditions = [0.1, 0, 0]
 
     states = odeint(
         thomas_cyclically_symmetric_attractor, InitialConditions, t)
@@ -1285,48 +1359,66 @@ def thomas_cyclically_symmetric_attractor(parameters=[30.0,3.0,28.0], dynamic_st
             [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
-
     return t, ts
 
-def halvorsens_cyclically_symmetric_attractor(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=200, SampleSize=3000):
+def halvorsens_cyclically_symmetric_attractor(parameters=[1.85, 4, 4], dynamic_state=None, InitialConditions=[-5, 0, 0], L=200.0, fs=200, SampleSize=5000):
+
+    """
+    The Halvorsens Cyclically Symmetric Attractor is defined as
+
+    .. math::
+        \dot{x} &= -ax - by - cz - y^2, 
+
+        \dot{y} &= -ay - bz - cz - z^2,
+
+        \dot{z} &= -az - bx - cy - x^2
+    
+    The system parameters are set to :math:`a = 1.85`, :math:`b = 4`, :math:`c = 4` for a periodic response and :math:`a = 1.45` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [-5, 0, 0]`.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/halvorsens_cyclically_symmetric_attractor.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+
+    """
 
     # setting simulation time series parameters
-    if fs == None:
-        fs = 200
-    if SampleSize == None:
-        SampleSize = 5000
-    if L == None:
-        L = 200.0
     t = np.linspace(0, L, int(L*fs))
 
     # setting system parameters
-    if parameters != None:
-        if len(parameters) != 3:
-            print(
-                'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-            parameters = None
-        else:
-            a, b, c = parameters[0], parameters[1], parameters[2]
-    if parameters == None:
+    num_param = 3
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 1.85
-        if dynamic_state == 'chaotic':
+        elif dynamic_state == 'chaotic':
             a = 1.45
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b, c = 4, 4
+    else:
+        a, b, c = parameters[0], parameters[1], parameters[2]
 
     # defining simulation functions
     def halvorsens_cyclically_symmetric_attractor(state, t):
         x, y, z = state  # unpack the state vector
         return -a*x - b*y - c*z - y**2, -a*y - b*z - c*x - z**2, -a*z - b*x - c*y - x**2
 
-    if InitialConditions == None:
-        InitialConditions = [-5, 0, 0]
-
     states = odeint(
         halvorsens_cyclically_symmetric_attractor, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
             [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
-
 
     return t, ts
