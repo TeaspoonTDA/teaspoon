@@ -356,7 +356,7 @@
 <li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Sampling rate for simulation</p></li>
 <li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
 <li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations</p></li>
-<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(\theta_{1, 0}\)</span>, <span class="math notranslate nohighlight">\(\theta_{2, 0}\)</span>, <span class="math notranslate nohighlight">\(\omega_{1, 0}\)</span>, <span class="math notranslate nohighlight">\(\omega_{2, 0}\)</span>]</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>, <span class="math notranslate nohighlight">\(z_0\)</span>]</p></li>
 <li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
 </ul>
 </dd>
@@ -367,6 +367,43 @@
 <dd class="field-odd"><p>array</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.complex_butterfly">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">complex_butterfly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.15]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.2,</span> <span class="pre">0.0,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/autonomous_dissipative_flows.html#complex_butterfly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.complex_butterfly" title="Link to this definition"></a></dt>
+<dd><p>The Complex Butterfly attractor <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{x} &amp;= a(y-x),\\\dot{y} &amp;= z~\text{sgn}(x),\\\dot{z} &amp;= |x|-1\end{aligned}\end{align} \]</div>
+<p>The system parameter is set to <span class="math notranslate nohighlight">\(a = 0.55\)</span> for a chaotic response and <span class="math notranslate nohighlight">\(a = 0.15\)</span> for a periodic response. The initial conditions were set to <span class="math notranslate nohighlight">\([x, y, z] = [0.2, 0.0, 0.0]\)</span>. The system was simulated for 1000 seconds at a rate of 10 Hz and the last 500 seconds were used for the chaotic response.</p>
+<figure class="align-default">
+<img alt="../../../_images/Complex_Butterfly.png" src="../../../_images/Complex_Butterfly.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – Array of one float [<span class="math notranslate nohighlight">\(a\)</span>] or None if using the dynamic_state variable</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Sampling rate for simulation</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>, <span class="math notranslate nohighlight">\(z_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Ahmed, Elwakil. “Creation of a complex butterfly attractor using a novel Lorenz-Type system”. IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications, 2002.</p>
+</aside>
+</aside>
 </dd></dl>
 
 </section>

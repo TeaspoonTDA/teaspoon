@@ -34,43 +34,7 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
 
 
     if system == 'complex_butterfly':
-        # system from https://pdfs.semanticscholar.org/3794/50ca6b8799d0b3c2f35bbe6df47676c69642.pdf?_ga=2.68291732.442509117.1595011450-840911007.1542643809
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 10
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 1000.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 1:
-                print(
-                    'Warning: needed 1 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                a = parameters[0]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                a = 0.15
-            if dynamic_state == 'chaotic':
-                a = 0.55
-
-        # defining simulation functions
-
-        def complex_butterfly(state, t):
-            x, y, z = state  # unpack the state vector
-            return a*(y-x), -z*np.sign(x), np.abs(x) - 1
-
-        if InitialConditions == None:
-            InitialConditions = [0.2, 0.0, 0.0]
-
-        states = odeint(complex_butterfly, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
+        t, ts = complex_butterfly()
 
 
     if system == 'chens_system':
@@ -1118,7 +1082,7 @@ def diffusionless_lorenz_attractor(parameters=[0.25], dynamic_state=None, Initia
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
-        InitialConditions (Optional[floats]): list of values for [:math:`\\theta_{1, 0}`, :math:`\\theta_{2, 0}`, :math:`\\omega_{1, 0}`, :math:`\\omega_{2, 0}`]
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
         dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
 
     Returns:
@@ -1158,3 +1122,71 @@ def diffusionless_lorenz_attractor(parameters=[0.25], dynamic_state=None, Initia
     t = t[-SampleSize:]
 
     return t, ts
+
+
+def complex_butterfly(parameters=[0.15], dynamic_state=None, InitialConditions=[0.2,0.0,0.0], L=1000.0, fs=10, SampleSize=5000):
+    """
+    The Complex Butterfly attractor [1]_ is defined as
+
+    .. math::
+        \dot{x} &= a(y-x),
+
+        \dot{y} &= z~\\text{sgn}(x),
+
+        \dot{z} &= |x|-1
+    
+    The system parameter is set to :math:`a = 0.55` for a chaotic response and :math:`a = 0.15` for a periodic response. The initial conditions were set to :math:`[x, y, z] = [0.2, 0.0, 0.0]`. The system was simulated for 1000 seconds at a rate of 10 Hz and the last 500 seconds were used for the chaotic response.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Complex_Butterfly.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`a`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [1] Ahmed, Elwakil. "Creation of a complex butterfly attractor using a novel Lorenz-Type system". IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications, 2002.
+
+    """
+    # setting simulation time series parameters
+    
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 1
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            a = 0.15
+        elif dynamic_state == 'chaotic':
+            a = 0.55
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        a = parameters[0]
+
+    # defining simulation functions
+
+    def complex_butterfly(state, t):
+        x, y, z = state  # unpack the state vector
+        return a*(y-x), -z*np.sign(x), np.abs(x) - 1
+
+    if InitialConditions == None:
+        InitialConditions = [0.2, 0.0, 0.0]
+
+    states = odeint(complex_butterfly, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
