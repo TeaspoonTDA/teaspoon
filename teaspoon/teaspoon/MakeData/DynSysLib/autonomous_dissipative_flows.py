@@ -41,6 +41,8 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
         t, ts = chens_system()
 
 
+# Sunia
+
     if system == 'hadley_circulation':
         # setting simulation time series parameters
         if fs == None:
@@ -317,6 +319,8 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
                 [-SampleSize:], (states[:, 2])[-SampleSize:]]
         t = t[-SampleSize:]
 
+
+# Max
 
     if system == 'burke_shaw_attractor':
         # system from http://www.atomosyd.net/spip.php?article33
