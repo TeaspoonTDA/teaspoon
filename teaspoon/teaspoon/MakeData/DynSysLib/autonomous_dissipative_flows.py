@@ -327,42 +327,7 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
 
 
     if system == 'rucklidge_attractor':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 50
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 1000.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 2:
-                print(
-                    'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                k, lamb = parameters[0], parameters[1]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                k = 1.1
-            if dynamic_state == 'chaotic':
-                k = 1.6
-            lamb = 6.7
-
-        # defining simulation functions
-        def rucklidge_attractor(state, t):
-            x, y, z = state  # unpack the state vector
-            return -k*x + lamb*y - y*z, x, -z + y**2
-
-        if InitialConditions == None:
-            InitialConditions = [1, 0, 4.5]
-
-        states = odeint(rucklidge_attractor, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
+        t, ts = rucklidge_attractor()
 
 
     if system == 'WINDMI':
@@ -1213,7 +1178,7 @@ def burke_shaw_attractor(parameters=[12.0,4.0], dynamic_state=None, InitialCondi
         L (Optional[int]): Number of iterations
         InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
         dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
-        
+
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
@@ -1256,3 +1221,67 @@ def burke_shaw_attractor(parameters=[12.0,4.0], dynamic_state=None, InitialCondi
 
     return t, ts
 
+
+def rucklidge_attractor(parameters=[1.1, 6.7], dynamic_state=None, InitialConditions=[1.0,0.0,4.5], L=1000.0, fs=50, SampleSize=5000):
+    """
+    The Rucklidge Attractor is defined [9]_ as
+
+    .. math::
+        \dot{x} &= -kx + \\lambda y - yz,
+
+        \dot{y} &= x,
+
+        \dot{z} &= -z + y^2
+
+    The system parameters are set to :math:`k = 1.1`, :math:`\\lambda = 6.7` for a periodic response and :math:`k = 1.6` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [1.0,0.0,4.5]`. The system was simulated for 1000 seconds at a rate of 50 Hz and the last 100 seconds were used for the chaotic response.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Rucklidge_Attractor.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`k`, :math:`\\lambda`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [9] Chandrasekaran, Ramanathan. "A new chaotic attractor from Rucklidge system and its application in secured communication using OFDM". 11th International Conference on Intelligent Systems and Control (ISCO), 2017.
+    """
+    # setting simulation time series parameters
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 2
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            k = 1.1
+        elif dynamic_state == 'chaotic':
+            k = 1.6
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+        lamb = 6.7
+    else:
+        k, lamb = parameters[0], parameters[1]
+
+    # defining simulation functions
+    def rucklidge_attractor(state, t):
+        x, y, z = state  # unpack the state vector
+        return -k*x + lamb*y - y*z, x, -z + y**2
+
+    if InitialConditions == None:
+        InitialConditions = [1, 0, 4.5]
+
+    states = odeint(rucklidge_attractor, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts

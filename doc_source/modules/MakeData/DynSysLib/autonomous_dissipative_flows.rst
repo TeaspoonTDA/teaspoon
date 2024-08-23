@@ -6,7 +6,7 @@ Main Functions
 --------------
 
 .. automodule:: teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows
-    :members: lorenz, rossler, coupled_lorenz_rossler, coupled_rossler_rossler, chua, double_pendulum, diffusionless_lorenz_attractor, complex_butterfly, chens_system, burke_shaw_attractor
+    :members: lorenz, rossler, coupled_lorenz_rossler, coupled_rossler_rossler, chua, double_pendulum, diffusionless_lorenz_attractor, complex_butterfly, chens_system, burke_shaw_attractor, rucklidge_attractor
     :undoc-members:
     :show-inheritance:
     :member-order: bysource
