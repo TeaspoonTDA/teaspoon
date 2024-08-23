@@ -89,6 +89,9 @@ class TestAutoDisFlows(unittest.TestCase):
         t, ts = adf.autonomous_dissipative_flows('rucklidge_attractor')
         t, ts = adf.autonomous_dissipative_flows('WINDMI')
         t, ts = adf.autonomous_dissipative_flows('simplest_quadratic_chaotic_flow')
+        t, ts = adf.autonomous_dissipative_flows('simplest_cubic_chaotic_flow')
+        t, ts = adf.autonomous_dissipative_flows('simplest_piecewise_linear_chaotic_flow')
+        t, ts = adf.autonomous_dissipative_flows('double_scroll')
 
 class TestConsFlows(unittest.TestCase):
 

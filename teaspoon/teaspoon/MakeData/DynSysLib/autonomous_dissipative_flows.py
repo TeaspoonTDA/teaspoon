@@ -61,155 +61,28 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
     if system == 'halvorsens_cyclically_symmetric_attractor':
         t, ts = halvorsens_cyclically_symmetric_attractor()
 
-# Max
-
     if system == 'burke_shaw_attractor':
         t, ts = burke_shaw_attractor()
-
 
     if system == 'rucklidge_attractor':
         t, ts = rucklidge_attractor()
 
-
     if system == 'WINDMI':
         t, ts = WINDMI()
-
 
     if system == 'simplest_quadratic_chaotic_flow':
         t, ts = simplest_quadratic_chaotic_flow()
 
-
     if system == 'simplest_cubic_chaotic_flow':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 20
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 1000.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 2:
-                print(
-                    'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                a, b = parameters[0], parameters[1]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                a = 2.11
-            if dynamic_state == 'chaotic':
-                a = 2.05
-            b = 2.5
-
-        # defining simulation functions
-        def simplest_cubic_chaotic_flow(state, t):
-            x, y, z = state  # unpack the state vector
-            return y, z, -a*z + x*y**2 - x
-
-        if InitialConditions == None:
-            InitialConditions = [0, 0.96, 0]
-
-        states = odeint(simplest_cubic_chaotic_flow, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
-
+        t, ts = simplest_cubic_chaotic_flow()
 
     if system == 'simplest_piecewise_linear_chaotic_flow':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 40
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 1000.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 2:
-                print(
-                    'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                a, b = parameters[0], parameters[1]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                a = 0.7
-            if dynamic_state == 'chaotic':
-                a = 0.6
-
-        # defining simulation functions
-        def simplest_piecewise_linear_chaotic_flow(state, t):
-            x, y, z = state  # unpack the state vector
-            return y, z, -a*z - y + np.abs(x) - 1
-
-        if InitialConditions == None:
-            InitialConditions = [0, -0.7, 0]
-
-        states = odeint(
-            simplest_piecewise_linear_chaotic_flow, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
-
+        t, ts = simplest_piecewise_linear_chaotic_flow()
 
     if system == 'double_scroll':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 20
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 1000.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 2:
-                print(
-                    'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                a, b = parameters[0], parameters[1]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                a = 1.0
-            if dynamic_state == 'chaotic':
-                a = 0.8
-
-        # defining simulation functions
-        def double_scroll(state, t):
-            x, y, z = state  # unpack the state vector
-            return y, z, -a*(z + y + x - np.sign(x))
-
-        if InitialConditions == None:
-            InitialConditions = [0.01, 0.01, 0]
-
-        states = odeint(double_scroll, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
+        t, ts = double_scroll()
 
     return t, ts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def lorenz(parameters=[100, 10, 8.0/3.0], dynamic_state=None, InitialConditions=[10.0**-10.0, 0.0, 1.0], L=100.0, fs=100, SampleSize=2000):
@@ -358,7 +231,7 @@ def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 1
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Coupled_Rossler_Lorenz_System.png
 
     Parameters:
-        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b_1`, :math:`b_2`, :math:`c_2`, :math:`k_1`, :math:`k_2`, :math:`k_3`, :math:`\\lambda`, :math:`\\sigma`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of nine floats [:math:`a`, :math:`b_1`, :math:`b_2`, :math:`c_2`, :math:`k_1`, :math:`k_2`, :math:`k_3`, :math:`\\lambda`, :math:`\\sigma`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -504,7 +377,7 @@ def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialCondi
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Chua_Circuit.png
 
     Parameters:
-        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`B`, :math:`g`, :math:`m_0`, :math:`m_1`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of five floats [:math:`a`, :math:`B`, :math:`g`, :math:`m_0`, :math:`m_1`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -570,7 +443,7 @@ def double_pendulum(parameters=[1, 1, 1, 1, 9.81], dynamic_state=None, InitialCo
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Double_Pendulum.png
 
     Parameters:
-        parameters (Optional[floats]): Array of three floats [:math:`m_1`, :math:`m_2`, :math:`l_1`, :math:`l_2`, :math:`g`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of five floats [:math:`m_1`, :math:`m_2`, :math:`l_1`, :math:`l_2`, :math:`g`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -772,7 +645,7 @@ def chens_system(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditio
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Chens_System.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -840,7 +713,7 @@ def hadley_circulation(parameters=[0.25, 4, 8, 1], dynamic_state=None, InitialCo
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/hadley_circulation.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`F``, :math:`G`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of four floats [:math:`a`, :math:`b`, :math:`F``, :math:`G`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -902,7 +775,7 @@ def ACT_attractor(parameters=[2.5, 0.02, 1.5, -0.07], dynamic_state=None, Initia
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/ACT_attractor.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`\\alpha`, :math:`\\mu`, :math:`\\delta``, :math:`\\beta`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of four floats [:math:`\\alpha`, :math:`\\mu`, :math:`\\delta``, :math:`\\beta`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -967,7 +840,7 @@ def rabinovich_frabrikant_attractor(parameters=[1.16, 0.87], dynamic_state=None,
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/rabinovich_frabrikant_attractor.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`\\alpha`, :math:`\\gamma`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of two floats [:math:`\\alpha`, :math:`\\gamma`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1033,7 +906,7 @@ def linear_feedback_rigid_body_motion_system(parameters=[5.3, -10, -3.8], dynami
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/linear_feedback_rigid_body_motion_system.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1098,7 +971,7 @@ def moore_spiegel_oscillator(parameters=[7.8, 20], dynamic_state=None, InitialCo
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/moore_spiegel_oscillator.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`T`, :math:`R`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of two floats [:math:`T`, :math:`R`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1231,7 +1104,7 @@ def halvorsens_cyclically_symmetric_attractor(parameters=[1.85, 4, 4], dynamic_s
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/halvorsens_cyclically_symmetric_attractor.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1293,7 +1166,7 @@ def burke_shaw_attractor(parameters=[12.0,4.0], dynamic_state=None, InitialCondi
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Burke_Shaw_Attractor.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`s`, :math:`V`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of two floats [:math:`s`, :math:`V`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1359,7 +1232,7 @@ def rucklidge_attractor(parameters=[1.1, 6.7], dynamic_state=None, InitialCondit
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Rucklidge_Attractor.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`k`, :math:`\\lambda`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of two floats [:math:`k`, :math:`\\lambda`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1423,7 +1296,7 @@ def WINDMI(parameters=[0.9, 2.5], dynamic_state=None, InitialConditions=[1.0,0.0
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/WINDMI_Attractor.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of two floats [:math:`a`, :math:`b`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1488,7 +1361,7 @@ def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None,
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Simplest_Quadratic_Chaotic_Flow.png
 
     Parameters:
-        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of two floats [:math:`a`, :math:`b`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1504,12 +1377,6 @@ def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None,
     """
 
     # setting simulation time series parameters
-    if fs == None:
-        fs = 20
-    if SampleSize == None:
-        SampleSize = 5000
-    if L == None:
-        L = 1000.0
     t = np.linspace(0, L, int(L*fs))
 
     # setting system parameters
@@ -1542,6 +1409,200 @@ def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None,
 
     states = odeint(simplest_quadratic_chaotic_flow,
                     InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+def simplest_cubic_chaotic_flow(parameters=[2.11, 2.5], dynamic_state=None, InitialConditions=[0.0,0.96,0.0], L=1000.0, fs=20, SampleSize=5000):
+    """
+    The Simplest Cubic Chaotic Flow is defined [12]_ as
+
+    .. math::
+        \dot{x} &= y,
+
+        \dot{y} &= z,
+
+        \dot{z} &= -az - xy^2 - x
+
+    The system parameters are set to :math:`a = 2.11`, :math:`b = 2.5` for a periodic response and :math:`a = 2.05` for chaotic. The initial conditions were set to :math:`[x, y, z] = [0.0,0.96,0.0]`. The system was simulated for 1000 seconds at a rate of 20 Hz and the last 250 seconds were used for the chaotic response.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Simplest_Cubic_Chaotic_Flow.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of two floats [:math:`a`, :math:`b`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [12] Malasomam, J.-M. "What is the simplest dissipative chaotic jerk equation which is parity invariant?" Physics Letters A, 2000.
+    """
+    # setting simulation time series parameters
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 2
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            a = 2.11
+        elif dynamic_state == 'chaotic':
+            a = 2.05
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+        b = 2.5
+    else:
+        a, b = parameters[0], parameters[1]
+
+    # defining simulation functions
+    def simplest_cubic_chaotic_flow(state, t):
+        x, y, z = state  # unpack the state vector
+        return y, z, -a*z + x*y**2 - x
+
+    if InitialConditions == None:
+        InitialConditions = [0, 0.96, 0]
+
+    states = odeint(simplest_cubic_chaotic_flow, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+def simplest_piecewise_linear_chaotic_flow(parameters=[0.7], dynamic_state=None, InitialConditions=[0.0,-0.7,0.0], L=1000.0, fs=40, SampleSize=5000):
+    """
+    The Simplest Piecewise-Linear Chaotic Flow is defined [13]_ as
+
+    .. math::
+        \dot{x} &= y,
+
+        \dot{y} &= z,
+
+        \dot{z} &= -az - y + |x| - 1
+
+    The system parameter is set to :math:`a = 0.7` for a periodic response and :math:`a = 0.6` for chaotic. The initial conditions were set to :math:`[x, y, z] = [0.0,-0.7,0.0]`. The system was simulated for 1000 seconds at a rate of 20 Hz and the last 250 seconds were used for the chaotic response.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Simplest_Piecewise_Linear_Chaotic_Flow.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`a`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [13] TAO YANG. "PIECEWISE-LINEAR CHAOTIC SYSTEMS WITH a SINGLE EQUILIBRIUM POINT" International Journal of Bifurcation and Chaos, 2000.
+    """
+
+    # setting simulation time series parameters
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 1
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            a = 0.7
+        elif dynamic_state == 'chaotic':
+            a = 0.6
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        a = parameters[0]
+
+    # defining simulation functions
+    def simplest_piecewise_linear_chaotic_flow(state, t):
+        x, y, z = state  # unpack the state vector
+        return y, z, -a*z - y + np.abs(x) - 1
+
+    if InitialConditions == None:
+        InitialConditions = [0, -0.7, 0]
+
+    states = odeint(
+        simplest_piecewise_linear_chaotic_flow, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+def double_scroll(parameters=[1.0], dynamic_state=None, InitialConditions=[0.01,0.01,0.0], L=1000.0, fs=20, SampleSize=5000):
+    """
+    The Double Scroll Attractor is defined [14]_ as
+
+    .. math::
+        \dot{x} &= y,
+
+        \dot{y} &= z,
+
+        \dot{z} &= -a(x + y + z - \\text{sgn}(x))
+
+    The system parameter is set to :math:`a = 1.0` for a periodic response and :math:`a = 0.8` for chaotic. The initial conditions were set to :math:`[x, y, z] = [0.01,0.01,0.0]`. The system was simulated for 1000 seconds at a rate of 20 Hz and the last 250 seconds were used for the chaotic response.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Double_Scroll_Attractor.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`a`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [14] A.S Elwakil "Chua's circuit decomposition: a systematic design approach for chaotic oscillators" Journal of the Franklin Institute, 2000.
+    """
+    # setting simulation time series parameters
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 1
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            a = 1.0
+        elif dynamic_state == 'chaotic':
+            a = 0.8
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+    else:
+        a = parameters[0]
+
+    # defining simulation functions
+    def double_scroll(state, t):
+        x, y, z = state  # unpack the state vector
+        return y, z, -a*(z + y + x - np.sign(x))
+
+    if InitialConditions == None:
+        InitialConditions = [0.01, 0.01, 0]
+
+    states = odeint(double_scroll, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
             [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]

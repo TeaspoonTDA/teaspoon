@@ -210,101 +210,23 @@
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;halvorsens_cyclically_symmetric_attractor&#39;</span><span class="p">:</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">halvorsens_cyclically_symmetric_attractor</span><span class="p">()</span>
 
-<span class="c1"># Max</span>
-
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;burke_shaw_attractor&#39;</span><span class="p">:</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">burke_shaw_attractor</span><span class="p">()</span>
-
 
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;rucklidge_attractor&#39;</span><span class="p">:</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">rucklidge_attractor</span><span class="p">()</span>
 
-
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;WINDMI&#39;</span><span class="p">:</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">WINDMI</span><span class="p">()</span>
-
 
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;simplest_quadratic_chaotic_flow&#39;</span><span class="p">:</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">simplest_quadratic_chaotic_flow</span><span class="p">()</span>
 
-
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;simplest_cubic_chaotic_flow&#39;</span><span class="p">:</span>
-        <span class="c1"># setting simulation time series parameters</span>
-        <span class="k">if</span> <span class="n">fs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span>
-        <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span>
-        <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">L</span> <span class="o">=</span> <span class="mf">1000.0</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-
-        <span class="c1"># setting system parameters</span>
-        <span class="k">if</span> <span class="n">parameters</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-                <span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
-                <span class="n">a</span> <span class="o">=</span> <span class="mf">2.11</span>
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
-                <span class="n">a</span> <span class="o">=</span> <span class="mf">2.05</span>
-            <span class="n">b</span> <span class="o">=</span> <span class="mf">2.5</span>
-
-        <span class="c1"># defining simulation functions</span>
-        <span class="k">def</span> <span class="nf">simplest_cubic_chaotic_flow</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
-            <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span>
-
-        <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.96</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-
-        <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">simplest_cubic_chaotic_flow</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
-                <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
-
+        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">simplest_cubic_chaotic_flow</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;simplest_piecewise_linear_chaotic_flow&#39;</span><span class="p">:</span>
-        <span class="c1"># setting simulation time series parameters</span>
-        <span class="k">if</span> <span class="n">fs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">fs</span> <span class="o">=</span> <span class="mi">40</span>
-        <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span>
-        <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">L</span> <span class="o">=</span> <span class="mf">1000.0</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-
-        <span class="c1"># setting system parameters</span>
-        <span class="k">if</span> <span class="n">parameters</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-                <span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
-                <span class="n">a</span> <span class="o">=</span> <span class="mf">0.7</span>
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
-                <span class="n">a</span> <span class="o">=</span> <span class="mf">0.6</span>
-
-        <span class="c1"># defining simulation functions</span>
-        <span class="k">def</span> <span class="nf">simplest_piecewise_linear_chaotic_flow</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
-            <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-
-        <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-
-        <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span>
-            <span class="n">simplest_piecewise_linear_chaotic_flow</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
-                <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
-
+        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">simplest_piecewise_linear_chaotic_flow</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;double_scroll&#39;</span><span class="p">:</span>
         <span class="c1"># setting simulation time series parameters</span>
@@ -516,7 +438,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Coupled_Rossler_Lorenz_System.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b_1`, :math:`b_2`, :math:`c_2`, :math:`k_1`, :math:`k_2`, :math:`k_3`, :math:`\\lambda`, :math:`\\sigma`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of nine floats [:math:`a`, :math:`b_1`, :math:`b_2`, :math:`c_2`, :math:`k_1`, :math:`k_2`, :math:`k_3`, :math:`\\lambda`, :math:`\\sigma`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -668,7 +590,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Chua_Circuit.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`B`, :math:`g`, :math:`m_0`, :math:`m_1`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of five floats [:math:`a`, :math:`B`, :math:`g`, :math:`m_0`, :math:`m_1`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -737,7 +659,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Double_Pendulum.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of three floats [:math:`m_1`, :math:`m_2`, :math:`l_1`, :math:`l_2`, :math:`g`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of five floats [:math:`m_1`, :math:`m_2`, :math:`l_1`, :math:`l_2`, :math:`g`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -948,7 +870,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Chens_System.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1019,7 +941,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/hadley_circulation.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`F``, :math:`G`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of four floats [:math:`a`, :math:`b`, :math:`F``, :math:`G`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1084,7 +1006,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/ACT_attractor.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`\\alpha`, :math:`\\mu`, :math:`\\delta``, :math:`\\beta`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of four floats [:math:`\\alpha`, :math:`\\mu`, :math:`\\delta``, :math:`\\beta`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1152,7 +1074,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/rabinovich_frabrikant_attractor.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`\\alpha`, :math:`\\gamma`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of two floats [:math:`\\alpha`, :math:`\\gamma`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1221,7 +1143,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/linear_feedback_rigid_body_motion_system.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1289,7 +1211,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/moore_spiegel_oscillator.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`T`, :math:`R`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of two floats [:math:`T`, :math:`R`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1428,7 +1350,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/halvorsens_cyclically_symmetric_attractor.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of three floats [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1493,7 +1415,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Burke_Shaw_Attractor.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`s`, :math:`V`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of two floats [:math:`s`, :math:`V`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1562,7 +1484,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Rucklidge_Attractor.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`k`, :math:`\\lambda`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of two floats [:math:`k`, :math:`\\lambda`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1629,7 +1551,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/WINDMI_Attractor.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of two floats [:math:`a`, :math:`b`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1697,7 +1619,7 @@
 <span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Simplest_Quadratic_Chaotic_Flow.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`] or None if using the dynamic_state variable</span>
+<span class="sd">        parameters (Optional[floats]): Array of two floats [:math:`a`, :math:`b`] or None if using the dynamic_state variable</span>
 <span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        L (Optional[int]): Number of iterations</span>
@@ -1713,12 +1635,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># setting simulation time series parameters</span>
-    <span class="k">if</span> <span class="n">fs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span>
-    <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span>
-    <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">L</span> <span class="o">=</span> <span class="mf">1000.0</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
     <span class="c1"># setting system parameters</span>
@@ -1751,6 +1667,209 @@
 
     <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">simplest_quadratic_chaotic_flow</span><span class="p">,</span>
                     <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+
+<div class="viewcode-block" id="simplest_cubic_chaotic_flow">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/autonomous_dissipative_flows.html#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.simplest_cubic_chaotic_flow">[docs]</a>
+<span class="k">def</span> <span class="nf">simplest_cubic_chaotic_flow</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">2.11</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.96</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Simplest Cubic Chaotic Flow is defined [12]_ as</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \dot{x} &amp;= y,</span>
+
+<span class="sd">        \dot{y} &amp;= z,</span>
+
+<span class="sd">        \dot{z} &amp;= -az - xy^2 - x</span>
+
+<span class="sd">    The system parameters are set to :math:`a = 2.11`, :math:`b = 2.5` for a periodic response and :math:`a = 2.05` for chaotic. The initial conditions were set to :math:`[x, y, z] = [0.0,0.96,0.0]`. The system was simulated for 1000 seconds at a rate of 20 Hz and the last 250 seconds were used for the chaotic response.</span>
+
+<span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Simplest_Cubic_Chaotic_Flow.png</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        parameters (Optional[floats]): Array of two floats [:math:`a`, :math:`b`] or None if using the dynamic_state variable</span>
+<span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
+<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+<span class="sd">        L (Optional[int]): Number of iterations</span>
+<span class="sd">        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]</span>
+<span class="sd">        dynamic_state (Optional[str]): Set dynamic state as either &#39;periodic&#39; or &#39;chaotic&#39; if not supplying parameters.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [12] Malasomam, J.-M. &quot;What is the simplest dissipative chaotic jerk equation which is parity invariant?&quot; Physics Letters A, 2000.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># setting simulation time series parameters</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+
+    <span class="c1"># setting system parameters</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="mf">2.11</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="mf">2.05</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mf">2.5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># defining simulation functions</span>
+    <span class="k">def</span> <span class="nf">simplest_cubic_chaotic_flow</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
+        <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span>
+
+    <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.96</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">simplest_cubic_chaotic_flow</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+
+
+<div class="viewcode-block" id="simplest_piecewise_linear_chaotic_flow">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/autonomous_dissipative_flows.html#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.simplest_piecewise_linear_chaotic_flow">[docs]</a>
+<span class="k">def</span> <span class="nf">simplest_piecewise_linear_chaotic_flow</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.7</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Simplest Piecewise-Linear Chaotic Flow is defined [13]_ as</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \dot{x} &amp;= y,</span>
+
+<span class="sd">        \dot{y} &amp;= z,</span>
+
+<span class="sd">        \dot{z} &amp;= -az - y + |x| - 1</span>
+
+<span class="sd">    The system parameter is set to :math:`a = 0.7` for a periodic response and :math:`a = 0.6` for chaotic. The initial conditions were set to :math:`[x, y, z] = [0.0,-0.7,0.0]`. The system was simulated for 1000 seconds at a rate of 20 Hz and the last 250 seconds were used for the chaotic response.</span>
+
+<span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Simplest_Piecewise_Linear_Chaotic_Flow.png</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`a`] or None if using the dynamic_state variable</span>
+<span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
+<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+<span class="sd">        L (Optional[int]): Number of iterations</span>
+<span class="sd">        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]</span>
+<span class="sd">        dynamic_state (Optional[str]): Set dynamic state as either &#39;periodic&#39; or &#39;chaotic&#39; if not supplying parameters.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [13] TAO YANG. &quot;PIECEWISE-LINEAR CHAOTIC SYSTEMS WITH a SINGLE EQUILIBRIUM POINT&quot; International Journal of Bifurcation and Chaos, 2000.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># setting simulation time series parameters</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+
+    <span class="c1"># setting system parameters</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="mf">0.7</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="mf">0.6</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># defining simulation functions</span>
+    <span class="k">def</span> <span class="nf">simplest_piecewise_linear_chaotic_flow</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
+        <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span>
+        <span class="n">simplest_piecewise_linear_chaotic_flow</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+
+
+
+<div class="viewcode-block" id="double_scroll">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/autonomous_dissipative_flows.html#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.double_scroll">[docs]</a>
+<span class="k">def</span> <span class="nf">double_scroll</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Double Scroll Attractor is defined [14]_ as</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \dot{x} &amp;= y,</span>
+
+<span class="sd">        \dot{y} &amp;= z,</span>
+
+<span class="sd">        \dot{z} &amp;= -a(x + y + z - \\text{sgn}(x))</span>
+
+<span class="sd">    The system parameter is set to :math:`a = 1.0` for a periodic response and :math:`a = 0.8` for chaotic. The initial conditions were set to :math:`[x, y, z] = [0.01,0.01,0.0]`. The system was simulated for 1000 seconds at a rate of 20 Hz and the last 250 seconds were used for the chaotic response.</span>
+
+<span class="sd">    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Double_Scroll_Attractor.png</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        parameters (Optional[floats]): Array of one float [:math:`a`] or None if using the dynamic_state variable</span>
+<span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
+<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+<span class="sd">        L (Optional[int]): Number of iterations</span>
+<span class="sd">        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]</span>
+<span class="sd">        dynamic_state (Optional[str]): Set dynamic state as either &#39;periodic&#39; or &#39;chaotic&#39; if not supplying parameters.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [14] A.S Elwakil &quot;Chua&#39;s circuit decomposition: a systematic design approach for chaotic oscillators&quot; Journal of the Franklin Institute, 2000.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># setting simulation time series parameters</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+
+    <span class="c1"># setting system parameters</span>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="mf">0.8</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># defining simulation functions</span>
+    <span class="k">def</span> <span class="nf">double_scroll</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
+        <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">z</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">double_scroll</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
             <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
