@@ -406,6 +406,43 @@
 </aside>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.chens_system">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">chens_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[30.0,</span> <span class="pre">3.0,</span> <span class="pre">28.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-10,</span> <span class="pre">0,</span> <span class="pre">37]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/autonomous_dissipative_flows.html#chens_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.chens_system" title="Link to this definition"></a></dt>
+<dd><p>Chen’s System is defined <a class="footnote-reference brackets" href="#id4" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{x} &amp;= a(y-x),\\\dot{y} &amp;= (c-a)x-xz+cy,\\\dot{z} &amp;= xy-bz\end{aligned}\end{align} \]</div>
+<p>The system parameters are set to <span class="math notranslate nohighlight">\(a = 35\)</span>, <span class="math notranslate nohighlight">\(b = 3\)</span>, and <span class="math notranslate nohighlight">\(c = 28\)</span> for a chaotic response and <span class="math notranslate nohighlight">\(a = 30\)</span> for a periodic response. The initial conditions were set to <span class="math notranslate nohighlight">\([x, y, z] = [-10, 0, 37]\)</span>. The system was simulated for 500 seconds at a rate of 200 Hz and the last 15 seconds were used for the chaotic response.</p>
+<figure class="align-default">
+<img alt="../../../_images/Chens_System.png" src="../../../_images/Chens_System.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – Array of one float [<span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(c\)</span>] or None if using the dynamic_state variable</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Sampling rate for simulation</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>, <span class="math notranslate nohighlight">\(z_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<p>Liang, Xiyin. “Mechanical analysis of Chen chaotic system”. Chaos, Solitons &amp; Fractals, 2017.</p>
+</aside>
+</aside>
+</dd></dl>
+
 </section>
 <section id="meta-function">
 <h2><span class="section-number">2.1.2.1.2.2. </span>Meta Function<a class="headerlink" href="#meta-function" title="Link to this heading"></a></h2>

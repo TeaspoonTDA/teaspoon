@@ -38,42 +38,7 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
 
 
     if system == 'chens_system':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 200
-        if SampleSize == None:
-            SampleSize = 3000
-        if L == None:
-            L = 500.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 3:
-                print(
-                    'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                a, b, c = parameters[0], parameters[1], parameters[2]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                a = 30
-            if dynamic_state == 'chaotic':
-                a = 35
-            b, c = 3, 28
-
-        # defining simulation functions
-        def chens_system(state, t):
-            x, y, z = state  # unpack the state vector
-            return a*(y-x), (c-a)*x - x*z + c*y, x*y - b*z
-
-        if InitialConditions == None:
-            InitialConditions = [-10, 0, 37]
-
-        states = odeint(chens_system, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
+        t, ts = chens_system()
 
 
     if system == 'hadley_circulation':
@@ -1184,6 +1149,73 @@ def complex_butterfly(parameters=[0.15], dynamic_state=None, InitialConditions=[
         InitialConditions = [0.2, 0.0, 0.0]
 
     states = odeint(complex_butterfly, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+def chens_system(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=200, SampleSize=3000):
+    """
+    Chen's System is defined [2]_ as
+
+    .. math::
+        \dot{x} &= a(y-x),
+
+        \dot{y} &= (c-a)x-xz+cy,
+
+        \dot{z} &= xy-bz
+    
+    The system parameters are set to :math:`a = 35`, :math:`b = 3`, and :math:`c = 28` for a chaotic response and :math:`a = 30` for a periodic response. The initial conditions were set to :math:`[x, y, z] = [-10, 0, 37]`. The system was simulated for 500 seconds at a rate of 200 Hz and the last 15 seconds were used for the chaotic response.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Chens_System.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`c`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [2] Liang, Xiyin. "Mechanical analysis of Chen chaotic system". Chaos, Solitons & Fractals, 2017.
+
+    """
+
+    # setting simulation time series parameters
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 3
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            a = 30.0
+        elif dynamic_state == 'chaotic':
+            a = 35.0
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+        b, c = 3, 28
+    else:
+        a, b, c = parameters[0], parameters[1], parameters[2]
+
+    # defining simulation functions
+    def chens_system(state, t):
+        x, y, z = state  # unpack the state vector
+        return a*(y-x), (c-a)*x - x*z + c*y, x*y - b*z
+
+    if InitialConditions == None:
+        InitialConditions = [-10, 0, 37]
+
+    states = odeint(chens_system, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
             [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
