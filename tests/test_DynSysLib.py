@@ -78,6 +78,13 @@ class TestAutoDisFlows(unittest.TestCase):
         t, ts = adf.autonomous_dissipative_flows('diffusionless_lorenz_attractor')
         t, ts = adf.autonomous_dissipative_flows('complex_butterfly')
         t, ts = adf.autonomous_dissipative_flows('chens_system')
+        t, ts = adf.autonomous_dissipative_flows('hadley_circulation')
+        t, ts = adf.autonomous_dissipative_flows('ACT_attractor')
+        t, ts = adf.autonomous_dissipative_flows('rabinovich_frabrikant_attractor')
+        t, ts = adf.autonomous_dissipative_flows('linear_feedback_rigid_body_motion_system')
+        t, ts = adf.autonomous_dissipative_flows('moore_spiegel_oscillator')
+        t, ts = adf.autonomous_dissipative_flows('thomas_cyclically_symmetric_attractor')
+        t, ts = adf.autonomous_dissipative_flows('halvorsens_cyclically_symmetric_attractor')
 
 class TestConsFlows(unittest.TestCase):
 
