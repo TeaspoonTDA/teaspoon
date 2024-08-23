@@ -40,285 +40,26 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
     if system == 'chens_system':
         t, ts = chens_system()
 
-
-# Sunia
-
     if system == 'hadley_circulation':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 50
-        if SampleSize == None:
-            SampleSize = 4000
-        if L == None:
-            L = 500.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 3:
-                print(
-                    'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                a, b, F, G = parameters[0], parameters[1], parameters[2], parameters[3]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                a = 0.30
-            if dynamic_state == 'chaotic':
-                a = 0.25
-            b, F, G = 4, 8, 1
-
-        # defining simulation functions
-        def hadley_circulation(state, t):
-            x, y, z = state  # unpack the state vector
-            return -y**2 - z**2 - a*x + a*F, x*y - b*x*z - y + G, b*x*y + x*z - z
-
-        if InitialConditions == None:
-            InitialConditions = [-10, 0, 37]
-
-        states = odeint(hadley_circulation, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
-
+        t, ts = hadley_circulation()
 
     if system == 'ACT_attractor':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 50
-        if SampleSize == None:
-            SampleSize = 4000
-        if L == None:
-            L = 500.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 4:
-                print(
-                    'Warning: needed 4 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                alpha, mu, delta, beta = parameters[0], parameters[1], parameters[2], parameters[3]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                alpha = 2.5
-            if dynamic_state == 'chaotic':
-                alpha = 2.0
-            mu, delta, beta = 0.02, 1.5, -0.07
-
-        # defining simulation functions
-        def ACT_attractor(state, t):
-            x, y, z = state  # unpack the state vector
-            return alpha*(x-y), -4*alpha*y + x*z + mu*x**3, -delta*alpha*z + x*y + beta*z**2
-
-        if InitialConditions == None:
-            InitialConditions = [0.5, 0, 0]
-
-        states = odeint(ACT_attractor, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
-
+        t, ts = ACT_attractor()
 
     if system == 'rabinovich_frabrikant_attractor':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 30
-        if SampleSize == None:
-            SampleSize = 3000
-        if L == None:
-            L = 500.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 2:
-                print(
-                    'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                alpha, gamma = parameters[0], parameters[1]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                alpha = 1.16
-            if dynamic_state == 'chaotic':
-                alpha = 1.13
-            gamma = 0.87
-
-        # defining simulation functions
-        def rabinovich_frabrikant_attractor(state, t):
-            x, y, z = state  # unpack the state vector
-            return y*(z-1+x**2)+gamma*x, x*(3*z + 1 - x**2) + gamma*y, -2*z*(alpha + x*y)
-
-        if InitialConditions == None:
-            InitialConditions = [-1, 0, 0.5]
-
-        states = odeint(rabinovich_frabrikant_attractor,
-                        InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
-
+        t, ts = rabinovich_frabrikant_attractor()
 
     if system == 'linear_feedback_rigid_body_motion_system':
-        # system from https://ir.nctu.edu.tw/bitstream/11536/26522/1/000220413000019.pdf
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 100
-        if SampleSize == None:
-            SampleSize = 3000
-        if L == None:
-            L = 500.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 3:
-                print(
-                    'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                a, b, c = parameters[0], parameters[1], parameters[2]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                a = 5.3
-            if dynamic_state == 'chaotic':
-                a = 5.0
-            b, c = -10, -3.8
-        # defining simulation functions
-
-        def linear_feedback_rigid_body_motion_system(state, t):
-            x, y, z = state  # unpack the state vector
-            return -y*z + a*x, x*z + b*y, (1/3)*x*y + c*z
-
-        if InitialConditions == None:
-            InitialConditions = [0.2, 0.2, 0.2]
-
-        states = odeint(
-            linear_feedback_rigid_body_motion_system, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
-
+        t, ts = linear_feedback_rigid_body_motion_system()
 
     if system == 'moore_spiegel_oscillator':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 100
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 500.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 2:
-                print(
-                    'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                T, R = parameters[0], parameters[1]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                T = 7.8
-            if dynamic_state == 'chaotic':
-                T = 7.0
-            R = 20
-        # defining simulation functions
-
-        def moore_spiegel_oscillator(state, t):
-            x, y, z = state  # unpack the state vector
-            return y, z, -z - (T-R + R*x**2)*y - T*x
-
-        if InitialConditions == None:
-            InitialConditions = [0.2, 0.2, 0.2]
-
-        states = odeint(moore_spiegel_oscillator, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
-
+        t, ts = moore_spiegel_oscillator()
 
     if system == 'thomas_cyclically_symmetric_attractor':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 10
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 1000.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 1:
-                print(
-                    'Warning: needed 1 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                b = parameters[0]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                b = 0.17
-            if dynamic_state == 'chaotic':
-                b = 0.18
-
-        # defining simulation functions
-        def thomas_cyclically_symmetric_attractor(state, t):
-            x, y, z = state  # unpack the state vector
-            return -b*x + np.sin(y), -b*y + np.sin(z), -b*z + np.sin(x)
-
-        if InitialConditions == None:
-            InitialConditions = [0.1, 0, 0]
-
-        states = odeint(
-            thomas_cyclically_symmetric_attractor, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
-
+        t, ts = thomas_cyclically_symmetric_attractor()
 
     if system == 'halvorsens_cyclically_symmetric_attractor':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 200
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 200.0
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 3:
-                print(
-                    'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                a, b, c = parameters[0], parameters[1], parameters[2]
-        if parameters == None:
-            if dynamic_state == 'periodic':
-                a = 1.85
-            if dynamic_state == 'chaotic':
-                a = 1.45
-            b, c = 4, 4
-
-        # defining simulation functions
-        def halvorsens_cyclically_symmetric_attractor(state, t):
-            x, y, z = state  # unpack the state vector
-            return -a*x - b*y - c*z - y**2, -a*y - b*z - c*x - z**2, -a*z - b*x - c*y - x**2
-
-        if InitialConditions == None:
-            InitialConditions = [-5, 0, 0]
-
-        states = odeint(
-            halvorsens_cyclically_symmetric_attractor, InitialConditions, t)
-        ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-                [-SampleSize:], (states[:, 2])[-SampleSize:]]
-        t = t[-SampleSize:]
-
+        t, ts = halvorsens_cyclically_symmetric_attractor()
 
 # Max
 
@@ -1226,3 +967,366 @@ def chens_system(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditio
 
     return t, ts
 
+
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+
+def hadley_circulation(parameters=[0.25, 4, 8, 1], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=50, SampleSize=4000):
+
+    """
+    Hadley Circulation System is defined as
+
+    .. math::
+        \dot{x} &= -y^2 - z^2 - ax + aF,
+
+        \dot{y} &= xy - bxz - y + G,
+
+        \dot{z} &= bxy + xz - z
+    
+    The system parameters are set to :math:`a = 0.25`, :math:`b = 4`, :math:`F = 8`and :math:`G = 1` for a periodic response and :math:`a = 0.3` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [-10, 0, 37]`.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/hadley_circulation.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`a`, :math:`b`, :math:`F``, :math:`G`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+
+    """
+
+    # setting simulation time series parameters
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 4
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            a = 0.30
+        elif dynamic_state == 'chaotic':
+            a = 0.25
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+        b, F, G = 4, 8, 1
+    else:
+        a, b, F, G = parameters[0], parameters[1], parameters[2], parameters[3]
+
+    # defining simulation functions
+    def hadley_circulation(state, t):
+        x, y, z = state  # unpack the state vector
+        return -y**2 - z**2 - a*x + a*F, x*y - b*x*z - y + G, b*x*y + x*z - z
+
+    states = odeint(hadley_circulation, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+def ACT_attractor(parameters=[2.5, 0.02, 1.5, -0.07], dynamic_state=None, InitialConditions=[0.5, 0, 0], L=500.0, fs=50, SampleSize=4000):
+
+    """
+    ACT Attractor is defined [3]_ as
+
+    .. math::
+        \dot{x} &= \\alpha(x-y),
+
+        \dot{y} &= -4\\alpha y + xz + \\mu x^3,
+
+        \dot{z} &= -\\delta \\alpha z + xy + \\beta z^2
+    
+    The system parameters are set to :math:`\\alpha = 2.5`, :math:`\\mu = 0.02`, :math:`\\delta = 1.5`and :math:`\\beta = -0.07` for a periodic response and :math:`a = 2.0` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.5, 0, 0]`.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/ACT_attractor.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`\\alpha`, :math:`\\mu`, :math:`\\delta``, :math:`\\beta`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [3] A. Arneodo, P. Coullet, and C. Tresser. Possible new strange attractors with spiral structure. Communications in Mathematical Physics, 79(4):573-579, dec 1981.
+
+    """
+
+    # setting simulation time series parameters
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 4
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            alpha = 2.5
+        elif dynamic_state == 'chaotic':
+            alpha = 2.0
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+        mu, delta, beta = 0.02, 1.5, -0.07
+    else:
+        alpha, mu, delta, beta = parameters[0], parameters[1], parameters[2], parameters[3]
+
+    # defining simulation functions
+    def ACT_attractor(state, t):
+        x, y, z = state  # unpack the state vector
+        return alpha*(x-y), -4*alpha*y + x*z + mu*x**3, -delta*alpha*z + x*y + beta*z**2
+
+    states = odeint(ACT_attractor, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+def rabinovich_frabrikant_attractor(parameters=[1.16, 0.87], dynamic_state=None, InitialConditions=[-1, 0, 0.5], L=500.0, fs=30, SampleSize=3000):
+
+    """
+    Rabinovich-Frabrikant Attractor is defined [4]_ as
+
+    .. math::
+        \dot{x} &= y(z - 1 + x^2) + \\alpha x,
+
+        \dot{y} &= x(3z + 1 - x^2) + \\alpha y,
+
+        \dot{z} &= -2z(\\gamma + xy)
+    
+    The system parameters are set to :math:`\\alpha = 1.16` and :math:`\\gamma = 0.87` for a periodic response and :math:`\\alpha = 1.13` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [-1, 0, 0.5]`.
+
+    .. figure:: ../../../figures/Autonomous_Dissipative_Flows/rabinovich_frabrikant_attractor.png
+
+    Parameters:
+        parameters (Optional[floats]): Array of one float [:math:`\\alpha`, :math:`\\gamma`] or None if using the dynamic_state variable
+        fs (Optional[float]): Sampling rate for simulation
+        SampleSize (Optional[int]): length of sample at end of entire time series
+        L (Optional[int]): Number of iterations
+        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`, :math:`z_0`]
+        dynamic_state (Optional[str]): Set dynamic state as either 'periodic' or 'chaotic' if not supplying parameters.
+
+    Returns:
+        array: Array of the time indices as `t` and the simulation time series `ts`
+
+    References
+    ----------
+    .. [4]  Marius-F. Danca. Hidden transient chaotic attractors of rabinovich-fabrikant system. Nonlinear Dynamics, 86(2):1263-1270, jul 2016.
+
+    """
+
+    # setting simulation time series parameters
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    num_param = 2
+
+    if len(parameters) != num_param:
+        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+    elif dynamic_state != None:
+        if dynamic_state == 'periodic':
+            alpha = 1.16
+        elif dynamic_state == 'chaotic':
+            alpha = 1.13
+        else:
+            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+        gamma = 0.87
+    else:
+        alpha, gamma = parameters[0], parameters[1]
+
+    # defining simulation functions
+    def rabinovich_frabrikant_attractor(state, t):
+        x, y, z = state  # unpack the state vector
+        return y*(z-1+x**2)+gamma*x, x*(3*z + 1 - x**2) + gamma*y, -2*z*(alpha + x*y)
+
+    states = odeint(rabinovich_frabrikant_attractor,
+                    InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+    return t, ts
+
+
+def linear_feedback_rigid_body_motion_system(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[0.2, 0.2, 0.2], L=500.0, fs=100, SampleSize=3000):
+
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    if parameters != None:
+        if len(parameters) != 3:
+            print(
+                'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
+            parameters = None
+        else:
+            a, b, c = parameters[0], parameters[1], parameters[2]
+    if parameters == None:
+        if dynamic_state == 'periodic':
+            a = 5.3
+        if dynamic_state == 'chaotic':
+            a = 5.0
+        b, c = -10, -3.8
+    # defining simulation functions
+
+    def linear_feedback_rigid_body_motion_system(state, t):
+        x, y, z = state  # unpack the state vector
+        return -y*z + a*x, x*z + b*y, (1/3)*x*y + c*z
+
+    if InitialConditions == None:
+        InitialConditions = 
+
+    states = odeint(
+        linear_feedback_rigid_body_motion_system, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+
+
+    return t, ts
+
+def moore_spiegel_oscillator(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=200, SampleSize=3000):
+
+    # setting simulation time series parameters
+    if fs == None:
+        fs = 100
+    if SampleSize == None:
+        SampleSize = 5000
+    if L == None:
+        L = 500.0
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    if parameters != None:
+        if len(parameters) != 2:
+            print(
+                'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
+            parameters = None
+        else:
+            T, R = parameters[0], parameters[1]
+    if parameters == None:
+        if dynamic_state == 'periodic':
+            T = 7.8
+        if dynamic_state == 'chaotic':
+            T = 7.0
+        R = 20
+    # defining simulation functions
+
+    def moore_spiegel_oscillator(state, t):
+        x, y, z = state  # unpack the state vector
+        return y, z, -z - (T-R + R*x**2)*y - T*x
+
+    if InitialConditions == None:
+        InitialConditions = [0.2, 0.2, 0.2]
+
+    states = odeint(moore_spiegel_oscillator, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+
+
+    return t, ts
+
+
+def thomas_cyclically_symmetric_attractor(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=200, SampleSize=3000):
+
+    # setting simulation time series parameters
+    if fs == None:
+        fs = 10
+    if SampleSize == None:
+        SampleSize = 5000
+    if L == None:
+        L = 1000.0
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    if parameters != None:
+        if len(parameters) != 1:
+            print(
+                'Warning: needed 1 parameters. Defaulting to periodic solution parameters.')
+            parameters = None
+        else:
+            b = parameters[0]
+    if parameters == None:
+        if dynamic_state == 'periodic':
+            b = 0.17
+        if dynamic_state == 'chaotic':
+            b = 0.18
+
+    # defining simulation functions
+    def thomas_cyclically_symmetric_attractor(state, t):
+        x, y, z = state  # unpack the state vector
+        return -b*x + np.sin(y), -b*y + np.sin(z), -b*z + np.sin(x)
+
+    if InitialConditions == None:
+        InitialConditions = [0.1, 0, 0]
+
+    states = odeint(
+        thomas_cyclically_symmetric_attractor, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+
+    return t, ts
+
+def halvorsens_cyclically_symmetric_attractor(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=200, SampleSize=3000):
+
+    # setting simulation time series parameters
+    if fs == None:
+        fs = 200
+    if SampleSize == None:
+        SampleSize = 5000
+    if L == None:
+        L = 200.0
+    t = np.linspace(0, L, int(L*fs))
+
+    # setting system parameters
+    if parameters != None:
+        if len(parameters) != 3:
+            print(
+                'Warning: needed 3 parameters. Defaulting to periodic solution parameters.')
+            parameters = None
+        else:
+            a, b, c = parameters[0], parameters[1], parameters[2]
+    if parameters == None:
+        if dynamic_state == 'periodic':
+            a = 1.85
+        if dynamic_state == 'chaotic':
+            a = 1.45
+        b, c = 4, 4
+
+    # defining simulation functions
+    def halvorsens_cyclically_symmetric_attractor(state, t):
+        x, y, z = state  # unpack the state vector
+        return -a*x - b*y - c*z - y**2, -a*y - b*z - c*x - z**2, -a*z - b*x - c*y - x**2
+
+    if InitialConditions == None:
+        InitialConditions = [-5, 0, 0]
+
+    states = odeint(
+        halvorsens_cyclically_symmetric_attractor, InitialConditions, t)
+    ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
+            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+    t = t[-SampleSize:]
+
+
+    return t, ts
