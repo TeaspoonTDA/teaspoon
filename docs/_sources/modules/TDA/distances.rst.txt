@@ -4,7 +4,4 @@ Distances
 .. automodule:: teaspoon.TDA.Distance
    :members:
 
-.. toctree::
-   :maxdepth: 4
-
-   notebooks/distance
+Further information can be found in the `Distance Notebook <../../notebooks/distances.ipynb>`_.

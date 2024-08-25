@@ -98,7 +98,7 @@ Multi-scale Permutation Entropy applies the permutation entropy calculation over
 
 Output of example:
 
-.. figure::mspe_example.png
+.. figure:: ../../figures/mspe_example.png
    :scale: 100 %
 
 
@@ -186,7 +186,7 @@ Output of example::
    Persistent entropy:  1.7693450019916783
 
 
-.. figure::persistent_entropy_example.png
+.. figure:: ../../figures/persistent_entropy_example.png
    :scale: 100 %
 
 

@@ -8,6 +8,7 @@ Main Functions
     :members: sine, incommensurate_sine
     :undoc-members:
     :show-inheritance:
+    :member-order: bysource
 
 
 Meta Function 
@@ -19,3 +20,4 @@ This function is for being able to input into the original ``teaspoon.MakeData.D
     :members: periodic_functions
     :undoc-members:
     :show-inheritance:
+    :no-index:

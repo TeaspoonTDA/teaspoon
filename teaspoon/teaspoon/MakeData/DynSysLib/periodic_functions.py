@@ -3,56 +3,11 @@ import numpy as np
 
 def periodic_functions(system, dynamic_state=None, L=None, fs=None,
                        SampleSize=None, parameters=None, InitialConditions=None):
-    '''
-    TODO Add docstring. Do we even want to keep this function? 
-    '''
     if system == 'sine':
-
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 50
-        if SampleSize == None:
-            SampleSize = 2000
-        if L == None:
-            L = 40
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 1:
-                print(
-                    'Warning: needed 1 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                omega = parameters[0]
-        if parameters == None:
-            omega = 2*np.pi
-
-        t, ts = sine(omega, L, fs, SampleSize, parameters)
+        t, ts = sine()
 
     if system == 'incommensurate_sine':
-        # setting simulation time series parameters
-        if fs == None:
-            fs = 50
-        if SampleSize == None:
-            SampleSize = 5000
-        if L == None:
-            L = 100
-        t = np.linspace(0, L, int(L*fs))
-
-        # setting system parameters
-        if parameters != None:
-            if len(parameters) != 2:
-                print(
-                    'Warning: needed 2 parameters. Defaulting to periodic solution parameters.')
-                parameters = None
-            else:
-                omega1, omega2 = parameters[0], parameters[1]
-        if parameters == None:
-            omega1 = np.pi
-            omega2 = 1
-
-        t, ts = incommensurate_sine(omega1, omega2, L, fs, SampleSize)
+        t, ts = incommensurate_sine()
 
     return t, ts
 
@@ -67,7 +22,7 @@ def sine(omega=2*np.pi,
 
     This was solved for 40 seconds with a sampling rate of 50 Hz.
 
-    TODO: Add fig from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    .. figure:: ../../../figures/Periodic_Quasiperiodic_Functions/Periodic_Sinosoidal_Function.png
 
     Parameters:
         omega (Optional[float]): frequency of the sine wave.
@@ -91,7 +46,14 @@ def sine(omega=2*np.pi,
 def incommensurate_sine(omega1=np.pi, omega2=1,
                         L=100, fs=50, SampleSize=5000):
     """
-    Add description from `Audun's pdf <https://teaspoontda.github.io/teaspoon/_downloads/8d622bebe5abdc608bbc9616ffa444d9/dynamic_systems_library.pdf>`_
+    This function is generated using two incommensurate periodic functions as
+
+    .. math::
+        x(t) = \sin(\\omega_1 t) + \sin(\\omega_2 t)
+
+    This was sampled such that :math:`t \in [0, 100]` at a rate of 50 Hz.
+
+    .. figure:: ../../../figures/Periodic_Quasiperiodic_Functions/Quasiperiodic_Function.png
 
     Parameters:
         omega1 (Optional[float]): frequency of the first sine wave.

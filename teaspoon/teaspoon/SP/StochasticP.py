@@ -34,7 +34,7 @@ def compute_cubical_persistence(p, filter=0.02):
 
     sup_pers = CubicalComplex(top_dimensional_cells=p)
     sup_pers = sup_pers.persistence(min_persistence=filter)
-    sup_pers = np.array(sup_pers)
+    # sup_pers = np.array(sup_pers)
 
     return array_to_dict(sup_pers)
 

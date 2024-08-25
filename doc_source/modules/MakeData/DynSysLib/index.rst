@@ -1,64 +1,44 @@
-Dynamic Systems Library (DynSysLib)
-=======================================================
-
-
-This page provides a summary of the Python Dynamical Systems Library (DynSysLib) for simulating a wide variety of dynamical systems. Full documentation of all of the currently available dynamical systems can be downloaded :download:`here <../../../figures/dynamic_systems_library.pdf>`.
+=====================================
+Dynamical Systems Library (DynSysLib)
+=====================================
 
 .. image:: ../../../figures/time_series_chaotic_animation.gif
-   :alt: Left floating image
-   :class: with-shadow float-left
-   :scale: 35
-
-Figure: :math:`x`-solution to simulated Rössler system for a chaotic response.
+  :alt: :math:`x`-solution to simulated Rössler system for a chaotic response.
+  :align: center
+  :scale: 35
 
 .. rst-class::  clear-both
 
-
-
-.. automodule:: teaspoon.MakeData.DynSysLib.DynSysLib
-    :members:
-    
-
-Of the optional other parameters either the **dynamic_state parameter** or the system **parameters** must be used.
-
-This function requires the following packages:
-
-* numpy
-* scipy
-* matplotlib
-* ddeint (delayed differential equations only)
+This page provides a summary of the  Dynamical Systems Library (``DynSysLib``) for simulating a wide variety of dynamical systems. 
 
 
 
-Available Dynamical Systems
-####################################
+.. toctree::
+   :maxdepth: 1
 
-The following table provides a list of all the available dynamical systems as called by the **system** keyword:
+   maps
+   autonomous_dissipative_flows
+   driven_dissipative_flows
+   conservative_flows
+   periodic_functions
+   noise_models
+   medical_data
+   delayed_flows
 
-.. .. toctree::
-..    :maxdepth: 1
-
-..    maps
-..    autonomous_dissipative_flows
-..    driven_dissipative_flows
-..    conservative_flows
-..    periodic_functions
-..    noise_models
-..    medical_data
-..    delayed_flows
+The following table provides a list of all the available dynamical systems. Further details for each system can be found in the linked directories. 
 
 .. list-table:: Available Dynamical Systems
    :widths: 10 10 10 10 10 10 10 10
    :header-rows: 1
 
-   * - Maps
-     - Autonomous Dissipative Flows
-     - Driven Dissipative Flows
-     - Conservative Flows
-     - Periodic Functions
-     - Noise Models
-     - Human Data
-     - Delayed Flows
+   * - `Maps <maps.md>`_
+     - `Autonomous Dissipative Flows <autonomous_dissipative_flows.md>`_
+     - `Driven Dissipative Flows <driven_dissipative_flows.md>`_
+     - `Conservative Flows <conservative_flows.md>`_
+     - `Periodic Functions <periodic_functions.md>`_
+     - `Noise Models <noise_models.md>`_
+     - `Medical Data <medical_data.md>`_
+     - `Delayed Flows <delayed_flows.md>`_
 
    * - logistic_map
      - chua
@@ -76,7 +56,7 @@ The following table provides a list of all the available dynamical systems as ca
      - uniform_noise
      - EEG
      - 
-   * - logistic_map
+   * - sine_map
      - rossler
      - forced_brusselator
      - nose_hoover_oscillator 
@@ -84,7 +64,7 @@ The following table provides a list of all the available dynamical systems as ca
      - rayleigh_noise
      - 
      - 
-   * - sine_map
+   * - tent_map
      - coupled_lorenz_rossler
      - ueda_oscillator
      - labyrinth_chaos 
@@ -92,7 +72,7 @@ The following table provides a list of all the available dynamical systems as ca
      - exponential_noise
      - 
      - 
-   * - tent_map
+   * - linear_congruential_generator_map
      - coupled_rossler_rossler
      - duffings_two_well_oscillator
      - henon_heiles_system
@@ -100,7 +80,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - linear_congruential_generator_map
+   * - rickers_population_map
      - double_pendulum
      - duffing_van_der_pol_oscillator
      - 
@@ -108,7 +88,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - rickers_population_map
+   * - gauss_map
      - diffusionless_lorenz_attractor
      - rayleigh_duffing_oscillator
      - 
@@ -116,7 +96,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - gauss_map
+   * - cusp_map
      - complex_butterfly
      - 
      - 
@@ -124,7 +104,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - cusp_map
+   * - pinchers_map
      - chens_system
      - 
      - 
@@ -132,7 +112,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - pinchers_map
+   * - sine_circle_map
      - hadley_circulation
      - 
      - 
@@ -140,7 +120,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - sine_circle_map
+   * - lozi_map
      - ACT_attractor
      - 
      - 
@@ -148,7 +128,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - lozi_map
+   * - delayed_logstic_map
      - rabinovich_frabrikant_attractor
      - 
      - 
@@ -156,7 +136,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - delayed_logstic_map
+   * - tinkerbell_map
      - linear_feedback_rigid_body_motion_system
      - 
      - 
@@ -164,7 +144,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - tinkerbell_map
+   * - burgers_map
      - moore_spiegel_oscillator
      - 
      - 
@@ -172,7 +152,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - burgers_map
+   * - holmes_cubic_map
      - thomas_cyclically_symmetric_attractor
      - 
      - 
@@ -180,7 +160,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - holmes_cubic_map
+   * - kaplan_yorke_map
      - halvorsens_cyclically_symmetric_attractor
      - 
      - 
@@ -188,7 +168,7 @@ The following table provides a list of all the available dynamical systems as ca
      - 
      - 
      - 
-   * - kaplan_yorke_map
+   * - ginger_bread_man_map
      - burke_shaw_attractor
      - 
      - 
@@ -249,8 +229,19 @@ The following table provides a list of all the available dynamical systems as ca
 
 
 
-Examples
-#########
+Meta Function for Simulating Dynamical Systems 
+==============================================
+
+The following function can be used to simulate a wide variety of dynamical systems. However, since the plan is for this function to be deprecated in a future release, we recommend using the specific functions for each system instead. 
+
+
+.. automodule:: teaspoon.MakeData.DynSysLib.DynSysLib
+    :members:
+    
+
+Of the optional other parameters either the **dynamic_state parameter** or the system **parameters** must be used.
+
+
 The following is a minimal working example::
 
     import matplotlib.pyplot as plt

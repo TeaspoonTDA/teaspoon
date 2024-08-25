@@ -15,7 +15,7 @@ Texture Analaysis Overview
 *********************************
 The process for analyzing these texture features is captured in the overview flow chart below. 
 
-.. figure::_overview_full.png
+.. figure:: ../../figures/_overview_full.png
    :scale: 40 %
 
 
@@ -35,7 +35,7 @@ Point cloud persistent homology is computed on the coordinates of the feature ce
 
 An example usage of this function is provided below where synthetic grids are generated to simulate the `nominal` and `experimental` feature center coordinates. The experimental grid has been perturbed by adding uniform noise to the x and y coordinates. The two input grids are shown in the figure below.
 
-.. figure::synthetic_grid.png
+.. figure:: ../../figures/synthetic_grid.png
    :scale: 35 %
 
 
@@ -74,7 +74,7 @@ Feature Depth
 
 An example use of this function is provided below. The example generates synthetic surfaces representing the `nominal` and `experimental` textures. These generated surfaces are shown below where there are 16 features in each image generated using 2D Gaussian distributions. One of the features in the experimental image is shallower than the others representing a non uniform depth distribution. Further, samples from a Gaussian distribution are added to the experimental surface to introduce noise in the image and further alter the depth distribution. 
 
-.. figure::synthetic_textures_depth.png
+.. figure:: ../../figures/synthetic_textures_depth.png
    :scale: 35 %
 
 **Example**::
@@ -154,7 +154,7 @@ Feature Roundness
 
 An example use of this function is provided below. The example generates synthetic surfaces representing the `nominal` and `experimental` textures. These generated surfaces are shown below where there are 16 features in each image generated using 2D Gaussian distributions similarily to the depth example above. However, for the experimental image in this case, all of the features are elliptical and the additive noise was increased to alter the roundness of the features.
 
-.. figure::synthetic_textures_roundness.png
+.. figure:: ../../figures/synthetic_textures_roundness.png
    :scale: 35 %
 
 **Example**::
@@ -214,7 +214,7 @@ Output of example::
 
    roundness_score = 0.11883556
 
-.. figure::emd_plot.png
+.. figure:: ../../figures/emd_plot.png
     :scale: 60 %
     :align: center
 

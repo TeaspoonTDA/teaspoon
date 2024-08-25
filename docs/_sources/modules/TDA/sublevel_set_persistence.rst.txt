@@ -49,7 +49,7 @@ Where the output for this example is::
      [-34.58506622  25.25230112]
      [        -inf  32.58419686]]
 
-.. figure::SLSP_example.png
+.. figure:: ../../figures/SLSP_example.png
    :scale: 75 %
 
 
@@ -145,5 +145,5 @@ Where the output for this example is::
     Distribution parameter estimate:  1.0665900603015368
     C:  7.408859563871353
 
-.. figure::SLSP_tools_cutoff.png
+.. figure:: ../../figures/SLSP_tools_cutoff.png
    :scale: 70 %

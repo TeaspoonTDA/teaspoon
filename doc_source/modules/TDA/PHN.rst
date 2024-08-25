@@ -3,7 +3,7 @@ Persistent Homology of Networks (PHN)
 
 This page provides a summary of the python functions used in "`Persistent Homology of Complex Networks for Dynamic State Detection <https://arxiv.org/abs/1904.07403>`_" for generating and analyzing complex networks as the Persistent Homology of Networks (PHN). Additionally, a basic example is provided showing the functionality of the method for a simple time series. Below, a simple overview of the method is provided.
 
-.. figure::process.png
+.. figure:: ../../figures/process.png
    :scale: 40 %
 
 Outline of method: a time series (a) is embedded (b) using state space reconstruction from Takens' embedding or segmenting the vectors into a set of permutations. From these two representations, an undirected, unweighted network (c) is formed by either applying a kth nearest neighbors algorithm or by setting each permutation state as a node. The distance matrix (d) is calculated using the shortest path between all nodes. The
@@ -88,7 +88,7 @@ Where the output for this example is::
     1-D Persistent Homology (loops):  [[ 1. 15.]]
     Persistent homology of network statistics:  [0.0, 0, 0.02127659574468085]
 
-.. figure::networks_example_OP.png
+.. figure:: ../../figures/networks_example_OP.png
    :scale: 23 %
 
 

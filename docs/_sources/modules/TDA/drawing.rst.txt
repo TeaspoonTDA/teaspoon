@@ -27,7 +27,7 @@ The following example plots a persistence diagram::
 
 The output for this example is
 
-.. figure::persistence_diagram_plot_example.png
+.. figure:: ../../figures/persistence_diagram_plot_example.png
    :scale: 20 %
    
    
@@ -48,5 +48,5 @@ The following example plots a point cloud::
 
 The output for this example is
 
-.. figure::point_cloud_plot_example.png
+.. figure:: ../../figures/point_cloud_plot_example.png
    :scale: 20 %

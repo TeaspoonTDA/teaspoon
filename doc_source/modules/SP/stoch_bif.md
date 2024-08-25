@@ -2,7 +2,9 @@
 
 Stochastic P-bifurcations are points of topological changes in the joint probability density function (PDF) of a stochastic system. Please cite the papers [“A topological framework for identifying phenomenological bifurcations in stochastic dynamical systems”](https://doi.org/10.1007/s11071-024-09289-1) and [“Topological Detection of Phenomenological Bifurcations with Unreliable Kernel Densities”](https://doi.org/10.48550/arXiv.2401.16563) when using these functions. These modules can be used to detect P-bifurcation given
 
-- [Analytical Densities](#analytical-density)
+- [Stochastic P-Bifurcation Detection](#stochastic-p-bifurcation-detection)
+  - [Analytical Density](#analytical-density)
+    - [Example](#example)
 
 ## Analytical Density
 
@@ -34,7 +36,7 @@ M = analytical_homological_bifurcation_plot(PDFs, bifurcation_parameters=factors
 
 The output for this example is
 
-```{image}analytical_homological_plot.png
+```{image} ../../figures/analytical_homological_plot.png
 :alt: Analytical Homological Plot
 :width: 300px
 :align: left

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.2.2. Featurization &mdash; teaspoon 1.3.7 documentation</title>
+  <title>2.5.2. Featurization &mdash; teaspoon 1.3.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
@@ -17,14 +17,16 @@
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.2.3. Classification" href="CL.html" />
-    <link rel="prev" title="2.2.1. Datasets" href="DS.html" /> 
+    <link rel="next" title="2.5.3. Classification" href="CL.html" />
+    <link rel="prev" title="2.5.1. Datasets" href="DS.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,62 +57,64 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">2. Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../ParamSelection/index.html">2.1. Parameter Selection Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html">2.1.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MakeData/index.html">2.1. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/PointCloud.html">2.1.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/DynSysLib/index.html">2.1.2. Dynamical Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html">2.2.1. Mutual Information (MI) for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html">2.1.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html">2.2.2. Auto-correlation for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html">2.1.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html">2.2.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html">2.1.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html">2.1.5. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html">2.2.5. MsPE for time delay (tau) and dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html">2.1.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html">2.2.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">2.2. Machine Learning (ML) Module</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="DS.html">2.2.1. Datasets</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2.2.2. Featurization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="CL.html">2.2.3. Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#references">2.2.4. References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SP/index.html">2.3. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../SP/tsa.html">2.3.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/network.html">2.3.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/information.html">2.3.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/misc.html">2.3.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/texture_analysis.html">2.3.5. Texture Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../TDA/index.html">2.3. Topological Data Analaysis (TDA) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/PHN.html">2.3.1. Persistent Homology of Networks (PHN) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/distances.html">2.3.2. Distances</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/drawing.html">2.3.3. Drawing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/persistence.html">2.3.4. Persistence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/sublevel_set_persistence.html">2.3.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/magnitude.html">2.3.6. Magnitude</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TDA/fast_zigzag.html">2.3.7. Fast Zigzag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TDA/index.html">2.4. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/PHN.html">2.4.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/distances.html">2.4.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/drawing.html">2.4.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/persistence.html">2.4.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/sublevel_set_persistence.html">2.4.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/magnitude.html">2.4.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/fast_zigzag.html">2.4.7. Fast Zigzag</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../SP/index.html">2.4. Signal Processing (SP) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../SP/tsa.html">2.4.1. Time Series Analysis (TSA) Tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/network.html">2.4.2. Network Representation of Time Series</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/information.html">2.4.3. Information Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/misc.html">2.4.4. Miscellaneous</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/texture_analysis.html">2.4.5. Texture Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../SP/stoch_bif.html">2.4.6. Stochastic P-Bifurcation Detection</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../MakeData/index.html">2.5. Make Data (MakeData) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../MakeData/PointCloud.html">2.5.1. Point Cloud Data Generation (PointCloud) Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../MakeData/DynSysLib/index.html">2.5.2. Dynamic Systems Library (DynSysLib) Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">2.5. Machine Learning (ML) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="DS.html">2.5.1. Datasets</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.5.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CL.html">2.5.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#references">2.5.4. References</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">4. Contributing</a><ul>
@@ -135,9 +139,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Table of Contents</a></li>
-          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.2. </span>Persistence Diagram Featurization</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">2.2.2. </span>Featurization</li>
+          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.5. </span>Persistence Diagram Featurization</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.5.2. </span>Featurization</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/modules/ML/F_PD.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -148,13 +152,13 @@
            <div itemprop="articleBody">
              
   <section id="featurization">
-<span id="id1"></span><h1><span class="section-number">2.2.2. </span>Featurization<a class="headerlink" href="#featurization" title="Link to this heading"></a></h1>
+<span id="id1"></span><h1><span class="section-number">2.5.2. </span>Featurization<a class="headerlink" href="#featurization" title="Link to this heading"></a></h1>
 <p>This documentation includes five different persistence diagram featurization methods.
 These are persistence landscapes, persistence images, Carlsson Coordinates, kernel method, and signature of paths.</p>
 <section id="persistence-landscapes">
-<span id="id2"></span><h2><span class="section-number">2.2.2.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Link to this heading"></a></h2>
+<span id="id2"></span><h2><span class="section-number">2.5.2.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Link to this heading"></a></h2>
 <section id="landscape-class">
-<h3><span class="section-number">2.2.2.1.1. </span>Landscape class<a class="headerlink" href="#landscape-class" title="Link to this heading"></a></h3>
+<h3><span class="section-number">2.5.2.1.1. </span>Landscape class<a class="headerlink" href="#landscape-class" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaspoon.ML.feature_functions.PLandscape">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">PLandscape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/ML/feature_functions.html#PLandscape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.PLandscape" title="Link to this definition"></a></dt>
@@ -203,7 +207,7 @@ The algorithm computes the persistence landscapes is written based on Ref. <span
 
 </dd></dl>
 
-<p><strong>Example:</strong> In this example, we do not specify which landscape function we want specifically. Therefore, algorihtms returns a warning to user if desired landscape points is wanted.</p>
+<p><strong>Example:</strong> In this example, we do not specify which landscape function we want. Therefore, the code returns a warning to user if desired landscape points is wanted.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
@@ -239,7 +243,7 @@ The algorithm computes the persistence landscapes is written based on Ref. <span
 <figure class="align-center" id="id13">
 <a class="reference internal image-reference" href="../../_images/All_Landscapes.png"><img alt="../../_images/All_Landscapes.png" src="../../_images/All_Landscapes.png" style="width: 708.0px; height: 371.09999999999997px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">All landscape functions for the given persistence diagram</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">All landscape functions for the given persistence diagram</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>If user specify the desired landscapes, output will be:</p>
@@ -299,19 +303,19 @@ The algorithm computes the persistence landscapes is written based on Ref. <span
 <figure class="align-center" id="id14">
 <a class="reference internal image-reference" href="../../_images/Des_Landscapes.png"><img alt="../../_images/Des_Landscapes.png" src="../../_images/Des_Landscapes.png" style="width: 491.25px; height: 282.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Chosen landscape functions for the given persistence diagram</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Chosen landscape functions for the given persistence diagram</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
 <section id="feature-matrix-generation">
-<span id="pb-landscape"></span><h3><span class="section-number">2.2.2.1.2. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Link to this heading"></a></h3>
+<span id="pb-landscape"></span><h3><span class="section-number">2.5.2.1.2. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Link to this heading"></a></h3>
 <figure class="align-center" id="id15">
 <span id="f-matrix"></span><a class="reference internal image-reference" href="../../_images/Mesh_Generation_Example.png"><img alt="../../_images/Mesh_Generation_Example.png" src="../../_images/Mesh_Generation_Example.png" style="width: 718.5px; height: 394.05px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Feature matrix generation steps explained with an simple example.</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Feature matrix generation steps explained with an simple example.</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.3</span></a> explains the steps for generation feature matrix using persistence landscapes. There are three persistence landscape sets for three different persistence diagram.
+<p><a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.4</span></a> explains the steps for generation feature matrix using persistence landscapes. There are three persistence landscape sets for three different persistence diagram.
 We choose one landscape function among them. In the example above, second landscape function is selected and plotted for each landscape set.
 The plot in the third column includes all selected landscape functions.
 In other words, we plot all selected landscapes in same figure.
@@ -320,13 +324,13 @@ Node points are projected on x-axis.
 The red dots in the plot represent these projections.
 Then, we sort these points (red dots) and remove the duplicates if there is any.
 Resulting array will be our mesh and it is used to obtain features.
-The mesh points is shown in <a class="reference internal" href="#mesh"><span class="std std-numref">Fig. 2.4</span></a> with red dots.
+The mesh points is shown in <a class="reference internal" href="#mesh"><span class="std std-numref">Fig. 2.5</span></a> with red dots.
 There may not be corresponding y value for each mesh points in selected landscape functions so we use linear interpolation to find these values.
 Then, these y values become the feature for each landscape functions, and they can be used in classification.</p>
 <figure class="align-center" id="id16">
 <span id="mesh"></span><a class="reference internal image-reference" href="../../_images/Mesh_Points.png"><img alt="../../_images/Mesh_Points.png" src="../../_images/Mesh_Points.png" style="width: 421.0px; height: 165.20000000000002px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Mesh obtained using second landscape function for the example provided in <a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.3</span></a>.</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Mesh obtained using second landscape function for the example provided in <a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.4</span></a>.</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <dl class="py function" id="module-teaspoon.ML.feature_functions">
@@ -361,7 +365,7 @@ mesh of landscapes functions.</p></li>
 </section>
 </section>
 <section id="persistence-images">
-<span id="id4"></span><h2><span class="section-number">2.2.2.2. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Link to this heading"></a></h2>
+<span id="id4"></span><h2><span class="section-number">2.5.2.2. </span>Persistence Images<a class="headerlink" href="#persistence-images" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_Image">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_Image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pers_imager</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/ML/feature_functions.html#F_Image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_Image" title="Link to this definition"></a></dt>
@@ -404,18 +408,16 @@ for test set is computed. The default is None.</p></li>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Ff</span><span class="o">.</span><span class="n">plot_F_Images</span><span class="p">(</span><span class="n">feature_PI</span><span class="p">,</span> <span class="n">num_plots</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The algorithm will return four images as shown in <a class="reference internal" href="#pi-example"><span class="std std-numref">Fig. 2.5</span></a>.  An example notebook is also available.</p>
+<p>The algorithm will return four images as shown in <a class="reference internal" href="#pi-example"><span class="std std-numref">Fig. 2.6</span></a>.  An example notebook is also available: <a class="reference internal" href="../../notebooks/persistence_images.html"><span class="doc">Lanscape Notebook</span></a>.</p>
 <figure class="align-center" id="id17">
 <span id="pi-example"></span><a class="reference internal image-reference" href="../../_images/PI_Example.png"><img alt="../../_images/PI_Example.png" src="../../_images/PI_Example.png" style="width: 506.40000000000003px; height: 248.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Example persistence images.</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Example of persistence images.</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 <section id="carlsson-coordinates">
-<span id="id5"></span><h2><span class="section-number">2.2.2.3. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Link to this heading"></a></h2>
+<span id="id5"></span><h2><span class="section-number">2.5.2.3. </span>Carlsson Coordinates<a class="headerlink" href="#carlsson-coordinates" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_CCoordinates">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_CCoordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/ML/feature_functions.html#F_CCoordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_CCoordinates" title="Link to this definition"></a></dt>
@@ -467,7 +469,7 @@ Each feature matrix has a size of NxFN, where N is the number of persistence dia
 </div>
 </section>
 <section id="template-functions">
-<span id="id8"></span><h2><span class="section-number">2.2.2.4. </span>Template Functions<a class="headerlink" href="#template-functions" title="Link to this heading"></a></h2>
+<span id="id8"></span><h2><span class="section-number">2.5.2.4. </span>Template Functions<a class="headerlink" href="#template-functions" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.ML.feature_functions.tent">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">tent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dgm_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BirthDeath'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/ML/feature_functions.html#tent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.tent" title="Link to this definition"></a></dt>
@@ -561,7 +563,7 @@ function on the base mesh. This matrix assumes that on a 2D mesh the functions a
 </div>
 </section>
 <section id="path-signatures">
-<span id="id9"></span><h2><span class="section-number">2.2.2.5. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Link to this heading"></a></h2>
+<span id="id9"></span><h2><span class="section-number">2.5.2.5. </span>Path Signatures<a class="headerlink" href="#path-signatures" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.ML.feature_functions.F_PSignature">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">F_PSignature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_Number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/ML/feature_functions.html#F_PSignature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.F_PSignature" title="Link to this definition"></a></dt>
@@ -607,7 +609,7 @@ Function takes two inputs and these are persistence landcsape set in an object a
 </div>
 </section>
 <section id="kernel-method">
-<span id="id11"></span><h2><span class="section-number">2.2.2.6. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Link to this heading"></a></h2>
+<span id="id11"></span><h2><span class="section-number">2.5.2.6. </span>Kernel Method<a class="headerlink" href="#kernel-method" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.ML.feature_functions.KernelMethod">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.ML.feature_functions.</span></span><span class="sig-name descname"><span class="pre">KernelMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perDgm1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perDgm2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/ML/feature_functions.html#KernelMethod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.ML.feature_functions.KernelMethod" title="Link to this definition"></a></dt>
@@ -650,8 +652,8 @@ There are three inputs and these are two persistence diagrams and the kernel sca
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="DS.html" class="btn btn-neutral float-left" title="2.2.1. Datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CL.html" class="btn btn-neutral float-right" title="2.2.3. Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="DS.html" class="btn btn-neutral float-left" title="2.5.1. Datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CL.html" class="btn btn-neutral float-right" title="2.5.3. Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

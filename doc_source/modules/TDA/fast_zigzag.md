@@ -23,6 +23,7 @@ and the output can be read and plotted by the following module
 ```{eval-rst}
 .. automodule:: teaspoon.TDA.fast_zigzag
    :members: plot_output_zigzag
+   :no-index:
 ```
 
 ### Example
@@ -47,9 +48,9 @@ plot_output_zigzag(filename, inserts, deletes, plotH2=False)
 
 ```
 
-The point clouds with the peristence diagram 
+The point clouds with the persistence diagram 
 
-```{image}fast_zigzag.png
+```{image} ../../figures/fast_zigzag.png
 :alt: Point Clouds with zigzag persistence diagram
 :width: 100%
 :align: center
