@@ -17,8 +17,8 @@ sys.modules['ripser'] = mock.Mock()
 # -- Project information -----------------------------------------------------
 
 project = 'teaspoon'
-copyright = '2020, Munch'
-author = 'Elizabeth Munch'
+copyright = '2024, Munch and Khasawneh'
+author = 'Elizabeth Munch and Firas Khasawneh'
 release = '1.3.7'
 
 source_suffix = {
@@ -45,7 +45,8 @@ extensions = ['sphinx.ext.autodoc',
               'sphinxcontrib.bibtex',
               'sphinx-prompt',
 	           'IPython.sphinxext.ipython_console_highlighting',
-              'myst_parser']
+              'myst_parser',
+              'nbsphinx']
 
 # Add any paths that contain templates here, relative to this directory.
 myst_heading_anchors = 5

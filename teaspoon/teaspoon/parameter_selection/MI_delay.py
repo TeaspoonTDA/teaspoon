@@ -10,6 +10,7 @@ for partitioning the x(t) vs x(t+tau) plots for calculating the mutual informati
 import scipy
 import numpy as np
 
+
 class Partitions:
     def __init__(self, data=None,
                  meshingScheme=None,

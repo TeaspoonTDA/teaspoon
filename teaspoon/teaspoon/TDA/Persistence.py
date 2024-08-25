@@ -61,6 +61,7 @@ def prepareFolders():
 # ----------------------------------------------
 # ----------------------------------------------
 
+
 def minPers(Dgm):
     """
     Finds minimum persistence for a given diagram
@@ -319,7 +320,8 @@ def CROCKER_Stack(DGMS, maxEps=3, numStops=10, alpha=None, plotting=True):
 
     for aps_idx, alpha_ in enumerate(alpha):
         for idx, Dgm in enumerate(DGMS):
-            thresholds_, betti_vals_ = BettiCurve(Dgm, maxEps, numStops, alpha_)
+            thresholds_, betti_vals_ = BettiCurve(
+                Dgm, maxEps, numStops, alpha_)
             all_betti_numbers_[aps_idx, :, idx] = betti_vals_
 
     if plotting:

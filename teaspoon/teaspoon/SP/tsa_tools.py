@@ -342,7 +342,8 @@ def ZeDA(sig, t1, tn, level=0.0,  plotting=False, method='std', score=3.0):
 
         iso_forest = IsolationForest(n_estimators=125)
         iso_df = fit_model(iso_forest, data)
-        iso_df['Predictions'] = iso_df['Predictions'].map(lambda x: 1 if x == -1 else 0)
+        iso_df['Predictions'] = iso_df['Predictions'].map(
+            lambda x: 1 if x == -1 else 0)
 
         predictions = iso_df['Predictions'].to_numpy()
 
@@ -368,7 +369,8 @@ def ZeDA(sig, t1, tn, level=0.0,  plotting=False, method='std', score=3.0):
 
         import operator
 
-        I_index = [*range(0, len(p_mu))] + [*range(len(p_mu), len(p_mu) + len(q_mu))]
+        I_index = [*range(0, len(p_mu))] + \
+            [*range(len(p_mu), len(p_mu) + len(q_mu))]
         I = p_mu + q_mu
 
         I_dict = dict(zip(I_index, I))
@@ -472,7 +474,8 @@ def ZeDA(sig, t1, tn, level=0.0,  plotting=False, method='std', score=3.0):
     elif method == 'iso':
         p_mu, q_mu = sortPQ_outlier(p, q)
         if len(p_mu) == 0 and len(q_mu) == 0:
-            print("The method 'iso' could not detect any points. Please use another method.")
+            print(
+                "The method 'iso' could not detect any points. Please use another method.")
 
     else:
         print('Keyword for method unrecognized. Use "std" for standard deviation, "iso" for Isolation Forest, or "dt" for signal with no noise.')
@@ -494,7 +497,8 @@ def ZeDA(sig, t1, tn, level=0.0,  plotting=False, method='std', score=3.0):
         plt.figure(figsize=(8, 4), dpi=200)
 
         plt.plot(t, sig, linewidth=1.5, alpha=1)
-        plt.axhline(y=0, linewidth=0.75, linestyle=':', color='grey', label='_nolegend_')
+        plt.axhline(y=0, linewidth=0.75, linestyle=':',
+                    color='grey', label='_nolegend_')
         plt.xlim([t1, tn])
         plt.xticks(fontsize=20)
         plt.yticks(fontsize=20)
@@ -502,7 +506,8 @@ def ZeDA(sig, t1, tn, level=0.0,  plotting=False, method='std', score=3.0):
         plt.ylabel("Amplitude", fontsize=25)
 
         ymin, ymax = plt.gca().get_ylim()
-        plt.vlines(brackets, ymin=ymin, ymax=ymax, linewidth=1.0, color='green', linestyle='--')
+        plt.vlines(brackets, ymin=ymin, ymax=ymax,
+                   linewidth=1.0, color='green', linestyle='--')
 
         n = np.zeros(len(ZC))
         plt.scatter(ZC, n, s=150, color='black', marker='x', zorder=2)
@@ -522,6 +527,7 @@ def ZeDA(sig, t1, tn, level=0.0,  plotting=False, method='std', score=3.0):
 ##########################################################################
 
 # In[ ]:
+
 
 def first_zero(sig, t1, tn, level=0.0, r=1.2, plotting=False):
     """This function takes a discrete time series and finds the first zero-crossing or the global minimum (if no crossing).
@@ -599,7 +605,6 @@ def first_zero(sig, t1, tn, level=0.0, r=1.2, plotting=False):
             x = [item[0] for item in sorted_pairs]
             y = [item[1] for item in sorted_pairs]
 
-
     ######################################################################
     # nth iteration
 
@@ -657,7 +662,8 @@ def first_zero(sig, t1, tn, level=0.0, r=1.2, plotting=False):
             lambda2.append(lambda_max*(x1[i][1] - x1[i][0]) / del_t_max)
             m.append(r*max(lambda1[i], lambda2[i], epsilon))
             R.append(0.5*(y1[i][1] + y1[i][0] - m[i]*(x1[i][1] - x1[i][0])))
-            t_hat.append(0.5*(x1[i][1] + x1[i][0] - (y1[i][1] - y1[i][0])/m[i]))
+            t_hat.append(0.5*(x1[i][1] + x1[i][0] -
+                         (y1[i][1] - y1[i][0])/m[i]))
 
         cond = [i for i in range(len(R)) if R[i] <= 0]
 
@@ -706,7 +712,8 @@ def first_zero(sig, t1, tn, level=0.0, r=1.2, plotting=False):
         plt.figure(figsize=(8, 4), dpi=200)
 
         plt.plot(t, sig, linewidth=1.5, alpha=1)
-        plt.axhline(y=0, linewidth=0.75, linestyle=':', color='grey', label='_nolegend_')
+        plt.axhline(y=0, linewidth=0.75, linestyle=':',
+                    color='grey', label='_nolegend_')
         plt.xlim([t1, tn])
         plt.xticks(fontsize=20)
         plt.yticks(fontsize=20)

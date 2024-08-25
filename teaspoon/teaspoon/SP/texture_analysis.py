@@ -32,9 +32,11 @@ def lattice_shape(data, plot=False):
     if type(data) != np.ndarray:
         raise TypeError('Data needs to be a numpy array.')
     if np.shape(data) != (len(data), 2):
-        raise ValueError('Data needs to have dimension (n,2) where n is the number of center points in the grid.')
+        raise ValueError(
+            'Data needs to have dimension (n,2) where n is the number of center points in the grid.')
     if int(np.sqrt(len(data))) ** 2 != len(data):
-        raise ValueError('The number of data points needs to be a square number.')
+        raise ValueError(
+            'The number of data points needs to be a square number.')
 
     # Scale data from [-1,1]
     xmin = np.min(data[:, 0])
@@ -88,8 +90,10 @@ def lattice_shape(data, plot=False):
 
         # Plot Histograms
         ax = plt.subplot(gs[0:1, 0:1])
-        plt.hist(de0, bins='rice', orientation='horizontal', label='$H_0$', color='blue')
-        plt.hist(de1, bins='rice', orientation='horizontal', label='$H_1$', color='red')
+        plt.hist(de0, bins='rice', orientation='horizontal',
+                 label='$H_0$', color='blue')
+        plt.hist(de1, bins='rice', orientation='horizontal',
+                 label='$H_1$', color='red')
         plt.xticks(size=TextSize)
         plt.yticks(np.arange(0, 1, step=0.2), size=TextSize)
         plt.xlabel('Count', size=TextSize)
@@ -162,9 +166,10 @@ def feature_depth(nom_image, exp_image, nfeat, plot=False):
         top = max(maxli, 1)
         ax = plt.subplot(gs[0:1, 0:1])
         plt.hist(nom_li0, bins=np.linspace(0, 1, num=numbins), orientation='horizontal', color='blue',
-                            label='$H_0$', density=True)
+                 label='$H_0$', density=True)
         plt.xticks(size=TextSize - 2)
-        plt.yticks(np.around(np.arange(0, 1.1 * top, step=(top / 5)), 2), size=TextSize - 2)
+        plt.yticks(
+            np.around(np.arange(0, 1.1 * top, step=(top / 5)), 2), size=TextSize - 2)
         plt.ylabel('Lifetime', size=TextSize)
         plt.xlabel('Probability Density', size=TextSize)
         plt.ylim(-0.02, 1.2 * top)
@@ -178,9 +183,10 @@ def feature_depth(nom_image, exp_image, nfeat, plot=False):
         maxli = max(exp_li0)
         top = max(maxli, 1)
         plt.hist(exp_li0, bins='rice', orientation='horizontal', color='blue',
-                            label='$H_0$', density=True)
+                 label='$H_0$', density=True)
         plt.xticks(size=TextSize - 2)
-        plt.yticks(np.around(np.arange(0, 1.1 * top, step=(top / 4)), 2), size=TextSize - 2)
+        plt.yticks(
+            np.around(np.arange(0, 1.1 * top, step=(top / 4)), 2), size=TextSize - 2)
         plt.ylabel('Lifetime', size=TextSize)
         plt.xlabel('Probability Density', size=TextSize)
         plt.ylim(-0.02, 1.2 * top)
@@ -195,8 +201,10 @@ def feature_depth(nom_image, exp_image, nfeat, plot=False):
         plt.ylabel('Lifetime', size=TextSize)
         plt.xlim(-0.02, 1.2 * top)
         plt.ylim(-0.02, 1.2 * top)
-        plt.xticks(np.around(np.arange(0, 1.1 * top, step=(top / 4)), 2), size=TextSize - 2)
-        plt.yticks(np.around(np.arange(0, 1.1 * top, step=(top / 4)), 2), size=TextSize - 2)
+        plt.xticks(
+            np.around(np.arange(0, 1.1 * top, step=(top / 4)), 2), size=TextSize - 2)
+        plt.yticks(
+            np.around(np.arange(0, 1.1 * top, step=(top / 4)), 2), size=TextSize - 2)
         plt.title(f'Persistence Diagram', size=TextSize)
         plt.legend(loc='best', fontsize=TextSize - 10, markerscale=1.3)
         plt.subplots_adjust(hspace=0.5)
@@ -288,16 +296,17 @@ def feature_roundness(nom_image, exp_image, nfeat, width, num_steps=50, plot=Fal
 
         # Compute earth movers distance
         if len(nom_li) > 0 and len(exp_li) > 0:
-            dist = np.array([np.round(T,2), np.round(stats.wasserstein_distance(nom_li, exp_li),4)])
+            dist = np.array([np.round(T, 2), np.round(
+                stats.wasserstein_distance(nom_li, exp_li), 4)])
             emd.append(dist)
             print(f'Step {step}/{num_steps}: (T, EMD) = ({dist})')
         else:
-            dist = np.array([np.round(T,2), 0])
+            dist = np.array([np.round(T, 2), 0])
             emd.append(dist)
             print(f'Step {step}/{num_steps}: (T, EMD) = ({dist})')
-        
+
         step += 1
-    
+
     # Compute roundness score and plot roundness curve
     emd = np.array(emd)
     roundness_score = integrate.simpson(emd[:, 1], x=emd[:, 0]) / (1 - ref)
@@ -305,7 +314,8 @@ def feature_roundness(nom_image, exp_image, nfeat, width, num_steps=50, plot=Fal
         plt.figure(figsize=(6, 6))
         plt.plot(emd[:, 0], emd[:, 1], 'r')
         plt.plot([-0.02, 1], [0, 0], 'k--', linewidth=0.5)
-        plt.plot([0, 0], [-0.02, 1.2 * np.max(emd[:, 1])], 'k--', linewidth=0.5)
+        plt.plot([0, 0], [-0.02, 1.2 * np.max(emd[:, 1])],
+                 'k--', linewidth=0.5)
         plt.xticks(np.round(np.linspace(0, 1, 4), 2), fontsize=30)
         plt.yticks(np.round(np.linspace(0, 0.25, 4), 2), fontsize=30)
         plt.xlim(-0.02, 1)
@@ -324,7 +334,7 @@ def filter_outliers(points, num_features):
         with a quantity larger than the expected total number of features.
     '''
     # Compute histogram
-    hist_noise = np.histogram(points[:,1], bins='rice')
+    hist_noise = np.histogram(points[:, 1], bins='rice')
     cutoffmin1 = 0
     remaining = np.sum(hist_noise[0])
     # If a bar is larger than feat, increase the noise cutoff
@@ -334,7 +344,7 @@ def filter_outliers(points, num_features):
             remaining -= item
 
     # Remove points from the persistence diagram with a lifetime below the cutoff
-    points = points[np.where(points[:,1] > cutoffmin1)]
+    points = points[np.where(points[:, 1] > cutoffmin1)]
     print(f'Cutoff Lifetime: {cutoffmin1}')
     return points
 
@@ -380,7 +390,7 @@ def find_ref_height(feat, per_diag):
                 break
     # No features? return minimum birth
     if len(z) == 0:
-        z = np.min(per_diag[:,0])
+        z = np.min(per_diag[:, 0])
     # Return average feature birth height
     return np.mean(z)
 
@@ -404,11 +414,11 @@ def generate_ph(img, dim):
     """
 
     pipe = Pipeline(
-    [
-        ("cub_pers", CubicalPersistence(homology_dimensions=dim, n_jobs=-2)),
-        ("finite_diags", DiagramSelector(use=True, point_type="finite")),
-    ]
-)
+        [
+            ("cub_pers", CubicalPersistence(homology_dimensions=dim, n_jobs=-2)),
+            ("finite_diags", DiagramSelector(use=True, point_type="finite")),
+        ]
+    )
     pdgm = pipe.fit_transform(np.array([img]))
     pdgm = pdgm[0].astype(np.float64)
 

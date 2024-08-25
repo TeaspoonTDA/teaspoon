@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.1.2.3. Driven Dissipative Flows &mdash; teaspoon 1.3.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="2.1.2.4. Conservative Flows" href="conservative_flows.html" />
+    <link rel="prev" title="2.1.2.2. Autonomous Dissipative Flows" href="autonomous_dissipative_flows.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/index.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/index.html#installation">1.1. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/index.html#optional-dependencies">1.2. Optional Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/index.html#issues">1.3. Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">2. Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">2.1. Make Data (MakeData) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../PointCloud.html">2.1.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">2.1.2. Dynamical Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html">2.2.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/AC.html">2.2.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html">2.2.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html">2.2.5. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FNN.html">2.2.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../SP/index.html">2.3. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/tsa.html">2.3.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/network.html">2.3.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/information.html">2.3.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/misc.html">2.3.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/texture_analysis.html">2.3.5. Texture Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../SP/stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../TDA/index.html">2.4. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/PHN.html">2.4.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/distances.html">2.4.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/drawing.html">2.4.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/persistence.html">2.4.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/sublevel_set_persistence.html">2.4.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/magnitude.html">2.4.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../TDA/fast_zigzag.html">2.4.7. Fast Zigzag</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ML/index.html">2.5. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ML/DS.html">2.5.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ML/F_PD.html">2.5.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ML/CL.html">2.5.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ML/index.html#references">2.5.4. References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#contributing-to-documentation">4.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">5. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">6. Citing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">teaspoon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2.1. </span>MakeData Module Documentation</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.1.2. </span>Dynamical Systems Library (DynSysLib)</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.1.2.3. </span>Driven Dissipative Flows</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/modules/MakeData/DynSysLib/driven_dissipative_flows.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="driven-dissipative-flows">
+<h1><span class="section-number">2.1.2.3. </span>Driven Dissipative Flows<a class="headerlink" href="#driven-dissipative-flows" title="Link to this heading"></a></h1>
+<section id="module-teaspoon.MakeData.DynSysLib.driven_dissipative_flows">
+<span id="main-functions"></span><h2><span class="section-number">2.1.2.3.1. </span>Main Functions<a class="headerlink" href="#module-teaspoon.MakeData.DynSysLib.driven_dissipative_flows" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.driven_dissipative_flows.base_excited_magnetic_pendulum">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">base_excited_magnetic_pendulum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.1038,</span> <span class="pre">0.208,</span> <span class="pre">9.81,</span> <span class="pre">0.18775,</span> <span class="pre">1.919e-05,</span> <span class="pre">0.022,</span> <span class="pre">9.42477796076938,</span> <span class="pre">0.003,</span> <span class="pre">1.2,</span> <span class="pre">0.032,</span> <span class="pre">1.257e-06]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.0,</span> <span class="pre">0.0]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#base_excited_magnetic_pendulum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.base_excited_magnetic_pendulum" title="Link to this definition"></a></dt>
+<dd><p>This is a simple pendulum with a magnet at its base. See Myers &amp; Khasawneh <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. The system was simulated for 100 seconds at a rate of 200 Hz and the last 25 seconds were used for the chaotic response as shown in the figure below.</p>
+<figure class="align-default">
+<img alt="../../../_images/Base_Excited_Magnetic_Pendulum_Setup.png" src="../../../_images/Base_Excited_Magnetic_Pendulum_Setup.png" />
+</figure>
+<figure class="align-default">
+<img alt="../../../_images/Base_Excited_Magnetic_Pendulum.png" src="../../../_images/Base_Excited_Magnetic_Pendulum.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [m, l, g, r_cm, I_o, A, w, c, q, d, mu] or None if using the dynamic_state variable</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+<li><p><strong>Returns</strong> – </p></li>
+<li><p><strong>array</strong> – Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Audun Myers and Firas A. Khasawneh. Dynamic State Analysis of a Driven Magnetic Pendulum using Ordinal Partition Networks and Topological Data Analysis. ASME 32nd Conference on Mechanical Vibration and Noise (VIB), November 3, 2020.</p>
+</aside>
+</aside>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.driven_dissipative_flows.driven_pendulum">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">driven_pendulum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1,</span> <span class="pre">9.81,</span> <span class="pre">1,</span> <span class="pre">0.1,</span> <span class="pre">5,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#driven_pendulum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.driven_pendulum" title="Link to this definition"></a></dt>
+<dd><p>The point mass, driven simple pendulum with viscous damping is described as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{\theta} = \omega,\\\dot{\omega} = -\frac{g}{l}\sin{\theta} + \frac{A}{ml^2}\sin{\omega_m t} - c\omega\end{aligned}\end{align} \]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\(g = 9.81\)</span> for gravitational constant, <span class="math notranslate nohighlight">\(l = 1\)</span> for the length of pendulum arm, <span class="math notranslate nohighlight">\(m = 1\)</span> for the point mass, <span class="math notranslate nohighlight">\(A = 5\)</span> for the amplitude of force, and <span class="math notranslate nohighlight">\(\omega = 1\)</span> for driving force (periodic) and <span class="math notranslate nohighlight">\(\omega = 2\)</span> for a chaotic state. The system was simulated for 300 seconds at a rate of 50 Hz and the last 100 seconds were used for the chaotic response as shown in the figure below.</p>
+<figure class="align-default">
+<img alt="../../../_images/Driven_Simple_Pendulum.png" src="../../../_images/Driven_Simple_Pendulum.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [m, g, l, c, A, w] or None if using the dynamic_state variable</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(\theta_0\)</span>, <span class="math notranslate nohighlight">\(\omega_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.driven_dissipative_flows.driven_van_der_pol_oscillator">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">driven_van_der_pol_oscillator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[2.9,</span> <span class="pre">5,</span> <span class="pre">1.788]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-1.9,</span> <span class="pre">0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#driven_van_der_pol_oscillator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.driven_van_der_pol_oscillator" title="Link to this definition"></a></dt>
+<dd><p>The Driven Van der Pol Oscillator is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{x} = y,\\\dot{y} = -x + b(1 - x^2)y + A\sin{\omega t}\end{aligned}\end{align} \]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\((x_0. y_0) = (-1.0, 0.0)\)</span> for initial conditions, <span class="math notranslate nohighlight">\(A = 5\)</span>, <span class="math notranslate nohighlight">\(\omega = 1.788\)</span>, <span class="math notranslate nohighlight">\(b = 2.9\)</span> (periodic) and <span class="math notranslate nohighlight">\(b = 3.0\)</span> (chaotic).</p>
+<figure class="align-default">
+<img alt="../../../_images/Driven_VanderPol_Oscillator.png" src="../../../_images/Driven_VanderPol_Oscillator.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [b, A, <span class="math notranslate nohighlight">\(\omega\)</span>] or None if using the dynamic_state variable</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.driven_dissipative_flows.shaw_van_der_pol_oscillator">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">shaw_van_der_pol_oscillator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1,</span> <span class="pre">5,</span> <span class="pre">1.4]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1.3,</span> <span class="pre">0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#shaw_van_der_pol_oscillator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.shaw_van_der_pol_oscillator" title="Link to this definition"></a></dt>
+<dd><p>The Shaw Van der Pol Oscillator is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{x} = y + \sin{\omega t},\\\dot{y} = -x + b(1 - x^2)y\end{aligned}\end{align} \]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\((x_0. y_0) = (1.3, 0.0)\)</span> for initial conditions, <span class="math notranslate nohighlight">\(A = 5\)</span>, <span class="math notranslate nohighlight">\(b = 1\)</span>, <span class="math notranslate nohighlight">\(\omega = 1.4\)</span> (periodic) and <span class="math notranslate nohighlight">\(\omega = 1.8\)</span> (chaotic).</p>
+<figure class="align-default">
+<img alt="../../../_images/Shaw_VanderPol_Oscillator.png" src="../../../_images/Shaw_VanderPol_Oscillator.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [b, A, <span class="math notranslate nohighlight">\(\omega\)</span>] or None if using the dynamic_state variable</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.driven_dissipative_flows.forced_brusselator">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">forced_brusselator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.4,</span> <span class="pre">1.2,</span> <span class="pre">0.05,</span> <span class="pre">1.1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.3,</span> <span class="pre">2]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#forced_brusselator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.forced_brusselator" title="Link to this definition"></a></dt>
+<dd><p>The Forced Brusselator is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{x} = x^2y - (b+1)x + a + A\sin{\omega t},\\\dot{y} = -x^2y + bx\end{aligned}\end{align} \]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\((x_0. y_0) = (0.3, 2.0)\)</span> for initial conditions, <span class="math notranslate nohighlight">\(a = 0.4\)</span>, <span class="math notranslate nohighlight">\(b = 1.2\)</span>, <span class="math notranslate nohighlight">\(A = 0.05\)</span>, <span class="math notranslate nohighlight">\(\omega = 1.1\)</span> (periodic) and <span class="math notranslate nohighlight">\(\omega = 1.0\)</span> (chaotic).</p>
+<figure class="align-default">
+<img alt="../../../_images/Forced_Brusselator.png" src="../../../_images/Forced_Brusselator.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [a, b, A, <span class="math notranslate nohighlight">\(\omega\)</span>] or None if using the dynamic_state variable</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.driven_dissipative_flows.ueda_oscillator">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">ueda_oscillator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.05,</span> <span class="pre">7.5,</span> <span class="pre">1.2]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[2.5,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#ueda_oscillator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.ueda_oscillator" title="Link to this definition"></a></dt>
+<dd><p>The Ueda Oscillator is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{x} = y,\\\dot{y} = -x^3 - by + A\sin{\omega t}\end{aligned}\end{align} \]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\((x_0. y_0) = (2.5, 0.0)\)</span> for initial conditions, <span class="math notranslate nohighlight">\(b = 0.05\)</span>, <span class="math notranslate nohighlight">\(A = 7.5\)</span>, <span class="math notranslate nohighlight">\(\omega = 1.2\)</span> (periodic) and <span class="math notranslate nohighlight">\(\omega = 1.0\)</span> (chaotic).</p>
+<figure class="align-default">
+<img alt="../../../_images/Ueda_Oscillator.png" src="../../../_images/Ueda_Oscillator.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [b, A, <span class="math notranslate nohighlight">\(\omega\)</span>] or None if using the dynamic_state variable</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.driven_dissipative_flows.duffings_two_well_oscillator">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">duffings_two_well_oscillator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.25,</span> <span class="pre">0.4,</span> <span class="pre">1.1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.2,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#duffings_two_well_oscillator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.duffings_two_well_oscillator" title="Link to this definition"></a></dt>
+<dd><p>The Duffings Two-Well Oscillator is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{x} = y,\\\dot{y} = -x^3 + x - by + A\sin{\omega t}\end{aligned}\end{align} \]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\((x_0. y_0) = (2.5, 0.0)\)</span> for initial conditions, <span class="math notranslate nohighlight">\(b = 0.25\)</span>, <span class="math notranslate nohighlight">\(A = 0.4\)</span>, <span class="math notranslate nohighlight">\(\omega = 1.1\)</span> (periodic) and <span class="math notranslate nohighlight">\(\omega = 1.0\)</span> (chaotic).</p>
+<figure class="align-default">
+<img alt="../../../_images/Duffings_TwoWell_Oscillator.png" src="../../../_images/Duffings_TwoWell_Oscillator.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [b, A, <span class="math notranslate nohighlight">\(\omega\)</span>] or None if using the dynamic_state variable</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.driven_dissipative_flows.duffing_van_der_pol_oscillator">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">duffing_van_der_pol_oscillator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.2,</span> <span class="pre">8,</span> <span class="pre">0.35,</span> <span class="pre">1.3]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.2,</span> <span class="pre">-0.2]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#duffing_van_der_pol_oscillator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.duffing_van_der_pol_oscillator" title="Link to this definition"></a></dt>
+<dd><p>The Duffings Two-Well Oscillator is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{x} = y,\\\dot{y} = \mu (1 - \gamma x^2)y - x^3 + A\sin{\omega t}\end{aligned}\end{align} \]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\((x_0. y_0) = (0.2, 0.0)\)</span> for initial conditions, <span class="math notranslate nohighlight">\(\mu = 0.2\)</span>, <span class="math notranslate nohighlight">\(\gamma = 8\)</span>, <span class="math notranslate nohighlight">\(A = 0.35\)</span>, <span class="math notranslate nohighlight">\(\omega = 1.3\)</span> (periodic) and <span class="math notranslate nohighlight">\(\omega = 1.2\)</span> (chaotic).</p>
+<figure class="align-default">
+<img alt="../../../_images/Duffing_VanderPol_Oscillator.png" src="../../../_images/Duffing_VanderPol_Oscillator.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span> A, <span class="math notranslate nohighlight">\(\omega\)</span>] or None if using the dynamic_state variable</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.MakeData.DynSysLib.driven_dissipative_flows.rayleigh_duffing_oscillator">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">rayleigh_duffing_oscillator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.2,</span> <span class="pre">4,</span> <span class="pre">0.3,</span> <span class="pre">1.4]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.3,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#rayleigh_duffing_oscillator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.rayleigh_duffing_oscillator" title="Link to this definition"></a></dt>
+<dd><p>The Rayleigh Duffing Oscillator is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\dot{x} = y,\\\dot{y} = \mu (1 - \gamma y^2)y - x^3 + A\sin{\omega t}\end{aligned}\end{align} \]</div>
+<p>where we chose the parameters <span class="math notranslate nohighlight">\((x_0. y_0) = (0.3, 0.0)\)</span> for initial conditions, <span class="math notranslate nohighlight">\(\mu = 0.2\)</span>, <span class="math notranslate nohighlight">\(\gamma = 4\)</span>, <span class="math notranslate nohighlight">\(A = 0.3\)</span>, <span class="math notranslate nohighlight">\(\omega = 1.4\)</span> (periodic) and <span class="math notranslate nohighlight">\(\omega = 1.2\)</span> (chaotic).</p>
+<figure class="align-default">
+<img alt="../../../_images/Rayleigh_Duffing_Oscillator.png" src="../../../_images/Rayleigh_Duffing_Oscillator.png" />
+</figure>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Number of iterations.</p></li>
+<li><p><strong>fs</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – sampling rate for simulation.</p></li>
+<li><p><strong>SampleSize</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – length of sample at end of entire time series</p></li>
+<li><p><strong>parameters</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span> A, <span class="math notranslate nohighlight">\(\omega\)</span>] or None if using the dynamic_state variable</p></li>
+<li><p><strong>InitialConditions</strong> (<em>Optional</em><em>[</em><em>floats</em><em>]</em>) – list of values for [<span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>]</p></li>
+<li><p><strong>dynamic_state</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Set dynamic state as either ‘periodic’ or ‘chaotic’ if not supplying parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of the time indices as <cite>t</cite> and the simulation time series <cite>ts</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="meta-function">
+<h2><span class="section-number">2.1.2.3.2. </span>Meta Function<a class="headerlink" href="#meta-function" title="Link to this heading"></a></h2>
+<p>This function is for being able to input into the original <code class="docutils literal notranslate"><span class="pre">teaspoon.MakeData.DynSysLib.DynamicSystems</span></code> function with default parameters.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.driven_dissipative_flows.</span></span><span class="sig-name descname"><span class="pre">driven_dissipative_flows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/driven_dissipative_flows.html#driven_dissipative_flows"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="autonomous_dissipative_flows.html" class="btn btn-neutral float-left" title="2.1.2.2. Autonomous Dissipative Flows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="conservative_flows.html" class="btn btn-neutral float-right" title="2.1.2.4. Conservative Flows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Munch and Khasawneh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

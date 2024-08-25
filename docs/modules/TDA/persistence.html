@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.4.4. Persistence &mdash; teaspoon 1.3.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.4.5. Zero-Dimensional Sublevel Set Persistence" href="sublevel_set_persistence.html" />
+    <link rel="prev" title="2.4.3. Drawing" href="drawing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/index.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/index.html#installation">1.1. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/index.html#optional-dependencies">1.2. Optional Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/index.html#issues">1.3. Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">2. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MakeData/index.html">2.1. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/PointCloud.html">2.1.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/DynSysLib/index.html">2.1.2. Dynamical Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html">2.2.1. Mutual Information (MI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html">2.2.2. Auto-correlation for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html">2.2.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html">2.2.5. MsPE for time delay (tau) and dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html">2.2.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../SP/index.html">2.3. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../SP/tsa.html">2.3.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/network.html">2.3.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/information.html">2.3.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/misc.html">2.3.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/texture_analysis.html">2.3.5. Texture Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">2.4. Topological Data Analaysis (TDA) Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="PHN.html">2.4.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">2.4.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html">2.4.3. Drawing</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.4.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sublevel_set_persistence.html">2.4.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnitude.html">2.4.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_zigzag.html">2.4.7. Fast Zigzag</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ML/index.html">2.5. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ML/DS.html">2.5.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/F_PD.html">2.5.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/CL.html">2.5.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/index.html#references">2.5.4. References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">4. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#contributing-to-documentation">4.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">5. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">6. Citing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">teaspoon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.4. </span>Topological Data Analysis (TDA) Module Documentation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.4.4. </span>Persistence</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/TDA/persistence.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="persistence">
+<h1><span class="section-number">2.4.4. </span>Persistence<a class="headerlink" href="#persistence" title="Link to this heading"></a></h1>
+<p>The following example computes the minimum and maximum birth times, as well as the maximum persistence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Draw</span> <span class="kn">import</span> <span class="n">drawDgm</span>
+<span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">maxBirth</span><span class="p">,</span> <span class="n">minBirth</span><span class="p">,</span> <span class="n">maxPers</span>
+
+<span class="n">numPts</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Generate Torus</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">numPts</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+
+<span class="c1"># Compute persistence diagrams</span>
+<span class="n">PD1</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;dgms&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum Birth: &#39;</span><span class="p">,</span> <span class="n">maxBirth</span><span class="p">(</span><span class="n">PD1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minimum Birth: &#39;</span><span class="p">,</span> <span class="n">minBirth</span><span class="p">(</span><span class="n">PD1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max Persistence: &#39;</span><span class="p">,</span> <span class="n">maxPers</span><span class="p">(</span><span class="n">PD1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The output of this code is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Maximum</span> <span class="n">Birth</span><span class="p">:</span>  <span class="mf">1.0100464820861816</span>
+<span class="n">Minimum</span> <span class="n">Birth</span><span class="p">:</span>  <span class="mf">0.17203105986118317</span>
+<span class="n">Max</span> <span class="n">Persistence</span><span class="p">:</span>  <span class="mf">1.3953008949756622</span>
+</pre></div>
+</div>
+<p>The following example computes the minimum and maximum birth times and the
+maximum persistence across all persistence diagrams in the specified column of
+the DataFrame:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">maxBirthSeries</span><span class="p">,</span> <span class="n">minBirthSeries</span><span class="p">,</span> <span class="n">maxPersistenceSeries</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum Birth of all diagrams: &#39;</span><span class="p">,</span> <span class="n">maxBirthSeries</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minimum Birth of all diagrams: &#39;</span><span class="p">,</span> <span class="n">minBirthSeries</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max Persistence of all diagrams: &#39;</span><span class="p">,</span> <span class="n">maxPersistenceSeries</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>The output of this code is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Maximum</span> <span class="n">Birth</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">diagrams</span><span class="p">:</span>  <span class="mf">1.2070081233978271</span>
+<span class="n">Minimum</span> <span class="n">Birth</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">diagrams</span><span class="p">:</span>  <span class="mf">0.028233738616108894</span>
+<span class="n">Max</span> <span class="n">Persistence</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">diagrams</span><span class="p">:</span>  <span class="mf">1.6290252953767776</span>
+</pre></div>
+</div>
+<p>The following example computes the Betti Curve for a persistence diagram:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">BettiCurve</span>
+<span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">48823</span><span class="p">)</span>
+<span class="n">Dgm</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;dgms&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">BettiCurve</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Betti Curve:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output of this code is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Betti</span> <span class="n">Curve</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.</span> <span class="mf">36.</span>  <span class="mf">2.</span>  <span class="mf">0.</span>  <span class="mf">0.</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The following example computes the CROCKER plot for a set of persistence diagrams:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span>
+<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">CROCKER</span>
+<span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+
+<span class="n">DGMS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+
+    <span class="n">T</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">48823</span><span class="p">)</span>
+    <span class="n">Dgm</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;dgms&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">DGMS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Dgm</span><span class="p">)</span>
+
+<span class="n">Crocker</span> <span class="o">=</span> <span class="n">CROCKER</span><span class="p">(</span><span class="n">DGMS</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="module-teaspoon.TDA.Persistence">
+<span id="functions"></span><h2><span class="section-number">2.4.4.1. </span>Functions<a class="headerlink" href="#module-teaspoon.TDA.Persistence" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.BettiCurve">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">BettiCurve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#BettiCurve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.BettiCurve" title="Link to this definition"></a></dt>
+<dd><p>Computes the Betti Curve for a persistence diagram for thresholds 0 to maxEps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Dgm</strong> – (array) 2D numpy array of persistence diagram of a specific homology class</p></li>
+<li><p><strong>maxEps</strong> – (Optional[float]) Maximum value of threshold; default: 3</p></li>
+<li><p><strong>numStops</strong> – (Optional[int]) Number of points between 0 and maxEps; default: 10</p></li>
+<li><p><strong>alpha</strong> – (Optional[float]) alpha smoothing to diagonal, points below this line are ignored, used for Crocker Stacks; default: 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>array of threshold values representing the Betti curve</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.CROCKER">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">CROCKER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DGMS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#CROCKER"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.CROCKER" title="Link to this definition"></a></dt>
+<dd><p>Computes the CROCKER plot for a list of persistence diagrams for thresholds 0 to maxEps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DGMS</strong> – (list) A python list of 2D numpy arrays of persistence diagrams of a specific homology class</p></li>
+<li><p><strong>maxEps</strong> – (Optional[float]) Maximum value of threshold; default: 3</p></li>
+<li><p><strong>numStops</strong> – (Optional[int]) Number of points between 0 and maxEps; default: 10</p></li>
+<li><p><strong>plotting</strong> – (Optional[bool]) Plots the CROCKER for the given diagrams; default: True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D CROCKER plot</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.CROCKER_Stack">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">CROCKER_Stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DGMS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#CROCKER_Stack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.CROCKER_Stack" title="Link to this definition"></a></dt>
+<dd><p>Computes the CROCKER stack for a list of persistence diagrams for
+thresholds 0 to maxEps with given alpha smoothing. Implemented according to
+the paper “Capturing Dynamics of Time-Varying Data via Topology” by Xian
+L. et al.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DGMS</strong> (<em>list</em>) – A python list of 2D numpy arrays of persistence diagrams of
+a specific homology class</p></li>
+<li><p><strong>maxEps</strong> (<em>float</em><em>, </em><em>optional</em>) – Maximum value of threshold, defaults to 3</p></li>
+<li><p><strong>numStops</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of points between 0 and maxEps, defaults to 10</p></li>
+<li><p><strong>alpha</strong> (<em>list</em><em>, </em><em>optional</em>) – A list of alpha values for smoothing, in default case it is
+behaving like CROCKER, defaults to [0]</p></li>
+<li><p><strong>plotting</strong> (<em>bool</em><em>, </em><em>optional</em>) – Plots the CROCKER for the given diagrams, defaults to True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the 3D CROCKER stack with dimensions [alpha][row][time]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.darray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.maxBirth">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxBirth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#maxBirth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirth" title="Link to this definition"></a></dt>
+<dd><p>Finds maximum birth for a given diagram</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Dgm</strong> – A 2D numpy array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(float) Maximum birth time for the given diagram</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.maxBirthSeries">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxBirthSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#maxBirthSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxBirthSeries" title="Link to this definition"></a></dt>
+<dd><p>Takes data frame DgmsDF.
+Finds maximum persistence over all diagrams in
+column with label dgm_col.
+It gets maximum persistence for a pandas.Series with diagrams as entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>DgmSeries</strong> – A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(float) Maximum persistence over all diagrams</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.maxPers">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxPers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#maxPers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPers" title="Link to this definition"></a></dt>
+<dd><p>Finds maximum persistence for a given diagram</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Dgm</strong> – A 2D numpy array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(float) Maximum persistence for the given diagram</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.maxPersistenceSeries">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">maxPersistenceSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#maxPersistenceSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.maxPersistenceSeries" title="Link to this definition"></a></dt>
+<dd><p>Takes data frame DgmsDF.
+Finds maximum persistence over all diagrams in
+column with label dgm_col.
+Gets maximum persistence for a pandas.Series with diagrams as entries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>DgmsSeries</strong> – A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(float) Maximum persistence over all diagrams</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.minBirth">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minBirth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#minBirth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirth" title="Link to this definition"></a></dt>
+<dd><p>Finds minimum birth  for a given diagram</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Dgm</strong> – A 2D numpy array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(float) Minimum birth time for the given diagram</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.minBirthSeries">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minBirthSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#minBirthSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minBirthSeries" title="Link to this definition"></a></dt>
+<dd><p>Takes data frame DgmsDF.
+Finds minimum persistence over all diagrams in
+column with label dgm_col.
+Gets minimum persistence for a pandas.Series with diagrams as entries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>DgmSeries</strong> – A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(float) Minimum birth time over all diagrams</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.minPers">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minPers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#minPers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minPers" title="Link to this definition"></a></dt>
+<dd><p>Finds minimum persistence for a given diagram</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Dgm</strong> – A 2D numpy array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(float) Minimum persistence for the given diagram</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.minPersistenceSeries">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">minPersistenceSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DgmsSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#minPersistenceSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.minPersistenceSeries" title="Link to this definition"></a></dt>
+<dd><p>Takes data frame DgmsDF.
+Finds minimum persistence over all diagrams in
+column with label dgm_col.
+Gets minimum persistence for a pandas.Series with diagrams as entries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>DgmSeries</strong> – A pandas.Series with entries Kx2 numpy arrays representing persistence diagrams.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(float) Minimum persistence over all diagrams</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.TDA.Persistence.removeInfiniteClasses">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.TDA.Persistence.</span></span><span class="sig-name descname"><span class="pre">removeInfiniteClasses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dgm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/TDA/Persistence.html#removeInfiniteClasses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.TDA.Persistence.removeInfiniteClasses" title="Link to this definition"></a></dt>
+<dd><p>Simply deletes classes that have infinite lifetimes.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="drawing.html" class="btn btn-neutral float-left" title="2.4.3. Drawing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sublevel_set_persistence.html" class="btn btn-neutral float-right" title="2.4.5. Zero-Dimensional Sublevel Set Persistence" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Munch and Khasawneh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

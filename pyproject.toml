@@ -2,9 +2,10 @@
 
 [project]
 name = "teaspoon"
-version = "1.5.6"
+version = "1.5.7"
 authors = [
   { name="Elizabeth Munch", email="muncheli@msu.edu" },
+  { name="Firas Khasawneh", email="khasawn3@msu.edu" },
 ]
 description = "A Topological Signal Processing Package"
 readme = "README.md"
@@ -38,7 +39,9 @@ dependencies = ["cycler>=0.11.0",
                 "pandas>=1.4.1",
                 "gudhi",
                 "numba",
-                "importlib_resources"
+                "importlib_resources",
+                "pooch",
+                "ddeint"
             ]
 
 [tool.setuptools.packages.find]

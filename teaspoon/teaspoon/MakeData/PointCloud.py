@@ -280,7 +280,6 @@ def Clusters(N=100,
 
 #----------------------------------------------------------------------#
 def GaussianField(m, n, a=0.8, b=100):
-
     '''
     Returns matrix representing the 2D gaussian field made on an m x n grid
 
@@ -314,18 +313,18 @@ def GaussianField(m, n, a=0.8, b=100):
         print("Scaling must be positive.")
         exit()
 
-    cov_fun = lambda x: np.exp((np.sqrt(x[0]**2 + x[1]**2)**(2 * a))/(-b))
+    def cov_fun(x): return np.exp((np.sqrt(x[0]**2 + x[1]**2)**(2 * a))/(-b))
 
     tx = np.arange(0, m, 1)
     ty = np.arange(0, n, 1)
 
-    rows = np.zeros((m,n))
+    rows = np.zeros((m, n))
     cols = rows
 
     for i in range(0, n):
         for j in range(0, m):
-            rows[j,i] = cov_fun([tx[j]-tx[0], ty[i]-ty[0]])
-            cols[j,i] = cov_fun([tx[j]-tx[0], ty[i]-ty[0]])
+            rows[j, i] = cov_fun([tx[j]-tx[0], ty[i]-ty[0]])
+            cols[j, i] = cov_fun([tx[j]-tx[0], ty[i]-ty[0]])
 
     """diff_tx = tx[:, np.newaxis] - tx[0]
     diff_ty = ty[:, np.newaxis] - ty[0]
@@ -333,7 +332,7 @@ def GaussianField(m, n, a=0.8, b=100):
     rows.T[:, :] = cov_values
     cols.T[:, :] = cov_values"""
 
-    second = cols[:,::-1]
+    second = cols[:, ::-1]
     second = second[:, :-1]
     third = cols[::-1, :]
     third = third[:-1, :]
@@ -344,7 +343,7 @@ def GaussianField(m, n, a=0.8, b=100):
     bottom = np.concatenate((third, fourth), axis=1)
     BlkCirc_row = np.concatenate((top, bottom), axis=0)
 
-    lam = np.fft.fft2(BlkCirc_row, axes=(0,0)).real / ((2*m - 1)*(2*n - 1))
+    lam = np.fft.fft2(BlkCirc_row, axes=(0, 0)).real / ((2*m - 1)*(2*n - 1))
 
     if len(lam[np.where(lam < 0)]) != 0:
         if abs(np.min(lam[np.where(lam < 0)])) > 10**(-15):
@@ -354,7 +353,8 @@ def GaussianField(m, n, a=0.8, b=100):
             lam[np.where(lam < 0)] = 0
     lam = np.sqrt(lam)
 
-    comp = 0.00000001*np.multiply(np.random.randn(2*m-1, 2*n-1), complex(np.random.randn(1), np.random.randn(1)))
+    comp = 0.00000001*np.multiply(np.random.randn(2*m-1, 2*n-1),
+                                  complex(np.random.randn(1), np.random.randn(1)))
 
     F = np.fft.fft2(np.multiply(lam, comp))
     F = F[0:m-1, 0:n-1]
@@ -366,7 +366,6 @@ def GaussianField(m, n, a=0.8, b=100):
 
 #----------------------------------------------------------------------#
 def Gaussians(centers, variances, amplitudes=None, resolution=200):
-
     '''
     Returns matrix representing the 2D gaussians made with given centers, variances and amplitudes
 
@@ -397,8 +396,10 @@ def Gaussians(centers, variances, amplitudes=None, resolution=200):
             print("Please specify all variances or reduce the supplied centers.")
             exit()
 
-    x = np.linspace(min(centers[:,0]) - 5 * max(variances), max(centers[:,0]) + 5 * max(variances), resolution, endpoint=True)
-    y = np.linspace(min(centers[:,1]) - 5 * max(variances), max(centers[:,1]) + 5 * max(variances), resolution, endpoint=True)
+    x = np.linspace(min(centers[:, 0]) - 5 * max(variances), max(
+        centers[:, 0]) + 5 * max(variances), resolution, endpoint=True)
+    y = np.linspace(min(centers[:, 1]) - 5 * max(variances), max(
+        centers[:, 1]) + 5 * max(variances), resolution, endpoint=True)
     X, Y = np.meshgrid(x, y)
     Z = np.zeros_like(X)
 
@@ -408,18 +409,19 @@ def Gaussians(centers, variances, amplitudes=None, resolution=200):
         print("Please specify all centers/variances or reduce the supplied amplitudes.")
         exit()
     elif len(amplitudes) < len(centers):
-        amplitudes = np.concatenate((amplitudes, np.ones(len(centers) - len(amplitudes))), axis=0)
+        amplitudes = np.concatenate(
+            (amplitudes, np.ones(len(centers) - len(amplitudes))), axis=0)
 
     for center, variance, amplitude in zip(centers, variances, amplitudes):
-        Z += amplitude*np.exp(-((X - center[0]) ** 2 + (Y - center[1]) ** 2) / (2 * variance ** 2))
+        Z += amplitude * \
+            np.exp(-((X - center[0]) ** 2 + (Y - center[1])
+                   ** 2) / (2 * variance ** 2))
 
     return Z
 
 
-
 #----------------------------------------------------------------------#
 def Sinc(x1=-10, x2=10, y1=-10, y2=10, N1=1000, N2=1000, mu=0, sigma=0.01, seed=None):
-
     '''
     Returns matrix representing the 2D sinc function on grid made on x1, x2, y1, y2 of N1 and N2 length
 
@@ -453,15 +455,15 @@ def Sinc(x1=-10, x2=10, y1=-10, y2=10, N1=1000, N2=1000, mu=0, sigma=0.01, seed=
 
     np.random.seed(seed)
 
-    x, y = np.linspace(x1, x2, N1, endpoint=True), np.linspace(y1, y2, N2, endpoint=True)
+    x, y = np.linspace(x1, x2, N1, endpoint=True), np.linspace(
+        y1, y2, N2, endpoint=True)
     X, Y = np.meshgrid(x, y)
 
-    f = np.sinc(np.hypot(X, Y)) + np.random.normal(mu, sigma, size = X.shape)
+    f = np.sinc(np.hypot(X, Y)) + np.random.normal(mu, sigma, size=X.shape)
 
     return f
 
 #----------------------------------------------------------------------#
-
 
 
 #----------------------------------------------------------------------#
