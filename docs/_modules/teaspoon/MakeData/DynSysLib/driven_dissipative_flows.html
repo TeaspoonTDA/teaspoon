@@ -148,6 +148,7 @@
 <span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+
 <div class="viewcode-block" id="driven_dissipative_flows">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.driven_dissipative_flows">[docs]</a>
 <span class="k">def</span> <span class="nf">driven_dissipative_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -184,16 +185,16 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="base_excited_magnetic_pendulum">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.base_excited_magnetic_pendulum">[docs]</a>
-<span class="k">def</span> <span class="nf">base_excited_magnetic_pendulum</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1038</span><span class="p">,</span> <span class="mf">0.208</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mf">0.18775</span><span class="p">,</span> <span class="mf">0.00001919</span><span class="p">,</span> <span class="mf">0.022</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">1.257E-6</span><span class="p">],</span> <span class="n">fs</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span> <span class="n">dynamic_state</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]):</span>
-
+<span class="k">def</span> <span class="nf">base_excited_magnetic_pendulum</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1038</span><span class="p">,</span> <span class="mf">0.208</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mf">0.18775</span><span class="p">,</span> <span class="mf">0.00001919</span><span class="p">,</span> <span class="mf">0.022</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">1.257E-6</span><span class="p">],</span> <span class="n">fs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is a simple pendulum with a magnet at its base. See Myers &amp; Khasawneh [1]_. The system was simulated for 100 seconds at a rate of 200 Hz and the last 25 seconds were used for the chaotic response as shown in the figure below.</span>
 
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Base_Excited_Magnetic_Pendulum_Setup.png</span>
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Base_Excited_Magnetic_Pendulum.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -201,7 +202,7 @@
 <span class="sd">        parameters (Optional[floats]): list of values for [m, l, g, r_cm, I_o, A, w, c, q, d, mu] or None if using the dynamic_state variable</span>
 <span class="sd">        InitialConditions (Optional[floats]): list of values for [:math:`x_0`, :math:`y_0`]</span>
 <span class="sd">        dynamic_state (Optional[str]): Set dynamic state as either &#39;periodic&#39; or &#39;chaotic&#39; if not supplying parameters.</span>
-<span class="sd">    </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
 
@@ -213,7 +214,8 @@
 
     <span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
     <span class="c1"># NEW EQUATIONS NEEDED (CORRECT)</span>
-    <span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r_cm</span><span class="p">,</span> <span class="n">I_o</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;m \ell g r_</span><span class="si">{cm}</span><span class="s2"> I_o A \omega c q d \mu&quot;</span><span class="p">)</span>  <span class="c1"># declare constants</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r_cm</span><span class="p">,</span> <span class="n">I_o</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span>
+        <span class="s2">&quot;m \ell g r_</span><span class="si">{cm}</span><span class="s2"> I_o A \omega c q d \mu&quot;</span><span class="p">)</span>  <span class="c1"># declare constants</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>  <span class="c1"># declare time variable</span>
     <span class="c1"># declare time dependent variables</span>
     <span class="n">th</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\theta&#39;</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
@@ -223,7 +225,7 @@
     <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">th</span>
     <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">asin</span><span class="p">((</span><span class="n">l</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">th</span><span class="p">))</span>
     <span class="n">Fr</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">mu</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">r</span><span class="o">**</span><span class="mi">4</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span>
-                                        <span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="n">b</span><span class="p">))</span>
+                                     <span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="n">b</span><span class="p">))</span>
     <span class="n">Fphi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">mu</span><span class="o">*</span><span class="n">q</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">r</span><span class="o">**</span><span class="mi">4</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">phi</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">))</span>
 
     <span class="n">tau_m</span> <span class="o">=</span> <span class="n">l</span><span class="o">*</span><span class="n">Fr</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="n">th</span><span class="p">)</span> <span class="o">-</span> <span class="n">l</span><span class="o">*</span><span class="n">Fphi</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="n">th</span><span class="p">)</span>
@@ -261,19 +263,22 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">11</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
-            <span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r_cm</span><span class="p">,</span> <span class="n">I_o</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">0.1038</span><span class="p">,</span> <span class="mf">0.208</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mf">0.18775</span><span class="p">,</span> <span class="mf">0.00001919</span><span class="p">,</span> <span class="mf">0.022</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">1.257E-6</span>
+            <span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r_cm</span><span class="p">,</span> <span class="n">I_o</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">0.1038</span><span class="p">,</span> <span class="mf">0.208</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mf">0.18775</span><span class="p">,</span> <span class="mf">0.00001919</span><span class="p">,</span> <span class="mf">0.022</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> \
+                <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">1.257E-6</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
-            <span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r_cm</span><span class="p">,</span> <span class="n">I_o</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">0.1038</span><span class="p">,</span> <span class="mf">0.208</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mf">0.18775</span><span class="p">,</span> <span class="mf">0.00001919</span><span class="p">,</span> <span class="mf">0.021</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">1.257E-6</span>
+            <span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r_cm</span><span class="p">,</span> <span class="n">I_o</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">0.1038</span><span class="p">,</span> <span class="mf">0.208</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mf">0.18775</span><span class="p">,</span> <span class="mf">0.00001919</span><span class="p">,</span> <span class="mf">0.021</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> \
+                <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">1.257E-6</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r_cm</span><span class="p">,</span> <span class="n">I_o</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span>
             <span class="mi">7</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
-
 
     <span class="k">def</span> <span class="nf">vectorfield</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">ph</span><span class="p">,</span> <span class="n">phi_dot</span> <span class="o">=</span> <span class="n">state</span>
@@ -286,10 +291,10 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="driven_pendulum">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.driven_pendulum">[docs]</a>
-<span class="k">def</span> <span class="nf">driven_pendulum</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
+<span class="k">def</span> <span class="nf">driven_pendulum</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The point mass, driven simple pendulum with viscous damping is described as</span>
 
@@ -301,7 +306,7 @@
 <span class="sd">    where we chose the parameters :math:`g = 9.81` for gravitational constant, :math:`l = 1` for the length of pendulum arm, :math:`m = 1` for the point mass, :math:`A = 5` for the amplitude of force, and :math:`\\omega = 1` for driving force (periodic) and :math:`\\omega = 2` for a chaotic state. The system was simulated for 300 seconds at a rate of 50 Hz and the last 100 seconds were used for the chaotic response as shown in the figure below.</span>
 
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Driven_Simple_Pendulum.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -320,14 +325,16 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">6</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">m</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">m</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">m</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
 
@@ -343,10 +350,10 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="driven_van_der_pol_oscillator">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.driven_van_der_pol_oscillator">[docs]</a>
-<span class="k">def</span> <span class="nf">driven_van_der_pol_oscillator</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">2.9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.788</span><span class="p">],</span> <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.9</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span>
+<span class="k">def</span> <span class="nf">driven_van_der_pol_oscillator</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">2.9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.788</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.9</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Driven Van der Pol Oscillator is defined as</span>
 
@@ -358,7 +365,7 @@
 <span class="sd">    where we chose the parameters :math:`(x_0. y_0) = (-1.0, 0.0)` for initial conditions, :math:`A = 5`, :math:`\\omega = 1.788`, :math:`b = 2.9` (periodic) and :math:`b = 3.0` (chaotic). </span>
 
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Driven_VanderPol_Oscillator.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -377,19 +384,21 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">3</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">2.9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.788</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.788</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
-
     <span class="c1"># defining simulation functions</span>
+
     <span class="k">def</span> <span class="nf">driven_van_der_pol</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
         <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
@@ -401,10 +410,10 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="shaw_van_der_pol_oscillator">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.shaw_van_der_pol_oscillator">[docs]</a>
-<span class="k">def</span> <span class="nf">shaw_van_der_pol_oscillator</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">],</span> <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
+<span class="k">def</span> <span class="nf">shaw_van_der_pol_oscillator</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Shaw Van der Pol Oscillator is defined as</span>
 
@@ -416,7 +425,7 @@
 <span class="sd">    where we chose the parameters :math:`(x_0. y_0) = (1.3, 0.0)` for initial conditions, :math:`A = 5`, :math:`b = 1`, :math:`\\omega = 1.4` (periodic) and :math:`\\omega = 1.8` (chaotic). </span>
 
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Shaw_VanderPol_Oscillator.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -435,14 +444,16 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">3</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.4</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.8</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
@@ -458,10 +469,10 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="forced_brusselator">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.forced_brusselator">[docs]</a>
-<span class="k">def</span> <span class="nf">forced_brusselator</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
+<span class="k">def</span> <span class="nf">forced_brusselator</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Forced Brusselator is defined as</span>
 
@@ -473,7 +484,7 @@
 <span class="sd">    where we chose the parameters :math:`(x_0. y_0) = (0.3, 2.0)` for initial conditions, :math:`a = 0.4`, :math:`b = 1.2`, :math:`A = 0.05`, :math:`\\omega = 1.1` (periodic) and :math:`\\omega = 1.0` (chaotic). </span>
 
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Forced_Brusselator.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -492,14 +503,16 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">4</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.1</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.0</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
@@ -515,10 +528,10 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="ueda_oscillator">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.ueda_oscillator">[docs]</a>
-<span class="k">def</span> <span class="nf">ueda_oscillator</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span>
+<span class="k">def</span> <span class="nf">ueda_oscillator</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Ueda Oscillator is defined as</span>
 
@@ -530,7 +543,7 @@
 <span class="sd">    where we chose the parameters :math:`(x_0. y_0) = (2.5, 0.0)` for initial conditions, :math:`b = 0.05`, :math:`A = 7.5`, :math:`\\omega = 1.2` (periodic) and :math:`\\omega = 1.0` (chaotic). </span>
 
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Ueda_Oscillator.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -549,14 +562,16 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">3</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">1.2</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">1.0</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
@@ -565,7 +580,6 @@
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
         <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
 
-
     <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">ueda_oscillator</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
@@ -573,10 +587,10 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="duffings_two_well_oscillator">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.duffings_two_well_oscillator">[docs]</a>
-<span class="k">def</span> <span class="nf">duffings_two_well_oscillator</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span>
+<span class="k">def</span> <span class="nf">duffings_two_well_oscillator</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Duffings Two-Well Oscillator is defined as</span>
 
@@ -588,7 +602,7 @@
 <span class="sd">    where we chose the parameters :math:`(x_0. y_0) = (2.5, 0.0)` for initial conditions, :math:`b = 0.25`, :math:`A = 0.4`, :math:`\\omega = 1.1` (periodic) and :math:`\\omega = 1.0` (chaotic). </span>
 
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Duffings_TwoWell_Oscillator.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -601,23 +615,25 @@
 <span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-            
+
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">3</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.1</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.0</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-        
+
     <span class="c1"># defining simulation functions</span>
     <span class="k">def</span> <span class="nf">duffings_two_well_oscillator</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
@@ -630,10 +646,10 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="duffing_van_der_pol_oscillator">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.duffing_van_der_pol_oscillator">[docs]</a>
-<span class="k">def</span> <span class="nf">duffing_van_der_pol_oscillator</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span> <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span>
+<span class="k">def</span> <span class="nf">duffing_van_der_pol_oscillator</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Duffings Two-Well Oscillator is defined as</span>
 
@@ -645,7 +661,7 @@
 <span class="sd">    where we chose the parameters :math:`(x_0. y_0) = (0.2, 0.0)` for initial conditions, :math:`\\mu = 0.2`, :math:`\\gamma = 8`, :math:`A = 0.35`, :math:`\\omega = 1.3` (periodic) and :math:`\\omega = 1.2` (chaotic). </span>
 
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Duffing_VanderPol_Oscillator.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -664,14 +680,16 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">4</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">mu</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">1.3</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">mu</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">1.2</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">mu</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
@@ -688,22 +706,22 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="rayleigh_duffing_oscillator">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.rayleigh_duffing_oscillator">[docs]</a>
-<span class="k">def</span> <span class="nf">rayleigh_duffing_oscillator</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">],</span> <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span>
+<span class="k">def</span> <span class="nf">rayleigh_duffing_oscillator</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Rayleigh Duffing Oscillator is defined as</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \dot{x} = y,</span>
-<span class="sd">        </span>
+
 <span class="sd">        \dot{y} = \\mu (1 - \\gamma y^2)y - x^3 + A\sin{\\omega t}</span>
 
 <span class="sd">    where we chose the parameters :math:`(x_0. y_0) = (0.3, 0.0)` for initial conditions, :math:`\\mu = 0.2`, :math:`\\gamma = 4`, :math:`A = 0.3`, :math:`\\omega = 1.4` (periodic) and :math:`\\omega = 1.2` (chaotic). </span>
 
 <span class="sd">    .. figure:: ../../../figures/Driven_Dissipative_Flows/Rayleigh_Duffing_Oscillator.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -716,35 +734,35 @@
 <span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-           
+
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
 
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">4</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">mu</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.4</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">mu</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.2</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">mu</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-        
+
     <span class="c1"># defining simulation functions</span>
     <span class="k">def</span> <span class="nf">rayleigh_duffing_oscillator</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
         <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">gamma</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-
 
     <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rayleigh_duffing_oscillator</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
 
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
 
 </pre></div>
 

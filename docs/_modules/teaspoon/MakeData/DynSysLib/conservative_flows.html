@@ -148,6 +148,7 @@
 <span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+
 <div class="viewcode-block" id="conservative_flows">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/conservative_flows.html#teaspoon.MakeData.DynSysLib.conservative_flows.conservative_flows">[docs]</a>
 <span class="k">def</span> <span class="nf">conservative_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -169,10 +170,10 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="simplest_driven_chaotic_flow">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/conservative_flows.html#teaspoon.MakeData.DynSysLib.conservative_flows.simplest_driven_chaotic_flow">[docs]</a>
-<span class="k">def</span> <span class="nf">simplest_driven_chaotic_flow</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">300.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
+<span class="k">def</span> <span class="nf">simplest_driven_chaotic_flow</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">300.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The simplest driven chaotic flow can be reproduced with the following equations</span>
 
@@ -184,7 +185,7 @@
 <span class="sd">    where we chose the parameters :math:`(x_0. y_0) = (0.0, 0.0)` for initial conditions, and :math:`\\omega = 1.0` (periodic) and :math:`\\omega = 1.88` (chaotic). </span>
 
 <span class="sd">    .. figure:: ../../../figures/Conservative_Flows/simplest_driven_chaotic_flow.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -203,14 +204,16 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">omega</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">omega</span> <span class="o">=</span> <span class="mf">1.88</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">omega</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -229,8 +232,7 @@
 
 <div class="viewcode-block" id="nose_hoover_oscillator">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/conservative_flows.html#teaspoon.MakeData.DynSysLib.conservative_flows.nose_hoover_oscillator">[docs]</a>
-<span class="k">def</span> <span class="nf">nose_hoover_oscillator</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
+<span class="k">def</span> <span class="nf">nose_hoover_oscillator</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Nose Hoover Oscillator is represented by the following equations</span>
 
@@ -244,7 +246,7 @@
 <span class="sd">    where we chose the parameters :math:`(x_0, y_0, z_0) = (0.0, 5.0, 0.0)` for initial conditions, and :math:`a = 6.0` (periodic) and :math:`a = 1` (chaotic). </span>
 
 <span class="sd">    .. figure:: ../../../figures/Conservative_Flows/nose_hoover_oscillator.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -263,14 +265,16 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mi">6</span>
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -281,7 +285,7 @@
 
     <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">nose_hoover_oscillator</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
-            <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
 
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
@@ -290,8 +294,7 @@
 
 <div class="viewcode-block" id="labyrinth_chaos">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/conservative_flows.html#teaspoon.MakeData.DynSysLib.conservative_flows.labyrinth_chaos">[docs]</a>
-<span class="k">def</span> <span class="nf">labyrinth_chaos</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">2000.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
+<span class="k">def</span> <span class="nf">labyrinth_chaos</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Labyrinth Chaos Oscillator is represented by the following equations</span>
 
@@ -305,7 +308,7 @@
 <span class="sd">    where we chose the parameters :math:`(x_0, y_0, z_0) = (0.1, 0.0, 0.0)` for initial conditions, and :math:`a = 1.0` (chaotic) with :math:`b = 1` and :math:`c = 1`. We could not find a periodic response. Any contributions would be appreciated!</span>
 
 <span class="sd">    .. figure:: ../../../figures/Conservative_Flows/labyrinth_chaos.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -324,7 +327,8 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">3</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We could not find a periodic response. Using the chaotic parameters.&#39;</span><span class="p">)</span>
@@ -332,7 +336,8 @@
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
@@ -343,7 +348,7 @@
 
     <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">labyrinth_chaos</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
-            <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
 
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
@@ -352,8 +357,7 @@
 
 <div class="viewcode-block" id="henon_heiles_system">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/conservative_flows.html#teaspoon.MakeData.DynSysLib.conservative_flows.henon_heiles_system">[docs]</a>
-<span class="k">def</span> <span class="nf">henon_heiles_system</span><span class="p">(</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.499</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
+<span class="k">def</span> <span class="nf">henon_heiles_system</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">10000.0</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.499</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Henon Heiles System is represented by the following equations</span>
 
@@ -363,13 +367,13 @@
 <span class="sd">        \dot{px} = -x - 2axy,</span>
 
 <span class="sd">        \dot{y} = py,</span>
-<span class="sd">        </span>
+
 <span class="sd">        \dot{py} = -y - a(x^2 - y^2)</span>
 
 <span class="sd">    where we chose the parameters :math:`(x_0, px_0, y_0, py_0) = (0.499, 0, 0, 0.03)` for initial conditions, and :math:`a = 1.0` (chaotic). We could not find a periodic response. Any contributions would be appreciated!</span>
 
 <span class="sd">    .. figure:: ../../../figures/Conservative_Flows/henon_heiles_system.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        L (Optional[int]): Number of iterations.</span>
 <span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
@@ -388,7 +392,8 @@
     <span class="n">num_param</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We could not find a periodic response. Using the chaotic parameters.&#39;</span><span class="p">)</span>
@@ -396,20 +401,20 @@
         <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-
     <span class="c1"># defining simulation functions</span>
+
     <span class="k">def</span> <span class="nf">henon_heiles_system</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">x</span><span class="p">,</span> <span class="n">px</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">py</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
         <span class="k">return</span> <span class="n">px</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">py</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-
     <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">henon_heiles_system</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span>
-            <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+          <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
 
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>

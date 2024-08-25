@@ -148,6 +148,7 @@
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
+
 <div class="viewcode-block" id="medical_data">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/medical_data.html#teaspoon.MakeData.DynSysLib.medical_data.medical_data">[docs]</a>
 <span class="k">def</span> <span class="nf">medical_data</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -162,34 +163,34 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="EEG">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/medical_data.html#teaspoon.MakeData.DynSysLib.medical_data.EEG">[docs]</a>
 <span class="k">def</span> <span class="nf">EEG</span><span class="p">(</span><span class="n">SampleSize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">):</span>
-
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The EEG signal was taken from andrzejak et al. [1]_. Specifically, the first 5000 data points from the EEG data of a healthy patient from set A (file Z-093) was used and the first 5000 data points of a patient experiencing a seizure from set E (file S-056) was used (see figure below for case during seizure).</span>
 
 <span class="sd">    .. figure:: ../../../figures/Human_Medical_Data/EEG_Data.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
 <span class="sd">        dynamic_state (Optional[str]): Set dynamic state as either &#39;normal&#39; or &#39;seizure&#39;.</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. [1] Ralph G Andrzejak, Klaus Lehnertz, Florian Mormann, Christoph Rieke, Peter David, and Christian E Elger. Indications of nonlinear deterministic and nite-dimensional structures in time series of brain electrical activity: Dependence on recording region and brain state. Physical Review E, 64(6):061907, 2001.</span>
-<span class="sd">    </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;teaspoon&#39;</span><span class="p">),</span><span class="s1">&#39;teaspoon&#39;</span><span class="p">),</span><span class="s1">&#39;MakeData&#39;</span><span class="p">),</span> <span class="s1">&#39;DynSysLib&#39;</span><span class="p">),</span> <span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;teaspoon&#39;</span><span class="p">),</span> <span class="s1">&#39;teaspoon&#39;</span><span class="p">),</span> <span class="s1">&#39;MakeData&#39;</span><span class="p">),</span> <span class="s1">&#39;DynSysLib&#39;</span><span class="p">),</span> <span class="s1">&#39;Data&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span>  <span class="c1"># healthy</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;EEG&#39;</span><span class="p">),</span> <span class="s1">&#39;Z093.txt&#39;</span><span class="p">)</span>
         <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span>
             <span class="mi">0</span><span class="p">:</span><span class="n">SampleSize</span><span class="p">]]</span>
-        
 
     <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;seizure&#39;</span><span class="p">:</span>  <span class="c1"># seizure</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;EEG&#39;</span><span class="p">),</span> <span class="s1">&#39;S056.txt&#39;</span><span class="p">)</span>
@@ -204,25 +205,25 @@
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 
 
+
 <div class="viewcode-block" id="ECG">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/medical_data.html#teaspoon.MakeData.DynSysLib.medical_data.ECG">[docs]</a>
 <span class="k">def</span> <span class="nf">ECG</span><span class="p">(</span><span class="n">dynamic_state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">):</span>
-
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Electrocardoagram (ECG) data was taken from SciPys misc.electrocardiogram data set. This ECG data was originally provided by the MIT-BIH Arrhythmia Database [2]_. We used data points 3000 to 5500  during normal sinus rhythm and 8500 to 11000 during arrhythmia (arrhythmia case shown below in figure).</span>
 
 <span class="sd">    .. figure:: ../../../figures/Human_Medical_Data/ECG_Data.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        dynamic_state (Optional[str]): Set dynamic state as either &#39;normal&#39; or &#39;seizure&#39;.</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. [2] George B Moody and Roger G Mark. The impact of the mit-bih arrhythmia database. IEEE Engineering in Medicine and Biology Magazine, 20(3):4550, 2001.</span>
-<span class="sd">    </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="kn">from</span> <span class="nn">scipy.datasets</span> <span class="kn">import</span> <span class="n">electrocardiogram</span>

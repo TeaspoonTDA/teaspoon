@@ -2,7 +2,7 @@
 
 [project]
 name = "teaspoon"
-version = "1.5.8"
+version = "1.5.7"
 authors = [
   { name="Elizabeth Munch", email="muncheli@msu.edu" },
   { name="Firas Khasawneh", email="khasawn3@msu.edu" },
