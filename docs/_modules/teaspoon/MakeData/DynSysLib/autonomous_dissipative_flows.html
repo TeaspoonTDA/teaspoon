@@ -16,7 +16,7 @@
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -229,58 +229,9 @@
         <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">simplest_piecewise_linear_chaotic_flow</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;double_scroll&#39;</span><span class="p">:</span>
-        <span class="c1"># setting simulation time series parameters</span>
-        <span class="k">if</span> <span class="n">fs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span>
-        <span class="k">if</span> <span class="n">SampleSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">SampleSize</span> <span class="o">=</span> <span class="mi">5000</span>
-        <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">L</span> <span class="o">=</span> <span class="mf">1000.0</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-
-        <span class="c1"># setting system parameters</span>
-        <span class="k">if</span> <span class="n">parameters</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="s1">&#39;Warning: needed 2 parameters. Defaulting to periodic solution parameters.&#39;</span><span class="p">)</span>
-                <span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
-                <span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>
-            <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
-                <span class="n">a</span> <span class="o">=</span> <span class="mf">0.8</span>
-
-        <span class="c1"># defining simulation functions</span>
-        <span class="k">def</span> <span class="nf">double_scroll</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># unpack the state vector</span>
-            <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">z</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">InitialConditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-
-        <span class="n">states</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">double_scroll</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
-                <span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:],</span> <span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">double_scroll</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

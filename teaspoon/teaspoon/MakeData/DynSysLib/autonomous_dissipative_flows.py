@@ -2,10 +2,10 @@ from scipy.integrate import odeint
 import scipy.integrate as integrate
 import numpy as np
 
+
 def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
                                  SampleSize=None, parameters=None,
                                  InitialConditions=None):
-    
 
     if system == 'lorenz':
         t, ts = lorenz()
@@ -16,26 +16,20 @@ def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
     if system == 'chua':
         t, ts = chua()
 
-
     if system == 'double_pendulum':
         t, ts = double_pendulum()
-
 
     if system == 'coupled_lorenz_rossler':
         t, ts = coupled_lorenz_rossler()
 
-
     if system == 'coupled_rossler_rossler':
         t, ts = coupled_rossler_rossler()
-
 
     if system == 'diffusionless_lorenz_attractor':
         t, ts = diffusionless_lorenz_attractor()
 
-
     if system == 'complex_butterfly':
         t, ts = complex_butterfly()
-
 
     if system == 'chens_system':
         t, ts = chens_system()
@@ -95,7 +89,7 @@ def lorenz(parameters=[100, 10, 8.0/3.0], dynamic_state=None, InitialConditions=
         \dot{y} &= x (\\rho - z) - y,
 
         \dot{z} &= x y - \\beta z
-    
+
     The Lorenz system was solved with a sampling rate of 100 Hz for 100 seconds with only the last 20 seconds used to avoid transients. For a chaotic response, parameters of :math:`\\sigma = 10.0`, :math:`\\beta = 8.0/3.0`, and :math:`\\rho = 105` and initial conditions :math:`[x_0,y_0,z_0] = [10^{-10},0,1]` are used. For a periodic response set :math:`\\rho = 100`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Lorenz_System.png
@@ -110,7 +104,7 @@ def lorenz(parameters=[100, 10, 8.0/3.0], dynamic_state=None, InitialConditions=
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     """
 
     t = np.linspace(0, L, int(L*fs))
@@ -118,7 +112,8 @@ def lorenz(parameters=[100, 10, 8.0/3.0], dynamic_state=None, InitialConditions=
     num_param = 3
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             rho = 100.0
@@ -129,7 +124,8 @@ def lorenz(parameters=[100, 10, 8.0/3.0], dynamic_state=None, InitialConditions=
             sigma = 10.0
             beta = 8.0 / 3.0
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         rho, sigma, beta = parameters[0], parameters[1], parameters[2]
 
@@ -142,7 +138,7 @@ def lorenz(parameters=[100, 10, 8.0/3.0], dynamic_state=None, InitialConditions=
 
     states = odeint(lorenz_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
@@ -158,7 +154,7 @@ def rossler(parameters=[0.1, 0.2, 14], dynamic_state=None, InitialConditions=[-0
         \dot{y} &= x + ay,
 
         \dot{z} &= b + z(x-c)
-    
+
     The Rössler system was solved with a sampling rate of 15 Hz for 1000 seconds with only the last 166 seconds used to avoid transients. For a chaotic response, parameters of :math:`a = 0.15`, :math:`b = 0.2`, and :math:`c = 14` and initial conditions :math:`[x_0,y_0,z_0] = [-0.4,0.6,1.0]` are used. For a periodic response set :math:`a = 0.10`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Rossler_System.png
@@ -173,14 +169,15 @@ def rossler(parameters=[0.1, 0.2, 14], dynamic_state=None, InitialConditions=[-0
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     """
     t = np.linspace(0, L, int(L*fs))
 
     num_param = 3
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 0.10
@@ -191,7 +188,8 @@ def rossler(parameters=[0.1, 0.2, 14], dynamic_state=None, InitialConditions=[-0
             b = 0.20
             c = 14
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a, b, c = parameters[0], parameters[1], parameters[2]
 
@@ -203,7 +201,7 @@ def rossler(parameters=[0.1, 0.2, 14], dynamic_state=None, InitialConditions=[-0
 
     states = odeint(rossler_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
@@ -225,7 +223,7 @@ def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 1
         \dot{y}_2 &= \\lambda x_2 - y_2 - x_2z_2,
 
         \dot{z}_2 &= x_2y_2 - b_1z_2
-    
+
     where :math:`b_1 =8/3`, :math:`b_2 =0.2`, :math:`c_2 =5.7`, :math:`k_1 =0.1`, :math:`k_2 =0.1`, :math:`k_3 =0.1`, :math:`\\lambda =28`, :math:`\\sigma =10`,and :math:`a=0.25` for a periodic response and :math:`a = 0.51` for a chaotic response. This system was simulated at a frequency of 50 Hz for 500 seconds with the last 300 seconds used. The default initial condition is :math:`[x_1, y_1, z_1, x_2, y_2, z_2]=[0.1,0.1,0.1,0,0,0]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Coupled_Rossler_Lorenz_System.png
@@ -240,43 +238,46 @@ def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 1
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     """
     t = np.linspace(0, L, int(L*fs))
 
     num_param = 9
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a, b1, b2, c2, k1, k2, k3, lam, sigma = 0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 10
         elif dynamic_state == 'chaotic':
             a, b1, b2, c2, k1, k2, k3, lam, sigma = 0.51, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 10
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
-        a, b1, b2, c2, k1, k2, k3, lam, sigma = parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5], parameters[6], parameters[7], parameters[8]
+        a, b1, b2, c2, k1, k2, k3, lam, sigma = parameters[0], parameters[1], parameters[
+            2], parameters[3], parameters[4], parameters[5], parameters[6], parameters[7], parameters[8]
 
     # defining simulation functions
 
     def coupled_lorenz_rossler_sys(state, t):
         x1, y1, z1, x2, y2, z2 = state  # unpack the state vector
         D = [-y1 - z1 + k1*(x2-x1),
-                x1 + a*y1 + k2*(y2-y1),
-                b2 + z1*(x1-c2) + k3*(z2-z1),
-                sigma*(y2-x2),
-                lam*x2 - y2 - x2*z2,
-                x2*y2 - b1*z2]
+             x1 + a*y1 + k2*(y2-y1),
+             b2 + z1*(x1-c2) + k3*(z2-z1),
+             sigma*(y2-x2),
+             lam*x2 - y2 - x2*z2,
+             x2*y2 - b1*z2]
         return D[0], D[1], D[2], D[3], D[4], D[5]
 
     states = odeint(coupled_lorenz_rossler_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:],
-            (states[:, 1])[-SampleSize:],
-            (states[:, 2])[-SampleSize:],
-            (states[:, 3])[-SampleSize:],
-            (states[:, 4])[-SampleSize:],
-            (states[:, 5])[-SampleSize:]]
+          (states[:, 1])[-SampleSize:],
+          (states[:, 2])[-SampleSize:],
+          (states[:, 3])[-SampleSize:],
+          (states[:, 4])[-SampleSize:],
+          (states[:, 5])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
@@ -298,7 +299,7 @@ def coupled_rossler_rossler(parameters=[0.25, 0.99, 0.95], dynamic_state=None, I
         \dot{y}_2 &= w_2x_2 + 0.165y_2,
 
         \dot{z}_2 &= 0.2 + z_2(x_2-10)
-    
+
     with :math:`w_1 = 0.99`, :math:`w_2 = 0.95`, and :math:`k = 0.05`. This was solved for 1000 seconds with a sampling rate of 10 Hz. Only the last 150 seconds of the solution are used and the default initial condition is :math:`[x_1, y_1, z_1, x_2, y_2, z_2]=[-0.4,0.6,5.8,0.8,-2,-4]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/BiDirectional_Coupled_Rossler_System.png
@@ -313,21 +314,23 @@ def coupled_rossler_rossler(parameters=[0.25, 0.99, 0.95], dynamic_state=None, I
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     """
     t = np.linspace(0, L, int(L*fs))
 
     num_param = 3
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             k, w1, w2 = 0.25, 0.99, 0.95
         elif dynamic_state == 'chaotic':
             k, w1, w2 = 0.30, 0.99, 0.95
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         k, w1, w2 = parameters[0], parameters[1], parameters[2]
 
@@ -336,27 +339,27 @@ def coupled_rossler_rossler(parameters=[0.25, 0.99, 0.95], dynamic_state=None, I
     def coupled_rossler_rossler_sys(state, t):
         x1, y1, z1, x2, y2, z2 = state  # unpack the state vector
         D = [-w1*y1 - z1 + k*(x2-x1),
-                w1*x1 + 0.165*y1,
-                0.2 + z1*(x1-10),
-                -w2*y2 - z2 + k*(x1-x2),
-                w2*x2 + 0.165*y2,
-                0.2 + z2*(x2-10)]
+             w1*x1 + 0.165*y1,
+             0.2 + z1*(x1-10),
+             -w2*y2 - z2 + k*(x1-x2),
+             w2*x2 + 0.165*y2,
+             0.2 + z2*(x2-10)]
         return D[0], D[1], D[2], D[3], D[4], D[5]
 
     states = odeint(coupled_rossler_rossler_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:],
-            (states[:, 1])[-SampleSize:],
-            (states[:, 2])[-SampleSize:],
-            (states[:, 3])[-SampleSize:],
-            (states[:, 4])[-SampleSize:],
-            (states[:, 5])[-SampleSize:]]
+          (states[:, 1])[-SampleSize:],
+          (states[:, 2])[-SampleSize:],
+          (states[:, 3])[-SampleSize:],
+          (states[:, 4])[-SampleSize:],
+          (states[:, 5])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
-def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialConditions=[1.0, 0.0, 0.0],  
-    L=200.0, fs=50, SampleSize=4000):
+def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialConditions=[1.0, 0.0, 0.0],
+         L=200.0, fs=50, SampleSize=4000):
     """
     Chua's circuit is based on a non-linear circuit and is described as
 
@@ -366,12 +369,12 @@ def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialCondi
         \dot{y} &= \\gamma (x-y+z),
 
         \dot{z} &= -\\beta y,
-    
+
     where :math:`f(x)` is based on a non-linear resistor model defined as
 
     .. math::
         f(x) = m_1x + \\frac{1}{2}(m_0+m_1)[|x+1| - |x-1|]
-    
+
     The system parameters are set to :math:`\\beta=27`, :math:`\\gamma=1`, :math:`m_0 =-3/7`, :math:`m_1 =3/7`, and :math:`\\alpha=10.8` for a periodic response and :math:`\\alpha = 12.8` for a chaotic response. The system was simulated for 200 seconds at a rate of 50 Hz and the last 80 seconds are used.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Chua_Circuit.png
@@ -386,24 +389,26 @@ def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialCondi
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     """
     t = np.linspace(0, L, int(L*fs))
 
     num_param = 5
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a, B, g, m0, m1 = 10.8, 27, 1.0, -3/7, 3/7
         elif dynamic_state == 'chaotic':
             a, B, g, m0, m1 = 12.8, 27, 1.0, -3/7, 3/7
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a, B, g, m0, m1 = parameters[0], parameters[1], parameters[2], parameters[3], parameters[4]
-    
+
     # defining simulation functions
 
     def f(x):
@@ -412,14 +417,13 @@ def chua(parameters=[10.8, 27, 1.0, -3/7, 3/7], dynamic_state=None, InitialCondi
 
     def chua_sys(H, t=0):
         return np.array([a*(H[1]-f(H[0])),
-                            g*(H[0]-H[1]+H[2]),
-                            -B*H[1]])
-
+                         g*(H[0]-H[1]+H[2]),
+                         -B*H[1]])
 
     states, infodict = integrate.odeint(
         chua_sys, InitialConditions, t, full_output=True)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
@@ -437,7 +441,7 @@ def double_pendulum(parameters=[1, 1, 1, 1, 9.81], dynamic_state=None, InitialCo
         \dot{\\omega}_1 &= \\frac{-g(2m_1+m_2)\sin(\\theta_1) - m_2g\sin(\\theta_1-2\\theta_2) - 2\sin(\\theta_1-\\theta2)m_2(\\omega_2^2 l_2 + \\omega_1^2 l_1\cos(\\theta_1-\\theta_2))}{l_1(2m_1+m_2-m_2\cos(2\\theta_1-2\\theta_2))},
 
         \dot{\\omega}_2 &= \\frac{2\sin(\\theta_1-\\theta_2)(\\omega_1^2 l_1(m_1+m_2)+g(m_1+m_2)\cos(\\theta_1)+\\omega_2^2 l_2m_2\cos(\\theta_1-\\theta_2))}{l_2(2m_1+m_2-m_2\cos(2\\theta_1-2\\theta_2))}
-    
+
     where the system parameters are :math:`g=9.81 m/s^2`, :math:`m_1 =1 kg`, :math:`m_2 =1 kg`, :math:`l_1 = 1 m`, and :math:`l_2 =1 m`. The system was solved for 200 seconds at a rate of 100 Hz and only the last 30 seconds were used as shown in the figure below for the chaotic response with initial conditions :math:`[\\theta_1, \\theta_2, \\omega_1, \\omega_2] = [0, 3 rad, 0, 0]`. This system will have different dynamic states based on the initial conditions, which can vary from periodic, quasiperiodic, and chaotic.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Double_Pendulum.png
@@ -452,14 +456,15 @@ def double_pendulum(parameters=[1, 1, 1, 1, 9.81], dynamic_state=None, InitialCo
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     """
     t = np.linspace(0, L, int(L*fs))
 
     num_param = 5
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             m1, m2, l1, l2, g = 1, 1, 1, 1, 9.81
@@ -469,9 +474,10 @@ def double_pendulum(parameters=[1, 1, 1, 1, 9.81], dynamic_state=None, InitialCo
             InitialConditions = [0.0, 3, 0, 0]
         elif dynamic_state == 'quasiperiodic':
             m1, m2, l1, l2, g = 1, 1, 1, 1, 9.81
-            InitialConditions = [1, 0, 0, 0]            
+            InitialConditions = [1, 0, 0, 0]
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic", "quasiperiodic" or "chaotic", or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic", "quasiperiodic" or "chaotic", or provide an array of length {num_param} in parameters.')
     else:
         m1, m2, l1, l2, g = parameters[0], parameters[1], parameters[2], parameters[3], parameters[4]
 
@@ -480,21 +486,20 @@ def double_pendulum(parameters=[1, 1, 1, 1, 9.81], dynamic_state=None, InitialCo
         th1, th2, om1, om2 = state  # unpack the state vector
         numerator1 = -g*(2*m1+m2)*np.sin(th1) - m2*g*np.sin(th1-2*th2) - \
             2*np.sin(th1-th2)*m2*(om2**2 * l2 +
-                                    om1**2 * l1*np.cos(th1-th2))
+                                  om1**2 * l1*np.cos(th1-th2))
         numerator2 = 2*np.sin(th1-th2)*(om1**2 * l1*(m1+m2) +
                                         g*(m1+m2)*np.cos(th1)+om2**2 * l2*m2*np.cos(th1-th2))
         denomenator1 = l1*(2*m1+m2-m2*np.cos(2*th1-2*th2))
         denomenator2 = l2*(2*m1+m2-m2*np.cos(2*th1-2*th2))
         D = [om1,
-                om2,
-                numerator1/denomenator1,
-                numerator2/denomenator2]
+             om2,
+             numerator1/denomenator1,
+             numerator2/denomenator2]
         return D[0], D[1], D[2], D[3]
-
 
     states = odeint(double_pendulum_sys, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])[-SampleSize:],
-            (states[:, 2])[-SampleSize:], (states[:, 3])[-SampleSize:]]
+          (states[:, 2])[-SampleSize:], (states[:, 3])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
@@ -510,9 +515,9 @@ def diffusionless_lorenz_attractor(parameters=[0.25], dynamic_state=None, Initia
         \dot{y} &= -xz,
 
         \dot{z} &= xy + R
-    
+
     The system parameter is set to :math:`R = 0.40` for a chaotic response and :math:`R = 0.25` for a periodic response. The initial conditions were set to :math:`[x, y, z] = [1.0, -1.0, 0.01]`. The system was simulated for 1000 seconds at a rate of 40 Hz and the last 250 seconds were used for the chaotic response.
-    
+
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Diffusionless_Lorenz.png
 
     Parameters:
@@ -525,22 +530,24 @@ def diffusionless_lorenz_attractor(parameters=[0.25], dynamic_state=None, Initia
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     """
 
     t = np.linspace(0, L, int(L*fs))
-    
+
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             R = 0.25
         elif dynamic_state == 'chaotic':
             R = 0.40
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         R = parameters[0]
 
@@ -556,13 +563,13 @@ def diffusionless_lorenz_attractor(parameters=[0.25], dynamic_state=None, Initia
     states = odeint(diffusionless_lorenz_attractor,
                     InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
-def complex_butterfly(parameters=[0.15], dynamic_state=None, InitialConditions=[0.2,0.0,0.0], L=1000.0, fs=10, SampleSize=5000):
+def complex_butterfly(parameters=[0.15], dynamic_state=None, InitialConditions=[0.2, 0.0, 0.0], L=1000.0, fs=10, SampleSize=5000):
     """
     The Complex Butterfly attractor [1]_ is defined as
 
@@ -572,7 +579,7 @@ def complex_butterfly(parameters=[0.15], dynamic_state=None, InitialConditions=[
         \dot{y} &= z~\\text{sgn}(x),
 
         \dot{z} &= |x|-1
-    
+
     The system parameter is set to :math:`a = 0.55` for a chaotic response and :math:`a = 0.15` for a periodic response. The initial conditions were set to :math:`[x, y, z] = [0.2, 0.0, 0.0]`. The system was simulated for 1000 seconds at a rate of 10 Hz and the last 500 seconds were used for the chaotic response.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Complex_Butterfly.png
@@ -594,21 +601,23 @@ def complex_butterfly(parameters=[0.15], dynamic_state=None, InitialConditions=[
 
     """
     # setting simulation time series parameters
-    
+
     t = np.linspace(0, L, int(L*fs))
 
     # setting system parameters
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 0.15
         elif dynamic_state == 'chaotic':
             a = 0.55
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a = parameters[0]
 
@@ -623,13 +632,13 @@ def complex_butterfly(parameters=[0.15], dynamic_state=None, InitialConditions=[
 
     states = odeint(complex_butterfly, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
-def chens_system(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=200, SampleSize=3000):
+def chens_system(parameters=[30.0, 3.0, 28.0], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=200, SampleSize=3000):
     """
     Chen's System is defined [2]_ as
 
@@ -639,7 +648,7 @@ def chens_system(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditio
         \dot{y} &= (c-a)x-xz+cy,
 
         \dot{z} &= xy-bz
-    
+
     The system parameters are set to :math:`a = 35`, :math:`b = 3`, and :math:`c = 28` for a chaotic response and :math:`a = 30` for a periodic response. The initial conditions were set to :math:`[x, y, z] = [-10, 0, 37]`. The system was simulated for 500 seconds at a rate of 200 Hz and the last 15 seconds were used for the chaotic response.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Chens_System.png
@@ -668,14 +677,16 @@ def chens_system(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditio
     num_param = 3
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 30.0
         elif dynamic_state == 'chaotic':
             a = 35.0
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b, c = 3, 28
     else:
         a, b, c = parameters[0], parameters[1], parameters[2]
@@ -690,14 +701,13 @@ def chens_system(parameters=[30.0,3.0,28.0], dynamic_state=None, InitialConditio
 
     states = odeint(chens_system, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
 def hadley_circulation(parameters=[0.25, 4, 8, 1], dynamic_state=None, InitialConditions=[-10, 0, 37], L=500.0, fs=50, SampleSize=4000):
-
     """
     Hadley Circulation System is defined as
 
@@ -707,7 +717,7 @@ def hadley_circulation(parameters=[0.25, 4, 8, 1], dynamic_state=None, InitialCo
         \dot{y} &= xy - bxz - y + G,
 
         \dot{z} &= bxy + xz - z
-    
+
     The system parameters are set to :math:`a = 0.25`, :math:`b = 4`, :math:`F = 8`and :math:`G = 1` for a periodic response and :math:`a = 0.3` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [-10, 0, 37]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/hadley_circulation.png
@@ -733,14 +743,16 @@ def hadley_circulation(parameters=[0.25, 4, 8, 1], dynamic_state=None, InitialCo
     num_param = 4
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 0.30
         elif dynamic_state == 'chaotic':
             a = 0.25
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b, F, G = 4, 8, 1
     else:
         a, b, F, G = parameters[0], parameters[1], parameters[2], parameters[3]
@@ -752,14 +764,13 @@ def hadley_circulation(parameters=[0.25, 4, 8, 1], dynamic_state=None, InitialCo
 
     states = odeint(hadley_circulation, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
 def ACT_attractor(parameters=[2.5, 0.02, 1.5, -0.07], dynamic_state=None, InitialConditions=[0.5, 0, 0], L=500.0, fs=50, SampleSize=4000):
-
     """
     ACT Attractor is defined [3]_ as
 
@@ -769,7 +780,7 @@ def ACT_attractor(parameters=[2.5, 0.02, 1.5, -0.07], dynamic_state=None, Initia
         \dot{y} &= -4\\alpha y + xz + \\mu x^3,
 
         \dot{z} &= -\\delta \\alpha z + xy + \\beta z^2
-    
+
     The system parameters are set to :math:`\\alpha = 2.5`, :math:`\\mu = 0.02`, :math:`\\delta = 1.5`and :math:`\\beta = -0.07` for a periodic response and :math:`a = 2.0` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.5, 0, 0]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/ACT_attractor.png
@@ -798,14 +809,16 @@ def ACT_attractor(parameters=[2.5, 0.02, 1.5, -0.07], dynamic_state=None, Initia
     num_param = 4
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             alpha = 2.5
         elif dynamic_state == 'chaotic':
             alpha = 2.0
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         mu, delta, beta = 0.02, 1.5, -0.07
     else:
         alpha, mu, delta, beta = parameters[0], parameters[1], parameters[2], parameters[3]
@@ -817,14 +830,13 @@ def ACT_attractor(parameters=[2.5, 0.02, 1.5, -0.07], dynamic_state=None, Initia
 
     states = odeint(ACT_attractor, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
 def rabinovich_frabrikant_attractor(parameters=[1.16, 0.87], dynamic_state=None, InitialConditions=[-1, 0, 0.5], L=500.0, fs=30, SampleSize=3000):
-
     """
     Rabinovich-Frabrikant Attractor is defined [4]_ as
 
@@ -834,7 +846,7 @@ def rabinovich_frabrikant_attractor(parameters=[1.16, 0.87], dynamic_state=None,
         \dot{y} &= x(3z + 1 - x^2) + \\alpha y,
 
         \dot{z} &= -2z(\\gamma + xy)
-    
+
     The system parameters are set to :math:`\\alpha = 1.16` and :math:`\\gamma = 0.87` for a periodic response and :math:`\\alpha = 1.13` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [-1, 0, 0.5]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/rabinovich_frabrikant_attractor.png
@@ -863,14 +875,16 @@ def rabinovich_frabrikant_attractor(parameters=[1.16, 0.87], dynamic_state=None,
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             alpha = 1.16
         elif dynamic_state == 'chaotic':
             alpha = 1.13
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         gamma = 0.87
     else:
         alpha, gamma = parameters[0], parameters[1]
@@ -883,14 +897,13 @@ def rabinovich_frabrikant_attractor(parameters=[1.16, 0.87], dynamic_state=None,
     states = odeint(rabinovich_frabrikant_attractor,
                     InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
 def linear_feedback_rigid_body_motion_system(parameters=[5.3, -10, -3.8], dynamic_state=None, InitialConditions=[0.2, 0.2, 0.2], L=500.0, fs=100, SampleSize=3000):
-
     """
     Linear Feedback Rigid Body Motion System is defined [5]_ as
 
@@ -900,7 +913,7 @@ def linear_feedback_rigid_body_motion_system(parameters=[5.3, -10, -3.8], dynami
         \dot{y} &= xz + by,
 
         \dot{z} &= \\frac{1}{3}xy + cz
-    
+
     The system parameters are set to :math:`a = 5.3`, :math:`b = -10`, :math:`c = -3.8` for a periodic response and :math:`a = 5` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.2, 0.2, 0.2]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/linear_feedback_rigid_body_motion_system.png
@@ -929,14 +942,16 @@ def linear_feedback_rigid_body_motion_system(parameters=[5.3, -10, -3.8], dynami
     num_param = 3
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 5.3
         elif dynamic_state == 'chaotic':
             a = 5.0
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b, c = -10, -3.8
     else:
         a, b, c = parameters[0], parameters[1], parameters[2]
@@ -948,14 +963,13 @@ def linear_feedback_rigid_body_motion_system(parameters=[5.3, -10, -3.8], dynami
     states = odeint(
         linear_feedback_rigid_body_motion_system, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
 def moore_spiegel_oscillator(parameters=[7.8, 20], dynamic_state=None, InitialConditions=[0.2, 0.2, 0.2], L=500.0, fs=100, SampleSize=5000):
-
     """
     The Moore-Spiegel Oscillator is defined [6]_ as
 
@@ -965,7 +979,7 @@ def moore_spiegel_oscillator(parameters=[7.8, 20], dynamic_state=None, InitialCo
         \dot{y} &= z,
 
         \dot{z} &= -z - (T - R + Rx^2)y - Tx
-    
+
     The system parameters are set to :math:`T = 7.8`, :math:`R = 20` for a periodic response and :math:`T = 7` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.2, 0.2, 0.2]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/moore_spiegel_oscillator.png
@@ -994,14 +1008,16 @@ def moore_spiegel_oscillator(parameters=[7.8, 20], dynamic_state=None, InitialCo
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             T = 7.8
         elif dynamic_state == 'chaotic':
             T = 7.0
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         R = 20
     else:
         T, R = parameters[0], parameters[1]
@@ -1011,18 +1027,17 @@ def moore_spiegel_oscillator(parameters=[7.8, 20], dynamic_state=None, InitialCo
         return y, z, -z - (T-R + R*x**2)*y - T*x
 
     if InitialConditions == None:
-        InitialConditions = [0.2,0.2,0.2]
+        InitialConditions = [0.2, 0.2, 0.2]
 
     states = odeint(moore_spiegel_oscillator, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
 def thomas_cyclically_symmetric_attractor(parameters=[0.17], dynamic_state=None, InitialConditions=[0.1, 0, 0], L=1000.0, fs=10, SampleSize=5000):
-
     """
     The Thomas Cyclically Symmetric Attractor is defined [7]_ as
 
@@ -1032,7 +1047,7 @@ def thomas_cyclically_symmetric_attractor(parameters=[0.17], dynamic_state=None,
         \dot{y} &= -by + \sin{z},
 
         \dot{z} &= -bz + \sin{x}
-    
+
     The system parameters are set to :math:`b = 0.17` for a periodic response and :math:`b = 0.18` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.1, 0, 0]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/thomas_cyclically_symmetric_attractor.png
@@ -1062,14 +1077,16 @@ def thomas_cyclically_symmetric_attractor(parameters=[0.17], dynamic_state=None,
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             b = 0.17
         elif dynamic_state == 'chaotic':
             b = 0.18
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         b = parameters[0]
 
@@ -1081,14 +1098,13 @@ def thomas_cyclically_symmetric_attractor(parameters=[0.17], dynamic_state=None,
     states = odeint(
         thomas_cyclically_symmetric_attractor, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
 def halvorsens_cyclically_symmetric_attractor(parameters=[1.85, 4, 4], dynamic_state=None, InitialConditions=[-5, 0, 0], L=200.0, fs=200, SampleSize=5000):
-
     """
     The Halvorsens Cyclically Symmetric Attractor is defined as
 
@@ -1098,7 +1114,7 @@ def halvorsens_cyclically_symmetric_attractor(parameters=[1.85, 4, 4], dynamic_s
         \dot{y} &= -ay - bz - cz - z^2,
 
         \dot{z} &= -az - bx - cy - x^2
-    
+
     The system parameters are set to :math:`a = 1.85`, :math:`b = 4`, :math:`c = 4` for a periodic response and :math:`a = 1.45` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [-5, 0, 0]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/halvorsens_cyclically_symmetric_attractor.png
@@ -1124,14 +1140,16 @@ def halvorsens_cyclically_symmetric_attractor(parameters=[1.85, 4, 4], dynamic_s
     num_param = 3
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 1.85
         elif dynamic_state == 'chaotic':
             a = 1.45
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b, c = 4, 4
     else:
         a, b, c = parameters[0], parameters[1], parameters[2]
@@ -1144,13 +1162,13 @@ def halvorsens_cyclically_symmetric_attractor(parameters=[1.85, 4, 4], dynamic_s
     states = odeint(
         halvorsens_cyclically_symmetric_attractor, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
-def burke_shaw_attractor(parameters=[12.0,4.0], dynamic_state=None, InitialConditions=[0.6,0.0,0.0], L=500.0, fs=200, SampleSize=5000):
+def burke_shaw_attractor(parameters=[12.0, 4.0], dynamic_state=None, InitialConditions=[0.6, 0.0, 0.0], L=500.0, fs=200, SampleSize=5000):
     """
     The Burke-Shaw Attractor is defined [8]_ as 
 
@@ -1188,14 +1206,16 @@ def burke_shaw_attractor(parameters=[12.0,4.0], dynamic_state=None, InitialCondi
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             s = 12.0
         elif dynamic_state == 'chaotic':
             s = 10.0
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         V = 4.0
     else:
         s, V = parameters[0], parameters[1]
@@ -1210,13 +1230,13 @@ def burke_shaw_attractor(parameters=[12.0,4.0], dynamic_state=None, InitialCondi
 
     states = odeint(burke_shaw_attractor, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
-def rucklidge_attractor(parameters=[1.1, 6.7], dynamic_state=None, InitialConditions=[1.0,0.0,4.5], L=1000.0, fs=50, SampleSize=5000):
+def rucklidge_attractor(parameters=[1.1, 6.7], dynamic_state=None, InitialConditions=[1.0, 0.0, 4.5], L=1000.0, fs=50, SampleSize=5000):
     """
     The Rucklidge Attractor is defined [9]_ as
 
@@ -1253,14 +1273,16 @@ def rucklidge_attractor(parameters=[1.1, 6.7], dynamic_state=None, InitialCondit
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             k = 1.1
         elif dynamic_state == 'chaotic':
             k = 1.6
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         lamb = 6.7
     else:
         k, lamb = parameters[0], parameters[1]
@@ -1275,12 +1297,13 @@ def rucklidge_attractor(parameters=[1.1, 6.7], dynamic_state=None, InitialCondit
 
     states = odeint(rucklidge_attractor, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
-def WINDMI(parameters=[0.9, 2.5], dynamic_state=None, InitialConditions=[1.0,0.0,4.5], L=1000.0, fs=20, SampleSize=5000):
+
+def WINDMI(parameters=[0.9, 2.5], dynamic_state=None, InitialConditions=[1.0, 0.0, 4.5], L=1000.0, fs=20, SampleSize=5000):
     """
     The WINDMI Attractor is defined [10]_ as
 
@@ -1317,20 +1340,22 @@ def WINDMI(parameters=[0.9, 2.5], dynamic_state=None, InitialConditions=[1.0,0.0
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 0.9
         elif dynamic_state == 'chaotic':
             a = 0.8
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b = 2.5
     else:
         a, b = parameters[0], parameters[1]
-    
 
     # defining simulation functions
+
     def WINDMI(state, t):
         x, y, z = state  # unpack the state vector
         return y, z, -a*z - y + b - np.exp(x)
@@ -1340,12 +1365,13 @@ def WINDMI(parameters=[0.9, 2.5], dynamic_state=None, InitialConditions=[1.0,0.0
 
     states = odeint(WINDMI, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
-def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None, InitialConditions=[-0.9,0.0,0.5], L=1000.0, fs=20, SampleSize=5000):
+
+def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None, InitialConditions=[-0.9, 0.0, 0.5], L=1000.0, fs=20, SampleSize=5000):
     """
     The Simplest Quadratic Chaotic Flow is defined [11]_ as
 
@@ -1383,7 +1409,8 @@ def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None,
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             print('We could not find a periodic response near $a = 2.017$.')
@@ -1393,7 +1420,8 @@ def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None,
         elif dynamic_state == 'chaotic':
             a = 2.017
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b = 1.0
     else:
         a, b = parameters[0], parameters[1]
@@ -1410,12 +1438,13 @@ def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None,
     states = odeint(simplest_quadratic_chaotic_flow,
                     InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
-def simplest_cubic_chaotic_flow(parameters=[2.11, 2.5], dynamic_state=None, InitialConditions=[0.0,0.96,0.0], L=1000.0, fs=20, SampleSize=5000):
+
+def simplest_cubic_chaotic_flow(parameters=[2.11, 2.5], dynamic_state=None, InitialConditions=[0.0, 0.96, 0.0], L=1000.0, fs=20, SampleSize=5000):
     """
     The Simplest Cubic Chaotic Flow is defined [12]_ as
 
@@ -1452,14 +1481,16 @@ def simplest_cubic_chaotic_flow(parameters=[2.11, 2.5], dynamic_state=None, Init
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 2.11
         elif dynamic_state == 'chaotic':
             a = 2.05
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b = 2.5
     else:
         a, b = parameters[0], parameters[1]
@@ -1474,13 +1505,13 @@ def simplest_cubic_chaotic_flow(parameters=[2.11, 2.5], dynamic_state=None, Init
 
     states = odeint(simplest_cubic_chaotic_flow, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
-def simplest_piecewise_linear_chaotic_flow(parameters=[0.7], dynamic_state=None, InitialConditions=[0.0,-0.7,0.0], L=1000.0, fs=40, SampleSize=5000):
+def simplest_piecewise_linear_chaotic_flow(parameters=[0.7], dynamic_state=None, InitialConditions=[0.0, -0.7, 0.0], L=1000.0, fs=40, SampleSize=5000):
     """
     The Simplest Piecewise-Linear Chaotic Flow is defined [13]_ as
 
@@ -1518,14 +1549,16 @@ def simplest_piecewise_linear_chaotic_flow(parameters=[0.7], dynamic_state=None,
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 0.7
         elif dynamic_state == 'chaotic':
             a = 0.6
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a = parameters[0]
 
@@ -1540,13 +1573,13 @@ def simplest_piecewise_linear_chaotic_flow(parameters=[0.7], dynamic_state=None,
     states = odeint(
         simplest_piecewise_linear_chaotic_flow, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts
 
 
-def double_scroll(parameters=[1.0], dynamic_state=None, InitialConditions=[0.01,0.01,0.0], L=1000.0, fs=20, SampleSize=5000):
+def double_scroll(parameters=[1.0], dynamic_state=None, InitialConditions=[0.01, 0.01, 0.0], L=1000.0, fs=20, SampleSize=5000):
     """
     The Double Scroll Attractor is defined [14]_ as
 
@@ -1583,14 +1616,16 @@ def double_scroll(parameters=[1.0], dynamic_state=None, InitialConditions=[0.01,
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 1.0
         elif dynamic_state == 'chaotic':
             a = 0.8
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a = parameters[0]
 
@@ -1604,7 +1639,7 @@ def double_scroll(parameters=[1.0], dynamic_state=None, InitialConditions=[0.01,
 
     states = odeint(double_scroll, InitialConditions, t)
     ts = [(states[:, 0])[-SampleSize:], (states[:, 1])
-            [-SampleSize:], (states[:, 2])[-SampleSize:]]
+          [-SampleSize:], (states[:, 2])[-SampleSize:]]
     t = t[-SampleSize:]
 
     return t, ts

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def maps(system, dynamic_state=None, L=None, fs=None,
          SampleSize=None, parameters=None, InitialConditions=None):
 
@@ -37,7 +38,7 @@ def maps(system, dynamic_state=None, L=None, fs=None,
 
     if system == 'henon_map':
         t, ts = henon_map()
-        
+
     if system == 'lozi_map':
         t, ts = lozi_map()
 
@@ -59,18 +60,18 @@ def maps(system, dynamic_state=None, L=None, fs=None,
     return t, ts
 
 
-def logistic_map(parameters=[3.5], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def logistic_map(parameters=[3.5], dynamic_state=None, InitialConditions=None,
+                 L=1000.0, fs=1, SampleSize=500):
     """
     The logistic map [1]_ was generated as
 
     .. math::
         x_{n+1} = rx_n(1-x_n)
-    
+
     where we chose the parameters :math:`x_0 = 0.5` and :math:`r = 3.6` for a chaotic state. You can set :math:`r = 3.5` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     .. figure:: ../../../figures/Maps/Logistic_map.png
-    
+
     Parameters:
         parameters (Optional[float]): Array of 1 float [r]
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -80,7 +81,7 @@ def logistic_map(parameters=[3.5], dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [1] May, Robert. "Simple mathematical models with very complicated dynamics". Nature, 1976.
@@ -91,14 +92,16 @@ def logistic_map(parameters=[3.5], dynamic_state=None, InitialConditions=None,
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             r = 3.5
         elif dynamic_state == 'chaotic':
             r = 3.6
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         r = parameters[0]
 
@@ -118,8 +121,8 @@ def logistic_map(parameters=[3.5], dynamic_state=None, InitialConditions=None,
     return t, ts
 
 
-def henon_map(parameters=[1.25,0.3,1.0], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def henon_map(parameters=[1.25, 0.3, 1.0], dynamic_state=None, InitialConditions=None,
+              L=1000.0, fs=1, SampleSize=500):
     """
     The Hénon map [2]_ was solved as
 
@@ -132,7 +135,7 @@ def henon_map(parameters=[1.25,0.3,1.0], dynamic_state=None, InitialConditions=N
     where we chose the parameters :math:`a = 1.20`, :math:`b = 0.30`, and :math:`c = 1.00` for a chaotic state with initial conditions :math:`x_0 = 0.1` and :math:`y_0 = 0.3`. You can set :math:`a = 1.25` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     .. figure:: ../../../figures/Maps/Henon_map.png
-    
+
     Parameters:
         parameters (Optional[floats]): Array of 3 floats [a,b,c].
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -142,7 +145,7 @@ def henon_map(parameters=[1.25,0.3,1.0], dynamic_state=None, InitialConditions=N
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [2] Hénon, Michel. "A two-dimensional mapping with a strange attractor". Communications in Mathematical Physics, 1976.
@@ -153,14 +156,16 @@ def henon_map(parameters=[1.25,0.3,1.0], dynamic_state=None, InitialConditions=N
     num_param = 3
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 1.25
         elif dynamic_state == 'chaotic':
             a = 1.20
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b, c = 0.3, 1.0
     else:
         a, b, c = parameters[0], parameters[1], parameters[2]
@@ -186,9 +191,8 @@ def henon_map(parameters=[1.25,0.3,1.0], dynamic_state=None, InitialConditions=N
     return t, ts
 
 
-def sine_map(parameters=[0.8], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
-
+def sine_map(parameters=[0.8], dynamic_state=None, InitialConditions=None,
+             L=1000.0, fs=1, SampleSize=500):
     """
     The Sine map is defined as
 
@@ -215,14 +219,16 @@ def sine_map(parameters=[0.8], dynamic_state=None, InitialConditions=None,
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             A = 0.8
         elif dynamic_state == 'chaotic':
             A = 1.0
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         A = parameters[0]
 
@@ -242,14 +248,14 @@ def sine_map(parameters=[0.8], dynamic_state=None, InitialConditions=None,
     return t, ts
 
 
-def tent_map(parameters=[1.05], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def tent_map(parameters=[1.05], dynamic_state=None, InitialConditions=None,
+             L=1000.0, fs=1, SampleSize=500):
     """
     The Tent map [3]_ was solved as
 
     .. math::
         x_{n+1} = A\min{([x_n, 1-x_n])}
-    
+
     where we chose the parameter :math:`A = 1.50` for a chaotic state with initial condition :math:`x_0 = 1/\sqrt{2}`. You can also change :math:`A = 1.05` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     .. figure:: ../../../figures/Maps/Tent_map.png
@@ -263,7 +269,7 @@ def tent_map(parameters=[1.05], dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [3] Crampin, Michael. "On the chaotic behaviour of the tent map". Teaching Mathematics and its Applications, 1994.
@@ -273,17 +279,18 @@ def tent_map(parameters=[1.05], dynamic_state=None, InitialConditions=None,
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             A = 1.05
         elif dynamic_state == 'chaotic':
             A = 1.5
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         A = parameters[0]
-
 
     if InitialConditions == None:
         InitialConditions = [1/np.sqrt(2)]
@@ -301,18 +308,18 @@ def tent_map(parameters=[1.05], dynamic_state=None, InitialConditions=None,
     return t, ts
 
 
-def linear_congruential_generator_map(parameters=[0.9,54773,259200], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def linear_congruential_generator_map(parameters=[0.9, 54773, 259200], dynamic_state=None, InitialConditions=None,
+                                      L=1000.0, fs=1, SampleSize=500):
     """
     The Linear Congruential Generator map is defined as
 
     .. math::
         x_{n+1}=(ax_n+b)\mod c
-    
+
     where we chose the parameter :math:`a = 1.1` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can also change :math:`a = 0.9` for a periodic response. :math:`b` and :math:`c` are set to 54,773 and 259,200 respectively for both dynamic states. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     .. figure:: ../../../figures/Maps/Linear_Congruential_Generator_map.png
-    
+
     Parameters:
         parameters (Optional[float]): Array of 3 floats [a,b,c].
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -327,14 +334,16 @@ def linear_congruential_generator_map(parameters=[0.9,54773,259200], dynamic_sta
     num_param = 3
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 0.9
         elif dynamic_state == 'chaotic':
             a = 1.1
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a, b, c = parameters[0], parameters[1], parameters[2]
 
@@ -354,18 +363,18 @@ def linear_congruential_generator_map(parameters=[0.9,54773,259200], dynamic_sta
     return t, ts
 
 
-def rickers_population_map(parameters=[13], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def rickers_population_map(parameters=[13], dynamic_state=None, InitialConditions=None,
+                           L=1000.0, fs=1, SampleSize=500):
     """
     The Ricker's Population map is defined [4]_ as
 
     .. math::
         x_{n+1}=ax_n e^{-x_n}
-    
+
     where we chose the parameter :math:`a = 20` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can set :math:`a = 13` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     .. figure:: ../../../figures/Maps/Rickers_Popoulation_map.png
-    
+
     Parameters:
         parameters (Optional[float]): Array of 1 parameter [a].
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -375,7 +384,7 @@ def rickers_population_map(parameters=[13], dynamic_state=None, InitialCondition
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [4] Ricker, William Edwin. "Stock and recruitment". Journal of the Fisheries Research Board of Canada, 1954.
@@ -386,14 +395,16 @@ def rickers_population_map(parameters=[13], dynamic_state=None, InitialCondition
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 13
         elif dynamic_state == 'chaotic':
             a = 20
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a = parameters[0]
 
@@ -413,18 +424,18 @@ def rickers_population_map(parameters=[13], dynamic_state=None, InitialCondition
     return t, ts
 
 
-def gauss_map(parameters=[6.20,-0.20], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def gauss_map(parameters=[6.20, -0.20], dynamic_state=None, InitialConditions=None,
+              L=1000.0, fs=1, SampleSize=500):
     """
     The Gauss map is defined [5]_ as
 
     .. math::
         x_{n+1}=e^{-\\alpha x_n^2}+\\beta
-    
+
     where we chose the parameters :math:`\\alpha = 6.20` and :math:`\\beta = -0.35` for a chaotic state with initial condition :math:`x_0 = 0.1`. You can set :math:`\\beta = -0.20` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients. Taken from https://en.wikipedia.org/wiki/Gauss_iterated_map
 
     .. figure:: ../../../figures/Maps/Gauss_map.png
-    
+
     Parameters:
         parameters (Optional[floats]): Array of parameters [alpha, beta].
         beta (Optional[float]): System parameter.
@@ -435,7 +446,7 @@ def gauss_map(parameters=[6.20,-0.20], dynamic_state=None, InitialConditions=Non
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [5] Hilborn, Robert C. "Chaos and nonlinear dynamics: an introduction for scientists and engineers". Oxford, Univ. Press, 2004.
@@ -445,14 +456,16 @@ def gauss_map(parameters=[6.20,-0.20], dynamic_state=None, InitialConditions=Non
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             beta = -0.20
         elif dynamic_state == 'chaotic':
             beta = -0.35
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         alpha = 6.20
     else:
         alpha, beta = parameters[0], parameters[1]
@@ -469,12 +482,12 @@ def gauss_map(parameters=[6.20,-0.20], dynamic_state=None, InitialConditions=Non
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
-    
+
     return t, ts
 
 
-def cusp_map(parameters=[1.1], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def cusp_map(parameters=[1.1], dynamic_state=None, InitialConditions=None,
+             L=1000.0, fs=1, SampleSize=500):
     """
     The Cusp map is defined [6]_ as
 
@@ -495,7 +508,7 @@ def cusp_map(parameters=[1.1], dynamic_state=None, InitialConditions=None,
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
 
-    
+
     References
     ----------
     .. [6] Beck, Christian. "Thermodynamics of Chaotic Systems". Cambridge University Press, 2009.
@@ -505,14 +518,16 @@ def cusp_map(parameters=[1.1], dynamic_state=None, InitialConditions=None,
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 1.1
         elif dynamic_state == 'chaotic':
             a = 1.2
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a = parameters[0]
 
@@ -532,8 +547,8 @@ def cusp_map(parameters=[1.1], dynamic_state=None, InitialConditions=None,
     return t, ts
 
 
-def pinchers_map(parameters=[1.3,0.5], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def pinchers_map(parameters=[1.3, 0.5], dynamic_state=None, InitialConditions=None,
+                 L=1000.0, fs=1, SampleSize=500):
     """
     The Pincher's map is defined [7]_ as
 
@@ -563,14 +578,16 @@ def pinchers_map(parameters=[1.3,0.5], dynamic_state=None, InitialConditions=Non
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             s = 1.3
         elif dynamic_state == 'chaotic':
             s = 1.6
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         c = 0.5
     else:
         s, c = parameters[0], parameters[1]
@@ -587,12 +604,12 @@ def pinchers_map(parameters=[1.3,0.5], dynamic_state=None, InitialConditions=Non
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
-    
+
     return t, ts
 
 
-def sine_circle_map(parameters=[0.5,1.5], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def sine_circle_map(parameters=[0.5, 1.5], dynamic_state=None, InitialConditions=None,
+                    L=1000.0, fs=1, SampleSize=500):
     """
     The Sine Circle map is defined [8]_ as
 
@@ -622,14 +639,16 @@ def sine_circle_map(parameters=[0.5,1.5], dynamic_state=None, InitialConditions=
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             k = 1.5
         elif dynamic_state == 'chaotic':
             k = 2.0
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         omega = 0.5
     else:
         omega, k = parameters[0], parameters[1]
@@ -650,8 +669,8 @@ def sine_circle_map(parameters=[0.5,1.5], dynamic_state=None, InitialConditions=
     return t, ts
 
 
-def lozi_map(parameters=[1.5,0.5], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def lozi_map(parameters=[1.5, 0.5], dynamic_state=None, InitialConditions=None,
+             L=1000.0, fs=1, SampleSize=500):
     """
     The Lozi map is defined [9]_ as
 
@@ -673,28 +692,30 @@ def lozi_map(parameters=[1.5,0.5], dynamic_state=None, InitialConditions=None,
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [9] Peitgen, Heinz-Otto. "Chaos and Fractals New Frontiers of Science". Springer-Verlag, 1992.
     """
-    
+
     t = np.linspace(0, L, int(L*fs))
 
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 1.5
         elif dynamic_state == 'chaotic':
             a = 1.7
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b = 0.5
     else:
-        a,b = parameters[0], parameters[1]
+        a, b = parameters[0], parameters[1]
 
     # defining simulation functions
     def lozi(a, b, x, y):
@@ -717,8 +738,8 @@ def lozi_map(parameters=[1.5,0.5], dynamic_state=None, InitialConditions=None,
     return t, ts
 
 
-def delayed_logstic_map(parameters=[2.20], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def delayed_logstic_map(parameters=[2.20], dynamic_state=None, InitialConditions=None,
+                        L=1000.0, fs=1, SampleSize=500):
     """
     The Delayed Logistic map is defined [10]_ as
 
@@ -730,7 +751,7 @@ def delayed_logstic_map(parameters=[2.20], dynamic_state=None, InitialConditions
     where we chose the parameter :math:`a = 2.27` for a chaotic state with initial conditions :math:`x_0 = 0.001` and :math:`y_0 = 0.001`. You can set :math:`a = 2.20` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     .. figure:: ../../../figures/Maps/Delayed_Logistic_map.png
-    
+
     Parameters:
         parameters (Optional[float]): Array of system parameters [a].
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -740,7 +761,7 @@ def delayed_logstic_map(parameters=[2.20], dynamic_state=None, InitialConditions
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [10] Ismail, Samar M. "Generalized Delayed Logistic Map Suitable For Pseudo-random Number Generation". International Conference on Science and Technology, 2015.
@@ -750,14 +771,16 @@ def delayed_logstic_map(parameters=[2.20], dynamic_state=None, InitialConditions
     num_param = 1
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 2.20
         elif dynamic_state == 'chaotic':
             a = 2.27
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a = parameters[0]
 
@@ -782,8 +805,8 @@ def delayed_logstic_map(parameters=[2.20], dynamic_state=None, InitialConditions
     return t, ts
 
 
-def tinkerbell_map(parameters=[0.7,-0.6, 2, 0.5], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def tinkerbell_map(parameters=[0.7, -0.6, 2, 0.5], dynamic_state=None, InitialConditions=None,
+                   L=1000.0, fs=1, SampleSize=500):
     """
     The Tinkerbell map is defined [11]_ as
 
@@ -795,7 +818,7 @@ def tinkerbell_map(parameters=[0.7,-0.6, 2, 0.5], dynamic_state=None, InitialCon
     where we chose the parameters :math:`a = 0.9`, :math:`b = -0.6`, :math:`c = 2.0`, and :math:`d = 0.5` for a chaotic state with initial conditions :math:`x_0 = 0.0` and :math:`y_0 = 0.5`. You can set :math:`a = 0.7` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     .. figure:: ../../../figures/Maps/Tinkerbell_map.png
-    
+
     Parameters:
         parameters (Optional[float]): Array of system parameters [a,b,c,d].
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -815,14 +838,16 @@ def tinkerbell_map(parameters=[0.7,-0.6, 2, 0.5], dynamic_state=None, InitialCon
     num_param = 4
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = 0.7
         elif dynamic_state == 'chaotic':
             a = 0.9
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b, c, d = -0.6, 2, 0.5
     else:
         a, b, c, d = parameters[0], parameters[1], parameters[2], parameters[3]
@@ -848,8 +873,8 @@ def tinkerbell_map(parameters=[0.7,-0.6, 2, 0.5], dynamic_state=None, InitialCon
     return t, ts
 
 
-def burgers_map(parameters=[0.75,1.6], dynamic_state=None, InitialConditions=None,  
-    L=3000.0, fs=1, SampleSize=500):
+def burgers_map(parameters=[0.75, 1.6], dynamic_state=None, InitialConditions=None,
+                L=3000.0, fs=1, SampleSize=500):
     """
     The Burger's map is defined [12]_ as
 
@@ -871,7 +896,7 @@ def burgers_map(parameters=[0.75,1.6], dynamic_state=None, InitialConditions=Non
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [12] Burgers, J. M. "Mathematical examples illustrating relations occurring in the theory of turbulent fluid motion". Trans. Roy. Neth. Acad. Sci. Amsterdam., 1995.
@@ -881,14 +906,16 @@ def burgers_map(parameters=[0.75,1.6], dynamic_state=None, InitialConditions=Non
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             b = 1.6
         elif dynamic_state == 'chaotic':
             b = 1.75
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         a = 0.75
     else:
         a, b = parameters[0], parameters[1]
@@ -915,8 +942,8 @@ def burgers_map(parameters=[0.75,1.6], dynamic_state=None, InitialConditions=Non
     return t, ts
 
 
-def holmes_cubic_map(parameters=[0.27,2.77], dynamic_state=None, InitialConditions=None,  
-    L=3000.0, fs=1, SampleSize=500):
+def holmes_cubic_map(parameters=[0.27, 2.77], dynamic_state=None, InitialConditions=None,
+                     L=3000.0, fs=1, SampleSize=500):
     """
     The Holme's Cubic map is defined [13]_ as
 
@@ -938,7 +965,7 @@ def holmes_cubic_map(parameters=[0.27,2.77], dynamic_state=None, InitialConditio
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [13] Chavoya-Aceves, O. "Symbolic dynamics of the cubic map". Physica D: Nonlinear Phenomena., 1985.
@@ -948,14 +975,16 @@ def holmes_cubic_map(parameters=[0.27,2.77], dynamic_state=None, InitialConditio
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             b = 0.27
         elif dynamic_state == 'chaotic':
             b = 0.20
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         d = 2.77
     else:
         b, d = parameters[0], parameters[1]
@@ -982,8 +1011,8 @@ def holmes_cubic_map(parameters=[0.27,2.77], dynamic_state=None, InitialConditio
     return t, ts
 
 
-def kaplan_yorke_map(parameters=[-1.0,0.2], dynamic_state=None, InitialConditions=None,  
-    L=1000.0, fs=1, SampleSize=500):
+def kaplan_yorke_map(parameters=[-1.0, 0.2], dynamic_state=None, InitialConditions=None,
+                     L=1000.0, fs=1, SampleSize=500):
     """
     The Kaplan Yorke map is defined [14]_ as
 
@@ -995,7 +1024,7 @@ def kaplan_yorke_map(parameters=[-1.0,0.2], dynamic_state=None, InitialCondition
     where we chose the parameters :math:`a = -2.0` and :math:`b = 0.2` for a chaotic state with initial conditions :math:`x_0 = -0.1` and :math:`y_0 = 0.5`. You can set :math:`a = -1.0` for a periodic response. We solve this system for 1000 data points and keep the second 500 to avoid transients.
 
     .. figure:: ../../../figures/Maps/Kaplan_Yorke_map.png
-        
+
     Parameters:
         parameters (Optional[float]): Array of system parameters [a,b].
         dynamic_state (Optional[string]): Dynamic state ('periodic' or 'chaotic')
@@ -1005,7 +1034,7 @@ def kaplan_yorke_map(parameters=[-1.0,0.2], dynamic_state=None, InitialCondition
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [14] Peitgen, Heinz-Otto. "Functional Differential Equations and Approximation of Fixed Points". Springer., 1979.
@@ -1015,14 +1044,16 @@ def kaplan_yorke_map(parameters=[-1.0,0.2], dynamic_state=None, InitialCondition
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a = -1.0
         elif dynamic_state == 'chaotic':
             a = -2.0
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
         b = 0.2
     else:
         a, b = parameters[0], parameters[1]
@@ -1049,8 +1080,8 @@ def kaplan_yorke_map(parameters=[-1.0,0.2], dynamic_state=None, InitialCondition
     return t, ts
 
 
-def gingerbread_man_map(parameters=[1.0,1.0], dynamic_state=None, InitialConditions=None,  
-         L=2000, fs=1, SampleSize=500):
+def gingerbread_man_map(parameters=[1.0, 1.0], dynamic_state=None, InitialConditions=None,
+                        L=2000, fs=1, SampleSize=500):
     """
     The Gingerbread Man Map is defined [15]_ [16]_ as
 
@@ -1062,7 +1093,7 @@ def gingerbread_man_map(parameters=[1.0,1.0], dynamic_state=None, InitialConditi
     where we chose the parameters :math:`a = 1.0` and :math:`b = 1.0`. For a chaotic state, initial conditions :math:`x_0 = 0.5` and :math:`y_0 = 1.8`, and for a periodic response :math:`x_0 = 0.5` and :math:`y_0 = 1.5`. We solve this system for 2000 data points and keep the last 500 to avoid transients.
 
     .. figure:: ../../../figures/Maps/Gingerbread_Man_map.png
-    
+
     Parameters:
         a (Optional[float]): System parameter.
         b (Optional[float]): System parameter. 
@@ -1073,7 +1104,7 @@ def gingerbread_man_map(parameters=[1.0,1.0], dynamic_state=None, InitialConditi
 
     Returns:
         array: Array of the time indices as `t` and the simulation time series `ts`
-    
+
     References
     ----------
     .. [15] Devaney, Robert. "The gingerbreadman". Algorithms, 1992.
@@ -1086,7 +1117,8 @@ def gingerbread_man_map(parameters=[1.0,1.0], dynamic_state=None, InitialConditi
     num_param = 2
 
     if len(parameters) != num_param:
-        raise ValueError(f'Need {num_param} parameters as specified in documentation.')
+        raise ValueError(
+            f'Need {num_param} parameters as specified in documentation.')
     elif dynamic_state != None:
         if dynamic_state == 'periodic':
             a, b = parameters[0], parameters[1]
@@ -1095,7 +1127,8 @@ def gingerbread_man_map(parameters=[1.0,1.0], dynamic_state=None, InitialConditi
             a, b = parameters[0], parameters[1]
             InitialConditions = [0.5, 1.8]
         else:
-            raise ValueError(f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
+            raise ValueError(
+                f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
     else:
         a, b = parameters[0], parameters[1]
 
@@ -1117,31 +1150,3 @@ def gingerbread_man_map(parameters=[1.0,1.0], dynamic_state=None, InitialConditi
     t = t[-SampleSize:]
 
     return t, ts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

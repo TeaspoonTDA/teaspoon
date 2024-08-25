@@ -1,9 +1,10 @@
+============
 Medical Data 
-================
+============
 
 
 Main Functions
---------------
+==============
 
 .. automodule:: teaspoon.MakeData.DynSysLib.medical_data
     :members: EEG, ECG
@@ -13,7 +14,7 @@ Main Functions
 
 
 Meta Function 
--------------
+==============
 
 This function is for being able to input into the original ``teaspoon.MakeData.DynSysLib.DynamicSystems`` function with default parameters.
 

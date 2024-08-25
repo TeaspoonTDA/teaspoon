@@ -1,37 +1,16 @@
+=====================================
 Dynamical Systems Library (DynSysLib)
-=======================================================
+=====================================
 
-
-This page provides a summary of the Python Dynamical Systems Library (DynSysLib) for simulating a wide variety of dynamical systems. Full documentation of the currently available dynamical systems can be downloaded :download:`here <../../../figures/dynamic_systems_library.pdf>`.
-
-.. figure:: ../../../figures/time_series_chaotic_animation.gif
-  :alt: Time series of a chaotic response.
-  :class: with-shadow float-left
+.. image:: ../../../figures/time_series_chaotic_animation.gif
+  :alt: :math:`x`-solution to simulated Rössler system for a chaotic response.
+  :align: center
   :scale: 35
-
-  :math:`x`-solution to simulated Rössler system for a chaotic response.
 
 .. rst-class::  clear-both
 
+This page provides a summary of the  Dynamical Systems Library (``DynSysLib``) for simulating a wide variety of dynamical systems. 
 
-
-.. automodule:: teaspoon.MakeData.DynSysLib.DynSysLib
-    :members:
-    
-
-Of the optional other parameters either the **dynamic_state parameter** or the system **parameters** must be used.
-
-This function requires the following packages:
-
-* numpy
-* scipy
-* matplotlib
-* ddeint (delayed differential equations only)
-
-
-
-Available Dynamical Systems
-####################################
 
 
 .. toctree::
@@ -46,21 +25,20 @@ Available Dynamical Systems
    medical_data
    delayed_flows
 
-TO BE REMOVED: 
-The following table provides a list of all the available dynamical systems as called by the **system** keyword:
+The following table provides a list of all the available dynamical systems. Further details for each system can be found in the linked directories. 
 
 .. list-table:: Available Dynamical Systems
    :widths: 10 10 10 10 10 10 10 10
    :header-rows: 1
 
-   * - Maps
-     - Autonomous Dissipative Flows
-     - Driven Dissipative Flows
-     - Conservative Flows
-     - Periodic Functions
-     - Noise Models
-     - Human Data
-     - Delayed Flows
+   * - `Maps <maps.md>`_
+     - `Autonomous Dissipative Flows <autonomous_dissipative_flows.md>`_
+     - `Driven Dissipative Flows <driven_dissipative_flows.md>`_
+     - `Conservative Flows <conservative_flows.md>`_
+     - `Periodic Functions <periodic_functions.md>`_
+     - `Noise Models <noise_models.md>`_
+     - `Medical Data <medical_data.md>`_
+     - `Delayed Flows <delayed_flows.md>`_
 
    * - logistic_map
      - chua
@@ -251,8 +229,18 @@ The following table provides a list of all the available dynamical systems as ca
 
 
 
-Examples
-########
+Meta Function for Simulating Dynamical Systems 
+==============================================
+
+The following function can be used to simulate a wide variety of dynamical systems. However, since the plan is for this function to be deprecated in a future release, we recommend using the specific functions for each system instead. 
+
+
+.. automodule:: teaspoon.MakeData.DynSysLib.DynSysLib
+    :members:
+    
+
+Of the optional other parameters either the **dynamic_state parameter** or the system **parameters** must be used.
+
 
 The following is a minimal working example::
 
