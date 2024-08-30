@@ -113,15 +113,6 @@
   publisher = {American Physical Society (APS)},
 }
 
-@InProceedings{Myers2023b,
-  author    = {Myers, Audun D. and Kvinge, Henry and Emerson, Tegan},
-  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
-  title     = {TopFusion: Using Topological Feature Space for Fusion and Imputation in Multi-Modal Data},
-  year      = {2023},
-  month     = {June},
-  pages     = {600-609},
-}
-
  
 @Article{Guezel2022,
   author    = {Güzel, İsmail and Munch, Elizabeth and Khasawneh, Firas A.},
@@ -415,31 +406,6 @@
   readstatus   = {read},
 }
 
-@Article{Chevyrev2018,
-  author        = {Ilya Chevyrev and Vidit Nanda and Harald Oberhauser},
-  title         = {Persistence paths and signature features in topological data analysis},
-  year          = {2018},
-  month         = jun,
-  abstract      = {We introduce a new feature map for barcodes that arise in persistent homology computation. The main idea is to first realize each barcode as a path in a convenient vector space, and to then compute its path signature which takes values in the tensor algebra of that vector space. The composition of these two operations - barcode to path, path to tensor series - results in a feature map that has several desirable properties for statistical learning, such as universality and characteristicness, and achieves state-of-the-art results on common classification benchmarks.},
-  archiveprefix = {arXiv},
-  creationdate  = {2019-01-23T00:00:00},
-  eprint        = {http://arxiv.org/abs/1806.00381v1},
-  file          = {:Persistence/StatsAndPersistence/Machine Learning/Chevyrev2018.pdf:PDF;:Chevyrev2018 - Persistence Paths and Signature Features in Topological Data Analysis.pdf:PDF:http\://arxiv.org/pdf/1806.00381v1},
-  keywords      = {stat.ML, cs.LG, math.PR, math.ST, stat.TH, featurization},
-  primaryclass  = {stat.ML},
-}
-
-@InProceedings{Reininghaus2015,
-  author       = {Reininghaus, Jan and Huber, Stefan and Bauer, Ulrich and Kwitt, Roland},
-  booktitle    = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-  title        = {A Stable Multi-Scale Kernel for Topological Machine Learning},
-  year         = {2015},
-  month        = {June},
-  creationdate = {2017-01-30T00:00:00},
-  file         = {Reininghaus2015.pdf:Persistence/StatsAndPersistence/Reininghaus2015.pdf:PDF},
-  readstatus   = {read},
-}
-
 @Article{Dey2022,
   doi = {10.48550/arxiv.2204.11080},
   url = {https://arxiv.org/abs/2204.11080},
@@ -461,18 +427,6 @@
   abstract       = {Topological data analysis (TDA) is a collection of powerful tools that can quantify shape and structure in data in order to answer questions from the data's domain. This is done by representing some aspect of the structure of the data in a simplified topological signature. In this article, we introduce two of the most commonly used topological signatures. First, the persistence diagram represents loops and holes in the space by considering connectivity of the data points for a continuum of values rather than a single fixed value. The second topological signature, the mapper graph, returns a 1-dimensional structure representing the shape of the data, and is particularly good for exploration and visualization of the data. While these techniques are based on very sophisticated mathematics, the current ubiquity of available software means that these tools are more accessible than ever to be applied to data by researchers in education and learning, as well as all domain scientists.},
   creationdate   = {2018-05-30T00:00:00},
   doi            = {10.18608/jla.2017.42.6},
-}
-
-@Article{McCullough2015,
-  author    = {McCullough, Michael and Small, Michael and Stemler, Thomas and Iu, Herbert Ho-Ching},
-  title     = {Time lagged ordinal partition networks for capturing dynamics of continuous dynamical systems},
-  journal   = {Chaos: An Interdisciplinary Journal of Nonlinear Science},
-  year      = {2015},
-  volume    = {25},
-  number    = {5},
-  pages     = {053101},
-  file      = {:Dynamics/McCullough2015.pdf:PDF;McCullough2015-arxiv.pdf:Dynamics/TSA/McCullough2015-arxiv.pdf:PDF},
-  publisher = {AIP Publishing},
 }
 
 @Article{Wang2016,
@@ -517,6 +471,76 @@
   url       = {http://dx.doi.org/10.1016/j.probengmech.2024.103634},
 }
 
+@Conference{Myers2020,
+  author    = {Myers, Audun D. and Melih Yesilli and Sarah Tymochko and Firas Khasawneh and Elizabeth Munch},
+  booktitle = {Topological Data Analysis and Beyond Workshop at NeurIPS 2020},
+  title     = {Teaspoon: A comprehensive python package for topological signal processing},
+  year      = {2020},
+  image     = {teaspoon.png},
+  keywords  = {conference},
+  url       = {https://openreview.net/pdf?id=qUoVqrIcy2P},
+}
+
+@Article{CrawleyBoevey2015,
+  author    = {Crawley-Boevey, William},
+  journal   = {Journal of Algebra and Its Applications},
+  title     = {Decomposition of pointwise finite-dimensional persistence modules},
+  year      = {2015},
+  issn      = {1793-6829},
+  month     = mar,
+  number    = {05},
+  pages     = {1550066},
+  volume    = {14},
+  doi       = {10.1142/s0219498815500668},
+  publisher = {World Scientific Pub Co Pte Lt},
+}
+
+@InProceedings{Myers2023b,
+  author    = {Myers, Audun D. and Kvinge, Henry and Emerson, Tegan},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  title     = {TopFusion: Using Topological Feature Space for Fusion and Imputation in Multi-Modal Data},
+  year      = {2023},
+  month     = {June},
+  pages     = {600-609},
+  doi       = {10.1109/cvprw59228.2023.00067}
+}
+
+@Article{Chevyrev2018,
+  author={Chevyrev, Ilya and Nanda, Vidit and Oberhauser, Harald},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Persistence Paths and Signature Features in Topological Data Analysis}, 
+  year={2020},
+  volume={42},
+  number={1},
+  pages={192-202},
+  keywords={Bars;Extraterrestrial measurements;Algebra;Data analysis;Kernel;Topological data analysis;barcodes;signature features;kernel learning},
+  doi={10.1109/TPAMI.2018.2885516}}
+
+
+@InProceedings{Reininghaus2015,
+  author={Reininghaus, Jan and Huber, Stefan and Bauer, Ulrich and Kwitt, Roland},
+  booktitle={2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}, 
+  title={A stable multi-scale kernel for topological machine learning}, 
+  year={2015},
+  volume={},
+  number={},
+  pages={4741-4748},
+  keywords={Yttrium},
+  doi={10.1109/CVPR.2015.7299106}}
+
+@Article{McCullough2015,
+  author    = {McCullough, Michael and Small, Michael and Stemler, Thomas and Iu, Herbert Ho-Ching},
+  title     = {Time lagged ordinal partition networks for capturing dynamics of continuous dynamical systems},
+  journal   = {Chaos: An Interdisciplinary Journal of Nonlinear Science},
+  year      = {2015},
+  volume    = {25},
+  number    = {5},
+  pages     = {053101},
+  doi       = {10.1063/1.4919075},
+  file      = {:Dynamics/McCullough2015.pdf:PDF;McCullough2015-arxiv.pdf:Dynamics/TSA/McCullough2015-arxiv.pdf:PDF},
+  publisher = {AIP Publishing},
+}
+
 
 @article{myers2024delay,
   title={Delay parameter selection in permutation entropy using topological data analysis},
@@ -524,7 +548,8 @@
   journal={La Matematica},
   pages={1--34},
   year={2024},
-  publisher={Springer}
+  publisher={Springer},
+  doi = {10.1007/s44007-024-00110-4}
 }
 
 @article{chelidze2017reliable,
@@ -535,7 +560,8 @@
   number={5},
   pages={051024},
   year={2017},
-  publisher={American Society of Mechanical Engineers}
+  publisher={American Society of Mechanical Engineers},
+  doi = {10.1115/1.4036814}
 }
 
 @article{cao1997practical,
@@ -546,17 +572,19 @@
   number={1-2},
   pages={43--50},
   year={1997},
-  publisher={Elsevier}
+  publisher={Elsevier},
+  doi = {10.1016/s0167-2789(97)00118-8}
 }
 
-@Conference{Myers2020,
-  author    = {Myers, Audun D. and Melih Yesilli and Sarah Tymochko and Firas Khasawneh and Elizabeth Munch},
-  booktitle = {Topological Data Analysis and Beyond Workshop at NeurIPS 2020},
-  title     = {Teaspoon: A comprehensive python package for topological signal processing},
-  year      = {2020},
-  image     = {teaspoon.png},
-  keywords  = {conference},
-  url       = {https://openreview.net/pdf?id=qUoVqrIcy2P},
+@Book{Hatcher,
+  author       = {Allen Hatcher},
+  publisher    = {Cambridge University Press},
+  title        = {Algebraic Topology},
+  year         = {2002},
+  creationdate = {2011-05-23T00:00:00},
+  file         = {Hatcher - algebraic topology.pdf:MathTextbooks/Hatcher - algebraic topology.pdf:PDF},
+  groups       = {Classic Textbooks},
+  owner        = {liz},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
