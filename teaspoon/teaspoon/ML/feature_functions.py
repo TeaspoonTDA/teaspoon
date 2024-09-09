@@ -509,7 +509,7 @@ def PLandscapes(A, L_number=[]):
     # group persistence diagrams with respect to same birth times
     compressed_data = np.split(A, np.unique(
         A[:, 0], return_index=1)[1][1:], axis=0)
-    compressed_data = np.array(compressed_data)  # convert list object to array
+    compressed_data = np.array(compressed_data, dtype=object)  # convert list object to array
 
     # sorting each birth time arrays with respect to descending order of death time
     N = np.arange(0, len(compressed_data), 1)
