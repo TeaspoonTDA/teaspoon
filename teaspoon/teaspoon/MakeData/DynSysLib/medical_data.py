@@ -2,18 +2,6 @@ import numpy as np
 import os
 
 
-def medical_data(system, dynamic_state=None, L=None, fs=None,
-                 SampleSize=None, parameters=None, InitialConditions=None):
-
-    if system == 'ECG':
-        t, ts = ECG()
-
-    if system == 'EEG':
-        t, ts = EEG()
-
-    return t, ts
-
-
 def EEG(SampleSize=5000, dynamic_state='normal'):
     """
     The EEG signal was taken from andrzejak et al. [1]_. Specifically, the first 5000 data points from the EEG data of a healthy patient from set A (file Z-093) was used and the first 5000 data points of a patient experiencing a seizure from set E (file S-056) was used (see figure below for case during seizure).

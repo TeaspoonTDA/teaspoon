@@ -150,83 +150,80 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="autonomous_dissipative_flows">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/autonomous_dissipative_flows.html#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.autonomous_dissipative_flows">[docs]</a>
-<span class="k">def</span> <span class="nf">autonomous_dissipative_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                 <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                 <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="c1"># def autonomous_dissipative_flows(system, dynamic_state=None, L=None, fs=None,</span>
+<span class="c1">#                                  SampleSize=None, parameters=None,</span>
+<span class="c1">#                                  InitialConditions=None):</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;lorenz&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">lorenz</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;lorenz&#39;:</span>
+<span class="c1">#         t, ts = lorenz()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;rossler&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">rossler</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;rossler&#39;:</span>
+<span class="c1">#         t, ts = rossler()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;chua&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">chua</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;chua&#39;:</span>
+<span class="c1">#         t, ts = chua()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;double_pendulum&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">double_pendulum</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;double_pendulum&#39;:</span>
+<span class="c1">#         t, ts = double_pendulum()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;coupled_lorenz_rossler&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">coupled_lorenz_rossler</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;coupled_lorenz_rossler&#39;:</span>
+<span class="c1">#         t, ts = coupled_lorenz_rossler()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;coupled_rossler_rossler&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">coupled_rossler_rossler</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;coupled_rossler_rossler&#39;:</span>
+<span class="c1">#         t, ts = coupled_rossler_rossler()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;diffusionless_lorenz_attractor&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">diffusionless_lorenz_attractor</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;diffusionless_lorenz_attractor&#39;:</span>
+<span class="c1">#         t, ts = diffusionless_lorenz_attractor()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;complex_butterfly&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">complex_butterfly</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;complex_butterfly&#39;:</span>
+<span class="c1">#         t, ts = complex_butterfly()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;chens_system&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">chens_system</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;chens_system&#39;:</span>
+<span class="c1">#         t, ts = chens_system()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;hadley_circulation&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">hadley_circulation</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;hadley_circulation&#39;:</span>
+<span class="c1">#         t, ts = hadley_circulation()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;ACT_attractor&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">ACT_attractor</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;ACT_attractor&#39;:</span>
+<span class="c1">#         t, ts = ACT_attractor()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;rabinovich_frabrikant_attractor&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">rabinovich_frabrikant_attractor</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;rabinovich_frabrikant_attractor&#39;:</span>
+<span class="c1">#         t, ts = rabinovich_frabrikant_attractor()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;linear_feedback_rigid_body_motion_system&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">linear_feedback_rigid_body_motion_system</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;linear_feedback_rigid_body_motion_system&#39;:</span>
+<span class="c1">#         t, ts = linear_feedback_rigid_body_motion_system()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;moore_spiegel_oscillator&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">moore_spiegel_oscillator</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;moore_spiegel_oscillator&#39;:</span>
+<span class="c1">#         t, ts = moore_spiegel_oscillator()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;thomas_cyclically_symmetric_attractor&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">thomas_cyclically_symmetric_attractor</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;thomas_cyclically_symmetric_attractor&#39;:</span>
+<span class="c1">#         t, ts = thomas_cyclically_symmetric_attractor()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;halvorsens_cyclically_symmetric_attractor&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">halvorsens_cyclically_symmetric_attractor</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;halvorsens_cyclically_symmetric_attractor&#39;:</span>
+<span class="c1">#         t, ts = halvorsens_cyclically_symmetric_attractor()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;burke_shaw_attractor&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">burke_shaw_attractor</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;burke_shaw_attractor&#39;:</span>
+<span class="c1">#         t, ts = burke_shaw_attractor()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;rucklidge_attractor&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">rucklidge_attractor</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;rucklidge_attractor&#39;:</span>
+<span class="c1">#         t, ts = rucklidge_attractor()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;WINDMI&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">WINDMI</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;WINDMI&#39;:</span>
+<span class="c1">#         t, ts = WINDMI()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;simplest_quadratic_chaotic_flow&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">simplest_quadratic_chaotic_flow</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;simplest_quadratic_chaotic_flow&#39;:</span>
+<span class="c1">#         t, ts = simplest_quadratic_chaotic_flow()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;simplest_cubic_chaotic_flow&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">simplest_cubic_chaotic_flow</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;simplest_cubic_chaotic_flow&#39;:</span>
+<span class="c1">#         t, ts = simplest_cubic_chaotic_flow()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;simplest_piecewise_linear_chaotic_flow&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">simplest_piecewise_linear_chaotic_flow</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;simplest_piecewise_linear_chaotic_flow&#39;:</span>
+<span class="c1">#         t, ts = simplest_piecewise_linear_chaotic_flow()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;double_scroll&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">double_scroll</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;double_scroll&#39;:</span>
+<span class="c1">#         t, ts = double_scroll()</span>
 
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
+<span class="c1">#     return t, ts</span>
 
 
 <div class="viewcode-block" id="lorenz">

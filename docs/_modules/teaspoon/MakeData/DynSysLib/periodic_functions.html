@@ -148,18 +148,15 @@
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="periodic_functions">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/periodic_functions.html#teaspoon.MakeData.DynSysLib.periodic_functions.periodic_functions">[docs]</a>
-<span class="k">def</span> <span class="nf">periodic_functions</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                       <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;sine&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">sine</span><span class="p">()</span>
+<span class="c1"># def periodic_functions(system, dynamic_state=None, L=None, fs=None,</span>
+<span class="c1">#                        SampleSize=None, parameters=None, InitialConditions=None):</span>
+<span class="c1">#     if system == &#39;sine&#39;:</span>
+<span class="c1">#         t, ts = sine()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;incommensurate_sine&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">incommensurate_sine</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;incommensurate_sine&#39;:</span>
+<span class="c1">#         t, ts = incommensurate_sine()</span>
 
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
+<span class="c1">#     return t, ts</span>
 
 
 <div class="viewcode-block" id="sine">

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaspoon.MakeData.DynSysLib.noise_models &mdash; teaspoon 1.3.7 documentation</title>
+  <title>teaspoon.MakeData.DynSysLib.delayed_flows &mdash; teaspoon 1.3.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
@@ -135,7 +135,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">teaspoon.MakeData.DynSysLib.noise_models</li>
+      <li class="breadcrumb-item active">teaspoon.MakeData.DynSysLib.delayed_flows</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -144,132 +144,82 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for teaspoon.MakeData.DynSysLib.noise_models</h1><div class="highlight"><pre>
+  <h1>Source code for teaspoon.MakeData.DynSysLib.delayed_flows</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">ddeint</span> <span class="kn">import</span> <span class="n">ddeint</span>
 
 
-<span class="c1"># def noise_models(system, dynamic_state=None, L=None, fs=None,</span>
-<span class="c1">#                  SampleSize=None, parameters=None, InitialConditions=None):</span>
-<span class="c1">#     if system == &#39;gaussian_noise&#39;:</span>
-<span class="c1">#         t, ts = gaussian_noise()</span>
+<span class="c1"># def delayed_flows(system, dynamic_state=None, L=None, fs=None,</span>
+<span class="c1">#                   SampleSize=None, parameters=None, InitialConditions=None):</span>
 
-<span class="c1">#     if system == &#39;uniform_noise&#39;:</span>
-<span class="c1">#         t, ts = uniform_noise()</span>
-
-<span class="c1">#     if system == &#39;rayleigh_noise&#39;:</span>
-<span class="c1">#         t, ts = rayleigh_noise()</span>
-
-<span class="c1">#     if system == &#39;exponential_noise&#39;:</span>
-<span class="c1">#         t, ts = exponential_noise()</span>
+<span class="c1">#     if system == &#39;mackey_glass&#39;:</span>
+<span class="c1">#         t, ts = mackey_glass()</span>
 
 <span class="c1">#     return t, ts</span>
 
 
-<div class="viewcode-block" id="gaussian_noise">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/noise_models.html#teaspoon.MakeData.DynSysLib.noise_models.gaussian_noise">[docs]</a>
-<span class="k">def</span> <span class="nf">gaussian_noise</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-                   <span class="n">L</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<div class="viewcode-block" id="mackey_glass">
+<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/delayed_flows.html#teaspoon.MakeData.DynSysLib.delayed_flows.mackey_glass">[docs]</a>
+<span class="k">def</span> <span class="nf">mackey_glass</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0001</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">7.75</span><span class="p">],</span> <span class="n">fs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate a noise signal sampled from a Gaussian distribution. </span>
+<span class="sd">    The Mackey-Glass Delayed Differential Equation is</span>
 
-<span class="sd">    .. figure:: ../../../figures/Noise_Models/gaussian_noise.png</span>
+<span class="sd">    .. math::</span>
+<span class="sd">        \dot{x}(t) = -\\gamma*x(t) + \\beta*\\frac{x(t - \\tau)}{1 + x(t - \\tau)^n}</span>
+
+<span class="sd">    where we chose the parameters :math:`\\tau = 2, \\beta = 2, \\gamma = 1,` and :math:`n = 9.65`. We solve this system for 400 seconds with a sampling rate of 50 Hz. The solution was then downsampled to 5 Hz and the last 200 seconds were used for the figure.</span>
+
+<span class="sd">    .. figure:: ../../../figures/Delayed_Flows/Mackey_Glass_Delayed_Differential_Equation.png</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        sigma (Optional[float]): Standard deviation of the normal distribution.</span>
-<span class="sd">        mu (Optional[float]): Mean of the normal distribution. </span>
-<span class="sd">        L (Optional[int]): amount of time to solve simulation for.</span>
-<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
+<span class="sd">        parameters (Optional[floats]): Array of four floats [gamma, tau, beta, n] or None if using the dynamic_state variable</span>
+<span class="sd">        fs (Optional[float]): Sampling rate for simulation</span>
 <span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
+<span class="sd">        L (Optional[int]): Number of iterations</span>
+<span class="sd">        dynamic_state (Optional[str]): Set dynamic state as either &#39;periodic&#39; or &#39;chaotic&#39; if not supplying parameters.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)))[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
 
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
+    <span class="n">num_param</span> <span class="o">=</span> <span class="mi">4</span>
 
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Need </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> parameters as specified in documentation.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;periodic&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mf">7.75</span>
+            <span class="n">τ</span> <span class="o">=</span> <span class="mf">2.0</span>
+            <span class="n">B</span> <span class="o">=</span> <span class="mf">2.0</span>
+            <span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.0001</span>
+        <span class="k">elif</span> <span class="n">dynamic_state</span> <span class="o">==</span> <span class="s1">&#39;chaotic&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mf">9.65</span>
+            <span class="n">τ</span> <span class="o">=</span> <span class="mf">2.0</span>
+            <span class="n">B</span> <span class="o">=</span> <span class="mf">2.0</span>
+            <span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.0001</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;dynamic_state needs to be either &quot;periodic&quot; or &quot;chaotic&quot; or provide an array of length </span><span class="si">{</span><span class="n">num_param</span><span class="si">}</span><span class="s1"> in parameters.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">gamma</span><span class="p">,</span> <span class="n">τ</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
+    <span class="k">def</span> <span class="nf">mackey_glass</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">xd</span> <span class="o">=</span> <span class="n">X</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">B</span><span class="o">*</span><span class="p">(</span><span class="n">xd</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xd</span><span class="o">**</span><span class="n">n</span><span class="p">))</span> <span class="o">-</span> <span class="n">gamma</span><span class="o">*</span><span class="n">x</span>
 
-<div class="viewcode-block" id="uniform_noise">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/noise_models.html#teaspoon.MakeData.DynSysLib.noise_models.uniform_noise">[docs]</a>
-<span class="k">def</span> <span class="nf">uniform_noise</span><span class="p">(</span><span class="n">a</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-                  <span class="n">L</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate a noise signal sampled from a uniform distribution.</span>
+    <span class="n">fsolve</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fsolve</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">t</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">τ</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="n">ddeint</span><span class="p">(</span><span class="n">mackey_glass</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">tt</span><span class="p">,</span> <span class="n">fargs</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,))</span><span class="o">.</span><span class="n">T</span>
 
-<span class="sd">    .. figure:: ../../../figures/Noise_Models/uniform_noise.png</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">        a (Optional[float]): Uniform distribution lower bound.</span>
-<span class="sd">        b (Optional[float]): Uniform distribution upper bound. </span>
-<span class="sd">        L (Optional[int]): amount of time to solve simulation for.</span>
-<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
-<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)))[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
-
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
-
-
-<div class="viewcode-block" id="rayleigh_noise">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/noise_models.html#teaspoon.MakeData.DynSysLib.noise_models.rayleigh_noise">[docs]</a>
-<span class="k">def</span> <span class="nf">rayleigh_noise</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-                   <span class="n">L</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate a noise signal sampled from a Rayleigh distribution. </span>
-
-<span class="sd">    .. figure:: ../../../figures/Noise_Models/rayleigh_noise.png</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">        sigma (Optional[float]): Rayleigh distribution mode.</span>
-<span class="sd">        L (Optional[int]): amount of time to solve simulation for.</span>
-<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
-<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rayleigh</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)))[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
-
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
-
-
-<div class="viewcode-block" id="exponential_noise">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/noise_models.html#teaspoon.MakeData.DynSysLib.noise_models.exponential_noise">[docs]</a>
-<span class="k">def</span> <span class="nf">exponential_noise</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-                      <span class="n">L</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate a noise signal sampled from an exponential distribution.</span>
-
-<span class="sd">    .. figure:: ../../../figures/Noise_Models/exponential_noise.png</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">        sigma (Optional[float]): Exponential distribution scale.</span>
-<span class="sd">        L (Optional[int]): amount of time to solve simulation for.</span>
-<span class="sd">        fs (Optional[int]): sampling rate for simulation.</span>
-<span class="sd">        SampleSize (Optional[int]): length of sample at end of entire time series</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        array: Array of the time indices as `t` and the simulation time series `ts`</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)))[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="p">[((</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])[::</span><span class="nb">int</span><span class="p">(</span><span class="n">fsolve</span><span class="o">/</span><span class="n">fs</span><span class="p">)])[</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">tt</span><span class="p">[::</span><span class="nb">int</span><span class="p">(</span><span class="n">fsolve</span><span class="o">/</span><span class="n">fs</span><span class="p">)][</span><span class="o">-</span><span class="n">SampleSize</span><span class="p">:]</span>
 
     <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
 

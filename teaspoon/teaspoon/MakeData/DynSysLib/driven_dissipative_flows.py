@@ -2,40 +2,6 @@ from scipy.integrate import odeint
 import numpy as np
 
 
-def driven_dissipative_flows(system, dynamic_state=None, L=None, fs=None,
-                             SampleSize=None, parameters=None,
-                             InitialConditions=None):
-
-    if system == 'base_excited_magnetic_pendulum':
-        t, ts = base_excited_magnetic_pendulum()
-
-    if system == 'driven_pendulum':
-        t, ts = driven_pendulum()
-
-    if system == 'driven_van_der_pol_oscillator':
-        t, ts = driven_van_der_pol_oscillator()
-
-    if system == 'shaw_van_der_pol_oscillator':
-        t, ts = shaw_van_der_pol_oscillator()
-
-    if system == 'forced_brusselator':
-        t, ts = forced_brusselator()
-
-    if system == 'ueda_oscillator':
-        t, ts = ueda_oscillator()
-
-    if system == 'duffings_two_well_oscillator':
-        t, ts = duffings_two_well_oscillator()
-
-    if system == 'duffing_van_der_pol_oscillator':
-        t, ts = duffing_van_der_pol_oscillator()
-
-    if system == 'rayleigh_duffing_oscillator':
-        t, ts = rayleigh_duffing_oscillator()
-
-    return t, ts
-
-
 def base_excited_magnetic_pendulum(parameters=[0.1038, 0.208, 9.81, 0.18775, 0.00001919, 0.022, 3*np.pi, 0.003, 1.2, 0.032, 1.257E-6], fs=200, SampleSize=5000, L=100.0, dynamic_state=None, InitialConditions=[0.0, 0.0]):
     """
     This is a simple pendulum with a magnet at its base. See Myers & Khasawneh [1]_. The system was simulated for 100 seconds at a rate of 200 Hz and the last 25 seconds were used for the chaotic response as shown in the figure below.
