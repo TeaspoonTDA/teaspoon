@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon: Topological Signal Processing in Python &mdash; teaspoon 1.3.7 documentation</title>
@@ -17,9 +17,11 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -164,164 +166,11 @@ All code is open source with up to date documentation, making the code easy to u
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules/index.html">2. Modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules/MakeData/index.html">2.1. Make Data (MakeData) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/MakeData/PointCloud.html">2.1.1. Point Cloud Data Generation (PointCloud) Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.Annulus"><code class="docutils literal notranslate"><span class="pre">Annulus()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.Circle"><code class="docutils literal notranslate"><span class="pre">Circle()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.Clusters"><code class="docutils literal notranslate"><span class="pre">Clusters()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.Cube"><code class="docutils literal notranslate"><span class="pre">Cube()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.GaussianField"><code class="docutils literal notranslate"><span class="pre">GaussianField()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.Gaussians"><code class="docutils literal notranslate"><span class="pre">Gaussians()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.Sinc"><code class="docutils literal notranslate"><span class="pre">Sinc()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.Sphere"><code class="docutils literal notranslate"><span class="pre">Sphere()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.Torus"><code class="docutils literal notranslate"><span class="pre">Torus()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.normalDiagram"><code class="docutils literal notranslate"><span class="pre">normalDiagram()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.testSetClassification"><code class="docutils literal notranslate"><span class="pre">testSetClassification()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.testSetManifolds"><code class="docutils literal notranslate"><span class="pre">testSetManifolds()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.testSetRegressionBall"><code class="docutils literal notranslate"><span class="pre">testSetRegressionBall()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.testSetRegressionLine"><code class="docutils literal notranslate"><span class="pre">testSetRegressionLine()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/PointCloud.html#examples">2.1.1.1. Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/MakeData/DynSysLib/index.html">2.1.2. Dynamical Systems Library (DynSysLib) Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/DynSysLib/maps.html">2.1.2.1. Maps</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/DynSysLib/autonomous_dissipative_flows.html">2.1.2.2. Autonomous Dissipative Flows</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/DynSysLib/driven_dissipative_flows.html">2.1.2.3. Driven Dissipative Flows</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/DynSysLib/conservative_flows.html">2.1.2.4. Conservative Flows</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/DynSysLib/periodic_functions.html">2.1.2.5. Periodic Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/DynSysLib/noise_models.html">2.1.2.6. Noise Models</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/DynSysLib/medical_data.html">2.1.2.7. Medical Data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/DynSysLib/delayed_flows.html">2.1.2.8. Delayed Flows</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/MakeData/DynSysLib/index.html#meta-function-for-simulating-dynamical-systems">2.1.2.9. Meta Function for Simulating Dynamical Systems</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="modules/ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/MI.html">2.2.1. Mutual Information (MI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/AC.html">2.2.2. Auto-correlation for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/FSA.html">2.2.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/MsPE.html">2.2.5. MsPE for time delay (tau) and dimension (n).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/FNN.html">2.2.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ParamSelection/FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="modules/SP/index.html">2.3. Signal Processing (SP) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/SP/tsa.html">2.3.1. Time Series Analysis (TSA) Tools</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/tsa.html#takens-embedding">2.3.1.1. Takens’ Embedding</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/tsa.html#permutation-sequence-generation">2.3.1.2. Permutation Sequence Generation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/tsa.html#k-nearest-neighbors">2.3.1.3. k Nearest Neighbors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/tsa.html#coarse-grained-state-space-binning">2.3.1.4. Coarse grained state space binning</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/tsa.html#coarse-grained-state-space-state-sequence">2.3.1.5. Coarse grained state space state sequence</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/tsa.html#zero-detection-algorithm-zeda">2.3.1.6. Zero Detection Algorithm (ZeDA)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/tsa.html#first-zero-detection-algorithm">2.3.1.7. First Zero Detection Algorithm</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/SP/network.html">2.3.2. Network Representation of Time Series</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/network.html#k-nearest-neighbors-graph">2.3.2.1. k Nearest Neighbors Graph</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/network.html#ordinal-partition-graph">2.3.2.2. Ordinal Partition Graph</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/network.html#coarse-grained-state-space-cgss-graph">2.3.2.3. Coarse Grained State Space (CGSS) Graph</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/network.html#module-teaspoon.SP.network_tools">2.3.2.4. Network Tools</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/SP/information.html">2.3.3. Information Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/information.html#entropy">2.3.3.1. Entropy</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/SP/misc.html">2.3.4. Miscellaneous</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/misc.html#module-teaspoon.SP.adaptivePart">2.3.4.1. Adaptive Partitioning</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/SP/texture_analysis.html">2.3.5. Texture Analysis</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/texture_analysis.html#texture-analaysis-overview">2.3.5.1. Texture Analaysis Overview</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/SP/stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/SP/stoch_bif.html#analytical-density">2.3.6.1. Analytical Density</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="modules/TDA/index.html">2.4. Topological Data Analaysis (TDA) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/TDA/PHN.html">2.4.1. Persistent Homology of Networks (PHN) Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/PHN.html#teaspoon.TDA.PHN.DistanceMatrix"><code class="docutils literal notranslate"><span class="pre">DistanceMatrix()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/PHN.html#teaspoon.TDA.PHN.PH_network"><code class="docutils literal notranslate"><span class="pre">PH_network()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/PHN.html#teaspoon.TDA.PHN.point_summaries"><code class="docutils literal notranslate"><span class="pre">point_summaries()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/PHN.html#example">2.4.1.1. Example</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/TDA/distances.html">2.4.2. Distances</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/distances.html#teaspoon.TDA.Distance.bottleneckDist"><code class="docutils literal notranslate"><span class="pre">bottleneckDist()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/distances.html#teaspoon.TDA.Distance.wassersteinDist"><code class="docutils literal notranslate"><span class="pre">wassersteinDist()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/TDA/drawing.html">2.4.3. Drawing</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/drawing.html#teaspoon.TDA.Draw.drawDgm"><code class="docutils literal notranslate"><span class="pre">drawDgm()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/drawing.html#teaspoon.TDA.Draw.drawPtCloud"><code class="docutils literal notranslate"><span class="pre">drawPtCloud()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/drawing.html#examples">2.4.3.1. Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/TDA/persistence.html">2.4.4. Persistence</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/persistence.html#module-teaspoon.TDA.Persistence">2.4.4.1. Functions</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/TDA/sublevel_set_persistence.html">2.4.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/sublevel_set_persistence.html#teaspoon.TDA.SLSP.Persistence0D"><code class="docutils literal notranslate"><span class="pre">Persistence0D()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/sublevel_set_persistence.html#teaspoon.TDA.SLSP_tools.cutoff"><code class="docutils literal notranslate"><span class="pre">cutoff()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/TDA/magnitude.html">2.4.6. Magnitude</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/magnitude.html#magnitude-function">2.4.6.1. Magnitude function</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/TDA/fast_zigzag.html">2.4.7. Fast Zigzag</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/TDA/fast_zigzag.html#generate-input-file-read-output">2.4.7.1. Generate Input File &amp; Read Output</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="modules/ML/index.html">2.5. Machine Learning (ML) Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/ML/DS.html">2.5.1. Datasets</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/DS.html#teaspoon.ML.load_datasets.mnist"><code class="docutils literal notranslate"><span class="pre">mnist()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/DS.html#teaspoon.ML.load_datasets.mpeg7"><code class="docutils literal notranslate"><span class="pre">mpeg7()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/DS.html#teaspoon.ML.load_datasets.shrec14"><code class="docutils literal notranslate"><span class="pre">shrec14()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ML/F_PD.html">2.5.2. Featurization</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/F_PD.html#persistence-landscapes">2.5.2.1. Persistence Landscapes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/F_PD.html#persistence-images">2.5.2.2. Persistence Images</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/F_PD.html#carlsson-coordinates">2.5.2.3. Carlsson Coordinates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/F_PD.html#template-functions">2.5.2.4. Template Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/F_PD.html#path-signatures">2.5.2.5. Path Signatures</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/F_PD.html#kernel-method">2.5.2.6. Kernel Method</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ML/CL.html">2.5.3. Classification</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/CL.html#teaspoon.ML.PD_Classification.getPercentScore"><code class="docutils literal notranslate"><span class="pre">getPercentScore()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/CL_PL.html">2.5.3.1. Persistence Landscapes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/CL_PI.html">2.5.3.2. Persistence Images</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/CL_CC.html">2.5.3.3. Carlsson Coordinates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/CL_TF.html">2.5.3.4. Template Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/CL_PS.html">2.5.3.5. Path Signatures</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules/ML/CL_KM.html">2.5.3.6. Kernel Method</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ML/index.html#references">2.5.4. References</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/MakeData/index.html">2.1. Make Data (MakeData) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/ParamSelection/index.html">2.2. Parameter Selection Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/SP/index.html">2.3. Signal Processing (SP) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/TDA/index.html">2.4. Topological Data Analaysis (TDA) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/ML/index.html">2.5. Machine Learning (ML) Module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/index.html">3. Example Notebooks</a><ul>
@@ -337,6 +186,13 @@ All code is open source with up to date documentation, making the code easy to u
 <li class="toctree-l1"><a class="reference internal" href="citing.html">6. Citing</a></li>
 </ul>
 </div>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<img alt="The basic pipeline of a TSP project aligned with the modules of teaspoon." src="_images/tspPipeline.png" />
+<p>Many topological signal processing projects can be fit into the pipeline shown above; and this pipeline aligns with the five submodules of <code class="docutils literal notranslate"><span class="pre">teaspoon</span></code>.
+We start with input time series data. In <code class="docutils literal notranslate"><span class="pre">teaspoon</span></code>, the <a class="reference external" href="https://teaspoontda.github.io/teaspoon/modules/MakeData/index.html">MakeData</a> module provides methods for creating synthetic data sets for testing purposes, including the <a class="reference external" href="https://teaspoontda.github.io/teaspoon/modules/MakeData/DynSysLib/index.html">DynSysLib</a> submodule with an extensive array of dynamical systems.
+The <a class="reference external" href="https://teaspoontda.github.io/teaspoon/modules/ParamSelection/index.html">ParameterSelection</a> modules provides tools for determining best parameters for transforming the time series into a delay coordinate (sometimes called Takens’) embedding. This includes standard tools such as false nearest neighbors and mutual information function as well as newly developed tools. The Signal Processing (<a class="reference external" href="https://teaspoontda.github.io/teaspoon/modules/SP/index.html">SP</a>) module does the conversion from a time series to a topological input. This includes the standard delay coordinate embedding, as well as network representations of time series. This topological input can be converted to a topological signature, in most cases a persistence diagram, using the <a class="reference external" href="https://teaspoontda.github.io/teaspoon/modules/TDA/index.html">TDA</a> module. Finally, these persistence diagrams can be used in a machine learning pipeline using the vectorization tools from the <a class="reference external" href="https://teaspoontda.github.io/teaspoon/modules/ML/index.html">ML</a> module.</p>
 </section>
 <section id="collaborators">
 <h2>Collaborators<a class="headerlink" href="#collaborators" title="Link to this heading"></a></h2>
