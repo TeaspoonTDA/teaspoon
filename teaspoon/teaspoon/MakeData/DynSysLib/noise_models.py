@@ -1,23 +1,6 @@
 import numpy as np
 
 
-def noise_models(system, dynamic_state=None, L=None, fs=None,
-                 SampleSize=None, parameters=None, InitialConditions=None):
-    if system == 'gaussian_noise':
-        t, ts = gaussian_noise()
-
-    if system == 'uniform_noise':
-        t, ts = uniform_noise()
-
-    if system == 'rayleigh_noise':
-        t, ts = rayleigh_noise()
-
-    if system == 'exponential_noise':
-        t, ts = exponential_noise()
-
-    return t, ts
-
-
 def gaussian_noise(sigma=1.0, mu=0.0,
                    L=1000, fs=1, SampleSize=1000):
     """

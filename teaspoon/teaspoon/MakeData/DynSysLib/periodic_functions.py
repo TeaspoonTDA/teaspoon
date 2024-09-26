@@ -1,17 +1,6 @@
 import numpy as np
 
 
-def periodic_functions(system, dynamic_state=None, L=None, fs=None,
-                       SampleSize=None, parameters=None, InitialConditions=None):
-    if system == 'sine':
-        t, ts = sine()
-
-    if system == 'incommensurate_sine':
-        t, ts = incommensurate_sine()
-
-    return t, ts
-
-
 def sine(omega=2*np.pi,
          L=40, fs=50, SampleSize=2000):
     """

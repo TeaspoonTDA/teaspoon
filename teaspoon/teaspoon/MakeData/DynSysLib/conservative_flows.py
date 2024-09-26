@@ -2,25 +2,6 @@ from scipy.integrate import odeint
 import numpy as np
 
 
-def conservative_flows(system, dynamic_state=None, L=None, fs=None,
-                       SampleSize=None, parameters=None,
-                       InitialConditions=None):
-
-    if system == 'simplest_driven_chaotic_flow':
-        t, ts = simplest_driven_chaotic_flow()
-
-    if system == 'nose_hoover_oscillator':
-        t, ts = nose_hoover_oscillator()
-
-    if system == 'labyrinth_chaos':
-        t, ts = labyrinth_chaos()
-
-    if system == 'henon_heiles_system':
-        t, ts = henon_heiles_system()
-
-    return t, ts
-
-
 def simplest_driven_chaotic_flow(fs=50, SampleSize=5000, L=300.0, parameters=[1], InitialConditions=[0, 0], dynamic_state=None):
     """
     The simplest driven chaotic flow can be reproduced with the following equations

@@ -9,14 +9,3 @@ Main Functions
     :undoc-members:
     :show-inheritance:
 
-
-Meta Function 
--------------
-
-This function is for being able to input into the original ``teaspoon.MakeData.DynSysLib.DynamicSystems`` function with default parameters.
-
-.. automodule:: teaspoon.MakeData.DynSysLib.noise_models
-    :members: noise_models
-    :undoc-members:
-    :show-inheritance:
-    :no-index:
