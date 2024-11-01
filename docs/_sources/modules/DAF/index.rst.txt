@@ -1,4 +1,3 @@
-.. _makedata:
 
 Data Assimilation and Forecasting Module Documentation
 =========================================================
