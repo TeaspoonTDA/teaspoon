@@ -1,4 +1,3 @@
-import tensorflow
 
 
 def lr_forecast(u_obs, Dr, w=0.005, b=4.0, beta=4e-5, seed=None):

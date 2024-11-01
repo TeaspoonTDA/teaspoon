@@ -41,7 +41,6 @@ forecast_len = 2000
 sample_freq = 50
 # Sliding Window Parameters
 window_size = 50
-stride_len = 1
 max_window_number = 10
 lam_max=0.91
 
@@ -57,7 +56,6 @@ def model_iteration(snr, i, beta=0, M=1):
     sample_freq = 50
     # Sliding Window Parameters
     window_size = 50
-    stride_len = 1
     # max_window_number = 200
     lam_max=0.91
 
@@ -94,8 +92,6 @@ def model_iteration(snr, i, beta=0, M=1):
         W_opt = TADA(u_obs, window_size, model_parameters, train_len=train_len, n_epochs=1, opt_params=opt_params, window_number=window_number)
 
 
-    small_window = np.copy(window_size)
-
     window_number = 1000
     window_size=50
 
@@ -104,13 +100,13 @@ def model_iteration(snr, i, beta=0, M=1):
 
 
     model_parameters = [W_opt, W_LR, W_in, b_in]
-    X_model_an= get_forecast(u_obs[:,train_len].reshape(-1,1), W_opt, W_in, b_in,forecast_len=end-train_len)
+    X_model_an= get_forecast(u_obs[:,train_len], W_opt, W_in, b_in,forecast_len=end-train_len)
 
     X_meas = u_obs[:,start:end]
 
     # Train new LR model using longer training set
     model_parameters = [W_LR, W_LR, W_in, b_in]
-    X_model=get_forecast(u_obs[:,train_len].reshape(-1,1), W_LR, W_in, b_in,forecast_len=end-train_len)
+    X_model=get_forecast(u_obs[:,train_len], W_LR, W_in, b_in,forecast_len=end-train_len)
 
 
     tada_time = forecast_time(X_model_an, X_meas, dt=0.02, lambda_max=0.91, threshold=0.05)

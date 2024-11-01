@@ -8,7 +8,6 @@ import pandas                as pd
 import gudhi                 as gd
 from gudhi.tensorflow        import RipsLayer
 from matplotlib.gridspec     import GridSpec
-import os
 from gudhi.wasserstein       import wasserstein_distance
 from lr_forecast import get_forecast
 
@@ -82,7 +81,7 @@ def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_p
             model_parameters = [W.numpy(), W_LR, W_in, b_in]
         
 
-        start_pt = u_obs[:,train_len].reshape(-1,1)
+        start_pt = u_obs[:,train_len]
 
         # Optimization
         with tf.GradientTape() as tape:
