@@ -16,22 +16,21 @@ from lr_forecast import get_forecast
 try:
     import tensorflow as tf
     from tensorflow import keras
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
 except:
     raise ImportError("TADA Requires tensorflow for optimization")
 
-def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_params=[1e-8, 0.9, 1], window_number=1, stride=1, i=None):
+def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_params=[1e-8, 0.9, 1], window_number=1):
     '''
         Compute optimal model weights using data assimilation and persistent homology.
 
         Args:
-            X_train (array): Array of time series signals for training the initial model (D x N) D is the dimension, N is the number of time points
-            X_meas (array): Array of measurement time series signals (D x N) D is the dimension, N is the number of time points
-            n_epochs (int): Number of epochs for each assimilation window
-            save (bool): Boolean variable to control whether plots are saved as images
-            Dr (int): Reservoir dimension for generating the linear regression random feature map model
-            train_len (int):
+            u_obs (array): Array of observations (D x N) D is the dimension, N is the number of time points (INCLUDING TRAINING DATA)
+            window_size (int): Number of points included in the sliding window
+            model_parameters (list): List of parameters used to generate a forecast. Must contain current model weights (W_A), original model weights (W_LR), random feature map weight matrix (W_in) and random feature map bias vector (b_in).
+            n_epochs (int): Number of optimization epochs for each assimilation window
+            train_len (int): Number of points used for training the original model
+            opt_params (list): List of parameters used for gradient descent optimization. Must contain a learning rate and decay rate. Decay only occurs between assimilation windows. 
+            window_number (int): Current window number. Used to determine how many points to forecast into the future for the current window. 
     '''
 
     if window_number < window_size:
@@ -49,9 +48,6 @@ def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_p
 
     X_meas = u_obs[:,start:end][:,-current_window_size:]
     X_model = get_forecast(u_obs[:,train_len], W_A, W_in, b_in,forecast_len=end-train_len)[:,start:end]
-
-
-    initial_model = np.copy(X_model)
 
     # Create tensorflow variable for weight matrix initialized to original LR weights
     W = tf.Variable(initial_value=W_A, trainable=True, name="W", dtype=tf.float64)
