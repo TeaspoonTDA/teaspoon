@@ -21,7 +21,7 @@ except:
 
 def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_params=[1e-8, 0.9, 1], window_number=1):
     '''
-        Compute optimal model weights using data assimilation and persistent homology.
+        Compute optimal model weights using data assimilation and persistent homology. Heavily modified code from https://github.com/GUDHI/TDA-tutorial.git
 
         Args:
             u_obs (array): Array of observations (D x N) D is the dimension, N is the number of time points (INCLUDING TRAINING DATA)
@@ -30,7 +30,10 @@ def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_p
             n_epochs (int): Number of optimization epochs for each assimilation window
             train_len (int): Number of points used for training the original model
             opt_params (list): List of parameters used for gradient descent optimization. Must contain a learning rate and decay rate. Decay only occurs between assimilation windows. 
-            window_number (int): Current window number. Used to determine how many points to forecast into the future for the current window. 
+            window_number (int): Current window number. Used to determine how many points to forecast into the future for the current window.
+        
+        Returns:
+            W (array): Optimal model weights using TADA algorithm.
     '''
 
     if window_number < window_size:
@@ -52,7 +55,6 @@ def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_p
     # Create tensorflow variable for weight matrix initialized to original LR weights
     W = tf.Variable(initial_value=W_A, trainable=True, name="W", dtype=tf.float64)
     
-
     # Create rips layer for computing attaching edges 
     rips_layer = RipsLayer(homology_dimensions=[0,1])
 
@@ -129,6 +131,17 @@ def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_p
 
 
 def get_initial_pds(X):
+    '''
+        Function to compute the initial persistence diagrams of the measurements and model forecast using the Vietoris Rips complex. 
+
+        Args:
+            X (array): Point cloud array for computing persistence.
+        
+        Returns:
+            pd0 (array): Array of 0D persistence pairs.
+            pd1 (array): Array of 1D persistence pairs.
+    '''
+
     # Plot measured persistence diagram
     st = gd.RipsComplex(points=np.transpose(X)).create_simplex_tree(max_dimension=2)
     dgm = st.persistence()
@@ -148,12 +161,27 @@ def get_initial_pds(X):
 
 
 
-def forecast_time(X_model_a, X_truth, dt=0.02, lambda_max=0.91, threshold=0.05):
+def forecast_time(X_model_a, X_truth, dt=1.0, lambda_max=1.0, threshold=0.05):
+    '''
+        Function to compute the forecast time using the relative forecast error to compare predictions to measurements with a threshold.  
+
+        Args:
+            X_model_a (array): Array of forecast points
+            X_truth (array): Array of measurements (ground truth)
+            dt (float): Time step size (defaults to 1 to return number of points)
+            lambda_max (float): Maximum lyapunov exponent (defaults to 1 to return number of points)
+            threshold (float): Threshold to use for comparing forecast and measurements. 
+        
+        Returns:
+            fc_time (float): Forecast time for the given threshold. 
+            
+    '''
     for i in range(1,X_model_a.shape[1]):
         error = np.divide(np.linalg.norm(X_model_a[:,0:i]-X_truth[:,0:i], axis=1)**2,np.linalg.norm(X_truth[:,0:i], axis=1)**2)
         # print(np.max(error))
         if np.max(error) > threshold:
-            return i*dt*lambda_max
+            fc_time = i*dt*lambda_max
+            return fc_time
     
     raise Warning("Longer forecast required to measure forecast time.")
 

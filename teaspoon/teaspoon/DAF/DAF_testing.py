@@ -113,8 +113,8 @@ def model_iteration(snr, i, beta=0, M=1):
     X_model=get_forecast(u_obs[:,train_len].reshape(-1,1), W_LR, W_in, b_in,forecast_len=end-train_len)
 
 
-    tada_time = forecast_time(X_model_an, X_meas, threshold=0.05)
-    lr_time = forecast_time(X_model, X_meas, threshold=0.05)
+    tada_time = forecast_time(X_model_an, X_meas, dt=0.02, lambda_max=0.91, threshold=0.05)
+    lr_time = forecast_time(X_model, X_meas, dt=0.02, lambda_max=0.91, threshold=0.05)
     
 
     return tada_time, lr_time
