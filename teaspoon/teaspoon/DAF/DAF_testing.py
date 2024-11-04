@@ -1,15 +1,15 @@
 #%%
-import numpy                 as np
+import numpy as np
 
 from matplotlib import rc
-import matplotlib.pyplot     as plt
+import matplotlib.pyplot as plt
 from teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows import lorenz
 
 # from forecast_layer import forecast_layer
-from da_lib_AD import TADA
-from lr_forecast import lr_forecast
-from da_lib_AD import forecast_time
-from lr_forecast import get_forecast
+from teaspoon.DAF.data_assimilation import TADA
+from teaspoon.DAF.forecasting import forecast_time
+from teaspoon.DAF.forecasting import random_feature_map_model
+from teaspoon.DAF.forecasting import get_forecast
 import colorednoise as cn
 
 # Set font
@@ -77,7 +77,7 @@ def model_iteration(snr, i, beta=0, M=1):
     u_obs = ts[:,0:train_len+forecast_len] + Gamma@noise
 
     # Train model
-    W_LR, W_in, b_in = lr_forecast(u_obs[:,0:train_len],Dr, seed=r_seed)
+    W_LR, W_in, b_in = random_feature_map_model(u_obs[:,0:train_len],Dr, seed=r_seed)
     model_parameters = [W_LR, W_LR, W_in, b_in]
 
     # Set optimization parameters

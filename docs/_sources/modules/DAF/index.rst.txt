@@ -1,11 +1,13 @@
+.. _DAF:
 
 Data Assimilation and Forecasting Module Documentation
 =========================================================
 
-This module provides two methods for generating data for analysis. The first is through point cloud data generation for various shapes (e.g. sphere, annulus, etc.). The second module is the dynamic systems library. This library has approximately 60 dynamical systems available for simulation where the output is the time series of each variable of the dynamical system. These systems include flows, maps, and collected data.
+This module provides tools for generating data driven dynamical systems using machine learning techniques and optimally updating the model based on incoming measurements using data assimilation.
 
 .. toctree::
    :maxdepth: 1
 
-   Data Assimilation Module <DataAssimilation.rst>
-   Forecasting Module <Forecasting.rst>
+   Forecasting <Forecasting.rst>
+   Data Assimilation <DataAssimilation.rst>
+   

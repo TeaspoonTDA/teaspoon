@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.6.1. Data Assimilation Module Documentation &mdash; teaspoon 1.3.7 documentation</title>
+  <title>2.6.2. Data Assimilation &mdash; teaspoon 1.3.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
@@ -23,8 +23,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.6.2. Forecasting Module Documentation" href="Forecasting.html" />
-    <link rel="prev" title="2.6. Data Assimilation and Forecasting Module Documentation" href="index.html" /> 
+    <link rel="next" title="3. Notebooks Index" href="../../notebooks/index.html" />
+    <link rel="prev" title="2.6.1. Forecasting" href="Forecasting.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -109,8 +109,8 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">2.6. Data Assimilation and Forecasting (DAF)</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2.6.1. Data Assimilation Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Forecasting.html">2.6.2. Forecasting Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Forecasting.html">2.6.1. Forecasting</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.6.2. Data Assimilation</a></li>
 </ul>
 </li>
 </ul>
@@ -144,7 +144,7 @@
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
           <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.6. </span>Data Assimilation and Forecasting Module Documentation</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">2.6.1. </span>Data Assimilation Module Documentation</li>
+      <li class="breadcrumb-item active"><span class="section-number">2.6.2. </span>Data Assimilation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/modules/DAF/DataAssimilation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -154,16 +154,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="data-assimilation-module-documentation">
-<h1><span class="section-number">2.6.1. </span>Data Assimilation Module Documentation<a class="headerlink" href="#data-assimilation-module-documentation" title="Link to this heading"></a></h1>
+  <section id="data-assimilation">
+<h1><span class="section-number">2.6.2. </span>Data Assimilation<a class="headerlink" href="#data-assimilation" title="Link to this heading"></a></h1>
+<p>This page gives a summary of the functions available in the data assimilation library.</p>
+<dl class="py function" id="module-teaspoon.DAF.data_assimilation">
+<dt class="sig sig-object py" id="teaspoon.DAF.data_assimilation.TADA">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.data_assimilation.</span></span><span class="sig-name descname"><span class="pre">TADA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u_obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1e-05,</span> <span class="pre">0.99]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/data_assimilation.html#TADA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.data_assimilation.TADA" title="Link to this definition"></a></dt>
+<dd><p>Compute optimal model weights using data assimilation and persistent homology. Heavily modified code from <a class="reference external" href="https://github.com/GUDHI/TDA-tutorial.git">https://github.com/GUDHI/TDA-tutorial.git</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u_obs</strong> (<em>array</em>) – Array of observations (D x N) D is the dimension, N is the number of time points (INCLUDING TRAINING DATA)</p></li>
+<li><p><strong>window_size</strong> (<em>int</em>) – Number of points included in the sliding window</p></li>
+<li><p><strong>model_parameters</strong> (<em>list</em>) – List of parameters used to generate a forecast. Must contain current model weights (W_A), original model weights (W_LR), random feature map weight matrix (W_in) and random feature map bias vector (b_in).</p></li>
+<li><p><strong>n_epochs</strong> (<em>int</em>) – Number of optimization epochs for each assimilation window</p></li>
+<li><p><strong>train_len</strong> (<em>int</em>) – Number of points used for training the original model</p></li>
+<li><p><strong>opt_params</strong> (<em>list</em>) – List of parameters used for gradient descent optimization. Must contain a learning rate and decay rate. Decay only occurs between assimilation windows.</p></li>
+<li><p><strong>window_number</strong> (<em>int</em>) – Current window number. Used to determine how many points to forecast into the future for the current window.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optimal model weights using TADA algorithm.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.DAF.data_assimilation.get_initial_pds">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.data_assimilation.</span></span><span class="sig-name descname"><span class="pre">get_initial_pds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/data_assimilation.html#get_initial_pds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.data_assimilation.get_initial_pds" title="Link to this definition"></a></dt>
+<dd><p>Function to compute the initial persistence diagrams of the measurements and model forecast using the Vietoris Rips complex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array</em>) – Point cloud array for computing persistence.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>0D and 1D persistence pairs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(2 arrays)</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="2.6. Data Assimilation and Forecasting Module Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Forecasting.html" class="btn btn-neutral float-right" title="2.6.2. Forecasting Module Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Forecasting.html" class="btn btn-neutral float-left" title="2.6.1. Forecasting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../notebooks/index.html" class="btn btn-neutral float-right" title="3. Notebooks Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
