@@ -31,7 +31,7 @@ jobs:
           build
           --user
       - name: Install package for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
       - name: Build a binary wheel and a source tarball
