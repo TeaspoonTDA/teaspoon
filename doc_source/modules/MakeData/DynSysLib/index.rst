@@ -227,30 +227,18 @@ The following table provides a list of all the available dynamical systems. Furt
 
 
 
-
-
-Meta Function for Simulating Dynamical Systems 
-==============================================
-
-The following function can be used to simulate a wide variety of dynamical systems. However, since the plan is for this function to be deprecated in a future release, we recommend using the specific functions for each system instead. 
-
-
-.. automodule:: teaspoon.MakeData.DynSysLib.DynSysLib
-    :members:
     
 
 Of the optional other parameters either the **dynamic_state parameter** or the system **parameters** must be used.
 
 
-The following is a minimal working example::
+The following is a minimal working example using the *rossler* system::
 
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
-    import teaspoon.MakeData.DynSysLib.DynSysLib as DSL
+    from teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows import rossler
     
-    system = 'rossler'
-    dynamic_state = 'periodic'
-    t, ts = DSL.DynamicSystems(system, dynamic_state)
+    t, ts = rossler(dynamic_state='periodic')
     
     TextSize = 15
     plt.figure(figsize = (12,4))
@@ -281,15 +269,18 @@ The following is another example implementing all of the possible inputs (dynami
 
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
-    import teaspoon.MakeData.DynSysLib.DynSysLib as DSL
+    from teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows import rossler
     
-    system = 'rossler'
-    UserGuide = True
+
     L, fs, SampleSize = 1000, 20, 2000
+
     # the length (in seconds) of the time series, the sample rate, and the sample size of the time series of the simulated system.
+
     parameters = [0.1, 0.2, 13.0] # these are the a, b, and c parameters from the Rossler system model.
+
     InitialConditions = [1.0, 0.0, 0.0] # [x_0, y_0, x_0]
-    t, ts = DSL.DynamicSystems(system, dynamic_state, L, fs, SampleSize, parameters,  InitialConditions, UserGuide)
+
+    t, ts = rossler(L=L, fs=fs, SampleSize=SampleSize, parameters=parameters,  InitialConditions=InitialConditions)
     
     TextSize = 15
     plt.figure(figsize = (12,4))
@@ -316,130 +307,4 @@ Where the output for this example is:
 
 .. figure:: ../../../figures/rossler_example_b.png
 
-Additionally, the user guide was prompted by setting UserGuide = True, which provides some simple instructions and a list of all the current systems::
 
-    ----------------------------------------User Guide----------------------------------------------
-    
-    This code outputs a time array t and a list time series for each variable of the dynamic system.
-    The user is only required to enter the system (see list below) as a string and 
-    the dynamic state as either periodic or chaotic as a string.
-    
-    The user also has the optional inputs as the time series length in seconds (L), 
-    the sampling rate (fs), and the sample size (SampleSize).
-    If the user does not supply these values, they are defaulted to preset values.
-    
-    Other optional inputs are parameters and InitialConditions. The parameters variable
-    needs to be entered as a list or array and are the dynamic system parameters.
-    If the correct number of parameters is not provided it will default to preset parameters.
-    The InitialConditions variable is also a list or array and is the initial conditions of the system.
-    The length of the initial conditions also need to match the system being analyzed.
-    
-    List of the dynamic systems available: 
-    ___________________
-    Maps:
-    -------------------
-    1 : logistic_map
-    2 : henon_map
-    3 : sine_map
-    4 : tent_map
-    5 : linear_congruential_generator_map
-    6 : rickers_population_map
-    7 : gauss_map
-    8 : cusp_map
-    9 : pinchers_map
-    10 : sine_circle_map
-    11 : lozi_map
-    12 : delayed_logstic_map
-    13 : tinkerbell_map
-    14 : burgers_map
-    15 : holmes_cubic_map
-    16 : kaplan_yorke_map
-    ___________________
-    
-    
-    ___________________
-    Autonomous Dissipative Flows:
-    -------------------
-    1 : chua
-    2 : lorenz
-    3 : rossler
-    4 : coupled_lorenz_rossler
-    5 : coupled_rossler_rossler
-    6 : double_pendulum
-    7 : diffusionless_lorenz_attractor
-    8 : complex_butterfly
-    9 : chens_system
-    10 : hadley_circulation
-    11 : ACT_attractor
-    12 : rabinovich_frabrikant_attractor
-    13 : linear_feedback_rigid_body_motion_system
-    14 : moore_spiegel_oscillator
-    15 : thomas_cyclically_symmetric_attractor
-    16 : halvorsens_cyclically_symmetric_attractor
-    17 : burke_shaw_attractor
-    18 : rucklidge_attractor
-    19 : WINDMI
-    20 : simplest_quadratic_chaotic_flow
-    21 : simplest_cubic_chaotic_flow
-    22 : simplest_piecewise_linear_chaotic_flow
-    23 : double_scroll
-    ___________________
-
-
-    ___________________
-    Driven Dissipative Flows:
-    -------------------
-    1 : driven_pendulum
-    2 : driven_can_der_pol_oscillator
-    3 : shaw_van_der_pol_oscillator
-    4 : forced_brusselator
-    5 : ueda_oscillator
-    6 : duffings_two_well_oscillator
-    7 : duffing_van_der_pol_oscillator
-    8 : rayleigh_duffing_oscillator
-    ___________________
-    
-        
-    ___________________
-    Conservative Flows:
-    -------------------
-    1 : simplest_driven_chaotic_flow
-    2 : nose_hoover_oscillator
-    3 : labyrinth_chaos
-    4 : henon_heiles_system
-    ___________________
-    
-    
-    ___________________
-    Periodic Functions:
-    -------------------
-    1 : sine
-    2 : incommensurate_sine
-    ___________________
-    
-    
-    ___________________
-    Noise Models:
-    -------------------
-    1 : gaussian_noise
-    2 : uniform_noise
-    3 : rayleigh_noise
-    4 : exponential_noise
-    ___________________
-    
-    
-    ___________________
-    Human Data:
-    -------------------
-    1 : ECG
-    2 : EEG
-    ___________________
-    
-    
-    ___________________
-    Delayed Flows:
-    -------------------
-    1 : mackey_glass
-    ___________________
-    
-    ------------------------------------------------------------------------------------------------

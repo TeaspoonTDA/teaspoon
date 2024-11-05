@@ -154,41 +154,38 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="driven_dissipative_flows">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.driven_dissipative_flows">[docs]</a>
-<span class="k">def</span> <span class="nf">driven_dissipative_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                             <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                             <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="c1"># def driven_dissipative_flows(system, dynamic_state=None, L=None, fs=None,</span>
+<span class="c1">#                              SampleSize=None, parameters=None,</span>
+<span class="c1">#                              InitialConditions=None):</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;base_excited_magnetic_pendulum&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">base_excited_magnetic_pendulum</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;base_excited_magnetic_pendulum&#39;:</span>
+<span class="c1">#         t, ts = base_excited_magnetic_pendulum()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;driven_pendulum&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">driven_pendulum</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;driven_pendulum&#39;:</span>
+<span class="c1">#         t, ts = driven_pendulum()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;driven_van_der_pol_oscillator&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">driven_van_der_pol_oscillator</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;driven_van_der_pol_oscillator&#39;:</span>
+<span class="c1">#         t, ts = driven_van_der_pol_oscillator()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;shaw_van_der_pol_oscillator&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">shaw_van_der_pol_oscillator</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;shaw_van_der_pol_oscillator&#39;:</span>
+<span class="c1">#         t, ts = shaw_van_der_pol_oscillator()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;forced_brusselator&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">forced_brusselator</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;forced_brusselator&#39;:</span>
+<span class="c1">#         t, ts = forced_brusselator()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;ueda_oscillator&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">ueda_oscillator</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;ueda_oscillator&#39;:</span>
+<span class="c1">#         t, ts = ueda_oscillator()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;duffings_two_well_oscillator&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">duffings_two_well_oscillator</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;duffings_two_well_oscillator&#39;:</span>
+<span class="c1">#         t, ts = duffings_two_well_oscillator()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;duffing_van_der_pol_oscillator&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">duffing_van_der_pol_oscillator</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;duffing_van_der_pol_oscillator&#39;:</span>
+<span class="c1">#         t, ts = duffing_van_der_pol_oscillator()</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;rayleigh_duffing_oscillator&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">rayleigh_duffing_oscillator</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;rayleigh_duffing_oscillator&#39;:</span>
+<span class="c1">#         t, ts = rayleigh_duffing_oscillator()</span>
 
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
+<span class="c1">#     return t, ts</span>
 
 
 <div class="viewcode-block" id="base_excited_magnetic_pendulum">

@@ -1,65 +1,6 @@
 import numpy as np
 
 
-def maps(system, dynamic_state=None, L=None, fs=None,
-         SampleSize=None, parameters=None, InitialConditions=None):
-
-    # https://www.mathworks.com/matlabcentral/fileexchange/34820-gingerbread_man-iterated-chaotic-map-with-parameters-attractor-explorer
-
-    if system == 'gingerbread_man_map':
-        t, ts = gingerbread_man_map()
-
-    if system == 'sine_map':
-        t, ts = sine_map()
-
-    if system == 'tent_map':
-        t, ts = tent_map()
-
-    if system == 'linear_congruential_generator_map':
-        t, ts = linear_congruential_generator_map()
-
-    if system == 'rickers_population_map':
-        t, ts = rickers_population_map()
-
-    if system == 'gauss_map':
-        t, ts = gauss_map()
-
-    if system == 'cusp_map':
-        t, ts = cusp_map()
-
-    if system == 'pinchers_map':
-        t, ts = pinchers_map()
-
-    if system == 'sine_circle_map':
-        t, ts = sine_circle_map()
-
-    if system == 'logistic_map':
-        t, ts = logistic_map()
-
-    if system == 'henon_map':
-        t, ts = henon_map()
-
-    if system == 'lozi_map':
-        t, ts = lozi_map()
-
-    if system == 'delayed_logstic_map':
-        t, ts = delayed_logstic_map()
-
-    if system == 'tinkerbell_map':
-        t, ts = tinkerbell_map()
-
-    if system == 'burgers_map':
-        t, ts = burgers_map()
-
-    if system == 'holmes_cubic_map':
-        t, ts = holmes_cubic_map()
-
-    if system == 'kaplan_yorke_map':
-        t, ts = kaplan_yorke_map()
-
-    return t, ts
-
-
 def logistic_map(parameters=[3.5], dynamic_state=None, InitialConditions=None,
                  L=1000.0, fs=1, SampleSize=500):
     """

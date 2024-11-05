@@ -22,9 +22,8 @@ class TestPeriodic(unittest.TestCase):
         """
         Checking that you can run all the commands with the original inputs 
         """
-
-        t, ts = pf.periodic_functions('sine')
-        t, ts = pf.periodic_functions('incommensurate_sine')
+        t, ts = pf.sine()
+        t, ts = pf.incommensurate_sine()
 
 class TestNoiseModels(unittest.TestCase):
 
@@ -33,10 +32,10 @@ class TestNoiseModels(unittest.TestCase):
         Checking that you can run all the commands with the original inputs 
         """
 
-        t, ts = nm.noise_models('gaussian_noise')
-        t, ts = nm.noise_models('uniform_noise')
-        t, ts = nm.noise_models('rayleigh_noise')
-        t, ts = nm.noise_models('exponential_noise')
+        t, ts = nm.gaussian_noise()
+        t, ts = nm.uniform_noise()
+        t, ts = nm.rayleigh_noise()
+        t, ts = nm.exponential_noise()
 
 class TestMaps(unittest.TestCase):
 
@@ -45,22 +44,22 @@ class TestMaps(unittest.TestCase):
         Checking that you can run all the commands with the original inputs 
         """
 
-        t, ts = maps.maps('gingerbread_man_map')
-        t, ts = maps.maps('sine_map')
-        t, ts = maps.maps('tent_map')
-        t, ts = maps.maps('linear_congruential_generator_map')
-        t, ts = maps.maps('rickers_population_map')
-        t, ts = maps.maps('gauss_map')
-        t, ts = maps.maps('cusp_map')
-        t, ts = maps.maps('pinchers_map')
-        t, ts = maps.maps('sine_circle_map')
-        t, ts = maps.maps('logistic_map')
-        t, ts = maps.maps('henon_map')
-        t, ts = maps.maps('lozi_map')
-        t, ts = maps.maps('delayed_logstic_map')
-        t, ts = maps.maps('tinkerbell_map')
-        t, ts = maps.maps('burgers_map')
-        t, ts = maps.maps('holmes_cubic_map')
+        t, ts = maps.gingerbread_man_map()
+        t, ts = maps.sine_map()
+        t, ts = maps.tent_map()
+        t, ts = maps.linear_congruential_generator_map()
+        t, ts = maps.rickers_population_map()
+        t, ts = maps.gauss_map()
+        t, ts = maps.cusp_map()
+        t, ts = maps.pinchers_map()
+        t, ts = maps.sine_circle_map()
+        t, ts = maps.logistic_map()
+        t, ts = maps.henon_map()
+        t, ts = maps.lozi_map()
+        t, ts = maps.delayed_logstic_map()
+        t, ts = maps.tinkerbell_map()
+        t, ts = maps.burgers_map()
+        t, ts = maps.holmes_cubic_map()
 
 class TestAutoDisFlows(unittest.TestCase):
 
@@ -69,29 +68,29 @@ class TestAutoDisFlows(unittest.TestCase):
         Checking that you can run all the commands with the original inputs 
         """
 
-        t, ts = adf.autonomous_dissipative_flows('lorenz')
-        t, ts = adf.autonomous_dissipative_flows('rossler')
-        t, ts = adf.autonomous_dissipative_flows('coupled_lorenz_rossler')
-        t, ts = adf.autonomous_dissipative_flows('coupled_rossler_rossler')
-        t, ts = adf.autonomous_dissipative_flows('chua')
-        t, ts = adf.autonomous_dissipative_flows('double_pendulum')
-        t, ts = adf.autonomous_dissipative_flows('diffusionless_lorenz_attractor')
-        t, ts = adf.autonomous_dissipative_flows('complex_butterfly')
-        t, ts = adf.autonomous_dissipative_flows('chens_system')
-        t, ts = adf.autonomous_dissipative_flows('hadley_circulation')
-        t, ts = adf.autonomous_dissipative_flows('ACT_attractor')
-        t, ts = adf.autonomous_dissipative_flows('rabinovich_frabrikant_attractor')
-        t, ts = adf.autonomous_dissipative_flows('linear_feedback_rigid_body_motion_system')
-        t, ts = adf.autonomous_dissipative_flows('moore_spiegel_oscillator')
-        t, ts = adf.autonomous_dissipative_flows('thomas_cyclically_symmetric_attractor')
-        t, ts = adf.autonomous_dissipative_flows('halvorsens_cyclically_symmetric_attractor')
-        t, ts = adf.autonomous_dissipative_flows('burke_shaw_attractor')
-        t, ts = adf.autonomous_dissipative_flows('rucklidge_attractor')
-        t, ts = adf.autonomous_dissipative_flows('WINDMI')
-        t, ts = adf.autonomous_dissipative_flows('simplest_quadratic_chaotic_flow')
-        t, ts = adf.autonomous_dissipative_flows('simplest_cubic_chaotic_flow')
-        t, ts = adf.autonomous_dissipative_flows('simplest_piecewise_linear_chaotic_flow')
-        t, ts = adf.autonomous_dissipative_flows('double_scroll')
+        t, ts = adf.lorenz()
+        t, ts = adf.rossler()
+        t, ts = adf.coupled_lorenz_rossler()
+        t, ts = adf.coupled_rossler_rossler()
+        t, ts = adf.chua()
+        t, ts = adf.double_pendulum()
+        t, ts = adf.diffusionless_lorenz_attractor()
+        t, ts = adf.complex_butterfly()
+        t, ts = adf.chens_system()
+        t, ts = adf.hadley_circulation()
+        t, ts = adf.ACT_attractor()
+        t, ts = adf.rabinovich_frabrikant_attractor()
+        t, ts = adf.linear_feedback_rigid_body_motion_system()
+        t, ts = adf.moore_spiegel_oscillator()
+        t, ts = adf.thomas_cyclically_symmetric_attractor()
+        t, ts = adf.halvorsens_cyclically_symmetric_attractor()
+        t, ts = adf.burke_shaw_attractor()
+        t, ts = adf.rucklidge_attractor()
+        t, ts = adf.WINDMI()
+        t, ts = adf.simplest_quadratic_chaotic_flow()
+        t, ts = adf.simplest_cubic_chaotic_flow()
+        t, ts = adf.simplest_piecewise_linear_chaotic_flow()
+        t, ts = adf.double_scroll()
 
 class TestConsFlows(unittest.TestCase):
 
@@ -100,10 +99,10 @@ class TestConsFlows(unittest.TestCase):
         Checking that you can run all the commands with the original inputs 
         """
 
-        t, ts = cf.conservative_flows('simplest_driven_chaotic_flow')
-        t, ts = cf.conservative_flows('nose_hoover_oscillator')
-        t, ts = cf.conservative_flows('labyrinth_chaos')
-        t, ts = cf.conservative_flows('henon_heiles_system')
+        t, ts = cf.simplest_driven_chaotic_flow()
+        t, ts = cf.nose_hoover_oscillator()
+        t, ts = cf.labyrinth_chaos()
+        t, ts = cf.henon_heiles_system()
 
 class DelFlows(unittest.TestCase):
 
@@ -112,7 +111,7 @@ class DelFlows(unittest.TestCase):
         Checking that you can run all the commands with the original inputs 
         """
 
-        t, ts = df.delayed_flows('mackey_glass')
+        t, ts = df.mackey_glass()
 
 class DrivDisFlows(unittest.TestCase):
 
@@ -121,15 +120,15 @@ class DrivDisFlows(unittest.TestCase):
         Checking that you can run all the commands with the original inputs 
         """
 
-        t, ts = ddf.driven_dissipative_flows('base_excited_magnetic_pendulum')
-        t, ts = ddf.driven_dissipative_flows('driven_pendulum')
-        t, ts = ddf.driven_dissipative_flows('driven_van_der_pol_oscillator')
-        t, ts = ddf.driven_dissipative_flows('shaw_van_der_pol_oscillator')
-        t, ts = ddf.driven_dissipative_flows('forced_brusselator')
-        t, ts = ddf.driven_dissipative_flows('ueda_oscillator')
-        t, ts = ddf.driven_dissipative_flows('duffings_two_well_oscillator')
-        t, ts = ddf.driven_dissipative_flows('duffing_van_der_pol_oscillator')
-        t, ts = ddf.driven_dissipative_flows('rayleigh_duffing_oscillator')
+        t, ts = ddf.base_excited_magnetic_pendulum()
+        t, ts = ddf.driven_pendulum()
+        t, ts = ddf.driven_van_der_pol_oscillator()
+        t, ts = ddf.shaw_van_der_pol_oscillator()
+        t, ts = ddf.forced_brusselator()
+        t, ts = ddf.ueda_oscillator()
+        t, ts = ddf.duffings_two_well_oscillator()
+        t, ts = ddf.duffing_van_der_pol_oscillator()
+        t, ts = ddf.rayleigh_duffing_oscillator()
         
 class MedData(unittest.TestCase):
 
@@ -138,8 +137,8 @@ class MedData(unittest.TestCase):
         Checking that you can run all the commands with the original inputs 
         """
 
-        t, ts = md.medical_data('ECG')      
-        t, ts = md.medical_data('EEG')      
+        t, ts = md.ECG()      
+        t, ts = md.EEG()      
 
         
 if __name__ == '__main__':

@@ -105,11 +105,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../modules/ML/index.html#references">2.5.4. References</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../modules/DAF/index.html">2.6. Data Assimilation and Forecasting (DAF)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../modules/DAF/Forecasting.html">2.6.1. Forecasting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../modules/DAF/DataAssimilation.html">2.6.2. Data Assimilation</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/index.html">3. Example Notebooks</a><ul>
@@ -154,16 +149,13 @@
 <span class="kn">from</span> <span class="nn">ddeint</span> <span class="kn">import</span> <span class="n">ddeint</span>
 
 
-<div class="viewcode-block" id="delayed_flows">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/delayed_flows.html#teaspoon.MakeData.DynSysLib.delayed_flows.delayed_flows">[docs]</a>
-<span class="k">def</span> <span class="nf">delayed_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                  <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="c1"># def delayed_flows(system, dynamic_state=None, L=None, fs=None,</span>
+<span class="c1">#                   SampleSize=None, parameters=None, InitialConditions=None):</span>
 
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;mackey_glass&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">mackey_glass</span><span class="p">()</span>
+<span class="c1">#     if system == &#39;mackey_glass&#39;:</span>
+<span class="c1">#         t, ts = mackey_glass()</span>
 
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
+<span class="c1">#     return t, ts</span>
 
 
 <div class="viewcode-block" id="mackey_glass">
