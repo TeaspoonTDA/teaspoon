@@ -76,8 +76,3 @@ This page gives a summary of the functions available in the data assimilation li
 
     print(f"TADA Forecast Time: {tada_time}")
     print(f"LR Forecast Time: {lr_time}")
-
-Output of example::
-
-    TADA Forecast Time: 2.821
-    LR Forecast Time: 1.8746
