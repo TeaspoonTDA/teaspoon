@@ -16,3 +16,4 @@ Modules: Table of Contents
    Signal Processing (SP) Module <SP/index.rst>
    Topological Data Analaysis (TDA) Module <TDA/index.rst>
    Machine Learning (ML) Module <ML/index.rst>
+   Data Assimilation and Forecasting (DAF) <DAF/index.rst>

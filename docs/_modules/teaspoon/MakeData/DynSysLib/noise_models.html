@@ -105,6 +105,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../modules/ML/index.html#references">2.5.4. References</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/DAF/index.html">2.6. Data Assimilation and Forecasting (DAF)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/DAF/Forecasting.html">2.6.1. Forecasting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/DAF/DataAssimilation.html">2.6.2. Data Assimilation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/index.html">3. Example Notebooks</a><ul>
@@ -146,23 +151,6 @@
              
   <h1>Source code for teaspoon.MakeData.DynSysLib.noise_models</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-
-<span class="c1"># def noise_models(system, dynamic_state=None, L=None, fs=None,</span>
-<span class="c1">#                  SampleSize=None, parameters=None, InitialConditions=None):</span>
-<span class="c1">#     if system == &#39;gaussian_noise&#39;:</span>
-<span class="c1">#         t, ts = gaussian_noise()</span>
-
-<span class="c1">#     if system == &#39;uniform_noise&#39;:</span>
-<span class="c1">#         t, ts = uniform_noise()</span>
-
-<span class="c1">#     if system == &#39;rayleigh_noise&#39;:</span>
-<span class="c1">#         t, ts = rayleigh_noise()</span>
-
-<span class="c1">#     if system == &#39;exponential_noise&#39;:</span>
-<span class="c1">#         t, ts = exponential_noise()</span>
-
-<span class="c1">#     return t, ts</span>
 
 
 <div class="viewcode-block" id="gaussian_noise">
