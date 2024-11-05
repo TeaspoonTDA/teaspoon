@@ -66,7 +66,9 @@ print(f"LR Forecast Time: {lr_time}")
 
 # %%
 
-if tada_time - 2.8574 < 0.001:
+if np.abs(tada_time - 2.821) < 0.001:
     print("PASS")
 else:
     raise ValueError("Incorrect Forecast Time")
+
+
