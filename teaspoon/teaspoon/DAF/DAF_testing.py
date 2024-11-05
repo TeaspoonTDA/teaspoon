@@ -19,8 +19,7 @@ window_size = 50
 max_window_number = 10
 
 # Get training and validation data at random initial condition
-ICs = list(np.random.normal(size=(3,1)).reshape(-1,))
-t, ts = lorenz(L=500, fs=50, SampleSize=6001, parameters=[28,10.0,8.0/3.0],InitialConditions=ICs)
+t, ts = lorenz(L=500, fs=50, SampleSize=6001, parameters=[28,10.0,8.0/3.0])
 ts = np.array(ts) 
 
 # Get signal and noise amplitudes using signal-to-noise ratio
@@ -46,7 +45,7 @@ for window_number in range(1,max_window_number):
     W_opt = TADA(u_obs, window_size, model_parameters, train_len=train_len, n_epochs=1, opt_params=opt_params, window_number=window_number)
 
 # Set forecast parameters
-window_number = 200
+window_number = 1000
 start = train_len
 end = train_len + window_number + 1
 
