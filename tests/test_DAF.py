@@ -11,7 +11,7 @@ class daf_module(unittest.TestCase):
         from teaspoon.DAF.forecasting import get_forecast
 
         # Set random seed
-        r_seed = 48824
+        r_seed = 123456
         np.random.seed(r_seed)
 
         # Set TADA parameters
@@ -23,9 +23,9 @@ class daf_module(unittest.TestCase):
         max_window_number = 10
 
         # Get training and validation data at random initial condition
-        ICs = list(np.random.normal(size=(3,1)).reshape(-1,))
-        t, ts = lorenz(L=500, fs=50, SampleSize=6001, parameters=[28,10.0,8.0/3.0],InitialConditions=ICs)
-        ts = np.array(ts) 
+        import os
+        print(os.getcwd())
+        ts = np.load('./tests/DAF_lorenz_sim_data.npy') 
 
         # Get signal and noise amplitudes using signal-to-noise ratio
         a_sig = np.sqrt(np.mean(np.square(ts),axis=1))
@@ -50,7 +50,7 @@ class daf_module(unittest.TestCase):
             W_opt = TADA(u_obs, window_size, model_parameters, train_len=train_len, n_epochs=1, opt_params=opt_params, window_number=window_number)
 
         # Set forecast parameters
-        window_number = 200
+        window_number = 1000
         start = train_len
         end = train_len + window_number + 1
 
@@ -63,8 +63,11 @@ class daf_module(unittest.TestCase):
         tada_time = forecast_time(X_model_tada, X_meas, dt=0.02, lambda_max=0.91, threshold=0.05)
         lr_time = forecast_time(X_model_lr, X_meas, dt=0.02, lambda_max=0.91, threshold=0.05)
         
-        self.assertAlmostEqual(tada_time, 2.821, delta=0.001)
-        self.assertAlmostEqual(lr_time, 1.875, delta=0.001)
+        print("TADA Time: ", tada_time)
+        print("LR Time: ", lr_time)
+
+        self.assertAlmostEqual(tada_time, 3.658, delta=0.001)
+        self.assertAlmostEqual(lr_time, 3.058, delta=0.001)
 
 
 
