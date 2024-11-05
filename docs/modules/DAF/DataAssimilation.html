@@ -156,7 +156,7 @@
              
   <section id="data-assimilation">
 <h1><span class="section-number">2.6.2. </span>Data Assimilation<a class="headerlink" href="#data-assimilation" title="Link to this heading"></a></h1>
-<p>This page gives a summary of the functions available in the data assimilation library.</p>
+<p>This page gives a summary of the functions available in the data assimilation library. Differentiation of persistence diagrams is exploited to optimize data driven model coefficients by minimizing topological differences between model the model forecast and measurements. More information on the details of the TADA algorithm can be found in,  “<a class="reference external" href="https://arxiv.org">Topological Approach for Data Assimilation</a>.” We plan to implement more data assimilation tools here in the future.</p>
 <dl class="py function" id="module-teaspoon.DAF.data_assimilation">
 <dt class="sig sig-object py" id="teaspoon.DAF.data_assimilation.TADA">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.data_assimilation.</span></span><span class="sig-name descname"><span class="pre">TADA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u_obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1e-05,</span> <span class="pre">0.99]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/data_assimilation.html#TADA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.data_assimilation.TADA" title="Link to this definition"></a></dt>
@@ -199,6 +199,76 @@
 </dl>
 </dd></dl>
 
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows</span> <span class="kn">import</span> <span class="n">lorenz</span>
+<span class="kn">from</span> <span class="nn">teaspoon.DAF.data_assimilation</span> <span class="kn">import</span> <span class="n">TADA</span>
+<span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">forecast_time</span>
+<span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">random_feature_map_model</span>
+<span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">get_forecast</span>
+
+<span class="c1"># Set random seed</span>
+<span class="n">r_seed</span> <span class="o">=</span> <span class="mi">48824</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">r_seed</span><span class="p">)</span>
+
+<span class="c1"># Set TADA parameters</span>
+<span class="n">snr</span> <span class="o">=</span> <span class="mf">60.0</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">1e-5</span>
+<span class="n">train_len</span> <span class="o">=</span> <span class="mi">4000</span>
+<span class="n">forecast_len</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">window_size</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">max_window_number</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Get training and validation data at random initial condition</span>
+<span class="n">ICs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">lorenz</span><span class="p">(</span><span class="n">L</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">6001</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">28</span><span class="p">,</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">8.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">],</span><span class="n">InitialConditions</span><span class="o">=</span><span class="n">ICs</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+
+<span class="c1"># Get signal and noise amplitudes using signal-to-noise ratio</span>
+<span class="n">a_sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">a_noise</span> <span class="o">=</span> <span class="n">a_sig</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">snr</span><span class="o">/</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Add noise to the signal</span>
+<span class="n">Gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">a_noise</span><span class="p">)</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">ts</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">train_len</span><span class="o">+</span><span class="n">forecast_len</span><span class="p">]))</span>
+<span class="n">u_obs</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">train_len</span><span class="o">+</span><span class="n">forecast_len</span><span class="p">]</span> <span class="o">+</span> <span class="n">Gamma</span><span class="nd">@noise</span>
+
+<span class="c1"># Train model</span>
+<span class="n">W_LR</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span> <span class="o">=</span> <span class="n">random_feature_map_model</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">train_len</span><span class="p">],</span><span class="n">Dr</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">r_seed</span><span class="p">)</span>
+
+<span class="c1"># Set optimization parameters</span>
+<span class="n">d_rate</span> <span class="o">=</span> <span class="mf">0.99</span>
+<span class="n">opt_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">lr</span><span class="p">,</span> <span class="n">d_rate</span><span class="p">]</span>
+<span class="n">W_opt</span> <span class="o">=</span> <span class="n">W_LR</span>
+
+<span class="c1"># TADA optimization loop</span>
+<span class="k">for</span> <span class="n">window_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">max_window_number</span><span class="p">):</span>
+    <span class="n">model_parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">W_opt</span><span class="p">,</span> <span class="n">W_LR</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span><span class="p">]</span>
+    <span class="n">W_opt</span> <span class="o">=</span> <span class="n">TADA</span><span class="p">(</span><span class="n">u_obs</span><span class="p">,</span> <span class="n">window_size</span><span class="p">,</span> <span class="n">model_parameters</span><span class="p">,</span> <span class="n">train_len</span><span class="o">=</span><span class="n">train_len</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">opt_params</span><span class="o">=</span><span class="n">opt_params</span><span class="p">,</span> <span class="n">window_number</span><span class="o">=</span><span class="n">window_number</span><span class="p">)</span>
+
+<span class="c1"># Set forecast parameters</span>
+<span class="n">window_number</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">train_len</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">train_len</span> <span class="o">+</span> <span class="n">window_number</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Forecast TADA and LR models and get measurements</span>
+<span class="n">X_model_tada</span> <span class="o">=</span> <span class="n">get_forecast</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="n">train_len</span><span class="p">],</span> <span class="n">W_opt</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span><span class="p">,</span><span class="n">forecast_len</span><span class="o">=</span><span class="n">end</span><span class="o">-</span><span class="n">train_len</span><span class="p">)</span>
+<span class="n">X_model_lr</span> <span class="o">=</span><span class="n">get_forecast</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="n">train_len</span><span class="p">],</span> <span class="n">W_LR</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span><span class="p">,</span><span class="n">forecast_len</span><span class="o">=</span><span class="n">end</span><span class="o">-</span><span class="n">train_len</span><span class="p">)</span>
+<span class="n">X_meas</span> <span class="o">=</span> <span class="n">u_obs</span><span class="p">[:,</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+
+<span class="c1"># Compute and print forecast times</span>
+<span class="n">tada_time</span> <span class="o">=</span> <span class="n">forecast_time</span><span class="p">(</span><span class="n">X_model_tada</span><span class="p">,</span> <span class="n">X_meas</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">lambda_max</span><span class="o">=</span><span class="mf">0.91</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">lr_time</span> <span class="o">=</span> <span class="n">forecast_time</span><span class="p">(</span><span class="n">X_model_lr</span><span class="p">,</span> <span class="n">X_meas</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">lambda_max</span><span class="o">=</span><span class="mf">0.91</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TADA Forecast Time: </span><span class="si">{</span><span class="n">tada_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LR Forecast Time: </span><span class="si">{</span><span class="n">lr_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output of example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TADA</span> <span class="n">Forecast</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">2.821</span>
+<span class="n">LR</span> <span class="n">Forecast</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">1.8746</span>
+</pre></div>
+</div>
 </section>
 
 
