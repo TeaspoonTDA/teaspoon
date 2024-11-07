@@ -35,7 +35,7 @@ Modules
 
 Many topological signal processing projects can be fit into the pipeline shown above; and this pipeline aligns with the five submodules of ``teaspoon``. 
 We start with input time series data. In ``teaspoon``, the `MakeData`_ module provides methods for creating synthetic data sets for testing purposes, including the `DynSysLib`_ submodule with an extensive array of dynamical systems. 
-The `ParameterSelection`_ modules provides tools for determining best parameters for transforming the time series into a delay coordinate (sometimes called Takens') embedding. This includes standard tools such as false nearest neighbors and mutual information function as well as newly developed tools. The Signal Processing (`SP`_) module does the conversion from a time series to a topological input. This includes the standard delay coordinate embedding, as well as network representations of time series. This topological input can be converted to a topological signature, in most cases a persistence diagram, using the `TDA`_ module. Finally, these persistence diagrams can be used in a machine learning pipeline using the vectorization tools from the `ML`_ module.
+The `ParameterSelection`_ modules provides tools for determining best parameters for transforming the time series into a delay coordinate (sometimes called Takens') embedding. This includes standard tools such as false nearest neighbors and mutual information function as well as newly developed tools. The Signal Processing (`SP`_) module does the conversion from a time series to a topological input. This includes the standard delay coordinate embedding, as well as network representations of time series. This topological input can be converted to a topological signature, in most cases a persistence diagram, using the `TDA`_ module. These persistence diagrams can then be used in a machine learning pipeline using the vectorization tools from the `ML`_ module. Our newest module, Data Assimilation and Forecasting (`DAF`_),provides tools for generating data driven models for dynamical systems and optimally updating the models using persistent homology. 
 
 .. _MakeData: https://teaspoontda.github.io/teaspoon/modules/MakeData/index.html
 .. _DynSysLib: https://teaspoontda.github.io/teaspoon/modules/MakeData/DynSysLib/index.html
@@ -43,6 +43,7 @@ The `ParameterSelection`_ modules provides tools for determining best parameters
 .. _SP: https://teaspoontda.github.io/teaspoon/modules/SP/index.html
 .. _TDA: https://teaspoontda.github.io/teaspoon/modules/TDA/index.html
 .. _ML: https://teaspoontda.github.io/teaspoon/modules/ML/index.html
+.. _DAF: https://teaspoontda.github.io/teaspoon/modules/DAF/index.html
 
 
 Collaborators

@@ -33,7 +33,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-39-mac:
@@ -55,7 +55,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-39-windows:
@@ -77,7 +77,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-310-ubuntu:
@@ -99,7 +99,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-310-mac:
@@ -121,7 +121,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-310-windows:
@@ -143,7 +143,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-311-ubuntu:
@@ -165,7 +165,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-311-mac:
@@ -187,7 +187,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-311-windows:
@@ -209,7 +209,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-312-ubuntu:
@@ -231,7 +231,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-312-mac:
@@ -253,7 +253,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
   build-312-windows:
@@ -275,7 +275,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
         

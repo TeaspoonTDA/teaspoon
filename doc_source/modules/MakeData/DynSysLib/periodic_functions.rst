@@ -10,14 +10,3 @@ Main Functions
     :show-inheritance:
     :member-order: bysource
 
-
-Meta Function 
--------------
-
-This function is for being able to input into the original ``teaspoon.MakeData.DynSysLib.DynamicSystems`` function with default parameters.
-
-.. automodule:: teaspoon.MakeData.DynSysLib.periodic_functions
-    :members: periodic_functions
-    :undoc-members:
-    :show-inheritance:
-    :no-index:

@@ -2,7 +2,7 @@
 
 [project]
 name = "teaspoon"
-version = "1.5.8"
+version = "1.5.12"
 authors = [
   { name="Elizabeth Munch", email="muncheli@msu.edu" },
   { name="Firas Khasawneh", email="khasawn3@msu.edu" },
@@ -42,6 +42,12 @@ dependencies = ["cycler>=0.11.0",
                 "importlib_resources",
                 "pooch",
                 "ddeint"
+            ]
+
+[project.optional-dependencies]
+full =      [   "teaspoon[full]",
+                "tensorflow",
+                "eagerpy"
             ]
 
 [tool.setuptools.packages.find]

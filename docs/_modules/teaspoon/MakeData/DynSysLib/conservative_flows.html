@@ -105,6 +105,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../modules/ML/index.html#references">2.5.4. References</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/DAF/index.html">2.6. Data Assimilation and Forecasting (DAF)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/DAF/Forecasting.html">2.6.1. Forecasting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/DAF/DataAssimilation.html">2.6.2. Data Assimilation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/index.html">3. Example Notebooks</a><ul>
@@ -147,28 +152,6 @@
   <h1>Source code for teaspoon.MakeData.DynSysLib.conservative_flows</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-
-<div class="viewcode-block" id="conservative_flows">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/conservative_flows.html#teaspoon.MakeData.DynSysLib.conservative_flows.conservative_flows">[docs]</a>
-<span class="k">def</span> <span class="nf">conservative_flows</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                       <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                       <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;simplest_driven_chaotic_flow&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">simplest_driven_chaotic_flow</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;nose_hoover_oscillator&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">nose_hoover_oscillator</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;labyrinth_chaos&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">labyrinth_chaos</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;henon_heiles_system&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">henon_heiles_system</span><span class="p">()</span>
-
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
 
 
 <div class="viewcode-block" id="simplest_driven_chaotic_flow">

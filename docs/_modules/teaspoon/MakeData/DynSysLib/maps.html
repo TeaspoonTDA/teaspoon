@@ -105,6 +105,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../modules/ML/index.html#references">2.5.4. References</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/DAF/index.html">2.6. Data Assimilation and Forecasting (DAF)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/DAF/Forecasting.html">2.6.1. Forecasting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../modules/DAF/DataAssimilation.html">2.6.2. Data Assimilation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/index.html">3. Example Notebooks</a><ul>
@@ -146,68 +151,6 @@
              
   <h1>Source code for teaspoon.MakeData.DynSysLib.maps</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-
-<div class="viewcode-block" id="maps">
-<a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.maps">[docs]</a>
-<span class="k">def</span> <span class="nf">maps</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-         <span class="n">SampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-    <span class="c1"># https://www.mathworks.com/matlabcentral/fileexchange/34820-gingerbread_man-iterated-chaotic-map-with-parameters-attractor-explorer</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;gingerbread_man_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">gingerbread_man_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;sine_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">sine_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;tent_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">tent_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;linear_congruential_generator_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">linear_congruential_generator_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;rickers_population_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">rickers_population_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;gauss_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">gauss_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;cusp_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">cusp_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;pinchers_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">pinchers_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;sine_circle_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">sine_circle_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;logistic_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">logistic_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;henon_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">henon_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;lozi_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">lozi_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;delayed_logstic_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">delayed_logstic_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;tinkerbell_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">tinkerbell_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;burgers_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">burgers_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;holmes_cubic_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">holmes_cubic_map</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">system</span> <span class="o">==</span> <span class="s1">&#39;kaplan_yorke_map&#39;</span><span class="p">:</span>
-        <span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">kaplan_yorke_map</span><span class="p">()</span>
-
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">ts</span></div>
-
 
 
 <div class="viewcode-block" id="logistic_map">

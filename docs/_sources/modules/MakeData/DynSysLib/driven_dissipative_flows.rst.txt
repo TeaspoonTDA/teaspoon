@@ -11,15 +11,3 @@ Main Functions
     :member-order: bysource
 
 
-Meta Function 
--------------
-
-This function is for being able to input into the original ``teaspoon.MakeData.DynSysLib.DynamicSystems`` function with default parameters.
-
-
-.. automodule:: teaspoon.MakeData.DynSysLib.driven_dissipative_flows
-    :members: driven_dissipative_flows
-    :undoc-members:
-    :show-inheritance:
-    :no-index:
-

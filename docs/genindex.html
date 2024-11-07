@@ -105,6 +105,11 @@
 <li class="toctree-l3"><a class="reference internal" href="modules/ML/index.html#references">2.5.4. References</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="modules/DAF/index.html">2.6. Data Assimilation and Forecasting (DAF)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/DAF/Forecasting.html">2.6.1. Forecasting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/DAF/DataAssimilation.html">2.6.2. Data Assimilation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/index.html">3. Example Notebooks</a><ul>
@@ -263,10 +268,10 @@
 </li>
       <li><a href="modules/MakeData/DynSysLib/autonomous_dissipative_flows.html#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.double_pendulum">double_pendulum() (in module teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows)</a>
 </li>
-      <li><a href="modules/MakeData/DynSysLib/autonomous_dissipative_flows.html#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.double_scroll">double_scroll() (in module teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/MakeData/DynSysLib/autonomous_dissipative_flows.html#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.double_scroll">double_scroll() (in module teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows)</a>
+</li>
       <li><a href="modules/TDA/drawing.html#teaspoon.TDA.Draw.drawDgm">drawDgm() (in module teaspoon.TDA.Draw)</a>
 </li>
       <li><a href="modules/TDA/drawing.html#teaspoon.TDA.Draw.drawPtCloud">drawPtCloud() (in module teaspoon.TDA.Draw)</a>
@@ -278,8 +283,6 @@
       <li><a href="modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.duffing_van_der_pol_oscillator">duffing_van_der_pol_oscillator() (in module teaspoon.MakeData.DynSysLib.driven_dissipative_flows)</a>
 </li>
       <li><a href="modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.duffings_two_well_oscillator">duffings_two_well_oscillator() (in module teaspoon.MakeData.DynSysLib.driven_dissipative_flows)</a>
-</li>
-      <li><a href="modules/MakeData/DynSysLib/index.html#teaspoon.MakeData.DynSysLib.DynSysLib.DynamicSystems">DynamicSystems() (in module teaspoon.MakeData.DynSysLib.DynSysLib)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -315,6 +318,8 @@
 </li>
       <li><a href="modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.forced_brusselator">forced_brusselator() (in module teaspoon.MakeData.DynSysLib.driven_dissipative_flows)</a>
 </li>
+      <li><a href="modules/DAF/Forecasting.html#teaspoon.DAF.forecasting.forecast_time">forecast_time() (in module teaspoon.DAF.forecasting)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -329,9 +334,13 @@
 </li>
       <li><a href="modules/MakeData/PointCloud.html#teaspoon.MakeData.PointCloud.Gaussians">Gaussians() (in module teaspoon.MakeData.PointCloud)</a>
 </li>
+      <li><a href="modules/TDA/fast_zigzag.html#teaspoon.TDA.fast_zigzag.generate_input_file">generate_input_file() (in module teaspoon.TDA.fast_zigzag)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/TDA/fast_zigzag.html#teaspoon.TDA.fast_zigzag.generate_input_file">generate_input_file() (in module teaspoon.TDA.fast_zigzag)</a>
+      <li><a href="modules/DAF/Forecasting.html#teaspoon.DAF.forecasting.get_forecast">get_forecast() (in module teaspoon.DAF.forecasting)</a>
+</li>
+      <li><a href="modules/DAF/DataAssimilation.html#teaspoon.DAF.data_assimilation.get_initial_pds">get_initial_pds() (in module teaspoon.DAF.data_assimilation)</a>
 </li>
       <li><a href="modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions.getOrdinal">getOrdinal() (teaspoon.SP.adaptivePart.Partitions method)</a>
 </li>
@@ -415,6 +424,8 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/MakeData/DynSysLib/delayed_flows.html#teaspoon.MakeData.DynSysLib.delayed_flows.mackey_glass">mackey_glass() (in module teaspoon.MakeData.DynSysLib.delayed_flows)</a>
+</li>
       <li><a href="modules/SP/network.html#teaspoon.SP.network_tools.make_network">make_network() (in module teaspoon.SP.network_tools)</a>
 </li>
       <li><a href="modules/TDA/persistence.html#teaspoon.TDA.Persistence.maxBirth">maxBirth() (in module teaspoon.TDA.Persistence)</a>
@@ -449,13 +460,17 @@
     module
 
       <ul>
+        <li><a href="modules/DAF/DataAssimilation.html#module-teaspoon.DAF.data_assimilation">teaspoon.DAF.data_assimilation</a>
+</li>
+        <li><a href="modules/DAF/Forecasting.html#module-teaspoon.DAF.forecasting">teaspoon.DAF.forecasting</a>
+</li>
         <li><a href="modules/MakeData/DynSysLib/autonomous_dissipative_flows.html#module-teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows">teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows</a>
 </li>
         <li><a href="modules/MakeData/DynSysLib/conservative_flows.html#module-teaspoon.MakeData.DynSysLib.conservative_flows">teaspoon.MakeData.DynSysLib.conservative_flows</a>
 </li>
-        <li><a href="modules/MakeData/DynSysLib/driven_dissipative_flows.html#module-teaspoon.MakeData.DynSysLib.driven_dissipative_flows">teaspoon.MakeData.DynSysLib.driven_dissipative_flows</a>
+        <li><a href="modules/MakeData/DynSysLib/delayed_flows.html#module-teaspoon.MakeData.DynSysLib.delayed_flows">teaspoon.MakeData.DynSysLib.delayed_flows</a>
 </li>
-        <li><a href="modules/MakeData/DynSysLib/index.html#module-teaspoon.MakeData.DynSysLib.DynSysLib">teaspoon.MakeData.DynSysLib.DynSysLib</a>
+        <li><a href="modules/MakeData/DynSysLib/driven_dissipative_flows.html#module-teaspoon.MakeData.DynSysLib.driven_dissipative_flows">teaspoon.MakeData.DynSysLib.driven_dissipative_flows</a>
 </li>
         <li><a href="modules/MakeData/DynSysLib/maps.html#module-teaspoon.MakeData.DynSysLib.maps">teaspoon.MakeData.DynSysLib.maps</a>
 </li>
@@ -570,6 +585,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/MakeData/DynSysLib/autonomous_dissipative_flows.html#teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows.rabinovich_frabrikant_attractor">rabinovich_frabrikant_attractor() (in module teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows)</a>
 </li>
+      <li><a href="modules/DAF/Forecasting.html#teaspoon.DAF.forecasting.random_feature_map_model">random_feature_map_model() (in module teaspoon.DAF.forecasting)</a>
+</li>
       <li><a href="modules/SP/network.html#teaspoon.SP.network_tools.random_walk">random_walk() (in module teaspoon.SP.network_tools)</a>
 </li>
       <li><a href="modules/MakeData/DynSysLib/driven_dissipative_flows.html#teaspoon.MakeData.DynSysLib.driven_dissipative_flows.rayleigh_duffing_oscillator">rayleigh_duffing_oscillator() (in module teaspoon.MakeData.DynSysLib.driven_dissipative_flows)</a>
@@ -632,6 +649,22 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/DAF/DataAssimilation.html#teaspoon.DAF.data_assimilation.TADA">TADA() (in module teaspoon.DAF.data_assimilation)</a>
+</li>
+      <li>
+    teaspoon.DAF.data_assimilation
+
+      <ul>
+        <li><a href="modules/DAF/DataAssimilation.html#module-teaspoon.DAF.data_assimilation">module</a>
+</li>
+      </ul></li>
+      <li>
+    teaspoon.DAF.forecasting
+
+      <ul>
+        <li><a href="modules/DAF/Forecasting.html#module-teaspoon.DAF.forecasting">module</a>
+</li>
+      </ul></li>
       <li>
     teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows
 
@@ -647,17 +680,17 @@
 </li>
       </ul></li>
       <li>
+    teaspoon.MakeData.DynSysLib.delayed_flows
+
+      <ul>
+        <li><a href="modules/MakeData/DynSysLib/delayed_flows.html#module-teaspoon.MakeData.DynSysLib.delayed_flows">module</a>
+</li>
+      </ul></li>
+      <li>
     teaspoon.MakeData.DynSysLib.driven_dissipative_flows
 
       <ul>
         <li><a href="modules/MakeData/DynSysLib/driven_dissipative_flows.html#module-teaspoon.MakeData.DynSysLib.driven_dissipative_flows">module</a>
-</li>
-      </ul></li>
-      <li>
-    teaspoon.MakeData.DynSysLib.DynSysLib
-
-      <ul>
-        <li><a href="modules/MakeData/DynSysLib/index.html#module-teaspoon.MakeData.DynSysLib.DynSysLib">module</a>
 </li>
       </ul></li>
       <li>
@@ -744,6 +777,8 @@
         <li><a href="modules/ParamSelection/MI.html#module-teaspoon.parameter_selection.MI_delay">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     teaspoon.parameter_selection.MsPE
 
@@ -751,8 +786,6 @@
         <li><a href="modules/ParamSelection/MsPE.html#module-teaspoon.parameter_selection.MsPE">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     teaspoon.parameter_selection.PAMI_delay
 
