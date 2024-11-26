@@ -36,7 +36,7 @@ def EEG(SampleSize=5000, dynamic_state='normal'):
     fs = 173.61
     t = np.arange(len(ts[0]))/fs
     t = t[-SampleSize:]
-    ts = [(ts[0])[-SampleSize:]]
+    ts = ts[0][-SampleSize:]
 
     return t, ts
 
