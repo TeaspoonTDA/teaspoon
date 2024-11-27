@@ -20,8 +20,8 @@ def EEG(SampleSize=5000, dynamic_state='normal'):
     .. [1] Ralph G Andrzejak, Klaus Lehnertz, Florian Mormann, Christoph Rieke, Peter David, and Christian E Elger. Indications of nonlinear deterministic and nite-dimensional structures in time series of brain electrical activity: Dependence on recording region and brain state. Physical Review E, 64(6):061907, 2001.
 
     """
-    path = os.path.join(os.path.join(os.path.join(os.path.join(os.path.join(
-        os.getcwd(), 'teaspoon'), 'teaspoon'), 'MakeData'), 'DynSysLib'), 'Data')
+    current_file_directory = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(current_file_directory, 'Data')
 
     if dynamic_state == 'normal':  # healthy
         path = os.path.join(os.path.join(path, 'EEG'), 'Z093.txt')
@@ -36,7 +36,7 @@ def EEG(SampleSize=5000, dynamic_state='normal'):
     fs = 173.61
     t = np.arange(len(ts[0]))/fs
     t = t[-SampleSize:]
-    ts = [(ts[0])[-SampleSize:]]
+    ts = ts[0][-SampleSize:]
 
     return t, ts
 
