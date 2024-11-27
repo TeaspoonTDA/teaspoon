@@ -21,7 +21,7 @@ def EEG(SampleSize=5000, dynamic_state='normal'):
 
     """
     import importlib_resources
-    from teaspoon.MakeData.DynSysLib.data import EEG
+    from teaspoon.MakeData.DynSysLib.Data import EEG
 
     
     if dynamic_state == 'normal':  # healthy
