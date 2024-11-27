@@ -138,7 +138,7 @@ class MedData(unittest.TestCase):
         """
 
         t, ts = md.ECG()      
-        # t, ts = md.EEG()      
+        t, ts = md.EEG()      
 
         
 if __name__ == '__main__':
