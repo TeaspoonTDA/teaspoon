@@ -20,18 +20,18 @@ def EEG(SampleSize=5000, dynamic_state='normal'):
     .. [1] Ralph G Andrzejak, Klaus Lehnertz, Florian Mormann, Christoph Rieke, Peter David, and Christian E Elger. Indications of nonlinear deterministic and nite-dimensional structures in time series of brain electrical activity: Dependence on recording region and brain state. Physical Review E, 64(6):061907, 2001.
 
     """
-    current_file_directory = os.path.dirname(os.path.abspath(__file__))
-    path = os.path.join(current_file_directory, 'Data')
+    import importlib_resources
+    from teaspoon.MakeData.DynSysLib.data import EEG
 
+    
     if dynamic_state == 'normal':  # healthy
-        path = os.path.join(os.path.join(path, 'EEG'), 'Z093.txt')
-        ts = [np.loadtxt(path, skiprows=1)[
-            0:SampleSize]]
+        ts = importlib_resources.files(EEG).joinpath('Z093.txt')
+        ts = [np.loadtxt(ts, skiprows=1)[0:SampleSize]]
 
     if dynamic_state == 'seizure':  # seizure
-        path = os.path.join(os.path.join(path, 'EEG'), 'S056.txt')
-        ts = [np.loadtxt(path, skiprows=1)[
-            0:SampleSize]]
+        ts = importlib_resources.files(EEG).joinpath('S056.txt')
+        ts = [np.loadtxt(ts, skiprows=1)[0:SampleSize]]
+
 
     fs = 173.61
     t = np.arange(len(ts[0]))/fs

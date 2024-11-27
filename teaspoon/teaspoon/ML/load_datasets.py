@@ -1,14 +1,14 @@
 import pandas as pd
 import importlib_resources
-
+from teaspoon.ML import datasets
 
 def mpeg7():
     """
     Load the persistence diagrams from the MPEG7 dataset
 
     """
-
-    stream = importlib_resources.files('datasets').joinpath('mpeg7.pickle')
+    
+    stream = importlib_resources.files(datasets).joinpath('mpeg7.pickle')
     data = pd.read_pickle(stream)
     return(data)
 
@@ -18,7 +18,7 @@ def shrec14():
     Load the persistence diagrams from the shrec14 dataset
 
     """
-    stream = importlib_resources.files('datasets').joinpath('shrec14.pickle')
+    stream = importlib_resources.files(datasets).joinpath('shrec14.pickle')
     data = pd.read_pickle(stream)
     return(data)
 
@@ -39,6 +39,6 @@ def mnist():
 
     """
 
-    stream = importlib_resources.files('datasets').joinpath('mnist.pickle')
+    stream = importlib_resources.files(datasets).joinpath('mnist.pickle')
     data = pd.read_pickle(stream)
     return(data)
