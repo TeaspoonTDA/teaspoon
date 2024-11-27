@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@master
+      - uses: actions/checkout@fix_medical_data
         with:
-          ref: 'test_release'
+          ref: 'fix_medical_data'
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
