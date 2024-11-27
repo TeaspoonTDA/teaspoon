@@ -10,6 +10,6 @@ if __name__ == "__main__":
     long_description = ld,
     dependency_links = ["git+https://github.com/shizuo-kaji/CubicalRipser_3dim.git"],
     package_data={
-        'teaspoon.MakeData.DynSysLib.Data.EEG': ['*.txt'],
+        'teaspoon.MakeData.DynSysLib.data.EEG': ['*.txt'],
     },
     include_package_data=True)
