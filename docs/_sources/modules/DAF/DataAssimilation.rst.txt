@@ -3,7 +3,7 @@
 Data Assimilation
 =========================================================
 
-This page gives a summary of the functions available in the data assimilation library. Differentiation of persistence diagrams is exploited to optimize data driven model coefficients by minimizing topological differences between model the model forecast and measurements. More information on the details of the TADA algorithm can be found in,  "`Topological Approach for Data Assimilation <https://arxiv.org>`_." We plan to implement more data assimilation tools here in the future. 
+This page gives a summary of the functions available in the data assimilation library. Differentiation of persistence diagrams is exploited to optimize data driven model coefficients by minimizing topological differences between model the model forecast and measurements. More information on the details of the TADA algorithm can be found in,  "`Topological Approach for Data Assimilation <https://arxiv.org/abs/2411.18627>`_." We plan to implement more data assimilation tools here in the future. 
 
 .. warning:: 
     `TADA` requires `tensorflow <https://www.tensorflow.org>`_ for optimization features. Please install teaspoon using the command: `pip install "teaspoon[full]"` to install the necessary packages. 
@@ -76,3 +76,6 @@ This page gives a summary of the functions available in the data assimilation li
 
     print(f"TADA Forecast Time: {tada_time}")
     print(f"LR Forecast Time: {lr_time}")
+
+.. note:: 
+    Resulting forecast times may vary depending on the operating system.  

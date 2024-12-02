@@ -86,3 +86,6 @@ This page outlines the available time series forecasting functions.
 Output of example
 
 .. figure:: ../../figures/LR_forecast_example.png
+
+.. note::
+    Forecast may vary depending on the operating system. 
