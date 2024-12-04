@@ -1,7 +1,4 @@
 """
-MsPE for time delay (tau) and dimension (n).
-=================================================
-
 This function implements Multi-scale Permutation Entropy (MsPE) for the selection of n and tau for permutation entropy. 
 Additionally, it only requires a single time series, is robust to additive noise, and has a fast computation time.
 """

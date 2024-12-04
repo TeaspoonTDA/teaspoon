@@ -1,9 +1,6 @@
 
 # In[ ]:
 """
-Statistical analysis of the Fourier spectrum for time delay (tau).
-=======================================================================
-
 This function a statistical analysis (using the least median of squares) of the fourier spectrum (FFT) from a time series to detect 
 the greatest signficant frequency, which is then used to select the delay (tau) from the samping rate criteria developed in 
 On the 0/1 test for chaos in continuous systems by Melosik and Marszalek.
