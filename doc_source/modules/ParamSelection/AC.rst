@@ -1,3 +1,7 @@
+========================================================
+Auto-correlation for time delay (tau)
+========================================================
+
 
 .. automodule:: teaspoon.parameter_selection.autocorrelation
     :members:

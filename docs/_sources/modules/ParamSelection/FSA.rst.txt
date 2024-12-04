@@ -1,4 +1,6 @@
-
+========================================================================
+Statistical analysis of the Fourier spectrum for time delay (tau)
+========================================================================
 
 .. automodule:: teaspoon.parameter_selection.delay_LMS
     :members:

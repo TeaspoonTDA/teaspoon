@@ -1,4 +1,6 @@
-
+========================================================
+Mutual Information (MI) for time delay (tau)
+========================================================
 
 .. automodule:: teaspoon.parameter_selection.MI_delay
     :members:

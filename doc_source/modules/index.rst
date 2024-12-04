@@ -8,7 +8,7 @@ Modules: Table of Contents
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    
    
    Make Data (MakeData) Module <MakeData/index.rst>
