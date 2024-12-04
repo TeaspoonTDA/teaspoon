@@ -156,7 +156,7 @@
              
   <section id="data-assimilation">
 <h1><span class="section-number">2.6.2. </span>Data Assimilation<a class="headerlink" href="#data-assimilation" title="Link to this heading"></a></h1>
-<p>This page gives a summary of the functions available in the data assimilation library. Differentiation of persistence diagrams is exploited to optimize data driven model coefficients by minimizing topological differences between model the model forecast and measurements. More information on the details of the TADA algorithm can be found in,  “<a class="reference external" href="https://arxiv.org">Topological Approach for Data Assimilation</a>.” We plan to implement more data assimilation tools here in the future.</p>
+<p>This page gives a summary of the functions available in the data assimilation library. Differentiation of persistence diagrams is exploited to optimize data driven model coefficients by minimizing topological differences between model the model forecast and measurements. More information on the details of the TADA algorithm can be found in,  “<a class="reference external" href="https://arxiv.org/abs/2411.18627">Topological Approach for Data Assimilation</a>.” We plan to implement more data assimilation tools here in the future.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><cite>TADA</cite> requires <a class="reference external" href="https://www.tensorflow.org">tensorflow</a> for optimization features. Please install teaspoon using the command: <cite>pip install “teaspoon[full]”</cite> to install the necessary packages.</p>
@@ -267,6 +267,10 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TADA Forecast Time: </span><span class="si">{</span><span class="n">tada_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LR Forecast Time: </span><span class="si">{</span><span class="n">lr_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Resulting forecast times may vary depending on the operating system.</p>
 </div>
 </section>
 
