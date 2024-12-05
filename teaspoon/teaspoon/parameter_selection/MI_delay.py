@@ -1,7 +1,5 @@
 """
-Mutual Information (MI) for time delay (tau).
-=======================================================================
-uses mutual information to find a suitable delay via the location
+Uses mutual information to find a suitable delay via the location
 of the first minima in the mutual information vs delay plot, which is calculated using multiple
 x(t) vs x(t+tau) plots. These plots have their individual mutual information calculated. Various methods
 for partitioning the x(t) vs x(t+tau) plots for calculating the mutual information.

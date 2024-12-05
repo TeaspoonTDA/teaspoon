@@ -1,10 +1,3 @@
-"""
-False Nearest Neighbors (FNN) for dimension (n).
-==================================================
-
-
-"""
-
 
 def ts_recon(ts, dim, tau):
     import numpy as np
