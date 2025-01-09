@@ -1,7 +1,4 @@
 """
-Permutation Auto Mutual Information (PAMI) for time delay (tau).
-=======================================================================
-
 This function implements the mulutal information of permutations to find the delay (tau) 
 that causes the first minima in the mutual information between permutations.
 """

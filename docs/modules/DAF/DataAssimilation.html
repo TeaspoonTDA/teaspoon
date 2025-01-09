@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.6.2. Data Assimilation &mdash; teaspoon 1.3.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Notebooks Index" href="../../notebooks/index.html" />
+    <link rel="prev" title="2.6.1. Forecasting" href="Forecasting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/index.html">1. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/index.html#installation">1.1. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/index.html#optional-dependencies">1.2. Optional Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/index.html#issues">1.3. Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">2. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MakeData/index.html">2.1. Make Data (MakeData) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/PointCloud.html">2.1.1. Point Cloud Data Generation (PointCloud) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MakeData/DynSysLib/index.html">2.1.2. Dynamical Systems Library (DynSysLib) Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MI.html">2.2.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/AC.html">2.2.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FSA.html">2.2.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/MsPE.html">2.2.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ParamSelection/FNN.html">2.2.6. False Nearest Neighbors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../SP/index.html">2.3. Signal Processing (SP) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../SP/tsa.html">2.3.1. Time Series Analysis (TSA) Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/network.html">2.3.2. Network Representation of Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/information.html">2.3.3. Information Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/misc.html">2.3.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/texture_analysis.html">2.3.5. Texture Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../TDA/index.html">2.4. Topological Data Analaysis (TDA) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/PHN.html">2.4.1. Persistent Homology of Networks (PHN) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/distances.html">2.4.2. Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/drawing.html">2.4.3. Drawing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/persistence.html">2.4.4. Persistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/sublevel_set_persistence.html">2.4.5. Zero Dimensional Sublevel Set Persistence (SLSP) Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/magnitude.html">2.4.6. Magnitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TDA/fast_zigzag.html">2.4.7. Fast Zigzag</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ML/index.html">2.5. Machine Learning (ML) Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ML/DS.html">2.5.1. Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/F_PD.html">2.5.2. Featurization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/CL.html">2.5.3. Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ML/index.html#references">2.5.4. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">2.6. Data Assimilation and Forecasting (DAF)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Forecasting.html">2.6.1. Forecasting</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.6.2. Data Assimilation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">4. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#contributing-to-documentation">4.1. Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">5. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">6. Citing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">teaspoon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.6. </span>Data Assimilation and Forecasting Module Documentation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.6.2. </span>Data Assimilation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/DAF/DataAssimilation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-assimilation">
+<h1><span class="section-number">2.6.2. </span>Data Assimilation<a class="headerlink" href="#data-assimilation" title="Link to this heading"></a></h1>
+<p>This page gives a summary of the functions available in the data assimilation library. Differentiation of persistence diagrams is exploited to optimize data driven model coefficients by minimizing topological differences between model the model forecast and measurements. More information on the details of the TADA algorithm can be found in,  “<a class="reference external" href="https://arxiv.org/abs/2411.18627">Topological Approach for Data Assimilation</a>.” We plan to implement more data assimilation tools here in the future.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><cite>TADA</cite> requires <a class="reference external" href="https://www.tensorflow.org">tensorflow</a> for optimization features. Please install teaspoon using the command: <cite>pip install “teaspoon[full]”</cite> to install the necessary packages.</p>
+</div>
+<dl class="py function" id="module-teaspoon.DAF.data_assimilation">
+<dt class="sig sig-object py" id="teaspoon.DAF.data_assimilation.TADA">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.data_assimilation.</span></span><span class="sig-name descname"><span class="pre">TADA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u_obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1e-05,</span> <span class="pre">0.99]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/data_assimilation.html#TADA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.data_assimilation.TADA" title="Link to this definition"></a></dt>
+<dd><p>Compute optimal model weights using data assimilation and persistent homology. Heavily modified code from <a class="reference external" href="https://github.com/GUDHI/TDA-tutorial.git">https://github.com/GUDHI/TDA-tutorial.git</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u_obs</strong> (<em>array</em>) – Array of observations (D x N) D is the dimension, N is the number of time points (INCLUDING TRAINING DATA)</p></li>
+<li><p><strong>window_size</strong> (<em>int</em>) – Number of points included in the sliding window</p></li>
+<li><p><strong>model_parameters</strong> (<em>list</em>) – List of parameters used to generate a forecast. Must contain current model weights (W_A), original model weights (W_LR), random feature map weight matrix (W_in) and random feature map bias vector (b_in).</p></li>
+<li><p><strong>n_epochs</strong> (<em>int</em>) – Number of optimization epochs for each assimilation window</p></li>
+<li><p><strong>train_len</strong> (<em>int</em>) – Number of points used for training the original model</p></li>
+<li><p><strong>opt_params</strong> (<em>list</em>) – List of parameters used for gradient descent optimization. Must contain a learning rate and decay rate. Decay only occurs between assimilation windows.</p></li>
+<li><p><strong>window_number</strong> (<em>int</em>) – Current window number. Used to determine how many points to forecast into the future for the current window.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optimal model weights using TADA algorithm.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.DAF.data_assimilation.get_initial_pds">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.data_assimilation.</span></span><span class="sig-name descname"><span class="pre">get_initial_pds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/data_assimilation.html#get_initial_pds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.data_assimilation.get_initial_pds" title="Link to this definition"></a></dt>
+<dd><p>Function to compute the initial persistence diagrams of the measurements and model forecast using the Vietoris Rips complex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array</em>) – Point cloud array for computing persistence.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>0D and 1D persistence pairs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(2 arrays)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows</span> <span class="kn">import</span> <span class="n">lorenz</span>
+<span class="kn">from</span> <span class="nn">teaspoon.DAF.data_assimilation</span> <span class="kn">import</span> <span class="n">TADA</span>
+<span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">forecast_time</span>
+<span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">random_feature_map_model</span>
+<span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">get_forecast</span>
+
+<span class="c1"># Set random seed</span>
+<span class="n">r_seed</span> <span class="o">=</span> <span class="mi">48824</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">r_seed</span><span class="p">)</span>
+
+<span class="c1"># Set TADA parameters</span>
+<span class="n">snr</span> <span class="o">=</span> <span class="mf">60.0</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">1e-5</span>
+<span class="n">train_len</span> <span class="o">=</span> <span class="mi">4000</span>
+<span class="n">forecast_len</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">window_size</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">max_window_number</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Get training and validation data at random initial condition</span>
+<span class="n">ICs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">lorenz</span><span class="p">(</span><span class="n">L</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">6001</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">28</span><span class="p">,</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">8.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">],</span><span class="n">InitialConditions</span><span class="o">=</span><span class="n">ICs</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+
+<span class="c1"># Get signal and noise amplitudes using signal-to-noise ratio</span>
+<span class="n">a_sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">a_noise</span> <span class="o">=</span> <span class="n">a_sig</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">snr</span><span class="o">/</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Add noise to the signal</span>
+<span class="n">Gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">a_noise</span><span class="p">)</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">ts</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">train_len</span><span class="o">+</span><span class="n">forecast_len</span><span class="p">]))</span>
+<span class="n">u_obs</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">train_len</span><span class="o">+</span><span class="n">forecast_len</span><span class="p">]</span> <span class="o">+</span> <span class="n">Gamma</span><span class="nd">@noise</span>
+
+<span class="c1"># Train model</span>
+<span class="n">W_LR</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span> <span class="o">=</span> <span class="n">random_feature_map_model</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">train_len</span><span class="p">],</span><span class="n">Dr</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">r_seed</span><span class="p">)</span>
+
+<span class="c1"># Set optimization parameters</span>
+<span class="n">d_rate</span> <span class="o">=</span> <span class="mf">0.99</span>
+<span class="n">opt_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">lr</span><span class="p">,</span> <span class="n">d_rate</span><span class="p">]</span>
+<span class="n">W_opt</span> <span class="o">=</span> <span class="n">W_LR</span>
+
+<span class="c1"># TADA optimization loop</span>
+<span class="k">for</span> <span class="n">window_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">max_window_number</span><span class="p">):</span>
+    <span class="n">model_parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">W_opt</span><span class="p">,</span> <span class="n">W_LR</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span><span class="p">]</span>
+    <span class="n">W_opt</span> <span class="o">=</span> <span class="n">TADA</span><span class="p">(</span><span class="n">u_obs</span><span class="p">,</span> <span class="n">window_size</span><span class="p">,</span> <span class="n">model_parameters</span><span class="p">,</span> <span class="n">train_len</span><span class="o">=</span><span class="n">train_len</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">opt_params</span><span class="o">=</span><span class="n">opt_params</span><span class="p">,</span> <span class="n">window_number</span><span class="o">=</span><span class="n">window_number</span><span class="p">)</span>
+
+<span class="c1"># Set forecast parameters</span>
+<span class="n">window_number</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">train_len</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">train_len</span> <span class="o">+</span> <span class="n">window_number</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Forecast TADA and LR models and get measurements</span>
+<span class="n">X_model_tada</span> <span class="o">=</span> <span class="n">get_forecast</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="n">train_len</span><span class="p">],</span> <span class="n">W_opt</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span><span class="p">,</span><span class="n">forecast_len</span><span class="o">=</span><span class="n">end</span><span class="o">-</span><span class="n">train_len</span><span class="p">)</span>
+<span class="n">X_model_lr</span> <span class="o">=</span><span class="n">get_forecast</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="n">train_len</span><span class="p">],</span> <span class="n">W_LR</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span><span class="p">,</span><span class="n">forecast_len</span><span class="o">=</span><span class="n">end</span><span class="o">-</span><span class="n">train_len</span><span class="p">)</span>
+<span class="n">X_meas</span> <span class="o">=</span> <span class="n">u_obs</span><span class="p">[:,</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+
+<span class="c1"># Compute and print forecast times</span>
+<span class="n">tada_time</span> <span class="o">=</span> <span class="n">forecast_time</span><span class="p">(</span><span class="n">X_model_tada</span><span class="p">,</span> <span class="n">X_meas</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">lambda_max</span><span class="o">=</span><span class="mf">0.91</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">lr_time</span> <span class="o">=</span> <span class="n">forecast_time</span><span class="p">(</span><span class="n">X_model_lr</span><span class="p">,</span> <span class="n">X_meas</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">lambda_max</span><span class="o">=</span><span class="mf">0.91</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TADA Forecast Time: </span><span class="si">{</span><span class="n">tada_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LR Forecast Time: </span><span class="si">{</span><span class="n">lr_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Resulting forecast times may vary depending on the operating system.</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Forecasting.html" class="btn btn-neutral float-left" title="2.6.1. Forecasting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../notebooks/index.html" class="btn btn-neutral float-right" title="3. Notebooks Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Munch and Khasawneh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

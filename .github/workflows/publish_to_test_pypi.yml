@@ -15,6 +15,7 @@ jobs:
     name: Build and publish python distributions to TestPyPI
     runs-on: ubuntu-latest
     concurrency: release
+    if: ${{ github.event.workflow_run.head_branch == 'test_release' }}  # Only run if the first workflow was on the 'test_release' branch
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@master
@@ -31,7 +32,7 @@ jobs:
           build
           --user
       - name: Install teaspoon for testing
-        run: pip install .
+        run: pip install ".[full]"
       - name: Run tests
         run: make tests
       - name: Build a binary wheel and a source tarball

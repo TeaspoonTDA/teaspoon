@@ -2,15 +2,6 @@ import numpy as np
 from ddeint import ddeint
 
 
-def delayed_flows(system, dynamic_state=None, L=None, fs=None,
-                  SampleSize=None, parameters=None, InitialConditions=None):
-
-    if system == 'mackey_glass':
-        t, ts = mackey_glass()
-
-    return t, ts
-
-
 def mackey_glass(parameters=[1.0001, 2.0, 2.0, 7.75], fs=5, SampleSize=1000, L=400, dynamic_state=None):
     """
     The Mackey-Glass Delayed Differential Equation is

@@ -1,3 +1,6 @@
+========================================================
+MsPE for time delay (tau) and dimension (n)
+========================================================
 
 .. automodule:: teaspoon.parameter_selection.MsPE
     :members:

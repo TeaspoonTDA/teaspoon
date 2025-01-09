@@ -1,3 +1,7 @@
+========================================================
+False Nearest Neighbors (FNN) for dimension (n)
+========================================================
+
 
 .. automodule:: teaspoon.parameter_selection.FNN_n
     :members:

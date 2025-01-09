@@ -14,7 +14,7 @@ This page provides a summary of the Python functions used in "`On the Automatic 
 The following is the table of contents for the parameter selection methods:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    
    Mutual Information <MI.rst>
    Auto-correlation <AC.rst>

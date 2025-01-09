@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.1.2.1. Maps &mdash; teaspoon 1.3.7 documentation</title>
@@ -17,7 +17,7 @@
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
@@ -63,25 +63,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../ParamSelection/index.html">2.2. Parameter Selection Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html">2.2.1. Mutual Information (MI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_DV"><code class="docutils literal notranslate"><span class="pre">MI_DV()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_basic"><code class="docutils literal notranslate"><span class="pre">MI_basic()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_for_delay"><code class="docutils literal notranslate"><span class="pre">MI_for_delay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html#teaspoon.parameter_selection.MI_delay.MI_kraskov"><code class="docutils literal notranslate"><span class="pre">MI_kraskov()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/AC.html">2.2.2. Auto-correlation for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/AC.html#teaspoon.parameter_selection.autocorrelation.autoCorrelation_tau"><code class="docutils literal notranslate"><span class="pre">autoCorrelation_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html">2.2.3. Statistical analysis of the Fourier spectrum for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.AbsFFT"><code class="docutils literal notranslate"><span class="pre">AbsFFT()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.LMSforDelay"><code class="docutils literal notranslate"><span class="pre">LMSforDelay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html#teaspoon.parameter_selection.delay_LMS.MaximumFrequency"><code class="docutils literal notranslate"><span class="pre">MaximumFrequency()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information (PAMI) for time delay (tau).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.PAMI_for_delay"><code class="docutils literal notranslate"><span class="pre">PAMI_for_delay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html#teaspoon.parameter_selection.PAMI_delay.mutualPerm"><code class="docutils literal notranslate"><span class="pre">mutualPerm()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html">2.2.5. MsPE for time delay (tau) and dimension (n).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_n"><code class="docutils literal notranslate"><span class="pre">MsPE_n()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html#teaspoon.parameter_selection.MsPE.MsPE_tau"><code class="docutils literal notranslate"><span class="pre">MsPE_tau()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FNN.html">2.2.6. False Nearest Neighbors (FNN) for dimension (n).</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FNN.html#teaspoon.parameter_selection.FNN_n.FNN_n"><code class="docutils literal notranslate"><span class="pre">FNN_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MI.html">2.2.1. Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/AC.html">2.2.2. Auto-correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FSA.html">2.2.3. Fourier Spectrum Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/PAMI.html">2.2.4. Permutation Auto Mutual Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/MsPE.html">2.2.5. Multi-scale Permutation Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ParamSelection/FNN.html">2.2.6. False Nearest Neighbors</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../SP/index.html">2.3. Signal Processing (SP) Module</a><ul>
@@ -108,6 +95,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../ML/F_PD.html">2.5.2. Featurization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ML/CL.html">2.5.3. Classification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ML/index.html#references">2.5.4. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../DAF/index.html">2.6. Data Assimilation and Forecasting (DAF)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../DAF/Forecasting.html">2.6.1. Forecasting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../DAF/DataAssimilation.html">2.6.2. Data Assimilation</a></li>
 </ul>
 </li>
 </ul>
@@ -185,7 +177,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="note">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>May, Robert. “Simple mathematical models with very complicated dynamics”. Nature, 1976.</p>
 </aside>
@@ -221,7 +213,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id4" role="note">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
 <p>Hénon, Michel. “A two-dimensional mapping with a strange attractor”. Communications in Mathematical Physics, 1976.</p>
 </aside>
@@ -286,7 +278,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id6" role="note">
+<aside class="footnote brackets" id="id6" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">3</a><span class="fn-bracket">]</span></span>
 <p>Crampin, Michael. “On the chaotic behaviour of the tent map”. Teaching Mathematics and its Applications, 1994.</p>
 </aside>
@@ -351,7 +343,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id8" role="note">
+<aside class="footnote brackets" id="id8" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">4</a><span class="fn-bracket">]</span></span>
 <p>Ricker, William Edwin. “Stock and recruitment”. Journal of the Fisheries Research Board of Canada, 1954.</p>
 </aside>
@@ -388,7 +380,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id10" role="note">
+<aside class="footnote brackets" id="id10" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">5</a><span class="fn-bracket">]</span></span>
 <p>Hilborn, Robert C. “Chaos and nonlinear dynamics: an introduction for scientists and engineers”. Oxford, Univ. Press, 2004.</p>
 </aside>
@@ -424,7 +416,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id12" role="note">
+<aside class="footnote brackets" id="id12" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">6</a><span class="fn-bracket">]</span></span>
 <p>Beck, Christian. “Thermodynamics of Chaotic Systems”. Cambridge University Press, 2009.</p>
 </aside>
@@ -460,7 +452,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id14" role="note">
+<aside class="footnote brackets" id="id14" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">7</a><span class="fn-bracket">]</span></span>
 <p>Akgul, Akif. “Text Encryption by Using One-Dimensional Chaos Generators and Nonlinear Equations”. International Conference on Electrical and Electronics Engineering, ELECO, 2013.</p>
 </aside>
@@ -496,7 +488,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id16" role="note">
+<aside class="footnote brackets" id="id16" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">8</a><span class="fn-bracket">]</span></span>
 <p>Arnold, V.I. “Small denominators. i. mapping the circle onto itself”. Izv. Akad. Nauk SSSR Ser. Mat., 1961.</p>
 </aside>
@@ -532,7 +524,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id18" role="note">
+<aside class="footnote brackets" id="id18" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">9</a><span class="fn-bracket">]</span></span>
 <p>Peitgen, Heinz-Otto. “Chaos and Fractals New Frontiers of Science”. Springer-Verlag, 1992.</p>
 </aside>
@@ -568,7 +560,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id20" role="note">
+<aside class="footnote brackets" id="id20" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">10</a><span class="fn-bracket">]</span></span>
 <p>Ismail, Samar M. “Generalized Delayed Logistic Map Suitable For Pseudo-random Number Generation”. International Conference on Science and Technology, 2015.</p>
 </aside>
@@ -604,7 +596,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id22" role="note">
+<aside class="footnote brackets" id="id22" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id21">11</a><span class="fn-bracket">]</span></span>
 <p>Goldsztejn, Alexandre M. “Tinkerbell is chaotic”. SIAM Journal on Applied Dynamical Systems, 2011.</p>
 </aside>
@@ -640,7 +632,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id24" role="note">
+<aside class="footnote brackets" id="id24" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id23">12</a><span class="fn-bracket">]</span></span>
 <p>Burgers, J. M. “Mathematical examples illustrating relations occurring in the theory of turbulent fluid motion”. Trans. Roy. Neth. Acad. Sci. Amsterdam., 1995.</p>
 </aside>
@@ -676,7 +668,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id26" role="note">
+<aside class="footnote brackets" id="id26" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">13</a><span class="fn-bracket">]</span></span>
 <p>Chavoya-Aceves, O. “Symbolic dynamics of the cubic map”. Physica D: Nonlinear Phenomena., 1985.</p>
 </aside>
@@ -712,7 +704,7 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id28" role="note">
+<aside class="footnote brackets" id="id28" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id27">14</a><span class="fn-bracket">]</span></span>
 <p>Peitgen, Heinz-Otto. “Functional Differential Equations and Approximation of Fixed Points”. Springer., 1979.</p>
 </aside>
@@ -749,25 +741,16 @@
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id31" role="note">
+<aside class="footnote brackets" id="id31" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id29">15</a><span class="fn-bracket">]</span></span>
 <p>Devaney, Robert. “The gingerbreadman”. Algorithms, 1992.</p>
 </aside>
-<aside class="footnote brackets" id="id32" role="note">
+<aside class="footnote brackets" id="id32" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id30">16</a><span class="fn-bracket">]</span></span>
 <p>Devaney, Robert. “A piecewise linear model for the zones of instability of an area-preserving map”. Physica D: Nonlinear Phenomena, 1984.</p>
 </aside>
 </aside>
 </dd></dl>
-
-</section>
-<section id="meta-function">
-<h2><span class="section-number">2.1.2.1.2. </span>Meta Function<a class="headerlink" href="#meta-function" title="Link to this heading"></a></h2>
-<p>This function is for being able to input into the original <code class="docutils literal notranslate"><span class="pre">teaspoon.MakeData.DynSysLib.DynamicSystems</span></code> function with default parameters.</p>
-<dl class="py function">
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.MakeData.DynSysLib.maps.</span></span><span class="sig-name descname"><span class="pre">maps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialConditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/teaspoon/MakeData/DynSysLib/maps.html#maps"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd></dd></dl>
 
 </section>
 </section>

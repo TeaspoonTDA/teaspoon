@@ -1,4 +1,6 @@
-
+====================================================================
+Permutation Auto Mutual Information (PAMI) for time delay (tau)
+====================================================================
 
 .. automodule:: teaspoon.parameter_selection.PAMI_delay
     :members:

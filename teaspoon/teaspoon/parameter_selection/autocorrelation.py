@@ -1,7 +1,4 @@
 """
-Auto-correlation for time delay (tau).
-=======================================================================
-
 This function implements Auto-Correlation (AC) for the selection of the delay tau for permutation entropy. 
 Additionally, it only requires a single time series and has a fast computation time. 
 However, this method is only designed for linear system.
