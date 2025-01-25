@@ -190,6 +190,35 @@
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.DAF.data_assimilation.rafda">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.data_assimilation.</span></span><span class="sig-name descname"><span class="pre">rafda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u_obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/data_assimilation.html#rafda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.data_assimilation.rafda" title="Link to this definition"></a></dt>
+<dd><p>Function for generating a RAFDA model based on the method presented in <a class="reference external" href="https://doi.org/10.1016/j.physd.2021.132911">https://doi.org/10.1016/j.physd.2021.132911</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u_obs</strong> (<em>array</em>) – Array of observations (D x N) D is the dimension, N is the number of training points.</p></li>
+<li><p><strong>Dr</strong> (<em>int</em>) – Reservoir dimension</p></li>
+<li><p><strong>Gamma</strong> (<em>array</em>) – Observational covariance matrix.</p></li>
+<li><p><strong>M</strong> (<em>int</em>) – Ensemble size.</p></li>
+<li><p><strong>g</strong> (<em>float</em>) – Initial random weight ensemble distribution parameter.</p></li>
+<li><p><strong>w</strong> (<em>float</em>) – Random feature weight matrix distribution width parameter.</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – Random feature bias vector distribution parameter.</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – Ridge regression regularization parameter.</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – Random seed (optional)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optimal RAFDA model weights.
+W_in (array): Random weight matrix.
+b_in (array): Random bias vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>W_RAFDA (array)</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows</span> <span class="kn">import</span> <span class="n">lorenz</span>
