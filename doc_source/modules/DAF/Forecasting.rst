@@ -67,7 +67,7 @@ This page outlines the available time series forecasting functions.
     ax2.plot(X_model[1,:],'r', label="Forecast")  
     ax2.plot(X_meas[1,:], '.b', label="Measurement")
     ax2.plot([],[])
-    ax2.set_title('x', fontsize='x-large')
+    ax2.set_title('y', fontsize='x-large')
     ax2.tick_params(axis='both', which='major', labelsize='x-large')
     ax2.set_ylim((-30,30))
 
@@ -76,7 +76,7 @@ This page outlines the available time series forecasting functions.
     ax3.plot(X_meas[2,:], '.b', label="Measurement")
     ax3.plot([],[])
     ax3.legend(fontsize='large', loc='upper left')
-    ax3.set_title('x', fontsize='x-large')
+    ax3.set_title('z', fontsize='x-large')
     ax3.tick_params(axis='both', which='major', labelsize='x-large')
     ax3.set_ylim((0,60))
 

@@ -78,7 +78,7 @@ def wassersteinDist(
 
     # Get distances between all pairs of off-diagonal points
     # When we fix this for more q options,
-    if q == np.infty:
+    if q == np.inf:
         metric = 'chebyshev'
     elif q == 1:
         metric = 'l1'

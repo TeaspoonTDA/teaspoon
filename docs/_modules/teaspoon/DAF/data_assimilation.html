@@ -143,6 +143,7 @@
 <span class="kn">from</span> <span class="nn">gudhi.wasserstein</span>       <span class="kn">import</span> <span class="n">wasserstein_distance</span>
 <span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">get_forecast</span>
 <span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">forecast_time</span>
+<span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">random_feature_map_model</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -289,6 +290,66 @@
     <span class="n">pd0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd0</span><span class="p">))</span>
     <span class="n">pd1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd1</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">pd0</span><span class="p">,</span> <span class="n">pd1</span></div>
+
+
+
+
+<div class="viewcode-block" id="rafda">
+<a class="viewcode-back" href="../../../modules/DAF/DataAssimilation.html#teaspoon.DAF.data_assimilation.rafda">[docs]</a>
+<span class="k">def</span> <span class="nf">rafda</span><span class="p">(</span><span class="n">u_obs</span><span class="p">,</span> <span class="n">Dr</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">4e-5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function for generating a RAFDA model based on the method presented in https://doi.org/10.1016/j.physd.2021.132911. </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        u_obs (array): Array of observations (D x N) D is the dimension, N is the number of training points.</span>
+<span class="sd">        Dr (int): Reservoir dimension</span>
+<span class="sd">        Gamma (array): Observational covariance matrix.</span>
+<span class="sd">        M (int): Ensemble size.</span>
+<span class="sd">        g (float): Initial random weight ensemble distribution parameter.</span>
+<span class="sd">        w (float): Random feature weight matrix distribution width parameter.</span>
+<span class="sd">        b (float): Random feature bias vector distribution parameter.</span>
+<span class="sd">        beta (float): Ridge regression regularization parameter.</span>
+<span class="sd">        seed (int): Random seed (optional)</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        W_RAFDA (array): Optimal RAFDA model weights.</span>
+<span class="sd">        W_in (array): Random weight matrix.</span>
+<span class="sd">        b_in (array): Random bias vector.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">u_obs</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">u_obs</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">W_LR</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span> <span class="o">=</span> <span class="n">random_feature_map_model</span><span class="p">(</span><span class="n">u_obs</span><span class="p">,</span> <span class="n">Dr</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">W_LR</span> <span class="o">=</span> <span class="n">W_LR</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+    <span class="c1"># Sample initial ensemble (u_obs \in R^D)</span>
+    <span class="n">u_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">Gamma</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">M</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">w_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">W_LR</span><span class="p">,</span> <span class="n">g</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">D</span><span class="o">*</span><span class="n">Dr</span><span class="p">),</span><span class="n">size</span><span class="o">=</span><span class="n">M</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">Z_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">u_o</span><span class="p">,</span><span class="n">w_o</span><span class="p">])</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">D</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">D</span><span class="p">,</span><span class="n">D</span><span class="o">*</span><span class="n">Dr</span><span class="p">))])</span>
+    <span class="n">Z_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">D</span><span class="o">+</span><span class="n">D</span><span class="o">*</span><span class="n">Dr</span><span class="p">,</span> <span class="n">M</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="c1"># Ensemble steps</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">W_in</span> <span class="o">@</span> <span class="n">Z_a</span><span class="p">[:</span><span class="n">D</span><span class="p">,:]</span> <span class="o">+</span> <span class="n">b_in</span><span class="p">)</span>
+        <span class="n">W_a_prev</span> <span class="o">=</span> <span class="n">Z_a</span><span class="p">[</span><span class="n">D</span><span class="p">:,:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">Dr</span><span class="p">,</span> <span class="n">M</span><span class="p">))</span>
+
+        <span class="n">W_a_flat</span> <span class="o">=</span> <span class="n">W_a_prev</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">W_a_prev</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">W_a_prev</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">M</span><span class="p">)</span>
+        <span class="n">u_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ijk,jk-&gt;ik&#39;</span><span class="p">,</span> <span class="n">W_a_prev</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+
+        <span class="n">Z_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">u_f</span><span class="p">,</span> <span class="n">W_a_flat</span><span class="p">))</span>
+        <span class="n">Z_f_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Z_f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">Z_f_hat</span> <span class="o">=</span> <span class="n">Z_f</span> <span class="o">-</span> <span class="n">Z_f_mean</span>
+
+        <span class="n">P_f</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">Z_f_hat</span><span class="nd">@Z_f_hat</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">Uo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="n">n</span><span class="p">][:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span><span class="n">M</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Gamma</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">M</span><span class="p">))</span>
+
+        <span class="n">Z_a</span> <span class="o">=</span> <span class="n">Z_f</span> <span class="o">-</span> <span class="n">P_f</span><span class="nd">@H</span><span class="o">.</span><span class="n">T</span><span class="nd">@np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">H</span><span class="nd">@P_f@H</span><span class="o">.</span><span class="n">T</span><span class="o">+</span><span class="n">Gamma</span><span class="p">)</span><span class="o">@</span><span class="p">(</span><span class="n">H</span><span class="nd">@Z_f</span><span class="o">-</span><span class="n">Uo</span><span class="p">)</span>
+        <span class="n">Z_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">Z_a</span><span class="p">)</span>
+
+    <span class="n">W_RAFDA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Z_a</span><span class="p">[</span><span class="n">D</span><span class="p">:,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">D</span><span class="p">,</span><span class="n">Dr</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">W_RAFDA</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span></div>
 
 
 

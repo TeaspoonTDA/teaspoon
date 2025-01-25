@@ -4,6 +4,7 @@ from gudhi.tensorflow        import RipsLayer
 from gudhi.wasserstein       import wasserstein_distance
 from teaspoon.DAF.forecasting import get_forecast
 from teaspoon.DAF.forecasting import forecast_time
+from teaspoon.DAF.forecasting import random_feature_map_model
 
 try:
     import tensorflow as tf
@@ -145,6 +146,63 @@ def get_initial_pds(X):
     pd0 = tf.convert_to_tensor(np.array(pd0))
     pd1 = tf.convert_to_tensor(np.array(pd1))
     return pd0, pd1
+
+
+
+def rafda(u_obs, Dr, Gamma, M=1000, g=1000, w=0.005, b=4.0, beta=4e-5, seed=None):
+    """
+    Function for generating a RAFDA model based on the method presented in https://doi.org/10.1016/j.physd.2021.132911. 
+
+    Args:
+        u_obs (array): Array of observations (D x N) D is the dimension, N is the number of training points.
+        Dr (int): Reservoir dimension
+        Gamma (array): Observational covariance matrix.
+        M (int): Ensemble size.
+        g (float): Initial random weight ensemble distribution parameter.
+        w (float): Random feature weight matrix distribution width parameter.
+        b (float): Random feature bias vector distribution parameter.
+        beta (float): Ridge regression regularization parameter.
+        seed (int): Random seed (optional)
+        
+    Returns:
+        W_RAFDA (array): Optimal RAFDA model weights.
+        W_in (array): Random weight matrix.
+        b_in (array): Random bias vector.
+    """
+    D = np.shape(u_obs)[0]
+    N = np.shape(u_obs)[1]
+    W_LR, W_in, b_in = random_feature_map_model(u_obs, Dr, w=w, b=b, beta=beta, seed=seed)
+    W_LR = W_LR.ravel()
+
+    # Sample initial ensemble (u_obs \in R^D)
+    u_o = np.random.multivariate_normal(u_obs[:,0], Gamma,size=M).T
+    w_o = np.random.multivariate_normal(W_LR, g*np.identity(D*Dr),size=M).T
+    Z_a = np.vstack([u_o,w_o])
+    H = np.hstack([np.identity(D),np.zeros((D,D*Dr))])
+    Z_f = np.zeros((D+D*Dr, M))
+
+    for n in range(1, N):
+        # Ensemble steps
+        print(n)
+        phi = np.tanh(W_in @ Z_a[:D,:] + b_in)
+        W_a_prev = Z_a[D:,:].reshape((D, Dr, M))
+
+        W_a_flat = W_a_prev.reshape(W_a_prev.shape[0] * W_a_prev.shape[1], M)
+        u_f = np.einsum('ijk,jk->ik', W_a_prev, phi)
+
+        Z_f = np.vstack((u_f, W_a_flat))
+        Z_f_mean = np.mean(Z_f, axis=1, keepdims=True)
+        Z_f_hat = Z_f - Z_f_mean
+
+        P_f = (1/(M-1))*Z_f_hat@Z_f_hat.T
+        Uo = np.tile(u_obs[:,n][:, np.newaxis],M) - np.sqrt(Gamma)@np.random.normal(size=(D,M))
+
+        Z_a = Z_f - P_f@H.T@np.linalg.inv(H@P_f@H.T+Gamma)@(H@Z_f-Uo)
+        Z_f = np.copy(Z_a)
+
+    W_RAFDA = np.mean(Z_a[D:, :], axis=1).reshape((D,Dr))
+
+    return W_RAFDA, W_in, b_in
 
 
 
