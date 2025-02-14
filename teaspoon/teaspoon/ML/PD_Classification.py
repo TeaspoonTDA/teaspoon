@@ -438,13 +438,18 @@ def getPercentScore(DgmsDF,
         elif params.feature_function == fF.F_Image:
 
             # persistence images algorithm has built-in transfer learning option
-            output = fF.F_Image(D_train, params.pixel_size, params.var, False, [
-            ], pers_imager=None, training=True)
+            # output = fF.F_Image(D_train, params.pixel_size, params.var, False, [
+            # ], pers_imager=None, training=True)
+            output = fF.F_Image(D_train, params.pixel_size, params.var, pers_imager=None, training=True, parallel=False)
+
             X_train = output['F_Matrix']
             pers_imager = output['pers_imager']
+
             # use these bounds to compute persistence images of test set
-            output = fF.F_Image(D_test, params.pixel_size, params.var, False, [
-            ], pers_imager=pers_imager, training=False)
+            # output = fF.F_Image(D_test, params.pixel_size, params.var, False, [
+            # ], pers_imager=pers_imager, training=False)
+            output = fF.F_Image(D_test, params.pixel_size, params.var, pers_imager=pers_imager, training=False, parallel=False)
+
             X_test = output['F_Matrix']
 
         ########------- CARLSSON COORDINATES---------------#########
