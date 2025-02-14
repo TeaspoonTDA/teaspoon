@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../">
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.3.6. Stochastic P-Bifurcation Detection &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -32,16 +31,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            teaspoon
-              <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
+            <a href="../../index.html" class="icon icon-home"> teaspoon
+            <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -128,7 +123,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
           <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.3. </span>Signal Processing (SP) Module Documentation</a></li>
       <li class="breadcrumb-item active"><span class="section-number">2.3.6. </span>Stochastic P-Bifurcation Detection</li>
@@ -141,26 +136,50 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="stochastic-p-bifurcation-detection">
-<h1><span class="section-number">2.3.6. </span>Stochastic P-Bifurcation Detection<a class="headerlink" href="#stochastic-p-bifurcation-detection" title="Link to this heading"></a></h1>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="stochastic-p-bifurcation-detection">
+<h1><span class="section-number">2.3.6. </span>Stochastic P-Bifurcation Detection<a class="headerlink" href="#stochastic-p-bifurcation-detection" title="Permalink to this heading"></a></h1>
 <p>Stochastic P-bifurcations are points of topological changes in the joint probability density function (PDF) of a stochastic system. Please cite the papers <a class="reference external" href="https://doi.org/10.1007/s11071-024-09289-1">“A topological framework for identifying phenomenological bifurcations in stochastic dynamical systems”</a> and <a class="reference external" href="https://doi.org/10.48550/arXiv.2401.16563">“Topological Detection of Phenomenological Bifurcations with Unreliable Kernel Densities”</a> when using these functions. These modules can be used to detect P-bifurcation given</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#stochastic-p-bifurcation-detection"><span class="std std-ref">Stochastic P-Bifurcation Detection</span></a></p>
+<li><p><a class="reference internal" href="#stochastic-p-bifurcation-detection">Stochastic P-Bifurcation Detection</a></p>
 <ul>
-<li><p><a class="reference internal" href="#analytical-density"><span class="std std-ref">Analytical Density</span></a></p>
+<li><p><a class="reference internal" href="#analytical-density">Analytical Density</a></p>
 <ul>
-<li><p><a class="reference internal" href="#example"><span class="std std-ref">Example</span></a></p></li>
+<li><p><a class="reference internal" href="#example">Example</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <section id="analytical-density">
-<h2><span class="section-number">2.3.6.1. </span>Analytical Density<a class="headerlink" href="#analytical-density" title="Link to this heading"></a></h2>
+<h2><span class="section-number">2.3.6.1. </span>Analytical Density<a class="headerlink" href="#analytical-density" title="Permalink to this heading"></a></h2>
 <p>Given the analytical PDFs, the homological bifurcation plot can be generated with the module below</p>
-<dl class="py function" id="module-teaspoon.SP.StochasticP">
+<span class="target" id="module-teaspoon.SP.StochasticP"></span><dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.SP.StochasticP.analytical_homological_bifurcation_plot">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.StochasticP.</span></span><span class="sig-name descname"><span class="pre">analytical_homological_bifurcation_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PDFs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bifurcation_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/SP/StochasticP.html#analytical_homological_bifurcation_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.StochasticP.analytical_homological_bifurcation_plot" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.StochasticP.</span></span><span class="sig-name descname"><span class="pre">analytical_homological_bifurcation_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PDFs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bifurcation_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxEps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numStops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/SP/StochasticP.html#analytical_homological_bifurcation_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.SP.StochasticP.analytical_homological_bifurcation_plot" title="Permalink to this definition"></a></dt>
 <dd><p>Computes the homological bifurcation plot given a list of analytically generated PDFs</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -181,7 +200,7 @@
 </dd></dl>
 
 <section id="example">
-<h3><span class="section-number">2.3.6.1.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<h3><span class="section-number">2.3.6.1.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
 <p>The following example plots an analytical bifurcation plot for a set of PDFs where the system shifts from a monostability to a limit cycle:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">teaspoon.SP.StochasticP</span> <span class="kn">import</span> <span class="n">analytical_homological_bifurcation_plot</span>
