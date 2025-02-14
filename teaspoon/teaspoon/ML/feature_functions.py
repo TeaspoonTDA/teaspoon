@@ -688,7 +688,7 @@ class PLandscape():
             self.DesPL = 'Warning: Desired landscape numbers were not specified.'
         self.AllPL = out['all']
 
-    def PLandscape_plot(self, PL, L_number=[]):
+    def PLandscape_plot(self, PL, L_number=[], show_mesh=False):
         """
         This function plots selected persistence landscapes or it plots all of them if user does not provide desired landscape functions.
 
@@ -699,6 +699,8 @@ class PLandscape():
             Persistence diagram points--(Nx2) matrix.
         L_number : list
             Desired landscape numbers in a list form. If the list is empty, all landscapes will be plotted.
+        show_mesh : bool
+            Shows the mesh 
 
         Returns
         -------
@@ -721,6 +723,12 @@ class PLandscape():
             x = PL[index1-1][:, 0]
             y = PL[index1-1][:, 1]
             plt.plot(x, y, label=r'Landscape %s' % index1)
+
+            if show_mesh == True:
+                plt.scatter(x, np.zeros(len(x)), marker='.', c='Red')
+                plt.scatter(x, y, marker='.')
+                plt.vlines(x, ymin=0, ymax=y, colors='Red', linestyles='--', linewidth=0.5)
+
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
         fig = plt.gcf()
         PL_plot = fig
