@@ -60,12 +60,12 @@ bibliography: paper.bib
 # Summary
 
 The field of topological data analysis (TDA) has risen in the last two decades to become a mature field of research providing a unique perspective on data analysis.
-TDA consists of a suite of tools inspired by the field of Algebraic Topology which encodes shape and structure in data in a quantitative manner.
+TDA consists of a suite of tools inspired by the field of Algebraic Topology, which encodes shape and structure in data in a quantitative manner.
 One particular subfield of work has focused on using TDA tools for the analysis of time series, colloquially known as Topological Signal Processing, or TSP.
 The python package \texttt{teaspoon} has been built specifically to cater to the needs of researchers working in the field of TSP, with the added benefit that the code can be used for other forms of input data beyond signal.
 
 Recent work has largely focused on the use of persistent homology and its variants for this context, thus this has been the main tool utilized in \texttt{teaspoon}.
-While full discussion of the specifics of persistence is outside the scope of this brief paper, we give a brief introduction here and direct the interested reader to @Dey2021 and @Munch2017 for more information.
+While a full discussion of the specifics of persistence is outside the scope of this brief paper, we give a brief introduction here and direct the interested reader to @Dey2021 and @Munch2017 for more information.
 Standard homology (see, e.g., @Hatcher) is a construction which builds a vector space for any input topological space $X$ and a given dimension $p$ of structure to be studied.
 Denoted $H_p(X)$, the $p=0$ dimensional homology encodes the structure of connected components; $p=1$ encodes loops; $p=2$ encodes voids; and higher dimensional versions exist without the interpretability of these lower dimensional versions.
 While homology is defined for a fixed topological space, persistent homology studies the changing homology for a changing topological space.
@@ -74,7 +74,7 @@ The persistence diagram is a 2D scatter plot of points, each one giving the (bir
 
 ![An example filtration of simplicial complexes and the corresponding persistence diagram. \label{fig:example}](figures/Filt_PD_Combined.png)
 
-As an example, in Figure \ref{fig:example} we have a sequence of topological spaces in which we wish to track how the homology is changing, along with the corresponding persistence diagram (below).
+As an example, in Figure \ref{fig:example} we have a sequence of topological spaces in which we wish to track how the homology is changing, along with the corresponding persistence diagram (right).
 Each red point in the persistence diagram at right represents a connected component (an $H_0$ feature), and each blue point represents a cycle (a $H_1$ feature).
 For example, three vertices from $K_0$ are connected by edges in $K_1$, thus there are two persistence points at $(0,1)$ in dimension 0 corresponding to the fact that three connected components have merged into one.
 Similarly, a cycle first appears in $K_2$ and is filled in at $K_4$, so there is a persistence point in dimension 1 at (2,4).
@@ -120,7 +120,7 @@ The *Stochastic P-Bifurcation Detection* provides homological techniques for aut
 
 After performing any necessary transformations, the *Topological Data Analaysis (TDA)* module has tools for computing topological signatures of data persistence on input data.
 This module is largely wrappers for externally available code since much work has already been done to optimize this aspect of the pipeline.
-Point cloud persistence, for instance when taking the Takens embedding as input, is computed using the external *ripser* python package [@Bauer2021] in Scikit-TDA [@Saul2019].
+Point cloud persistence, for instance when taking the Takens embedding as input, is computed using the external *ripser* Python package [@Bauer2021] in Scikit-TDA [@Saul2019].
 Zero dimensional sublevel set persistence is computed with entirely internal code [@Myers2022].
 The module also offers code for computing bottleneck distance---which relies on the *scikit-tda* *persim* package [@Saul2019]---and Wasserstein distance based on Optimal Transport Theory.
 There is also code which makes it easier to use the fast zigzag software [@Dey2022] by providing a wrapper for generating the input file given a list of point clouds as well as filtering the resultant persistence diagram.
@@ -174,7 +174,7 @@ Because of its longevity, a non-exhaustive but extensive list of papers
 @Perea2022;
 @Tymochko2019
 ]
-as well as thesis
+as well as theses
 [
  @Tymochko2022;
 @Yi2022;
