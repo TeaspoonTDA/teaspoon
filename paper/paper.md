@@ -19,7 +19,7 @@ authors:
   - name: Danielle Barnes
     affiliation: 1
     # orcid: 0000-0000-0000-0000
-  - name: Max Chumley
+  - name: Max M. Chumley
     affiliation: 1
     orcid: 0000-0002-5335-5409
   - name: İsmail Güzel
