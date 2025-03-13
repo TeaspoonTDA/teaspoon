@@ -62,11 +62,11 @@ bibliography: paper.bib
 The field of topological data analysis (TDA) has risen in the last two decades to become a mature field of research providing a unique perspective on data analysis.
 TDA consists of a suite of tools inspired by the field of Algebraic Topology, which encodes shape and structure in data in a quantitative manner.
 One particular subfield of work has focused on using TDA tools for the analysis of time series, colloquially known as Topological Signal Processing, or TSP.
-The python package \texttt{teaspoon} has been built specifically to cater to the needs of researchers working in the field of TSP, with the added benefit that the code can be used for other forms of input data beyond signal.
+The Python package \texttt{teaspoon} has been built specifically to cater to the needs of researchers working in the field of TSP, with the added benefit that the code can be used for other forms of input data beyond signal.
 
 Recent work has largely focused on the use of persistent homology and its variants for this context, thus this has been the main tool utilized in \texttt{teaspoon}.
 While a full discussion of the specifics of persistence is outside the scope of this brief paper, we give a brief introduction here and direct the interested reader to @Dey2021 and @Munch2017 for more information.
-Standard homology (see, e.g., @Hatcher) is a construction which builds a vector space for any input topological space $X$ and a given dimension $p$ of structure to be studied.
+Standard homology (see, e.g., @Hatcher) is a construction that builds a vector space for any input topological space $X$ and a given dimension $p$ of structure to be studied.
 Denoted $H_p(X)$, the $p=0$ dimensional homology encodes the structure of connected components; $p=1$ encodes loops; $p=2$ encodes voids; and higher dimensional versions exist without the interpretability of these lower dimensional versions.
 While homology is defined for a fixed topological space, persistent homology studies the changing homology for a changing topological space.
 Indeed, through a fundamental theorem of persistence [@CrawleyBoevey2015], we can use this sequence of vector spaces to determine when $p$-dimensional structures appear (or are born) and disappear (or die).
@@ -112,7 +112,7 @@ The transforms converting a time series into a mathematical structure available 
 This includes both standard tools as well as newly developed techniques that incorporate topological information.
 For instance, the Takens embedding is included, which converts an input time series into a point cloud.
 However, there are also more recent techniques which convert a time series into a network, such as the Ordinal Partition Network (OPN) [@McCullough2015; @Myers2023c] or the Coarse Grained State Space (CGSS) network [@Wang2016; @Myers2023a].
-Similarly, standard entropy computations are included, as well as persistent (as in persistent homology) entropy. For more conventional time series analysis, a noise robust zero-crossing detection tool [@Tanweer2024_FODS] is included which detects all crossings of a discrete signal at once.
+Similarly, standard entropy computations are included, as well as persistent (as in persistent homology) entropy. For more conventional time series analysis, a noise robust zero-crossing detection tool [@Tanweer2024_FODS] is included, which detects all crossings of a discrete signal at once.
 This module also includes the *Texture Analysis* submodule, which provides techniques for comparing experimental and nominal surface textures in manufacturing/machining applications [@Chumley2023].
 The *Stochastic P-Bifurcation Detection* provides homological techniques for automatic and unbiased detection of Phenomenological Bifurcations in stochastic dynamical systems [@Tanweer2024_NODY; @Tanweer2024_PREM].
 
@@ -141,8 +141,8 @@ and kernel methods [@Reininghaus2015].
 
 The \texttt{teaspoon} package is focused on applications of TDA to time series with an emphasis on ease of usability in a Python environment.
 Optimization of the computation of persistence itself has been well studied by others and excellent code already exists for this aspect of the pipeline [@Otter2017].
-Where applicable, \texttt{teaspoon} uses these codebanks, particularly for persistent homology computations.
-Existing code banks include
+Where applicable, \texttt{teaspoon} uses these packages, particularly for persistent homology computations.
+Existing packages include
 Ripser [@Bauer2021],
 GUDHI [@Boissonnat2016],
 giotto-tda [@Tauzin2020],
@@ -150,15 +150,15 @@ dionysus2 [@Morozov2019],
 scikit-tda [@Saul2019],
 R-TDA [@Fasy2014],
 and the Topology Toolkit (TTK) [@BinMasood2019].
-However, persistence in these codebanks is often provided in a very general context.
+However, persistence in these packages is often provided in a very general context.
 So, \texttt{teaspoon} fills the gap by providing tailored, well-documented tools for time series that can be used with a lower barrier to entry.
-This is not covered in other packages which are meant for broad applicability without specialization.
+This is not covered in other packages, which are meant for broad applicability without specialization.
 
 # Representative Publications Using Teaspoon
 
 The \texttt{teaspoon} package was started in 2017 as a GitLab repository, and was ported to GitHub in 2018.
 A previous but now outdated paper outlined the basic functionality of \texttt{teaspoon} at the time [@Myers2020].
-Because of its longevity, a non-exhaustive but extensive list of papers
+Because of its longevity, we provide a non-exhaustive but extensive list of papers
 [
 @Chumley2023;
 @Elchesen2022;
@@ -180,7 +180,7 @@ as well as theses
 @Yi2022;
  @Collins2022
 ]
-have utilized \texttt{teaspoon}.
+that have utilized \texttt{teaspoon}.
 
 # Acknowledgements
 
