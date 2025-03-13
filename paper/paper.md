@@ -142,7 +142,7 @@ and kernel methods [@Reininghaus2015].
 The \texttt{teaspoon} package is focused on applications of TDA to time series with an emphasis on ease of usability in a Python environment.
 Optimization of the computation of persistence itself has been well studied by others and excellent code already exists for this aspect of the pipeline [@Otter2017].
 Where applicable, \texttt{teaspoon} uses these packages, particularly for persistent homology computations.
-Existing pacakges include
+Existing packages include
 Ripser [@Bauer2021],
 GUDHI [@Boissonnat2016],
 giotto-tda [@Tauzin2020],
@@ -150,7 +150,7 @@ dionysus2 [@Morozov2019],
 scikit-tda [@Saul2019],
 R-TDA [@Fasy2014],
 and the Topology Toolkit (TTK) [@BinMasood2019].
-However, persistence in these pacakges is often provided in a very general context.
+However, persistence in these packages is often provided in a very general context.
 So, \texttt{teaspoon} fills the gap by providing tailored, well-documented tools for time series that can be used with a lower barrier to entry.
 This is not covered in other packages, which are meant for broad applicability without specialization.
 
