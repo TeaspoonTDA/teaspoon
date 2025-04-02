@@ -183,7 +183,6 @@ def rafda(u_obs, Dr, Gamma, M=1000, g=1000, w=0.005, b=4.0, beta=4e-5, seed=None
 
     for n in range(1, N):
         # Ensemble steps
-        print(n)
         phi = np.tanh(W_in @ Z_a[:D,:] + b_in)
         W_a_prev = Z_a[D:,:].reshape((D, Dr, M))
 

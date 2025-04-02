@@ -28,58 +28,79 @@ def random_feature_map_model(u_obs, Dr, w=0.005, b=4.0, beta=4e-5, seed=None):
     W_in = np.random.uniform(-w,w,size=(Dr,D))
     b_in = np.random.uniform(-b,b,size=(Dr,1))
 
-    phi_mat = np.array(np.tanh(W_in@u_obs[:,0].reshape(-1,1)+b_in)) #np.tanh(W_in@u_obs + b_in)
+    phi_mat = np.tanh(W_in @ u_obs[:,:-1] + b_in)
 
-    for i in range(1,N):
-        phi_mat = np.hstack((phi_mat, np.tanh(W_in@u_obs[:,i-1].reshape(-1,1)+b_in)))
-    
     # Compute W_LR (u_obs does not include u_0)
-    W_LR = u_obs@phi_mat.T@np.linalg.inv((phi_mat@phi_mat.T+beta*np.eye(Dr)))
+    W_LR = u_obs[:,1:]@phi_mat.T@np.linalg.inv((phi_mat@phi_mat.T+beta*np.eye(Dr)))
 
     return W_LR, W_in, b_in
 
 
-def get_forecast(X_start, W, W_in, b_in, forecast_len, auto_diff=False):
+def G_rfm(xn, W_LR, mu, auto_diff=False):
+    """
+    Random Feature Map Model Forecast Function with TensorFlow differentiation support.
+
+    Args:
+        xn (array): Input state vector (D x 1).
+        W_LR (array): Matrix of model coefficients.
+        mu (list): List of internal model parameters (W_in, b_in).
+        auto_diff (bool): Toggle automatic differentiation for tensorflow usage with TADA.
+    
+    Returns:
+        x_new (array): Forecasted state vector (D x 1).
+    """
+    import numpy as np
+    W_in, b_in = mu
+    if auto_diff:
+        try:
+            import tensorflow as tf
+            from tensorflow.python.ops.numpy_ops import np_config
+            np_config.enable_numpy_behavior()
+        except:
+            raise ImportError("TensorFlow is required for auto_diff functionality.")
+        x_new = tf.matmul(W_LR, tf.tanh(tf.matmul(W_in, xn) + b_in))
+    else:
+        x_new = (W_LR @ np.tanh(W_in @ xn + b_in)).reshape(-1,1)
+    return x_new
+
+
+def get_forecast(Xp, W, mu, forecast_len, G=G_rfm, auto_diff=False):
     """
     Function for computing a forecast from a given random feature map model. 
 
     Args:
-        X_start (array): Starting point for the forecast (D x 1) vector.
+        Xp (array): Starting point(s) for the forecast (D x p) vector.
         W (array): Matrix of model coefficients to use for forecasting.
-        W_in (array): Random weight matrix.
-        b_in (array): Random bias vector.
+        mu (list): List of internal model parameters.
         forecast_len (int): Number of points to forecast into the future.
+        G (function): Forecast function. Defaults to random feature map (G_rfm).
         auto_diff (bool): Toggle automatic differentiation for tensorflow usage with TADA.
         
     Returns:
         forecast (array): Array of forecasted states.
     """
     import numpy as np
-    D = np.shape(X_start)[0]
-    Dr = np.shape(W)[1]
-    if not auto_diff:
-        next_pt = X_start.reshape(-1,1)
-        phi_mat = np.tanh(W_in@X_start.reshape(-1,1)+b_in)
+    D = np.shape(Xp)[0]
+    p = np.shape(Xp)[1]
 
+    if not auto_diff:
+        x_next = G(Xp, W, mu)
+        forecast = Xp[:,-p].reshape(D,p)
         for i in range(1, forecast_len):
-            next_pt = W@phi_mat[:,i-1].reshape(-1,1)
-            phi_mat = np.hstack((phi_mat, np.tanh(W_in@next_pt+b_in)))
-        forecast = np.hstack((X_start.reshape(-1,1), W@phi_mat))
+            x_next = G(forecast[:,-p:].reshape(D,p), W, mu)
+            forecast = np.hstack((forecast, x_next))
     else:
         try:
             import tensorflow as tf
             from tensorflow.python.ops.numpy_ops import np_config
             np_config.enable_numpy_behavior()
-        except:
-            raise ImportError("TADA Requires tensorflow for optimization")
+        except ImportError:
+            raise ImportError("TensorFlow is required for auto_diff functionality.")
         
-        start_arr = np.zeros(shape=(np.shape(X_start)[0],(forecast_len)))
-        start_arr[:,0] = X_start.reshape(-1)
-
-        forecast = tf.constant(start_arr.T) 
-        for i in range(1, forecast_len):
-            index = [[i]]
-            forecast = tf.tensor_scatter_nd_update(forecast, index, tf.transpose(tf.matmul(W,tf.tanh(tf.matmul(W_in, tf.reshape(forecast[i-1,:],[-1,1]))+b_in))))
+        forecast = tf.reshape(tf.convert_to_tensor(Xp[:,-p], dtype=tf.float64), (D,p))
+        for i in range(forecast_len):
+            x_next = G(forecast[:,-p:].reshape(D,p), W, mu, auto_diff=True)
+            forecast = tf.concat([forecast, x_next], axis=1)
     
     return forecast
 
@@ -117,6 +138,7 @@ if __name__ == "__main__":
     from teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows import lorenz
     from teaspoon.DAF.forecasting import random_feature_map_model
     from teaspoon.DAF.forecasting import get_forecast
+    
 
     # Set font
     rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
