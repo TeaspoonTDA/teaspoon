@@ -145,6 +145,50 @@
 <h1><span class="section-number">2.6.1. </span>Forecasting<a class="headerlink" href="#forecasting" title="Link to this heading"></a></h1>
 <p>This page outlines the available time series forecasting functions.</p>
 <dl class="py function" id="module-teaspoon.DAF.forecasting">
+<dt class="sig sig-object py" id="teaspoon.DAF.forecasting.G_lstm">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.forecasting.</span></span><span class="sig-name descname"><span class="pre">G_lstm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W_lstm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_diff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/forecasting.html#G_lstm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.forecasting.G_lstm" title="Link to this definition"></a></dt>
+<dd><p>LSTM Forecast Function with TensorFlow differentiation support.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xp</strong> (<em>np.ndarray</em><em> or </em><em>tf.Tensor</em>) – Input state vector of shape (D, p)</p></li>
+<li><p><strong>W_lstm</strong> (<em>list</em>) – Model weight arrays to set for the LSTM model (not used here but required for compatibility with other models)</p></li>
+<li><p><strong>mu</strong> (<em>list</em>) – List containing internal model parameters (lstm_units, p, model)</p></li>
+<li><p><strong>auto_diff</strong> (<em>bool</em>) – Enable automatic differentiation functionality</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Forecasted state vector of shape (D, 1)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>x_new</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.DAF.forecasting.G_rfm">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.forecasting.</span></span><span class="sig-name descname"><span class="pre">G_rfm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W_LR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_diff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/forecasting.html#G_rfm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.forecasting.G_rfm" title="Link to this definition"></a></dt>
+<dd><p>Random Feature Map Model Forecast Function with TensorFlow differentiation support.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xn</strong> (<em>array</em>) – Input state vector (D x 1).</p></li>
+<li><p><strong>W_LR</strong> (<em>array</em>) – Matrix of model coefficients.</p></li>
+<li><p><strong>mu</strong> (<em>list</em>) – List of internal model parameters (W_in, b_in).</p></li>
+<li><p><strong>auto_diff</strong> (<em>bool</em>) – Toggle automatic differentiation for tensorflow usage with TADA.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Forecasted state vector (D x 1).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>x_new (array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.DAF.forecasting.forecast_time">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.forecasting.</span></span><span class="sig-name descname"><span class="pre">forecast_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_model_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_truth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/forecasting.html#forecast_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.forecasting.forecast_time" title="Link to this definition"></a></dt>
 <dd><p>Function to compute the forecast time using the relative forecast error to compare predictions to measurements with a threshold.</p>
@@ -169,16 +213,16 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.DAF.forecasting.get_forecast">
-<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.forecasting.</span></span><span class="sig-name descname"><span class="pre">get_forecast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forecast_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_diff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/forecasting.html#get_forecast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.forecasting.get_forecast" title="Link to this definition"></a></dt>
-<dd><p>Function for computing a forecast from a given random feature map model.</p>
+<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.forecasting.</span></span><span class="sig-name descname"><span class="pre">get_forecast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Xp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forecast_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G=&lt;function</span> <span class="pre">G_rfm&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_diff=False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/forecasting.html#get_forecast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.forecasting.get_forecast" title="Link to this definition"></a></dt>
+<dd><p>Function for computing a forecast from a given forecast model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_start</strong> (<em>array</em>) – Starting point for the forecast (D x 1) vector.</p></li>
-<li><p><strong>W</strong> (<em>array</em>) – Matrix of model coefficients to use for forecasting.</p></li>
-<li><p><strong>W_in</strong> (<em>array</em>) – Random weight matrix.</p></li>
-<li><p><strong>b_in</strong> (<em>array</em>) – Random bias vector.</p></li>
+<li><p><strong>Xp</strong> (<em>array</em>) – Starting point(s) for the forecast (D x p) vector.</p></li>
+<li><p><strong>W</strong> (<em>array/object</em>) – Model weights or model object for making predictions.</p></li>
+<li><p><strong>mu</strong> (<em>list</em>) – List of internal model parameters (model specific).</p></li>
 <li><p><strong>forecast_len</strong> (<em>int</em>) – Number of points to forecast into the future.</p></li>
+<li><p><strong>G</strong> (<em>function</em>) – Forecast function. Defaults to random feature map (G_rfm).</p></li>
 <li><p><strong>auto_diff</strong> (<em>bool</em>) – Toggle automatic differentiation for tensorflow usage with TADA.</p></li>
 </ul>
 </dd>
@@ -192,13 +236,36 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="teaspoon.DAF.forecasting.lstm_model">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.forecasting.</span></span><span class="sig-name descname"><span class="pre">lstm_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u_obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/forecasting.html#lstm_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.forecasting.lstm_model" title="Link to this definition"></a></dt>
+<dd><p>Function for generating a LSTM forecast model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u_obs</strong> (<em>array</em>) – Array of observations (D x N) D is the dimension, N is the number of training points.</p></li>
+<li><p><strong>units</strong> (<em>int</em>) – Number of LSTM units.</p></li>
+<li><p><strong>p</strong> (<em>int</em>) – Number of past points to use for predicting the next point.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – Number of LSTM training epochs.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – Training batch size for LSTM model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trained LSTM model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>model (keras Sequential)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="teaspoon.DAF.forecasting.random_feature_map_model">
 <span class="sig-prename descclassname"><span class="pre">teaspoon.DAF.forecasting.</span></span><span class="sig-name descname"><span class="pre">random_feature_map_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u_obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/DAF/forecasting.html#random_feature_map_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaspoon.DAF.forecasting.random_feature_map_model" title="Link to this definition"></a></dt>
 <dd><p>Function for generating a random feature map dynamical system model based on the method presented in <a class="reference external" href="https://doi.org/10.1016/j.physd.2021.132911">https://doi.org/10.1016/j.physd.2021.132911</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u_obs</strong> (<em>array</em>) – Array of observations (D x N) D is the dimension, N is the number of time points (INCLUDING TRAINING DATA)</p></li>
+<li><p><strong>u_obs</strong> (<em>array</em>) – Array of observations (D x N) D is the dimension, N is the number of training points.</p></li>
 <li><p><strong>Dr</strong> (<em>int</em>) – Reservoir dimension</p></li>
 <li><p><strong>w</strong> (<em>float</em>) – Random feature weight matrix distribution width parameter.</p></li>
 <li><p><strong>b</strong> (<em>float</em>) – Random feature bias vector distribution parameter.</p></li>
@@ -225,6 +292,7 @@ b_in (array): Random bias vector.</p>
 <span class="kn">from</span> <span class="nn">teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows</span> <span class="kn">import</span> <span class="n">lorenz</span>
 <span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">random_feature_map_model</span>
 <span class="kn">from</span> <span class="nn">teaspoon.DAF.forecasting</span> <span class="kn">import</span> <span class="n">get_forecast</span>
+
 
 <span class="c1"># Set font</span>
 <span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">,</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">]})</span>
@@ -255,7 +323,7 @@ b_in (array): Random bias vector.</p>
 
 <span class="c1"># Generate forecast</span>
 <span class="n">forecast_len</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">X_model</span><span class="o">=</span> <span class="n">get_forecast</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="n">train_len</span><span class="p">],</span> <span class="n">W_LR</span><span class="p">,</span> <span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span><span class="p">,</span><span class="n">forecast_len</span><span class="o">=</span><span class="n">forecast_len</span><span class="p">)</span>
+<span class="n">X_model</span><span class="o">=</span> <span class="n">get_forecast</span><span class="p">(</span><span class="n">u_obs</span><span class="p">[:,</span><span class="n">train_len</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">W_LR</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="p">(</span><span class="n">W_in</span><span class="p">,</span> <span class="n">b_in</span><span class="p">),</span><span class="n">forecast_len</span><span class="o">=</span><span class="n">forecast_len</span><span class="p">)</span>
 <span class="n">X_meas</span> <span class="o">=</span> <span class="n">u_obs</span><span class="p">[:,</span><span class="n">train_len</span><span class="p">:</span><span class="n">train_len</span><span class="o">+</span><span class="n">forecast_len</span><span class="p">]</span>
 
 <span class="c1"># Plot measurements and forecast</span>

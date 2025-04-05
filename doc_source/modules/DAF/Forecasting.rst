@@ -18,6 +18,7 @@ This page outlines the available time series forecasting functions.
     from teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows import lorenz
     from teaspoon.DAF.forecasting import random_feature_map_model
     from teaspoon.DAF.forecasting import get_forecast
+    
 
     # Set font
     rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
@@ -48,7 +49,7 @@ This page outlines the available time series forecasting functions.
 
     # Generate forecast
     forecast_len = 500
-    X_model= get_forecast(u_obs[:,train_len], W_LR, W_in, b_in,forecast_len=forecast_len)
+    X_model= get_forecast(u_obs[:,train_len].reshape(-1,1), W_LR, mu=(W_in, b_in),forecast_len=forecast_len)
     X_meas = u_obs[:,train_len:train_len+forecast_len]
 
     # Plot measurements and forecast
