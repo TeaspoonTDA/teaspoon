@@ -15,11 +15,12 @@ Persistence Landscapes
 Landscape class
 ~~~~~~~~~~~~~~~
 
-.. autoclass:: teaspoon.ML.feature_functions.PLandscape
-    :members: 
+.. automodule:: teaspoon.ML.feature_functions.PLandscape
+    :special-members: __init__
+    :members: PLandscape_plot
     :undoc-members:
     :private-members:
-    :special-members: __init__
+
 
 **Example:** In this example, we do not specify which landscape function we want. Therefore, the code returns a warning to user if desired landscape points is wanted. 
     	
@@ -157,20 +158,43 @@ Then, these y values become the feature for each landscape functions, and they c
 
    Mesh obtained using second landscape function for the example provided in :numref:`F_Matrix`.
 
-.. automodule:: teaspoon.ML.feature_functions
-    :members: F_Landscape
-    :undoc-members:
-    :private-members:
-    :special-members:
+.. currentmodule:: teaspoon.ML.feature_functions
+.. autofunction:: F_Landscape
+
+
+**Example**::
+
+	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
+	>>> from teaspoon.ML.Base import ParameterBucket
+	>>> from teaspoon.ML.feature_functions import PLandscape, F_Landscape
+
+	>>> # generate persistence diagrams
+	>>> df = testSetManifolds(numDgms=50, numPts=100)
+	>>> Diagrams_H1 = df['Dgm1']
+	>>> params = ParameterBucket(PL_Number = [1, 5, 6])
+
+	>>> all_dfs = []
+	>>> for i in range(Diagrams_H1.size):
+	>>> 	all_dfs.append(PLandscape(Diagrams_H1[i]).AllPL)
+	>>> f_matrix, mesh = F_Landscape(all_dfs, params)
+	>>> print(f_matrix)
+
+	[[0. 0. 0. ... 0. 0. 0.]
+	[0. 0. 0. ... 0. 0. 0.]
+	[0. 0. 0. ... 0. 0. 0.]
+	...
+	[0. 0. 0. ... 0. 0. 0.]
+	[0. 0. 0. ... 0. 0. 0.]
+	[0. 0. 0. ... 0. 0. 0.]]
 
 .. _persistence_images:
 	
 Persistence Images
 ------------------
-	
+
 .. currentmodule:: teaspoon.ML.feature_functions
 .. autofunction:: F_Image
-	
+
 
 **Example**::
 	
@@ -230,8 +254,6 @@ Template Functions
 
 .. currentmodule:: teaspoon.ML.feature_functions
 .. autofunction:: tent
-
-.. currentmodule:: teaspoon.ML.feature_functions
 .. autofunction:: interp_polynomial
 
 
@@ -264,18 +286,14 @@ Template Functions
 	>>> feature = np.concatenate(listOfG, axis=1) 
 
 
-
-
-
-
-
 .. _path_signatures:
 
 Path Signatures
 ---------------
 
 .. currentmodule:: teaspoon.ML.feature_functions
-.. autofunction:: F_PSignature	 
+.. autofunction:: F_PSignature
+
 
 **Example**::
 	
@@ -306,7 +324,7 @@ Kernel Method
 
 .. currentmodule:: teaspoon.ML.feature_functions
 .. autofunction:: KernelMethod
- 
+
 **Example**::
 
 	>>> from teaspoon.MakeData.PointCloud import testSetManifolds
