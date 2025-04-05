@@ -18,6 +18,7 @@ This page outlines the available time series forecasting functions.
     from teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows import lorenz
     from teaspoon.DAF.forecasting import random_feature_map_model
     from teaspoon.DAF.forecasting import get_forecast
+    
 
     # Set font
     rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
@@ -48,7 +49,7 @@ This page outlines the available time series forecasting functions.
 
     # Generate forecast
     forecast_len = 500
-    X_model= get_forecast(u_obs[:,train_len], W_LR, W_in, b_in,forecast_len=forecast_len)
+    X_model= get_forecast(u_obs[:,train_len].reshape(-1,1), W_LR, mu=(W_in, b_in),forecast_len=forecast_len)
     X_meas = u_obs[:,train_len:train_len+forecast_len]
 
     # Plot measurements and forecast
@@ -67,7 +68,7 @@ This page outlines the available time series forecasting functions.
     ax2.plot(X_model[1,:],'r', label="Forecast")  
     ax2.plot(X_meas[1,:], '.b', label="Measurement")
     ax2.plot([],[])
-    ax2.set_title('x', fontsize='x-large')
+    ax2.set_title('y', fontsize='x-large')
     ax2.tick_params(axis='both', which='major', labelsize='x-large')
     ax2.set_ylim((-30,30))
 
@@ -76,7 +77,7 @@ This page outlines the available time series forecasting functions.
     ax3.plot(X_meas[2,:], '.b', label="Measurement")
     ax3.plot([],[])
     ax3.legend(fontsize='large', loc='upper left')
-    ax3.set_title('x', fontsize='x-large')
+    ax3.set_title('z', fontsize='x-large')
     ax3.tick_params(axis='both', which='major', labelsize='x-large')
     ax3.set_ylim((0,60))
 
