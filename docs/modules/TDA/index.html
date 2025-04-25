@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.4. Topological Data Analysis (TDA) Module Documentation &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="2.4.1. Persistent Homology of Networks (PHN)" href="PHN.html" />
-    <link rel="prev" title="2.3.6. Stochastic P-Bifurcation Detection" href="../SP/stoch_bif.html" /> 
+    <link rel="prev" title="2.3.7. Parameter Path Optimization" href="../SP/parameter_path_opt.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,12 +32,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="../../index.html" class="icon icon-home"> teaspoon
-            <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -71,6 +76,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../SP/misc.html">2.3.4. Miscellaneous</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../SP/texture_analysis.html">2.3.5. Texture Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../SP/stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/parameter_path_opt.html">2.3.7. Parameter Path Optimization</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">2.4. Topological Data Analaysis (TDA) Module</a><ul>
@@ -123,7 +129,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
       <li class="breadcrumb-item active"><span class="section-number">2.4. </span>Topological Data Analysis (TDA) Module Documentation</li>
       <li class="wy-breadcrumbs-aside">
@@ -135,32 +141,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="topological-data-analysis-tda-module-documentation">
-<h1><span class="section-number">2.4. </span>Topological Data Analysis (TDA) Module Documentation<a class="headerlink" href="#topological-data-analysis-tda-module-documentation" title="Permalink to this heading"></a></h1>
+  <section id="topological-data-analysis-tda-module-documentation">
+<h1><span class="section-number">2.4. </span>Topological Data Analysis (TDA) Module Documentation<a class="headerlink" href="#topological-data-analysis-tda-module-documentation" title="Link to this heading"></a></h1>
 <p>This branch of the documentation covers tool used for topological data analysis. Specifically, there are several wrappers for calculating the persistent homology as well as tools to calculate the persistent homology of networks (graphs).  For use of zigzag persistence, please visit our companion repository, spork.</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -179,7 +161,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../SP/stoch_bif.html" class="btn btn-neutral float-left" title="2.3.6. Stochastic P-Bifurcation Detection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../SP/parameter_path_opt.html" class="btn btn-neutral float-left" title="2.3.7. Parameter Path Optimization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="PHN.html" class="btn btn-neutral float-right" title="2.4.1. Persistent Homology of Networks (PHN)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
