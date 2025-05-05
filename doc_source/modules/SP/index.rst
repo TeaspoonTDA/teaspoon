@@ -14,3 +14,4 @@ The signal processing module include various methods of analyzing a time series.
    Miscellaneous <misc.rst>
    Texture Analysis <texture_analysis.rst>
    Stochastic P-Bifurcation Detection <stoch_bif.md>
+   Parameter Path Optimization <parameter_path_opt.rst>

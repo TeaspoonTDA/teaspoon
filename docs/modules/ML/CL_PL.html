@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.5.3.1. Persistence Landscapes &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -31,12 +32,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-            <a href="../../index.html" class="icon icon-home"> teaspoon
-            <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            teaspoon
+              <img src="../../_static/teaspoon.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -71,6 +76,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../SP/misc.html">2.3.4. Miscellaneous</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../SP/texture_analysis.html">2.3.5. Texture Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../SP/stoch_bif.html">2.3.6. Stochastic P-Bifurcation Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../SP/parameter_path_opt.html">2.3.7. Parameter Path Optimization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../TDA/index.html">2.4. Topological Data Analaysis (TDA) Module</a><ul>
@@ -123,7 +129,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">2. </span>Modules: Table of Contents</a></li>
           <li class="breadcrumb-item"><a href="index.html"><span class="section-number">2.5. </span>Persistence Diagram Featurization</a></li>
           <li class="breadcrumb-item"><a href="CL.html"><span class="section-number">2.5.3. </span>Classification</a></li>
@@ -137,32 +143,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="persistence-landscapes">
-<h1><span class="section-number">2.5.3.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Permalink to this heading"></a></h1>
+  <section id="persistence-landscapes">
+<h1><span class="section-number">2.5.3.1. </span>Persistence Landscapes<a class="headerlink" href="#persistence-landscapes" title="Link to this heading"></a></h1>
 <p>The code block below provides an example for classification using persistence landscapes.
 We generate persistence diagrams using <em>testSetManifolds</em> function from <a class="reference internal" href="../MakeData/PointCloud.html#point-cloud"><span class="std std-ref">Point Cloud Data Generation Module Documentation</span></a>.
 Splitting diagrams into test set and training set is performed using <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html">StratifiedKFold</a> function.
@@ -241,7 +223,7 @@ Number of folds are selected by user. Then, SVM with default hyperparameters is 
 </pre></div>
 </div>
 <section id="precomputed-landscapes">
-<h2><span class="section-number">2.5.3.1.1. </span>Precomputed Landscapes<a class="headerlink" href="#precomputed-landscapes" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.5.3.1.1. </span>Precomputed Landscapes<a class="headerlink" href="#precomputed-landscapes" title="Link to this heading"></a></h2>
 <p>User can also feed precomputed persistence landscapes to classification algorithm to save computation time.
 In this case, the first input to <em>getPercentScore</em> function will be trated as landscapes, and algorithm will
 not spend time on computing the landscapes.
@@ -339,7 +321,7 @@ To enable this option, <em>precomputed</em> needs to be set to True.</p>
 </div>
 </section>
 <section id="transfer-learning-between-two-sets-of-persistence-diagrams">
-<h2><span class="section-number">2.5.3.1.2. </span>Transfer learning between two sets of persistence diagrams<a class="headerlink" href="#transfer-learning-between-two-sets-of-persistence-diagrams" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.5.3.1.2. </span>Transfer learning between two sets of persistence diagrams<a class="headerlink" href="#transfer-learning-between-two-sets-of-persistence-diagrams" title="Link to this heading"></a></h2>
 <p>Machine learning module of teaspoon also provides user with transfer learning option.
 When it is enabled, user can train and test a classifier on two different sets of persistence diagrams
 or persistence landscapes.
@@ -425,7 +407,7 @@ In the last step, we set classification parameters and perform the classificatio
 </div>
 </section>
 <section id="hyperparameter-tuning">
-<h2><span class="section-number">2.5.3.1.3. </span>Hyperparameter tuning<a class="headerlink" href="#hyperparameter-tuning" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.5.3.1.3. </span>Hyperparameter tuning<a class="headerlink" href="#hyperparameter-tuning" title="Link to this heading"></a></h2>
 <p>Our package also provides user with hyperparameter tuning.
 When it is enabled, user is expected to provide the parameters and their range in a dictionary to tune parameters.
 Algorithm implements <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html">GridSearchCV</a>.</p>
