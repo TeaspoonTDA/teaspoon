@@ -638,15 +638,15 @@ def getPercentScore(DgmsDF,
                 'Please provide saving path to save classification reports.')
 
         save_name = saving_path+'\\test_set_classification_report_run_number.pkl'
-        c_report_train = np.asarray(c_report_train)
+        c_report_test = np.asarray(c_report_test)
         f = open(save_name, "wb")
-        pickle.dump(c_report_train, f)
+        pickle.dump(c_report_test, f)
         f.close()
 
         save_name = saving_path+'\\training_set_classification_report_run_number.pkl'
-        c_report_train = np.asarray(c_report_test)
+        c_report_train = np.asarray(c_report_train)
         f = open(save_name, "wb")
-        pickle.dump(c_report_test, f)
+        pickle.dump(c_report_train, f)
         f.close()
 
     return c_report_train, c_report_test
