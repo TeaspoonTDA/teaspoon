@@ -780,15 +780,15 @@
                 <span class="s1">&#39;Please provide saving path to save classification reports.&#39;</span><span class="p">)</span>
 
         <span class="n">save_name</span> <span class="o">=</span> <span class="n">saving_path</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">test_set_classification_report_run_number.pkl&#39;</span>
-        <span class="n">c_report_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">c_report_train</span><span class="p">)</span>
+        <span class="n">c_report_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">c_report_test</span><span class="p">)</span>
         <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_name</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">c_report_train</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">c_report_test</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
         <span class="n">save_name</span> <span class="o">=</span> <span class="n">saving_path</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">training_set_classification_report_run_number.pkl&#39;</span>
-        <span class="n">c_report_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">c_report_test</span><span class="p">)</span>
+        <span class="n">c_report_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">c_report_train</span><span class="p">)</span>
         <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_name</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">c_report_test</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">c_report_train</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">c_report_train</span><span class="p">,</span> <span class="n">c_report_test</span></div>
