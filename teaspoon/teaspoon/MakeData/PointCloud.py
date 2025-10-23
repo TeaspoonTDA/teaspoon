@@ -567,13 +567,16 @@ def testSetClassification(N=20,
         if not seed is None:
             seed += 1
         dgm = normalDiagram(N=N, mu=muBlue, sd=sd, seed=seed)
-        data = {'Dgm': dgm, 'mean': muRed, 'sd': sd, 'trainingLabel': 1}
+        data = {'Dgm': dgm, 'mean': muBlue, 'sd': sd, 'trainingLabel': 1}
         DgmsDF.loc[counter] = data
         counter += 1
 
     # Permute the data
     if permute:
         DgmsDF = DgmsDF.reindex(np.random.permutation(DgmsDF.index))
+        # Reset the index 
+        DgmsDF.reset_index(drop=True, inplace=True)
+        
 
     return DgmsDF
 
