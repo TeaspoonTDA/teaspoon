@@ -4,7 +4,7 @@ from scipy.spatial.distance import euclidean
 from ripser import ripser
 
 
-#-------------Circles and Annuli---------------------------------------#
+# -------------Circles and Annuli---------------------------------------#
 def Circle(N=100, r=1, gamma=None, seed=None):
     """
     Generate :math:`N` points in :math:`\mathbb{R}^2` from the circle centered
@@ -118,7 +118,7 @@ def Annulus(N=200, r=1, R=2, seed=None):
     return P[:N, :]
 
 
-#-------------Torus a la Diaconis paper--------------------------------#
+# -------------Torus a la Diaconis paper--------------------------------#
 
 def Torus(N=100, r=1, R=2,  seed=None):
     '''
@@ -191,7 +191,7 @@ def Torus(N=100, r=1, R=2,  seed=None):
     return P
 
 
-#----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 
 def Cube(N=100, diam=1, dim=2, seed=None):
     """
@@ -218,7 +218,7 @@ def Cube(N=100, diam=1, dim=2, seed=None):
     return P
 
 
-#----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 
 def Clusters(N=100,
              centers=np.array(((0, 0), (3, 3))),
@@ -278,7 +278,7 @@ def Clusters(N=100,
     return P
 
 
-#----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 def GaussianField(m, n, a=0.8, b=100):
     '''
     Returns matrix representing the 2D gaussian field made on an m x n grid
@@ -364,7 +364,7 @@ def GaussianField(m, n, a=0.8, b=100):
     return field1
 
 
-#----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 def Gaussians(centers, variances, amplitudes=None, resolution=200):
     '''
     Returns matrix representing the 2D gaussians made with given centers, variances and amplitudes
@@ -420,7 +420,7 @@ def Gaussians(centers, variances, amplitudes=None, resolution=200):
     return Z
 
 
-#----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 def Sinc(x1=-10, x2=10, y1=-10, y2=10, N1=1000, N2=1000, mu=0, sigma=0.01, seed=None):
     '''
     Returns matrix representing the 2D sinc function on grid made on x1, x2, y1, y2 of N1 and N2 length
@@ -463,22 +463,22 @@ def Sinc(x1=-10, x2=10, y1=-10, y2=10, N1=1000, N2=1000, mu=0, sigma=0.01, seed=
 
     return f
 
-#----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 
 
-#----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 
 
-#----------------------------------------------------------------------#
-#----------------------------------------------------------------------#
-#----------------Sets of data for ML-----------------------------------#
-#----------------------------------------------------------------------#
-#----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
+# ----------------Sets of data for ML-----------------------------------#
+# ----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 
 
-#----------------------------------------------------------------------#
-#------------Normally distributed points in (birth,death) plane--------#
-#----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
+# ------------Normally distributed points in (birth,death) plane--------#
+# ----------------------------------------------------------------------#
 def normalDiagram(N=20, mu=(2, 4), sd=1, seed=None):
     """
     Generates a diagram with points drawn from a normal distribution in the persistence diagram plane.
@@ -574,9 +574,8 @@ def testSetClassification(N=20,
     # Permute the data
     if permute:
         DgmsDF = DgmsDF.reindex(np.random.permutation(DgmsDF.index))
-        # Reset the index 
+        # Reset the index
         DgmsDF.reset_index(drop=True, inplace=True)
-        
 
     return DgmsDF
 
@@ -693,10 +692,11 @@ def testSetRegressionBall(N=20,
     return DgmsDF
 
 
-#------------------------------------------------------------#
+# ------------------------------------------------------------#
 
 def testSetManifolds(numDgms=50,
                      numPts=300,
+                     maxDim=1,
                      permute=True,
                      seed=None,
                      verbose=False
@@ -718,6 +718,8 @@ def testSetManifolds(numDgms=50,
             The number of diagrams generated of each type. The resulting dataset will have `6*numDgms` diagrams.
          numPts
             The number of points in each point cloud.
+         maxDim
+            The maximum homology dimension to compute.  Default is 1.
          permute
             If ``permute=True``, the data frame returned has its rows randomly permuted.  If `False`, the rows will be red type followed by blue type.
          seed
@@ -728,7 +730,7 @@ def testSetManifolds(numDgms=50,
 
     '''
 
-    columns = ['Dgm0', 'Dgm1', 'trainingLabel']
+    columns = [f'Dgm{j}' for j in range(maxDim + 1)] + ['trainingLabel']
     index = range(6*numDgms)
     DgmsDF = pd.DataFrame(columns=columns, index=index)
 
@@ -740,93 +742,81 @@ def testSetManifolds(numDgms=50,
         fixSeed = False
 
     # -
-    if verbose:
-        print('Generating torus clouds...')
-    for i in range(numDgms):
-        if fixSeed:
-            seed += 1
-        dgmOut = ripser(Torus(N=numPts, seed=seed))[
-            'dgms']  # using ripser package
-        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1], 'trainingLabel': 'Torus'}
-        DgmsDF.loc[counter] = data
-        counter += 1
+    point_cloud_configs = [
+        {
+            'name': 'Torus',
+            'func': Torus,
+            'args': {'N': numPts},
+            'ripser_args': {'maxdim': maxDim}
+        },
+        {
+            'name': 'Annulus',
+            'func': Annulus,
+            'args': {'N': numPts},
+            'ripser_args': {'maxdim': maxDim}
+        },
+        {
+            'name': 'Cube',
+            'func': Cube,
+            'args': {'N': numPts},
+            'ripser_args': {'maxdim': maxDim}
+        },
+        {
+            'name': '3Cluster',
+            'func': Clusters,
+            'args': {'centers': np.array([[0, 0], [0, 2], [2, 0]]), 'N': numPts, 'sd': .05},
+            'ripser_args': {'maxdim': maxDim}
+        },
+        {
+            'name': '3Clusters of 3Clusters',
+            'func': Clusters,
+            'args': {
+                'centers': np.concatenate((
+                    np.array([[0, 0], [0, 1.5], [1.5, 0]]),
+                    np.dot(np.array([[0, 0], [0, 1.5], [1.5, 0]]), np.array(
+                        [(np.sin(np.pi/4), np.cos(np.pi/4)), (np.cos(np.pi/4), -np.sin(np.pi/4))])) + [0, 5],
+                    np.array([[0, 0], [0, 1.5], [1.5, 0]]) + [3, 5]
+                )),
+                'N': numPts,
+                'sd': .05
+            },
+            'ripser_args': {'maxdim': maxDim}
+        },
+        {
+            'name': 'Sphere',
+            'func': Sphere,
+            'args': {'N': numPts, 'noise': .05},
+            'ripser_args': {'maxdim': maxDim}
+        }
+    ]
 
-    # -
-    if verbose:
-        print('Generating annuli clouds...')
-    for i in range(numDgms):
-        if fixSeed:
-            seed += 1
-        dgmOut = ripser(Annulus(N=numPts, seed=seed))['dgms']
-        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
-                'trainingLabel': 'Annulus'}
-        DgmsDF.loc[counter] = data
-        counter += 1
+    for config in point_cloud_configs:
+        if verbose:
+            print(f"Generating {config['name'].lower()} clouds...")
+        for i in range(numDgms):
+            if fixSeed:
+                seed += 1
 
-    # -
-    if verbose:
-        print('Generating cube clouds...')
-    for i in range(numDgms):
-        if fixSeed:
-            seed += 1
-        dgmOut = ripser(Cube(N=numPts, seed=seed))['dgms']
-        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1], 'trainingLabel': 'Cube'}
-        DgmsDF.loc[counter] = data
-        counter += 1
+            point_cloud_func = config['func']
+            point_cloud_args = config['args'].copy()
+            point_cloud_args['seed'] = seed
 
-    # -
-    if verbose:
-        print('Generating three cluster clouds...')
-    # Centered at (0,0), (0,5), and (5,0) with sd =1
-    # Then scaled by .3 to make birth/death times closer to the other examples
-    centers = np.array([[0, 0], [0, 2], [2, 0]])
-    # centers = np.array( [ [0,0], [0,2], [2,0]  ])
-    for i in range(numDgms):
-        if fixSeed:
-            seed += 1
-        dgmOut = ripser(Clusters(centers=centers, N=numPts,
-                                 seed=seed, sd=.05))['dgms']
-        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
-                'trainingLabel': '3Cluster'}
-        DgmsDF.loc[counter] = data
-        counter += 1
+            point_cloud = point_cloud_func(**point_cloud_args)
 
-    # -
-    if verbose:
-        print('Generating three clusters of three clusters clouds...')
+            ripser_args = config['ripser_args'].copy()
 
-    centers = np.array([[0, 0], [0, 1.5], [1.5, 0]])
-    theta = np.pi/4
-    centersUp = np.dot(centers, np.array(
-        [(np.sin(theta), np.cos(theta)), (np.cos(theta), -np.sin(theta))])) + [0, 5]
-    centersUpRight = centers + [3, 5]
-    centers = np.concatenate((centers,  centersUp, centersUpRight))
-    for i in range(numDgms):
-        if fixSeed:
-            seed += 1
-        dgmOut = ripser(Clusters(centers=centers,
-                                 N=numPts,
-                                 sd=.05,
-                                 seed=seed))['dgms']
-        # Dgms.append([dgmOut[0],dgmOut[1]])
-        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
-                'trainingLabel': '3Clusters of 3Clusters'}
-        DgmsDF.loc[counter] = data
-        counter += 1
+            dgmOut = ripser(point_cloud, **ripser_args)['dgms']
 
-    # -
-
-    if verbose:
-        print('Generating sphere clouds...')
-
-    for i in range(numDgms):
-        if fixSeed:
-            seed += 1
-        dgmOut = ripser(Sphere(N=numPts, noise=.05, seed=seed))['dgms']
-        data = {'Dgm0': dgmOut[0], 'Dgm1': dgmOut[1],
-                'trainingLabel': 'Sphere'}
-        DgmsDF.loc[counter] = data
-        counter += 1
+            data = {}
+            for j in range(maxDim + 1):
+                label = f'Dgm{j}'
+                try:
+                    data[label] = dgmOut[j]
+                except IndexError:
+                    data[label] = np.array([])
+            data['trainingLabel'] = config['name']
+            DgmsDF.loc[counter] = data
+            counter += 1
 
     if verbose:
         print('Finished generating clouds and computing persistence.\n')
@@ -834,5 +824,7 @@ def testSetManifolds(numDgms=50,
     # Permute the diagrams if necessary.
     if permute:
         DgmsDF = DgmsDF.reindex(np.random.permutation(DgmsDF.index))
+        # Reset the labels
+        DgmsDF.reset_index(drop=True, inplace=True)
 
     return DgmsDF

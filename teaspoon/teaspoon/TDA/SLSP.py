@@ -11,7 +11,7 @@ def interleave(list1, list2):
 
 
 def initialize_Q_M(sample_data):
-    #import packages
+    # import packages
     import numpy as np
     from scipy.signal import find_peaks
     from sortedcontainers import SortedList

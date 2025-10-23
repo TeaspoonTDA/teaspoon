@@ -1,24 +1,21 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon.MakeData.DynSysLib.maps &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=d4a0791e"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -100,9 +97,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/index.html">3. Example Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">4. Contributing</a><ul>
@@ -138,12 +133,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for teaspoon.MakeData.DynSysLib.maps</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 
 <div class="viewcode-block" id="logistic_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.logistic_map">[docs]</a>
-<span class="k">def</span> <span class="nf">logistic_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">3.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">logistic_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">3.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The logistic map [1]_ was generated as</span>
@@ -207,7 +202,7 @@
 
 <div class="viewcode-block" id="henon_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.henon_map">[docs]</a>
-<span class="k">def</span> <span class="nf">henon_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">henon_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
               <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Hénon map [2]_ was solved as</span>
@@ -257,7 +252,7 @@
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
-    <span class="k">def</span> <span class="nf">henon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">henon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">c</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -280,7 +275,7 @@
 
 <div class="viewcode-block" id="sine_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.sine_map">[docs]</a>
-<span class="k">def</span> <span class="nf">sine_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.8</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sine_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.8</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Sine map is defined as</span>
@@ -340,7 +335,7 @@
 
 <div class="viewcode-block" id="tent_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.tent_map">[docs]</a>
-<span class="k">def</span> <span class="nf">tent_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.05</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tent_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.05</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Tent map [3]_ was solved as</span>
@@ -403,7 +398,7 @@
 
 <div class="viewcode-block" id="linear_congruential_generator_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.linear_congruential_generator_map">[docs]</a>
-<span class="k">def</span> <span class="nf">linear_congruential_generator_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">54773</span><span class="p">,</span> <span class="mi">259200</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">linear_congruential_generator_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">54773</span><span class="p">,</span> <span class="mi">259200</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                       <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Linear Congruential Generator map is defined as</span>
@@ -461,7 +456,7 @@
 
 <div class="viewcode-block" id="rickers_population_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.rickers_population_map">[docs]</a>
-<span class="k">def</span> <span class="nf">rickers_population_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rickers_population_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Ricker&#39;s Population map is defined [4]_ as</span>
@@ -525,7 +520,7 @@
 
 <div class="viewcode-block" id="gauss_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.gauss_map">[docs]</a>
-<span class="k">def</span> <span class="nf">gauss_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">6.20</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.20</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gauss_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">6.20</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.20</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
               <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Gauss map is defined [5]_ as</span>
@@ -590,7 +585,7 @@
 
 <div class="viewcode-block" id="cusp_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.cusp_map">[docs]</a>
-<span class="k">def</span> <span class="nf">cusp_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.1</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cusp_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.1</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Cusp map is defined [6]_ as</span>
@@ -654,7 +649,7 @@
 
 <div class="viewcode-block" id="pinchers_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.pinchers_map">[docs]</a>
-<span class="k">def</span> <span class="nf">pinchers_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pinchers_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Pincher&#39;s map is defined [7]_ as</span>
@@ -718,7 +713,7 @@
 
 <div class="viewcode-block" id="sine_circle_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.sine_circle_map">[docs]</a>
-<span class="k">def</span> <span class="nf">sine_circle_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sine_circle_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Sine Circle map is defined [8]_ as</span>
@@ -782,7 +777,7 @@
 
 <div class="viewcode-block" id="lozi_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.lozi_map">[docs]</a>
-<span class="k">def</span> <span class="nf">lozi_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lozi_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Lozi map is defined [9]_ as</span>
@@ -831,7 +826,7 @@
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
-    <span class="k">def</span> <span class="nf">lozi</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lozi</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">1</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -854,7 +849,7 @@
 
 <div class="viewcode-block" id="delayed_logstic_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.delayed_logstic_map">[docs]</a>
-<span class="k">def</span> <span class="nf">delayed_logstic_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">2.20</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">delayed_logstic_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">2.20</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Delayed Logistic map is defined [10]_ as</span>
@@ -901,7 +896,7 @@
         <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
-    <span class="k">def</span> <span class="nf">delay_log</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delay_log</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">),</span> <span class="n">x</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -924,7 +919,7 @@
 
 <div class="viewcode-block" id="tinkerbell_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.tinkerbell_map">[docs]</a>
-<span class="k">def</span> <span class="nf">tinkerbell_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tinkerbell_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Tinkerbell map is defined [11]_ as</span>
@@ -972,7 +967,7 @@
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
     <span class="c1"># defining simulation functions</span>
-    <span class="k">def</span> <span class="nf">tinkerbell</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tinkerbell</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">d</span><span class="o">*</span><span class="n">y</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -995,7 +990,7 @@
 
 <div class="viewcode-block" id="burgers_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.burgers_map">[docs]</a>
-<span class="k">def</span> <span class="nf">burgers_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">burgers_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">L</span><span class="o">=</span><span class="mf">3000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Burger&#39;s map is defined [12]_ as</span>
@@ -1044,7 +1039,7 @@
 
     <span class="c1"># defining simulation functions</span>
 
-    <span class="k">def</span> <span class="nf">burgers</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">burgers</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1067,7 +1062,7 @@
 
 <div class="viewcode-block" id="holmes_cubic_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.holmes_cubic_map">[docs]</a>
-<span class="k">def</span> <span class="nf">holmes_cubic_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.27</span><span class="p">,</span> <span class="mf">2.77</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">holmes_cubic_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">0.27</span><span class="p">,</span> <span class="mf">2.77</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">L</span><span class="o">=</span><span class="mf">3000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Holme&#39;s Cubic map is defined [13]_ as</span>
@@ -1116,7 +1111,7 @@
 
     <span class="c1"># defining simulation functions</span>
 
-    <span class="k">def</span> <span class="nf">holmes</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">holmes</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="o">+</span><span class="n">d</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">3</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1139,7 +1134,7 @@
 
 <div class="viewcode-block" id="kaplan_yorke_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.kaplan_yorke_map">[docs]</a>
-<span class="k">def</span> <span class="nf">kaplan_yorke_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kaplan_yorke_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">L</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Kaplan Yorke map is defined [14]_ as</span>
@@ -1188,7 +1183,7 @@
 
     <span class="c1"># defining simulation functions</span>
 
-    <span class="k">def</span> <span class="nf">kaplan_yorke</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kaplan_yorke</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="mf">0.99995</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1211,7 +1206,7 @@
 
 <div class="viewcode-block" id="gingerbread_man_map">
 <a class="viewcode-back" href="../../../../modules/MakeData/DynSysLib/maps.html#teaspoon.MakeData.DynSysLib.maps.gingerbread_man_map">[docs]</a>
-<span class="k">def</span> <span class="nf">gingerbread_man_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gingerbread_man_map</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">dynamic_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">InitialConditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">L</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">SampleSize</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Gingerbread Man Map is defined [15]_ [16]_ as</span>
@@ -1263,7 +1258,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">gingerbread_man</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gingerbread_man</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span>
 
     <span class="k">if</span> <span class="n">InitialConditions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>

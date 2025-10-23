@@ -296,27 +296,27 @@ def bary_diff_matrix(xnew, xbase, w=None):
 
     M = M / divisor
 
-    #	M[np.isnan(M)] = 0
+    # M[np.isnan(M)] = 0
 
     M[xdiff == 0] = 1
 
-    #	# Construct the derivative (Section 9.3 of Berrut and Trefethen)
-    #	xdiff2 = xdiff ** 2
+    # # Construct the derivative (Section 9.3 of Berrut and Trefethen)
+    # xdiff2 = xdiff ** 2
     #
-    #	frac1 = wex / xdiff
-    #	frac1[np.isinf(frac1)] = float("inf")
+    # frac1 = wex / xdiff
+    # frac1[np.isinf(frac1)] = float("inf")
     #
-    #	frac2 = wex / xdiff2
+    # frac2 = wex / xdiff2
     #
-    #	DM = (M * np.tile(np.sum(frac2, axis=1)[np.newaxis].T, (1, n)) - frac2) / np.tile(np.sum(frac1, axis=1)[np.newaxis].T, (1, n))
-    #	row, col = np.where(xdiff == 0)
+    # DM = (M * np.tile(np.sum(frac2, axis=1)[np.newaxis].T, (1, n)) - frac2) / np.tile(np.sum(frac1, axis=1)[np.newaxis].T, (1, n))
+    # row, col = np.where(xdiff == 0)
     #
     #
-    #	if np.all(row == 0):  # or, row.size == 0:
-    #		DM[row, ] = (wex[row, ] / np.tile(w[col].T, (1, n))) / xdiff[row, ]
-    #		idx = sub2ind(DM.shape, row, col)
-    #		DM[idx] = 0
-    #		DM[idx] = -np.sum(DM[row, ], axis=1)
+    # if np.all(row == 0):  # or, row.size == 0:
+    # DM[row, ] = (wex[row, ] / np.tile(w[col].T, (1, n))) / xdiff[row, ]
+    # idx = sub2ind(DM.shape, row, col)
+    # DM[idx] = 0
+    # DM[idx] = -np.sum(DM[row, ], axis=1)
     return M
 
 
@@ -341,7 +341,7 @@ def interp_polynomial(Dgm, params, dgm_type='BirthDeath'):
             function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.
 
     '''
-    #	jacobi_func = params.jacobi_func
+    # jacobi_func = params.jacobi_func
 
     # check if we asked for a squre mesh or not
     if isinstance(params.d, int):
@@ -727,7 +727,8 @@ class PLandscape():
             if show_mesh == True:
                 plt.scatter(x, np.zeros(len(x)), marker='.', c='Red')
                 plt.scatter(x, y, marker='.')
-                plt.vlines(x, ymin=0, ymax=y, colors='Red', linestyles='--', linewidth=0.5)
+                plt.vlines(x, ymin=0, ymax=y, colors='Red',
+                           linestyles='--', linewidth=0.5)
 
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
         fig = plt.gcf()

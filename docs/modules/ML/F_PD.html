@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -5,23 +7,17 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.5.2. Featurization &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -105,9 +101,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">4. Contributing</a><ul>
@@ -197,8 +191,8 @@ The algorithm computes the persistence landscapes is written based on Ref. <span
 </dd></dl>
 
 <p><strong>Example:</strong> In this example, we do not specify which landscape function we want. Therefore, the code returns a warning to user if desired landscape points is wanted.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span>
@@ -230,7 +224,8 @@ The algorithm computes the persistence landscapes is written based on Ref. <span
 </div>
 <p>Output of the plotting functions is:</p>
 <figure class="align-center" id="id13">
-<a class="reference internal image-reference" href="../../_images/All_Landscapes.png"><img alt="../../_images/All_Landscapes.png" src="../../_images/All_Landscapes.png" style="width: 708.0px; height: 371.09999999999997px;" /></a>
+<a class="reference internal image-reference" href="../../_images/All_Landscapes.png"><img alt="../../_images/All_Landscapes.png" src="../../_images/All_Landscapes.png" style="width: 708.0px; height: 371.09999999999997px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">All landscape functions for the given persistence diagram</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
 </figcaption>
@@ -290,7 +285,8 @@ The algorithm computes the persistence landscapes is written based on Ref. <span
 </div>
 <p>Output of the plotting functions is:</p>
 <figure class="align-center" id="id14">
-<a class="reference internal image-reference" href="../../_images/Des_Landscapes.png"><img alt="../../_images/Des_Landscapes.png" src="../../_images/Des_Landscapes.png" style="width: 491.25px; height: 282.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/Des_Landscapes.png"><img alt="../../_images/Des_Landscapes.png" src="../../_images/Des_Landscapes.png" style="width: 491.25px; height: 282.0px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Chosen landscape functions for the given persistence diagram</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
@@ -299,7 +295,8 @@ The algorithm computes the persistence landscapes is written based on Ref. <span
 <section id="feature-matrix-generation">
 <span id="pb-landscape"></span><h3><span class="section-number">2.5.2.1.2. </span>Feature matrix generation<a class="headerlink" href="#feature-matrix-generation" title="Link to this heading"></a></h3>
 <figure class="align-center" id="id15">
-<span id="f-matrix"></span><a class="reference internal image-reference" href="../../_images/Mesh_Generation_Example.png"><img alt="../../_images/Mesh_Generation_Example.png" src="../../_images/Mesh_Generation_Example.png" style="width: 718.5px; height: 394.05px;" /></a>
+<span id="f-matrix"></span><a class="reference internal image-reference" href="../../_images/Mesh_Generation_Example.png"><img alt="../../_images/Mesh_Generation_Example.png" src="../../_images/Mesh_Generation_Example.png" style="width: 718.5px; height: 394.05px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Feature matrix generation steps explained with an simple example.</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
 </figcaption>
@@ -317,7 +314,8 @@ The mesh points is shown in <a class="reference internal" href="#mesh"><span cla
 There may not be corresponding y value for each mesh points in selected landscape functions so we use linear interpolation to find these values.
 Then, these y values become the feature for each landscape functions, and they can be used in classification.</p>
 <figure class="align-center" id="id16">
-<span id="mesh"></span><a class="reference internal image-reference" href="../../_images/Mesh_Points.png"><img alt="../../_images/Mesh_Points.png" src="../../_images/Mesh_Points.png" style="width: 421.0px; height: 165.20000000000002px;" /></a>
+<span id="mesh"></span><a class="reference internal image-reference" href="../../_images/Mesh_Points.png"><img alt="../../_images/Mesh_Points.png" src="../../_images/Mesh_Points.png" style="width: 421.0px; height: 165.20000000000002px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Mesh obtained using second landscape function for the example provided in <a class="reference internal" href="#f-matrix"><span class="std std-numref">Fig. 2.4</span></a>.</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
 </figcaption>
@@ -352,9 +350,9 @@ mesh of landscapes functions.</p></li>
 </dd></dl>
 
 <p><strong>Example</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">ParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.feature_functions</span> <span class="kn">import</span> <span class="n">PLandscape</span><span class="p">,</span> <span class="n">F_Landscape</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML.Base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParameterBucket</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML.feature_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PLandscape</span><span class="p">,</span> <span class="n">F_Landscape</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -408,8 +406,8 @@ for test set is computed. The default is None.</p></li>
 </dd></dl>
 
 <p><strong>Example</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -422,9 +420,10 @@ for test set is computed. The default is None.</p></li>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Ff</span><span class="o">.</span><span class="n">plot_F_Images</span><span class="p">(</span><span class="n">feature_PI</span><span class="p">,</span> <span class="n">num_plots</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The algorithm will return four images as shown in <a class="reference internal" href="#pi-example"><span class="std std-numref">Fig. 2.6</span></a>.  An example notebook is also available: <a class="reference internal" href="../../notebooks/persistence_images.html"><span class="doc">Lanscape Notebook</span></a>.</p>
+<p>The algorithm will return four images as shown in <a class="reference internal" href="#pi-example"><span class="std std-numref">Fig. 2.6</span></a>.  An example notebook is also available: <a class="reference external" href="../../notebooks/persistence_images.ipynb">Lanscape Notebook</a>.</p>
 <figure class="align-center" id="id17">
-<span id="pi-example"></span><a class="reference internal image-reference" href="../../_images/PI_Example.png"><img alt="../../_images/PI_Example.png" src="../../_images/PI_Example.png" style="width: 506.40000000000003px; height: 248.0px;" /></a>
+<span id="pi-example"></span><a class="reference internal image-reference" href="../../_images/PI_Example.png"><img alt="../../_images/PI_Example.png" src="../../_images/PI_Example.png" style="width: 506.40000000000003px; height: 248.0px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Example of persistence images.</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
 </figcaption>
@@ -469,8 +468,8 @@ Each feature matrix has a size of NxFN, where N is the number of persistence dia
 </dd></dl>
 
 <p><strong>Example</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">Ff</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -548,11 +547,11 @@ function on the base mesh. This matrix assumes that on a 2D mesh the functions a
 </dd></dl>
 
 <p><strong>Example</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">Base</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -600,9 +599,9 @@ Function takes two inputs and these are persistence landcsape set in an object a
 </dd></dl>
 
 <p><strong>Example</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
@@ -647,8 +646,8 @@ There are three inputs and these are two persistence diagrams and the kernel sca
 </dd></dl>
 
 <p><strong>Example</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Diagrams_H1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dgm1&#39;</span><span class="p">]</span>

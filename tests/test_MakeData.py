@@ -1,42 +1,32 @@
-# Tests done by Audun Myers as of 11/6/20 (Version 0.0.1)
+# Tests for the MakeData module
 
-
-# In[ ]: Dynamic Systems Library
-
-import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
+import pandas as pd
+import teaspoon.MakeData.PointCloud as gPC
 import unittest
-from teaspoon.MakeData.DynSysLib.autonomous_dissipative_flows import rossler
 
-class TestRossler(unittest.TestCase):
+class TestDataGeneration(unittest.TestCase):
+    
+    # TODO: add tests for the dynsyslib
 
-    def test_Rossler(self):
+    def test_generate_point_cloud_dataframe(self):
+        df = gPC.testSetManifolds(numDgms=2, numPts=50, maxDim=2, permute=False, seed=42)
+        assert isinstance(df, pd.DataFrame)
+        assert df.shape[0] == 6 * 2  # 6 manifold types * numDgms
+        assert 'Dgm0' in df.columns
+        assert 'Dgm1' in df.columns
+        assert 'Dgm2' in df.columns
+        assert 'trainingLabel' in df.columns
+        assert not df.isnull().values.any()
 
-        dynamic_state = 'periodic'
-        t, ts = rossler(dynamic_state=dynamic_state)
-
-        TextSize = 15
-        plt.figure(figsize = (12,4))
-        gs = gridspec.GridSpec(1,2)
-
-        ax = plt.subplot(gs[0, 0])
-        plt.xticks(size = TextSize)
-        plt.yticks(size = TextSize)
-        plt.ylabel(r'$x(t)$', size = TextSize)
-        plt.xlabel(r'$t$', size = TextSize)
-        plt.plot(t,ts[0], 'k')
-
-        ax = plt.subplot(gs[0, 1])
-        plt.plot(ts[0], ts[1],'k.')
-        plt.plot(ts[0], ts[1],'k', alpha = 0.25)
-        plt.xticks(size = TextSize)
-        plt.yticks(size = TextSize)
-        plt.xlabel(r'$x(t)$', size = TextSize)
-        plt.ylabel(r'$y(t)$', size = TextSize)
-
-        # plt.show()
-        print('Ran Rossler in MakeData_tests')
-
+    def test_generate_normal_distribution_dataframe(self):
+        df = gPC.testSetClassification(N=10, numDgms=5, permute=False, seed=42)
+        assert isinstance(df, pd.DataFrame)
+        assert df.shape[0] == 5 * 2  # numDgms * 2 types
+        assert 'Dgm' in df.columns
+        assert 'mean' in df.columns
+        assert 'sd' in df.columns
+        assert 'trainingLabel' in df.columns
+        assert not df.isnull().values.any()
 
 
 if __name__ == '__main__':

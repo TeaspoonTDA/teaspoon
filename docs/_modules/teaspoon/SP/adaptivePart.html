@@ -1,24 +1,21 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon.SP.adaptivePart &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -100,9 +97,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
@@ -149,17 +144,17 @@
 <span class="c1">#</span>
 <span class="c1"># @author: khasawn3</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binned_statistic_2d</span><span class="p">,</span> <span class="n">chisquare</span><span class="p">,</span> <span class="n">rankdata</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">patches</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span><span class="p">,</span> <span class="n">MiniBatchKMeans</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">binned_statistic_2d</span><span class="p">,</span> <span class="n">chisquare</span><span class="p">,</span> <span class="n">rankdata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">patches</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span><span class="p">,</span> <span class="n">MiniBatchKMeans</span>
 
 
 <div class="viewcode-block" id="Partitions">
 <a class="viewcode-back" href="../../../modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions">[docs]</a>
-<span class="k">class</span> <span class="nc">Partitions</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Partitions</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    A data structure for storing a partition coming from an adapative meshing scheme.</span>
 
@@ -190,7 +185,7 @@
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">convertToOrd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">meshingScheme</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">partitionParams</span><span class="o">=</span><span class="p">{},</span>
@@ -274,7 +269,7 @@
 
 <div class="viewcode-block" id="Partitions.convertOrdToFloat">
 <a class="viewcode-back" href="../../../modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions.convertOrdToFloat">[docs]</a>
-    <span class="k">def</span> <span class="nf">convertOrdToFloat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partitionEntry</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">convertOrdToFloat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partitionEntry</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Converts to nodes of a partition entry from ordinal back to floats.</span>
 
@@ -309,10 +304,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;to begin with so I can&#39;t.  Exiting...&quot;</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;xFloats&#39;</span><span class="p">):</span>  <span class="c1"># if the data wasn&#39;t ordinal</span>
             <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convertOrdToFloat</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
@@ -322,7 +317,7 @@
 
 <div class="viewcode-block" id="Partitions.getOrdinal">
 <a class="viewcode-back" href="../../../modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions.getOrdinal">[docs]</a>
-    <span class="k">def</span> <span class="nf">getOrdinal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getOrdinal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Overrides the builtin magic method in the case where you had non-ordinal data but still want the ordinal stuff back.</span>
 <span class="sd">        If the data wasn&#39;t ordinal, this has the exact same effect as self[key].</span>
@@ -336,7 +331,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># iterates over the converted entries in the</span>
         <span class="c1"># parameter bucket</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;xFloats&#39;</span><span class="p">):</span>
@@ -346,7 +341,7 @@
 
 <div class="viewcode-block" id="Partitions.iterOrdinal">
 <a class="viewcode-back" href="../../../modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions.iterOrdinal">[docs]</a>
-    <span class="k">def</span> <span class="nf">iterOrdinal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iterOrdinal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Functions just like iter magic method without converting each entry back to its float</span>
 
@@ -356,7 +351,7 @@
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitionBucket</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;!</span>
 <span class="sd">        @brief Nicely prints all currently set values in the bucket.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -372,7 +367,7 @@
 
 <div class="viewcode-block" id="Partitions.plot">
 <a class="viewcode-back" href="../../../modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions.plot">[docs]</a>
-    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Plot the partitions. Can plot in ordinal or float, whichever is in the partition bucket when it&#39;s called.</span>
 
@@ -400,7 +395,7 @@
     <span class="c1"># they are each equal to an ordered vector with the same number of rows.</span>
 <div class="viewcode-block" id="Partitions.isOrdinal">
 <a class="viewcode-back" href="../../../modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions.isOrdinal">[docs]</a>
-    <span class="k">def</span> <span class="nf">isOrdinal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dd</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">isOrdinal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dd</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Helper function for error checking. Used to make sure input is in ordinal coordinates.</span>
 <span class="sd">        It checks that when the two data columns are sorted they are each equal to an ordered vector with the same number of rows.</span>
@@ -422,7 +417,7 @@
 
 <div class="viewcode-block" id="Partitions.return_partition_DV">
 <a class="viewcode-back" href="../../../modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions.return_partition_DV">[docs]</a>
-    <span class="k">def</span> <span class="nf">return_partition_DV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">borders</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nmin</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">return_partition_DV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">borders</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nmin</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Recursive method that partitions the data based on the DV method.</span>
 
@@ -592,7 +587,7 @@
 
 <div class="viewcode-block" id="Partitions.return_partition_clustering">
 <a class="viewcode-back" href="../../../modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions.return_partition_clustering">[docs]</a>
-    <span class="k">def</span> <span class="nf">return_partition_clustering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">clusterAlg</span><span class="o">=</span><span class="n">KMeans</span><span class="p">,</span> <span class="n">num_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">boxOption</span><span class="o">=</span><span class="s2">&quot;boundPoints&quot;</span><span class="p">,</span> <span class="n">boxSize</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">return_partition_clustering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">clusterAlg</span><span class="o">=</span><span class="n">KMeans</span><span class="p">,</span> <span class="n">num_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">boxOption</span><span class="o">=</span><span class="s2">&quot;boundPoints&quot;</span><span class="p">,</span> <span class="n">boxSize</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Partitioning method based on clustering algorithms. First cluster the data, then using the cluster centers and labels determine the partitions.</span>
 
@@ -695,7 +690,7 @@
 
 <div class="viewcode-block" id="Partitions.setParameters">
 <a class="viewcode-back" href="../../../modules/SP/misc.html#teaspoon.SP.adaptivePart.Partitions.setParameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">setParameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partitionParams</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setParameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partitionParams</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Helper function to set the parameters depending on the meshing scheme.</span>
 <span class="sd">        If any are not specified, it is set to a default value.</span>

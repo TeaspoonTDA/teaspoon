@@ -593,7 +593,7 @@ def MI_for_delay(ts, plotting=False, method='basic', h_method='sturge', k=2, ran
         plt.ylabel('MI', size=TextSize)
         plt.xticks(size=TextSize)
         plt.yticks(size=TextSize)
-        #plt.legend(loc = 'upper right', fontsize = TextSize)
+        # plt.legend(loc = 'upper right', fontsize = TextSize)
         plt.ylim(0)
         plt.show()
 

@@ -5,6 +5,8 @@ __pycache__/
 .DS_Store
 output
 .vscode/
+.conda*
+Sandbox.ipynb
 
 # C extensions
 *.so
