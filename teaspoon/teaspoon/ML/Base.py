@@ -405,7 +405,7 @@ class TentParameters(ParameterBucket):
 
 # Applies the passed featurization function to all diagrams in the series and outputs the feature matrix
 # @param DgmSeries : pd.Series.
-#	The structure holding the persistence diagrams.
+# The structure holding the persistence diagrams.
 # @param params : ParameterBucket.
 # 	A parameter bucket used for calculations.
 def build_G(DgmSeries, params):
@@ -461,7 +461,7 @@ def build_G(DgmSeries, params):
 # 				diagram.
 # 			- **clfClass**:
 # 				The class which will be used for classification.  Currently tested
-#				using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.
+# using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.
 #
 # @return
 # 	The classifier object. Coefficients can be found from clf.coef_
@@ -537,19 +537,19 @@ def ML_via_featurization(DgmsDF,
 # 	@param params
 # 		A class of type ParameterBucket.
 # 		Should store at least:
-#			- **featureFunction**:
-#				The function use for featurizing the persistence diagrams. Should take in
-#				a diagram and a ParameterBucket and output a vector of real numbers as features.
+# - **featureFunction**:
+# The function use for featurizing the persistence diagrams. Should take in
+# a diagram and a ParameterBucket and output a vector of real numbers as features.
 # 			- **clfClass**:
 # 				The model which will be used for classification.  Currently tested
-#				using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.
-#			- **seed**:
-#				None if we don't want to mess with the seed for the train_test_split function. Else, pass integer.
-#			- **test_split**:
-#				The percentage of the data to be reserved for the test part of the train/test split.
+# using `sklearn.RidgeClassifierCV` and `sklearn.RidgeCV`.
+# - **seed**:
+# None if we don't want to mess with the seed for the train_test_split function. Else, pass integer.
+# - **test_split**:
+# The percentage of the data to be reserved for the test part of the train/test split.
 #
 # 	@return
-#		Returned as a dictionary of entries:
+# Returned as a dictionary of entries:
 # 		- **score**
 # 			The percent correct when predicting on the test set.
 # 		- **DgmsDF**

@@ -23,7 +23,6 @@ def EEG(SampleSize=5000, dynamic_state='normal'):
     import importlib_resources
     from teaspoon.MakeData.DynSysLib.Data import EEG
 
-    
     if dynamic_state == 'normal':  # healthy
         ts = importlib_resources.files(EEG).joinpath('Z093.txt')
         ts = [np.loadtxt(ts, skiprows=1)[0:SampleSize]]
@@ -31,7 +30,6 @@ def EEG(SampleSize=5000, dynamic_state='normal'):
     if dynamic_state == 'seizure':  # seizure
         ts = importlib_resources.files(EEG).joinpath('S056.txt')
         ts = [np.loadtxt(ts, skiprows=1)[0:SampleSize]]
-
 
     fs = 173.61
     t = np.arange(len(ts[0]))/fs

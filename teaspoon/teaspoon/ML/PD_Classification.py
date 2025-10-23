@@ -290,7 +290,7 @@ def getPercentScore(DgmsDF,
         L_train = training_set_label[k_fold]
         L_test = test_set_label[k_fold]
 
-        ########-------TEMPLATE FUNCTION PART---------------###############
+        ######## -------TEMPLATE FUNCTION PART---------------###############
         # Note: Template function featurization part is seperated because
         #       its functions' structure is different
 
@@ -311,7 +311,7 @@ def getPercentScore(DgmsDF,
                 # TODO this should work for both interp and tents but doesn't yet
                 params.makeAdaptivePartition(allDgms, meshingScheme=None)
 
-            #--------Training------------#
+            # --------Training------------#
             # if verbose:
             #     print('Using ' + str(len(L_train)) + '/' +
             #           str(len(D_train)) + ' to train...')
@@ -327,7 +327,7 @@ def getPercentScore(DgmsDF,
             # feature matrix for training set
             G_train = np.concatenate(listOfG_train, axis=1)
 
-            #--------Testing-------------#
+            # --------Testing-------------#
             # if verbose:
             #     print('Using ' + str(len(L_test)) + '/' +
             #           str(len(D_test)) + ' to test...')
@@ -347,7 +347,7 @@ def getPercentScore(DgmsDF,
         L_train = L_train.sort_index().values
         L_test = L_test.sort_index().values
 
-        ########------- LANDSCAPES---------------#########
+        ######## ------- LANDSCAPES---------------#########
         if params.feature_function == fF.F_Landscape:
 
             # user defines the landscapes number which are used in feature extraction
@@ -434,13 +434,14 @@ def getPercentScore(DgmsDF,
                     X_test = np.concatenate((X_test, ftr), axis=1)
                 X_test = X_test[:, 1:]
 
-        ########------- PERSISTENCE IMAGES---------------#########
+        ######## ------- PERSISTENCE IMAGES---------------#########
         elif params.feature_function == fF.F_Image:
 
             # persistence images algorithm has built-in transfer learning option
             # output = fF.F_Image(D_train, params.pixel_size, params.var, False, [
             # ], pers_imager=None, training=True)
-            output = fF.F_Image(D_train, params.pixel_size, params.var, pers_imager=None, training=True, parallel=False)
+            output = fF.F_Image(D_train, params.pixel_size, params.var,
+                                pers_imager=None, training=True, parallel=False)
 
             X_train = output['F_Matrix']
             pers_imager = output['pers_imager']
@@ -448,11 +449,12 @@ def getPercentScore(DgmsDF,
             # use these bounds to compute persistence images of test set
             # output = fF.F_Image(D_test, params.pixel_size, params.var, False, [
             # ], pers_imager=pers_imager, training=False)
-            output = fF.F_Image(D_test, params.pixel_size, params.var, pers_imager=pers_imager, training=False, parallel=False)
+            output = fF.F_Image(D_test, params.pixel_size, params.var,
+                                pers_imager=pers_imager, training=False, parallel=False)
 
             X_test = output['F_Matrix']
 
-        ########------- CARLSSON COORDINATES---------------#########
+        ######## ------- CARLSSON COORDINATES---------------#########
         elif params.feature_function == fF.F_CCoordinates:
             if params.FN > 5:
                 raise Exception(
@@ -469,7 +471,7 @@ def getPercentScore(DgmsDF,
             X_train = X_train[-1]
             X_test = X_test[-1]
 
-        ########------- PATH SIGNATURES ---------------#########
+        ######## ------- PATH SIGNATURES ---------------#########
         elif params.feature_function == fF.F_PSignature:
             # check if user provided the landscape number which will be used in feature extraction
             if params.L_number == None:
@@ -497,7 +499,7 @@ def getPercentScore(DgmsDF,
                 X_train = fF.F_PSignature(PL_train, params.L_number)
                 X_test = fF.F_PSignature(PL_test, params.L_number)
 
-        ########------- KERNEL METHODS---------------#########
+        ######## ------- KERNEL METHODS---------------#########
         elif params.feature_function == fF.KernelMethod:
             if params.TF_Learning:
                 raise Exception(

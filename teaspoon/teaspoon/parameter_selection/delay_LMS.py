@@ -135,7 +135,7 @@ def AbsFFT(ts, fs):
     # removes first term (tends to be infinity or overly large)
     yf = np.split(yf, [1])[1]
     yf = yf/max(yf)  # Normalizes fourier transform based on maximum density
-    return(xf, yf)
+    return (xf, yf)
 
 
 # In[ ]:
