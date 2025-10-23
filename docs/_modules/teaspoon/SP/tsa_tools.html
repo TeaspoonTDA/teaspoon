@@ -1,24 +1,21 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon.SP.tsa_tools &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -100,9 +97,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
@@ -138,15 +133,15 @@
            <div itemprop="articleBody">
              
   <h1>Source code for teaspoon.SP.tsa_tools</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
-<span class="kn">from</span> <span class="nn">teaspoon.parameter_selection</span> <span class="kn">import</span> <span class="n">MsPE</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">teaspoon.parameter_selection</span> <span class="kn">import</span> <span class="n">FNN_n</span>
-<span class="kn">from</span> <span class="nn">teaspoon.parameter_selection</span> <span class="kn">import</span> <span class="n">MI_delay</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">NearestNeighbors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.parameter_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">MsPE</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.parameter_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">FNN_n</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.parameter_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">MI_delay</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
 
@@ -155,7 +150,7 @@
 
 <div class="viewcode-block" id="cgss_binning">
 <a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.cgss_binning">[docs]</a>
-<span class="k">def</span> <span class="nf">cgss_binning</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">binning_method</span><span class="o">=</span><span class="s1">&#39;equal_size&#39;</span><span class="p">,</span> <span class="n">plot_binning</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cgss_binning</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">binning_method</span><span class="o">=</span><span class="s1">&#39;equal_size&#39;</span><span class="p">,</span> <span class="n">plot_binning</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the binning array applied to each dimension when constructing CGSSN.</span>
 
 <span class="sd">    Args:</span>
@@ -179,11 +174,11 @@
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">perc_FNN</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">FNN_n</span><span class="o">.</span><span class="n">FNN_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">equalObs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>  <span class="c1"># define function to calculate equal-frequency bins based on interpolation</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">equalObs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>  <span class="c1"># define function to calculate equal-frequency bins based on interpolation</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">B</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
     <span class="c1"># get state space reconstruction from signal (SSR)</span>
-    <span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">takens</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP.tsa_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">takens</span>
     <span class="n">SSR</span> <span class="o">=</span> <span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 
     <span class="c1"># ----------------Define how to use the embedding----------------</span>
@@ -221,7 +216,7 @@
 
 <div class="viewcode-block" id="cgss_sequence">
 <a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.cgss_sequence">[docs]</a>
-<span class="k">def</span> <span class="nf">cgss_sequence</span><span class="p">(</span><span class="n">SSR</span><span class="p">,</span> <span class="n">B_array</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cgss_sequence</span><span class="p">(</span><span class="n">SSR</span><span class="p">,</span> <span class="n">B_array</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the sequence of coarse-grained state space states from the state space reconstruction.</span>
 
 <span class="sd">    Args:</span>
@@ -257,7 +252,7 @@
 <span class="c1"># finds permutation sequency from modified pyentropy package</span>
 <div class="viewcode-block" id="permutation_sequence">
 <a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.permutation_sequence">[docs]</a>
-<span class="k">def</span> <span class="nf">permutation_sequence</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">permutation_sequence</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates the sequence of permutations from a 1-D time series.</span>
 
 <span class="sd">    Args:</span>
@@ -271,26 +266,26 @@
 <span class="sd">        [1-D array of intsegers]: array of permutations represented as int from [0, n!-1] from the time series.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
     <span class="n">time_series</span> <span class="o">=</span> <span class="n">ts</span>
 
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.parameter_selection</span> <span class="kn">import</span> <span class="n">MsPE</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.parameter_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">MsPE</span>
         <span class="n">tau</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">MsPE</span><span class="o">.</span><span class="n">MsPE_tau</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">MsPE</span><span class="o">.</span><span class="n">MsPE_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">tau</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.parameter_selection</span> <span class="kn">import</span> <span class="n">MsPE</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.parameter_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">MsPE</span>
         <span class="n">tau</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">MsPE</span><span class="o">.</span><span class="n">MsPE_tau</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
 
     <span class="n">m</span><span class="p">,</span> <span class="n">delay</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">tau</span>
 
-    <span class="kn">import</span> <span class="nn">itertools</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-    <span class="k">def</span> <span class="nf">util_hash_term</span><span class="p">(</span><span class="n">perm</span><span class="p">):</span>  <span class="c1"># finds permutation type</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">util_hash_term</span><span class="p">(</span><span class="n">perm</span><span class="p">):</span>  <span class="c1"># finds permutation type</span>
         <span class="n">deg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">perm</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">deg</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">deg</span><span class="p">)])</span>
     <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span>  <span class="c1"># total length of time series</span>
@@ -320,7 +315,7 @@
 
 <div class="viewcode-block" id="takens">
 <a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.takens">[docs]</a>
-<span class="k">def</span> <span class="nf">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates an array of n-dimensional arrays from a time-delay state-space reconstruction.</span>
 
 <span class="sd">    Args:</span>
@@ -334,17 +329,17 @@
 <span class="sd">        [arraay of n-dimensional arrays]: array of delyed embedded vectors of dimension n for state space reconstruction.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">tau</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.parameter_selection</span> <span class="kn">import</span> <span class="n">MI_delay</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.parameter_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">MI_delay</span>
         <span class="n">tau</span> <span class="o">=</span> <span class="n">MI_delay</span><span class="o">.</span><span class="n">MI_for_delay</span><span class="p">(</span>
             <span class="n">ts</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;basic&#39;</span><span class="p">,</span> <span class="n">h_method</span><span class="o">=</span><span class="s1">&#39;sturge&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">teaspoon.parameter_selection</span> <span class="kn">import</span> <span class="n">FNN_n</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.parameter_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">FNN_n</span>
         <span class="n">perc_FNN</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">FNN_n</span><span class="o">.</span><span class="n">FNN_n</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 
     <span class="c1"># takens embedding method. Not the fastest algoriothm, but it works. Need to improve</span>
@@ -363,7 +358,7 @@
 
 <div class="viewcode-block" id="k_NN">
 <a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.k_NN">[docs]</a>
-<span class="k">def</span> <span class="nf">k_NN</span><span class="p">(</span><span class="n">embedded_time_series</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">k_NN</span><span class="p">(</span><span class="n">embedded_time_series</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function gets the k nearest neighbors from an array of the state space reconstruction vectors</span>
 
 <span class="sd">    Args:</span>
@@ -377,7 +372,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">ETS</span> <span class="o">=</span> <span class="n">embedded_time_series</span>
-    <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">NearestNeighbors</span>
     <span class="c1"># get nearest neighbors</span>
     <span class="n">nbrs</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;ball_tree&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ETS</span><span class="p">)</span>
     <span class="c1"># get incidices of nearest neighbors</span>
@@ -390,7 +385,7 @@
 
 <div class="viewcode-block" id="ZeDA">
 <a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.ZeDA">[docs]</a>
-<span class="k">def</span> <span class="nf">ZeDA</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>  <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">3.0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ZeDA</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>  <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">3.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a uniformly sampled time series and finds level-crossings.</span>
 
 <span class="sd">    Args:</span>
@@ -411,7 +406,7 @@
 
     <span class="c1">##############################################################</span>
     <span class="c1"># Sorts time series in P and Q point clouds</span>
-    <span class="k">def</span> <span class="nf">sortPQ</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sortPQ</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
 
         <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -433,9 +428,9 @@
 
     <span class="c1">################################################################</span>
     <span class="c1"># Find points in persistence diagram above the threshold mu</span>
-    <span class="k">def</span> <span class="nf">sortPQ_mu</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">zscore</span><span class="o">=</span><span class="n">score</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sortPQ_mu</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">zscore</span><span class="o">=</span><span class="n">score</span><span class="p">):</span>
 
-        <span class="kn">import</span> <span class="nn">statistics</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
 
         <span class="n">p_mu</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">q_mu</span> <span class="o">=</span> <span class="p">[]</span>
@@ -472,7 +467,7 @@
 
     <span class="c1">################################################################</span>
     <span class="c1"># Find outliers in persistence diagram using Isolation Forest</span>
-    <span class="k">def</span> <span class="nf">sortPQ_outlier</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sortPQ_outlier</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
 
         <span class="n">p_mu</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">q_mu</span> <span class="o">=</span> <span class="p">[]</span>
@@ -483,14 +478,14 @@
         <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">p_per</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">q_per</span><span class="p">)</span>
         <span class="n">X</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
 
-        <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-        <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">IsolationForest</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsolationForest</span>
 
         <span class="n">data_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
 
-        <span class="k">def</span> <span class="nf">fit_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">fit_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">):</span>
             <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">data_to_predict</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
             <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">data_to_predict</span><span class="p">)</span>
@@ -522,9 +517,9 @@
 
     <span class="c1">####################################################################</span>
     <span class="c1"># Interleave P_mu and Q_mu</span>
-    <span class="k">def</span> <span class="nf">interleave</span><span class="p">(</span><span class="n">p_mu</span><span class="p">,</span> <span class="n">q_mu</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interleave</span><span class="p">(</span><span class="n">p_mu</span><span class="p">,</span> <span class="n">q_mu</span><span class="p">):</span>
 
-        <span class="kn">import</span> <span class="nn">operator</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
 
         <span class="n">I_index</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_mu</span><span class="p">))]</span> <span class="o">+</span> \
             <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p_mu</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_mu</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">q_mu</span><span class="p">))]</span>
@@ -603,7 +598,7 @@
     <span class="c1">#########################################################################</span>
     <span class="c1"># ZeDA Function</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="n">sig</span> <span class="o">=</span> <span class="n">sig</span> <span class="o">-</span> <span class="n">level</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">sig</span><span class="p">),</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -644,8 +639,8 @@
     <span class="c1"># Plot Everything, if plotting == True</span>
     <span class="k">if</span> <span class="n">plotting</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
 
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-        <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rc</span>
         <span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">,</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">]})</span>
         <span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -689,7 +684,7 @@
 
 <div class="viewcode-block" id="first_zero">
 <a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.first_zero">[docs]</a>
-<span class="k">def</span> <span class="nf">first_zero</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">first_zero</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function takes a discrete time series and finds the first zero-crossing or the global minimum (if no crossing).</span>
 
 <span class="sd">    Args:</span>
@@ -862,8 +857,8 @@
 
     <span class="k">if</span> <span class="n">plotting</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
 
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-        <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rc</span>
         <span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">,</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">]})</span>
         <span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -894,50 +889,50 @@
 
 <span class="c1"># Only runs if running from this file (This will show basic example)</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
 
     <span class="c1"># ------------------------------------TAKENS-----------------------------------------</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>  <span class="c1"># generate a simple time series</span>
 
-    <span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">takens</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP.tsa_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">takens</span>
     <span class="n">embedded_ts</span> <span class="o">=</span> <span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">embedded_ts</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">embedded_ts</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k.&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span> <span class="n">show</span><span class="p">()</span>
 
     <span class="c1"># ------------------------------------PS-----------------------------------------</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>  <span class="c1"># generate a simple time series</span>
 
-    <span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">permutation_sequence</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP.tsa_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutation_sequence</span>
     <span class="n">PS</span> <span class="o">=</span> <span class="n">permutation_sequence</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">PS</span><span class="p">)],</span> <span class="n">PS</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span> <span class="n">show</span><span class="p">()</span>
 
     <span class="c1"># ------------------------------------kNN-----------------------------------------</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>  <span class="c1"># generate a simple time series</span>
 
-    <span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">takens</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP.tsa_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">takens</span>
     <span class="n">embedded_ts</span> <span class="o">=</span> <span class="n">takens</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
-    <span class="kn">from</span> <span class="nn">teaspoon.SP.tsa_tools</span> <span class="kn">import</span> <span class="n">k_NN</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP.tsa_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">k_NN</span>
     <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">k_NN</span><span class="p">(</span><span class="n">embedded_ts</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">embedded_ts</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">embedded_ts</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k.&#39;</span><span class="p">)</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># choose arbitrary index to get NN of.</span>
     <span class="n">NN</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># get nearest neighbors of point with that index.</span>

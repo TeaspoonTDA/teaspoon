@@ -1,24 +1,21 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon.ML.feature_functions &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -100,9 +97,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
@@ -147,20 +142,20 @@
 <span class="c1"># &#39;&#39;&#39;</span>
 
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">persim</span> <span class="kn">import</span> <span class="n">PersistenceImager</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
-<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span> <span class="k">as</span> <span class="n">lnorm</span>
-<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="n">t</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Piecewise</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">diff</span><span class="p">,</span> <span class="n">integrate</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
-<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">guvectorize</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">mixture</span>
-<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">persim</span><span class="w"> </span><span class="kn">import</span> <span class="n">PersistenceImager</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span> <span class="k">as</span> <span class="n">lnorm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">t</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Piecewise</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">diff</span><span class="p">,</span> <span class="n">integrate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">guvectorize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">mixture</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
 <span class="c1"># -------------------------------------------- #</span>
 <span class="c1"># -------------------------------------------- #</span>
@@ -174,8 +169,8 @@
 
 
 <div class="viewcode-block" id="tent">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.tent">[docs]</a>
-<span class="k">def</span> <span class="nf">tent</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.tent">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tent</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Applies the tent function to a diagram.</span>
 
@@ -267,7 +262,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">sub2ind</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sub2ind</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Converts subscripts to indices</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -278,7 +273,7 @@
 
 
 <span class="c1"># convert indices to subscripts</span>
-<span class="k">def</span> <span class="nf">ind2sub</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ind2sub</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Converts indices to subscripts</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -292,7 +287,7 @@
 <span class="c1"># find the quadrature/interpolation weights for common orthognal functions</span>
 <span class="c1"># define the function blocks</span>
 <span class="c1"># Chebyshev-Gauss points of the first kind</span>
-<span class="k">def</span> <span class="nf">quad_cheb1</span><span class="p">(</span><span class="n">npts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">quad_cheb1</span><span class="p">(</span><span class="n">npts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Find the quadrature/interpolation weights for common orthognal functions</span>
 
@@ -312,7 +307,7 @@
 <span class="c1"># Computes the Legendre-Gauss-Lobatto nodes, and their quadrate weights.</span>
 <span class="c1"># The LGL nodes are the zeros of (1-x**2)*P&#39;_N(x), wher P_N is the nth Legendre</span>
 <span class="c1"># polynomial</span>
-<span class="k">def</span> <span class="nf">quad_legendre</span><span class="p">(</span><span class="n">npts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">quad_legendre</span><span class="p">(</span><span class="n">npts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Computes the Legendre-Gauss-Lobatto nodes, and their quadrate weights.</span>
 
@@ -369,7 +364,7 @@
 
 
 <span class="c1"># find the barycentric interplation weights</span>
-<span class="k">def</span> <span class="nf">bary_weights</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bary_weights</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Find the barycentric interplation weights</span>
 
@@ -397,7 +392,7 @@
     <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">w</span>
 
 
-<span class="k">def</span> <span class="nf">bary_diff_matrix</span><span class="p">(</span><span class="n">xnew</span><span class="p">,</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bary_diff_matrix</span><span class="p">(</span><span class="n">xnew</span><span class="p">,</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculate both the derivative and plain Lagrange interpolation matrix</span>
 <span class="sd">    using Barycentric formulae from Berrut and Trefethen, SIAM Review, 2004.</span>
@@ -464,8 +459,8 @@
 
 
 <div class="viewcode-block" id="interp_polynomial">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.interp_polynomial">[docs]</a>
-<span class="k">def</span> <span class="nf">interp_polynomial</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.interp_polynomial">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">interp_polynomial</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.</span>
 
@@ -595,7 +590,7 @@
 
 
 <span class="c1"># this function returns the points from querSet that are within the baseRecatangle</span>
-<span class="k">def</span> <span class="nf">getSubset</span><span class="p">(</span><span class="n">querySet</span><span class="p">,</span> <span class="n">baseRectangle</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">getSubset</span><span class="p">(</span><span class="n">querySet</span><span class="p">,</span> <span class="n">baseRectangle</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -625,7 +620,7 @@
                     <span class="p">(</span><span class="n">querySet</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ymax</span><span class="p">),</span> <span class="p">:]</span>
 
 
-<span class="k">def</span> <span class="nf">PLandscapes</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">PLandscapes</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes persistence landscapes for given persistence diagrams.</span>
 <span class="sd">    Function has two inputs which are persistence diagrams and chosen landscapes function.</span>
@@ -789,10 +784,10 @@
     <span class="k">return</span> <span class="n">output</span>
 
 
-<span class="k">class</span> <span class="nc">PLandscape</span><span class="p">():</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PLandscape</span><span class="p">():</span>
 
     <span class="c1"># if user wants to see the plot and the points of the specific landscapes, L_number variable should be given as input.</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">PD</span><span class="p">,</span> <span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">PD</span><span class="p">,</span> <span class="n">L_number</span><span class="o">=</span><span class="p">[]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This class uses landscapes algorithm (:meth:`PD_Featurization.PLandscapes`) to compute persistence landscapes and plot them based on user preference.</span>
 <span class="sd">        The algorithm computes the persistence landscapes is written based on Ref. :cite:`1 &lt;Bubenik2017&gt;`.        </span>
@@ -834,7 +829,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">DesPL</span> <span class="o">=</span> <span class="s1">&#39;Warning: Desired landscape numbers were not specified.&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">AllPL</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">PLandscape_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">PL</span><span class="p">,</span> <span class="n">L_number</span><span class="o">=</span><span class="p">[],</span> <span class="n">show_mesh</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">PLandscape_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">PL</span><span class="p">,</span> <span class="n">L_number</span><span class="o">=</span><span class="p">[],</span> <span class="n">show_mesh</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function plots selected persistence landscapes or it plots all of them if user does not provide desired landscape functions.</span>
 
@@ -855,9 +850,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-        <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rc</span>
         <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PL</span><span class="p">)</span>                                   <span class="c1"># number of landscapes</span>
         <span class="c1"># if user does not enter any landscape function, all landscpaes will be plotted</span>
         <span class="k">if</span> <span class="n">L_number</span> <span class="o">==</span> <span class="p">[]:</span>
@@ -882,8 +877,8 @@
 
 
 <div class="viewcode-block" id="F_Landscape">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.F_Landscape">[docs]</a>
-<span class="k">def</span> <span class="nf">F_Landscape</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">max_l_number</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.F_Landscape">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">F_Landscape</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">max_l_number</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes the features for selected persistence landscape numbers.</span>
 <span class="sd">    There are three inputs to the function.</span>
@@ -973,8 +968,8 @@
 
 
 <div class="viewcode-block" id="F_Image">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.F_Image">[docs]</a>
-<span class="k">def</span> <span class="nf">F_Image</span><span class="p">(</span><span class="n">PD1</span><span class="p">,</span> <span class="n">PS</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">pers_imager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.F_Image">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">F_Image</span><span class="p">(</span><span class="n">PD1</span><span class="p">,</span> <span class="n">PS</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">pers_imager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes the persistence images of given persistence diagrams</span>
 <span class="sd">    using `Persim &lt;https://persim.scikit-tda.org/en/latest/notebooks/Classification%20with%20persistence%20images.html&gt;`_</span>
@@ -1039,8 +1034,8 @@
 
 
 <div class="viewcode-block" id="F_CCoordinates">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.F_CCoordinates">[docs]</a>
-<span class="k">def</span> <span class="nf">F_CCoordinates</span><span class="p">(</span><span class="n">PD</span><span class="p">,</span> <span class="n">FN</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.F_CCoordinates">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">F_CCoordinates</span><span class="p">(</span><span class="n">PD</span><span class="p">,</span> <span class="n">FN</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. :eq:`1st_coord` - :eq:`5th_coord`.</span>
 <span class="sd">    The first four functions are taken from Ref. :cite:`2 &lt;Adcock2016&gt;` and the last one is obtained from Ref. :cite:`3 &lt;Khasawneh2018&gt;`.</span>
@@ -1146,8 +1141,8 @@
 
 
 <div class="viewcode-block" id="F_PSignature">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.F_PSignature">[docs]</a>
-<span class="k">def</span> <span class="nf">F_PSignature</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span> <span class="n">L_Number</span><span class="o">=</span><span class="p">[]):</span>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.F_PSignature">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">F_PSignature</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span> <span class="n">L_Number</span><span class="o">=</span><span class="p">[]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    This function takes the persistence landscape set and returns the feature matrix which is computed using path signatures :cite:`4 &lt;Chevyrev2016,Chevyrev2020&gt;`.</span>
@@ -1243,8 +1238,8 @@
 
 
 <div class="viewcode-block" id="KernelMethod">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.KernelMethod">[docs]</a>
-<span class="k">def</span> <span class="nf">KernelMethod</span><span class="p">(</span><span class="n">perDgm1</span><span class="p">,</span> <span class="n">perDgm2</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.KernelMethod">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">KernelMethod</span><span class="p">(</span><span class="n">perDgm1</span><span class="p">,</span> <span class="n">perDgm2</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    This function computes the kernel for given two persistence diagram based on the formula provided in Ref. :cite:`5 &lt;Reininghaus2015&gt;`.</span>
@@ -1292,7 +1287,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">plot_F_Images</span><span class="p">(</span><span class="n">PI_features</span><span class="p">,</span> <span class="n">num_plots</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[]):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_F_Images</span><span class="p">(</span><span class="n">PI_features</span><span class="p">,</span> <span class="n">num_plots</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function plots the persistence images given a number of plots or index</span>
 
@@ -1314,8 +1309,8 @@
 <span class="sd">    Plot of selected images</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">scipy.ndimage</span> <span class="k">as</span> <span class="nn">ndimage</span>
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ndimage</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
     <span class="k">if</span> <span class="n">num_plots</span> <span class="o">!=</span> <span class="n">rows</span><span class="o">*</span><span class="n">cols</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Rows * Columns must be equal to the Number of Plots&quot;</span><span class="p">)</span>
@@ -1340,7 +1335,7 @@
 
 
 <span class="nd">@guvectorize</span><span class="p">([</span><span class="s2">&quot;void(float64[:,:,:], float64[:,:], float64, float64[:])&quot;</span><span class="p">,],</span> <span class="s2">&quot;(p,m,n), (m,n), ()-&gt;(p)&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;parallel&#39;</span><span class="p">,</span> <span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_distance_parallel</span><span class="p">(</span><span class="n">dgms0</span><span class="p">,</span> <span class="n">dgms1</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_distance_parallel</span><span class="p">(</span><span class="n">dgms0</span><span class="p">,</span> <span class="n">dgms1</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    This function computes (in parallel) the multiscale heat kernel distance for an array of persistence diagrams based on the formula provided in Ref. :cite:`5 &lt;Reininghaus2015&gt;`.</span>
@@ -1415,7 +1410,7 @@
 
 
 <span class="nd">@guvectorize</span><span class="p">([</span><span class="s2">&quot;void(float64[:,:,:], float64[:,:], float64, float64[:])&quot;</span><span class="p">,],</span> <span class="s2">&quot;(p,m,n), (m,n), ()-&gt;(p)&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">,</span> <span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_distance</span><span class="p">(</span><span class="n">dgms0</span><span class="p">,</span> <span class="n">dgms1</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_distance</span><span class="p">(</span><span class="n">dgms0</span><span class="p">,</span> <span class="n">dgms1</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    This function computes the multiscale heat kernel distance for an array of persistence diagrams based on the formula provided in Ref. :cite:`5 &lt;Reininghaus2015&gt;`.</span>
@@ -1490,7 +1485,7 @@
         <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">kSigma1</span> <span class="o">+</span> <span class="n">kSigma0</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">kSigma2</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">f_dgm</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">keyargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f_dgm</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">keyargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Given a persistence diagram :math:`D = (S,\mu)` and a compactly supported function in :math:`\mathbb{R}^2`, this function computes</span>
 <span class="sd">    .. math::</span>
@@ -1509,7 +1504,7 @@
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">f_ellipse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">rotation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f_ellipse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">rotation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Computes a bump function centered with an ellipsoidal domain centered ac `c`, rotaded by &#39;rotation&#39; and with axis given by &#39;axis&#39;. The bump function is computed using the gollowing formula </span>
 <span class="sd">    .. math::</span>
@@ -1533,7 +1528,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">temp</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">adaptive_feature</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">keyargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">adaptive_feature</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">keyargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Given a collection of persistent diagrams and a compactly supported function in :math:`\mathbb{R}^2`, computes :math:`\\nu_{D}(f)` for each diagram :math:`D` in the collection.</span>
 <span class="sd">    :param list_dgms: list of persistent diagrams</span>
@@ -1553,7 +1548,7 @@
     <span class="k">return</span> <span class="n">feat</span>
 
 
-<span class="k">def</span> <span class="nf">adaptive_template_functions</span><span class="p">(</span><span class="n">train_dgms</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">.05</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">adaptive_template_functions</span><span class="p">(</span><span class="n">train_dgms</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">.05</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    This function computes adaptive template functions as in the paper :cite:`6 &lt;polanco2019adaptive&gt;` from a training set and returns the ellipses needed to fit features to a training and testing dataset.</span>
@@ -1589,7 +1584,7 @@
     <span class="k">return</span> <span class="n">ellipses</span>
 
 
-<span class="k">def</span> <span class="nf">adaptive_template_features</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">,</span> <span class="n">list_ellipses</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="n">f_ellipse</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">adaptive_template_features</span><span class="p">(</span><span class="n">list_dgms</span><span class="p">,</span> <span class="n">list_ellipses</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="n">f_ellipse</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    This function computes all the features for a collection of persistent diagrams given a list ot ellipses.</span>
 <span class="sd">    :param list_dgms: list of persistent diagrams</span>
@@ -1612,7 +1607,7 @@
     <span class="k">return</span> <span class="n">features</span>
 
 
-<span class="k">def</span> <span class="nf">reshape_to_array</span><span class="p">(</span><span class="n">diagrams</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">reshape_to_array</span><span class="p">(</span><span class="n">diagrams</span><span class="p">):</span>
     <span class="n">ndgms</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">diagrams</span><span class="p">)</span>
     <span class="n">d0</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ndgms</span><span class="p">)</span>
     <span class="n">d1</span> <span class="o">=</span> <span class="mi">0</span>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -5,21 +7,16 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.4.4. Persistence &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -103,9 +100,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">4. Contributing</a><ul>
@@ -145,10 +140,10 @@
   <section id="persistence">
 <h1><span class="section-number">2.4.4. </span>Persistence<a class="headerlink" href="#persistence" title="Link to this heading"></a></h1>
 <p>The following example computes the minimum and maximum birth times, as well as the maximum persistence:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
-<span class="kn">from</span> <span class="nn">teaspoon.TDA.Draw</span> <span class="kn">import</span> <span class="n">drawDgm</span>
-<span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span>
-<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">maxBirth</span><span class="p">,</span> <span class="n">minBirth</span><span class="p">,</span> <span class="n">maxPers</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ripser</span><span class="w"> </span><span class="kn">import</span> <span class="n">ripser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.TDA.Draw</span><span class="w"> </span><span class="kn">import</span> <span class="n">drawDgm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">Torus</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.TDA.Persistence</span><span class="w"> </span><span class="kn">import</span> <span class="n">maxBirth</span><span class="p">,</span> <span class="n">minBirth</span><span class="p">,</span> <span class="n">maxPers</span>
 
 <span class="n">numPts</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
@@ -173,8 +168,8 @@
 <p>The following example computes the minimum and maximum birth times and the
 maximum persistence across all persistence diagrams in the specified column of
 the DataFrame:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">maxBirthSeries</span><span class="p">,</span> <span class="n">minBirthSeries</span><span class="p">,</span> <span class="n">maxPersistenceSeries</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.TDA.Persistence</span><span class="w"> </span><span class="kn">import</span> <span class="n">maxBirthSeries</span><span class="p">,</span> <span class="n">minBirthSeries</span><span class="p">,</span> <span class="n">maxPersistenceSeries</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">numPts</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
@@ -190,9 +185,9 @@ the DataFrame:</p>
 </pre></div>
 </div>
 <p>The following example computes the Betti Curve for a persistence diagram:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span>
-<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">BettiCurve</span>
-<span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">Torus</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.TDA.Persistence</span><span class="w"> </span><span class="kn">import</span> <span class="n">BettiCurve</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ripser</span><span class="w"> </span><span class="kn">import</span> <span class="n">ripser</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">48823</span><span class="p">)</span>
 <span class="n">Dgm</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;dgms&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
@@ -205,9 +200,9 @@ the DataFrame:</p>
 </pre></div>
 </div>
 <p>The following example computes the CROCKER plot for a set of persistence diagrams:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">Torus</span>
-<span class="kn">from</span> <span class="nn">teaspoon.TDA.Persistence</span> <span class="kn">import</span> <span class="n">CROCKER</span>
-<span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">Torus</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.TDA.Persistence</span><span class="w"> </span><span class="kn">import</span> <span class="n">CROCKER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ripser</span><span class="w"> </span><span class="kn">import</span> <span class="n">ripser</span>
 
 <span class="n">DGMS</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>

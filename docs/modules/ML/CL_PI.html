@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -5,21 +7,16 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.5.3.2. Persistence Images &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -103,9 +100,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">4. Contributing</a><ul>
@@ -150,12 +145,12 @@ As mentioned in <a class="reference internal" href="F_PD.html#persistence-images
 to compute persistence images.
 This library can automatically capture the bounds of the image. Our algorithm implements that option, so user
 do not need to give boundaries for life time and birth time of the images.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.PD_Classification</span> <span class="kn">import</span> <span class="n">getPercentScore</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">ParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML.PD_Classification</span><span class="w"> </span><span class="kn">import</span> <span class="n">getPercentScore</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML.Base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParameterBucket</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -227,13 +222,13 @@ persistence diagrams. The first diagram is treated as the training set, while th
 as test set.
 For given two sets of diagrams, algorithm computes their images and generates feature matrices.
 Then, supervised classification is performed with respect defined parameters.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.PD_Classification</span> <span class="kn">import</span> <span class="n">getPercentScore</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">ParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML.PD_Classification</span><span class="w"> </span><span class="kn">import</span> <span class="n">getPercentScore</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML.Base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParameterBucket</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">DgmsDF_train</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -308,12 +303,12 @@ Then, supervised classification is performed with respect defined parameters.</p
 <p>Our package also provides user with hyperparameter tuning.
 When it is enabled, user is expected to provide the parameters and their range in a dictionary to tune parameters.
 Algorithm implements <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html">GridSearchCV</a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.PD_Classification</span> <span class="kn">import</span> <span class="n">getPercentScore</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML</span> <span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.ML.Base</span> <span class="kn">import</span> <span class="n">ParameterBucket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">teaspoon.MakeData.PointCloud</span> <span class="kn">import</span> <span class="n">testSetManifolds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML.PD_Classification</span><span class="w"> </span><span class="kn">import</span> <span class="n">getPercentScore</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_functions</span> <span class="k">as</span> <span class="n">fF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.ML.Base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParameterBucket</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.MakeData.PointCloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">testSetManifolds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate persistence diagrams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">DgmsDF</span> <span class="o">=</span> <span class="n">testSetManifolds</span><span class="p">(</span><span class="n">numDgms</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">numPts</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>

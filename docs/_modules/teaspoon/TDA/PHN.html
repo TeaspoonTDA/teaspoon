@@ -1,24 +1,21 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaspoon.TDA.PHN &mdash; teaspoon 1.3.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -100,9 +97,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
@@ -139,23 +134,23 @@
              
   <h1>Source code for teaspoon.TDA.PHN</h1><div class="highlight"><pre>
 <span></span><span class="c1">#import packages</span>
-<span class="kn">from</span> <span class="nn">teaspoon.SP</span> <span class="kn">import</span> <span class="n">network</span>
-<span class="kn">from</span> <span class="nn">teaspoon.SP</span> <span class="kn">import</span> <span class="n">tsa_tools</span>
-<span class="kn">from</span> <span class="nn">teaspoon.SP</span> <span class="kn">import</span> <span class="n">network_tools</span>
-<span class="kn">from</span> <span class="nn">ripser</span> <span class="kn">import</span> <span class="n">ripser</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP</span><span class="w"> </span><span class="kn">import</span> <span class="n">network</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP</span><span class="w"> </span><span class="kn">import</span> <span class="n">tsa_tools</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP</span><span class="w"> </span><span class="kn">import</span> <span class="n">network_tools</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ripser</span><span class="w"> </span><span class="kn">import</span> <span class="n">ripser</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
 
 <span class="c1"># import sub modules</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="DistanceMatrix">
 <a class="viewcode-back" href="../../../modules/TDA/PHN.html#teaspoon.TDA.PHN.DistanceMatrix">[docs]</a>
-<span class="k">def</span> <span class="nf">DistanceMatrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;shortest_unweighted_path&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">DistanceMatrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;shortest_unweighted_path&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the distance matrix from a connected graph represented as an adjacency matrix using an available method.&quot;</span>
 
 <span class="sd">    Args:</span>
@@ -202,7 +197,7 @@
 
 <div class="viewcode-block" id="point_summaries">
 <a class="viewcode-back" href="../../../modules/TDA/PHN.html#teaspoon.TDA.PHN.point_summaries">[docs]</a>
-<span class="k">def</span> <span class="nf">point_summaries</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">point_summaries</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the persistent homology statistics for a graph from the paper &quot;Persistent Homology of Complex Networks for Dynamic State Detection.&quot;</span>
 
 <span class="sd">    Args:</span>
@@ -221,7 +216,7 @@
     <span class="k">assert</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span>
         <span class="n">diagram</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span> <span class="s2">&quot;Diagram should include atleast 0D and 1D persistene diagrams as a list of numpy.ndarrays.&quot;</span>
 
-    <span class="k">def</span> <span class="nf">persistentEntropy</span><span class="p">(</span><span class="n">lt</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">persistentEntropy</span><span class="p">(</span><span class="n">lt</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">L</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span>
@@ -263,7 +258,7 @@
 
 <div class="viewcode-block" id="PH_network">
 <a class="viewcode-back" href="../../../modules/TDA/PHN.html#teaspoon.TDA.PHN.PH_network">[docs]</a>
-<span class="k">def</span> <span class="nf">PH_network</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">max_homology_dimension</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">PH_network</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">max_homology_dimension</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the persistent homology of the graph represented by the adjacency matrix A using a distance algorithm defined by user.</span>
 
 <span class="sd">    Args:</span>
@@ -275,7 +270,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        [list]: list of lists where ech list is a persistence diagram (standard ripser format).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sparse</span>
     <span class="n">D_sparse</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">ripser</span><span class="p">(</span><span class="n">D_sparse</span><span class="p">,</span> <span class="n">distance_matrix</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">maxdim</span><span class="o">=</span><span class="n">max_homology_dimension</span><span class="p">)</span>
@@ -289,19 +284,19 @@
 
 <span class="c1"># Only runs if running from this file (This will show basic example)</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
 
     <span class="c1"># ---------------------------Complex Example---------------------------------------</span>
 
     <span class="c1"># import needed packages</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">from</span> <span class="nn">teaspoon.SP.network</span> <span class="kn">import</span> <span class="n">ordinal_partition_graph</span>
-    <span class="kn">from</span> <span class="nn">teaspoon.TDA.PHN</span> <span class="kn">import</span> <span class="n">PH_network</span>
-    <span class="kn">from</span> <span class="nn">teaspoon.SP.network_tools</span> <span class="kn">import</span> <span class="n">make_network</span>
-    <span class="kn">from</span> <span class="nn">teaspoon.parameter_selection.MsPE</span> <span class="kn">import</span> <span class="n">MsPE_tau</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP.network</span><span class="w"> </span><span class="kn">import</span> <span class="n">ordinal_partition_graph</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.TDA.PHN</span><span class="w"> </span><span class="kn">import</span> <span class="n">PH_network</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.SP.network_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_network</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaspoon.parameter_selection.MsPE</span><span class="w"> </span><span class="kn">import</span> <span class="n">MsPE_tau</span>
 
     <span class="c1"># generate a siple sinusoidal time series</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
@@ -329,9 +324,9 @@
     <span class="n">stats</span> <span class="o">=</span> <span class="n">point_summaries</span><span class="p">(</span><span class="n">diagram</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Persistent homology of network statistics: &#39;</span><span class="p">,</span> <span class="n">stats</span><span class="p">)</span>
 
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-    <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
-    <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.gridspec</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gridspec</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
 
     <span class="n">TextSize</span> <span class="o">=</span> <span class="mi">14</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
