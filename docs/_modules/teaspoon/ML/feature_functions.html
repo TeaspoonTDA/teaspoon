@@ -16,6 +16,7 @@
       <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -97,7 +98,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
@@ -169,7 +172,7 @@
 
 
 <div class="viewcode-block" id="tent">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.tent">[docs]</a>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.tent">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tent</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Applies the tent function to a diagram.</span>
@@ -434,32 +437,32 @@
 
     <span class="n">M</span> <span class="o">=</span> <span class="n">M</span> <span class="o">/</span> <span class="n">divisor</span>
 
-    <span class="c1">#	M[np.isnan(M)] = 0</span>
+    <span class="c1"># M[np.isnan(M)] = 0</span>
 
     <span class="n">M</span><span class="p">[</span><span class="n">xdiff</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
-    <span class="c1">#	# Construct the derivative (Section 9.3 of Berrut and Trefethen)</span>
-    <span class="c1">#	xdiff2 = xdiff ** 2</span>
+    <span class="c1"># # Construct the derivative (Section 9.3 of Berrut and Trefethen)</span>
+    <span class="c1"># xdiff2 = xdiff ** 2</span>
     <span class="c1">#</span>
-    <span class="c1">#	frac1 = wex / xdiff</span>
-    <span class="c1">#	frac1[np.isinf(frac1)] = float(&quot;inf&quot;)</span>
+    <span class="c1"># frac1 = wex / xdiff</span>
+    <span class="c1"># frac1[np.isinf(frac1)] = float(&quot;inf&quot;)</span>
     <span class="c1">#</span>
-    <span class="c1">#	frac2 = wex / xdiff2</span>
+    <span class="c1"># frac2 = wex / xdiff2</span>
     <span class="c1">#</span>
-    <span class="c1">#	DM = (M * np.tile(np.sum(frac2, axis=1)[np.newaxis].T, (1, n)) - frac2) / np.tile(np.sum(frac1, axis=1)[np.newaxis].T, (1, n))</span>
-    <span class="c1">#	row, col = np.where(xdiff == 0)</span>
+    <span class="c1"># DM = (M * np.tile(np.sum(frac2, axis=1)[np.newaxis].T, (1, n)) - frac2) / np.tile(np.sum(frac1, axis=1)[np.newaxis].T, (1, n))</span>
+    <span class="c1"># row, col = np.where(xdiff == 0)</span>
     <span class="c1">#</span>
     <span class="c1">#</span>
-    <span class="c1">#	if np.all(row == 0):  # or, row.size == 0:</span>
-    <span class="c1">#		DM[row, ] = (wex[row, ] / np.tile(w[col].T, (1, n))) / xdiff[row, ]</span>
-    <span class="c1">#		idx = sub2ind(DM.shape, row, col)</span>
-    <span class="c1">#		DM[idx] = 0</span>
-    <span class="c1">#		DM[idx] = -np.sum(DM[row, ], axis=1)</span>
+    <span class="c1"># if np.all(row == 0):  # or, row.size == 0:</span>
+    <span class="c1"># DM[row, ] = (wex[row, ] / np.tile(w[col].T, (1, n))) / xdiff[row, ]</span>
+    <span class="c1"># idx = sub2ind(DM.shape, row, col)</span>
+    <span class="c1"># DM[idx] = 0</span>
+    <span class="c1"># DM[idx] = -np.sum(DM[row, ], axis=1)</span>
     <span class="k">return</span> <span class="n">M</span>
 
 
 <div class="viewcode-block" id="interp_polynomial">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.interp_polynomial">[docs]</a>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.interp_polynomial">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">interp_polynomial</span><span class="p">(</span><span class="n">Dgm</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">dgm_type</span><span class="o">=</span><span class="s1">&#39;BirthDeath&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Extracts the weights on the interpolation mesh using barycentric Lagrange interpolation.</span>
@@ -481,7 +484,7 @@
 <span class="sd">            function on the base mesh. This matrix assumes that on a 2D mesh the functions are ordered row-wise.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1">#	jacobi_func = params.jacobi_func</span>
+    <span class="c1"># jacobi_func = params.jacobi_func</span>
 
     <span class="c1"># check if we asked for a squre mesh or not</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -868,7 +871,8 @@
             <span class="k">if</span> <span class="n">show_mesh</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;Red&#39;</span><span class="p">)</span>
                 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;Red&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;Red&#39;</span><span class="p">,</span>
+                           <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
@@ -877,7 +881,7 @@
 
 
 <div class="viewcode-block" id="F_Landscape">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.F_Landscape">[docs]</a>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.F_Landscape">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">F_Landscape</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">max_l_number</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes the features for selected persistence landscape numbers.</span>
@@ -968,7 +972,7 @@
 
 
 <div class="viewcode-block" id="F_Image">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.F_Image">[docs]</a>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.F_Image">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">F_Image</span><span class="p">(</span><span class="n">PD1</span><span class="p">,</span> <span class="n">PS</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">pers_imager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes the persistence images of given persistence diagrams</span>
@@ -1034,7 +1038,7 @@
 
 
 <div class="viewcode-block" id="F_CCoordinates">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.F_CCoordinates">[docs]</a>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.F_CCoordinates">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">F_CCoordinates</span><span class="p">(</span><span class="n">PD</span><span class="p">,</span> <span class="n">FN</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. :eq:`1st_coord` - :eq:`5th_coord`.</span>
@@ -1141,7 +1145,7 @@
 
 
 <div class="viewcode-block" id="F_PSignature">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.F_PSignature">[docs]</a>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.F_PSignature">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">F_PSignature</span><span class="p">(</span><span class="n">PL</span><span class="p">,</span> <span class="n">L_Number</span><span class="o">=</span><span class="p">[]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -1238,7 +1242,7 @@
 
 
 <div class="viewcode-block" id="KernelMethod">
-<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.PLandscape.KernelMethod">[docs]</a>
+<a class="viewcode-back" href="../../../modules/ML/F_PD.html#teaspoon.ML.feature_functions.KernelMethod">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">KernelMethod</span><span class="p">(</span><span class="n">perDgm1</span><span class="p">,</span> <span class="n">perDgm2</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 

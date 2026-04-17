@@ -16,6 +16,7 @@
       <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -97,7 +98,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
@@ -427,7 +430,7 @@
         <span class="n">L_train</span> <span class="o">=</span> <span class="n">training_set_label</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
         <span class="n">L_test</span> <span class="o">=</span> <span class="n">test_set_label</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
 
-        <span class="c1">########-------TEMPLATE FUNCTION PART---------------###############</span>
+        <span class="c1">######## -------TEMPLATE FUNCTION PART---------------###############</span>
         <span class="c1"># Note: Template function featurization part is seperated because</span>
         <span class="c1">#       its functions&#39; structure is different</span>
 
@@ -448,7 +451,7 @@
                 <span class="c1"># TODO this should work for both interp and tents but doesn&#39;t yet</span>
                 <span class="n">params</span><span class="o">.</span><span class="n">makeAdaptivePartition</span><span class="p">(</span><span class="n">allDgms</span><span class="p">,</span> <span class="n">meshingScheme</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-            <span class="c1">#--------Training------------#</span>
+            <span class="c1"># --------Training------------#</span>
             <span class="c1"># if verbose:</span>
             <span class="c1">#     print(&#39;Using &#39; + str(len(L_train)) + &#39;/&#39; +</span>
             <span class="c1">#           str(len(D_train)) + &#39; to train...&#39;)</span>
@@ -464,7 +467,7 @@
             <span class="c1"># feature matrix for training set</span>
             <span class="n">G_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">listOfG_train</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-            <span class="c1">#--------Testing-------------#</span>
+            <span class="c1"># --------Testing-------------#</span>
             <span class="c1"># if verbose:</span>
             <span class="c1">#     print(&#39;Using &#39; + str(len(L_test)) + &#39;/&#39; +</span>
             <span class="c1">#           str(len(D_test)) + &#39; to test...&#39;)</span>
@@ -484,7 +487,7 @@
         <span class="n">L_train</span> <span class="o">=</span> <span class="n">L_train</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
         <span class="n">L_test</span> <span class="o">=</span> <span class="n">L_test</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
 
-        <span class="c1">########------- LANDSCAPES---------------#########</span>
+        <span class="c1">######## ------- LANDSCAPES---------------#########</span>
         <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Landscape</span><span class="p">:</span>
 
             <span class="c1"># user defines the landscapes number which are used in feature extraction</span>
@@ -571,13 +574,14 @@
                     <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_test</span><span class="p">,</span> <span class="n">ftr</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
                 <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
 
-        <span class="c1">########------- PERSISTENCE IMAGES---------------#########</span>
+        <span class="c1">######## ------- PERSISTENCE IMAGES---------------#########</span>
         <span class="k">elif</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Image</span><span class="p">:</span>
 
             <span class="c1"># persistence images algorithm has built-in transfer learning option</span>
             <span class="c1"># output = fF.F_Image(D_train, params.pixel_size, params.var, False, [</span>
             <span class="c1"># ], pers_imager=None, training=True)</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">D_train</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">pixel_size</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">var</span><span class="p">,</span> <span class="n">pers_imager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">D_train</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">pixel_size</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">var</span><span class="p">,</span>
+                                <span class="n">pers_imager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
             <span class="n">X_train</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;F_Matrix&#39;</span><span class="p">]</span>
             <span class="n">pers_imager</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;pers_imager&#39;</span><span class="p">]</span>
@@ -585,11 +589,12 @@
             <span class="c1"># use these bounds to compute persistence images of test set</span>
             <span class="c1"># output = fF.F_Image(D_test, params.pixel_size, params.var, False, [</span>
             <span class="c1"># ], pers_imager=pers_imager, training=False)</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">D_test</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">pixel_size</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">var</span><span class="p">,</span> <span class="n">pers_imager</span><span class="o">=</span><span class="n">pers_imager</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_Image</span><span class="p">(</span><span class="n">D_test</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">pixel_size</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">var</span><span class="p">,</span>
+                                <span class="n">pers_imager</span><span class="o">=</span><span class="n">pers_imager</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
             <span class="n">X_test</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;F_Matrix&#39;</span><span class="p">]</span>
 
-        <span class="c1">########------- CARLSSON COORDINATES---------------#########</span>
+        <span class="c1">######## ------- CARLSSON COORDINATES---------------#########</span>
         <span class="k">elif</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_CCoordinates</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">FN</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
@@ -606,7 +611,7 @@
             <span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="c1">########------- PATH SIGNATURES ---------------#########</span>
+        <span class="c1">######## ------- PATH SIGNATURES ---------------#########</span>
         <span class="k">elif</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">:</span>
             <span class="c1"># check if user provided the landscape number which will be used in feature extraction</span>
             <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">L_number</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -634,7 +639,7 @@
                 <span class="n">X_train</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">PL_train</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">L_number</span><span class="p">)</span>
                 <span class="n">X_test</span> <span class="o">=</span> <span class="n">fF</span><span class="o">.</span><span class="n">F_PSignature</span><span class="p">(</span><span class="n">PL_test</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">L_number</span><span class="p">)</span>
 
-        <span class="c1">########------- KERNEL METHODS---------------#########</span>
+        <span class="c1">######## ------- KERNEL METHODS---------------#########</span>
         <span class="k">elif</span> <span class="n">params</span><span class="o">.</span><span class="n">feature_function</span> <span class="o">==</span> <span class="n">fF</span><span class="o">.</span><span class="n">KernelMethod</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">TF_Learning</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
