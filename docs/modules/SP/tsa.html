@@ -9,7 +9,7 @@
   <title>2.3.1. Time Series Analysis (TSA) Tools &mdash; teaspoon 1.3.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css?v=7f9a90b1" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -17,7 +17,9 @@
       <script src="../../_static/documentation_options.js?v=d4a0791e"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -101,7 +103,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">4. Contributing</a><ul>
@@ -149,6 +153,7 @@
 <li><p><a class="reference internal" href="#cgss-sequence"><span class="std std-ref">Coarse grained state space state sequence</span></a></p></li>
 <li><p><a class="reference internal" href="#zeda"><span class="std std-ref">Zero Detection Algorithm (ZeDA)</span></a></p></li>
 <li><p><a class="reference internal" href="#molinaro"><span class="std std-ref">First Zero Detection Algorithm</span></a></p></li>
+<li><p><a class="reference internal" href="#diffusion-classification"><span class="std std-ref">Diffusion Classification</span></a></p></li>
 </ul>
 <p>Further detailed documentation and examples are provided below for each (or click link).</p>
 <section id="takens-embedding">
@@ -441,6 +446,51 @@
 <a class="reference internal image-reference" href="../../_images/FirstZero_ExampleOutput.png"><img alt="../../_images/FirstZero_ExampleOutput.png" src="../../_images/FirstZero_ExampleOutput.png" style="width: 632.0px; height: 312.0px;" />
 </a>
 </figure>
+</section>
+<section id="diffusion-classification">
+<span id="id1"></span><h2><span class="section-number">2.3.1.8. </span>Diffusion Classification<a class="headerlink" href="#diffusion-classification" title="Link to this heading"></a></h2>
+<p>This section provides an implementation of a diffusion classification algorithm for discrete time series. This was proposed in “<a class="reference external" href="https://arxiv.org/pdf/2601.06009">Detecting Stochasticity in Discrete Signals via Nonparametric Excursion Theorem</a>”, and classifies whether the signal exhibits diffusive behavior of the Ito type.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">teaspoon.SP.tsa_tools.</span></span><span class="sig-name descname"><span class="pre">diffusion_classification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-2.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_details</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/teaspoon/SP/tsa_tools.html#diffusion_classification"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Classify a time series as diffusive or non-diffusive using excursion statistics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>array-like</em>)</p></li>
+<li><p><strong>dt</strong> (<em>float</em>)</p></li>
+<li><p><strong>threshold_low</strong> (<em>float</em>)</p></li>
+<li><p><strong>threshold_high</strong> (<em>float</em>)</p></li>
+<li><p><strong>num_eps</strong> (<em>int</em>)</p></li>
+<li><p><strong>eps_min</strong> (<em>float</em><em> (</em><em>optional</em><em>)</em>)</p></li>
+<li><p><strong>eps_max</strong> (<em>float</em><em> (</em><em>optional</em><em>)</em>)</p></li>
+<li><p><strong>return_details</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>classification OR dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span> <span class="c1"># Brownian motion (diffusive signal)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">diffusion_classification</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">return_details</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Diffusion classification result:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output of example:</p>
+<blockquote>
+<div><p>diffusive</p>
+</div></blockquote>
 </section>
 </section>
 

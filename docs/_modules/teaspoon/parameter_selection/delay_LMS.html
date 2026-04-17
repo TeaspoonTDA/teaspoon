@@ -16,6 +16,7 @@
       <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -97,7 +98,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
@@ -278,7 +281,7 @@
     <span class="c1"># removes first term (tends to be infinity or overly large)</span>
     <span class="n">yf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">yf</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">yf</span> <span class="o">=</span> <span class="n">yf</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>  <span class="c1"># Normalizes fourier transform based on maximum density</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">)</span></div>
 
 
 

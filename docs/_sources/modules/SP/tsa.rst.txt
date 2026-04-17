@@ -12,6 +12,7 @@ The following are the available TSA functions:
 * :ref:`cgss_sequence`
 * :ref:`ZeDA`
 * :ref:`Molinaro`
+* :ref:`diffusion_classification`
 
 Further detailed documentation and examples are provided below for each (or click link).
 
@@ -237,3 +238,31 @@ Output of example:
 .. figure:: ../../figures/FirstZero_ExampleOutput.png
     :scale: 40 %
 
+.. _diffusion_classification:
+
+Diffusion Classification
+*******************************
+
+This section provides an implementation of a diffusion classification algorithm for discrete time series. This was proposed in "`Detecting Stochasticity in Discrete Signals via Nonparametric Excursion Theorem <https://arxiv.org/pdf/2601.06009>`_", and classifies whether the signal exhibits diffusive behavior of the Ito type.
+
+.. automodule:: teaspoon.SP.tsa_tools
+    :members: diffusion_classification
+    :noindex:
+
+**Example**::
+
+    import numpy as np
+
+    seed = 42
+    np.random.seed(seed)
+    n_steps = 1000
+    dt = 0.01
+    steps = np.sqrt(dt) * np.random.randn(n_steps)
+    x = np.cumsum(steps) # Brownian motion (diffusive signal)
+
+    result = diffusion_classification(x, dt=dt, return_details=False)
+    print("Diffusion classification result:", result)
+
+Output of example:
+
+    diffusive

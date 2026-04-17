@@ -728,6 +728,140 @@ def first_zero(sig, t1, tn, level=0.0, r=1.2, plotting=False):
 
     return t_new
 
+## Stochastic Diffusion Detection Tool
+
+import numpy as np
+
+
+def _count_large_excursions(signal, eps):
+    """
+    Discrete N_eps using alternating excursions of size >= eps.
+    """
+    n = len(signal)
+    if n < 2:
+        return 0
+
+    start = 0
+    count = 0
+
+    while True:
+        # Find downward move
+        max_val = signal[start]
+        t_next = None
+        for j in range(start, n):
+            if signal[j] > max_val:
+                max_val = signal[j]
+            if max_val - signal[j] > eps:
+                t_next = j
+                break
+
+        if t_next is None or t_next >= n - 1:
+            break
+
+        # Find upward move
+        min_val = signal[t_next]
+        s_next = None
+        for j in range(t_next, n):
+            if signal[j] < min_val:
+                min_val = signal[j]
+            if signal[j] - min_val > eps:
+                s_next = j
+                break
+
+        if s_next is None:
+            break
+
+        count += 1
+        start = s_next
+
+        if start >= n - 1:
+            break
+
+    return count
+
+
+def diffusion_classification(
+    signal,
+    dt,
+    threshold_low=-2.5,
+    threshold_high=-1.0,
+    num_eps=100,
+    eps_min=None,
+    eps_max=None,
+    return_details=False,
+):
+    """
+    Classify a time series as diffusive or non-diffusive using excursion statistics.
+
+    Parameters
+    ----------
+    signal : array-like
+    dt : float
+    threshold_low : float
+    threshold_high : float
+    num_eps : int
+    eps_min, eps_max : float (optional)
+    return_details : bool
+
+    Returns
+    -------
+    classification OR dict
+    """
+
+    signal = np.asarray(signal).reshape(-1)
+
+    if len(signal) < 10:
+        raise ValueError("Signal too short")
+
+    std = np.std(signal)
+    if std < 1e-10:
+        raise ValueError("Signal is near-constant")
+
+    # epsilon grid
+    if eps_min is None:
+        eps_min = 0.1 * std
+    if eps_max is None:
+        eps_max = 5.0 * std
+
+    eps_vals = np.logspace(np.log10(eps_min), np.log10(eps_max), num_eps)
+
+    # compute N_eps
+    N_vals = np.array([
+        _count_large_excursions(signal, eps)
+        for eps in eps_vals
+    ])
+
+    # remove zeros (log issues)
+    mask = N_vals > 0
+    if mask.sum() < 5:
+        return "unknown"
+
+    eps_vals = eps_vals[mask]
+    N_vals = N_vals[mask]
+
+    # fit slope
+    log_eps = np.log(eps_vals)
+    log_N = np.log(N_vals)
+
+    slope, _ = np.polyfit(log_eps, log_N, 1)
+
+    # classification
+    if threshold_low <= slope <= threshold_high:
+        label = "diffusive"
+    else:
+        label = "non-diffusive"
+
+    if return_details:
+        return {
+            "classification": label,
+            "slope": float(slope),
+            "eps_vals": eps_vals,
+            "N_eps": N_vals,
+        }
+
+    return label
+
+
 
 # In[ ]:
 
@@ -784,3 +918,4 @@ if __name__ == "__main__":
     plt.plot(embedded_ts.T[0][i], embedded_ts.T[1]
              [i], 'bd')  # plot point of interest
     plt. show()
+

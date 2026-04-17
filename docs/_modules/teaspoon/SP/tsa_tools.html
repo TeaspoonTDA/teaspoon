@@ -8,7 +8,7 @@
   <title>teaspoon.SP.tsa_tools &mdash; teaspoon 1.3.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css?v=7f9a90b1" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -16,6 +16,7 @@
       <script src="../../../_static/documentation_options.js?v=d4a0791e"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -97,7 +98,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/index.html">3. Example Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/distance.html">3.1. Computing Wasserstein and Bottleneck Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/persistence_images.html">3.2. Computing Features from Persistence Images</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">4. Contributing</a><ul>
@@ -884,6 +887,143 @@
     <span class="k">return</span> <span class="n">t_new</span></div>
 
 
+<span class="c1">## Stochastic Diffusion Detection Tool</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_count_large_excursions</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">eps</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Discrete N_eps using alternating excursions of size &gt;= eps.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Find downward move</span>
+        <span class="n">max_val</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="n">t_next</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">signal</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_val</span><span class="p">:</span>
+                <span class="n">max_val</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">max_val</span> <span class="o">-</span> <span class="n">signal</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">eps</span><span class="p">:</span>
+                <span class="n">t_next</span> <span class="o">=</span> <span class="n">j</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">t_next</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">t_next</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Find upward move</span>
+        <span class="n">min_val</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[</span><span class="n">t_next</span><span class="p">]</span>
+        <span class="n">s_next</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t_next</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">signal</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_val</span><span class="p">:</span>
+                <span class="n">min_val</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">signal</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">min_val</span> <span class="o">&gt;</span> <span class="n">eps</span><span class="p">:</span>
+                <span class="n">s_next</span> <span class="o">=</span> <span class="n">j</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">s_next</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">s_next</span>
+
+        <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<div class="viewcode-block" id="diffusion_classification">
+<a class="viewcode-back" href="../../../modules/SP/tsa.html#teaspoon.SP.tsa_tools.diffusion_classification">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">diffusion_classification</span><span class="p">(</span>
+    <span class="n">signal</span><span class="p">,</span>
+    <span class="n">dt</span><span class="p">,</span>
+    <span class="n">threshold_low</span><span class="o">=-</span><span class="mf">2.5</span><span class="p">,</span>
+    <span class="n">threshold_high</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">num_eps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">eps_min</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">eps_max</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">return_details</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classify a time series as diffusive or non-diffusive using excursion statistics.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    signal : array-like</span>
+<span class="sd">    dt : float</span>
+<span class="sd">    threshold_low : float</span>
+<span class="sd">    threshold_high : float</span>
+<span class="sd">    num_eps : int</span>
+<span class="sd">    eps_min, eps_max : float (optional)</span>
+<span class="sd">    return_details : bool</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    classification OR dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signal too short&quot;</span><span class="p">)</span>
+
+    <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">std</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signal is near-constant&quot;</span><span class="p">)</span>
+
+    <span class="c1"># epsilon grid</span>
+    <span class="k">if</span> <span class="n">eps_min</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">eps_min</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">std</span>
+    <span class="k">if</span> <span class="n">eps_max</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">eps_max</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">std</span>
+
+    <span class="n">eps_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">eps_min</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">eps_max</span><span class="p">),</span> <span class="n">num_eps</span><span class="p">)</span>
+
+    <span class="c1"># compute N_eps</span>
+    <span class="n">N_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="n">_count_large_excursions</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="n">eps_vals</span>
+    <span class="p">])</span>
+
+    <span class="c1"># remove zeros (log issues)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">N_vals</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;unknown&quot;</span>
+
+    <span class="n">eps_vals</span> <span class="o">=</span> <span class="n">eps_vals</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">N_vals</span> <span class="o">=</span> <span class="n">N_vals</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+    <span class="c1"># fit slope</span>
+    <span class="n">log_eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">eps_vals</span><span class="p">)</span>
+    <span class="n">log_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_vals</span><span class="p">)</span>
+
+    <span class="n">slope</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">log_eps</span><span class="p">,</span> <span class="n">log_N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># classification</span>
+    <span class="k">if</span> <span class="n">threshold_low</span> <span class="o">&lt;=</span> <span class="n">slope</span> <span class="o">&lt;=</span> <span class="n">threshold_high</span><span class="p">:</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;diffusive&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;non-diffusive&quot;</span>
+
+    <span class="k">if</span> <span class="n">return_details</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+            <span class="s2">&quot;slope&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">slope</span><span class="p">),</span>
+            <span class="s2">&quot;eps_vals&quot;</span><span class="p">:</span> <span class="n">eps_vals</span><span class="p">,</span>
+            <span class="s2">&quot;N_eps&quot;</span><span class="p">:</span> <span class="n">N_vals</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">label</span></div>
+
+
+
 
 <span class="c1"># In[ ]:</span>
 
@@ -940,6 +1080,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">embedded_ts</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">embedded_ts</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
              <span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s1">&#39;bd&#39;</span><span class="p">)</span>  <span class="c1"># plot point of interest</span>
     <span class="n">plt</span><span class="o">.</span> <span class="n">show</span><span class="p">()</span>
+
 </pre></div>
 
            </div>
