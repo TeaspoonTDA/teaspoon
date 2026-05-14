@@ -1032,10 +1032,12 @@ def F_PSignature(PL, L_Number=[]):
 
             # define first function of path
             g = Piecewise((0, t < 0), (t, t >= 0))
+            segments = []
             for j in range(0, len(x)-1):
-                function_name = 'f_%d_%d_case%d' % (j+1, 1, i+1)
-                exec(
-                    "%s = ((y[j+1]-y[j])/(x[j+1]-x[j]))*t+(y[j+1]*(x[j+1]-x[j])+x[j+1]*(y[j]-y[j+1]))/(x[j+1]-x[j])" % (function_name))
+                slope = (y[j+1]-y[j])/(x[j+1]-x[j])
+                intercept = (y[j+1]*(x[j+1]-x[j]) +
+                             x[j+1]*(y[j]-y[j+1]))/(x[j+1]-x[j])
+                segments.append(slope*t + intercept)
 
             lower_bound = x[0]
             upper_bound = x[-1]
@@ -1053,9 +1055,8 @@ def F_PSignature(PL, L_Number=[]):
             S_2_2 = 0
             for j in range(0, len(x)-1):
 
-                f_name = 'f_%d_%d_case%d' % (j+1, 1, i+1)
-                exec(
-                    'global PL_function; PL_function = Piecewise((0,t<x[j]),(0,t>x[j+1]),(%s ,True))' % (f_name))
+                PL_function = Piecewise(
+                    (0, t < x[j]), (0, t > x[j+1]), (segments[j], True))
                 # S(2)
                 Signature_2 = integrate(diff(PL_function), (t, x[j], x[j+1]))
                 S_2 = S_2 + float(Signature_2)
