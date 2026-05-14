@@ -460,16 +460,8 @@ def getPercentScore(DgmsDF,
                 raise Exception(
                     "There are five coordinates available currenly. Please enter a number between 1 and 5.")
 
-            X_train, TotalNumComb, CombList = fF.F_CCoordinates(
-                D_train, params.FN)
-            X_test, TotalNumComb, CombList = fF.F_CCoordinates(
-                D_test, params.FN)
-
-            # feature matrix for different combinations of Carlsson Coordinates are generated
-            # To avoid complexity, we only consider the last feature matrix that includes the all
-            # coordinates
-            X_train = X_train[-1]
-            X_test = X_test[-1]
+            X_train = fF.F_CCoordinates(D_train, params.FN)
+            X_test = fF.F_CCoordinates(D_test, params.FN)
 
         ######## ------- PATH SIGNATURES ---------------#########
         elif params.feature_function == fF.F_PSignature:
