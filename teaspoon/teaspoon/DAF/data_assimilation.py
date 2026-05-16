@@ -1,6 +1,5 @@
 import numpy as np
 import gudhi as gd
-from gudhi.tensorflow import RipsLayer
 from gudhi.wasserstein import wasserstein_distance
 from teaspoon.DAF.forecasting import get_forecast
 from teaspoon.DAF.forecasting import forecast_time
@@ -9,8 +8,10 @@ from teaspoon.DAF.forecasting import random_feature_map_model
 try:
     import tensorflow as tf
     from tensorflow import keras
-except:
-    raise ImportError("TADA Requires tensorflow for optimization")
+    from gudhi.tensorflow import RipsLayer
+    _tensorflow_available = True
+except ImportError:
+    _tensorflow_available = False
 
 
 def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_params=[1e-5, 0.99], window_number=1, j2_sample_size=50):
@@ -30,6 +31,10 @@ def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_p
         Returns:
             (array): Updated model weights using TADA algorithm.
     '''
+
+    if not _tensorflow_available:
+        raise ImportError(
+            "TADA requires TensorFlow. Install with: pip install 'teaspoon[full]'")
 
     # Grow the window size as new measurements are received
     if window_number < window_size:
