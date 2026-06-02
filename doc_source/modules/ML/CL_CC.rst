@@ -251,8 +251,60 @@ Algorithm implements `GridSearchCV
     Average accuracy: 0.842
     Standard deviation: 0.010
 
-    For more metrics, see the outputs.    
+    For more metrics, see the outputs.
 
+Extracting the trained models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+By default, ``getPercentScore`` returns only the train and test classification reports.
+If the cross-validation results look good and the user wants to apply the trained
+classifier to new data, the ``return_models=True`` option returns a third value:
+a list with one entry per cross-validation fold, each holding the fitted classifier
+and the feature scaler used during training.
 
+::
 
+    >>> from teaspoon.ML.PD_Classification import getPercentScore
+    >>> from teaspoon.ML import feature_functions as fF
+    >>> from teaspoon.ML.Base import ParameterBucket
+    >>> from teaspoon.MakeData.PointCloud import testSetManifolds
+    >>> from sklearn.preprocessing import LabelEncoder
+    >>> from sklearn.svm import SVC
 
+    >>> # generate persistence diagrams
+    >>> DgmsDF = testSetManifolds(numDgms=20, numPts=100)
+    >>> labels_col='trainingLabel'
+    >>> dgm_col='Dgm1'
+
+    >>> # convert categorical labels into integers
+    >>> label_encoder = LabelEncoder()
+    >>> y = label_encoder.fit_transform(DgmsDF[labels_col])
+    >>> DgmsDF[labels_col] = y
+
+    >>> # set classification parameters
+    >>> params = ParameterBucket()
+    >>> params.feature_function = fF.F_CCoordinates
+    >>> params.k_fold_cv = 5
+    >>> params.FN = 5
+    >>> params.clf_model = SVC
+
+    >>> # ask for the trained models in addition to the reports
+    >>> c_report_train, c_report_test, models = getPercentScore(DgmsDF,
+    >>>                                                         labels_col='trainingLabel',
+    >>>                                                         dgm_col='Dgm1',
+    >>>                                                         params=params,
+    >>>                                                         precomputed=False,
+    >>>                                                         saving=False,
+    >>>                                                         saving_path=None,
+    >>>                                                         return_models=True)
+
+    >>> # use the model from the first fold on new feature vectors
+    >>> trained = models[0]
+    >>> clf = trained['model']
+    >>> scaler = trained['scaler']
+    >>> new_features = ...  # shape (n_samples, params.FN)
+    >>> if scaler is not None:
+    >>>     new_features = scaler.transform(new_features)
+    >>> predictions = clf.predict(new_features)
+
+The ``scaler`` entry is ``None`` when the kernel method is used, since that path
+operates on a precomputed kernel matrix and does not standardize features.
