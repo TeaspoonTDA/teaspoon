@@ -17,7 +17,6 @@ from numpy.linalg import norm as lnorm
 from sympy.abc import t
 from sympy import Piecewise
 from sympy import diff, integrate
-from itertools import combinations
 from numba import guvectorize
 from sklearn import mixture
 import copy
@@ -887,12 +886,11 @@ def F_Image(PD1, PS, var, pers_imager=None, training=True, parallel=False):
     return output
 
 
-def F_CCoordinates(PD, FN):
+def F_CCoordinates(PD, FN=5):
     """
     This code generates feature matrix to be used in machine learning applications using Carlsson Coordinates which is composed of five different functions shown in Eq. :eq:`1st_coord` - :eq:`5th_coord`.
     The first four functions are taken from Ref. :cite:`2 <Adcock2016>` and the last one is obtained from Ref. :cite:`3 <Khasawneh2018>`.
     There are two inputs to the function. These are persistence diagrams and number of coordinates that user wants to use in feature matrix.
-    Algorithm will return feature matrix object array that includes feature matrices for different combinations, and total number of combinations will be :math:`\sum_{i=1}^{FN} {FN \choose i}`.
 
     .. math:: f_{1}(PD) = \sum b_{i}(d_{i}-b_{i})
        :label: 1st_coord
@@ -907,39 +905,23 @@ def F_CCoordinates(PD, FN):
        :label: 4th_coord
 
     .. math:: f_{5}(PD) = max(d_{i}-b_{i})
-       :label: 5th_coord    
+       :label: 5th_coord
 
     Parameters
     ----------
     PD : ndarray
          Object array that includes all persistence diagrams.
-    FN : int
-        Number of features. It can take integer values between 1 and 5.
+    FN : int, optional
+        Number of features. It can take integer values between 1 and 5. The default is 5, which returns all coordinates.
 
     Returns
     -------
-    FeatureMatrix : object array
-        Object array that contains the feature matrices of each feature combinations. 
-        Each feature matrix has a size of NxFN, where N is the number of persistence diagrams and FN is the number of feature chosen.
-    TotalNumComb : int
-        Number of combinations.
-    CombList : list
-        List of combinations.
+    feature : ndarray
+        Feature matrix of size NxFN, where N is the number of persistence diagrams and FN is the number of features chosen.
 
     """
 
     N = len(PD)
-
-    # Create combinations for features with respect to user choice
-    Combinations = []            # define a list that includes all combinations
-    TotalNumComb = 0
-    for i in range(0, FN):
-        poss_comb = list(combinations(range(1, FN+1), i+1))
-        Combinations.append(poss_comb)
-        TotalNumComb = TotalNumComb+len(poss_comb)
-
-    # Generating feature matrix that includes whole features inside of it.
-    # Then this matrix will be used to create feature matrix for different combinations of features.
 
     feature = np.zeros((N, 5))
     for i in range(0, N):
@@ -958,37 +940,7 @@ def F_CCoordinates(PD, FN):
             np.power(maxdtminusdt, 2), np.power(life_time, 4)))
         feature[i, 4] = max(life_time)
 
-    # faeture matrix will be modified depending on how many features user wants
-    feature = feature[:, 0:FN]
-
-    # Create a matrix that includes feature matrix for different combinations
-    FeatureMatrix = np.ndarray(shape=(TotalNumComb), dtype=object)
-
-    # Create a matrix that includes whole possible combinations for given number of feature
-    CombList = np.zeros((TotalNumComb, 5))
-
-    increment = 0
-    for j in range(0, FN):
-        # combinations with n number inside total number of features
-        listofCombinations = Combinations[j]
-        # number of elements inside of the combination
-        numberincombination = len(listofCombinations[0])
-        # number of combinations
-        numberofcombination = len(listofCombinations)
-
-        # create feature matrices for all combinations
-        for i in range(0, numberofcombination):
-            # create an array will take columns from feature matrix with FN=5 with respect to combination
-            featmat = np.zeros((N, numberincombination))
-            combfeat = np.array(listofCombinations[i])    # combinations
-            CombList[increment, 0:len(combfeat)] = combfeat
-            for k in range(0, numberincombination):
-                featmat[:, k] = feature[:, combfeat[k]-1]
-            # storing feature matrix for each combination in a object type array
-            FeatureMatrix[increment] = featmat
-            increment = increment + 1                     # increment
-
-    return FeatureMatrix, TotalNumComb, CombList
+    return feature[:, 0:FN]
 
 
 def F_PSignature(PL, L_Number=[]):
@@ -1032,10 +984,12 @@ def F_PSignature(PL, L_Number=[]):
 
             # define first function of path
             g = Piecewise((0, t < 0), (t, t >= 0))
+            segments = []
             for j in range(0, len(x)-1):
-                function_name = 'f_%d_%d_case%d' % (j+1, 1, i+1)
-                exec(
-                    "%s = ((y[j+1]-y[j])/(x[j+1]-x[j]))*t+(y[j+1]*(x[j+1]-x[j])+x[j+1]*(y[j]-y[j+1]))/(x[j+1]-x[j])" % (function_name))
+                slope = (y[j+1]-y[j])/(x[j+1]-x[j])
+                intercept = (y[j+1]*(x[j+1]-x[j]) +
+                             x[j+1]*(y[j]-y[j+1]))/(x[j+1]-x[j])
+                segments.append(slope*t + intercept)
 
             lower_bound = x[0]
             upper_bound = x[-1]
@@ -1053,9 +1007,8 @@ def F_PSignature(PL, L_Number=[]):
             S_2_2 = 0
             for j in range(0, len(x)-1):
 
-                f_name = 'f_%d_%d_case%d' % (j+1, 1, i+1)
-                exec(
-                    'global PL_function; PL_function = Piecewise((0,t<x[j]),(0,t>x[j+1]),(%s ,True))' % (f_name))
+                PL_function = Piecewise(
+                    (0, t < x[j]), (0, t > x[j+1]), (segments[j], True))
                 # S(2)
                 Signature_2 = integrate(diff(PL_function), (t, x[j], x[j+1]))
                 S_2 = S_2 + float(Signature_2)
