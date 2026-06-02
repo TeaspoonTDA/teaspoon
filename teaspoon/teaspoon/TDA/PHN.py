@@ -32,7 +32,7 @@ def DistanceMatrix(A, method='shortest_unweighted_path'):
         print('Defaulting to unweighted shortest path.')
         method = 'shortest_unweighted_path'
 
-    A = network_tools.remove_zeros(A)
+    A = np.array(network_tools.remove_zeros(A))
     np.fill_diagonal(A, 0)
     A = A + A.T
 
