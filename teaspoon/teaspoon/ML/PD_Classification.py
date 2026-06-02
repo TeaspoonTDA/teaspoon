@@ -210,6 +210,7 @@ def getPercentScore(DgmsDF,
                     precomputed=False,
                     saving=False,
                     saving_path=None,
+                    return_models=False,
                     **kwargs):
     """
 
@@ -226,16 +227,18 @@ def getPercentScore(DgmsDF,
     params : parameterbucket object
         Parameter bucket object. The default is Base.ParameterBucket().
     precomputed : boolean, optional
-        If user already computed the persitence landscapes, this should be set to True, otherwise algorithm will 
+        If user already computed the persitence landscapes, this should be set to True, otherwise algorithm will
         spend time on computing these. This option is only valid when persistence landscapes are used as featurization
         methods. If this parameter is True, algorithm treat 'DgmsDF' as persistence landscapes. The default is False.
     saving : boolean, optional
         If user wants to save classification results, this should be set to True and saving_path needs to be provided. The default is False.
     saving_path : str, optional
         The path where user wants to save the results. This should be provided when saving is True. The default is None.
-    **kwargs : 
+    return_models : boolean, optional
+        If True, the trained classifier and feature scaler from each cross-validation fold are returned alongside the classification reports. The default is False.
+    **kwargs :
         Additional parameters. When user wants to apply transfer learning, the second set of persistence diagrams and their labels should be passed in a
-        dataframe format. 
+        dataframe format.
 
     Returns
     -------
@@ -243,6 +246,8 @@ def getPercentScore(DgmsDF,
         Classification report for training set results.
     c_report_test : dict
         Classification report for test set results.
+    models : list of dict, optional
+        Only returned when return_models is True. A list with one entry per cross-validation fold, each containing the keys 'model' (the fitted classifier) and 'scaler' (the fitted StandardScaler, or None for the kernel method which does not use one).
 
     """
 
@@ -261,6 +266,7 @@ def getPercentScore(DgmsDF,
     accuracy_test = []
     c_report_train = []
     c_report_test = []
+    models = []
 
     # obtain training and test sets for diagrams using the stratified k-fold
     if params.TF_Learning:
@@ -555,6 +561,7 @@ def getPercentScore(DgmsDF,
                 accuracy_train.append(cr_train['accuracy'])
                 c_report_train.append(cr_train)
                 c_report_test.append(cr_test)
+                models.append({'model': clf, 'scaler': None})
 
                 print('Run Number: {}'.format(k_fold+1))
                 print('Test set acc.: {:.3f} \nTraining set acc.: {:.3f}'.format(
@@ -611,6 +618,7 @@ def getPercentScore(DgmsDF,
             accuracy_train.append(cr_train['accuracy'])
             c_report_train.append(cr_train)
             c_report_test.append(cr_test)
+            models.append({'model': model, 'scaler': scaler})
 
             print('Run Number: {}'.format(k_fold+1))
             print('Test set acc.: {:.3f} \nTraining set acc.: {:.3f}'.format(
@@ -643,4 +651,6 @@ def getPercentScore(DgmsDF,
         pickle.dump(c_report_train, f)
         f.close()
 
+    if return_models:
+        return c_report_train, c_report_test, models
     return c_report_train, c_report_test
