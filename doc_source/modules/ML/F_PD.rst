@@ -243,7 +243,7 @@ Carlsson Coordinates
 
 	>>> # compute feature matrix
 	>>> FN = 3
-	>>> FeatureMatrix, TotalNumComb, CombList = Ff.F_CCoordinates(Diagrams_H1, FN)
+	>>> FeatureMatrix = Ff.F_CCoordinates(Diagrams_H1, FN)
 
 
 
