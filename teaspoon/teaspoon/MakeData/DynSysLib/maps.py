@@ -50,11 +50,12 @@ def logistic_map(parameters=[3.5], dynamic_state=None, InitialConditions=None,
         InitialConditions = [0.5]
     xn = InitialConditions[0]
 
-    t, ts = [], []
-    for n in range(0, int(L)):
+    N = int(L)
+    ts = np.empty(N)
+    for n in range(0, N):
         xn = r*xn*(1-xn)
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
+        ts[n] = xn
+    t = np.arange(N, dtype=float)
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
@@ -177,11 +178,12 @@ def sine_map(parameters=[0.8], dynamic_state=None, InitialConditions=None,
         InitialConditions = [0.1]
     xn = InitialConditions[0]
 
-    t, ts = [], []
-    for n in range(0, int(L)):
+    N = int(L)
+    ts = np.empty(N)
+    for n in range(0, N):
         xn = A*np.sin(np.pi*xn)
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
+        ts[n] = xn
+    t = np.arange(N, dtype=float)
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
@@ -237,11 +239,12 @@ def tent_map(parameters=[1.05], dynamic_state=None, InitialConditions=None,
         InitialConditions = [1/np.sqrt(2)]
     xn = InitialConditions[0]
 
-    t, ts = [], []
-    for n in range(0, int(L)):
+    N = int(L)
+    ts = np.empty(N)
+    for n in range(0, N):
         xn = A*np.min([xn, 1-xn])
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
+        ts[n] = xn
+    t = np.arange(N, dtype=float)
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
@@ -292,11 +295,12 @@ def linear_congruential_generator_map(parameters=[0.9, 54773, 259200], dynamic_s
         InitialConditions = [0.1]
     xn = InitialConditions[0]
 
-    t, ts = [], []
-    for n in range(0, int(L)):
+    N = int(L)
+    ts = np.empty(N)
+    for n in range(0, N):
         xn = (a*xn + b) % c
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
+        ts[n] = xn
+    t = np.arange(N, dtype=float)
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
@@ -353,11 +357,12 @@ def rickers_population_map(parameters=[13], dynamic_state=None, InitialCondition
         InitialConditions = [0.1]
     xn = InitialConditions[0]
 
-    t, ts = [], []
-    for n in range(0, int(L)):
+    N = int(L)
+    ts = np.empty(N)
+    for n in range(0, N):
         xn = a*xn*np.exp(-xn)
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
+        ts[n] = xn
+    t = np.arange(N, dtype=float)
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
@@ -415,11 +420,12 @@ def gauss_map(parameters=[6.20, -0.20], dynamic_state=None, InitialConditions=No
         InitialConditions = [0.1]
     xn = InitialConditions[0]
 
-    t, ts = [], []
-    for n in range(0, int(L)):
+    N = int(L)
+    ts = np.empty(N)
+    for n in range(0, N):
         xn = np.exp(-alpha*xn**2) + beta
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
+        ts[n] = xn
+    t = np.arange(N, dtype=float)
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
@@ -476,11 +482,12 @@ def cusp_map(parameters=[1.1], dynamic_state=None, InitialConditions=None,
         InitialConditions = [0.5]
     xn = InitialConditions[0]
 
-    t, ts = [], []
-    for n in range(0, int(L)):
+    N = int(L)
+    ts = np.empty(N)
+    for n in range(0, N):
         xn = 1-a*np.sqrt(np.abs(xn))
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
+        ts[n] = xn
+    t = np.arange(N, dtype=float)
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
@@ -537,11 +544,12 @@ def pinchers_map(parameters=[1.3, 0.5], dynamic_state=None, InitialConditions=No
         InitialConditions = [0.0]
     xn = InitialConditions[0]
 
-    t, ts = [], []
-    for n in range(0, int(L)):
+    N = int(L)
+    ts = np.empty(N)
+    for n in range(0, N):
         xn = np.abs(np.tanh(s*(xn-c)))
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
+        ts[n] = xn
+    t = np.arange(N, dtype=float)
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]
@@ -598,11 +606,12 @@ def sine_circle_map(parameters=[0.5, 1.5], dynamic_state=None, InitialConditions
         InitialConditions = [0.0]
     xn = InitialConditions[0]
 
-    t, ts = [], []
-    for n in range(0, int(L)):
+    N = int(L)
+    ts = np.empty(N)
+    for n in range(0, N):
         xn = xn + omega - (k/(2*np.pi))*np.sin(2*np.pi*xn) % 1
-        ts = np.append(ts, xn)
-        t = np.append(t, n)
+        ts[n] = xn
+    t = np.arange(N, dtype=float)
 
     ts = [ts[-SampleSize:]]
     t = t[-SampleSize:]

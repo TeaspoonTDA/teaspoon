@@ -146,21 +146,22 @@ def permutation_sequence(ts, n=None, tau=None):
         deg = len(perm)
         return sum([perm[k]*deg**k for k in range(deg)])
     L = len(time_series)  # total length of time series
-    perm_order = []  # prepares permutation sequence array
     # prepares all possible permutations for comparison
     permutations = np.array(list(itertools.permutations(range(m))))
     hashlist = [util_hash_term(perm)
                 for perm in permutations]  # prepares hashlist
-    for i in range(L - delay * (m - 1)):
-        # For all possible permutations in time series
-        sorted_index_array = np.array(np.argsort(
-            time_series[i:i + delay * m:delay], kind='quicksort'))
-        # sort array for catagorization
-        hashvalue = util_hash_term(sorted_index_array)
-        # permutation type
-        perm_order = np.append(
-            perm_order, np.argwhere(hashlist == hashvalue)[0][0])
-        # appends new permutation to end of array
+    hl = np.asarray(hashlist)
+    order = np.argsort(hl)
+    ts_arr = np.asarray(time_series)
+    nw = L - delay * (m - 1)
+    if nw > 0:
+        win_idx = np.arange(nw)[:, None] + delay * np.arange(m)[None, :]
+        ranks = np.argsort(ts_arr[win_idx], axis=1, kind='quicksort')
+        hashvalues = ranks.dot(m ** np.arange(m))
+        perm_order = order[np.searchsorted(hl[order], hashvalues)]
+    else:
+        # no windows: leave a list so .astype below raises as the original did
+        perm_order = []
     # sets permutation type as integer where $p_i \in \mathbb{z}_{>0}$
     perm_seq = perm_order.astype(int)+1
     return perm_seq  # returns sequence of permutations

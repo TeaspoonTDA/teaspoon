@@ -44,7 +44,7 @@ def MsPE_tau(time_series, delay_end=200, plotting=False):
                 delay_peak = delay-1
                 end = True
             NPE_previous = NPE
-        MSPE = np.append(MSPE, NPE)
+        MSPE.append(NPE)
         delays.append(delay)
 
         if delay > de:
@@ -91,7 +91,7 @@ def MsPE_n(time_series, delay, m_start=3, m_end=7, plotting=False):
     for m in range(m_start, m_end+1):
         PE = ent.permutation_entropy(time_series, m, delay)/(np.log(2))
         NPE = PE/(m-1)
-        MnPE = np.append(MnPE, NPE)
+        MnPE.append(NPE)
     dim = np.argmax(MnPE)
 
     if plotting == True:
