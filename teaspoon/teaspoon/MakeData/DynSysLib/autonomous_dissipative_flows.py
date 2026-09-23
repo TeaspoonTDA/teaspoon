@@ -133,7 +133,7 @@ def rossler(parameters=[0.1, 0.2, 14], dynamic_state=None, InitialConditions=[-0
 
 def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 10], dynamic_state=None, InitialConditions=[0.1, 0.1, 0.1, 0, 0, 0], L=500.0, fs=50, SampleSize=15000):
     """
-    The coupled Lorenz-Rössler system is defined as
+    The coupled Rössler-Rössler system is defined as
 
     .. math::
         \dot{x}_1 &= -y_1-z_1+k_1(x_2-x_1),
@@ -642,12 +642,12 @@ def hadley_circulation(parameters=[0.25, 4, 8, 1], dynamic_state=None, InitialCo
 
         \dot{z} &= bxy + xz - z
 
-    The system parameters are set to :math:`a = 0.25`, :math:`b = 4`, :math:`F = 8`and :math:`G = 1` for a periodic response and :math:`a = 0.3` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [-10, 0, 37]`.
+    The system parameters are set to :math:`a = 0.25`, :math:`b = 4`, :math:`F = 8` and :math:`G = 1` for a periodic response and :math:`a = 0.3` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [-10, 0, 37]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/hadley_circulation.png
 
     Parameters:
-        parameters (Optional[floats]): Array of four floats [:math:`a`, :math:`b`, :math:`F``, :math:`G`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of four floats [:math:`a`, :math:`b`, :math:`F`, :math:`G`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -705,12 +705,12 @@ def ACT_attractor(parameters=[2.5, 0.02, 1.5, -0.07], dynamic_state=None, Initia
 
         \dot{z} &= -\\delta \\alpha z + xy + \\beta z^2
 
-    The system parameters are set to :math:`\\alpha = 2.5`, :math:`\\mu = 0.02`, :math:`\\delta = 1.5`and :math:`\\beta = -0.07` for a periodic response and :math:`a = 2.0` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.5, 0, 0]`.
+    The system parameters are set to :math:`\\alpha = 2.5`, :math:`\\mu = 0.02`, :math:`\\delta = 1.5` and :math:`\\beta = -0.07` for a periodic response and :math:`\\alpha = 2.0` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.5, 0, 0]`.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/ACT_attractor.png
 
     Parameters:
-        parameters (Optional[floats]): Array of four floats [:math:`\\alpha`, :math:`\\mu`, :math:`\\delta``, :math:`\\beta`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of four floats [:math:`\\alpha`, :math:`\\mu`, :math:`\\delta`, :math:`\\beta`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1103,7 +1103,7 @@ def burke_shaw_attractor(parameters=[12.0, 4.0], dynamic_state=None, InitialCond
 
         \dot{z} &= sxy + V
 
-    The system parameters are set to :math:`s = 12`, :math:`V = 4`, and :math:`c = 28` for a periodic response and :math:`s = 10` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.6,0.0,0.0]`. The system was simulated for 500 seconds at a rate of 200 Hz and the last 25 seconds were used for the chaotic response.
+    The system parameters are set to :math:`s = 12` and :math:`V = 4` for a periodic response and :math:`s = 10` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.6,0.0,0.0]`. The system was simulated for 500 seconds at a rate of 200 Hz and the last 25 seconds were used for the chaotic response.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Burke_Shaw_Attractor.png
 
