@@ -19,7 +19,7 @@ sys.modules['ripser'] = mock.Mock()
 project = 'teaspoon'
 copyright = '2024, Munch and Khasawneh'
 author = 'Elizabeth Munch and Firas Khasawneh'
-release = '1.3.7'
+release = '1.6.0'
 
 source_suffix = {
     '.rst': 'restructuredtext',
