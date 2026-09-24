@@ -133,7 +133,7 @@ def rossler(parameters=[0.1, 0.2, 14], dynamic_state=None, InitialConditions=[-0
 
 def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 10], dynamic_state=None, InitialConditions=[0.1, 0.1, 0.1, 0, 0, 0], L=500.0, fs=50, SampleSize=15000):
     """
-    The coupled Rössler-Rössler system is defined as
+    The coupled Lorenz-Rössler system is defined as
 
     .. math::
         \dot{x}_1 &= -y_1-z_1+k_1(x_2-x_1),
@@ -209,7 +209,7 @@ def coupled_lorenz_rossler(parameters=[0.25, 8/3, 0.2, 5.7, 0.1, 0.1, 0.1, 28, 1
 
 def coupled_rossler_rossler(parameters=[0.25, 0.99, 0.95], dynamic_state=None, InitialConditions=[-0.4, 0.6, 5.8, 0.8, -2, -4], L=1000.0, fs=10, SampleSize=1500):
     """
-    The coupled Lorenz-Rössler system is defined as
+    The coupled Rössler-Rössler system is defined as
 
     .. math::
         \dot{x}_1 &= -w_1y_1 - z_1 +k(x_2-x_1),
