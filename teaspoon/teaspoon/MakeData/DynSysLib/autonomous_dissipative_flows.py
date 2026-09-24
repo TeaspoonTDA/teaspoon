@@ -1368,7 +1368,7 @@ def simplest_quadratic_chaotic_flow(parameters=[2.017, 1.0], dynamic_state=None,
     return t, ts
 
 
-def simplest_cubic_chaotic_flow(parameters=[2.11, 2.5], dynamic_state=None, InitialConditions=[0.0, 0.96, 0.0], L=1000.0, fs=20, SampleSize=5000):
+def simplest_cubic_chaotic_flow(parameters=[2.11], dynamic_state=None, InitialConditions=[0.0, 0.96, 0.0], L=1000.0, fs=20, SampleSize=5000):
     """
     The Simplest Cubic Chaotic Flow is defined [12]_ as
 
@@ -1379,12 +1379,12 @@ def simplest_cubic_chaotic_flow(parameters=[2.11, 2.5], dynamic_state=None, Init
 
         \dot{z} &= -az - xy^2 - x
 
-    The system parameters are set to :math:`a = 2.11`, :math:`b = 2.5` for a periodic response and :math:`a = 2.05` for chaotic. The initial conditions were set to :math:`[x, y, z] = [0.0,0.96,0.0]`. The system was simulated for 1000 seconds at a rate of 20 Hz and the last 250 seconds were used for the chaotic response.
+    The system parameter is set to :math:`a = 2.11` for a periodic response and :math:`a = 2.05` for a chaotic response. The initial conditions were set to :math:`[x, y, z] = [0.0,0.96,0.0]`. The system was simulated for 1000 seconds at a rate of 20 Hz and the last 250 seconds were used for the chaotic response.
 
     .. figure:: ../../../figures/Autonomous_Dissipative_Flows/Simplest_Cubic_Chaotic_Flow.png
 
     Parameters:
-        parameters (Optional[floats]): Array of two floats [:math:`a`, :math:`b`] or None if using the dynamic_state variable
+        parameters (Optional[floats]): Array of one float [:math:`a`] or None if using the dynamic_state variable
         fs (Optional[float]): Sampling rate for simulation
         SampleSize (Optional[int]): length of sample at end of entire time series
         L (Optional[int]): Number of iterations
@@ -1402,7 +1402,7 @@ def simplest_cubic_chaotic_flow(parameters=[2.11, 2.5], dynamic_state=None, Init
     t = np.linspace(0, L, int(L*fs))
 
     # setting system parameters
-    num_param = 2
+    num_param = 1
 
     if len(parameters) != num_param:
         raise ValueError(
@@ -1415,9 +1415,8 @@ def simplest_cubic_chaotic_flow(parameters=[2.11, 2.5], dynamic_state=None, Init
         else:
             raise ValueError(
                 f'dynamic_state needs to be either "periodic" or "chaotic" or provide an array of length {num_param} in parameters.')
-        b = 2.5
     else:
-        a, b = parameters[0], parameters[1]
+        a = parameters[0]
 
     # defining simulation functions
     def simplest_cubic_chaotic_flow(state, t):
