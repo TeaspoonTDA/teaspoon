@@ -14,7 +14,7 @@ except ImportError:
     _tensorflow_available = False
 
 
-def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_params=[1e-5, 0.99], window_number=1, j2_sample_size=50):
+def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_params=[1e-5, 0.99], window_number=1, j2_sample_size=50, rng=None):
     '''
         Compute optimal model weights using data assimilation and persistent homology. Heavily modified code from https://github.com/GUDHI/TDA-tutorial.git
 
@@ -26,7 +26,8 @@ def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_p
             train_len (int): Number of points used for training the original model
             opt_params (list): List of parameters used for gradient descent optimization. Must contain a learning rate and decay rate. Decay only occurs between assimilation windows. 
             window_number (int): Current window number. Used to determine how many points to forecast into the future for the current window.
-            j2_sample_size (int): Number of points to sample for J_2 loss function. This is a random sample of the training data.
+            j2_sample_size (int): Number of distinct time samples drawn from the first train_len - 1 time steps of u_obs for the J_2 loss function.
+            rng (numpy.random.Generator): Random number generator used to draw the J_2 sample. If None (default), NumPy's global RNG is used, so seeding with np.random.seed makes results reproducible. To use a seeded Generator instead, create it once and pass the same object to every TADA call; creating a new Generator with the same seed for each call would draw the same sample in every window.
 
         Returns:
             (array): Updated model weights using TADA algorithm.
@@ -35,6 +36,10 @@ def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_p
     if not _tensorflow_available:
         raise ImportError(
             "TADA requires TensorFlow. Install with: pip install 'teaspoon[full]'")
+
+    if j2_sample_size > train_len - 1:
+        raise ValueError(
+            f"j2_sample_size ({j2_sample_size}) cannot exceed train_len - 1 ({train_len - 1}).")
 
     # Grow the window size as new measurements are received
     if window_number < window_size:
@@ -122,14 +127,15 @@ def TADA(u_obs, window_size, model_parameters, n_epochs=1, train_len=4000, opt_p
             # Total loss
             J_1_loss = persistence_loss + reg_loss
 
-            # Compute J_2 loss
-            random_indices = tf.random.shuffle(
-                tf.range(tf.shape(u_obs[:, :train_len])[0]))[:j2_sample_size]
-            training_samples = u_obs[:, :train_len][:, random_indices]
-            train_loss = G(training_samples, W, mu,
-                           auto_diff=True) - training_samples
+            # Compute J_2 loss on a random sample of training time steps
+            sampler = np.random if rng is None else rng
+            idx = sampler.choice(
+                train_len - 1, size=j2_sample_size, replace=False)
+            y_t = u_obs[:, idx]  # D x n
+            train_loss = G(y_t, W, mu, auto_diff=True) - y_t  # D x n
+            # Points of the cloud are time samples: n x D
             train_dgm = rips_layer.call(
-                tf.cast(tf.squeeze(tf.gather(train_loss, random_indices)), np.float32))
+                tf.cast(tf.transpose(train_loss), np.float32))
             train_dgm0 = tf.cast(train_dgm[0][0], dtype=np.float64)
             train_dgm1 = tf.cast(train_dgm[1][0], dtype=np.float64)
             empty_dgm = tf.constant(
