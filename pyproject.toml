@@ -2,14 +2,14 @@
 
 [project]
 name = "teaspoon"
-version = "1.6.1"
+version = "1.6.3"
 authors = [
   { name="Elizabeth Munch", email="muncheli@msu.edu" },
   { name="Firas Khasawneh", email="khasawn3@msu.edu" },
 ]
 description = "A Topological Signal Processing Package"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
