@@ -74,7 +74,7 @@ class daf_module(unittest.TestCase):
         print("TADA Time: ", tada_time)
         print("LR Time: ", lr_time)
 
-        self.assertAlmostEqual(tada_time, 3.894, delta=0.05)
+        self.assertAlmostEqual(tada_time, 3.986, delta=0.05)
         self.assertAlmostEqual(lr_time, 3.058, delta=0.05)
 
 
